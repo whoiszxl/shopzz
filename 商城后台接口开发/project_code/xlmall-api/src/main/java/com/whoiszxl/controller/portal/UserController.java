@@ -1,4 +1,4 @@
-package com.whoiszxl.controller;
+package com.whoiszxl.controller.portal;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.whoiszxl.common.Const;
@@ -15,6 +16,7 @@ import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.service.UserService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
@@ -22,7 +24,9 @@ import io.swagger.annotations.ApiOperation;
  * @author whoiszxl
  *
  */
+@Api(value = "前台用户管理模块", description = "前台用户管理模块")
 @RestController
+@RequestMapping("/user/")
 public class UserController {
 	
 	@Autowired
