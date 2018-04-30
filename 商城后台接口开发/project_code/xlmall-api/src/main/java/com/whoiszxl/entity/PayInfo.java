@@ -2,7 +2,17 @@ package com.whoiszxl.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="xl_pay_info")
 public class PayInfo {
+	
+	@Id
+	@GeneratedValue
     private Integer id;
 
     private Integer userId;

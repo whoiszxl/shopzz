@@ -2,19 +2,36 @@ package com.whoiszxl.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="xl_user")
 public class User {
+	
+	@Id
+	@GeneratedValue
     private Integer id;
 
+	@Column(nullable=false)
     private String username;
 
+	@Column(nullable=false)
     private String password;
 
+	@Column(nullable=false)
     private String email;
 
+	@Column(nullable=false)
     private String phone;
 
+	@Column(nullable=false)
     private String question;
 
+	@Column(nullable=false)
     private String answer;
 
     private Integer role;
@@ -119,4 +136,13 @@ public class User {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", phone="
+				+ phone + ", question=" + question + ", answer=" + answer + ", role=" + role + ", createTime="
+				+ createTime + ", updateTime=" + updateTime + "]";
+	}
+    
+    
 }
