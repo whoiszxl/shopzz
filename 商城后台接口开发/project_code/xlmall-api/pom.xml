@@ -77,6 +77,11 @@
 	        <artifactId>spring-boot-starter-cache</artifactId>
     	</dependency>
     	
+    	<dependency>
+	      <groupId>joda-time</groupId>
+	      <artifactId>joda-time</artifactId>
+    	</dependency>
+    	
 
 		<!-- id加密解密 -->
 		<dependency>
