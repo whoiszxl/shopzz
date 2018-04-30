@@ -22,7 +22,7 @@ import com.whoiszxl.service.CategoryService;
  * @author whoiszxl
  *
  */
-@Service("iCategoryService")
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
 	private Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
