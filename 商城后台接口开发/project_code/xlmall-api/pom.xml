@@ -74,9 +74,9 @@
 
 		<!-- 數據庫連接池依賴 -->
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.25</version>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid-spring-boot-starter</artifactId>
+		    <version>1.1.1</version>
 		</dependency>
 
 		<dependency>
