@@ -26,6 +26,7 @@ import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.PropertiesUtil;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 
@@ -47,21 +48,25 @@ public class ProductManageController {
 	private UserService userService;
 
 	@PostMapping("save")
+	@ApiOperation(value = "后台商品保存")
 	public ServerResponse<String> productSave(HttpSession session, Product product) {
 		return productService.saveOrUpdateProduct(product);
 	}
 
 	@PostMapping("set_sale_status")
+	@ApiOperation(value = "后台设置订单状态")
 	public ServerResponse<String> setSaleStatus(HttpSession session, Integer productId, Integer status) {
 		return productService.setSaleStatus(productId, status);
 	}
 
 	@GetMapping("detail")
+	@ApiOperation(value = "后台获取商品详情")
 	public ServerResponse<?> getDetail(HttpSession session, Integer productId) {
 		return productService.manageProductDetail(productId);
 	}
 
 	@GetMapping("list")
+	@ApiOperation(value = "后台获取商品列表")
 	public ServerResponse<?> getList(HttpSession session,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -69,6 +74,7 @@ public class ProductManageController {
 	}
 
 	@GetMapping("search")
+	@ApiOperation(value = "后台搜索商品")
 	public ServerResponse productSearch(HttpSession session, String productName, Integer productId,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -77,6 +83,7 @@ public class ProductManageController {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping("upload")
+	@ApiOperation(value = "后台上传文件")
 	public ServerResponse upload(HttpSession session,
 			@RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request) {
 		String path = request.getSession().getServletContext().getRealPath("upload");
@@ -91,6 +98,7 @@ public class ProductManageController {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping("richtext_img_upload")
+	@ApiOperation(value = "后台富文本图片上传")
 	public Map richtextImgUpload(HttpSession session,
 			@RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request,
 			HttpServletResponse response) {

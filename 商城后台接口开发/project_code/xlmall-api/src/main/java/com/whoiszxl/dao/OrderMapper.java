@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.whoiszxl.entity.Order;
 
 public interface OrderMapper {
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Order record);

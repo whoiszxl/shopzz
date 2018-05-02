@@ -26,6 +26,7 @@ public class UserFilterConfig {
 		List<String> urls = new ArrayList<>();
 		urls.add("/cart/*");
 		urls.add("/shipping/*");
+		urls.add("/order/*");
 		//urls.add("/user/*");
 		filterRegistrationBean.setUrlPatterns(urls);
 		filterRegistrationBean.setOrder(3);
