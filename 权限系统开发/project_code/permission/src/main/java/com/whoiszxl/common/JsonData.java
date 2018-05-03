@@ -1,5 +1,8 @@
 package com.whoiszxl.common;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 前端响应对象
  * @author whoiszxl
@@ -37,6 +40,14 @@ public class JsonData {
 		jsonData.msg = msg;
 		return jsonData;
 	}
+	
+	public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<String, Object>();
+        result.put("ret", ret);
+        result.put("msg", msg);
+        result.put("data", data);
+        return result;
+    }
 	
 	public boolean isRet() {
 		return ret;
