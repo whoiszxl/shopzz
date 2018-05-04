@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.whoiszxl.dao.SysUserMapper;
+import com.whoiszxl.exception.PermissionException;
 import com.whoiszxl.model.SysUser;
 
 @RestController
@@ -17,10 +18,11 @@ public class UserController {
 	@Autowired
 	private SysUserMapper sysUserMapper;
 	
-	@GetMapping("/user")
+	@GetMapping("/user.json")
 	public SysUser getUser() {
-		logger.error("UserController.getUser()");
-		logger.info(sysUserMapper.selectByPrimaryKey(1).toString());
-		return sysUserMapper.selectByPrimaryKey(1);
+		throw new PermissionException("permission error");
+		//logger.error("UserController.getUser()");
+		//logger.info(sysUserMapper.selectByPrimaryKey(1).toString());
+		//return sysUserMapper.selectByPrimaryKey(1);
 	}
 }
