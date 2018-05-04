@@ -25,7 +25,7 @@
 	</properties>
 
 	<dependencies>
-		
+
 		<!-- devtools热部署 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -33,7 +33,7 @@
 			<optional>true</optional>
 			<scope>true</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -124,6 +124,16 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
+		<!-- validator -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+
 		<!-- tools -->
 		<dependency>
 			<groupId>commons-collections</groupId>
@@ -158,10 +168,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>  
-                    <!--fork :  如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->  
-                    <fork>true</fork>  
-                </configuration> 
+				<configuration>
+					<!--fork : 如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
+					<fork>true</fork>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
