@@ -1,5 +1,6 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.model.SysUser;
 import com.whoiszxl.param.UserParam;
 
 /**
@@ -37,6 +38,16 @@ public interface UserService {
 	 * @return 是否有效
 	 */
 	boolean checkTelephoneExist(String phone, Integer userId);
+
+	/**
+	 * 通过用户名或者邮箱查询到这个用户
+	 * @param keyword
+	 * @return 查询到的用户实体
+	 */
+	SysUser findByKeyword(String keyword);
+
+	
+
 
 	
 }

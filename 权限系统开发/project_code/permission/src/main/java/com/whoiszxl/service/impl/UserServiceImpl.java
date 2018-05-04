@@ -67,14 +67,17 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean checkEmailExist(String mail, Integer userId) {
-		// TODO Auto-generated method stub
-		return false;
+		return sysUserMapper.checkEmailExist(mail, userId) > 0;
 	}
 
 	@Override
 	public boolean checkTelephoneExist(String phone, Integer userId) {
-		// TODO Auto-generated method stub
-		return false;
+		return sysUserMapper.checkTelephoneExist(phone, userId) > 0;
+	}
+
+	@Override
+	public SysUser findByKeyword(String keyword) {
+		return sysUserMapper.findByKeyword(keyword);
 	}
 
 	

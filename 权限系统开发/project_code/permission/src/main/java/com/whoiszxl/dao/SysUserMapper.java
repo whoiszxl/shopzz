@@ -1,5 +1,8 @@
 package com.whoiszxl.dao;
 
+
+import org.apache.ibatis.annotations.Param;
+
 import com.whoiszxl.model.SysUser;
 
 public interface SysUserMapper {
@@ -14,4 +17,10 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+	SysUser findByKeyword(@Param("keyword") String keyword);
+
+	int checkTelephoneExist(@Param("phone") String phone, @Param("userId") Integer userId);
+
+	int checkEmailExist(@Param("mail") String mail, @Param("userId") Integer userId);
 }
