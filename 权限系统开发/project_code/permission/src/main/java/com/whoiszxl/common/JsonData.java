@@ -25,6 +25,12 @@ public class JsonData {
 		return jsonData;
 	}
 	
+	public static JsonData success(String msg) {
+		JsonData jsonData = new JsonData(true);
+		jsonData.msg = msg;
+		return jsonData;
+	}
+	
 	public static JsonData success(Object object) {
 		JsonData jsonData = new JsonData(true);
 		jsonData.data = object;

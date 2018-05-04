@@ -9,7 +9,7 @@ import org.codehaus.jackson.type.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.whoiszxl.controller.UserController;
+import com.whoiszxl.controller.SysUserController;
 
 /**
  * json object转换工具
