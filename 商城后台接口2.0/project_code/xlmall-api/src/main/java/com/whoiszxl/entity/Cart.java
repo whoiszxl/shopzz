@@ -2,98 +2,90 @@ package com.whoiszxl.entity;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="xl_cart")
 public class Cart {
-	
-	@Id
-	@GeneratedValue
-    private Integer id;
 
-    private Integer userId;
+	private Integer id;
 
-    private Integer productId;
+	private Integer userId;
 
-    private Integer quantity;
+	private Integer productId;
 
-    private Integer checked;
+	private Integer quantity;
 
-    private Date createTime;
+	private Integer checked;
 
-    private Date updateTime;
+	private Date createTime;
 
-    public Cart(Integer id, Integer userId, Integer productId, Integer quantity, Integer checked, Date createTime, Date updateTime) {
-        this.id = id;
-        this.userId = userId;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.checked = checked;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
+	private Date updateTime;
 
-    public Cart() {
-        super();
-    }
+	public Cart(Integer id, Integer userId, Integer productId, Integer quantity, Integer checked, Date createTime,
+			Date updateTime) {
+		this.id = id;
+		this.userId = userId;
+		this.productId = productId;
+		this.quantity = quantity;
+		this.checked = checked;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Cart() {
+		super();
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getUserId() {
-        return userId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public Integer getProductId() {
-        return productId;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
+	public Integer getProductId() {
+		return productId;
+	}
 
-    public Integer getQuantity() {
-        return quantity;
-    }
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+	public Integer getQuantity() {
+		return quantity;
+	}
 
-    public Integer getChecked() {
-        return checked;
-    }
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
-    public void setChecked(Integer checked) {
-        this.checked = checked;
-    }
+	public Integer getChecked() {
+		return checked;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setChecked(Integer checked) {
+		this.checked = checked;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }

@@ -3,142 +3,135 @@ package com.whoiszxl.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="xl_order_item")
 public class OrderItem {
-	
-	@Id
-	@GeneratedValue
-    private Integer id;
 
-    private Integer userId;
+	private Integer id;
 
-    private Long orderNo;
+	private Integer userId;
 
-    private Integer productId;
+	private Long orderNo;
 
-    private String productName;
+	private Integer productId;
 
-    private String productImage;
+	private String productName;
 
-    private BigDecimal currentUnitPrice;
+	private String productImage;
 
-    private Integer quantity;
+	private BigDecimal currentUnitPrice;
 
-    private BigDecimal totalPrice;
+	private Integer quantity;
 
-    private Date createTime;
+	private BigDecimal totalPrice;
 
-    private Date updateTime;
+	private Date createTime;
 
-    public OrderItem(Integer id, Integer userId, Long orderNo, Integer productId, String productName, String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Date createTime, Date updateTime) {
-        this.id = id;
-        this.userId = userId;
-        this.orderNo = orderNo;
-        this.productId = productId;
-        this.productName = productName;
-        this.productImage = productImage;
-        this.currentUnitPrice = currentUnitPrice;
-        this.quantity = quantity;
-        this.totalPrice = totalPrice;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
+	private Date updateTime;
 
-    public OrderItem() {
-        super();
-    }
+	public OrderItem(Integer id, Integer userId, Long orderNo, Integer productId, String productName,
+			String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Date createTime,
+			Date updateTime) {
+		this.id = id;
+		this.userId = userId;
+		this.orderNo = orderNo;
+		this.productId = productId;
+		this.productName = productName;
+		this.productImage = productImage;
+		this.currentUnitPrice = currentUnitPrice;
+		this.quantity = quantity;
+		this.totalPrice = totalPrice;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public OrderItem() {
+		super();
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getUserId() {
-        return userId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public Long getOrderNo() {
-        return orderNo;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
-    }
+	public Long getOrderNo() {
+		return orderNo;
+	}
 
-    public Integer getProductId() {
-        return productId;
-    }
+	public void setOrderNo(Long orderNo) {
+		this.orderNo = orderNo;
+	}
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
+	public Integer getProductId() {
+		return productId;
+	}
 
-    public String getProductName() {
-        return productName;
-    }
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
 
-    public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
-    }
+	public String getProductName() {
+		return productName;
+	}
 
-    public String getProductImage() {
-        return productImage;
-    }
+	public void setProductName(String productName) {
+		this.productName = productName == null ? null : productName.trim();
+	}
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage == null ? null : productImage.trim();
-    }
+	public String getProductImage() {
+		return productImage;
+	}
 
-    public BigDecimal getCurrentUnitPrice() {
-        return currentUnitPrice;
-    }
+	public void setProductImage(String productImage) {
+		this.productImage = productImage == null ? null : productImage.trim();
+	}
 
-    public void setCurrentUnitPrice(BigDecimal currentUnitPrice) {
-        this.currentUnitPrice = currentUnitPrice;
-    }
+	public BigDecimal getCurrentUnitPrice() {
+		return currentUnitPrice;
+	}
 
-    public Integer getQuantity() {
-        return quantity;
-    }
+	public void setCurrentUnitPrice(BigDecimal currentUnitPrice) {
+		this.currentUnitPrice = currentUnitPrice;
+	}
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+	public Integer getQuantity() {
+		return quantity;
+	}
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
-    }
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }

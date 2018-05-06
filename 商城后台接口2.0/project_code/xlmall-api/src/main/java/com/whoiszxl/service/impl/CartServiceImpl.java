@@ -29,7 +29,7 @@ import com.whoiszxl.vo.CartVo;
  * @author whoiszxl
  *
  */
-@Service("iCartService")
+@Service
 public class CartServiceImpl implements CartService {
 
 	@Autowired
