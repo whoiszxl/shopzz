@@ -142,7 +142,7 @@
 		</dependency>
 
 
-		
+
 
 
 		<!-- id加密解密 -->
@@ -151,36 +151,42 @@
 			<artifactId>hashids</artifactId>
 			<version>1.0.1</version>
 		</dependency>
-		
+
 		<dependency>
-	      <groupId>org.apache.commons</groupId>
-	      <artifactId>commons-lang3</artifactId>
-	      <version>3.5</version>
-    	</dependency>
-    	
-    	<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
+		</dependency>
+
+		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 		</dependency>
 
+		<!-- 添加jedis依赖 -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+
 
 		<!-- alipay -->
-		<dependency>     
-		    <groupId>alipay-sdk</groupId>    
-		    <artifactId>alipay-sdk</artifactId>    
-		    <version>1.0.0</version>    
-		    <scope>system</scope>    
-		    <systemPath>${project.basedir}/src/main/resources/lib/alipay-sdk-java20161213173952.jar</systemPath>    
-		</dependency>  
-		
-		<dependency>     
-		    <groupId>alipay-trade-sdk</groupId>    
-		    <artifactId>alipay-trade-sdk</artifactId>    
-		    <version>1.0.0</version>    
-		    <scope>system</scope>    
-		    <systemPath>${project.basedir}/src/main/resources/lib/alipay-trade-sdk-20161215.jar</systemPath>    
-		</dependency> 
-		
+		<dependency>
+			<groupId>alipay-sdk</groupId>
+			<artifactId>alipay-sdk</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/alipay-sdk-java20161213173952.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>alipay-trade-sdk</groupId>
+			<artifactId>alipay-trade-sdk</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/alipay-trade-sdk-20161215.jar</systemPath>
+		</dependency>
+
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
