@@ -24,6 +24,7 @@ import com.whoiszxl.common.ResponseCode;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.service.OrderService;
+import com.whoiszxl.utils.UserUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,23 +47,32 @@ public class OrderController {
 	
 	@PostMapping("create")
 	@ApiOperation(value = "创建订单接口")
-	public ServerResponse create(HttpSession session,Integer shippingId) {
-		User user = (User)session.getAttribute(Const.CURRENT_USER);
+	public ServerResponse create(HttpServletRequest request,Integer shippingId) {
+		User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
+        }
 		return orderService.createOrder(user.getId(),shippingId);
 	}
 	
 	
 	@PostMapping("cancel")
 	@ApiOperation(value = "取消订单接口")
-	public ServerResponse cancel(HttpSession session,Long orderNo) {
-		User user = (User)session.getAttribute(Const.CURRENT_USER);
+	public ServerResponse cancel(HttpServletRequest request,Long orderNo) {
+		User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
+        }
 		return orderService.cancel(user.getId(), orderNo);
 	}
 	
 	@PostMapping("get_order_cart_product")
 	@ApiOperation(value = "获取订单的商品集合,缩略图和总价接口")
-    public ServerResponse getOrderCartProduct(HttpSession session){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
+    public ServerResponse getOrderCartProduct(HttpServletRequest request){
+		User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
+        }
         return orderService.getOrderCartProduct(user.getId());
     }
 
@@ -70,20 +80,20 @@ public class OrderController {
 
     @GetMapping("detail")
     @ApiOperation(value = "获取订单详情接口")
-    public ServerResponse detail(HttpSession session,Long orderNo){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user ==null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+    public ServerResponse detail(HttpServletRequest request,Long orderNo){
+    	User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
         return orderService.getOrderDetail(user.getId(),orderNo);
     }
 
     @GetMapping("list")
     @ApiOperation(value = "获取订单列表接口")
-    public ServerResponse list(HttpSession session, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user ==null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+    public ServerResponse list(HttpServletRequest request, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+    	User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
         return orderService.getOrderList(user.getId(),pageNum,pageSize);
     }
@@ -98,8 +108,11 @@ public class OrderController {
 	
 	@PostMapping("pay")
 	@ApiOperation(value = "支付宝支付接口")
-	public ServerResponse pay(HttpSession session, Long orderNo, HttpServletRequest request) {
-		User user = (User) session.getAttribute(Const.CURRENT_USER);
+	public ServerResponse pay(HttpServletRequest request, Long orderNo) {
+		User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
+        }
 		String path = request.getSession().getServletContext().getRealPath("upload");
 		return orderService.pay(orderNo, user.getId(), path);
 	}
@@ -108,8 +121,11 @@ public class OrderController {
 	
 	@PostMapping("query_order_pay_status")
 	@ApiOperation(value = "查询订单支付状态接口")
-	public ServerResponse<Boolean> queryOrderPayStatus(HttpSession session, Long orderNo) {
-		User user = (User) session.getAttribute(Const.CURRENT_USER);
+	public ServerResponse<Boolean> queryOrderPayStatus(HttpServletRequest request, Long orderNo) {
+		User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
+        }
 		ServerResponse serverResponse = orderService.queryOrderPayStatus(user.getId(), orderNo);
 		if(serverResponse.isSuccess()) {
 			return ServerResponse.createBySuccess(true);

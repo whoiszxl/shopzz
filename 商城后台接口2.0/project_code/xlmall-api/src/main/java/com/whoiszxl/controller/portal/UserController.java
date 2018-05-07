@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.whoiszxl.common.Const;
+import com.whoiszxl.common.RedisPool;
 import com.whoiszxl.common.ResponseCode;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
@@ -18,6 +19,7 @@ import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.RedisPoolUtil;
+import com.whoiszxl.utils.UserUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -89,13 +91,10 @@ public class UserController {
 	public ServerResponse<User> getUserInfo(HttpServletRequest request) {
 		//User user = (User) session.getAttribute(Const.CURRENT_USER);
 		//单点登录：获取用户信息
-		String loginToken = CookieUtil.readLoginToken(request);
-		if(StringUtils.isEmpty(loginToken)) {
-			return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-		}
-		
-		String userJsonStr = RedisPoolUtil.get(loginToken);
-		User user = JsonUtil.string2Obj(userJsonStr, User.class);
+		User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
+        }
 		
 		if (user != null) {
 			return ServerResponse.createBySuccess(user);
@@ -123,27 +122,28 @@ public class UserController {
 
 	@PostMapping("reset_password")
 	@ApiOperation(value = "通过旧密码重置密码的接口")
-	public ServerResponse<String> resetPassword(HttpSession session, String passwordOld, String passwordNew) {
-		User user = (User) session.getAttribute(Const.CURRENT_USER);
-		if (user == null) {
-			return ServerResponse.createByErrorMessage("用户未登录");
-		}
+	public ServerResponse<String> resetPassword(HttpServletRequest request, String passwordOld, String passwordNew) {
+		User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
+        }
 		return userService.resetPassword(passwordOld, passwordNew, user);
 	}
 
 	@PostMapping("update_information")
 	@ApiOperation(value = "更新用户信息接口")
-	public ServerResponse<User> update_information(HttpSession session, User user) {
-		User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
-		if (currentUser == null) {
-			return ServerResponse.createByErrorMessage("用户未登录");
-		}
+	public ServerResponse<User> update_information(HttpServletRequest request, User user) {
+		User currentUser = UserUtil.getCurrentUser(request);
+        if(currentUser == null) {
+        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
+        }
 		user.setId(currentUser.getId());
 		user.setUsername(currentUser.getUsername());
 		ServerResponse<User> response = userService.updateInformation(user);
 		if (response.isSuccess()) {
 			response.getData().setUsername(currentUser.getUsername());
-			session.setAttribute(Const.CURRENT_USER, response.getData());
+			String loginToken = CookieUtil.readLoginToken(request);
+			RedisPoolUtil.setEx(loginToken, JsonUtil.obj2String(response.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
 		}
 
 		return response;
@@ -151,11 +151,11 @@ public class UserController {
 
 	@PostMapping("get_information")
 	@ApiOperation(value = "获取用户信息的接口")
-	public ServerResponse<User> get_information(HttpSession session) {
-		User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
-		if (currentUser == null) {
-			return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-		}
-		return userService.getInformation(currentUser.getId());
+	public ServerResponse<User> get_information(HttpServletRequest request) {
+		User user = UserUtil.getCurrentUser(request);
+        if(user == null) {
+        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
+        }
+		return userService.getInformation(user.getId());
 	}
 }
