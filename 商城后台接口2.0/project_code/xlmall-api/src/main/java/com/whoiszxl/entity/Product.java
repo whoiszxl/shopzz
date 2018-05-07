@@ -3,153 +3,145 @@ package com.whoiszxl.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="xl_product")
 public class Product {
-	
-	@Id
-	@GeneratedValue
-    private Integer id;
 
-    private Integer categoryId;
+	private Integer id;
 
-    private String name;
+	private Integer categoryId;
 
-    private String subtitle;
+	private String name;
 
-    private String mainImage;
+	private String subtitle;
 
-    private String subImages;
+	private String mainImage;
 
-    private String detail;
+	private String subImages;
 
-    private BigDecimal price;
+	private String detail;
 
-    private Integer stock;
+	private BigDecimal price;
 
-    private Integer status;
+	private Integer stock;
 
-    private Date createTime;
+	private Integer status;
 
-    private Date updateTime;
+	private Date createTime;
 
-    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock, Integer status, Date createTime, Date updateTime) {
-        this.id = id;
-        this.categoryId = categoryId;
-        this.name = name;
-        this.subtitle = subtitle;
-        this.mainImage = mainImage;
-        this.subImages = subImages;
-        this.detail = detail;
-        this.price = price;
-        this.stock = stock;
-        this.status = status;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
+	private Date updateTime;
 
-    public Product() {
-        super();
-    }
+	public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages,
+			String detail, BigDecimal price, Integer stock, Integer status, Date createTime, Date updateTime) {
+		this.id = id;
+		this.categoryId = categoryId;
+		this.name = name;
+		this.subtitle = subtitle;
+		this.mainImage = mainImage;
+		this.subImages = subImages;
+		this.detail = detail;
+		this.price = price;
+		this.stock = stock;
+		this.status = status;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Product() {
+		super();
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getCategoryId() {
-        return categoryId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
+	public Integer getCategoryId() {
+		return categoryId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getSubtitle() {
-        return subtitle;
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle == null ? null : subtitle.trim();
-    }
+	public String getSubtitle() {
+		return subtitle;
+	}
 
-    public String getMainImage() {
-        return mainImage;
-    }
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle == null ? null : subtitle.trim();
+	}
 
-    public void setMainImage(String mainImage) {
-        this.mainImage = mainImage == null ? null : mainImage.trim();
-    }
+	public String getMainImage() {
+		return mainImage;
+	}
 
-    public String getSubImages() {
-        return subImages;
-    }
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage == null ? null : mainImage.trim();
+	}
 
-    public void setSubImages(String subImages) {
-        this.subImages = subImages == null ? null : subImages.trim();
-    }
+	public String getSubImages() {
+		return subImages;
+	}
 
-    public String getDetail() {
-        return detail;
-    }
+	public void setSubImages(String subImages) {
+		this.subImages = subImages == null ? null : subImages.trim();
+	}
 
-    public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
-    }
+	public String getDetail() {
+		return detail;
+	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+	public void setDetail(String detail) {
+		this.detail = detail == null ? null : detail.trim();
+	}
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+	public BigDecimal getPrice() {
+		return price;
+	}
 
-    public Integer getStock() {
-        return stock;
-    }
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
+	public Integer getStock() {
+		return stock;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }

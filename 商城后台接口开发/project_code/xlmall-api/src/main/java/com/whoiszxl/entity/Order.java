@@ -3,17 +3,17 @@ package com.whoiszxl.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
+
+
+
+
+
 @Table(name="xl_order")
 public class Order {
 	
-	@Id
-	@GeneratedValue
+	
+	
     private Integer id;
 
     private Long orderNo;

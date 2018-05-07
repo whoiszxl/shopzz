@@ -2,109 +2,101 @@ package com.whoiszxl.entity;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="xl_pay_info")
 public class PayInfo {
-	
-	@Id
-	@GeneratedValue
-    private Integer id;
 
-    private Integer userId;
+	private Integer id;
 
-    private Long orderNo;
+	private Integer userId;
 
-    private Integer payPlatform;
+	private Long orderNo;
 
-    private String platformNumber;
+	private Integer payPlatform;
 
-    private String platformStatus;
+	private String platformNumber;
 
-    private Date createTime;
+	private String platformStatus;
 
-    private Date updateTime;
+	private Date createTime;
 
-    public PayInfo(Integer id, Integer userId, Long orderNo, Integer payPlatform, String platformNumber, String platformStatus, Date createTime, Date updateTime) {
-        this.id = id;
-        this.userId = userId;
-        this.orderNo = orderNo;
-        this.payPlatform = payPlatform;
-        this.platformNumber = platformNumber;
-        this.platformStatus = platformStatus;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
+	private Date updateTime;
 
-    public PayInfo() {
-        super();
-    }
+	public PayInfo(Integer id, Integer userId, Long orderNo, Integer payPlatform, String platformNumber,
+			String platformStatus, Date createTime, Date updateTime) {
+		this.id = id;
+		this.userId = userId;
+		this.orderNo = orderNo;
+		this.payPlatform = payPlatform;
+		this.platformNumber = platformNumber;
+		this.platformStatus = platformStatus;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public PayInfo() {
+		super();
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getUserId() {
-        return userId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public Long getOrderNo() {
-        return orderNo;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
-    }
+	public Long getOrderNo() {
+		return orderNo;
+	}
 
-    public Integer getPayPlatform() {
-        return payPlatform;
-    }
+	public void setOrderNo(Long orderNo) {
+		this.orderNo = orderNo;
+	}
 
-    public void setPayPlatform(Integer payPlatform) {
-        this.payPlatform = payPlatform;
-    }
+	public Integer getPayPlatform() {
+		return payPlatform;
+	}
 
-    public String getPlatformNumber() {
-        return platformNumber;
-    }
+	public void setPayPlatform(Integer payPlatform) {
+		this.payPlatform = payPlatform;
+	}
 
-    public void setPlatformNumber(String platformNumber) {
-        this.platformNumber = platformNumber == null ? null : platformNumber.trim();
-    }
+	public String getPlatformNumber() {
+		return platformNumber;
+	}
 
-    public String getPlatformStatus() {
-        return platformStatus;
-    }
+	public void setPlatformNumber(String platformNumber) {
+		this.platformNumber = platformNumber == null ? null : platformNumber.trim();
+	}
 
-    public void setPlatformStatus(String platformStatus) {
-        this.platformStatus = platformStatus == null ? null : platformStatus.trim();
-    }
+	public String getPlatformStatus() {
+		return platformStatus;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setPlatformStatus(String platformStatus) {
+		this.platformStatus = platformStatus == null ? null : platformStatus.trim();
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }

@@ -2,98 +2,90 @@ package com.whoiszxl.entity;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="xl_category")
 public class Category {
-	
-	@Id
-	@GeneratedValue
-    private Integer id;
 
-    private Integer parentId;
+	private Integer id;
 
-    private String name;
+	private Integer parentId;
 
-    private Boolean status;
+	private String name;
 
-    private Integer sortOrder;
+	private Boolean status;
 
-    private Date createTime;
+	private Integer sortOrder;
 
-    private Date updateTime;
+	private Date createTime;
 
-    public Category(Integer id, Integer parentId, String name, Boolean status, Integer sortOrder, Date createTime, Date updateTime) {
-        this.id = id;
-        this.parentId = parentId;
-        this.name = name;
-        this.status = status;
-        this.sortOrder = sortOrder;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
+	private Date updateTime;
 
-    public Category() {
-        super();
-    }
+	public Category(Integer id, Integer parentId, String name, Boolean status, Integer sortOrder, Date createTime,
+			Date updateTime) {
+		this.id = id;
+		this.parentId = parentId;
+		this.name = name;
+		this.status = status;
+		this.sortOrder = sortOrder;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Category() {
+		super();
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getParentId() {
-        return parentId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
+	public Integer getParentId() {
+		return parentId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Boolean getStatus() {
-        return status;
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
+	public Boolean getStatus() {
+		return status;
+	}
 
-    public Integer getSortOrder() {
-        return sortOrder;
-    }
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 
-    public void setSortOrder(Integer sortOrder) {
-        this.sortOrder = sortOrder;
-    }
+	public Integer getSortOrder() {
+		return sortOrder;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setSortOrder(Integer sortOrder) {
+		this.sortOrder = sortOrder;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }
