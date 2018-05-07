@@ -15,12 +15,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
+import com.whoiszxl.utils.CookieUtil;
+import com.whoiszxl.utils.JsonUtil;
+import com.whoiszxl.utils.RedisPoolUtil;
 
 /**
  * 
@@ -59,8 +63,16 @@ public class UserFilter implements Filter {
 			return;
 		}
 		
-		HttpSession session = httpServletRequest.getSession();
-		User user = (User) session.getAttribute(Const.CURRENT_USER);
+		//HttpSession session = httpServletRequest.getSession();
+		//User user = (User) session.getAttribute(Const.CURRENT_USER);
+		
+		String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+		User user = null;
+		if(StringUtils.isNotEmpty(loginToken)) {
+			String userJsonStr = RedisPoolUtil.get(loginToken);
+			user = JsonUtil.string2Obj(loginToken, User.class);
+		}
+		
 		ServerResponse<String> errorObj = null;
 		if(user == null) {
 			errorObj = ServerResponse.createByErrorMessage("用户未登录,请登录");
