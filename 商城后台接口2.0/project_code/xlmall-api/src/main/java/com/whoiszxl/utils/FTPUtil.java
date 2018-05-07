@@ -21,6 +21,12 @@ public class FTPUtil {
 	private static String ftpIp = "images.whoiszxl.com";
     private static String ftpUser = PropertiesUtil.getProperty("ftp.user");
     private static String ftpPass = PropertiesUtil.getProperty("ftp.pass");
+    
+    private String ip;
+    private int port;
+    private String user;
+    private String pwd;
+    private FTPClient ftpClient;
 
     public FTPUtil(String ip,int port,String user,String pwd){
         this.ip = ip;
@@ -80,17 +86,6 @@ public class FTPUtil {
         return isSuccess;
     }
     
-    
-    
-    
-    
-    
-    private String ip;
-    private int port;
-    private String user;
-    private String pwd;
-    private FTPClient ftpClient;
-
     public String getIp() {
         return ip;
     }

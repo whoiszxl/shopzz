@@ -92,11 +92,12 @@ public class RedisPoolUtil {
 		try {
 			jedis = RedisPool.getJedis();
 			result = jedis.get(key);
-			RedisPool.returnResource(jedis);
 		} catch (Exception e) {
 			log.error("get key:{} error", key, e);
+			RedisPool.returnBrokenResource(jedis);
 			return result;
 		}
+		RedisPool.returnResource(jedis);
 		return result;
 	}
 	

@@ -73,6 +73,7 @@ public class RedisPool {
 	}
 	
 	static {
+		System.out.println("初始化Redis连接池了哟");
 		initPool();
 	}
 	
@@ -82,7 +83,13 @@ public class RedisPool {
 	
 	public static void returnResource(Jedis jedis) {
 		if(jedis != null) {
-			pool.close();
+			pool.returnResource(jedis);
+		}
+	}
+	
+	public static void returnBrokenResource(Jedis jedis) {
+		if(jedis != null) {
+			pool.returnBrokenResource(jedis);
 		}
 	}
 	
