@@ -91,7 +91,7 @@ public class AdminFilter implements Filter {
 		User user = null;
 		if (StringUtils.isNotEmpty(loginToken)) {
 			String userJsonStr = RedisPoolUtil.get(loginToken);
-			user = JsonUtil.string2Obj(loginToken, User.class);
+			user = JsonUtil.string2Obj(userJsonStr, User.class);
 		}
 
 		ServerResponse<String> errorObj = null;
