@@ -30,7 +30,7 @@ import com.whoiszxl.entity.User;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
-import com.whoiszxl.utils.RedisPoolUtil;
+import com.whoiszxl.utils.RedisShardedPoolUtil;
 
 /**
  * 
@@ -90,7 +90,7 @@ public class AdminFilter implements Filter {
 		String loginToken = CookieUtil.readLoginToken(httpServletRequest);
 		User user = null;
 		if (StringUtils.isNotEmpty(loginToken)) {
-			String userJsonStr = RedisPoolUtil.get(loginToken);
+			String userJsonStr = RedisShardedPoolUtil.get(loginToken);
 			user = JsonUtil.string2Obj(userJsonStr, User.class);
 		}
 

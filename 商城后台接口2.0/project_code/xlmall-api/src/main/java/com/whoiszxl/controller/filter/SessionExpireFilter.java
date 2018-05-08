@@ -23,7 +23,7 @@ import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
-import com.whoiszxl.utils.RedisPoolUtil;
+import com.whoiszxl.utils.RedisShardedPoolUtil;
 
 /**
  * session续命过滤器
@@ -69,14 +69,14 @@ public class SessionExpireFilter implements Filter {
 		String loginToken = CookieUtil.readLoginToken(httpServletRequest);
 		User user = null;
 		if(StringUtils.isNotEmpty(loginToken)) {
-			String userJsonStr = RedisPoolUtil.get(loginToken);
+			String userJsonStr = RedisShardedPoolUtil.get(loginToken);
 			user = JsonUtil.string2Obj(userJsonStr, User.class);
 		}
 		
 		ServerResponse<String> errorObj = null;
 		if(user != null) {
 			//如果user不为空，则重置session的时间，即调用expire命令
-			RedisPoolUtil.expire(loginToken, Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+			RedisShardedPoolUtil.expire(loginToken, Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
 		}
 		chain.doFilter(request, response);	
 	}

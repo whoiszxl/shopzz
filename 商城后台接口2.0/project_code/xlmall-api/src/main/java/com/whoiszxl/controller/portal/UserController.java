@@ -18,7 +18,7 @@ import com.whoiszxl.entity.User;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
-import com.whoiszxl.utils.RedisPoolUtil;
+import com.whoiszxl.utils.RedisShardedPoolUtil;
 import com.whoiszxl.utils.UserUtil;
 
 import io.swagger.annotations.Api;
@@ -56,7 +56,7 @@ public class UserController {
 
 			// 单点登录:写入token
 			CookieUtil.writeLoginToken(httpServletResponse, session.getId());
-			RedisPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()),
+			RedisShardedPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()),
 					Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
 		}
 		return response;
@@ -68,7 +68,7 @@ public class UserController {
 		//session.removeAttribute(Const.CURRENT_USER);
 		//单点登录：清除cookie和redis
 		String loginToken = CookieUtil.readLoginToken(request);
-		RedisPoolUtil.del(loginToken);
+		RedisShardedPoolUtil.del(loginToken);
 		CookieUtil.deleteLoginToken(request, response);
 		return ServerResponse.createBySuccess();
 	}
@@ -143,7 +143,7 @@ public class UserController {
 		if (response.isSuccess()) {
 			response.getData().setUsername(currentUser.getUsername());
 			String loginToken = CookieUtil.readLoginToken(request);
-			RedisPoolUtil.setEx(loginToken, JsonUtil.obj2String(response.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+			RedisShardedPoolUtil.setEx(loginToken, JsonUtil.obj2String(response.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
 		}
 
 		return response;

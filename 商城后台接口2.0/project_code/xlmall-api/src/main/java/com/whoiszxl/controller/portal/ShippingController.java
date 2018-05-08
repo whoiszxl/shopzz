@@ -18,7 +18,7 @@ import com.whoiszxl.entity.Shipping;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.service.ShippingService;
 import com.whoiszxl.utils.CookieUtil;
-import com.whoiszxl.utils.RedisPoolUtil;
+import com.whoiszxl.utils.RedisShardedPoolUtil;
 import com.whoiszxl.utils.UserUtil;
 
 import io.swagger.annotations.Api;

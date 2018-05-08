@@ -14,7 +14,7 @@ import com.whoiszxl.dao.UserMapper;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.MD5Util;
-import com.whoiszxl.utils.RedisPoolUtil;
+import com.whoiszxl.utils.RedisShardedPoolUtil;
 
 @Service("userService")
 public class UserServiveImpl implements UserService {
@@ -106,7 +106,7 @@ public class UserServiveImpl implements UserService {
 		if(resultCount > 0) {
 			String forgetToken = UUID.randomUUID().toString();
 			//TokenCache.setKey(TokenCache.TOKEN_PREFIX + username, forgetToken);
-			RedisPoolUtil.setEx(Const.TOKEN_PREFIX + username, forgetToken, 60 * 60 * 12);
+			RedisShardedPoolUtil.setEx(Const.TOKEN_PREFIX + username, forgetToken, 60 * 60 * 12);
 			return ServerResponse.createBySuccess(forgetToken);
 		}
 		return ServerResponse.createByErrorMessage("问题答案错误");
@@ -123,7 +123,7 @@ public class UserServiveImpl implements UserService {
 		}
 		
 		//String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX + username);
-		String token = RedisPoolUtil.get(Const.TOKEN_PREFIX + username);
+		String token = RedisShardedPoolUtil.get(Const.TOKEN_PREFIX + username);
 		if(StringUtils.isBlank(token)) {
 			return ServerResponse.createByErrorMessage("token无效或者过期了");
 		}
