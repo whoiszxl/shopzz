@@ -28,4 +28,19 @@ public interface OrderMapper {
     List<Order> selectByUserId(Integer userId);
 
     List<Order> selectAllOrder();
+    
+    /**
+     * 查询两小时之前的未支付的订单
+     * @param status
+     * @param date
+     * @return
+     */
+    List<Order> selectOrderStatusByCreateTime(@Param("status") Integer status, @Param("date") String date);
+    
+    /**
+     * 通过订单id关闭订单
+     * @param id
+     * @return
+     */
+    int closeOrderByOrderId(Integer id);
 }

@@ -11,6 +11,7 @@ import java.util.Random;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -672,5 +673,32 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderVoList;
     }
+
+	@Override
+	public void closeOrder(int hour) {
+		Date closeDateTime = DateUtils.addHours(new Date(), -hour);
+		List<Order> orderList = orderMapper.selectOrderStatusByCreateTime(Const.OrderStatusEnum.NO_PAY.getCode(), DateTimeUtil.dateToStr(closeDateTime));
+		
+		for (Order order : orderList) {
+			List<OrderItem> orderListItem = orderItemMapper.getByOrderNo(order.getOrderNo());
+			for (OrderItem orderItem : orderListItem) {
+				//一定要用主键和innodb，防止悲观锁锁表
+				Integer stock = productMapper.selectStockByProductId(orderItem.getProductId());
+				
+				//商品被删除了的情况
+				if(stock == null) {
+					continue;
+				}
+				
+				Product product = new Product();
+				product.setId(orderItem.getProductId());
+				//加上订单中的库存
+				product.setStock(stock + orderItem.getQuantity());
+				productMapper.updateByPrimaryKeySelective(product);
+			}
+			orderMapper.closeOrderByOrderId(order.getId());
+			logger.info("定时关闭两小时未支付订单：{}",order.getOrderNo());
+		}
+	}
 }
 

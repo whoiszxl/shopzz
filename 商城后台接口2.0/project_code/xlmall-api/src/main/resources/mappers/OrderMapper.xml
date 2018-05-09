@@ -232,4 +232,21 @@
     ORDER BY  create_time desc
   </select>
   
+  <select id="selectOrderStatusByCreateTime" resultMap="BaseResultMap" parameterType="map">
+  	select
+  	<include refid="Base_Column_List" />
+  	from xl_order
+  	where status = #{status}
+  	<![CDATA[
+  	and create_time <= #{date}
+  	]]>
+  	order by create_time desc
+  </select>
+  
+  <update id="closeOrderByOrderId" parameterType="int">
+  	update xl_order
+  	set status = 0
+  	where id = #{id}
+  </update>
+	
 </mapper>
