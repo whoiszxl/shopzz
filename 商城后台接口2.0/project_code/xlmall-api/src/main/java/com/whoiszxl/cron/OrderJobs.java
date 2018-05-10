@@ -52,7 +52,7 @@ public class OrderJobs {
     }
 	
 	
-	@Scheduled(cron="0/10 * * * * ?")
+	//@Scheduled(cron="0/10 * * * * ?")
     public void closeOrderByRedisShardedLockV2(){
         logger.info("RedisShardedLock关闭订单定时任务启动");
         Long lockTimeout = Long.parseLong(PropertiesUtil.getProperty("close.order.lock.timeout","50000"));
@@ -107,7 +107,7 @@ public class OrderJobs {
     }
 	
 	
-	@Scheduled(cron="0/10 * * * * ?")
+	@Scheduled(cron="* 0/2 * * * ?")
     public void closeOrderByRedisShardedLockV4() {
 		RLock lock = redissonManager.getRedisson().getLock(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK);
 		boolean getLock = false;
