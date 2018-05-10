@@ -171,6 +171,18 @@
 			<artifactId>jedis</artifactId>
 		</dependency>
 		
+		<!-- Redisson依赖 -->
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+			
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-avro</artifactId>
+		</dependency>	
+			
 		<dependency>
 	      <groupId>org.codehaus.jackson</groupId>
 	      <artifactId>jackson-mapper-asl</artifactId>

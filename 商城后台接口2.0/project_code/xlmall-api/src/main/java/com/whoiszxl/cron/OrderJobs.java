@@ -1,8 +1,11 @@
 package com.whoiszxl.cron;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.lang3.StringUtils;
+import org.redisson.api.RLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.whoiszxl.common.Const;
+import com.whoiszxl.common.RedissonManager;
 import com.whoiszxl.service.OrderService;
 import com.whoiszxl.utils.PropertiesUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
@@ -26,6 +30,9 @@ public class OrderJobs {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private RedissonManager redissonManager;
 	
 	
 	/**
@@ -63,7 +70,7 @@ public class OrderJobs {
     }
 	
 	
-	@Scheduled(cron="0/10 * * * * ?")
+	//@Scheduled(cron="0/10 * * * * ?")
     public void closeOrderByRedisShardedLockV3(){
         logger.info("RedisShardedLock关闭订单定时任务启动");
         Long lockTimeout = Long.parseLong(PropertiesUtil.getProperty("close.order.lock.timeout","50000"));
@@ -98,6 +105,32 @@ public class OrderJobs {
         
         logger.info("RedisShardedLock关闭订单定时任务结束");
     }
+	
+	
+	@Scheduled(cron="0/10 * * * * ?")
+    public void closeOrderByRedisShardedLockV4() {
+		RLock lock = redissonManager.getRedisson().getLock(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK);
+		boolean getLock = false;
+		try {
+			if(getLock = lock.tryLock(0, 5, TimeUnit.SECONDS)) {
+				logger.info("redisson获取分布式锁：{}，ThreadName：{}", Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK, Thread.currentThread().getName());
+				int hour = Integer.parseInt(PropertiesUtil.getProperty("close.order.task.hour","2"));
+		        orderService.closeOrder(hour);
+			}else {
+				logger.info("redisson没有获取到分布式锁：{}，ThreadName：{}", Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK, Thread.currentThread().getName());
+			}
+			
+		} catch (InterruptedException e) {
+			logger.error("redisson分布式锁获取异常", e);
+		}finally {
+			if(!getLock) {
+				return;
+			}
+			lock.unlock();
+			logger.info("redisson分布式锁释放了");
+		}
+		
+	}
 	
 	private void closeOrder(String lockName) {
 		//设置有效期50秒，防止死锁
