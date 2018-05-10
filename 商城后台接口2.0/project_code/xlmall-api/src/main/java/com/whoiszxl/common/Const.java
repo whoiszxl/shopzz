@@ -25,6 +25,10 @@ public class Const {
 		int REDIS_SESSION_EXTIME = 60*30;
 	}
 	
+	public interface REDIS_LOCK {
+		String CLOSE_ORDER_TASK_LOCK = "CLOSE_ORDER_TASK_LOCK";
+	}
+	
 	public interface ProductListOrderBy{
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
     }
