@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:51 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-11 18:07:24
+ * @Last Modified time: 2018-05-11 22:26:50
  */
 var webpack = require('webpack');
 var Ex = require('extract-text-webpack-plugin');
@@ -36,14 +36,24 @@ var config = {
         publicPath : '/dist',
         filename: 'js/[name].js'
     },
-    externals : {
-        'jquery' : 'window.jQuery'
+    externals:{
+        '$'         :'window.jQuery',
+        'jquery'    :'window.jQuery'
     },
     module: {
         loaders: [
             { test: /\.css$/, loader: Ex.extract("style-loader","css-loader") },
             { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=100&name=resource/[name].[ext]' },
         ]
+    },
+    resolve : {
+        alias : {
+            node_modules    : __dirname + '/node_modules',
+            util            : __dirname + '/src/util',
+            page            : __dirname + '/src/page',
+            service         : __dirname + '/src/service',
+            image           : __dirname + '/src/image'
+        }
     },
     plugins: [
         // 独立通用模块到js/base.js
