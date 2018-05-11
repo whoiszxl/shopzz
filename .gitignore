@@ -29,3 +29,7 @@ mvnw
 mvnw.cmd
 .recommenders
 Servers
+
+
+# frontend configuration
+node_modules
