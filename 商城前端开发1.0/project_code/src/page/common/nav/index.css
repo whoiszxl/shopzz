@@ -1,0 +1,30 @@
+/*
+ * @Author: whoiszxl 
+ * @Date: 2018-05-11 23:15:29 
+ * @Last Modified by:   whoiszxl 
+ * @Last Modified time: 2018-05-11 23:15:29 
+ */
+
+.nav{
+  background: #eee;
+  height: 30px;
+  line-height: 30px;   
+}
+/* 用户部分 */
+.nav .user{
+  float: left;
+}
+.nav .user.login{
+  display: none;
+}
+.nav .user .link{
+  margin-right: 5px;
+}
+/* 导航链接部分 */
+.nav .nav-list{
+  float: right;
+}
+.nav .nav-list .nav-item{
+  display: inline-block;
+  margin-left: 5px;
+}

@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-</head>
-<body>
+    <head>
+        <%= require('html-loader!./layout/head-common.html') %>
+        
+        <title>xlmall电商平台</title>
+    </head>
     
+<body>
+    <%= require('html-loader!./layout/nav.html') %>
+
+    <div>
+        <a class="link">test</a>
+        <a class="link-text">test</a>
+        <i class="fa fa-user"></i>
+    </div>
+
+    <%= require('html-loader!./layout/footer.html') %>
 </body>
+
+
 </html>
