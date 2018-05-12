@@ -8,11 +8,11 @@
     
 <body>
     <%= require('html-loader!./layout/nav.html') %>
+    <%= require('html-loader!./layout/header.html')  %>
 
-    <div>
-        <a class="link">test</a>
-        <a class="link-text">test</a>
-        <i class="fa fa-user"></i>
+    <div class="page-wrap w">
+        <%= require('html-loader!./layout/nav-side.html')  %>
+        <div class="content with-nav">aa</div>
     </div>
 
     <%= require('html-loader!./layout/footer.html') %>

@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:51 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-11 22:26:50
+ * @Last Modified time: 2018-05-12 14:03:43
  */
 var webpack = require('webpack');
 var Ex = require('extract-text-webpack-plugin');
@@ -30,6 +30,7 @@ var config = {
         'common': ['./src/page/common/index.js'], 
         'index' : ['./src/page/index/index.js'],
         'login' : ['./src/page/login/index.js'],
+        'result': ['./src/page/result/index.js'],
     },
     output: {
         path: './dist',
@@ -44,6 +45,7 @@ var config = {
         loaders: [
             { test: /\.css$/, loader: Ex.extract("style-loader","css-loader") },
             { test: /\.(gif|png|jpg|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=100&name=resource/[name].[ext]' },
+            { test: /\.string$/, loader: 'html-loader'}
         ]
     },
     resolve : {
@@ -66,6 +68,7 @@ var config = {
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
         new HtmlWebpackPlugin(getHtmlConfig('login', '商品列表页')),
+        new HtmlWebpackPlugin(getHtmlConfig('result', '操作结果')),
     ]
 };
 
