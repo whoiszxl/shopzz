@@ -2,12 +2,12 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 22:12:25 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-11 22:28:50
+ * @Last Modified time: 2018-05-12 10:02:56
  */
 
 'use strict';
 
-var Hogan = require('hogan');
+var Hogan = require('hogan.js');
 var conf = {
     serverHost : ''
 };
