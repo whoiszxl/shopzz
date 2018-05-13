@@ -1,0 +1,16 @@
+<div class="pg-content">
+    {{#pageArray}}
+    {{#disabled}}
+        <span class="pg-item disabled" data-value="{{value}}">{{name}}</span>
+    {{/disabled}}
+    {{^disabled}}
+        {{#active}}
+            <span class="pg-item active" data-value="{{value}}">{{name}}</span>
+        {{/active}}
+        {{^active}}
+            <span class="pg-item" data-value="{{value}}">{{name}}</span>
+        {{/active}}
+    {{/disabled}}
+    {{/pageArray}}
+    <span class="pg-total">{{pageNum}} / {{pages}}</span>
+</div>

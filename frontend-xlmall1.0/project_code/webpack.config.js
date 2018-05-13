@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:51 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-12 17:05:49
+ * @Last Modified time: 2018-05-13 22:02:54
  */
 var webpack = require('webpack');
 var Ex = require('extract-text-webpack-plugin');
@@ -29,6 +29,7 @@ var config = {
     entry: {
         'common': ['./src/page/common/index.js'], 
         'index' : ['./src/page/index/index.js'],
+        'list' : ['./src/page/list/index.js'],
         'user-login' : ['./src/page/user-login/index.js'],
         'user-register' : ['./src/page/user-register/index.js'],
         'user-pass-reset'   : ['./src/page/user-pass-reset/index.js'],
@@ -72,7 +73,7 @@ var config = {
         new Ex("css/[name].css"),
         // html模板的处理
         new HtmlWebpackPlugin(getHtmlConfig('index', '首页')),
-        new HtmlWebpackPlugin(getHtmlConfig('login', '商品列表页')),
+        new HtmlWebpackPlugin(getHtmlConfig('list', '商品列表页')),
         new HtmlWebpackPlugin(getHtmlConfig('user-login', '用户登录')),
         new HtmlWebpackPlugin(getHtmlConfig('user-register', '用户注册')),
         new HtmlWebpackPlugin(getHtmlConfig('user-pass-reset', '找回密码')),
