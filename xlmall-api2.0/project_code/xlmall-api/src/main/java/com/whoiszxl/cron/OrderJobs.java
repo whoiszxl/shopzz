@@ -107,7 +107,7 @@ public class OrderJobs {
     }
 	
 	
-	@Scheduled(cron="* 0/2 * * * ?")
+	@Scheduled(cron="0 0/5 * * * ? ")
     public void closeOrderByRedisShardedLockV4() {
 		RLock lock = redissonManager.getRedisson().getLock(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK);
 		boolean getLock = false;
