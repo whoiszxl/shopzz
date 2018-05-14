@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:51 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-14 10:30:03
+ * @Last Modified time: 2018-05-14 12:05:27
  */
 var webpack = require('webpack');
 var Ex = require('extract-text-webpack-plugin');
@@ -26,6 +26,11 @@ var getHtmlConfig = function(name, title){
 
 // webpack config
 var config = {
+
+    devServer: {
+        host: '0.0.0.0',
+        disableHostCheck: true
+    },
     entry: {
         'common': ['./src/page/common/index.js'], 
         'index' : ['./src/page/index/index.js'],
