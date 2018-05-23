@@ -12,6 +12,7 @@ import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.common.TokenCache;
 import com.whoiszxl.dao.UserMapper;
 import com.whoiszxl.entity.User;
+import com.whoiszxl.jwt.JWTUtil;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.MD5Util;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
@@ -40,6 +41,26 @@ public class UserServiveImpl implements UserService {
 		user.setPassword(StringUtils.EMPTY);
 		
 		return ServerResponse.createBySuccess("登录成功",user);
+	}
+	
+	@Override
+	public ServerResponse<String> jwt_login(String username, String password) {
+		int resultCount = userMapper.checkUsername(username);
+		if(resultCount == 0) {
+			return ServerResponse.createByErrorMessage("用户名不存在");
+		}
+		
+		//密码md5登录
+		String md5Password = MD5Util.MD5EncodeUtf8(password);
+		
+		User user = userMapper.selectLogin(username, md5Password);
+		if(user == null) {
+			return ServerResponse.createByErrorMessage("密码错误");
+		}
+		
+		user.setPassword(StringUtils.EMPTY);
+		
+		return ServerResponse.createBySuccess("登录成功",JWTUtil.sign(username, md5Password));
 	}
 	
 	

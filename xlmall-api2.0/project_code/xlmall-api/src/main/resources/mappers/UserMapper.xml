@@ -171,6 +171,13 @@
   	and password = #{password}
   </select>
   
+  <select id="selectUserByUsername" resultMap="BaseResultMap" parameterType="string">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from xl_user
+  	where username = #{username}
+  </select>
+  
   
   <select id="selectQuestionByUsername" resultType="string" parameterType="string">
   	select

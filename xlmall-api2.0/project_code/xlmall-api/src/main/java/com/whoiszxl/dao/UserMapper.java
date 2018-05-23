@@ -48,6 +48,15 @@ public interface UserMapper {
     String selectQuestionByUsername(String username);
     
     
+    /**
+     * 通过用户名查询到用户的所有信息咯
+     * @param username 用户名
+     * @return 查询的对象实体 
+     */
+    User selectUserByUsername(String username);
+    
+    
+    
     int checkAnswer(@Param("username") String username,@Param("question") String question,@Param("answer") String answer);
     
     

@@ -15,6 +15,8 @@ public interface UserService {
 	
 	ServerResponse<User> login(String username,String password);
 	
+	ServerResponse<String> jwt_login(String username,String password);
+	
 	ServerResponse<String> register(User user);
 	
 	ServerResponse<String> checkVaild(String str,String type);

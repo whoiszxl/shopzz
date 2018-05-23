@@ -54,11 +54,28 @@ public class UserController {
 		if (response.isSuccess()) {
 			// session.setAttribute(Const.CURRENT_USER, response.getData());
 
-			// 单点登录:写入token
+			//单点登录:写入token
 			CookieUtil.writeLoginToken(httpServletResponse, session.getId());
 			RedisShardedPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()),
-					Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+			Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
 		}
+		return response;
+	}
+	
+	
+	
+	/**
+	 * jwt用户登录
+	 * 
+	 * @param username
+	 * @param password
+	 * @param session
+	 * @return
+	 */
+	@PostMapping("jwt_login")
+	@ApiOperation(value = "账号密码登录接口")
+	public ServerResponse<String> jwt_login(String username, String password) {
+		ServerResponse<String> response = userService.jwt_login(username, password);
 		return response;
 	}
 

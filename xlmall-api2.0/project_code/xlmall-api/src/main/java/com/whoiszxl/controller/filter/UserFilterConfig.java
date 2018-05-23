@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author whoiszxl
  *
  */
-@Configuration
+//@Configuration
 public class UserFilterConfig {
 
 	
