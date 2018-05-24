@@ -3,6 +3,8 @@ package com.whoiszxl.controller.portal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,8 @@ import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ResponseCode;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
+import com.whoiszxl.jwt.JWTUtil;
+import com.whoiszxl.jwt.JwtUserService;
 import com.whoiszxl.service.CartService;
 import com.whoiszxl.utils.UserUtil;
 import com.whoiszxl.vo.CartVo;
@@ -33,10 +37,14 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
+	@Autowired
+	private JwtUserService jwtUserService;
+	
 	@ApiOperation(value = "购物车列表")
 	@GetMapping("list")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<CartVo> list(HttpServletRequest request){
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
@@ -45,8 +53,9 @@ public class CartController {
 	
 	@ApiOperation(value = "购物车添加")
 	@PostMapping("add")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<CartVo> add(HttpServletRequest request, Integer count, Integer productId) {
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
@@ -55,8 +64,9 @@ public class CartController {
 	
 	@ApiOperation(value = "更新购物车商品")
 	@PostMapping("update")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<CartVo> update(HttpServletRequest request, Integer count, Integer productId) {
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
@@ -65,8 +75,9 @@ public class CartController {
 	
 	@ApiOperation(value = "批量删除购物车商品")
 	@PostMapping("delete_product")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<CartVo> deleteProduct(HttpServletRequest request,String productIds){
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
@@ -75,8 +86,9 @@ public class CartController {
 	
 	@ApiOperation(value = "选中所有购物车商品")
 	@PostMapping("select_all")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<CartVo> selectAll(HttpServletRequest request){
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
@@ -85,8 +97,9 @@ public class CartController {
 
 	@ApiOperation(value = "不选中购物车所有商品")
     @PostMapping("un_select_all")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<CartVo> unSelectAll(HttpServletRequest request){
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
@@ -96,8 +109,9 @@ public class CartController {
 
 	@ApiOperation(value = "购物车里单个选中商品")
     @PostMapping("select")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<CartVo> select(HttpServletRequest request,Integer productId){
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
@@ -106,8 +120,9 @@ public class CartController {
 
 	@ApiOperation(value = "购物车里单个不选中商品")
     @PostMapping("un_select")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<CartVo> unSelect(HttpServletRequest request,Integer productId){
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }
@@ -117,8 +132,9 @@ public class CartController {
 
 	@ApiOperation(value = "查询当前用户购物车的商品数量")
     @PostMapping("get_cart_product_count")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<Integer> getCartProductCount(HttpServletRequest request){
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
         }

@@ -14,6 +14,7 @@ import com.whoiszxl.dao.UserMapper;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.jwt.JWTUtil;
 import com.whoiszxl.service.UserService;
+import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.MD5Util;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
 
@@ -57,10 +58,7 @@ public class UserServiveImpl implements UserService {
 		if(user == null) {
 			return ServerResponse.createByErrorMessage("密码错误");
 		}
-		
-		user.setPassword(StringUtils.EMPTY);
-		
-		return ServerResponse.createBySuccess("登录成功",JWTUtil.sign(username, md5Password));
+		return ServerResponse.createBySuccess("登录成功",JWTUtil.sign(username, md5Password, user.getId()));
 	}
 	
 	

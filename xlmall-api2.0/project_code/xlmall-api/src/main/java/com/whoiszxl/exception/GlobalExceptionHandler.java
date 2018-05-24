@@ -21,7 +21,7 @@ import com.whoiszxl.common.ServerResponse;
  * @author whoiszxl
  *
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	private static Logger log = LoggerFactory.getLogger("全局异常");

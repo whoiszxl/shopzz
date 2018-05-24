@@ -30,7 +30,7 @@ public class MyRealm extends AuthorizingRealm {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MyRealm.class);
 	
 	@Autowired
-	private UserService jwtUserService;
+	private JwtUserService jwtUserService;
 	
 	
 	/**
@@ -79,7 +79,7 @@ public class MyRealm extends AuthorizingRealm {
         }
         
         //存在的话就直接用jwt去校验是否有效
-        if (!JWTUtil.verify(token, username, user.getPassword())) {
+        if (!JWTUtil.verify(token, username, user.getPassword(), user.getId())) {
             throw new AuthenticationException("Username or password error");
         }
 

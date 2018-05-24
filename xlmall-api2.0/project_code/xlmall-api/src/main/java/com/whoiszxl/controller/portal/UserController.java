@@ -4,17 +4,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
 
 import com.whoiszxl.common.Const;
-import com.whoiszxl.common.RedisPool;
-import com.whoiszxl.common.ResponseCode;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
+import com.whoiszxl.jwt.JWTUtil;
+import com.whoiszxl.jwt.JwtUserService;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
@@ -37,6 +40,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private JwtUserService jwtUserService;
 
 	/**
 	 * 用户登录
@@ -81,12 +87,8 @@ public class UserController {
 
 	@PostMapping("logout")
 	@ApiOperation(value = "登出接口")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<String> logout(HttpServletResponse response, HttpServletRequest request) {
-		//session.removeAttribute(Const.CURRENT_USER);
-		//单点登录：清除cookie和redis
-		String loginToken = CookieUtil.readLoginToken(request);
-		RedisShardedPoolUtil.del(loginToken);
-		CookieUtil.deleteLoginToken(request, response);
 		return ServerResponse.createBySuccess();
 	}
 
@@ -105,18 +107,13 @@ public class UserController {
 
 	@PostMapping("get_user_info")
 	@ApiOperation(value = "获取用户信息的接口")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<User> getUserInfo(HttpServletRequest request) {
-		//User user = (User) session.getAttribute(Const.CURRENT_USER);
-		//单点登录：获取用户信息
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
         }
-		
-		if (user != null) {
-			return ServerResponse.createBySuccess(user);
-		}
-		return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
+		return ServerResponse.createBySuccess(user);
 	}
 
 	@PostMapping("forget_get_question")
@@ -139,8 +136,9 @@ public class UserController {
 
 	@PostMapping("reset_password")
 	@ApiOperation(value = "通过旧密码重置密码的接口")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<String> resetPassword(HttpServletRequest request, String passwordOld, String passwordNew) {
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
         }
@@ -149,30 +147,31 @@ public class UserController {
 
 	@PostMapping("update_information")
 	@ApiOperation(value = "更新用户信息接口")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<User> update_information(HttpServletRequest request, User user) {
-		User currentUser = UserUtil.getCurrentUser(request);
-        if(currentUser == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
-		user.setId(currentUser.getId());
-		user.setUsername(currentUser.getUsername());
+		String token = request.getHeader("Authorization");
+		String username = JWTUtil.getUsername(token);
+		int id = JWTUtil.getUserId(token);
+		user.setId(id);
+		user.setUsername(username);
 		ServerResponse<User> response = userService.updateInformation(user);
-		if (response.isSuccess()) {
-			response.getData().setUsername(currentUser.getUsername());
-			String loginToken = CookieUtil.readLoginToken(request);
-			RedisShardedPoolUtil.setEx(loginToken, JsonUtil.obj2String(response.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
-		}
-
 		return response;
 	}
 
 	@PostMapping("get_information")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	@ApiOperation(value = "获取用户信息的接口")
 	public ServerResponse<User> get_information(HttpServletRequest request) {
-		User user = UserUtil.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
+		User user = jwtUserService.getCurrentUser(request);
+		if(user == null) {
+        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
         }
-		return userService.getInformation(user.getId());
+		return ServerResponse.createBySuccess(user);
 	}
+	
+	@RequestMapping(path = "/401")
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ServerResponse<String> unauthorized() {
+        return ServerResponse.createByErrorCodeMessage(401, "Unauthorized");
+    }
 }

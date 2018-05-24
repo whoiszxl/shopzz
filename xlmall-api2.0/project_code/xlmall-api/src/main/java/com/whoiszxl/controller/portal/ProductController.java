@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
 import com.whoiszxl.common.ServerResponse;
+import com.whoiszxl.jwt.JwtUserService;
 import com.whoiszxl.service.ProductService;
 import com.whoiszxl.vo.ProductDetailVo;
 
@@ -24,6 +25,9 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/product/")
 public class ProductController {
+	
+	@Autowired
+	private JwtUserService jwtUserService;
 
 	@Autowired
 	private ProductService productService;

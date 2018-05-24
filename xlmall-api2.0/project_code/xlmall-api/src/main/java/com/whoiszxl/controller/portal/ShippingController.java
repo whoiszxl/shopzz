@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.Shipping;
 import com.whoiszxl.entity.User;
+import com.whoiszxl.jwt.JwtUserService;
 import com.whoiszxl.service.ShippingService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
@@ -37,10 +40,14 @@ public class ShippingController {
 	@Autowired
 	private ShippingService shippingService;
 	
+	@Autowired
+	private JwtUserService jwtUserService;
+	
 	@PostMapping("add")
 	@ApiOperation(value = "添加一个收货地址")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse add(HttpServletRequest request,Shipping shipping) {
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
         }
@@ -49,8 +56,9 @@ public class ShippingController {
 	
 	@PostMapping("delete")
 	@ApiOperation(value = "删除一个收货地址")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse delete(HttpServletRequest request,Integer shippingId) {
-		User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
         }
@@ -59,8 +67,9 @@ public class ShippingController {
 	
 	@PostMapping("update")
 	@ApiOperation(value = "更新一个收货地址")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse update(HttpServletRequest request,Shipping shipping){
-        User user = UserUtil.getCurrentUser(request);
+		User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
         }
@@ -70,8 +79,9 @@ public class ShippingController {
 
     @GetMapping("selects")
     @ApiOperation(value = "通过用户id和地址id查询到一个收货地址")
+    @RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<Shipping> select(HttpServletRequest request,Integer shippingId){
-    	User user = UserUtil.getCurrentUser(request);
+    	User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
         }
@@ -81,10 +91,11 @@ public class ShippingController {
 
     @PostMapping("list")
     @ApiOperation(value = "查询当前用户的所有收货地址")
+    @RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<PageInfo> list(@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize",defaultValue = "10")int pageSize,
                                          HttpServletRequest request){
-    	User user = UserUtil.getCurrentUser(request);
+    	User user = jwtUserService.getCurrentUser(request);
         if(user == null) {
         	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
         }
