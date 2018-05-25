@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:51 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-14 12:05:27
+ * @Last Modified time: 2018-05-25 18:29:42
  */
 var webpack = require('webpack');
 var Ex = require('extract-text-webpack-plugin');
@@ -44,6 +44,7 @@ var config = {
         'user-center'       : ['./src/page/user-center/index.js'],
         'user-center-update': ['./src/page/user-center-update/index.js'],
         'result': ['./src/page/result/index.js'],
+        "about": ["./src/page/about/index.js"],
     },
     output: {
         path: './dist',
@@ -90,6 +91,8 @@ var config = {
         new HtmlWebpackPlugin(getHtmlConfig('user-center-update', '修改个人信息')),
         new HtmlWebpackPlugin(getHtmlConfig('user-pass-update', '修改密码')),
         new HtmlWebpackPlugin(getHtmlConfig('result', '操作结果')),
+        new HtmlWebpackPlugin(getHtmlConfig('about', '关于XMMALL')),
+
     ]
 };
 
