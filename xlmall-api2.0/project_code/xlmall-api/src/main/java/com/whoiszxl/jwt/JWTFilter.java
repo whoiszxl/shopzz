@@ -7,13 +7,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.whoiszxl.service.impl.OrderServiceImpl;
+import com.whoiszxl.exception.UnauthorizedException;
+import com.whoiszxl.utils.RedisShardedPoolUtil;
 
 /**
  * 所有的请求都会先经过Filter，所以我们继承官方的BasicHttpAuthenticationFilter，并且重写鉴权的方法。
@@ -23,7 +25,7 @@ import com.whoiszxl.service.impl.OrderServiceImpl;
  */
 public class JWTFilter extends BasicHttpAuthenticationFilter {
 
-	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(JWTFilter.class);
 	/**
      * 判断用户是否想要登入。
      * 检测header里面是否包含Authorization字段即可
@@ -43,12 +45,19 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     	//获得头信息中的token咯
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String authorization = httpServletRequest.getHeader("Authorization");
-
+        
+        //在校验之前还要校验一下token是否在redis中
+        String have = RedisShardedPoolUtil.get(authorization);
+        if(!StringUtils.equals(have, "1")) {
+        	logger.error("token不在redis中了");
+        	throw new UnauthorizedException("token处于无效期中");
+        }
+        
         JWTToken token = new JWTToken(authorization);
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获
         getSubject(request, response).login(token);
         // 如果没有抛出异常则代表登入成功，返回true
-        return true;
+        return true;  
     }
 
     /**

@@ -16,6 +16,7 @@ import com.whoiszxl.jwt.JWTUtil;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.MD5Util;
+import com.whoiszxl.utils.PropertiesUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
 
 @Service("userService")
@@ -23,6 +24,8 @@ public class UserServiveImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	
+	private static final long EXPIRE_TIME = Integer.parseInt(PropertiesUtil.getProperty("jwt.token.expire.time","60000"));
 
 	@Override
 	public ServerResponse<User> login(String username, String password) {
@@ -32,9 +35,7 @@ public class UserServiveImpl implements UserService {
 		}
 		
 		//密码md5登录
-		String md5Password = MD5Util.MD5EncodeUtf8(password);
-		
-		User user = userMapper.selectLogin(username, md5Password);
+		User user = userMapper.selectLogin(username, MD5Util.MD5EncodeUtf8(password));
 		if(user == null) {
 			return ServerResponse.createByErrorMessage("密码错误");
 		}
@@ -52,13 +53,13 @@ public class UserServiveImpl implements UserService {
 		}
 		
 		//密码md5登录
-		String md5Password = MD5Util.MD5EncodeUtf8(password);
-		
-		User user = userMapper.selectLogin(username, md5Password);
+		User user = userMapper.selectLogin(username, MD5Util.MD5EncodeUtf8(password));
 		if(user == null) {
 			return ServerResponse.createByErrorMessage("密码错误");
 		}
-		return ServerResponse.createBySuccess("登录成功",JWTUtil.sign(username, password, user.getId()));
+		String token = JWTUtil.sign(username, password, user.getId());
+		RedisShardedPoolUtil.setEx(token, "1", (int)(Const.JWTTokenCache.JWT_TOKEN_EXTIME/1000));
+		return ServerResponse.createBySuccess("登录成功", token);
 	}
 	
 	

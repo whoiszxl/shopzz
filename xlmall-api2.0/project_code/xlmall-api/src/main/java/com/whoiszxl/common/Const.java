@@ -25,6 +25,14 @@ public class Const {
 		int REDIS_SESSION_EXTIME = 60*30;
 	}
 	
+	public interface JWTTokenCache {
+		
+		/**
+		 * 以毫秒为单位
+		 */
+		long JWT_TOKEN_EXTIME = 60*1000*10;
+	}
+	
 	public interface REDIS_LOCK {
 		String CLOSE_ORDER_TASK_LOCK = "CLOSE_ORDER_TASK_LOCK";
 	}
