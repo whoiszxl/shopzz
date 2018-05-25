@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 22:12:25 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-12 15:32:52
+ * @Last Modified time: 2018-05-25 17:30:05
  */
 
 'use strict';
@@ -15,11 +15,17 @@ var _xl = {
     // 网络请求
     request : function(param){
         var _this = this;
+        //从cookie中获取到token
+        var token = $.cookie('token');
+        console.log("header:"+token);
         $.ajax({
             type        : param.method  || 'get',
             url         : param.url     || '',
             dataType    : param.type    || 'json',
             data        : param.data    || '',
+            headers     : {
+                'Authorization': token
+            },
             success     : function(res){
                 // 请求成功
                 if(0 === res.status){

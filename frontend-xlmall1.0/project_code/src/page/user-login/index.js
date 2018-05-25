@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-12 14:45:35 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-12 15:31:19
+ * @Last Modified time: 2018-05-25 17:17:03
  */
 
 'use strict';
@@ -48,9 +48,12 @@ var page = {
             },
             // 表单验证结果
             validateResult = this.formValidate(formData);
+            console.log(validateResult);
         // 验证成功
         if(validateResult.status){
             _user.login(formData, function(res){
+                //存储从服务器拿到的token到cookie中
+                $.cookie('token', res);
                 window.location.href = _xl.getUrlParam('redirect') || './index.html';
             }, function(errMsg){
                 formError.show(errMsg);

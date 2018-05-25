@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-12 15:32:04 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-12 15:32:26
+ * @Last Modified time: 2018-05-25 17:22:37
  */
 
 'use strict';
@@ -12,7 +12,7 @@ var _user = {
     // 用户登录
     login : function(userInfo, resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/login.do'),
+            url     : _xl.getServerUrl('/user/jwt_login'),
             data    : userInfo,
             method  : 'POST',
             success : resolve,
@@ -22,7 +22,7 @@ var _user = {
     // 检查用户名
     checkUsername : function(username, resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/check_valid.do'),
+            url     : _xl.getServerUrl('/user/check_valid'),
             data    : {
                 type    : 'username',
                 str     : username
@@ -35,7 +35,7 @@ var _user = {
     // 用户注册
     register : function(userInfo, resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/register.do'),
+            url     : _xl.getServerUrl('/user/register'),
             data    : userInfo,
             method  : 'POST',
             success : resolve,
@@ -45,7 +45,7 @@ var _user = {
     // 检查登录状态
     checkLogin : function(resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/get_user_info.do'),
+            url     : _xl.getServerUrl('/user/get_user_info'),
             method  : 'POST',
             success : resolve,
             error   : reject
@@ -54,7 +54,7 @@ var _user = {
     // 获取用户密码提示问题
     getQuestion : function(username, resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/forget_get_question.do'),
+            url     : _xl.getServerUrl('/user/forget_get_question'),
             data    : {
                 username : username
             },
@@ -66,7 +66,7 @@ var _user = {
     // 检查密码提示问题答案
     checkAnswer : function(userInfo, resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/forget_check_answer.do'),
+            url     : _xl.getServerUrl('/user/forget_check_answer'),
             data    : userInfo,
             method  : 'POST',
             success : resolve,
@@ -76,7 +76,7 @@ var _user = {
     // 重置密码
     resetPassword : function(userInfo, resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/forget_reset_password.do'),
+            url     : _xl.getServerUrl('/user/forget_reset_password'),
             data    : userInfo,
             method  : 'POST',
             success : resolve,
@@ -86,7 +86,7 @@ var _user = {
     // 获取用户信息
     getUserInfo : function(resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/get_information.do'),
+            url     : _xl.getServerUrl('/user/get_information'),
             method  : 'POST',
             success : resolve,
             error   : reject
@@ -95,7 +95,7 @@ var _user = {
     // 更新个人信息
     updateUserInfo : function(userInfo, resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/update_information.do'),
+            url     : _xl.getServerUrl('/user/update_information'),
             data    : userInfo,
             method  : 'POST',
             success : resolve,
@@ -105,7 +105,7 @@ var _user = {
     // 登录状态下更新密码
     updatePassword : function(userInfo, resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/reset_password.do'),
+            url     : _xl.getServerUrl('/user/reset_password'),
             data    : userInfo,
             method  : 'POST',
             success : resolve,
@@ -115,7 +115,7 @@ var _user = {
     // 登出
     logout : function(resolve, reject){
         _xl.request({
-            url     : _xl.getServerUrl('/user/logout.do'),
+            url     : _xl.getServerUrl('/user/logout'),
             method  : 'POST',
             success : resolve,
             error   : reject
