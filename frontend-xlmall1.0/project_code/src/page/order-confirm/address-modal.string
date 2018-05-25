@@ -1,0 +1,46 @@
+<div class="modalContainer">
+    <div class="receiverHead">
+        {{^isUpdate}}
+        <p>新建地址</p>
+        {{/isUpdate}} {{#isUpdate}}
+        <p>编辑地址</p> {{/isUpdate}}
+
+        <span class="close fa fa-close"></span>
+    </div>
+    <div class="receiverBody">
+        <div class="form">
+            <div class="receiver-item">
+                <label><span class="required">*</span> 收件人姓名:</label>
+                <input type="text" placeholder="请输入收件人姓名" id="receiver-name" value="{{data.receiverName}}">
+            </div>
+            <div class="receiver-item">
+                <div class="addressSelect">
+                    <label><span class="required">*</span>所在城市:</label>
+
+                    <select id="receiver-select-province">
+                                        </select>
+                    <select id="receiver-select-city">
+                                            <option value="请选择">请选择</option>
+                                        </select>
+                </div>
+            </div>
+            <div class="receiver-item">
+                <label><span class="required">*</span>收件人地址:</label>
+                <input type="text" placeholder="请输入收件人地址" id="receiver-address" value="{{data.receiverAddress}}">
+            </div>
+            <div class="receiver-item">
+                <label><span class="required">*</span>收件人号码:</label>
+                <input type="text" placeholder="请输入收件人号码" id="receiver-phone" value="{{data.receiverPhone}}">
+            </div>
+            <div class="receiver-item">
+                <label>邮政编码:</label>
+                <input type="text" placeholder="如：100000" id="receiver-zip" value="{{data.receiverZip}}">
+            </div>
+
+            <div class="btn receiver-address-submit">
+                保存收货地址
+            </div>
+            <input type="hidden" id="modal-id" data-id={{data.id}}>
+        </div>
+    </div>
+</div>

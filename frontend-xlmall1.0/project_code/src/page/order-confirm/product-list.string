@@ -1,0 +1,20 @@
+<div class="inventory-title">
+    <span class="t-item">商品详情</span>
+    <span class="t-item">价格</span>
+    <span class="t-item">数量</span>
+    <span class="t-item">小计</span>
+</div>
+{{#orderItemVoList}}
+<div class="inventory-item" data-product-id={{productId}}>
+    <a href=""><img src="{{imageHost}}{{productImage}}" alt="{{productName}}" class="img t-item">
+    </a>
+    <span class="describe t-item"><a href="" class="link">{{productName}}</a> </span>
+    <span class="price t-item">{{currentUnitPrice}}</span>
+    <span class="number t-item">{{quantity}}</span>
+    <span class="subtotal t-item">{{totalPrice}}</span>
+</div>
+{{/orderItemVoList}}
+<div class="panel-submit">
+    <span class="text">订单总价: <span class="total">￥{{productTotalPrice}}</span> </span>
+    <span class="btn submit">提交订单</span>
+</div>

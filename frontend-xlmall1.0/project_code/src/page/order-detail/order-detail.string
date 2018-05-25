@@ -1,0 +1,53 @@
+<div class="panel">
+    <div class="title">
+        订单信息
+    </div>
+    <div class="order-info">
+        <div class="info-item">
+            <span class="order-number text">订单号:{{orderNo}}</span>
+            <span class="order-time text">订单创建时间:{{createTime}}</span>
+        </div>
+        <div class="info-item">
+            <span class="order-receiverInfo text">收件人:
+                {{receiverName}}
+                   {{shippingVo.receiverProvince}}   
+                    {{shippingVo.receiverCity}} 
+                     {{shippingVo.receiverAddress}} </span>
+        </div>
+        <div class="info-item">
+            <span class="order-status text">订单状态:{{statusDesc}}</span>
+        </div>
+        <div class="info-item">
+            <span class="order-paymentType text">支付方式:{{paymentTypeDesc}}</span>
+        </div>
+        {{^alreadyPay}}
+        <a class="btn" href="./pay.html?orderNo={{orderNo}}">去支付</a> {{/alreadyPay}} {{^alreadyPay}}
+        <div class="btn order-cancal">取消订单</div>
+        {{/alreadyPay}}
+    </div>
+</div>
+<div class="panel">
+    <div class="title">
+        商品清单
+    </div>
+    <div class="listHead">
+        <span>商品信息</span>
+        <span>单价</span>
+        <span>数量</span>
+        <span>合计</span>
+    </div>
+    {{#orderItemVoList}}
+    <div class="order-cell">
+        <span class="cell-img">  <a href="./detail.html?productId={{productId}}">
+            <img src="{{imageHost}}{{productImage}}" alt="" >
+        </a>
+        </span>
+        <span class="cell-info">
+            <a href="./detail.html?productId={{productId}}" class="link"><span>{{productName}}</span></a>
+        </span>
+        <span class="cell-price"><span>￥{{currentUnitPrice}}</span></span>
+        <span class="cell-number"><span>{{quantity}}</span></span>
+        <span class="cell-total"><span>￥{{totalPrice}}</span></span>
+    </div>
+    {{/orderItemVoList}}
+</div>

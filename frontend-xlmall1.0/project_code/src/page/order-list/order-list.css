@@ -1,0 +1,104 @@
+.order-item {
+    margin-bottom: 10px;
+}
+
+.listHead {
+    background-color: rgba(222, 218, 218, 0.36);
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 0;
+    border-bottom: 1px solid rgba(125, 125, 125, 0.25);
+}
+
+.listHead>span {
+    display: inline-block;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 17px;
+    text-align: center;
+}
+
+.listHead>span:nth-child(1) {
+    text-align: left;
+    padding-left: 70px;
+    width: 70%;
+}
+
+.listHead>span:nth-child(2) {
+    width: 10%;
+}
+
+.listHead>span:nth-child(3) {
+    width: 10%;
+}
+
+.listHead>span:nth-child(4) {
+    width: 10%;
+}
+
+
+/* 每个订单的头部  */
+
+.order-info {
+    background-color: rgba(208, 208, 208, 0.25);
+    padding: 10px 0 10px 30px;
+    font-size: 13px;
+    text-align: left;
+    color: #d6d6d6;
+}
+
+.order-info>span {
+    width: 15%;
+    margin-right: 45px;
+    color: #999;
+}
+
+.order-info>span.order-total>i {
+    color: #c60023;
+}
+
+
+/* 每个订单里面的商品信息 */
+
+.order-cell {
+    background-color: rgba(248, 246, 246, 0.40);
+    padding: 20px;
+    padding-right: 0;
+    border-bottom: 1px solid rgba(212, 212, 212, 0.23);
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0;
+}
+
+.order-cell>span {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 15px;
+    color: #999;
+}
+
+.order-cell .cell-img img {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
+.order-cell .cell-info {
+    width: 505px;
+}
+
+.order-cell .cell-price {
+    width: 10%;
+    text-align: center;
+}
+
+.order-cell .cell-number {
+    width: 10%;
+    text-align: center;
+}
+
+.order-cell .cell-total {
+    width: 10%;
+    text-align: center;
+}

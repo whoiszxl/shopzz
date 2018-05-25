@@ -1,0 +1,249 @@
+/*  地址样式 */
+
+.address {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.address .address-item,
+.address-add {
+    position: relative;
+    width: 200px;
+    margin: 20px 20px 0 0;
+    padding: 10px;
+    border: 4px dashed #cdcdcd;
+    cursor: pointer;
+    word-break: break-all;
+}
+
+.address .address-item.active {
+    border: 4px dashed #E46207;
+}
+
+.address .address-item:hover {
+    background-color: rgba(168, 168, 168, 0.3);
+}
+
+.address .address-item .address-title {
+    border-bottom: 1px solid #cdcdcd;
+}
+
+.address .address-item .address-detail {
+    margin-bottom: 20px;
+}
+
+.address .address-item .address-detail span {
+    display: block;
+    margin: 3px 0;
+}
+
+.address .address-item .address-operate {
+    position: absolute;
+    right: 10px;
+    bottom: 0px;
+    color: #959393;
+    visibility: hidden;
+}
+
+.address .address-item:hover .address-operate {
+    visibility: visible;
+}
+
+.address .address-item .address-operate span:hover {
+    color: #fc261b;
+}
+
+
+/*  添加新地址 */
+
+.address .address-add .add-new {
+    margin: 50px;
+    text-align: center;
+}
+
+.address .address-add:hover {
+    background-color: rgba(168, 168, 168, 0.3);
+}
+
+.address .address-add .add-new i.fa-plus {
+    display: block;
+    font-size: 60px;
+    color: #666;
+}
+
+
+/* 商品清单  */
+
+.inventory-con .inventory-title {
+    padding: 5px;
+    position: relative;
+    margin-top: 20px;
+    height: 30px;
+    border-bottom: 1px solid #aeaeae;
+}
+
+.inventory-con .inventory-title .t-item {
+    position: absolute;
+    font-weight: bold;
+}
+
+.inventory-con .inventory-title .t-item:nth-child(1) {
+    left: 100px;
+}
+
+.inventory-con .inventory-title .t-item:nth-child(2) {
+    left: 505px;
+}
+
+.inventory-con .inventory-title .t-item:nth-child(3) {
+    left: 700px;
+}
+
+.inventory-con .inventory-title .t-item:nth-child(4) {
+    left: 910px;
+}
+
+
+/* 清单项目  */
+
+.inventory-con .inventory-item {
+    border-bottom: 1px dotted #d3d3d3;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.inventory-con .inventory-item .t-item {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.inventory-con .inventory-item .img {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.inventory-con .inventory-item .describe {
+    width: 40%;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.inventory-con .inventory-item .price {
+    width: 18%;
+}
+
+.inventory-con .inventory-item .number {
+    width: 20%;
+}
+
+.inventory-con .inventory-item .subtotal {
+    width: 10%;
+}
+
+
+/*  提交 */
+
+.panel-submit {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    background-color: rgba(178, 178, 178, 0.50);
+    text-align: right;
+}
+
+.panel-submit .text {
+    margin-right: 100px;
+}
+
+.panel-submit .total {
+    color: #c60023;
+}
+
+.panel-submit .submit {
+    vertical-align: top;
+}
+
+
+/* 新建地址  */
+
+.modal {
+    position: fixed;
+    /* 使得占满屏幕  */
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(50, 29, 29, 0.40);
+}
+
+.modal .modalContainer {
+    width: 600px;
+    padding: 20px;
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    background-color: #ffffff;
+    /*  设置圆角 */
+    border-radius: 10px;
+}
+
+
+/*  头部 */
+
+.modal {
+    display: none;
+}
+
+.modal .modalContainer .receiverHead {
+    position: relative;
+    font-weight: bold;
+    padding: 10px;
+    border-bottom: 1px solid rgba(51, 48, 48, 0.64);
+}
+
+.modal .modalContainer .receiverHead .close {
+    position: absolute;
+    padding: 5px;
+    right: 10px;
+    bottom: 5px;
+    cursor: pointer;
+}
+
+
+/* 主体部分 */
+
+.modal .modalContainer .receiverBody .form {
+    padding: 10px;
+}
+
+.modal .modalContainer .receiverBody .required {
+    color: #e43421;
+    margin-right: 5px;
+}
+
+.modal .modalContainer .receiverBody div {
+    margin-bottom: 10px;
+}
+
+.modal .modalContainer .receiverBody label {
+    display: block;
+    float: left;
+    width: 120px;
+    text-align: right;
+    margin-right: 30px;
+}
+
+.modal .modalContainer .receiverBody input {
+    height: 25px;
+    line-height: 25px;
+    margin-top: -5px;
+    outline: none;
+}
+
+.modal .modalContainer .receiverBody .btn {
+    margin-left: 150px;
+}

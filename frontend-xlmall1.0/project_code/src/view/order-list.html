@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%= require("html-loader!./layout/head-common.html") %>
+        <title>
+            <%= htmlWebpackPlugin.options.title %>XLMALL电商平台
+        </title>
+</head>
+
+<body>
+    <!-- 头部  -->
+    <%= require("html-loader!./layout/nav.html") %>
+        <%= require("html-loader!./layout/header.html") %>
+            <!-- 侧边  -->
+            <div class="crumbs">
+                <div><a href="./index.html" class="link">XLMALL</a></a>&gt;
+                    <%= htmlWebpackPlugin.options.title %>
+                </div>
+
+            </div>
+            <div class="page-wrap w">
+                <!--w 还有清除浮动的功能 因为hide-->
+                <!-- 面包屑导航  -->
+                <%=   require("html-loader!./layout/nav-side.html")    %>
+                    <!--内容  -->
+                    <div class="content with-nav">
+                        <div class="panel">
+                            <div class="title">
+                                <%= htmlWebpackPlugin.options.title %>
+                            </div>
+                            <div class="order-list-con">
+                                <div class="loading"></div>
+                            </div>
+
+                        </div>
+                        <div class="paging">
+                        </div>
+                    </div>
+            </div>
+            <%=   require("html-loader!./layout/footer.html")    %>
+</body>
+
+</html>

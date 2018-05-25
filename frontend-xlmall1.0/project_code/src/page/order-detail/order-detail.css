@@ -1,0 +1,16 @@
+/* 订单信息  */
+
+@import url("../order-list/order-list.css");
+.order-info {
+    background-color: #ffffff;
+}
+
+.order-info .info-item {
+    margin: 20px 0;
+}
+
+.order-info .info-item .text {
+    margin-right: 30px;
+    font-size: 15px;
+    color: #999;
+}
