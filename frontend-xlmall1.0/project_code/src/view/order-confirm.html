@@ -1,48 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <%= require("html-loader!./layout/head-common.html") %>
-        <title>
-            <%= htmlWebpackPlugin.options.title %>XLMALL电商平台
-        </title>
+    <%= require('html-loader!./layout/head-common.html') %>
+    <title><%= htmlWebpackPlugin.options.title%> - XLMALL电商平台</title>
 </head>
-
 <body>
-    <!-- 头部  -->
-    <%= require("html-loader!./layout/nav.html") %>
-        <%= require("html-loader!./layout/header.html") %>
-            <!-- 侧边  -->
-            <div class="crumbs">
-                <div><a href="./index.html" class="link">XLMALL</a></a>&gt;
-                    <%= htmlWebpackPlugin.options.title %>
-                </div>
+<%= require('html-loader!./layout/nav.html') %>
+<%= require('html-loader!./layout/header.html') %>
+<div class="crumb">
+    <div class="w">
+        <div class="crumb-con">
+            <a href="./index.html" class="link">XLMALL</a>
+            <span> > </span>
+            <span class="link-text"><%= htmlWebpackPlugin.options.title%> </span>
+        </div>
+    </div>
+</div>
+<div class="page-wrap w">
+    <div class="panel">
+        <h1 class="panel-title">收货地址</h1>
+        <div class="panel-body address-con">
 
-            </div>
-            <div class="page-wrap w">
-                <div class="panel">
-                    <div class="title">
-                        收货地址
-                    </div>
-                    <div class="panel-con address">
 
-                    </div>
-                </div>
-                <div class="panel">
-                    <div class="title">
-                        商品清单
-                    </div>
-                    <div class="inventory-con">
+        </div>
+    </div>
+    <div class="panel">
+        <h1 class="panel-title">商品清单</h1>
+        <div class="panel-body product-con">
 
-                    </div>
-                </div>
-                <!-- 新建地址的弹出框  -->
-                <div class="modal">
 
-                </div>
-            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-wrap">
 
-            <%=   require("html-loader!./layout/footer.html")    %>
+</div>
+<%= require('html-loader!./layout/footer.html') %>
 </body>
-
 </html>

@@ -1,0 +1,49 @@
+<table class="order-list-table header">
+    <tr>
+        <th class="cell cell-img">&nbsp;</th>
+        <th class="cell cell-info">商品信息</th>
+        <th class="cell cell-price">单价</th>
+        <th class="cell cell-count">数量</th>
+        <th class="cell cell-total">小计</th>
+    </tr>
+</table>
+{{#list}}
+<table class="order-list-table order-item">
+    <tr>
+        <td colspan="5" class="order-info">
+            <span class="order-text">
+                <span>订单号:</span>
+                <a href="./order-detail.html?orderNumber={{orderNo}}" class="link order-num" target="_blank">{{orderNo}}</a>
+            </span>
+            <span class="order-text">{{createTime}}</span>
+            <span class="order-text">收件人:{{receiverName}}</span>
+            <span class="order-text">订单状态:{{statusDesc}}</span>
+            <span class="order-text">
+                <span>订单总价:</span>
+                <span class="order-total">${{payment}}</span>
+            </span>
+            <a href="./order-detail.html?orderNumber={{orderNo}}" class="link order-detail" target="_blank">查看详情</a>
+        </td>
+    </tr>
+    {{#orderItemVoList}}
+    <tr>
+        <td class="cell cell-img">
+            <a href="./detail.html?productId={{productId}}" target="_blank">
+                <img src="{{imageHost}}{{productImage}}" alt="{{productName}}" class="p-img">
+            </a>
+        </td>
+        <td class="cell cell-info">
+            <a href="./detail.html?productId={{productId}}" class="link" target="_blank">
+                {{productName}}
+            </a>
+        </td>
+        <td class="cell cell-price">${{currentUnitPrice}}</td>
+        <td class="cell cell-count">{{quantity}}</td>
+        <td class="cell cell-total">${{totalPrice}}</td>
+    </tr>
+    {{/orderItemVoList}}
+</table>
+{{/list}}
+{{^list}}
+<p class="err-tip">您暂时还没有订单</p>
+{{/list}}

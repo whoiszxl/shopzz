@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 23:15:43 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-25 18:08:06
+ * @Last Modified time: 2018-05-26 01:03:24
  */
 
 'use strict';
@@ -44,7 +44,7 @@ var nav = {
     loadUserInfo: function() {
         user_service.checkLogin(function(res) {
             console.log("用户名："+res.username);
-            $(".notLogin").hide();
+            $(".not-login").hide();
             $('.login').show().find('.username').text(res.username);
         }, function(errMsg) {
             // do nothing
@@ -54,7 +54,7 @@ var nav = {
     //加载购物车信息
     loadCartInfo: function() {
         cart_service.getCartCount(function(res) {
-            $(".cart-count").text("(" + res.data + ")" || "(0)");
+            $(".cart-count").text("(" + res + ")" || "(0)");
         }, function(errMsg) {
             $(".cart-count").text("(0)");
         })

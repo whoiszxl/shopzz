@@ -1,20 +1,29 @@
-<div class="inventory-title">
-    <span class="t-item">商品详情</span>
-    <span class="t-item">价格</span>
-    <span class="t-item">数量</span>
-    <span class="t-item">小计</span>
-</div>
-{{#orderItemVoList}}
-<div class="inventory-item" data-product-id={{productId}}>
-    <a href=""><img src="{{imageHost}}{{productImage}}" alt="{{productName}}" class="img t-item">
-    </a>
-    <span class="describe t-item"><a href="" class="link">{{productName}}</a> </span>
-    <span class="price t-item">{{currentUnitPrice}}</span>
-    <span class="number t-item">{{quantity}}</span>
-    <span class="subtotal t-item">{{totalPrice}}</span>
-</div>
-{{/orderItemVoList}}
-<div class="panel-submit">
-    <span class="text">订单总价: <span class="total">￥{{productTotalPrice}}</span> </span>
-    <span class="btn submit">提交订单</span>
+<table class="product-table">
+    <tr>
+        <th class="cell-img">&nbsp;</th>
+        <th class="cell-info">商品描述</th>
+        <th class="cell-price">价格</th>
+        <th class="cell-count">数量</th>
+        <th class="cell-total">小计</th>
+    </tr>
+    {{#orderItemVoList}}
+    <tr>
+        <td class="cell-img">
+            <a href="./detail.html?productId={{productId}}" target="_blank">
+                <img src="{{imageHost}}{{productImage}}" alt="{{productName}}" class="p-img">
+            </a>
+        </td>
+        <td class="cell-info">
+            <a href="./detail.html?productId=" class="link" target="_blank">{{productName}}</a>
+        </td>
+        <td class="cell-price">$ {{currentUnitPrice}}</td>
+        <td class="cell-count">{{quantity}}</td>
+        <td class="cell-total">$ {{totalPrice}}</td>
+    </tr>
+    {{/orderItemVoList}}
+</table>
+<div class="submit-con">
+    <span>订单总价:</span>
+    <span class="submit-total">$qqq</span>
+    <span class="btn order-submit">提交订单</span>
 </div>
