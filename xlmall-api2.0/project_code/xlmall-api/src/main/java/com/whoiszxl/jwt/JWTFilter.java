@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.exception.UnauthorizedException;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
 
@@ -50,7 +52,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         String have = RedisShardedPoolUtil.get(authorization);
         if(!StringUtils.equals(have, "1")) {
         	logger.error("token不在redis中了");
-        	throw new UnauthorizedException("token处于无效期中");
+        	return false;
         }
         
         JWTToken token = new JWTToken(authorization);
@@ -75,7 +77,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             try {
                 executeLogin(request, response);
             } catch (Exception e) {
-                response401(request, response);
+            	responseError(request, response);
             }
         }
         return true;
@@ -102,10 +104,14 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     /**
      * 将非法请求跳转到 /user/401
      */
-    private void response401(ServletRequest req, ServletResponse resp) {
+    private void responseError(ServletRequest request, ServletResponse response) {
         try {
-            HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
-            httpServletResponse.sendRedirect("/user/401");
+            ServerResponse<String> errorMessage = ServerResponse.createByErrorMessage("非法请求");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json; charset=utf-8");
+			ObjectMapper objectMapper = new ObjectMapper();
+			String errorStr = objectMapper.writeValueAsString(errorMessage);
+			response.getWriter().write(errorStr);
         } catch (IOException e) {
         	logger.error(e.getMessage());
         }

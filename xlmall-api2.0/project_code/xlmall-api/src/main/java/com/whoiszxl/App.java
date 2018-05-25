@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.whoiszxl"})
 @MapperScan("com.whoiszxl.dao")
 @EnableScheduling //打开支持定时任务的注解
 public class App {

@@ -23,6 +23,7 @@ public class JwtExceptionController {
 
 	
 	private static Logger log = LoggerFactory.getLogger("全局异常");
+	
 	/**
 	 * 捕捉shiro的异常
 	 * @param e
