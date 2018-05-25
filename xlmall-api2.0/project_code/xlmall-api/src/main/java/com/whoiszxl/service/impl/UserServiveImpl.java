@@ -58,7 +58,7 @@ public class UserServiveImpl implements UserService {
 		if(user == null) {
 			return ServerResponse.createByErrorMessage("密码错误");
 		}
-		return ServerResponse.createBySuccess("登录成功",JWTUtil.sign(username, md5Password, user.getId()));
+		return ServerResponse.createBySuccess("登录成功",JWTUtil.sign(username, password, user.getId()));
 	}
 	
 	

@@ -72,11 +72,13 @@ public class UserController {
 	
 	/**
 	 * jwt用户登录
-	 * 
-	 * @param username
-	 * @param password
-	 * @param session
-	 * @return
+	 * 校验数据库，通过后颁发签名
+	 * 颁发签名后将签名存入redis做有效性验证
+	 * 每次校验token的时候先判断redis是否存在token
+	 * 登出的时候清除掉token
+	 * @param username 用户账号
+	 * @param password 用户密码
+	 * @return 用户token
 	 */
 	@PostMapping("jwt_login")
 	@ApiOperation(value = "账号密码登录接口")
