@@ -42,7 +42,7 @@ public class CartController {
 	
 	@ApiOperation(value = "购物车列表")
 	@GetMapping("list")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<CartVo> list(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
 		return cartService.list(user.getId());
@@ -50,7 +50,7 @@ public class CartController {
 	
 	@ApiOperation(value = "购物车添加")
 	@PostMapping("add")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<CartVo> add(HttpServletRequest request, Integer count, Integer productId) {
 		User user = jwtUserService.getCurrentUser(request);
 		return cartService.add(user.getId(), productId, count);
@@ -58,7 +58,7 @@ public class CartController {
 	
 	@ApiOperation(value = "更新购物车商品")
 	@PostMapping("update")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<CartVo> update(HttpServletRequest request, Integer count, Integer productId) {
 		User user = jwtUserService.getCurrentUser(request);
 		return cartService.update(user.getId(), productId, count);
@@ -66,7 +66,7 @@ public class CartController {
 	
 	@ApiOperation(value = "批量删除购物车商品")
 	@PostMapping("delete_product")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<CartVo> deleteProduct(HttpServletRequest request,String productIds){
 		User user = jwtUserService.getCurrentUser(request);
         return cartService.deleteProduct(user.getId(),productIds);
@@ -74,7 +74,7 @@ public class CartController {
 	
 	@ApiOperation(value = "选中所有购物车商品")
 	@PostMapping("select_all")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse<CartVo> selectAll(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
         return cartService.selectOrUnSelect(user.getId(),null,Const.Cart.CHECKED);
@@ -82,7 +82,7 @@ public class CartController {
 
 	@ApiOperation(value = "不选中购物车所有商品")
     @PostMapping("un_select_all")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse<CartVo> unSelectAll(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
         return cartService.selectOrUnSelect(user.getId(),null,Const.Cart.UN_CHECKED);
@@ -91,7 +91,7 @@ public class CartController {
 
 	@ApiOperation(value = "购物车里单个选中商品")
     @PostMapping("select")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse<CartVo> select(HttpServletRequest request,Integer productId){
 		User user = jwtUserService.getCurrentUser(request);
         return cartService.selectOrUnSelect(user.getId(),productId,Const.Cart.CHECKED);
@@ -99,7 +99,7 @@ public class CartController {
 
 	@ApiOperation(value = "购物车里单个不选中商品")
     @PostMapping("un_select")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse<CartVo> unSelect(HttpServletRequest request,Integer productId){
 		User user = jwtUserService.getCurrentUser(request);
         return cartService.selectOrUnSelect(user.getId(),productId,Const.Cart.UN_CHECKED);
@@ -108,7 +108,7 @@ public class CartController {
 
 	@ApiOperation(value = "查询当前用户购物车的商品数量")
     @PostMapping("get_cart_product_count")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse<Integer> getCartProductCount(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
         return cartService.getCartProductCount(user.getId());

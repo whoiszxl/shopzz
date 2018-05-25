@@ -14,12 +14,10 @@ import com.whoiszxl.entity.User;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
-import com.whoiszxl.utils.RedisPoolUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 
 /**
  * 

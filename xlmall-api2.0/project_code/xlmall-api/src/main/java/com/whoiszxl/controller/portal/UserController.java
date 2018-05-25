@@ -89,7 +89,7 @@ public class UserController {
 
 	@PostMapping("logout")
 	@ApiOperation(value = "登出接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<String> logout(HttpServletResponse response, HttpServletRequest request) {
 		return ServerResponse.createBySuccess();
 	}
@@ -102,14 +102,14 @@ public class UserController {
 	}
 
 	@PostMapping("check_valid")
-	@ApiOperation(value = "校验用户名邮箱参数登录")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<String> checkValid(String str, String type) {
 		return userService.checkVaild(str, type);
 	}
 
 	@PostMapping("get_user_info")
 	@ApiOperation(value = "获取用户信息的接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<User> getUserInfo(HttpServletRequest request) {
 		User user = jwtUserService.getCurrentUser(request);
 		return ServerResponse.createBySuccess(user);
@@ -135,7 +135,7 @@ public class UserController {
 
 	@PostMapping("reset_password")
 	@ApiOperation(value = "通过旧密码重置密码的接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<String> resetPassword(HttpServletRequest request, String passwordOld, String passwordNew) {
 		User user = jwtUserService.getCurrentUser(request);
 		return userService.resetPassword(passwordOld, passwordNew, user);
@@ -143,7 +143,7 @@ public class UserController {
 
 	@PostMapping("update_information")
 	@ApiOperation(value = "更新用户信息接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<User> update_information(HttpServletRequest request, User user) {
 		String token = request.getHeader("Authorization");
 		String username = JWTUtil.getUsername(token);
@@ -155,8 +155,8 @@ public class UserController {
 	}
 
 	@PostMapping("get_information")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	@ApiOperation(value = "获取用户信息的接口")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<User> get_information(HttpServletRequest request) {
 		User user = jwtUserService.getCurrentUser(request);
 		return ServerResponse.createBySuccess(user);

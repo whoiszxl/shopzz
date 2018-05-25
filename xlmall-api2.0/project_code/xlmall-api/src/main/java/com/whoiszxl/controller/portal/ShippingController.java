@@ -45,7 +45,7 @@ public class ShippingController {
 	
 	@PostMapping("add")
 	@ApiOperation(value = "添加一个收货地址")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse add(HttpServletRequest request,Shipping shipping) {
 		User user = jwtUserService.getCurrentUser(request);
 		return shippingService.add(user.getId() , shipping);
@@ -53,7 +53,7 @@ public class ShippingController {
 	
 	@PostMapping("delete")
 	@ApiOperation(value = "删除一个收货地址")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse delete(HttpServletRequest request,Integer shippingId) {
 		User user = jwtUserService.getCurrentUser(request);
 		return shippingService.del(user.getId(),shippingId);
@@ -61,7 +61,7 @@ public class ShippingController {
 	
 	@PostMapping("update")
 	@ApiOperation(value = "更新一个收货地址")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse update(HttpServletRequest request,Shipping shipping){
 		User user = jwtUserService.getCurrentUser(request);
         return shippingService.update(user.getId(),shipping);
@@ -70,7 +70,7 @@ public class ShippingController {
 
     @GetMapping("selects")
     @ApiOperation(value = "通过用户id和地址id查询到一个收货地址")
-    @RequiresRoles(value={"0","1"}, logical=Logical.OR)
+    @RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse<Shipping> select(HttpServletRequest request,Integer shippingId){
     	User user = jwtUserService.getCurrentUser(request);
         return shippingService.select(user.getId(),shippingId);
@@ -79,7 +79,7 @@ public class ShippingController {
 
     @PostMapping("list")
     @ApiOperation(value = "查询当前用户的所有收货地址")
-    @RequiresRoles(value={"0","1"}, logical=Logical.OR)
+    @RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse<PageInfo> list(@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize",defaultValue = "10")int pageSize,
                                          HttpServletRequest request){

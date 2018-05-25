@@ -53,7 +53,7 @@ public class OrderController {
 	
 	@PostMapping("create")
 	@ApiOperation(value = "创建订单接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse create(HttpServletRequest request,Integer shippingId) {
 		User user = jwtUserService.getCurrentUser(request);
 		return orderService.createOrder(user.getId(),shippingId);
@@ -62,7 +62,7 @@ public class OrderController {
 	
 	@PostMapping("cancel")
 	@ApiOperation(value = "取消订单接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse cancel(HttpServletRequest request,Long orderNo) {
 		User user = jwtUserService.getCurrentUser(request);
 		return orderService.cancel(user.getId(), orderNo);
@@ -70,7 +70,7 @@ public class OrderController {
 	
 	@PostMapping("get_order_cart_product")
 	@ApiOperation(value = "获取订单的商品集合,缩略图和总价接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse getOrderCartProduct(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
         return orderService.getOrderCartProduct(user.getId());
@@ -80,7 +80,7 @@ public class OrderController {
 
     @GetMapping("detail")
     @ApiOperation(value = "获取订单详情接口")
-    @RequiresRoles(value={"0","1"}, logical=Logical.OR)
+    @RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse detail(HttpServletRequest request,Long orderNo){
     	User user = jwtUserService.getCurrentUser(request);
         return orderService.getOrderDetail(user.getId(),orderNo);
@@ -88,7 +88,7 @@ public class OrderController {
 
     @GetMapping("list")
     @ApiOperation(value = "获取订单列表接口")
-    @RequiresRoles(value={"0","1"}, logical=Logical.OR)
+    @RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse list(HttpServletRequest request, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
     	User user = jwtUserService.getCurrentUser(request);
         return orderService.getOrderList(user.getId(),pageNum,pageSize);
@@ -104,7 +104,7 @@ public class OrderController {
 	
 	@PostMapping("pay")
 	@ApiOperation(value = "支付宝支付接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse pay(HttpServletRequest request, Long orderNo) {
 		User user = jwtUserService.getCurrentUser(request);
 		String path = request.getSession().getServletContext().getRealPath("upload");
@@ -115,7 +115,7 @@ public class OrderController {
 	
 	@PostMapping("query_order_pay_status")
 	@ApiOperation(value = "查询订单支付状态接口")
-	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<Boolean> queryOrderPayStatus(HttpServletRequest request, Long orderNo) {
 		User user = jwtUserService.getCurrentUser(request);
 		ServerResponse serverResponse = orderService.queryOrderPayStatus(user.getId(), orderNo);
