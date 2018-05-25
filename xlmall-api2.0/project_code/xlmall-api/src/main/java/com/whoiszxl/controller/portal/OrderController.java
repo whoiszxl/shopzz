@@ -56,9 +56,6 @@ public class OrderController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse create(HttpServletRequest request,Integer shippingId) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
 		return orderService.createOrder(user.getId(),shippingId);
 	}
 	
@@ -68,9 +65,6 @@ public class OrderController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse cancel(HttpServletRequest request,Long orderNo) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
 		return orderService.cancel(user.getId(), orderNo);
 	}
 	
@@ -79,9 +73,6 @@ public class OrderController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse getOrderCartProduct(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return orderService.getOrderCartProduct(user.getId());
     }
 
@@ -92,9 +83,6 @@ public class OrderController {
     @RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse detail(HttpServletRequest request,Long orderNo){
     	User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return orderService.getOrderDetail(user.getId(),orderNo);
     }
 
@@ -103,9 +91,6 @@ public class OrderController {
     @RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse list(HttpServletRequest request, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
     	User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return orderService.getOrderList(user.getId(),pageNum,pageSize);
     }
 
@@ -122,9 +107,6 @@ public class OrderController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse pay(HttpServletRequest request, Long orderNo) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
 		String path = request.getSession().getServletContext().getRealPath("upload");
 		return orderService.pay(orderNo, user.getId(), path);
 	}
@@ -133,11 +115,9 @@ public class OrderController {
 	
 	@PostMapping("query_order_pay_status")
 	@ApiOperation(value = "查询订单支付状态接口")
+	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<Boolean> queryOrderPayStatus(HttpServletRequest request, Long orderNo) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
 		ServerResponse serverResponse = orderService.queryOrderPayStatus(user.getId(), orderNo);
 		if(serverResponse.isSuccess()) {
 			return ServerResponse.createBySuccess(true);

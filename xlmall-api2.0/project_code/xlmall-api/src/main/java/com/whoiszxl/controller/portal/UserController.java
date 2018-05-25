@@ -112,9 +112,6 @@ public class UserController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<User> getUserInfo(HttpServletRequest request) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
 		return ServerResponse.createBySuccess(user);
 	}
 
@@ -141,9 +138,6 @@ public class UserController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<String> resetPassword(HttpServletRequest request, String passwordOld, String passwordNew) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
 		return userService.resetPassword(passwordOld, passwordNew, user);
 	}
 
@@ -165,9 +159,6 @@ public class UserController {
 	@ApiOperation(value = "获取用户信息的接口")
 	public ServerResponse<User> get_information(HttpServletRequest request) {
 		User user = jwtUserService.getCurrentUser(request);
-		if(user == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
 		return ServerResponse.createBySuccess(user);
 	}
 	

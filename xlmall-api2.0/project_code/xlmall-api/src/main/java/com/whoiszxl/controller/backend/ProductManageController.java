@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,24 +51,28 @@ public class ProductManageController {
 
 	@PostMapping("save")
 	@ApiOperation(value = "后台商品保存")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<String> productSave(HttpSession session, Product product) {
 		return productService.saveOrUpdateProduct(product);
 	}
 
 	@PostMapping("set_sale_status")
 	@ApiOperation(value = "后台设置订单状态")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<String> setSaleStatus(HttpSession session, Integer productId, Integer status) {
 		return productService.setSaleStatus(productId, status);
 	}
 
 	@GetMapping("detail")
 	@ApiOperation(value = "后台获取商品详情")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<?> getDetail(HttpSession session, Integer productId) {
 		return productService.manageProductDetail(productId);
 	}
 
 	@GetMapping("list")
 	@ApiOperation(value = "后台获取商品列表")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<?> getList(HttpSession session,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -75,6 +81,7 @@ public class ProductManageController {
 
 	@GetMapping("search")
 	@ApiOperation(value = "后台搜索商品")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse productSearch(HttpSession session, String productName, Integer productId,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -84,6 +91,7 @@ public class ProductManageController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping("upload")
 	@ApiOperation(value = "后台上传文件")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse upload(HttpSession session,
 			@RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request) {
 		String path = request.getSession().getServletContext().getRealPath("upload");

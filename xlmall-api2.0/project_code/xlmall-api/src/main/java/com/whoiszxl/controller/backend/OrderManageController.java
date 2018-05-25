@@ -1,5 +1,7 @@
 package com.whoiszxl.controller.backend;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
-
+import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.service.OrderService;
 import com.whoiszxl.service.UserService;
@@ -34,6 +36,7 @@ public class OrderManageController {
 
 	@GetMapping("list")
 	@ApiOperation(value = "后台订单列表")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<PageInfo> orderList(
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -42,6 +45,7 @@ public class OrderManageController {
 
 	@GetMapping("detail")
 	@ApiOperation(value = "后台订单详情")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<OrderVo> orderDetail(Long orderNo) {
 		return orderService.manageDetail(orderNo);
 
@@ -49,6 +53,7 @@ public class OrderManageController {
 
 	@GetMapping("search")
 	@ApiOperation(value = "后台搜索订单")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<PageInfo> orderSearch(Long orderNo,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
@@ -57,6 +62,7 @@ public class OrderManageController {
 
 	@PostMapping("send_goods")
 	@ApiOperation(value = "后台订单发货")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<String> orderSendGoods(Long orderNo) {
 		return orderService.manageSendGoods(orderNo);
 	}

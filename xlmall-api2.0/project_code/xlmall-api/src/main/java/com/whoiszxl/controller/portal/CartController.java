@@ -45,9 +45,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<CartVo> list(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
 		return cartService.list(user.getId());
 	}
 	
@@ -56,9 +53,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<CartVo> add(HttpServletRequest request, Integer count, Integer productId) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
 		return cartService.add(user.getId(), productId, count);
 	}
 	
@@ -67,9 +61,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<CartVo> update(HttpServletRequest request, Integer count, Integer productId) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
 		return cartService.update(user.getId(), productId, count);
 	}
 	
@@ -78,9 +69,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse<CartVo> deleteProduct(HttpServletRequest request,String productIds){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return cartService.deleteProduct(user.getId(),productIds);
     }
 	
@@ -89,9 +77,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<CartVo> selectAll(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return cartService.selectOrUnSelect(user.getId(),null,Const.Cart.CHECKED);
     }
 
@@ -100,9 +85,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<CartVo> unSelectAll(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return cartService.selectOrUnSelect(user.getId(),null,Const.Cart.UN_CHECKED);
     }
 
@@ -112,9 +94,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<CartVo> select(HttpServletRequest request,Integer productId){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return cartService.selectOrUnSelect(user.getId(),productId,Const.Cart.CHECKED);
     }
 
@@ -123,9 +102,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<CartVo> unSelect(HttpServletRequest request,Integer productId){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return cartService.selectOrUnSelect(user.getId(),productId,Const.Cart.UN_CHECKED);
     }
 
@@ -135,9 +111,6 @@ public class CartController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<Integer> getCartProductCount(HttpServletRequest request){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
-        }
         return cartService.getCartProductCount(user.getId());
     }
 

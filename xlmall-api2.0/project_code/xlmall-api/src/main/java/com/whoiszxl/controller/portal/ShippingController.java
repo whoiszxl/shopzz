@@ -48,9 +48,6 @@ public class ShippingController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse add(HttpServletRequest request,Shipping shipping) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
 		return shippingService.add(user.getId() , shipping);
 	}
 	
@@ -59,9 +56,6 @@ public class ShippingController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
 	public ServerResponse delete(HttpServletRequest request,Integer shippingId) {
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
 		return shippingService.del(user.getId(),shippingId);
 	}
 	
@@ -70,9 +64,6 @@ public class ShippingController {
 	@RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse update(HttpServletRequest request,Shipping shipping){
 		User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
         return shippingService.update(user.getId(),shipping);
     }
 
@@ -82,9 +73,6 @@ public class ShippingController {
     @RequiresRoles(value={"0","1"}, logical=Logical.OR)
     public ServerResponse<Shipping> select(HttpServletRequest request,Integer shippingId){
     	User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
         return shippingService.select(user.getId(),shippingId);
     }
 
@@ -96,9 +84,6 @@ public class ShippingController {
                                          @RequestParam(value = "pageSize",defaultValue = "10")int pageSize,
                                          HttpServletRequest request){
     	User user = jwtUserService.getCurrentUser(request);
-        if(user == null) {
-        	return ServerResponse.createByErrorMessage("用户未登录,无法获取详细信息");
-        }
         return shippingService.list(user.getId(),pageNum,pageSize);
     }
 	
