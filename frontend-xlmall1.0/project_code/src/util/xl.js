@@ -2,14 +2,14 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 22:12:25 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-26 10:57:15
+ * @Last Modified time: 2018-05-26 14:51:47
  */
 
 'use strict';
 
 var Hogan = require('hogan.js');
 var conf = {
-    serverHost : 'http://fe.whoiszxl.com'
+    serverHost : 'http://xlmall.whoiszxl.com'
 };
 var _xl = {
     // 网络请求

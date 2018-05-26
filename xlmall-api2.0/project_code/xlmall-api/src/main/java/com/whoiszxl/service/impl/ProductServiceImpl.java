@@ -59,6 +59,7 @@ public class ProductServiceImpl implements ProductService {
 				}
 
 			} else {
+				System.out.println(product);
 				int rowCount = productMapper.insert(product);
 				if (rowCount > 0) {
 					return ServerResponse.createBySuccessMessage("新增产品成功");

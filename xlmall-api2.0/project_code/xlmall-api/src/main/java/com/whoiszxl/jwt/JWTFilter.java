@@ -1,6 +1,7 @@
 package com.whoiszxl.jwt;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -9,15 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.exception.UnauthorizedException;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
+
 
 /**
  * 所有的请求都会先经过Filter，所以我们继承官方的BasicHttpAuthenticationFilter，并且重写鉴权的方法。
@@ -51,8 +55,8 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         //在校验之前还要校验一下token是否在redis中
         String have = RedisShardedPoolUtil.get(authorization);
         if(!StringUtils.equals(have, "1")) {
-        	logger.error("token不在redis中了");
-        	return false;
+        	logger.error("token已经在redis失效了");
+        	throw new TokenExpiredException("token already expired..");
         }
         
         JWTToken token = new JWTToken(authorization);
@@ -105,15 +109,22 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      * 将非法请求跳转到 /user/401
      */
     private void responseError(ServletRequest request, ServletResponse response) {
-        try {
+    	PrintWriter pw = null;
+    	try {
+        	HttpServletResponse httpResponse = WebUtils.toHttp(response);
             ServerResponse<String> errorMessage = ServerResponse.createByErrorMessage("非法请求");
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("application/json; charset=utf-8");
+            httpResponse.setCharacterEncoding("UTF-8");
+            httpResponse.setContentType("application/json; charset=utf-8");
 			ObjectMapper objectMapper = new ObjectMapper();
 			String errorStr = objectMapper.writeValueAsString(errorMessage);
-			response.getWriter().write(errorStr);
+			pw = httpResponse.getWriter();
+			pw.append(errorStr);
         } catch (IOException e) {
         	logger.error(e.getMessage());
-        }
+        }finally {
+			if(pw != null) {
+				pw.close();
+			}
+		}
     }
 }

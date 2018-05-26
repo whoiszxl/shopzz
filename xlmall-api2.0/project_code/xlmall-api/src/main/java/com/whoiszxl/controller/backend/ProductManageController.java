@@ -51,7 +51,7 @@ public class ProductManageController {
 
 	@PostMapping("save")
 	@ApiOperation(value = "后台商品保存")
-	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN } )
 	public ServerResponse<String> productSave(HttpSession session, Product product) {
 		return productService.saveOrUpdateProduct(product);
 	}

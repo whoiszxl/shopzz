@@ -144,4 +144,14 @@ public class Product {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", categoryId=" + categoryId + ", name=" + name + ", subtitle=" + subtitle
+				+ ", mainImage=" + mainImage + ", subImages=" + subImages + ", detail=" + detail + ", price=" + price
+				+ ", stock=" + stock + ", status=" + status + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + "]";
+	}
+	
+	
 }
