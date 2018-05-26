@@ -118,6 +118,7 @@ var page = {
         $('.product-con').html('<div class="loading"></div>')
         // 获取地址列表
         _order.getProductList(function (res) {
+            console.log(res);
             var productListHtml = _xl.renderHtml(templateProduct,res);
             $('.product-con').html(productListHtml);
         },function (errMsg) {

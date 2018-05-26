@@ -1,0 +1,44 @@
+/*
+* @Author: Administrator
+* @Date:   2018-05-04 14:46:34
+* @Last Modified by:   Administrator
+* @Last Modified time: 2018-05-05 15:52:56
+*/
+$sub-img-size: 80px;
+.img-con{
+	width: $sub-img-size;
+	height: $sub-img-size;
+	float: left;
+	margin-right: 10px;
+	padding: 3px;
+	border: 1px solid #ccc;
+	position: relative;
+	img{
+		width: 100%;
+		height: 100%;
+	} 
+	.fa-close{
+		width: $sub-img-size;
+		height: $sub-img-size;
+		line-height: $sub-img-size;
+		text-align: center;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;  //这样设置可以让图标覆盖整个父容器
+		cursor: pointer;
+		display: none;
+		font-size: 50px;
+		color: #aaa;
+		background: rgba(0, 0, 0, .2);
+	}
+	&:hover{
+		.fa-close{
+			display: block;
+		}
+	}
+}
+.btn-upload{
+	margin-top: 10px;
+}

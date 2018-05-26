@@ -1,0 +1,202 @@
+/*
+ * @Author: whoiszxl 
+ * @Date: 2018-05-12 10:30:55 
+ * @Last Modified by:   whoiszxl 
+ * @Last Modified time: 2018-05-12 10:30:55 
+ */
+/* 通用头部导航 */
+.header .logo{
+    position: absolute;
+    left: 60px;
+    top: 34px;
+    display: block;
+    font-size: 36px;
+    color: #c60023;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.header .search-con{
+    padding: 40px 0 30px 250px;
+}
+.header .search-con .search-input{
+    width: 550px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    font-size: 15px;
+    border: 2px solid #c60023;
+    outline: none;
+}
+.header .search-con .search-btn{
+    position: absolute;
+    height: 44px;
+    width: 80px;
+}
+
+/* 面包屑导航 */
+.crumb{
+    margin-bottom: 15px;
+    height: 50px;
+    line-height: 50px;
+    background: #eee;
+    color: #888;
+    font-size: 14px;
+    border-top: 2px solid #c60023;
+}/*
+ * @Author: whoiszxl 
+ * @Date: 2018-05-11 23:15:29 
+ * @Last Modified by:   whoiszxl 
+ * @Last Modified time: 2018-05-11 23:15:29 
+ */
+
+.nav{
+  background: #eee;
+  height: 30px;
+  line-height: 30px;   
+}
+/* 用户部分 */
+.nav .user{
+  float: left;
+}
+.nav .user.login{
+  display: none;
+}
+.nav .user .link{
+  margin-right: 5px;
+}
+/* 导航链接部分 */
+.nav .nav-list{
+  float: right;
+}
+.nav .nav-list .nav-item{
+  display: inline-block;
+  margin-left: 5px;
+}
+/*
+ * @Author: whoiszxl 
+ * @Date: 2018-05-14 10:30:43 
+ * @Last Modified by:   whoiszxl 
+ * @Last Modified time: 2018-05-14 10:30:43 
+ */
+
+.cart-table{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin-bottom: 10px;
+}
+/* header */
+.cart-header{
+    background: #eee;
+}
+.cart-header .cart-cell{
+    height: 40px;
+    line-height: 40px;
+}
+.cart-table .cell-check{
+    width: 6%;
+    text-align: left;
+    padding-left: 20px;
+}
+.cart-table .cell-img{
+    width: 10%;
+    text-align: left;
+}
+.cart-table .cell-img .p-img{
+    margin: 10px 0;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ddd;
+}
+.cart-table .cell-info{
+    width: 35%;
+    text-align: left;
+}
+.cart-header .cell-info{
+    width: 45%;
+    padding-left: 106px;
+}
+.cart-table .cell-price{
+    width: 10%;
+    text-align: center;
+}
+.cart-table .cell-count{
+    width: 15%;
+    text-align: center;
+}
+.cart-table .cell-count .count-input{
+    width: 60px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+    outline: none;
+    color: #333;
+}
+.cart-table .cell-count .count-btn{
+    display: inline-block;
+    width: 20px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #ddd;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #fff;
+    -moz-user-select : none;
+    -webkit-user-select : none;
+    -ms-user-select : none;
+    user-select : none;
+}
+.cart-table .cell-total{
+    width: 14%;
+    text-align: center;
+    font-weight: bold;
+}
+.cart-table .cell-opera{
+    width: 10%;
+    text-align: center;
+}
+
+/* footer */
+.cart-footer{
+    position: relative;
+    line-height: 50px;
+    background: #eee;
+    overflow: hidden;
+}
+.cart-footer .select-con{
+    float: left;
+    padding-left: 20px;
+}
+.cart-footer .delete-con{
+    float: left;
+    margin-left: 20px;
+}
+.cart-footer .submit-con{
+    float: right;
+}
+.cart-footer .submit-con .submit-total{
+    font-size: 18px;
+    color: #c60023;
+    font-weight: bold;
+    margin-right: 30px;
+    vertical-align: middle;
+}
+.cart-footer .submit-con .btn-submit{
+    width: 80px;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+}
+/* 错误信息 */
+.err-tip{
+    height: 60px;
+    line-height: 60px;
+    color: #f60;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    background: #eee;
+}

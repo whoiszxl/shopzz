@@ -214,7 +214,7 @@
   	and id != #{userId}
   </select>
   
-  <select id="selectAllUser" resultMap="BaseResultMap">
+  <select id="selectAllUser" resultType="com.whoiszxl.entity.User">
     SELECT
     id, username, email, phone, create_time
     from xl_user
