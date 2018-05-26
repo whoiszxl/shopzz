@@ -1,16 +1,22 @@
 package com.whoiszxl.service.impl;
 
 
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.common.TokenCache;
 import com.whoiszxl.dao.UserMapper;
+import com.whoiszxl.entity.Order;
+import com.whoiszxl.entity.OrderItem;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.jwt.JWTUtil;
 import com.whoiszxl.service.UserService;
@@ -18,6 +24,7 @@ import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.MD5Util;
 import com.whoiszxl.utils.PropertiesUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
+import com.whoiszxl.vo.OrderVo;
 
 @Service("userService")
 public class UserServiveImpl implements UserService {
@@ -219,5 +226,14 @@ public class UserServiveImpl implements UserService {
         }
         return ServerResponse.createByError();
     }
+
+	@Override
+	public ServerResponse<PageInfo> getUserList(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		List<User> userList = userMapper.selectAllUser();
+		PageInfo pageResult = new PageInfo<>(userList);
+		pageResult.setList(userList);
+		return ServerResponse.createBySuccess(pageResult);
+	}
 
 }

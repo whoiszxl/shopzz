@@ -7,10 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageInfo;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
@@ -62,6 +65,15 @@ public class UserManageController {
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<String> logout(HttpServletResponse response, HttpServletRequest request) {
 		return ServerResponse.createBySuccess();
+	}
+	
+	@GetMapping("list")
+	@ApiOperation(value = "获取普通用户列表")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	public ServerResponse<PageInfo> userList (
+			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+		return userService.getUserList(pageNum, pageSize);
 	}
 
 }
