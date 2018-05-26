@@ -1,8 +1,11 @@
 package com.whoiszxl.controller.backend;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
+import com.whoiszxl.jwt.JwtUserService;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
@@ -31,26 +35,33 @@ public class UserManageController {
 
 	@Autowired
 	private UserService userService;
-
-	@PostMapping("login")
-	@ApiOperation(value = "后台管理员登录")
-	public ServerResponse<User> login(String username, String password, HttpSession session, HttpServletResponse httpServletResponse) {
-		ServerResponse<User> response = userService.login(username, password);
-		if (response.isSuccess()) {
-			User user = response.getData();
-			if (user.getRole() == Const.Role.ROLE_ADMIN) {
-				// 登录的是管理员
-				//session.setAttribute(Const.CURRENT_USER, user);
-				// 单点登录:写入token
-				CookieUtil.writeLoginToken(httpServletResponse, session.getId());
-				RedisShardedPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()),
-						Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
-				return response;
-			} else {
-				return ServerResponse.createByErrorMessage("不是管理员无法登录");
-			}
-		}
+	
+	@Autowired
+	private JwtUserService jwtUserService;
+	
+	
+	/**
+	 * jwt用户登录
+	 * 校验数据库，通过后颁发签名
+	 * 颁发签名后将签名存入redis做有效性验证
+	 * 每次校验token的时候先判断redis是否存在token
+	 * 登出的时候清除掉token
+	 * @param username 用户账号
+	 * @param password 用户密码
+	 * @return 用户token
+	 */
+	@PostMapping("jwt_login")
+	@ApiOperation(value = "账号密码登录接口")
+	public ServerResponse<String> jwt_login(String username, String password) {
+		ServerResponse<String> response = userService.jwt_login(username, password);
 		return response;
+	}
+
+	@PostMapping("logout")
+	@ApiOperation(value = "登出接口")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	public ServerResponse<String> logout(HttpServletResponse response, HttpServletRequest request) {
+		return ServerResponse.createBySuccess();
 	}
 
 }
