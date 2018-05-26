@@ -222,4 +222,10 @@
   	where id=#{id}
   	for update
   </select>
+  
+  <select id="selectProductCount" resultType="int">
+  	select 
+  	count(1)
+  	from xl_product
+  </select>
 </mapper>

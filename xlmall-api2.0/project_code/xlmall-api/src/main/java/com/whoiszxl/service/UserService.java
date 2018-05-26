@@ -38,5 +38,7 @@ public interface UserService {
 
 	ServerResponse<PageInfo> getUserList(int pageNum, int pageSize);
 
+	int selectUserCount();
+
 	
 }

@@ -236,4 +236,9 @@ public class UserServiveImpl implements UserService {
 		return ServerResponse.createBySuccess(pageResult);
 	}
 
+	@Override
+	public int selectUserCount() {
+		return userMapper.selectUserCount();
+	}
+
 }

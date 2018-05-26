@@ -258,6 +258,11 @@ public class ProductServiceImpl implements ProductService {
         pageInfo.setList(productListVoList);
         return ServerResponse.createBySuccess(pageInfo);
 	}
+
+	@Override
+	public int selectProductCount() {
+		return productMapper.selectProductCount();
+	}
 	
 }
 

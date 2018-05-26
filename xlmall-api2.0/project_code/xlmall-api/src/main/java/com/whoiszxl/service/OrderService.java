@@ -31,4 +31,5 @@ public interface OrderService {
     ServerResponse<String> manageSendGoods(Long orderNo);
     
     void closeOrder(int hour);
+	int selectOrderCount();
 }

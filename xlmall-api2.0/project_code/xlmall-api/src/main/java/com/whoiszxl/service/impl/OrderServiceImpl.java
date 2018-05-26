@@ -700,5 +700,10 @@ public class OrderServiceImpl implements OrderService {
 			logger.info("定时关闭两小时未支付订单：{}",order.getOrderNo());
 		}
 	}
+
+	@Override
+	public int selectOrderCount() {
+		return orderMapper.selectOrderCount();
+	}
 }
 

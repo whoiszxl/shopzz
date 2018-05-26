@@ -248,5 +248,11 @@
   	set status = 0
   	where id = #{id}
   </update>
+  
+  <select id="selectOrderCount" resultType="int">
+    SELECT
+    count(1)
+    from xl_order
+  </select>
 	
 </mapper>

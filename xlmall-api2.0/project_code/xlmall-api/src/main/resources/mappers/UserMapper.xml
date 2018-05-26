@@ -222,4 +222,12 @@
     ORDER BY create_time desc
   </select>
   
+  <select id="selectUserCount" resultType="int">
+    SELECT
+    count(1)
+    from xl_user
+    where role = 0
+  </select>
+  
+  
 </mapper>
