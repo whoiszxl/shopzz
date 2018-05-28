@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-12 17:07:37 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-12 17:08:00
+ * @Last Modified time: 2018-05-26 18:02:08
  */
 
 'use strict';
@@ -35,6 +35,7 @@ var page = {
             $('.panel-body').html(userHtml);
         }, function(errMsg){
             _xl.errorTips(errMsg);
+            _xl.doLogin();
         });
     }
 };

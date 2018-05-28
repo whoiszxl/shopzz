@@ -1,6 +1,10 @@
 package com.whoiszxl.dao;
 
+import com.whoiszxl.entity.Order;
 import com.whoiszxl.entity.User;
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -65,4 +69,8 @@ public interface UserMapper {
     int checkPassword(@Param("password")String password,@Param("userId")Integer userId);
     
     int checkEmailByUserId(@Param("email") String email,@Param("userId") Integer userId);
+    
+    List<User> selectAllUser();
+
+	int selectUserCount();
 }

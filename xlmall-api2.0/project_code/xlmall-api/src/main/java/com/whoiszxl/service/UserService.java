@@ -2,6 +2,7 @@ package com.whoiszxl.service;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
 
@@ -34,6 +35,10 @@ public interface UserService {
     ServerResponse<User> getInformation(Integer userId);
 
     ServerResponse checkAdminRole(User user);
+
+	ServerResponse<PageInfo> getUserList(int pageNum, int pageSize);
+
+	int selectUserCount();
 
 	
 }

@@ -43,4 +43,6 @@ public interface OrderMapper {
      * @return
      */
     int closeOrderByOrderId(Integer id);
+
+	int selectOrderCount();
 }

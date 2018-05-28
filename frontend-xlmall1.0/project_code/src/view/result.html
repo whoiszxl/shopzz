@@ -1,40 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <%= require('html-loader!./layout/head-common.html')  %>
-        <title><%= htmlWebpackPlugin.options.title%> - xlmall电商平台</title>
-    </head>
-    <body>
-        <%= require('html-loader!./layout/nav-simple.html')  %>
-        <div class="page-wrap w">
-            <div class="result-con register-success">
-                <h1 class="result-title">恭喜您，注册成功！</h1>
-                <div class="result-content">
-                    <a class="link" href="./index.html">回到首页</a>
-                    <a class="link" href="./user-login.html">立即去登录</a>
-                </div>
-            </div>
-            <div class="result-con pass-reset-success">
-                <h1 class="result-title">恭喜您，重置密码成功！</h1>
-                <div class="result-content">
-                    <a class="link" href="./index.html">回到首页</a>
-                    <a class="link" href="./user-login.html">立即去登录</a>
-                </div>
-            </div>
-            <div class="result-con cart-add-success">
-                <h1 class="result-title">您的商品已成功加入购物车！</h1>
-                <div class="result-content">
-                    <a class="link" href="./index.html">继续购物</a>
-                    <a class="link" href="./cart.html">去购物车查看</a>
-                </div>
-            </div>
-            <div class="result-con default-success">
-                <h1 class="result-title">恭喜您，操作成功！</h1>
-                <div class="result-content">
-                    <a class="link" href="./index.html">回到首页</a>
-                </div>
+<head>
+    <%= require('html-loader!./layout/head-common.html') %>
+    <title><%= htmlWebpackPlugin.options.title%> - XLMALL电商平台</title>
+</head>
+<body>
+    <%= require('html-loader!./layout/nav-simple.html') %>
+    <div class="page-wrap w">
+        <div class="result-con register-success">
+            <h1 class="result-title">恭喜您,注册成功!</h1>
+            <div class="result-content">
+                <a href="./index.html" class="link">回到首页</a>
+                <a href="./user-login.html" class="link">立即去登录</a>
             </div>
         </div>
-        <%= require('html-loader!./layout/footer.html')  %>
-    </body>
+        <div class="result-con default-success">
+            <h1 class="result-title">恭喜您,操作成功!</h1>
+            <div class="result-content">
+                <a href="./index.html" class="link">回到首页</a>
+            </div>
+        </div>
+        <div class="result-con pass-reset-success">
+            <h1 class="result-title">恭喜您,重置密码成功!</h1>
+            <div class="result-content">
+                <a href="./index.html" class="link">回到首页</a>
+                <a href="./user-login.html" class="link">立即去登录</a>
+            </div>
+        </div>
+        <div class="result-con cart-add-success">
+            <h1 class="result-title">您的商品加入购物车成功!</h1>
+            <div class="result-content">
+                <a href="./index.html" class="link">继续购物</a>
+                <a href="./cart.html" class="link">去购物车查看</a>
+            </div>
+        </div>
+        <div class="result-con payment-success">
+            <h1 class="result-title">您的订单支付成功!</h1>
+            <div class="result-content">
+                <a href="./index.html" class="link">继续购物</a>
+                <a href="./order-detail.html?orderNumber=" class="link order-number">查看订单</a>
+            </div>
+        </div>
+    </div>
+    <%= require('html-loader!./layout/footer.html') %>
+</body>
 </html>

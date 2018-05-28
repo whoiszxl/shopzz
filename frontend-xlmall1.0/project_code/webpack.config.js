@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:51 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-26 00:38:13
+ * @Last Modified time: 2018-05-26 10:00:13
  */
 var webpack = require('webpack');
 var Ex = require('extract-text-webpack-plugin');
@@ -52,8 +52,8 @@ var config = {
         "about": ["./src/page/about/index.js"],
     },
     output: {
-        path: './dist',
-        publicPath : '/dist',
+        path: __dirname + '/dist/',
+        publicPath : 'dev' === WEBPACK_ENV ? '/dist/' : '//images.whoiszxl.com/project_code/dist/',
         filename: 'js/[name].js'
     },
     externals:{
@@ -68,8 +68,8 @@ var config = {
                 test: /\.string$/, 
                 loader: 'html-loader',
                 query: {
-                minimize: true,
-                removerAttributeQuotes: false
+                    minimize: true,
+                    removerAttributeQuotes: false
                 }
             }
         ]

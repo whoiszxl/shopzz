@@ -214,4 +214,20 @@
   	and id != #{userId}
   </select>
   
+  <select id="selectAllUser" resultType="com.whoiszxl.entity.User">
+    SELECT
+    id, username, email, phone, create_time
+    from xl_user
+    where role = 0 
+    ORDER BY create_time desc
+  </select>
+  
+  <select id="selectUserCount" resultType="int">
+    SELECT
+    count(1)
+    from xl_user
+    where role = 0
+  </select>
+  
+  
 </mapper>

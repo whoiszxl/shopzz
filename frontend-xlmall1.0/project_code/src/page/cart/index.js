@@ -1,8 +1,8 @@
 /*
  * @Author: whoiszxl 
  * @Date: 2018-05-14 10:30:56 
- * @Last Modified by:   whoiszxl 
- * @Last Modified time: 2018-05-14 10:30:56 
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-05-26 10:07:25
  */
 
 'use strict';
@@ -130,7 +130,7 @@ var page = {
         $(document).on('click', '.btn-submit', function(){
             // 总价大于0，进行提交
             if(_this.data.cartInfo && _this.data.cartInfo.cartTotalPrice > 0){
-                window.location.href = './confirm.html';
+                window.location.href = './order-confirm.html';
             }else{
                 _xl.errorTips('请选择商品后再提交');
             }

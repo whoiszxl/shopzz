@@ -29,4 +29,6 @@ public interface ProductMapper {
     //考虑到有商品已经删除，int不能为空，只能用Integer
     //其中使用for update悲观锁，一定要主键查询，这样是行锁，如果不是主键，会是表锁
     Integer selectStockByProductId(Integer id);
+
+	int selectProductCount();
 }

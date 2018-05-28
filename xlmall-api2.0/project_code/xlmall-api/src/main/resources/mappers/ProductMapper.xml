@@ -40,7 +40,7 @@
     values (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{subtitle,jdbcType=VARCHAR}, #{mainImage,jdbcType=VARCHAR}, #{subImages,jdbcType=VARCHAR}, 
       #{detail,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, now(), now()}
+      #{status,jdbcType=INTEGER}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.whoiszxl.entity.Product" >
@@ -221,5 +221,11 @@
   	from xl_product
   	where id=#{id}
   	for update
+  </select>
+  
+  <select id="selectProductCount" resultType="int">
+  	select 
+  	count(1)
+  	from xl_product
   </select>
 </mapper>
