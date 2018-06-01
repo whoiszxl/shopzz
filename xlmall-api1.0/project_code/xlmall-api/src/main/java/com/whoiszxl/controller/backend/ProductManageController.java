@@ -87,7 +87,7 @@ public class ProductManageController {
 	public ServerResponse upload(HttpSession session,
 			@RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request) {
 		String path = request.getSession().getServletContext().getRealPath("upload");
-		String targetFileName = fileService.upload(file, path);
+		String targetFileName = fileService.uploadToQiniu(file, path);
 		String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
 
 		Map fileMap = Maps.newHashMap();
@@ -109,7 +109,7 @@ public class ProductManageController {
 		// "file_path": "[real file path]"
 		// }
 		String path = request.getSession().getServletContext().getRealPath("upload");
-		String targetFileName = fileService.upload(file, path);
+		String targetFileName = fileService.uploadToQiniu(file, path);
 		if (StringUtils.isBlank(targetFileName)) {
 			resultMap.put("success", false);
 			resultMap.put("msg", "上传失败");

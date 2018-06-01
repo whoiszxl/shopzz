@@ -38,6 +38,14 @@
 		</dependency>
 		
 		
+		<!-- 七牛云存储 -->
+		<dependency>
+		  <groupId>com.qiniu</groupId>
+		  <artifactId>qiniu-java-sdk</artifactId>
+		  <version>[7.2.0, 7.2.99]</version>
+		</dependency>
+		
+		
 		<!-- jwt+shiro 无状态登录 -->
 		<dependency>
             <groupId>org.apache.shiro</groupId>

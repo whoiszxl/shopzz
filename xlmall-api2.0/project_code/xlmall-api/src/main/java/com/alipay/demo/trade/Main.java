@@ -451,6 +451,6 @@ public class Main {
         //        main.test_trade_refund();
 
         // 测试当面付2.0生成支付二维码
-        main.test_trade_precreate();
+        //main.test_trade_precreate();
     }
 }

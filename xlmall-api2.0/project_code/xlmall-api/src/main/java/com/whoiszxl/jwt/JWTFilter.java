@@ -56,7 +56,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         String have = RedisShardedPoolUtil.get(authorization);
         if(!StringUtils.equals(have, "1")) {
         	logger.error("token已经在redis失效了");
-        	return true;
+        	throw new RuntimeException("token已经在redis失效了");
         }
         
         JWTToken token = new JWTToken(authorization);
