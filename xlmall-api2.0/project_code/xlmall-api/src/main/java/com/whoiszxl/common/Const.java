@@ -167,4 +167,8 @@ public class Const {
 		String ROLE_CUSTOMER = "0";//普通用户
 		String ROLE_ADMIN = "1";//管理员
 	}
+	
+	public interface Article {
+		int BANNER_LIST_COUNT = 5; //banner轮播图数量
+	}
 }
