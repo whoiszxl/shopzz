@@ -82,4 +82,12 @@ public class Banner {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+	@Override
+	public String toString() {
+		return "Banner [id=" + id + ", title=" + title + ", imgurl=" + imgurl + ", jumpurl=" + jumpurl + ", sort="
+				+ sort + ", status=" + status + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+    
+    
 }

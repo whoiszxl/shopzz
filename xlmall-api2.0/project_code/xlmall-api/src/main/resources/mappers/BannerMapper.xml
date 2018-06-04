@@ -125,4 +125,15 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectBannersByNum" resultMap="BaseResultMap" parameterType="int">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from xl_banner
+    where status=1
+    ORDER BY sort desc
+    limit #{num}
+  </select>
+  
+  
 </mapper>

@@ -31,6 +31,8 @@ public class ArticleController {
 	
 	@Autowired
 	private ArticleService articleService;
+	
+	
 	@GetMapping("banners")
 	@ApiOperation(value = "获取轮播图")
 	public ServerResponse bannerList() {
