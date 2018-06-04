@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
-import com.whoiszxl.entity.Banner;
 import com.whoiszxl.service.ArticleService;
+import com.whoiszxl.vo.BannerVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +36,7 @@ public class ArticleController {
 	@GetMapping("banners")
 	@ApiOperation(value = "获取轮播图")
 	public ServerResponse bannerList() {
-		List<Banner> bannerList = articleService.getBannerList(Const.Article.BANNER_LIST_COUNT);
+		List<BannerVo> bannerList = articleService.getBannerList(Const.Article.BANNER_LIST_COUNT);
 		return ServerResponse.createBySuccess(bannerList);
 	}
 

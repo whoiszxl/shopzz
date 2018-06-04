@@ -13,6 +13,7 @@ import com.whoiszxl.dao.UserMapper;
 import com.whoiszxl.entity.Banner;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.service.ArticleService;
+import com.whoiszxl.vo.BannerVo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -39,7 +40,7 @@ public class AppTests {
 		User selectByPrimaryKey = userMapper.selectByPrimaryKey(1);
 		System.out.println(selectByPrimaryKey);
 		
-		List<Banner> banner = articleService.getBannerList(5);
+		List<BannerVo> banner = articleService.getBannerList(5);
 		
 		System.out.println(banner);
 		
