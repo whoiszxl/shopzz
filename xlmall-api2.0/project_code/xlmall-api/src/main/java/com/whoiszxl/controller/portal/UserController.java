@@ -102,7 +102,6 @@ public class UserController {
 	}
 
 	@PostMapping("check_valid")
-	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
 	public ServerResponse<String> checkValid(String str, String type) {
 		return userService.checkVaild(str, type);
 	}

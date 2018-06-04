@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:21 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-04 18:17:32
+ * @Last Modified time: 2018-06-04 21:06:41
  */
 
 'use strict';
@@ -28,7 +28,10 @@ $(function() {
     _article.getBannerList(function(res){
 
         // 渲染banner的html
-        var bannerHtml  = _xl.renderHtml(templateBanner, res.data);
+        console.log(res);
+        var bannerHtml  = _xl.renderHtml(templateBanner, {
+            list :  res
+        });
         $('.banner-con').html(bannerHtml);
 
         // 初始化banner
