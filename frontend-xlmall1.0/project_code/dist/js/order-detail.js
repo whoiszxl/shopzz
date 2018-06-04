@@ -3,7 +3,7 @@ webpackJsonp([7],{
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(150);
+	module.exports = __webpack_require__(146);
 
 
 /***/ }),
@@ -394,7 +394,7 @@ webpackJsonp([7],{
 
 /***/ }),
 
-/***/ 128:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -406,9 +406,9 @@ webpackJsonp([7],{
 
 	'use strict';
 
-	__webpack_require__(129);
+	__webpack_require__(124);
 	var _xl             = __webpack_require__(8);
-	var templateIndex   = __webpack_require__(131);
+	var templateIndex   = __webpack_require__(126);
 	// 侧边导航
 	var navSide = {
 	    option : {
@@ -446,21 +446,21 @@ webpackJsonp([7],{
 
 /***/ }),
 
-/***/ 129:
+/***/ 124:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 131:
+/***/ 126:
 /***/ (function(module, exports) {
 
 	module.exports = "{{#navList}} {{#isActive}} <li class=\"nav-item active\"> {{/isActive}} {{^isActive}} </li><li class=nav-item> {{/isActive}} <a class=link href={{href}}>{{desc}}</a> </li> {{/navList}} ";
 
 /***/ }),
 
-/***/ 143:
+/***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -527,17 +527,17 @@ webpackJsonp([7],{
 
 /***/ }),
 
-/***/ 150:
+/***/ 146:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(151)
+	__webpack_require__(147)
 	__webpack_require__(12);
 	__webpack_require__(2);
-	var navSide = __webpack_require__(128);
+	var navSide = __webpack_require__(123);
 	var _xl = __webpack_require__(8);
-	var _order = __webpack_require__(143);
-	var templateIndex = __webpack_require__(153);
+	var _order = __webpack_require__(139);
+	var templateIndex = __webpack_require__(149);
 
 
 	// page逻辑部分
@@ -598,14 +598,14 @@ webpackJsonp([7],{
 
 /***/ }),
 
-/***/ 151:
+/***/ 147:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 153:
+/***/ 149:
 /***/ (function(module, exports) {
 
 	module.exports = "<div class=panel> <div class=panel-title>订单信息</div> <div class=panel-body> <div class=order-info> <div class=text-line> <span class=text>订单号:{{orderNo}}</span> <span class=text>创建时间:{{createTime}}</span> </div> <div class=text-line> <span class=text>收件人: {{receiverName}} {{shippingVo.receiverProvince}} {{shippingVo.receiverCity}} {{shippingVo.receiverAddress}} {{shippingVo.receiverMobile}} </span> </div> <div class=text-line> <span class=text>订单状态:{{statusDesc}}</span> </div> <div class=text-line> <span class=text>支付方式:{{paymentTypeDesc}}</span> </div> <div class=text-line> {{#needPay}} <a href=\"./payment.html?orderNumber={{orderNo}}\" class=btn>去支付</a> {{/needPay}} {{#isCancelable}} <a class=\"btn order-cancel\">取消订单</a> {{/isCancelable}} </div> </div> </div> </div> <div class=panel> <div class=panel-title>商品清单</div> <div class=panel-body> <table class=product-table> <tr> <th class=\"cell-th cell-img\">&nbsp;</th> <th class=\"cell-th cell-info\">商品信息</th> <th class=\"cell-th cell-price\">单价</th> <th class=\"cell-th cell-count\">数量</th> <th class=\"cell-th cell-total\">小计</th> </tr> {{#orderItemVoList}} <tr> <td class=\"cell cell-img\"> <a href=\"./detail.html?productId={{productId}}\" target=_blank> <img src={{imageHost}}{{productImage}} alt={{productName}} class=p-img> </a> </td> <td class=\"cell cell-info\"> <a href=\"./detail.html?productId={{productId}}\" class=link target=_blank> {{productName}} </a> </td> <td class=\"cell cell-price\">${{currentUnitPrice}}</td> <td class=\"cell cell-count\">{{quantity}}</td> <td class=\"cell cell-total\">${{totalPrice}}</td> </tr> {{/orderItemVoList}} </table> <p class=total> <span>订单总价:</span> <span class=total-price>${{payment}}</span> </p> </div> </div> ";

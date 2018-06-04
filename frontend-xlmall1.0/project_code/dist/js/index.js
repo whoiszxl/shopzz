@@ -401,7 +401,7 @@ webpackJsonp([4],{
 	 * @Author: whoiszxl 
 	 * @Date: 2018-05-11 10:32:21 
 	 * @Last Modified by: whoiszxl
-	 * @Last Modified time: 2018-05-12 18:40:25
+	 * @Last Modified time: 2018-06-04 21:06:41
 	 */
 
 	'use strict';
@@ -410,24 +410,41 @@ webpackJsonp([4],{
 	__webpack_require__(2);
 	__webpack_require__(118);
 
-
 	var templateBanner  = __webpack_require__(122);
-	var navSide = __webpack_require__(128);
+	var navSide = __webpack_require__(123);
 	var _xl = __webpack_require__(8);
+	var _article = __webpack_require__(127);
 
 	$(function() {
-	    // 渲染banner的html
-	    var bannerHtml  = _xl.renderHtml(templateBanner);
-	    $('.banner-con').html(bannerHtml);
-	    // 初始化banner
-	    var $slider     = $('.banner').unslider({
-	        dots: true
-	    });
+	    
 	    // 前一张和后一张操作的事件绑定
 	    $('.banner-con .banner-arrow').click(function(){
 	        var forward = $(this).hasClass('prev') ? 'prev' : 'next';
 	        $slider.data('unslider')[forward]();
 	    });
+
+	    
+	    _article.getBannerList(function(res){
+
+	        // 渲染banner的html
+	        console.log(res);
+	        var bannerHtml  = _xl.renderHtml(templateBanner, {
+	            list :  res
+	        });
+	        $('.banner-con').html(bannerHtml);
+
+	        // 初始化banner
+	        var $slider     = $('.banner').unslider({
+	            dots: true
+	        });
+	    }, function(errMsg){
+	        _xl.errorTips(errMsg);
+	        _xl.doLogin();
+	    });
+
+	    
+	    
+	    
 	});
 
 
@@ -472,48 +489,13 @@ webpackJsonp([4],{
 /***/ }),
 
 /***/ 122:
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-	module.exports = "<div class=banner> <ul> <li> <a href=\"./list.html?categoryId=100021\" target=_blank> <img class=banner-img src=" + __webpack_require__(123) + " /> </a> </li> <li> <a href=\"./list.html?categoryId=100030\" target=_blank> <img class=banner-img src=" + __webpack_require__(124) + " /> </a> </li> <li> <a href=\"./list.html?categoryId=100016\" target=_blank> <img class=banner-img src=" + __webpack_require__(125) + " /> </a> </li> <li> <a href=\"./list.html?categoryId=100001\" target=_blank> <img class=banner-img src=" + __webpack_require__(126) + " /> </a> </li> <li> <a href=\"./list.html?categoryId=100021\" target=_blank> <img class=banner-img src=" + __webpack_require__(127) + " /> </a> </li> </ul> <div class=\"banner-arrow prev\"> <i class=\"fa fa-angle-left\"></i> </div> <div class=\"banner-arrow next\"> <i class=\"fa fa-angle-right\"></i> </div> </div>";
+	module.exports = "<div class=banner> <ul> {{#list}} <li> <a href={{jumpurl}} target=_blank> <img class=banner-img src={{imgurl}} alt={{title}} /> </a> </li> {{/list}} </ul> <div class=\"banner-arrow prev\"> <i class=\"fa fa-angle-left\"></i> </div> <div class=\"banner-arrow next\"> <i class=\"fa fa-angle-right\"></i> </div> </div>";
 
 /***/ }),
 
 /***/ 123:
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "resource/banner1.jpg";
-
-/***/ }),
-
-/***/ 124:
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "resource/banner2.jpg";
-
-/***/ }),
-
-/***/ 125:
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "resource/banner3.jpg";
-
-/***/ }),
-
-/***/ 126:
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "resource/banner4.jpg";
-
-/***/ }),
-
-/***/ 127:
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "resource/banner5.jpg";
-
-/***/ }),
-
-/***/ 128:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -525,9 +507,9 @@ webpackJsonp([4],{
 
 	'use strict';
 
-	__webpack_require__(129);
+	__webpack_require__(124);
 	var _xl             = __webpack_require__(8);
-	var templateIndex   = __webpack_require__(131);
+	var templateIndex   = __webpack_require__(126);
 	// 侧边导航
 	var navSide = {
 	    option : {
@@ -565,17 +547,39 @@ webpackJsonp([4],{
 
 /***/ }),
 
-/***/ 129:
+/***/ 124:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 131:
+/***/ 126:
 /***/ (function(module, exports) {
 
 	module.exports = "{{#navList}} {{#isActive}} <li class=\"nav-item active\"> {{/isActive}} {{^isActive}} </li><li class=nav-item> {{/isActive}} <a class=link href={{href}}>{{desc}}</a> </li> {{/navList}} ";
+
+/***/ }),
+
+/***/ 127:
+/***/ (function(module, exports, __webpack_require__) {
+
+	
+	'use strict';
+
+	var _xl = __webpack_require__(8);
+
+	var _article = {
+	    // 获取商品列表
+	    getBannerList : function(resolve, reject){
+	        _xl.request({
+	            url     : _xl.getServerUrl('/article/banners'),
+	            success : resolve,
+	            error   : reject
+	        });
+	    }
+	}
+	module.exports = _article;
 
 /***/ })
 

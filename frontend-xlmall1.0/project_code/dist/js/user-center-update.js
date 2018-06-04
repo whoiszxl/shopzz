@@ -3,7 +3,7 @@ webpackJsonp([12],{
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(173);
+	module.exports = __webpack_require__(169);
 
 
 /***/ }),
@@ -394,7 +394,7 @@ webpackJsonp([12],{
 
 /***/ }),
 
-/***/ 128:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -406,9 +406,9 @@ webpackJsonp([12],{
 
 	'use strict';
 
-	__webpack_require__(129);
+	__webpack_require__(124);
 	var _xl             = __webpack_require__(8);
-	var templateIndex   = __webpack_require__(131);
+	var templateIndex   = __webpack_require__(126);
 	// 侧边导航
 	var navSide = {
 	    option : {
@@ -446,21 +446,21 @@ webpackJsonp([12],{
 
 /***/ }),
 
-/***/ 129:
+/***/ 124:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 131:
+/***/ 126:
 /***/ (function(module, exports) {
 
 	module.exports = "{{#navList}} {{#isActive}} <li class=\"nav-item active\"> {{/isActive}} {{^isActive}} </li><li class=nav-item> {{/isActive}} <a class=link href={{href}}>{{desc}}</a> </li> {{/navList}} ";
 
 /***/ }),
 
-/***/ 173:
+/***/ 169:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -471,13 +471,13 @@ webpackJsonp([12],{
 	 */
 
 	'use strict';
-	__webpack_require__(174);
+	__webpack_require__(170);
 	__webpack_require__(12);
 	__webpack_require__(2);
-	var navSide         = __webpack_require__(128);
+	var navSide         = __webpack_require__(123);
 	var _xl             = __webpack_require__(8);
 	var _user           = __webpack_require__(15);
-	var templateIndex   = __webpack_require__(176);
+	var templateIndex   = __webpack_require__(172);
 
 	// page 逻辑部分
 	var page = {
@@ -566,14 +566,14 @@ webpackJsonp([12],{
 
 /***/ }),
 
-/***/ 174:
+/***/ 170:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 176:
+/***/ 172:
 /***/ (function(module, exports) {
 
 	module.exports = "<div class=user-info> <div class=form-line> <span class=label>用户名：</span> <span class=text>{{username}}</span> </div> <div class=form-line> <span class=label>电 话：</span> <input class=input id=phone autocomplete=off value={{phone}} /> </div> <div class=form-line> <span class=label>邮 箱：</span> <input class=input id=email autocomplete=off value={{email}} /> </div> <div class=form-line> <span class=label>问 题：</span> <input class=input id=question autocomplete=off value={{question}} /> </div> <div class=form-line> <span class=label>答 案：</span> <input class=input id=answer autocomplete=off value={{answer}} /> </div> <span class=\"btn btn-submit\">提交</span> </div>";

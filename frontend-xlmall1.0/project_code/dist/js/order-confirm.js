@@ -3,7 +3,7 @@ webpackJsonp([6],{
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(140);
+	module.exports = __webpack_require__(136);
 
 
 /***/ }),
@@ -394,19 +394,19 @@ webpackJsonp([6],{
 
 /***/ }),
 
-/***/ 140:
+/***/ 136:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(141);
+	__webpack_require__(137);
 	__webpack_require__(2);
 	__webpack_require__(12);
 	var _xl = __webpack_require__(8);
-	var _order = __webpack_require__(143);
-	var _address = __webpack_require__(144);
-	var templateAddress = __webpack_require__(145);
-	var templateProduct = __webpack_require__(146);
-	var addressModal = __webpack_require__(147);
+	var _order = __webpack_require__(139);
+	var _address = __webpack_require__(140);
+	var templateAddress = __webpack_require__(141);
+	var templateProduct = __webpack_require__(142);
+	var addressModal = __webpack_require__(143);
 	var page = {
 	    data : {
 	        selectedAddressId : null
@@ -517,6 +517,7 @@ webpackJsonp([6],{
 	        $('.product-con').html('<div class="loading"></div>')
 	        // 获取地址列表
 	        _order.getProductList(function (res) {
+	            console.log(res);
 	            var productListHtml = _xl.renderHtml(templateProduct,res);
 	            $('.product-con').html(productListHtml);
 	        },function (errMsg) {
@@ -549,14 +550,14 @@ webpackJsonp([6],{
 
 /***/ }),
 
-/***/ 141:
+/***/ 137:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 143:
+/***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -623,7 +624,7 @@ webpackJsonp([6],{
 
 /***/ }),
 
-/***/ 144:
+/***/ 140:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -692,28 +693,28 @@ webpackJsonp([6],{
 
 /***/ }),
 
-/***/ 145:
+/***/ 141:
 /***/ (function(module, exports) {
 
 	module.exports = "{{#list}} {{#isActive}} <div class=\"address-item active\" data-id={{id}}> {{/isActive}} {{^isActive}} <div class=address-item data-id={{id}}> {{/isActive}} <div class=address-title> {{receiverCity}} {{receiverProvince}} ({{receiverName}} 收) </div> <div class=address-detail> {{receiverAddress}} {{receiverPhone}} </div> <div class=address-opera> <span class=\"link address-update\">编辑</span> <span class=\"link address-delete\">删除</span> </div> </div> {{/list}} <div class=address-add> <div class=address-new> <i class=\"fa fa-plus\"></i> <div class=text>使用新地址</div> </div> </div></div>";
 
 /***/ }),
 
-/***/ 146:
+/***/ 142:
 /***/ (function(module, exports) {
 
-	module.exports = "<table class=product-table> <tr> <th class=cell-img>&nbsp;</th> <th class=cell-info>商品描述</th> <th class=cell-price>价格</th> <th class=cell-count>数量</th> <th class=cell-total>小计</th> </tr> {{#orderItemVoList}} <tr> <td class=cell-img> <a href=\"./detail.html?productId={{productId}}\" target=_blank> <img src={{imageHost}}{{productImage}} alt={{productName}} class=p-img> </a> </td> <td class=cell-info> <a href=\"./detail.html?productId=\" class=link target=_blank>{{productName}}</a> </td> <td class=cell-price>$ {{currentUnitPrice}}</td> <td class=cell-count>{{quantity}}</td> <td class=cell-total>$ {{totalPrice}}</td> </tr> {{/orderItemVoList}} </table> <div class=submit-con> <span>订单总价:</span> <span class=submit-total>$qqq</span> <span class=\"btn order-submit\">提交订单</span> </div>";
+	module.exports = "<table class=product-table> <tr> <th class=cell-img>&nbsp;</th> <th class=cell-info>商品描述</th> <th class=cell-price>价格</th> <th class=cell-count>数量</th> <th class=cell-total>小计</th> </tr> {{#orderItemVoList}} <tr> <td class=cell-img> <a href=\"./detail.html?productId={{productId}}\" target=_blank> <img src={{imageHost}}{{productImage}} alt={{productName}} class=p-img> </a> </td> <td class=cell-info> <a href=\"./detail.html?productId=\" class=link target=_blank>{{productName}}</a> </td> <td class=cell-price>￥{{currentUnitPrice}}</td> <td class=cell-count>{{quantity}}</td> <td class=cell-total>{{totalPrice}}</td> </tr> {{/orderItemVoList}} </table> <div class=submit-con> <span>订单总价:</span> <span class=submit-total>￥{{productTotalPrice}}</span> <span class=\"btn order-submit\">提交订单</span> </div>";
 
 /***/ }),
 
-/***/ 147:
+/***/ 143:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var _xl = __webpack_require__(8);
-	var _cities = __webpack_require__(148);
-	var _address = __webpack_require__(144);
-	var templateAddressModal = __webpack_require__(149);
+	var _cities = __webpack_require__(144);
+	var _address = __webpack_require__(140);
+	var templateAddressModal = __webpack_require__(145);
 	var addressModal = {
 	    show : function (option) {
 	        //option绑定
@@ -860,7 +861,7 @@ webpackJsonp([6],{
 
 /***/ }),
 
-/***/ 148:
+/***/ 144:
 /***/ (function(module, exports) {
 
 	/*
@@ -927,7 +928,7 @@ webpackJsonp([6],{
 
 /***/ }),
 
-/***/ 149:
+/***/ 145:
 /***/ (function(module, exports) {
 
 	module.exports = "<div class=\"modal close\"> <div class=modal-container> <div class=modal-header> {{#isUpdate}} <h1 class=modal-title>更新地址</h1> {{/isUpdate}} {{^isUpdate}} <h1 class=modal-title>使用新地址</h1> {{/isUpdate}} <i class=\"fa fa-close close\"></i> </div> <div class=modal-body> <div class=form> <div class=form-line> <label for=receiver-name class=label> <span class=require>*</span>收件人姓名:</label> <input type=text class=form-item id=receiver-name placeholder=请输入收件人姓名 value={{data.receiverName}}> </div> <div class=form-line> <label for=receiver-province class=label> <span class=require>*</span>所在城市:</label> <select name=\"\" id=receiver-province class=form-item> <option value=\"\"> 请选择 </option> </select> <select name=\"\" id=receiver-city class=form-item> <option value=\"\"> 请选择 </option> </select> </div> <div class=form-line> <label for=receiver-address class=label> <span class=require>*</span>详细地址:</label> <input type=text class=form-item id=receiver-address placeholder=请精确到门牌号 value={{data.receiverAddress}}> </div> <div class=form-line> <label for=receiver-phone class=label> <span class=require>*</span>收件人手机:</label> <input type=text class=form-item id=receiver-phone placeholder=请输入11位手机号 value={{data.receiverName}}> </div> <div class=form-line> <label for=receiver-zip class=label>邮政编码:</label> <input type=text class=form-item id=receiver-zip placeholder=请输入邮政编码 value={{data.receiverZip}}> </div> <div class=form-line> <input type=hidden value={{data.id}} id=receiver-id /> <a class=\"btn address-btn\">保存收货地址</a> </div> </div> </div> </div> </div>";

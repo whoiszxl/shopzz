@@ -3,7 +3,7 @@ webpackJsonp([5],{
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(132);
+	module.exports = __webpack_require__(128);
 
 
 /***/ }),
@@ -434,7 +434,7 @@ webpackJsonp([5],{
 
 /***/ }),
 
-/***/ 132:
+/***/ 128:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -446,13 +446,13 @@ webpackJsonp([5],{
 
 	'use strict';
 	'use strict';
-	__webpack_require__(133);
+	__webpack_require__(129);
 	__webpack_require__(12);
 	__webpack_require__(2);
 	var _xl             = __webpack_require__(8);
 	var _product        = __webpack_require__(113);
-	var Pagination      = __webpack_require__(135);
-	var templateIndex   = __webpack_require__(139);
+	var Pagination      = __webpack_require__(131);
+	var templateIndex   = __webpack_require__(135);
 
 	var page = {
 	    data : {
@@ -557,14 +557,14 @@ webpackJsonp([5],{
 
 /***/ }),
 
-/***/ 133:
+/***/ 129:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 135:
+/***/ 131:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -577,9 +577,9 @@ webpackJsonp([5],{
 	'use strict';
 
 	'use strict';
-	__webpack_require__(136);
+	__webpack_require__(132);
 	var _xl                 = __webpack_require__(8);
-	var templatePagination  = __webpack_require__(138);
+	var templatePagination  = __webpack_require__(134);
 
 	var Pagination = function(){
 	    var _this = this;
@@ -656,21 +656,21 @@ webpackJsonp([5],{
 
 /***/ }),
 
-/***/ 136:
+/***/ 132:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 138:
+/***/ 134:
 /***/ (function(module, exports) {
 
 	module.exports = "<div class=pg-content> {{#pageArray}} {{#disabled}} <span class=\"pg-item disabled\" data-value={{value}}>{{name}}</span> {{/disabled}} {{^disabled}} {{#active}} <span class=\"pg-item active\" data-value={{value}}>{{name}}</span> {{/active}} {{^active}} <span class=pg-item data-value={{value}}>{{name}}</span> {{/active}} {{/disabled}} {{/pageArray}} <span class=pg-total>{{pageNum}} / {{pages}}</span> </div>";
 
 /***/ }),
 
-/***/ 139:
+/***/ 135:
 /***/ (function(module, exports) {
 
 	module.exports = "{{#list}} <li class=p-item> <div class=p-img-con> <a class=link href=\"./detail.html?productId={{id}}\" target=_blank> <img class=p-img src={{imageHost}}{{mainImage}} alt={{name}} /> </a> </div> <div class=p-price-con> <span class=p-price>￥{{price}}</span> </div> <div class=p-name-con> <a class=p-name href=\"./detail.html?productId={{id}}\" target=_blank>{{name}}</a> </div> </li> {{/list}} {{^list}} <p class=err-tip>很抱歉，实在找不到您要的商品。</p> {{/list}}";

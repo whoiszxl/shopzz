@@ -3,7 +3,7 @@ webpackJsonp([9],{
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(158);
+	module.exports = __webpack_require__(154);
 
 
 /***/ }),
@@ -394,7 +394,7 @@ webpackJsonp([9],{
 
 /***/ }),
 
-/***/ 128:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -406,9 +406,9 @@ webpackJsonp([9],{
 
 	'use strict';
 
-	__webpack_require__(129);
+	__webpack_require__(124);
 	var _xl             = __webpack_require__(8);
-	var templateIndex   = __webpack_require__(131);
+	var templateIndex   = __webpack_require__(126);
 	// 侧边导航
 	var navSide = {
 	    option : {
@@ -446,31 +446,31 @@ webpackJsonp([9],{
 
 /***/ }),
 
-/***/ 129:
+/***/ 124:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 131:
+/***/ 126:
 /***/ (function(module, exports) {
 
 	module.exports = "{{#navList}} {{#isActive}} <li class=\"nav-item active\"> {{/isActive}} {{^isActive}} </li><li class=nav-item> {{/isActive}} <a class=link href={{href}}>{{desc}}</a> </li> {{/navList}} ";
 
 /***/ }),
 
-/***/ 158:
+/***/ 154:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	__webpack_require__(159)
+	__webpack_require__(155)
 	__webpack_require__(12);
 	__webpack_require__(2);
-	var navSide = __webpack_require__(128);
+	var navSide = __webpack_require__(123);
 	var _xl = __webpack_require__(8);
-	var _payment = __webpack_require__(161);
-	var templateIndex = __webpack_require__(162);
+	var _payment = __webpack_require__(157);
+	var templateIndex = __webpack_require__(158);
 
 
 	// page逻辑部分
@@ -520,14 +520,14 @@ webpackJsonp([9],{
 
 /***/ }),
 
-/***/ 159:
+/***/ 155:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 161:
+/***/ 157:
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -564,7 +564,7 @@ webpackJsonp([9],{
 
 /***/ }),
 
-/***/ 162:
+/***/ 158:
 /***/ (function(module, exports) {
 
 	module.exports = " <p class=payment-tips>订单提交成功,请尽快支付!订单号: {{orderNo}}</p> <p class=\"payment-tips enhance\">请使用支付宝App扫描如下二维码进行支付:</p> <div class=img-con> <img src={{qrUrl}} alt=支付二维码 class=qr-code> </div>";

@@ -3,7 +3,7 @@ webpackJsonp([11],{
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(169);
+	module.exports = __webpack_require__(165);
 
 
 /***/ }),
@@ -394,7 +394,7 @@ webpackJsonp([11],{
 
 /***/ }),
 
-/***/ 128:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
@@ -406,9 +406,9 @@ webpackJsonp([11],{
 
 	'use strict';
 
-	__webpack_require__(129);
+	__webpack_require__(124);
 	var _xl             = __webpack_require__(8);
-	var templateIndex   = __webpack_require__(131);
+	var templateIndex   = __webpack_require__(126);
 	// 侧边导航
 	var navSide = {
 	    option : {
@@ -446,38 +446,38 @@ webpackJsonp([11],{
 
 /***/ }),
 
-/***/ 129:
+/***/ 124:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 131:
+/***/ 126:
 /***/ (function(module, exports) {
 
 	module.exports = "{{#navList}} {{#isActive}} <li class=\"nav-item active\"> {{/isActive}} {{^isActive}} </li><li class=nav-item> {{/isActive}} <a class=link href={{href}}>{{desc}}</a> </li> {{/navList}} ";
 
 /***/ }),
 
-/***/ 169:
+/***/ 165:
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*
 	 * @Author: whoiszxl 
 	 * @Date: 2018-05-12 17:07:37 
 	 * @Last Modified by: whoiszxl
-	 * @Last Modified time: 2018-05-12 17:08:00
+	 * @Last Modified time: 2018-05-26 18:02:08
 	 */
 
 	'use strict';
-	__webpack_require__(170);
+	__webpack_require__(166);
 	__webpack_require__(12);
 	__webpack_require__(2);
-	var navSide         = __webpack_require__(128);
+	var navSide         = __webpack_require__(123);
 	var _xl             = __webpack_require__(8);
 	var _user           = __webpack_require__(15);
-	var templateIndex   = __webpack_require__(172);
+	var templateIndex   = __webpack_require__(168);
 
 	// page 逻辑部分
 	var page = {
@@ -500,6 +500,7 @@ webpackJsonp([11],{
 	            $('.panel-body').html(userHtml);
 	        }, function(errMsg){
 	            _xl.errorTips(errMsg);
+	            _xl.doLogin();
 	        });
 	    }
 	};
@@ -509,14 +510,14 @@ webpackJsonp([11],{
 
 /***/ }),
 
-/***/ 170:
+/***/ 166:
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 172:
+/***/ 168:
 /***/ (function(module, exports) {
 
 	module.exports = "<div class=user-info> <div class=form-line> <span class=label>用户名：</span> <span class=text>{{username}}</span> </div> <div class=form-line> <span class=label>电 话：</span> <span class=text>{{phone}}</span> </div> <div class=form-line> <span class=label>邮 箱：</span> <span class=text>{{email}}</span> </div> <div class=form-line> <span class=label>问 题：</span> <span class=text>{{question}}</span> </div> <div class=form-line> <span class=label>答 案：</span> <span class=text>{{answer}}</span> </div> <a class=\"btn btn-submit\" href=./user-center-update.html>编辑</a> </div>";

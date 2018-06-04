@@ -402,8 +402,8 @@ webpackJsonp([1],[
 	/*
 	 * @Author: whoiszxl 
 	 * @Date: 2018-05-14 10:30:56 
-	 * @Last Modified by:   whoiszxl 
-	 * @Last Modified time: 2018-05-14 10:30:56 
+	 * @Last Modified by: whoiszxl
+	 * @Last Modified time: 2018-05-26 10:07:25
 	 */
 
 	'use strict';
@@ -536,7 +536,7 @@ webpackJsonp([1],[
 	                _xl.errorTips('请选择商品后再提交');
 	            }
 	        });
-		},
+	    },
 	    // 加载购物车信息
 	    loadCart : function(){
 	        var _this       = this;
