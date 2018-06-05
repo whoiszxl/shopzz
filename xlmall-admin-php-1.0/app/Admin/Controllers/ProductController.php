@@ -55,17 +55,21 @@ class ProductController extends Controller{
     }
 
     //编辑逻辑
-    public function update(Article $article){
+    public function update(Product $product){
         //验证数据
         $this->validate(request(), [
-            'title' => 'required|string|max:100|min:5',
-            'content' => 'required|string|min:10',
+            'name' => 'required|string|max:200|min:5'
         ]);
         //权限验证
-        $this->authorize('update', $article);
+        $this->authorize('update', $product);
         //逻辑
-        $article->title = request('title');
-        $article->content = request('content');
+        $article->name = request('name');
+        $article->subtitle = request('subtitle');
+        $article->main_image = request('main_image');
+        $article->sub_images = request('sub_images');
+        $article->detail = request('detail');
+        $article->price = request('price');
+        $article->stock = request('stock');
         $article->save();
         //渲染
         return redirect("/article/{$article->id}");
