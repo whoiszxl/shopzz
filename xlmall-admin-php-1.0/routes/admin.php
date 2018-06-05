@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin'], function(){
             Route::get('/products','\App\Admin\Controllers\ProductController@index');
             //编辑文章
             Route::get('/product/edit/{product}', '\App\Admin\Controllers\ProductController@edit');
-            Route::put('/product/{product}', '\App\Admin\Controllers\ProductController@update');
+            Route::post('/product/{product}', '\App\Admin\Controllers\ProductController@update');
 
 
             // 角色管理

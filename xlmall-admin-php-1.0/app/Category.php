@@ -13,6 +13,9 @@ class Category extends Model
 
     protected $table = 'xl_category';
 
+    const CREATED_AT = 'create_time';
+    const UPDATED_AT = 'update_time';
+
     //定义索引里的type
     public function searchableAs(){
         return "category";

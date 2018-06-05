@@ -13,6 +13,9 @@ class Product extends Model
 
     protected $table = 'xl_product';
 
+    const CREATED_AT = 'create_time';
+    const UPDATED_AT = 'update_time';
+
     //定义索引里的type
     public function searchableAs(){
         return "product";

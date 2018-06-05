@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use \App\Product;
+use \App\Category;
 
 class ProductController extends Controller{
 
@@ -16,8 +17,8 @@ class ProductController extends Controller{
 
 
     //详情页面
-    public function show(Article $article){
-        $article->load('comments');
+    public function show(Product $product){
+        $product->load('comments');
         return view("article/show", compact('article'));
     }
 
@@ -29,10 +30,10 @@ class ProductController extends Controller{
 
     //创建逻辑
     public function store(){
-        // $article = new Article();
-        // $article->title = request('title');
-        // $article->content = request('content');
-        // $article->save();
+        // $product = new Product();
+        // $product->title = request('title');
+        // $product->content = request('content');
+        // $product->save();
 
         //验证数据
         $this->validate(request(), [
@@ -43,7 +44,7 @@ class ProductController extends Controller{
         //添加逻辑
         $user_id = \Auth::id();
         $params = array_merge(request(['title','content']), compact('user_id'));
-        $result = Article::create($params);
+        $result = Product::create($params);
         
         //视图渲染
         return redirect('/article');
@@ -51,7 +52,9 @@ class ProductController extends Controller{
 
     //编辑页面
     public function edit(Product $product){
-        return view("admin.product.edit", compact('product'));
+        $categorys = Category::where('parent_id','!=',0)->get();
+        
+        return view("admin.product.edit", compact('product','categorys'));
     }
 
     //编辑逻辑
@@ -63,22 +66,22 @@ class ProductController extends Controller{
         //权限验证
         $this->authorize('update', $product);
         //逻辑
-        $article->name = request('name');
-        $article->subtitle = request('subtitle');
-        $article->main_image = request('main_image');
-        $article->sub_images = request('sub_images');
-        $article->detail = request('detail');
-        $article->price = request('price');
-        $article->stock = request('stock');
-        $article->save();
+        $product->name = request('name');
+        $product->subtitle = request('subtitle');
+        $product->main_image = request('main_image');
+        $product->sub_images = request('sub_images');
+        $product->detail = request('detail');
+        $product->price = request('price');
+        $product->stock = request('stock');
+        $product->save();
         //渲染
-        return redirect("/article/{$article->id}");
+        return redirect("/product/{$product->id}");
     }
 
     //删除逻辑
-    public function delete(Article $article){
-        $this->authorize('delete', $article);
-        $article->delete();
+    public function delete(Product $product){
+        $this->authorize('delete', $product);
+        $product->delete();
         return redirect("/article");
     }
 
@@ -89,14 +92,14 @@ class ProductController extends Controller{
     }
 
 
-    public function status(Article $article){
+    public function status(Product $product){
 
         $this->validate(request(), [
             'status' => 'required|in:-1,1',
         ]);
 
-        $article->status = request('status');
-        $article->save();
+        $product->status = request('status');
+        $product->save();
 
         return [
             'error' => 0,
