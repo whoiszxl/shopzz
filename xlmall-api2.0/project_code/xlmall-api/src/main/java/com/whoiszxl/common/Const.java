@@ -30,7 +30,7 @@ public class Const {
 		/**
 		 * 以毫秒为单位
 		 */
-		long JWT_TOKEN_EXTIME = 60*1000;
+		long JWT_TOKEN_EXTIME = 720000000;
 	}
 	
 	public interface REDIS_LOCK {
