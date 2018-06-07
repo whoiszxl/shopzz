@@ -2,7 +2,7 @@
  * @Author: Administrator
  * @Date:   2018-03-24 15:27:37
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-07 11:22:07
+ * @Last Modified time: 2018-06-07 11:38:06
  */
 
 const path = require('path');
@@ -102,11 +102,11 @@ module.exports = {
         },
         proxy: {
             '/manage': {
-                target: 'http://xlmall.whoiszxl.com',
+                target: 'http://118.126.92.128:10101',
                 changeOrigin: true //加了这个字段，请求就是从上面这个域名发出的，而不是从localhost发出
             },
             '/user/logout.do': {
-                target: 'http://xlmall.whoiszxl.com',
+                target: 'http://118.126.92.128:10101',
                 changeOrigin: true
             }
         }

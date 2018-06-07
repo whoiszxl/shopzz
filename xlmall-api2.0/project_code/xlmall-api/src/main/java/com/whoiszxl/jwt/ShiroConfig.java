@@ -66,6 +66,16 @@ public class ShiroConfig {
         filterRuleMap.put("/user/401", "anon");
         filterRuleMap.put("/user/jwt_login", "anon");
         filterRuleMap.put("/manage/user/jwt_login", "anon");
+        filterRuleMap.put("/article/**", "anon");
+        filterRuleMap.put("/product/**", "anon");
+        filterRuleMap.put("/callback/**", "anon");
+        
+        filterRuleMap.put("/user/check_valid", "anon");
+        filterRuleMap.put("/user/register", "anon");
+        filterRuleMap.put("/user/forget_get_question", "anon");
+        filterRuleMap.put("/user/forget_check_answer", "anon");
+        filterRuleMap.put("/user/forget_reset_password", "anon");
+        
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }
