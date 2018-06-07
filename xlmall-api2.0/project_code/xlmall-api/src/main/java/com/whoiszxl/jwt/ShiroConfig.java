@@ -64,6 +64,8 @@ public class ShiroConfig {
         filterRuleMap.put("/**", "jwt");
         // 访问401和404页面不通过我们的Filter
         filterRuleMap.put("/user/401", "anon");
+        filterRuleMap.put("/user/jwt_login", "anon");
+        filterRuleMap.put("/manage/user/jwt_login", "anon");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }
