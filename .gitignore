@@ -33,3 +33,5 @@ Servers
 
 # frontend configuration
 node_modules
+
+dist
