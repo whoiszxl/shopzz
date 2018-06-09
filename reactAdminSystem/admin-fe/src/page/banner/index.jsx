@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-26 16:48:16
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-10 02:11:58
+ * @Last Modified time: 2018-06-10 02:41:39
 */
 import React        from 'react';
 import { Link }     from 'react-router-dom';
@@ -12,6 +12,8 @@ import Article      from 'service/article-service.jsx'
 import PageTitle    from 'component/page-title/index.jsx';
 import TableList    from 'util/table-list/index.jsx';
 import Pagination   from 'util/pagination/index.jsx';
+
+import "./index.scss";
 
 const _mm   = new MUtil();
 const _article = new Article();
@@ -53,7 +55,7 @@ class BannerList extends React.Component{
                 <tr key={index}>
                     <td>{banner.id}</td>
                     <td>{banner.title}</td>
-                    <td>{banner.imgurl}</td>
+                    <td><img className="banner_img" src={banner.imgurl}/></td>
                     <td>{banner.jumpurl}</td>
                     <td>{banner.sort}</td>
                     <td>{banner.status == 1 ? '有效' : '无效'}</td>
