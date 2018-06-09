@@ -76,7 +76,7 @@ public class ProductManageController {
 	public ServerResponse<?> getList(HttpSession session,
 			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-		return productService.getProductList(pageNum, pageSize);
+		return productService.getManageProductList(pageNum, pageSize);
 	}
 
 	@PostMapping("search")

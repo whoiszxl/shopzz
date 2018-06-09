@@ -26,5 +26,7 @@ public interface ProductService {
 			String orderBy);
 
 	int selectProductCount();
+
+	ServerResponse<PageInfo> getManageProductList(int pageNum, int pageSize);
 }
 

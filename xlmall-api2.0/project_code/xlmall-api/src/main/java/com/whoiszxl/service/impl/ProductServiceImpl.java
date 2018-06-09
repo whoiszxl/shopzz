@@ -264,6 +264,23 @@ public class ProductServiceImpl implements ProductService {
 	public int selectProductCount() {
 		return productMapper.selectProductCount();
 	}
+
+	@Override
+	public ServerResponse<PageInfo> getManageProductList(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+        List<Product> productList = productMapper.selectList();
+        PageInfo pageInfo = new PageInfo<>(productList);
+
+        List<ProductListVo> productListVoList = Lists.newArrayList();
+        //返回列表对象
+        for (Product product : productList) {
+            ProductListVo productListVo = assembleProductListVo(product);
+            productListVoList.add(productListVo);
+        }
+        pageInfo.setList(productListVoList);
+
+        return ServerResponse.createBySuccess(pageInfo);
+	}
 	
 }
 
