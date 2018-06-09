@@ -34,7 +34,7 @@ public class OrderManageController {
 	@Autowired
 	private OrderService orderService;
 
-	@GetMapping("list")
+	@PostMapping("list")
 	@ApiOperation(value = "后台订单列表")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<PageInfo> orderList(
@@ -43,7 +43,7 @@ public class OrderManageController {
 		return orderService.manageList(pageNum, pageSize);
 	}
 
-	@GetMapping("detail")
+	@PostMapping("detail")
 	@ApiOperation(value = "后台订单详情")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<OrderVo> orderDetail(Long orderNo) {
@@ -51,7 +51,7 @@ public class OrderManageController {
 
 	}
 
-	@GetMapping("search")
+	@PostMapping("search")
 	@ApiOperation(value = "后台搜索订单")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<PageInfo> orderSearch(Long orderNo,

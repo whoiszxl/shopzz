@@ -47,7 +47,7 @@ public class CategoryManageController {
         return categoryService.updateCategoryName(categoryId,categoryName); 
     }
 
-    @GetMapping("get_category")
+	@PostMapping("get_category")
     @ApiOperation(value = "获取分类接口")
     @RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
     public ServerResponse<?> getChildrenParallelCategory(HttpSession session,@RequestParam(value = "categoryId" ,defaultValue = "0") Integer categoryId){
@@ -55,7 +55,7 @@ public class CategoryManageController {
        return categoryService.getChildrenParallelCategory(categoryId);
     }
 
-    @GetMapping("get_deep_category")
+	@PostMapping("get_deep_category")
     @ApiOperation(value = "获取当前分类和子集分类的分类id接口")
     @RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
     public ServerResponse<?> getCategoryAndDeepChildrenCategory(HttpSession session,@RequestParam(value = "categoryId" ,defaultValue = "0") Integer categoryId){

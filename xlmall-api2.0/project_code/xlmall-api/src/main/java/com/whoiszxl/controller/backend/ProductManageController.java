@@ -63,14 +63,14 @@ public class ProductManageController {
 		return productService.setSaleStatus(productId, status);
 	}
 
-	@GetMapping("detail")
+	@PostMapping("detail")
 	@ApiOperation(value = "后台获取商品详情")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<?> getDetail(HttpSession session, Integer productId) {
 		return productService.manageProductDetail(productId);
 	}
 
-	@GetMapping("list")
+	@PostMapping("list")
 	@ApiOperation(value = "后台获取商品列表")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<?> getList(HttpSession session,
@@ -79,7 +79,7 @@ public class ProductManageController {
 		return productService.getProductList(pageNum, pageSize);
 	}
 
-	@GetMapping("search")
+	@PostMapping("search")
 	@ApiOperation(value = "后台搜索商品")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse productSearch(HttpSession session, String productName, Integer productId,

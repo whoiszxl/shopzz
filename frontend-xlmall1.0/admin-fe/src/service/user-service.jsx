@@ -57,11 +57,14 @@ class User{
 
     //获取用户信息（名称邮箱之类）
     getUserInfo(key) {
+        userinfo =  _mm.request({
+            type: 'get',
+            url: 'manage/user/userinfo'
+        });
         if(key == null) {
-            return _mm.request({
-                type: 'get',
-                url: '/manage/'
-            })
+            return userinfo;
+        }else{
+            return JSON.parse(userinfo).key;
         }
     }
 }

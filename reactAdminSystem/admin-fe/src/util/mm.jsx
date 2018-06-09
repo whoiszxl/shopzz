@@ -2,15 +2,15 @@
 * @Author: whoiszxl
 * @Date:   2018-01-23 22:54:28
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-09 15:38:05
+ * @Last Modified time: 2018-06-09 16:13:53
 */
 
 class MUtil{
     request(param){
         let my_headers = null;
-        if(param.headers == null && this.getStorage('jwt_token') != null) {
+        if(param.headers == null && this.getToken() != null) {
             my_headers = {
-                'Authorization': this.getStorage('jwt_token')
+                'Authorization': this.getToken()
             };
         }
         return new Promise((resolve, reject) => {

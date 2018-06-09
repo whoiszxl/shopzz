@@ -1,8 +1,8 @@
 /*
  * @Author: whoiszxl 
  * @Date: 2018-06-09 14:11:02 
- * @Last Modified by:   whoiszxl 
- * @Last Modified time: 2018-06-09 14:11:02 
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-09 16:06:11
  */
 
 import React        from 'react';
@@ -17,7 +17,7 @@ class NavTop extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            username: _mm.getStorage('userInfo').username || ''
+            username: 'hello'
         }
     }
     // 退出登录

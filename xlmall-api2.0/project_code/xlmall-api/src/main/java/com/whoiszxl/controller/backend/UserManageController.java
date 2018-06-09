@@ -75,7 +75,7 @@ public class UserManageController {
 		return ServerResponse.createBySuccess();
 	}
 	
-	@GetMapping("list")
+	@PostMapping("list")
 	@ApiOperation(value = "获取普通用户列表")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<PageInfo> userList (
