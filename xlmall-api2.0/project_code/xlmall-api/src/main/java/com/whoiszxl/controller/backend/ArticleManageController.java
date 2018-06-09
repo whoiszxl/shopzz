@@ -33,7 +33,7 @@ public class ArticleManageController {
 	private ArticleService articleService;
 	
 	@PostMapping("list")
-	@ApiOperation(value = "后台订单列表")
+	@ApiOperation(value = "后台banner列表")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<List<Banner>> orderList() {
 		return ServerResponse.createBySuccess(articleService.getBannerManageList(Const.Article.BANNER_LIST_COUNT));

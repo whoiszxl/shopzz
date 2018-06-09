@@ -1,8 +1,8 @@
 /*
  * @Author: whoiszxl 
  * @Date: 2018-06-09 14:10:54 
- * @Last Modified by:   whoiszxl 
- * @Last Modified time: 2018-06-09 14:10:54 
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-10 02:23:28
  */
 
 import React                from 'react';
@@ -24,7 +24,7 @@ class NavSide extends React.Component{
                             </NavLink>
                         </li>
                         <li className="active">
-                            <Link to="/product">
+                            <Link to="#">
                                 <i className="fa fa-list"></i>
                                 <span>商品</span>
                                 <span className="fa arrow"></span>
@@ -39,7 +39,7 @@ class NavSide extends React.Component{
                             </ul>
                         </li>
                         <li className="active">
-                            <Link to="/order">
+                            <Link to="#">
                                 <i className="fa fa-check-square-o"></i>
                                 <span>订单</span>
                                 <span className="fa arrow"></span>
@@ -51,7 +51,7 @@ class NavSide extends React.Component{
                             </ul>
                         </li>
                         <li className="active">
-                            <Link to="/user">
+                            <Link to="#">
                                 <i className="fa fa-user-o"></i>
                                 <span>用户</span>
                                 <span className="fa arrow"></span>
@@ -59,6 +59,19 @@ class NavSide extends React.Component{
                             <ul className="nav nav-second-level collapse in">
                                 <li>
                                     <NavLink to="/user" activeClassName="active-menu">用户管理</NavLink>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li className="active">
+                            <Link to="#">
+                                <i className="fa fa-user-o"></i>
+                                <span>文章</span>
+                                <span className="fa arrow"></span>
+                            </Link>
+                            <ul className="nav nav-second-level collapse in">
+                                <li>
+                                    <NavLink to="/banner/index" activeClassName="active-menu">轮播图管理</NavLink>
                                 </li>
                             </ul>
                         </li>

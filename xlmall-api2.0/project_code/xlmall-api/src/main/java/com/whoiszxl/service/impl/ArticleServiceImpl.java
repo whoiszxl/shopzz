@@ -36,6 +36,9 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Banner> getBannerManageList(int num) {
 		List<Banner> banners = bannerMapper.selectBannersByNum(num);
+		for (Banner banner : banners) {
+			banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://image.chenyuspace.com/")+banner.getImgurl());
+		}
 		return banners;
 	}
 	
