@@ -232,7 +232,6 @@ public class UserServiveImpl implements UserService {
 		PageHelper.startPage(pageNum, pageSize);
 		List<User> userList = userMapper.selectAllUser();
 		PageInfo pageResult = new PageInfo<>(userList);
-		pageResult.setList(userList);
 		return ServerResponse.createBySuccess(pageResult);
 	}
 
