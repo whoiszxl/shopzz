@@ -332,11 +332,13 @@ public class OrderServiceImpl implements OrderService {
 	 * 查询所有订单并分页
 	 */
     public ServerResponse<PageInfo> manageList(int pageNum,int pageSize){
-        PageHelper.startPage(pageNum,pageSize);
-        List<Order> orderList = orderMapper.selectAllOrder();
-        List<OrderVo> orderVoList = this.assembleOrderVoList(orderList,null);
-        PageInfo pageResult = new PageInfo(orderVoList);
-        return ServerResponse.createBySuccess(pageResult);
+    	PageHelper.startPage(pageNum, pageSize);
+        List<Order> orderList =orderMapper.selectAllOrder();
+        PageInfo pageInfo = new PageInfo(orderList);
+
+        List<OrderVo> orderVoList = this.assembleOrderVoList(orderList, null);
+        pageInfo.setList(orderVoList);
+        return ServerResponse.createBySuccess(pageInfo);
     }
 
     public ServerResponse<OrderVo> manageDetail(Long orderNo){
