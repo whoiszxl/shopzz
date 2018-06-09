@@ -32,6 +32,12 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return bannerVoList;
 	}
+
+	@Override
+	public List<Banner> getBannerManageList(int num) {
+		List<Banner> banners = bannerMapper.selectBannersByNum(num);
+		return banners;
+	}
 	
 	
 

@@ -18,8 +18,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * 
- * @author Administrator
+ * 前台公共文章模块
+ * @author whoiszxl
  *
  */
 @Api(value = "前台公共文章模块",description="前台公共文章模块")

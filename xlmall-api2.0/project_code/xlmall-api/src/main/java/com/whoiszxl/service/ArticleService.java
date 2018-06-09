@@ -20,4 +20,6 @@ public interface ArticleService {
 	 */
 	List<BannerVo> getBannerList(int num);
 	
+	
+	List<Banner> getBannerManageList(int num);
 }
