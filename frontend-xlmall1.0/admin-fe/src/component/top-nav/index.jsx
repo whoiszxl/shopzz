@@ -11,7 +11,7 @@ class TopNav extends React.Component{
 	constructor(props){
 		super(props);
     this.state = {
-      username:  _mm.getStorage('userInfo').username || ''
+      username:  _user.getUserInfoByKey('username') || ''
     }
 	}
 
