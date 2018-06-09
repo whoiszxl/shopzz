@@ -59,6 +59,14 @@ public class UserManageController {
 		ServerResponse<String> response = userService.jwt_login(username, password);
 		return response;
 	}
+	
+	@PostMapping("userinfo")
+	@ApiOperation(value = "获取管理員用户信息的接口")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	public ServerResponse<User> get_information(HttpServletRequest request) {
+		User user = jwtUserService.getCurrentUser(request);
+		return ServerResponse.createBySuccess(user);
+	}
 
 	@PostMapping("logout")
 	@ApiOperation(value = "登出接口")
