@@ -2,6 +2,8 @@ package com.whoiszxl.controller.backend;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.Banner;
+import com.whoiszxl.entity.Product;
 import com.whoiszxl.service.ArticleService;
 
 import io.swagger.annotations.Api;
@@ -32,10 +35,17 @@ public class ArticleManageController {
 	@Autowired
 	private ArticleService articleService;
 	
-	@PostMapping("list")
+	@PostMapping("bannerlist")
 	@ApiOperation(value = "后台banner列表")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
-	public ServerResponse<List<Banner>> orderList() {
+	public ServerResponse<List<Banner>> bannerList() {
 		return ServerResponse.createBySuccess(articleService.getBannerManageList(Const.Article.BANNER_LIST_COUNT));
+	}
+	
+	@PostMapping("save")
+	@ApiOperation(value = "后台banner保存")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	public ServerResponse<String> bannerSave(Banner banner) {
+		return articleService.saveOrUpdateProduct(banner);
 	}
 }

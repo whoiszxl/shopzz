@@ -2,6 +2,7 @@ package com.whoiszxl.service;
 
 import java.util.List;
 
+import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.Banner;
 import com.whoiszxl.vo.BannerVo;
 
@@ -22,4 +23,7 @@ public interface ArticleService {
 	
 	
 	List<Banner> getBannerManageList(int num);
+
+
+	ServerResponse<String> saveOrUpdateProduct(Banner banner);
 }

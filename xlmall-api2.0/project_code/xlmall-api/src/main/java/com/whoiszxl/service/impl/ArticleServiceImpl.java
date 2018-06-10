@@ -3,11 +3,13 @@ package com.whoiszxl.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.dao.BannerMapper;
 import com.whoiszxl.entity.Banner;
 import com.whoiszxl.service.ArticleService;
@@ -40,6 +42,29 @@ public class ArticleServiceImpl implements ArticleService {
 			banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://image.chenyuspace.com/")+banner.getImgurl());
 		}
 		return banners;
+	}
+
+	@Override
+	public ServerResponse<String> saveOrUpdateProduct(Banner banner) {
+		if (banner != null) {
+			if (banner.getId() != null) {
+				int rowCount = bannerMapper.updateByPrimaryKey(banner);
+				if (rowCount > 0) {
+					return ServerResponse.createBySuccessMessage("更新轮播图成功");
+				} else {
+					return ServerResponse.createByErrorMessage("更新轮播图失败");
+				}
+
+			} else {
+				int rowCount = bannerMapper.insert(banner);
+				if (rowCount > 0) {
+					return ServerResponse.createBySuccessMessage("新增轮播图成功");
+				} else {
+					return ServerResponse.createByErrorMessage("新增轮播图失败");
+				}
+			}
+		}
+		return ServerResponse.createByErrorMessage("新增或更新轮播图参数不正确了");
 	}
 	
 	
