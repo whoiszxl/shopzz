@@ -2,10 +2,15 @@
 * @Author: whoiszxl
 * @Date:   2018-01-23 22:54:28
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-09 16:13:53
+ * @Last Modified time: 2018-06-11 23:29:15
 */
 
 class MUtil{
+
+    constructor() {
+        this.apiUrl = "http://118.126.92.128:10101";
+    }
+
     request(param){
         let my_headers = null;
         if(param.headers == null && this.getToken() != null) {

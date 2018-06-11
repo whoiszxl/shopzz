@@ -1,8 +1,8 @@
 /*
 * @Author: whoiszxl
 * @Date:   2018-02-05 13:17:10
-* @Last Modified by:   whoiszxl
-* @Last Modified time: 2018-02-05 15:49:32
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-11 23:31:07
 */
 import MUtil    from 'util/mm.jsx'
 
@@ -14,10 +14,10 @@ class Order{
         let url     = '',
             data    = {};
         if(listParam.listType === 'list'){
-            url             = '/manage/order/list';
+            url             = _mm.apiUrl + '/manage/order/list';
             data.pageNum    = listParam.pageNum;
         }else if(listParam.listType === 'search'){
-            url = '/manage/order/search';
+            url = _mm.apiUrl + '/manage/order/search';
             data.pageNum    = listParam.pageNum;
             data.orderNo    = listParam.orderNo;
         }
@@ -31,7 +31,7 @@ class Order{
     getOrderDetail(orderNumber){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/order/detail',
+            url     : _mm.apiUrl + '/manage/order/detail',
             data    : {
                 orderNo : orderNumber
             }
@@ -40,7 +40,7 @@ class Order{
     sendGoods(orderNumber){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/order/send_goods',
+            url     : _mm.apiUrl + '/manage/order/send_goods',
             data    : {
                 orderNo : orderNumber
             }

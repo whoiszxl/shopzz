@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-06-08 12:26:50 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-11 16:56:14
+ * @Last Modified time: 2018-06-11 23:15:34
  */
 
 const path = require('path');
@@ -17,7 +17,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'), //编译输出的路径
         publicPath: WEBPACK_ENV === 'dev' 
-        ? '/dist/' : '//yxgadmin.whoiszxl.com/dist/', //配置资源文件访问的公共路径
+        ? '/dist/' : '//yxgadmin.whoiszxl.com/', //配置资源文件访问的公共路径
         filename: 'js/app.js' //输出的入口js
     },
     resolve: {

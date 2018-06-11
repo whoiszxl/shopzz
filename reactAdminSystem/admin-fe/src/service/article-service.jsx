@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-26 13:38:21
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-11 18:12:30
+ * @Last Modified time: 2018-06-11 23:31:22
 */
 import MUtil        from 'util/mm.jsx'
 
@@ -12,7 +12,7 @@ class Article{
     // 获取banner列表
     getBannerList(){
         return _mm.request({
-            url: 'http://118.126.92.128:10101/manage/article/banner_list',
+            url: _mm.apiUrl + '/manage/article/banner_list',
             type: 'POST'
         });
     }
@@ -21,7 +21,7 @@ class Article{
     getBannerDetail(bannerId){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/article/banner_detail',
+            url     : _mm.apiUrl + '/manage/article/banner_detail',
             data    : {
                 bannerId : bannerId || 0
             }
@@ -35,7 +35,7 @@ class Article{
     saveBanner(banner){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/article/banner_save',
+            url     : _mm.apiUrl + '/manage/article/banner_save',
             data    : banner
         });
     }

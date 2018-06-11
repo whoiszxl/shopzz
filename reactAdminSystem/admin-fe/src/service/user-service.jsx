@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-25 21:21:46
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-11 18:15:02
+ * @Last Modified time: 2018-06-11 23:29:49
 */
 import MUtil        from 'util/mm.jsx'
 
@@ -13,7 +13,7 @@ class User{
     login(loginInfo){
         return _mm.request({
             type: 'post',
-            url: 'http://118.126.92.128:10101/manage/user/jwt_login',
+            url: _mm.apiUrl + '/manage/user/jwt_login',
             data: loginInfo
         });
     }
@@ -44,13 +44,13 @@ class User{
     logout(){
         return _mm.request({
             type    : 'post',
-            url     : '/user/logout'
+            url     : _mm.apiUrl + '/user/logout'
         });
     }
     getUserList(pageNum){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/user/list',
+            url     : _mm.apiUrl + '/manage/user/list',
             data    : {
                 pageNum : pageNum
             }

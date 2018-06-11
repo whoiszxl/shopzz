@@ -1,8 +1,8 @@
 /*
 * @Author: whoiszxl
 * @Date:   2018-01-31 13:19:15
-* @Last Modified by:   whoiszxl
-* @Last Modified time: 2018-02-04 22:52:34
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-11 23:30:57
 */
 import MUtil        from 'util/mm.jsx'
 
@@ -14,10 +14,10 @@ class Product{
         let url     = '',
             data    = {};
         if(listParam.listType === 'list'){
-            url                         = '/manage/product/list';
+            url                         = _mm.apiUrl + '/manage/product/list';
             data.pageNum                = listParam.pageNum;
         }else if(listParam.listType === 'search'){
-            url = '/manage/product/search';
+            url = _mm.apiUrl + '/manage/product/search';
             data.pageNum                = listParam.pageNum;
             data[listParam.searchType]  = listParam.keyword;
         }
@@ -31,7 +31,7 @@ class Product{
     getProduct(productId){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/product/detail',
+            url     : _mm.apiUrl + '/manage/product/detail',
             data    : {
                 productId : productId || 0
             }
@@ -41,7 +41,7 @@ class Product{
     setProductStatus(productInfo){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/product/set_sale_status',
+            url     : _mm.apiUrl + '/manage/product/set_sale_status',
             data    : productInfo
         });
     }
@@ -93,7 +93,7 @@ class Product{
     saveProduct(product){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/product/save',
+            url     : _mm.apiUrl + '/manage/product/save',
             data    : product
         });
     }
@@ -104,7 +104,7 @@ class Product{
     getCategoryList(parentCategoryId){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/category/get_category',
+            url     : _mm.apiUrl + '/manage/category/get_category',
             data    : {
                 categoryId : parentCategoryId || 0
             }
@@ -114,7 +114,7 @@ class Product{
     saveCategory(category){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/category/add_category',
+            url     : _mm.apiUrl + '/manage/category/add_category',
             data    : category
         });
     }
@@ -122,7 +122,7 @@ class Product{
     updateCategoryName(category){
         return _mm.request({
             type    : 'post',
-            url     : '/manage/category/set_category_name',
+            url     : _mm.apiUrl + '/manage/category/set_category_name',
             data    : category
         });
     }
