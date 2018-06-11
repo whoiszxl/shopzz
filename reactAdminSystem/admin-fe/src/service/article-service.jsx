@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-26 13:38:21
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-11 12:06:01
+ * @Last Modified time: 2018-06-11 18:12:30
 */
 import MUtil        from 'util/mm.jsx'
 
@@ -12,7 +12,7 @@ class Article{
     // 获取banner列表
     getBannerList(){
         return _mm.request({
-            url: '/manage/article/banner_list',
+            url: 'http://118.126.92.128:10101/manage/article/banner_list',
             type: 'POST'
         });
     }

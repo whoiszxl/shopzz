@@ -91,7 +91,8 @@ class ProductList extends React.Component{
     render(){
         let tableHeads = [
             {name: '商品ID', width: '10%'},
-            {name: '商品信息', width: '50%'},
+            {name: '商品主图', width: '10%'},
+            {name: '商品信息', width: '40%'},
             {name: '价格', width: '10%'},
             {name: '状态', width: '15%'},
             {name: '操作', width: '15%'},
@@ -113,6 +114,7 @@ class ProductList extends React.Component{
                             return (
                                 <tr key={index}>
                                     <td>{product.id}</td>
+                                    <td><img className="product_img" src={product.imageHost + product.mainImage} alt=""/></td>
                                     <td>
                                         <p>{product.name}</p>
                                         <p>{product.subtitle}</p>
