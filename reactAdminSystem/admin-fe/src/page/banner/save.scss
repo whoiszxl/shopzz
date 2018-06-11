@@ -1,8 +1,8 @@
 /*
 * @Author: whoiszxl
 * @Date:   2018-02-02 16:19:20
-* @Last Modified by:   whoiszxl
-* @Last Modified time: 2018-02-02 16:51:03
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-11 13:05:50
 */
 
 $sub-img-size: 80px;
@@ -14,9 +14,10 @@ $sub-img-size: 80px;
     margin-right: 10px;
     border: 1px solid #ccc;
     .img{
-        width: 100%;
-        height: 100%;
+        width: 200px;
+        height: 100px;
         display: block;
+        padding-bottom: 20px;   
     }
     .fa-close{
         position: absolute;

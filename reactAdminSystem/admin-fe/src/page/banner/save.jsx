@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-02-01 16:19:36
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-11 12:14:18
+ * @Last Modified time: 2018-06-11 13:08:25
 */
 import React                from 'react';
 import MUtil                from 'util/mm.jsx'
@@ -38,6 +38,9 @@ class BannerSave extends React.Component{
         if(this.state.id){
             _article.getBannerDetail(this.state.id).then((res) => {
                 this.setState(res);
+                this.setState({
+                    showimg : res.imgurl
+                });
             }, (errMsg) => {
                 _mm.errorTips(errMsg);
             });
