@@ -26,4 +26,7 @@ public interface ArticleService {
 
 
 	ServerResponse<String> saveOrUpdateProduct(Banner banner);
+
+
+	ServerResponse<Banner> manageBannerDetail(Integer bannerId);
 }

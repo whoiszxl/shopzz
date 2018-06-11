@@ -19,7 +19,9 @@ import OrderList        from 'page/order/index.jsx';
 import OrderDetail      from 'page/order/detail.jsx';
 import UserList         from 'page/user/index.jsx';
 import BannerList       from 'page/banner/index.jsx';
+import BannerSave      from 'page/banner/save.jsx';
 import ErrorPage        from 'page/error/index.jsx';
+
 
 class App extends React.Component {
     render(){
@@ -36,6 +38,7 @@ class App extends React.Component {
                     <Redirect exact from="/user" to="/user/index"/>
 
                     <Route path="/banner/index" component={BannerList}/>
+                    <Route path="/banner/save/:pid?" component={BannerSave}/>
                     <Route component={ErrorPage}/>
                 </Switch>
             </Layout>

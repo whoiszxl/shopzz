@@ -66,6 +66,15 @@ public class ArticleServiceImpl implements ArticleService {
 		}
 		return ServerResponse.createByErrorMessage("新增或更新轮播图参数不正确了");
 	}
+
+	@Override
+	public ServerResponse<Banner> manageBannerDetail(Integer bannerId) {
+		Banner banner = bannerMapper.selectByPrimaryKey(bannerId);
+		if(banner == null) {
+			return ServerResponse.createByErrorMessage("轮播图不存在");
+		}
+		return ServerResponse.createBySuccess(banner);
+	}
 	
 	
 

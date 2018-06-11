@@ -12,8 +12,19 @@ class Article{
     // 获取banner列表
     getBannerList(){
         return _mm.request({
-            url: '/manage/article/list',
+            url: '/manage/article/banner_list',
             type: 'POST'
+        });
+    }
+
+    // 获取banner详情
+    getProduct(bannerId){
+        return _mm.request({
+            type    : 'post',
+            url     : '/manage/article/banner_detail',
+            data    : {
+                bannerId : bannerId || 0
+            }
         });
     }
 }

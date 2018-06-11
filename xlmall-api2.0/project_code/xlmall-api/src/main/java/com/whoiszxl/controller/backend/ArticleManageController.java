@@ -35,17 +35,24 @@ public class ArticleManageController {
 	@Autowired
 	private ArticleService articleService;
 	
-	@PostMapping("bannerlist")
+	@PostMapping("banner_list")
 	@ApiOperation(value = "后台banner列表")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<List<Banner>> bannerList() {
 		return ServerResponse.createBySuccess(articleService.getBannerManageList(Const.Article.BANNER_LIST_COUNT));
 	}
 	
-	@PostMapping("save")
+	@PostMapping("banner_save")
 	@ApiOperation(value = "后台banner保存")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<String> bannerSave(Banner banner) {
 		return articleService.saveOrUpdateProduct(banner);
+	}
+	
+	@PostMapping("banner_detail")
+	@ApiOperation(value = "后台banner保存")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	public ServerResponse<Banner> bannerDetail(Integer bannerId) {
+		return articleService.manageBannerDetail(bannerId);
 	}
 }
