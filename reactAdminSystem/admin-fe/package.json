@@ -5,8 +5,9 @@
   "author": "whoiszxl",
   "license": "MIT",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack-dev-server",
-    "dist": "./node_modules/.bin/webpack -p"
+    "dev"      : "./node_modules/.bin/webpack-dev-server",
+    "dist"     : "WEBPACK_ENV=online ./node_modules/.bin/webpack -p",
+    "dist_win" : "set WEBPACK_ENV=online&& ./node_modules/.bin/webpack -p"
   },
   "devDependencies": {
     "babel-core": "6.26.0",

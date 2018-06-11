@@ -1,12 +1,12 @@
 /*
 * @Author: whoiszxl
 * @Date:   2018-02-01 16:19:36
-* @Last Modified by:   whoiszxl
-* @Last Modified time: 2018-02-04 21:39:59
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-11 12:14:18
 */
 import React                from 'react';
 import MUtil                from 'util/mm.jsx'
-import Product              from 'service/product-service.jsx'
+import Article              from 'service/article-service.jsx'
 import PageTitle            from 'component/page-title/index.jsx';
 import FileUploader         from 'util/file-uploader/index.jsx'
 import RichEditor           from 'util/rich-editor/index.jsx'
@@ -14,7 +14,7 @@ import RichEditor           from 'util/rich-editor/index.jsx'
 import './save.scss';
 
 const _mm           = new MUtil();
-const _product      = new Product();
+const _article      = new Article();
 
 class BannerSave extends React.Component{
     constructor(props){
@@ -22,28 +22,21 @@ class BannerSave extends React.Component{
         this.state = {
             id               : this.props.match.params.pid,
             title            : '',
-            banner_img       : '',
+            imgurl           : '',
+            showimg          : '',
             jumpurl          : '',
             sort             : 0,
             status           : 1,
         }
     }
     componentDidMount(){
-        this.loadProduct();
+        this.loadBanner();
     }
     // 加载banner详情
-    loadProduct(){
+    loadBanner(){
         // 有id的时候，表示是编辑功能，需要表单回填
         if(this.state.id){
-            _product.getProduct(this.state.id).then((res) => {
-                let images = res.subImages.split(',');
-                res.subImages = images.map((imgUri) => {
-                    return {
-                        uri: imgUri,
-                        url: res.imageHost + imgUri
-                    }
-                });
-                res.defaultDetail = res.detail;
+            _article.getBannerDetail(this.state.id).then((res) => {
                 this.setState(res);
             }, (errMsg) => {
                 _mm.errorTips(errMsg);
@@ -58,71 +51,47 @@ class BannerSave extends React.Component{
             [name] : value
         });
     }
-    // 品类选择器变化
-    onCategoryChange(categoryId, parentCategoryId){
-        this.setState({
-            categoryId          : categoryId,
-            parentCategoryId    : parentCategoryId
-        });
-    }
+
     // 上传图片成功
     onUploadSuccess(res){
-        let subImages = this.state.subImages;
-        subImages.push(res);
+        console.log(res);
         this.setState({
-            subImages : subImages
+            imgurl           : res.uri,
+            showimg          : res.url,
         });
     }
     // 上传图片失败
     onUploadError(errMsg){
         _mm.errorTips(errMsg);
     }
-    // 删除图片
-    onImageDelete(e){
-        let index       = parseInt(e.target.getAttribute('index')),
-            subImages   = this.state.subImages;
-        subImages.splice(index, 1);
-        this.setState({
-            subImages : subImages
-        });
-    }
-    // 富文本编辑器的变化
-    onDetailValueChange(value){
-        this.setState({
-            detail: value
-        });
-    }
-    getSubImagesString(){
-        return this.state.subImages.map((image) => image.uri).join(',');
-    }
+
+
     // 提交表单
     onSubmit(){
-        let product = {
-            name        : this.state.name,
-            subtitle    : this.state.subtitle,
-            categoryId  : parseInt(this.state.categoryId),
-            subImages   : this.getSubImagesString(),
-            detail      : this.state.detail,
-            price       : parseFloat(this.state.price),
-            stock       : parseInt(this.state.stock),
+        let banner = {
+            title        : this.state.title,
+            imgurl    : this.state.imgurl,
+            jumpurl      : this.state.jumpurl,
+            sort       : parseInt(this.state.sort),
             status      : this.state.status
         },
-        productCheckResult = _product.checkProduct(product);
+
+        bannerCheckResult = _article.checkBanner(banner);
         if(this.state.id){
-            product.id = this.state.id;
+            banner.id = this.state.id;
         }
         // 表单验证成功
-        if(productCheckResult.status){
-            _product.saveProduct(product).then((res) => {
+        if(bannerCheckResult.status){
+            _article.saveBanner(banner).then((res) => {
                 _mm.successTips(res);
-                this.props.history.push('/product/index');
+                this.props.history.push('/banner/index');
             }, (errMsg) => {
                 _mm.errorTips(errMsg);
             });
         }
         // 表单验证失败
         else{
-            _mm.errorTips(productCheckResult.msg);
+            _mm.errorTips(bannerCheckResult.msg);
         }
         
     }
@@ -136,8 +105,8 @@ class BannerSave extends React.Component{
                         <div className="col-md-5">
                             <input type="text" className="form-control" 
                                 placeholder="请输入轮播图标题"
-                                name="name"
-                                value={this.state.name}
+                                name="title"
+                                value={this.state.title}
                                 onChange={(e) => this.onValueChange(e)}/>
                         </div>
                     </div>
@@ -145,15 +114,15 @@ class BannerSave extends React.Component{
                     <div className="form-group">
                         <label className="col-md-2 control-label">轮播图图片</label>
                         <div className="col-md-10">
-                            {
-                                this.state.subImages.length ? this.state.subImages.map(
-                                    (image, index) => (
-                                    <div className="img-con" key={index}>
-                                        <img className="img" src={image.url} />
-                                        <i className="fa fa-close" index={index} onClick={(e) => this.onImageDelete(e)}></i>
-                                    </div>)
-                                ) : (<div>请上传图片</div>)
-                            }
+                          
+                               
+                        <div className="img-con">
+                            <img className="img" src={this.state.showimg} />
+                            <i className="fa fa-close"></i>
+                        </div>
+                        
+                        <div>请上传图片</div>
+                            
                         </div>
                         <div className="col-md-offset-2 col-md-10 file-upload-con">
                             <FileUploader onSuccess={(res) => this.onUploadSuccess(res)}
@@ -161,12 +130,24 @@ class BannerSave extends React.Component{
                         </div>
                     </div>
                     <div className="form-group">
-                        <label className="col-md-2 control-label">轮播图详情</label>
-                        <div className="col-md-10">
-                            <RichEditor 
-                                detail={this.state.detail}
-                                defaultDetail={this.state.defaultDetail}
-                                onValueChange={(value) => this.onDetailValueChange(value)}/>
+                        <label className="col-md-2 control-label">轮播图点击跳转地址</label>
+                        <div className="col-md-5">
+                            <input type="text" className="form-control" 
+                                placeholder="请输入轮播图点击跳转地址"
+                                name="jumpurl"
+                                value={this.state.jumpurl}
+                                onChange={(e) => this.onValueChange(e)}/>
+                        </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label className="col-md-2 control-label">排序权重</label>
+                        <div className="col-md-5">
+                            <input type="text" className="form-control" 
+                                placeholder="请输入轮播图排序权重"
+                                name="sort"
+                                value={this.state.sort}
+                                onChange={(e) => this.onValueChange(e)}/>
                         </div>
                     </div>
                     <div className="form-group">

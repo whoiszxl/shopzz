@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-26 16:48:16
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-10 02:41:39
+ * @Last Modified time: 2018-06-11 11:46:42
 */
 import React        from 'react';
 import { Link }     from 'react-router-dom';
@@ -63,6 +63,9 @@ class BannerList extends React.Component{
                     <td>{banner.sort}</td>
                     <td>{banner.status == 1 ? '有效' : '无效'}</td>
                     <td>{banner.createTime}</td>
+                    <td>
+                        <Link className="opear" to={ `/banner/save/${banner.id}` }>编辑</Link>
+                    </td>
                 </tr>
             );
         });

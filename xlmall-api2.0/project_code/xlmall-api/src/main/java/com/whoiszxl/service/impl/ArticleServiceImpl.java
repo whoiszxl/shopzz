@@ -1,6 +1,7 @@
 package com.whoiszxl.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -48,6 +49,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public ServerResponse<String> saveOrUpdateProduct(Banner banner) {
 		if (banner != null) {
 			if (banner.getId() != null) {
+				banner.setUpdateTime(new Date());
 				int rowCount = bannerMapper.updateByPrimaryKey(banner);
 				if (rowCount > 0) {
 					return ServerResponse.createBySuccessMessage("更新轮播图成功");
@@ -56,6 +58,8 @@ public class ArticleServiceImpl implements ArticleService {
 				}
 
 			} else {
+				banner.setUpdateTime(new Date());
+				banner.setUpdateTime(new Date());
 				int rowCount = bannerMapper.insert(banner);
 				if (rowCount > 0) {
 					return ServerResponse.createBySuccessMessage("新增轮播图成功");
@@ -73,6 +77,7 @@ public class ArticleServiceImpl implements ArticleService {
 		if(banner == null) {
 			return ServerResponse.createByErrorMessage("轮播图不存在");
 		}
+		banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://image.chenyuspace.com/")+banner.getImgurl());
 		return ServerResponse.createBySuccess(banner);
 	}
 	
