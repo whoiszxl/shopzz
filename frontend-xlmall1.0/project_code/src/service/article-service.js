@@ -11,6 +11,15 @@ var _article = {
             success : resolve,
             error   : reject
         });
+    },
+
+    //获取关键词列表
+    getKeywordsList : function(resolve, reject) {
+        _xl.request({
+            url     : _xl.getServerUrl('/article/keywords'),
+            success : resolve,
+            error   : reject
+        });
     }
 }
 module.exports = _article;

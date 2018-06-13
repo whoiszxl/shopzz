@@ -1,0 +1,9 @@
+<ul class="keywords-list">
+    {{#keywordsList}}
+    <li class="keywords-item">
+        {{#.}}
+            <a class="link" target="_blank" href="./list.html?keyword={{.}}">{{.}}</a>
+        {{/.}}
+    </li>
+    {{/keywordsList}}
+</ul>

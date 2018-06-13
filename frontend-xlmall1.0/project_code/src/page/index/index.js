@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:21 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-07 11:54:49
+ * @Last Modified time: 2018-06-13 14:22:08
  */
 
 'use strict';
@@ -12,6 +12,7 @@ require('page/common/header/index.js');
 require('util/slider/index.js');
 
 var templateBanner  = require('./banner.string');
+var templateKeywords = require('./keywords.string');
 var navSide = require('page/common/nav-side/index.js');
 var _xl = require('util/xl.js');
 var _article = require('service/article-service.js');
@@ -28,7 +29,6 @@ $(function() {
     _article.getBannerList(function(res){
 
         // 渲染banner的html
-        console.log(res);
         var bannerHtml  = _xl.renderHtml(templateBanner, {
             list :  res
         });
@@ -41,6 +41,18 @@ $(function() {
     }, function(errMsg){
     });
 
+
+    _article.getKeywordsList(function(res){
+
+        console.log(res);
+        
+        var keywordsHtml = _xl.renderHtml(templateKeywords, {
+            keywordsList : res
+        });
+
+        $('.keywords-list').html(keywordsHtml);
+
+    });
     
     
     
