@@ -18,6 +18,7 @@ public class Const {
 	
 	public static final String TOKEN_PREFIX = "token_";
 	
+	
 	public interface RedisCacheExtime {
 		/**
 		 * 以秒为单位
@@ -170,5 +171,6 @@ public class Const {
 	
 	public interface Article {
 		int BANNER_LIST_COUNT = 5; //banner轮播图数量
+		String INDEX_KEYWORDS_REDIS_KEY = "index_keywords"; //主頁關鍵詞在redis的key
 	}
 }

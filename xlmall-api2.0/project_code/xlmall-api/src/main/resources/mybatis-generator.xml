@@ -11,8 +11,8 @@
 		</commentGenerator>
 		<!--数据库链接地址账号密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://swoole.whoiszxl.com:3306/xlmall"
-			userId="xlmall" password="669731945">
+			connectionURL="jdbc:mysql://118.126.92.128:4004/xlmall"
+			userId="root" password="abc123456">
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
@@ -38,7 +38,7 @@
 		</javaClientGenerator>
 		<!--生成对应表及类名 -->
 
-		<table tableName="xl_banner" domainObjectName="Banner"
+		<table tableName="xl_keywords" domainObjectName="Keywords"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

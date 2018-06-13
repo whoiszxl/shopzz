@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whoiszxl.dao.KeywordsMapper">
+  <resultMap id="BaseResultMap" type="com.whoiszxl.entity.Keywords">
+    <id column="id" jdbcType="TINYINT" property="id" />
+    <result column="words" jdbcType="VARCHAR" property="words" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, words
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Byte" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xl_keywords
+    where id = #{id,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
+    delete from xl_keywords
+    where id = #{id,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="com.whoiszxl.entity.Keywords">
+    insert into xl_keywords (id, words)
+    values (#{id,jdbcType=TINYINT}, #{words,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whoiszxl.entity.Keywords">
+    insert into xl_keywords
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="words != null">
+        words,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=TINYINT},
+      </if>
+      <if test="words != null">
+        #{words,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whoiszxl.entity.Keywords">
+    update xl_keywords
+    <set>
+      <if test="words != null">
+        words = #{words,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whoiszxl.entity.Keywords">
+    update xl_keywords
+    set words = #{words,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=TINYINT}
+  </update>
+  
+  <select id="selectAllKeywords" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+    from xl_keywords
+  </select>
+</mapper>

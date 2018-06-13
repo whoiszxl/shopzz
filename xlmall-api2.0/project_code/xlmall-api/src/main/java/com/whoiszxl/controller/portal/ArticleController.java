@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
+import com.whoiszxl.entity.Keywords;
 import com.whoiszxl.service.ArticleService;
 import com.whoiszxl.vo.BannerVo;
 
@@ -35,9 +36,14 @@ public class ArticleController {
 	
 	@GetMapping("banners")
 	@ApiOperation(value = "获取轮播图")
-	public ServerResponse bannerList() {
+	public ServerResponse<List<BannerVo>> bannerList() {
 		List<BannerVo> bannerList = articleService.getBannerList(Const.Article.BANNER_LIST_COUNT);
 		return ServerResponse.createBySuccess(bannerList);
 	}
 
+	@GetMapping("keywords")
+	@ApiOperation(value = "獲取主頁關鍵詞")
+	public ServerResponse<List<List<String>>> keywordsList() {
+		return articleService.getKeywordsList();
+	}
 }

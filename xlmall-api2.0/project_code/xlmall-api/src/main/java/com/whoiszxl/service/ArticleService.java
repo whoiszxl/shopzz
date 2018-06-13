@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.Banner;
+import com.whoiszxl.entity.Keywords;
 import com.whoiszxl.vo.BannerVo;
 
 /**
@@ -29,4 +30,7 @@ public interface ArticleService {
 
 
 	ServerResponse<Banner> manageBannerDetail(Integer bannerId);
+
+
+	ServerResponse<List<List<String>>> getKeywordsList();
 }

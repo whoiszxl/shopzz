@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.dao.BannerMapper;
 import com.whoiszxl.dao.UserMapper;
 import com.whoiszxl.entity.Banner;
+import com.whoiszxl.entity.Keywords;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.service.ArticleService;
 import com.whoiszxl.vo.BannerVo;
@@ -46,6 +48,12 @@ public class AppTests {
 		
 	}
 	
+	
+	@Test
+	public void testname() throws Exception {
+		ServerResponse<List<List<String>>> keywordsList = articleService.getKeywordsList();
+		System.out.println(keywordsList.getData());
+	}
 	
 	
 
