@@ -216,7 +216,7 @@
   
   <select id="selectAllUser" resultType="com.whoiszxl.entity.User">
     SELECT
-    id, username, email, phone, create_time
+    id, username, email, phone, create_time as createTime
     from xl_user
     where role = 0 
     ORDER BY create_time desc

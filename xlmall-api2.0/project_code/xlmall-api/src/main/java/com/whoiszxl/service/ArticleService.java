@@ -23,14 +23,20 @@ public interface ArticleService {
 	List<BannerVo> getBannerList(int num);
 	
 	
-	List<Banner> getBannerManageList(int num);
+	ServerResponse<List<Banner>> getBannerManageList(int num);
 
 
-	ServerResponse<String> saveOrUpdateProduct(Banner banner);
+	ServerResponse<String> saveOrUpdateBanner(Banner banner);
 
 
 	ServerResponse<Banner> manageBannerDetail(Integer bannerId);
 
 
 	ServerResponse<List<List<String>>> getKeywordsList();
+
+
+	ServerResponse<List<Keywords>> getKeywordsManageList();
+
+
+	ServerResponse<String> saveOrUpdateKeywords(Keywords keywords);
 }

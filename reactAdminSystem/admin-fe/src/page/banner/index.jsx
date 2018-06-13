@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-26 16:48:16
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-11 13:04:08
+ * @Last Modified time: 2018-06-13 16:12:17
 */
 import React        from 'react';
 import { Link }     from 'react-router-dom';
@@ -72,7 +72,7 @@ class BannerList extends React.Component{
         return (
             <div id="page-wrapper">
                 <PageTitle title="轮播图列表"/>
-                <TableList tableHeads={['ID', '标题', '图片', '跳转地址', '排序', '状态', '创建时间']}>
+                <TableList tableHeads={['ID', '标题', '图片', '跳转地址', '排序', '状态', '创建时间', '操作']}>
                     {listBody}
                 </TableList>
             </div>

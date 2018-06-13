@@ -55,6 +55,12 @@ public class AppTests {
 		System.out.println(keywordsList.getData());
 	}
 	
-	
+	@Test
+	public void testaaa() throws Exception {
+		List<User> selectAllUser = userMapper.selectAllUser();
+		for (User user : selectAllUser) {
+			System.out.println(user);
+		}
+	}
 
 }

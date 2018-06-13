@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-06-08 12:28:22 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-09 14:58:51
+ * @Last Modified time: 2018-06-13 16:04:11
  */
 
 import React from "react";
@@ -19,7 +19,9 @@ import OrderList        from 'page/order/index.jsx';
 import OrderDetail      from 'page/order/detail.jsx';
 import UserList         from 'page/user/index.jsx';
 import BannerList       from 'page/banner/index.jsx';
-import BannerSave      from 'page/banner/save.jsx';
+import BannerSave       from 'page/banner/save.jsx';
+import KeywordsList     from 'page/keywords/index.jsx';
+import KeywordsSave     from 'page/keywords/save.jsx';
 import ErrorPage        from 'page/error/index.jsx';
 
 
@@ -39,6 +41,8 @@ class App extends React.Component {
 
                     <Route path="/banner/index" component={BannerList}/>
                     <Route path="/banner/save/:pid?" component={BannerSave}/>
+                    <Route path="/keywords/index" component={KeywordsList}/>
+                    <Route path="/keywords/save/:pid?" component={KeywordsSave}/>
                     <Route component={ErrorPage}/>
                 </Switch>
             </Layout>

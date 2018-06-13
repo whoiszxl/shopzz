@@ -1,4 +1,4 @@
-<ul class="keywords-list">
+
     {{#keywordsList}}
     <li class="keywords-item">
         {{#.}}
@@ -6,4 +6,3 @@
         {{/.}}
     </li>
     {{/keywordsList}}
-</ul>

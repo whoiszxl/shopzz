@@ -52,16 +52,16 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<Banner> getBannerManageList(int num) {
+	public ServerResponse<List<Banner>> getBannerManageList(int num) {
 		List<Banner> banners = bannerMapper.selectBannersByNum(num);
 		for (Banner banner : banners) {
 			banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://image.chenyuspace.com/")+banner.getImgurl());
 		}
-		return banners;
+		return ServerResponse.createBySuccess(banners);
 	}
 
 	@Override
-	public ServerResponse<String> saveOrUpdateProduct(Banner banner) {
+	public ServerResponse<String> saveOrUpdateBanner(Banner banner) {
 		if (banner != null) {
 			if (banner.getId() != null) {
 				banner.setUpdateTime(new Date());
@@ -121,6 +121,39 @@ public class ArticleServiceImpl implements ArticleService {
 		
 		return ServerResponse.createBySuccess(result);
 		
+	}
+
+	@Override
+	public ServerResponse<List<Keywords>> getKeywordsManageList() {
+		List<Keywords> keywords = keywordsMapper.selectAllKeywords();
+		return ServerResponse.createBySuccess(keywords);
+	}
+
+	@Override
+	public ServerResponse<String> saveOrUpdateKeywords(Keywords keywords) {
+		if (keywords != null) {
+			if (keywords.getId() != null) {
+				int rowCount = keywordsMapper.updateByPrimaryKey(keywords);
+				if (rowCount > 0) {
+					//更新或新增成功之后需要更新redis缓存，直接删掉好了
+					RedisShardedPoolUtil.del(Const.Article.INDEX_KEYWORDS_REDIS_KEY);
+					return ServerResponse.createBySuccessMessage("更新关键词成功");
+				} else {
+					return ServerResponse.createByErrorMessage("更新关键词失败");
+				}
+
+			} else {
+				int rowCount = keywordsMapper.insert(keywords);
+				if (rowCount > 0) {
+					//更新或新增成功之后需要更新redis缓存，直接删掉好了
+					RedisShardedPoolUtil.del(Const.Article.INDEX_KEYWORDS_REDIS_KEY);
+					return ServerResponse.createBySuccessMessage("新增关键词成功");
+				} else {
+					return ServerResponse.createByErrorMessage("新增关键词失败");
+				}
+			}
+		}
+		return ServerResponse.createByErrorMessage("新增或更新关键词参数不正确了");
 	}
 	
 	

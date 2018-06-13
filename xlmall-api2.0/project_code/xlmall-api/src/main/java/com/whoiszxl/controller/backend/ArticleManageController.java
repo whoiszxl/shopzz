@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.Banner;
+import com.whoiszxl.entity.Keywords;
 import com.whoiszxl.entity.Product;
 import com.whoiszxl.service.ArticleService;
 
@@ -39,20 +40,34 @@ public class ArticleManageController {
 	@ApiOperation(value = "后台banner列表")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<List<Banner>> bannerList() {
-		return ServerResponse.createBySuccess(articleService.getBannerManageList(Const.Article.BANNER_LIST_COUNT));
+		return articleService.getBannerManageList(Const.Article.BANNER_LIST_COUNT);
 	}
 	
 	@PostMapping("banner_save")
 	@ApiOperation(value = "后台banner保存")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<String> bannerSave(Banner banner) {
-		return articleService.saveOrUpdateProduct(banner);
+		return articleService.saveOrUpdateBanner(banner);
 	}
 	
 	@PostMapping("banner_detail")
-	@ApiOperation(value = "后台banner保存")
+	@ApiOperation(value = "后台banner詳情")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<Banner> bannerDetail(Integer bannerId) {
 		return articleService.manageBannerDetail(bannerId);
+	}
+	
+	@PostMapping("keywords_list")
+	@ApiOperation(value = "后台keywords列表")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	public ServerResponse<List<Keywords>> keywordsList() {
+		return articleService.getKeywordsManageList();
+	}
+	
+	@PostMapping("keywords_save")
+	@ApiOperation(value = "后台keywords保存")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	public ServerResponse<String> bannerSave(Keywords keywords) {
+		return articleService.saveOrUpdateKeywords(keywords);
 	}
 }

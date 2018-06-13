@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-26 13:38:21
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-11 23:31:22
+ * @Last Modified time: 2018-06-13 16:30:40
 */
 import MUtil        from 'util/mm.jsx'
 
@@ -28,9 +28,6 @@ class Article{
         });
     }
 
-
-    saveBanner
-
     // 保存banner
     saveBanner(banner){
         return _mm.request({
@@ -41,6 +38,24 @@ class Article{
     }
 
 
+    // 获取keywords列表
+    getKeywordsList(){
+        return _mm.request({
+            url: _mm.apiUrl + '/manage/article/keywords_list',
+            type: 'POST'
+        });
+    }
+
+    // 保存keywords
+    updateKeywordsWords(keywords){
+        return _mm.request({
+            type    : 'post',
+            url     : _mm.apiUrl + '/manage/article/keywords_save',
+            data    : keywords
+        });
+    }
+
+    
 
     // 检查保存商品的表单数据
     checkBanner(banner){

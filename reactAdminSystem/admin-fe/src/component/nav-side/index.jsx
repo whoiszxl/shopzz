@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-06-09 14:10:54 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-10 02:23:28
+ * @Last Modified time: 2018-06-13 16:00:12
  */
 
 import React                from 'react';
@@ -72,6 +72,9 @@ class NavSide extends React.Component{
                             <ul className="nav nav-second-level collapse in">
                                 <li>
                                     <NavLink to="/banner/index" activeClassName="active-menu">轮播图管理</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/keywords/index" activeClassName="active-menu">关键词管理</NavLink>
                                 </li>
                             </ul>
                         </li>
