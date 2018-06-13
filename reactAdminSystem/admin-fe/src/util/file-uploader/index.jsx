@@ -6,12 +6,18 @@
 */
 import React        from 'react';
 import FileUpload   from './react-fileupload.jsx';
+import MUtil        from 'util/mm.jsx';
+
+const _mm           = new MUtil();
 
 class FileUploader extends React.Component{
     render(){
         const options={
-            baseUrl         :'/manage/product/upload',
+            baseUrl         : _mm.apiUrl + '/manage/product/upload',
             fileFieldName   : 'upload_file',
+            requestHeaders  : {
+                'Authorization': _mm.getToken()
+            },
             dataType        : 'json',
             chooseAndUpload : true,
             uploadSuccess   : (res) => {

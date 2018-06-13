@@ -6,6 +6,7 @@
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="status" jdbcType="BIT" javaType="java.lang.Boolean" />
       <arg column="sort_order" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -13,7 +14,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, parent_id, name, status, sort_order, create_time, update_time
+    id, parent_id, name, img, status, sort_order, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -26,11 +27,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.whoiszxl.entity.Category" >
-    insert into xl_category (id, parent_id, name, 
+    insert into xl_category (id, parent_id, name, img, 
       status, sort_order, create_time, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{status,jdbcType=BIT}, #{sortOrder,jdbcType=INTEGER}, now(), 
+    #{img,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{sortOrder,jdbcType=INTEGER}, now(), 
       now())
   </insert>
   <insert id="insertSelective" parameterType="com.whoiszxl.entity.Category" >
@@ -44,6 +45,9 @@
       </if>
       <if test="name != null" >
         name,
+      </if>
+      <if test="img != null" >
+        img,
       </if>
       <if test="status != null" >
         status,
@@ -68,6 +72,9 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
       <if test="status != null" >
         #{status,jdbcType=BIT},
       </if>
@@ -91,6 +98,9 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
       <if test="status != null" >
         status = #{status,jdbcType=BIT},
       </if>
@@ -110,6 +120,7 @@
     update xl_category
     set parent_id = #{parentId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
       status = #{status,jdbcType=BIT},
       sort_order = #{sortOrder,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

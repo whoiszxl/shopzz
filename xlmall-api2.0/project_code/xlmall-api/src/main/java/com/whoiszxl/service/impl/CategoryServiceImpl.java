@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
 	
 	@Override
-	public ServerResponse addCategory(String categoryName, Integer parentId) {
+	public ServerResponse addCategory(String categoryName, String img, Integer parentId) {
 		if(parentId == null || StringUtils.isBlank(categoryName)) {
 			return ServerResponse.createByErrorMessage("添加品类参数错误");
 		}
@@ -39,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Category category = new Category();
 		category.setName(categoryName);
 		category.setParentId(parentId);
+		category.setImg(img);
 		category.setStatus(true);
 		
 		int rowCount = categoryMapper.insert(category);

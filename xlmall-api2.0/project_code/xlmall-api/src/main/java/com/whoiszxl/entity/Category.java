@@ -9,6 +9,8 @@ public class Category {
 	private Integer parentId;
 
 	private String name;
+	
+	private String img;
 
 	private Boolean status;
 
@@ -18,15 +20,26 @@ public class Category {
 
 	private Date updateTime;
 
-	public Category(Integer id, Integer parentId, String name, Boolean status, Integer sortOrder, Date createTime,
-			Date updateTime) {
+	public Category(Integer id, Integer parentId, String name, String img, Boolean status, Integer sortOrder,
+			Date createTime, Date updateTime) {
+		super();
 		this.id = id;
 		this.parentId = parentId;
 		this.name = name;
+		this.img = img;
 		this.status = status;
 		this.sortOrder = sortOrder;
 		this.createTime = createTime;
 		this.updateTime = updateTime;
+	}
+
+	
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public Category() {

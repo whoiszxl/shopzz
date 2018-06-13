@@ -7,6 +7,8 @@
 import React        from 'react';
 import MUtil        from 'util/mm.jsx'
 import Product      from 'service/product-service.jsx'
+import FileUploader from 'util/file-uploader/index.jsx'
+import './add.scss';
 
 import PageTitle    from 'component/page-title/index.jsx';
 
@@ -20,7 +22,9 @@ class CategoryAdd extends React.Component{
         this.state = {
             categoryList    : [],
             parentId        : 0,
-            categoryName    : ''
+            categoryName    : '',
+            img             : '',
+            showimg         : ''
         };
     }
     componentDidMount(){
@@ -51,7 +55,8 @@ class CategoryAdd extends React.Component{
         if(categoryName){
             _product.saveCategory({
                 parentId        : this.state.parentId,
-                categoryName    : categoryName
+                categoryName    : categoryName,
+                img             : this.state.img
             }).then((res) => {
                 _mm.successTips(res);
                 this.props.history.push('/product-category/index');
@@ -64,6 +69,20 @@ class CategoryAdd extends React.Component{
             _mm.errorTips('请输入品类名称');
         }
     }
+
+    // 上传图片成功
+    onUploadSuccess(res){
+        console.log(res);
+        this.setState({
+            img              : res.uri,
+            showimg          : res.url,
+        });
+    }
+    // 上传图片失败
+    onUploadError(errMsg){
+        _mm.errorTips(errMsg);
+    }
+    
     render(){
         return (
             <div id="page-wrapper">
@@ -96,6 +115,26 @@ class CategoryAdd extends React.Component{
                                         onChange={(e) => this.onValueChange(e)}/>
                                 </div>
                             </div>
+
+                            <div className="form-group">
+                                <label className="col-md-2 control-label">轮播图图片</label>
+                                <div className="col-md-10">
+                                
+                                    
+                                <div className="img-con">
+                                    <img src={this.state.showimg} />
+                                    <i className="fa fa-close"></i>
+                                </div>
+                                
+                                <div>请上传图片</div>
+                            
+                                </div>
+                                <div className="col-md-offset-2 col-md-10 file-upload-con">
+                                    <FileUploader onSuccess={(res) => this.onUploadSuccess(res)}
+                                        onError={(errMsg) => this.onUploadError(errMsg)}/>
+                                </div>
+                            </div>
+                            
                             <div className="form-group">
                                 <div className="col-md-offset-2 col-md-10">
                                     <button type="submit" className="btn btn-primary" 

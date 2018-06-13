@@ -35,8 +35,8 @@ public class CategoryManageController {
 	@PostMapping("/add_category")
 	@ApiOperation(value = "添加分类接口")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
-	public ServerResponse<String> addCategory(HttpSession session, String categoryName, @RequestParam(value="parentId",defaultValue="0") int parentId) {
-		return categoryService.addCategory(categoryName, parentId);
+	public ServerResponse<String> addCategory(HttpSession session, String categoryName, String img, @RequestParam(value="parentId",defaultValue="0") int parentId) {
+		return categoryService.addCategory(categoryName, img, parentId);
 	}
 	
 	@PostMapping("set_category_name")
