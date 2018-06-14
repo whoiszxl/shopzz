@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-23 22:54:28
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-13 15:58:41
+ * @Last Modified time: 2018-06-14 18:30:19
 */
 
 class MUtil{
@@ -13,6 +13,7 @@ class MUtil{
     }
 
     request(param){
+        console.log("requ");
         let my_headers = null;
         if(param.headers == null && this.getToken() != null) {
             my_headers = {
@@ -32,7 +33,7 @@ class MUtil{
                         typeof resolve === 'function' && resolve(res.data, res.msg);
                     }
                     // 没有登录状态，强制登录
-                    else if(10 === res.status){
+                    else if(10 === res.status || 401 === res.status){
                         this.doLogin();
                     }
                     else{
@@ -40,6 +41,7 @@ class MUtil{
                     }
                 },
                 error       : err => {
+                    console.log(err);
                     typeof reject === 'function' && reject(err.statusText);
                 }
             });

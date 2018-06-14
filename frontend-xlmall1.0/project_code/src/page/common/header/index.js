@@ -1,8 +1,8 @@
 /*
  * @Author: whoiszxl 
  * @Date: 2018-05-12 10:31:15 
- * @Last Modified by:   whoiszxl 
- * @Last Modified time: 2018-05-12 10:31:15 
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-14 18:08:46
  */
 
 'use strict';
@@ -40,13 +40,11 @@ var header = {
     searchSubmit : function(){
         var keyword = $.trim($('#search-input').val());
         // 如果提交的时候有keyword,正常跳转到list页
-        if(keyword){
-            window.location.href = './list.html?keyword=' + keyword;
-        }
+        window.location.href = './list.html?keyword=' + keyword;
         // 如果keyword为空，直接返回首页
-        else{
-            _xl.goHome();
-        }
+        // else{
+        //     _xl.goHome();
+        // }
     }
 };
 

@@ -2,7 +2,7 @@
 * @Author: whoiszxl
 * @Date:   2018-01-26 16:48:16
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-13 16:56:46
+ * @Last Modified time: 2018-06-14 18:30:27
 */
 import React        from 'react';
 import { Link }     from 'react-router-dom';
@@ -35,6 +35,7 @@ class UserList extends React.Component{
                 list : []
             });
             _mm.errorTips(errMsg);
+            _mm.doLogin();
         });
     }
     // 页数发生变化的时候

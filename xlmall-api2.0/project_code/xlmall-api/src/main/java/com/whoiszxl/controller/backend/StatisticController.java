@@ -37,6 +37,7 @@ public class StatisticController {
 	
 	@PostMapping("base_count")
 	@ApiOperation(value = "用户总数，商品总数，订单总数统计")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public ServerResponse<Map> base_count() {
 		//查询用户总数
 		int userCount = userService.selectUserCount();

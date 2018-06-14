@@ -211,9 +211,9 @@ public class ProductServiceImpl implements ProductService {
 	public ServerResponse<PageInfo> getProductByKeywordCategory(String keyword, Integer categoryId, int pageNum,
 			int pageSize, String orderBy) {
 		//关键字和分类id都不存在，参数错误
-		if(StringUtils.isBlank(keyword) && categoryId == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
-        }
+//		if(StringUtils.isBlank(keyword) && categoryId == null){
+//            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
+//        }
         List<Integer> categoryIdList = new ArrayList<Integer>();
 
         if(categoryId != null){
