@@ -18,12 +18,15 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.dao.CategoryMapper;
 import com.whoiszxl.entity.Banner;
 import com.whoiszxl.entity.Category;
 import com.whoiszxl.service.CategoryService;
+import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.PropertiesUtil;
+import com.whoiszxl.utils.RedisShardedPoolUtil;
 import com.whoiszxl.vo.BannerVo;
 import com.whoiszxl.vo.CategoryVo;
 
@@ -54,6 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		int rowCount = categoryMapper.insert(category);
 		if(rowCount > 0) {
+			RedisShardedPoolUtil.del(Const.Article.INDEX_CATEGORY_REDIS_KEY);
 			return ServerResponse.createBySuccessMessage("添加品类成功");
 		}
 		return ServerResponse.createByErrorMessage("添加品类失败");
@@ -70,6 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
         if(rowCount > 0){
+        	RedisShardedPoolUtil.del(Const.Article.INDEX_CATEGORY_REDIS_KEY);
             return ServerResponse.createBySuccess("更新品类名字成功");
         }
         return ServerResponse.createByErrorMessage("更新品类名字失败");
@@ -137,6 +142,7 @@ public class CategoryServiceImpl implements CategoryService {
 				category.setUpdateTime(new Date());
 				int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
 				if (rowCount > 0) {
+					RedisShardedPoolUtil.del(Const.Article.INDEX_CATEGORY_REDIS_KEY);
 					return ServerResponse.createBySuccessMessage("更新分类成功");
 				} else {
 					return ServerResponse.createByErrorMessage("更新分类失败");
@@ -146,6 +152,7 @@ public class CategoryServiceImpl implements CategoryService {
 				category.setCreateTime(new Date());
 				int rowCount = categoryMapper.insert(category);
 				if (rowCount > 0) {
+					RedisShardedPoolUtil.del(Const.Article.INDEX_CATEGORY_REDIS_KEY);
 					return ServerResponse.createBySuccessMessage("新增分类成功");
 				} else {
 					return ServerResponse.createByErrorMessage("新增分类失败");
@@ -169,24 +176,33 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public ServerResponse<List<HashMap<String, Object>>> getIndexPageCategorys(int categoryMainCount) {
-		//获取最顶级的分类
-		List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentIdAndCount(0, categoryMainCount);
-        if(CollectionUtils.isEmpty(categoryList)){
-            logger.info("没有顶级分类");
-        }
-        
-    	List<HashMap<String, Object>> result = Lists.newArrayList();
-    	int index = 1;
-        for (Category mainCategory : categoryList) {
-        	List<Category> minorCategoryList = categoryMapper.selectCategoryChildrenByParentIdAndCount(mainCategory.getId(), 5);
-        	HashMap<String, Object> item = Maps.newHashMap();
-        	item.put("index", index++);
-        	item.put("imgHost", PropertiesUtil.getProperty("ftp.server.http.prefix"));
-        	item.put("mainCategoryName", mainCategory.getName());
-        	item.put("minorCategoryList", minorCategoryList);
-        	result.add(item);
+		
+		String cache_category = RedisShardedPoolUtil.get(Const.Article.INDEX_CATEGORY_REDIS_KEY);
+		List<HashMap<String, Object>> result = null;
+		if(cache_category != null) {
+			result = JsonUtil.string2Obj(cache_category, List.class);
+		}else {
+			//获取最顶级的分类
+			List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentIdAndCount(0, categoryMainCount);
+	        if(CollectionUtils.isEmpty(categoryList)){
+	            logger.info("没有顶级分类");
+	        }
+	        
+	    	result = Lists.newArrayList();
+	    	int index = 1;
+	        for (Category mainCategory : categoryList) {
+	        	List<Category> minorCategoryList = categoryMapper.selectCategoryChildrenByParentIdAndCount(mainCategory.getId(), 5);
+	        	HashMap<String, Object> item = Maps.newHashMap();
+	        	item.put("index", index++);
+	        	item.put("imgHost", PropertiesUtil.getProperty("ftp.server.http.prefix"));
+	        	item.put("mainCategoryName", mainCategory.getName());
+	        	item.put("minorCategoryList", minorCategoryList);
+	        	result.add(item);
+			}
+	        
+	        RedisShardedPoolUtil.set(Const.Article.INDEX_CATEGORY_REDIS_KEY, JsonUtil.obj2String(result));
 		}
-        
+		
 		return ServerResponse.createBySuccess(result);
 	}
 

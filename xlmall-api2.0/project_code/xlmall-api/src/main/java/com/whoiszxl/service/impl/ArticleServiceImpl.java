@@ -53,11 +53,24 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public ServerResponse<List<Banner>> getBannerManageList(int num) {
-		List<Banner> banners = bannerMapper.selectBannersByNum(num);
-		for (Banner banner : banners) {
-			banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+banner.getImgurl());
+		
+		String cache_banner = RedisShardedPoolUtil.get(Const.Article.INDEX_BANNER_REDIS_KEY);
+		List<Banner> result = null;
+		if(cache_banner != null) {
+			//缓存有直接返回
+			result = JsonUtil.string2Obj(cache_banner, List.class);
+			logger.info("從redis取出了banner");
+		}else{
+			//从数据库拿
+			result = bannerMapper.selectBannersByNum(num);
+			for (Banner banner : result) {
+				banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+banner.getImgurl());
+			}
+			RedisShardedPoolUtil.set(Const.Article.INDEX_BANNER_REDIS_KEY, JsonUtil.obj2String(result));
+			logger.info("從数据库取出了banner");
 		}
-		return ServerResponse.createBySuccess(banners);
+		
+		return ServerResponse.createBySuccess(result);
 	}
 
 	@Override
@@ -67,6 +80,7 @@ public class ArticleServiceImpl implements ArticleService {
 				banner.setUpdateTime(new Date());
 				int rowCount = bannerMapper.updateByPrimaryKey(banner);
 				if (rowCount > 0) {
+					RedisShardedPoolUtil.del(Const.Article.INDEX_BANNER_REDIS_KEY);
 					return ServerResponse.createBySuccessMessage("更新轮播图成功");
 				} else {
 					return ServerResponse.createByErrorMessage("更新轮播图失败");
@@ -77,6 +91,7 @@ public class ArticleServiceImpl implements ArticleService {
 				banner.setUpdateTime(new Date());
 				int rowCount = bannerMapper.insert(banner);
 				if (rowCount > 0) {
+					RedisShardedPoolUtil.del(Const.Article.INDEX_BANNER_REDIS_KEY);
 					return ServerResponse.createBySuccessMessage("新增轮播图成功");
 				} else {
 					return ServerResponse.createByErrorMessage("新增轮播图失败");
