@@ -56,6 +56,7 @@ public class ArticleServiceImpl implements ArticleService {
 				bannerVo.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+bannerVo.getImgurl());
 				result.add(bannerVo);
 			}
+			logger.info("從数据库取出了banner");
 			RedisShardedPoolUtil.set(Const.Article.INDEX_BANNER_REDIS_KEY, JsonUtil.obj2String(result));
 		}	
 		return result;
