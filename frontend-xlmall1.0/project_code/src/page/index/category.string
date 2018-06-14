@@ -5,7 +5,7 @@
 
         {{#minorCategoryList}}
         <li class="floor-item">
-            <a href="./list.html?categoryId={{id}}">
+            <a target="_blank" href="./list.html?categoryId={{id}}">
                 <span class="floor-text">{{name}}</span>
                 <img class="floor-img" src="{{imgHost}}{{img}}" alt="{{name}}" />
             </a>

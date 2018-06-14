@@ -133,5 +133,16 @@
     <include refid="Base_Column_List"/>
     from xl_category
     where parent_id = #{parentId}
+    order by sort_order DESC
   </select>
+  
+  <select id="selectCategoryChildrenByParentIdAndCount" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from xl_category
+    where parent_id = #{parentId}
+    order by sort_order DESC
+    limit #{count}
+  </select>
+  
 </mapper>

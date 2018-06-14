@@ -1,8 +1,8 @@
 /*
 * @Author: whoiszxl
 * @Date:   2018-02-04 21:34:16
-* @Last Modified by:   whoiszxl
-* @Last Modified time: 2018-02-04 22:49:58
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-14 16:16:51
 */
 import React        from 'react';
 import { Link }     from 'react-router-dom';
@@ -75,6 +75,7 @@ class CategoryList extends React.Component{
                     <td>
                         <img className="category-img-con" src={category.imgHost+category.img}/>
                     </td>
+                    <td>{category.sortOrder}</td>
                     <td>
                         <a className="opear"
                             onClick={(e) => this.onUpdateName(category.id, category.name)}>修改名称</a>
@@ -103,7 +104,7 @@ class CategoryList extends React.Component{
                         <p>父品类ID: {this.state.parentCategoryId}</p>
                     </div>
                 </div>
-                <TableList tableHeads={['品类ID', '品类名称', '品类图片', '操作']}>
+                <TableList tableHeads={['品类ID', '品类名称', '品类图片', '排序权重', '操作']}>
                     {listBody}
                 </TableList>
             </div>

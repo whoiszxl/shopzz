@@ -170,7 +170,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public ServerResponse<List<HashMap<String, Object>>> getIndexPageCategorys(int categoryMainCount) {
 		//获取最顶级的分类
-		List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(0);
+		List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentIdAndCount(0, categoryMainCount);
         if(CollectionUtils.isEmpty(categoryList)){
             logger.info("没有顶级分类");
         }
@@ -178,7 +178,7 @@ public class CategoryServiceImpl implements CategoryService {
     	List<HashMap<String, Object>> result = Lists.newArrayList();
     	int index = 1;
         for (Category mainCategory : categoryList) {
-        	List<Category> minorCategoryList = categoryMapper.selectCategoryChildrenByParentId(mainCategory.getId());
+        	List<Category> minorCategoryList = categoryMapper.selectCategoryChildrenByParentIdAndCount(mainCategory.getId(), 5);
         	HashMap<String, Object> item = Maps.newHashMap();
         	item.put("index", index++);
         	item.put("imgHost", PropertiesUtil.getProperty("ftp.server.http.prefix"));
