@@ -14,6 +14,7 @@ import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.Banner;
 import com.whoiszxl.entity.Keywords;
 import com.whoiszxl.service.ArticleService;
+import com.whoiszxl.vo.BannerVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ public class ArticleManageController {
 	@PostMapping("banner_detail")
 	@ApiOperation(value = "后台banner詳情")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
-	public ServerResponse<Banner> bannerDetail(Integer bannerId) {
+	public ServerResponse<BannerVo> bannerDetail(Integer bannerId) {
 		return articleService.manageBannerDetail(bannerId);
 	}
 	

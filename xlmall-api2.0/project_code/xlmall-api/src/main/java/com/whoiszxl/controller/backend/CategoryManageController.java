@@ -1,5 +1,7 @@
 package com.whoiszxl.controller.backend;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.authz.annotation.Logical;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
+import com.whoiszxl.entity.Category;
+import com.whoiszxl.entity.Product;
 import com.whoiszxl.service.CategoryService;
-
+import com.whoiszxl.vo.BannerVo;
+import com.whoiszxl.vo.CategoryVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,11 +51,28 @@ public class CategoryManageController {
         //更新categoryName
         return categoryService.updateCategoryName(categoryId,categoryName); 
     }
+	
+	
+	
+	@PostMapping("save")
+	@ApiOperation(value = "更新或者添加分類")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN } )
+	public ServerResponse<String> categorySave(HttpSession session, Category category) {
+		return categoryService.saveOrUpdateCategory(category);
+	}
+	
+	@PostMapping("detail")
+	@ApiOperation(value = "后台category詳情")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
+	public ServerResponse<CategoryVo> categoryDetail(Integer categoryId) {
+		return categoryService.manageCategoryDetail(categoryId);
+	}
+	
 
 	@PostMapping("get_category")
     @ApiOperation(value = "获取分类接口")
     @RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
-    public ServerResponse<?> getChildrenParallelCategory(HttpSession session,@RequestParam(value = "categoryId" ,defaultValue = "0") Integer categoryId){
+    public ServerResponse<List<CategoryVo>> getChildrenParallelCategory(HttpSession session,@RequestParam(value = "categoryId" ,defaultValue = "0") Integer categoryId){
        //查询子节点的category信息,并且不递归,保持平级
        return categoryService.getChildrenParallelCategory(categoryId);
     }

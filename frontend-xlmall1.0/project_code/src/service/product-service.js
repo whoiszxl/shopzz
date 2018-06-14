@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-13 22:06:02 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-25 17:22:48
+ * @Last Modified time: 2018-06-14 13:59:56
  */
 
 'use strict';
@@ -26,6 +26,16 @@ var _product = {
             data    : {
                 productId : productId
             },
+            success : resolve,
+            error   : reject
+        });
+    },
+
+    // 获取主页推荐分类
+    getIndexCategoryList : function(resolve, reject){
+        _xl.request({
+            url     : _xl.getServerUrl('/category/categorys'),
+            data    : [],
             success : resolve,
             error   : reject
         });

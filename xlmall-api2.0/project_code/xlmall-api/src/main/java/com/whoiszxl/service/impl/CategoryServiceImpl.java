@@ -1,5 +1,9 @@
 package com.whoiszxl.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -7,15 +11,21 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.dao.CategoryMapper;
+import com.whoiszxl.entity.Banner;
 import com.whoiszxl.entity.Category;
 import com.whoiszxl.service.CategoryService;
+import com.whoiszxl.utils.PropertiesUtil;
+import com.whoiszxl.vo.BannerVo;
+import com.whoiszxl.vo.CategoryVo;
 
 /**
  * 
@@ -66,12 +76,21 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public ServerResponse<List<Category>> getChildrenParallelCategory(Integer categoryId) {
+	public ServerResponse<List<CategoryVo>> getChildrenParallelCategory(Integer categoryId) {
 		List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(categoryId);
         if(CollectionUtils.isEmpty(categoryList)){
             logger.info("未找到当前分类的子分类");
         }
-        return ServerResponse.createBySuccess(categoryList);
+        
+        List<CategoryVo> categoryVoList = new ArrayList<CategoryVo>();
+        for (Category category : categoryList) {
+        	CategoryVo categoryVo = new CategoryVo();
+			BeanUtils.copyProperties(category, categoryVo);
+			categoryVo.setImgHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
+			categoryVoList.add(categoryVo);
+		}
+        
+        return ServerResponse.createBySuccess(categoryVoList);
 	}
 
 	@Override
@@ -81,6 +100,7 @@ public class CategoryServiceImpl implements CategoryService {
 		//调用递归
         findChildCategory(categorySet,categoryId);
 
+        System.out.println(categorySet);
         //新建一个list集合
         List<Integer> categoryIdList = Lists.newArrayList();
         if(categoryId != null){
@@ -108,6 +128,67 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return categorySet;
     }
+
+	@Override
+	public ServerResponse<String> saveOrUpdateCategory(Category category) {
+		if (category != null) {
+
+			if (category.getId() != null) {
+				category.setUpdateTime(new Date());
+				int rowCount = categoryMapper.updateByPrimaryKeySelective(category);
+				if (rowCount > 0) {
+					return ServerResponse.createBySuccessMessage("更新分类成功");
+				} else {
+					return ServerResponse.createByErrorMessage("更新分类失败");
+				}
+
+			} else {
+				category.setCreateTime(new Date());
+				int rowCount = categoryMapper.insert(category);
+				if (rowCount > 0) {
+					return ServerResponse.createBySuccessMessage("新增分类成功");
+				} else {
+					return ServerResponse.createByErrorMessage("新增分类失败");
+				}
+			}
+		}
+		return ServerResponse.createByErrorMessage("新增或更新分类参数不正确了");
+	}
+
+	@Override
+	public ServerResponse<CategoryVo> manageCategoryDetail(Integer categoryId) {
+		Category category = categoryMapper.selectByPrimaryKey(categoryId);
+		if(category == null) {
+			return ServerResponse.createByErrorMessage("分类不存在");
+		}
+		CategoryVo categoryVo = new CategoryVo();
+		BeanUtils.copyProperties(category, categoryVo);
+		categoryVo.setImgHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
+		return ServerResponse.createBySuccess(categoryVo);
+	}
+
+	@Override
+	public ServerResponse<List<HashMap<String, Object>>> getIndexPageCategorys(int categoryMainCount) {
+		//获取最顶级的分类
+		List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentId(0);
+        if(CollectionUtils.isEmpty(categoryList)){
+            logger.info("没有顶级分类");
+        }
+        
+    	List<HashMap<String, Object>> result = Lists.newArrayList();
+    	int index = 1;
+        for (Category mainCategory : categoryList) {
+        	List<Category> minorCategoryList = categoryMapper.selectCategoryChildrenByParentId(mainCategory.getId());
+        	HashMap<String, Object> item = Maps.newHashMap();
+        	item.put("index", index++);
+        	item.put("imgHost", PropertiesUtil.getProperty("ftp.server.http.prefix"));
+        	item.put("mainCategoryName", mainCategory.getName());
+        	item.put("minorCategoryList", minorCategoryList);
+        	result.add(item);
+		}
+        
+		return ServerResponse.createBySuccess(result);
+	}
 
 }
 

@@ -197,7 +197,7 @@ class ProductSave extends React.Component{
                                 this.state.subImages.length ? this.state.subImages.map(
                                     (image, index) => (
                                     <div className="img-con" key={index}>
-                                        <img className="img" src={image.url} />
+                                        <img className="product-img" src={image.url} />
                                         <i className="fa fa-close" index={index} onClick={(e) => this.onImageDelete(e)}></i>
                                     </div>)
                                 ) : (<div>请上传图片</div>)

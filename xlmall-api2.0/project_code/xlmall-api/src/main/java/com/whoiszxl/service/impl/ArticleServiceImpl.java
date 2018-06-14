@@ -45,7 +45,7 @@ public class ArticleServiceImpl implements ArticleService {
 		for (Banner banner : banners) {
 			BannerVo bannerVo = new BannerVo();
 			BeanUtils.copyProperties(banner, bannerVo);
-			bannerVo.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://image.chenyuspace.com/")+bannerVo.getImgurl());
+			bannerVo.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+bannerVo.getImgurl());
 			bannerVoList.add(bannerVo);
 		}
 		return bannerVoList;
@@ -55,7 +55,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public ServerResponse<List<Banner>> getBannerManageList(int num) {
 		List<Banner> banners = bannerMapper.selectBannersByNum(num);
 		for (Banner banner : banners) {
-			banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://image.chenyuspace.com/")+banner.getImgurl());
+			banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+banner.getImgurl());
 		}
 		return ServerResponse.createBySuccess(banners);
 	}
@@ -87,13 +87,15 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public ServerResponse<Banner> manageBannerDetail(Integer bannerId) {
+	public ServerResponse<BannerVo> manageBannerDetail(Integer bannerId) {
 		Banner banner = bannerMapper.selectByPrimaryKey(bannerId);
 		if(banner == null) {
 			return ServerResponse.createByErrorMessage("轮播图不存在");
 		}
-		banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://image.chenyuspace.com/")+banner.getImgurl());
-		return ServerResponse.createBySuccess(banner);
+		BannerVo bannerVo = new BannerVo();
+		BeanUtils.copyProperties(banner, bannerVo);
+		bannerVo.setImgHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
+		return ServerResponse.createBySuccess(bannerVo);
 	}
 
 	@Override

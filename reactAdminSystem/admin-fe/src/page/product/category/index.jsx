@@ -73,8 +73,12 @@ class CategoryList extends React.Component{
                     <td>{category.id}</td>
                     <td>{category.name}</td>
                     <td>
+                        <img className="category-img-con" src={category.imgHost+category.img}/>
+                    </td>
+                    <td>
                         <a className="opear"
                             onClick={(e) => this.onUpdateName(category.id, category.name)}>修改名称</a>
+                        <Link className="opear" to={ `/product-category/save/${category.id}` }>编辑</Link>
                         {
                             category.parentId === 0
                             ? <Link to={`/product-category/index/${category.id}`}>查看子品类</Link>
@@ -99,7 +103,7 @@ class CategoryList extends React.Component{
                         <p>父品类ID: {this.state.parentCategoryId}</p>
                     </div>
                 </div>
-                <TableList tableHeads={['品类ID', '品类名称', '操作']}>
+                <TableList tableHeads={['品类ID', '品类名称', '品类图片', '操作']}>
                     {listBody}
                 </TableList>
             </div>

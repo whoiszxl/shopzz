@@ -121,8 +121,8 @@ class CategoryAdd extends React.Component{
                                 <div className="col-md-10">
                                 
                                     
-                                <div className="img-con">
-                                    <img src={this.state.showimg} />
+                                <div className="category-img-con">
+                                    <img className="category-img" src={this.state.showimg} />
                                     <i className="fa fa-close"></i>
                                 </div>
                                 

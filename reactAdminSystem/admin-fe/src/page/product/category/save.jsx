@@ -6,7 +6,7 @@
 */
 import React                from 'react';
 import MUtil                from 'util/mm.jsx'
-import Article              from 'service/article-service.jsx'
+import Product              from 'service/product-service.jsx'
 import PageTitle            from 'component/page-title/index.jsx';
 import FileUploader         from 'util/file-uploader/index.jsx'
 import RichEditor           from 'util/rich-editor/index.jsx'
@@ -14,36 +14,36 @@ import RichEditor           from 'util/rich-editor/index.jsx'
 import './save.scss';
 
 const _mm           = new MUtil();
-const _article      = new Article();
+const _product      = new Product();
 
-class BannerSave extends React.Component{
+class CategorySave extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            id               : this.props.match.params.pid,
-            title            : '',
-            imgurl           : '',
+            id               : this.props.match.params.categoryId,
+            img              : '',
             imgHost          : '',
-            jumpurl          : '',
-            sort             : 0,
+            name             : '',
+            parentId         : '',
+            sortOrder        : 0,
             status           : 1,
         }
     }
     componentDidMount(){
-        this.loadBanner();
+        this.loadCategory();
     }
     // 加载banner详情
-    loadBanner(){
+    loadCategory(){
         // 有id的时候，表示是编辑功能，需要表单回填
         if(this.state.id){
-            _article.getBannerDetail(this.state.id).then((res) => {
+            _product.getCategory(this.state.id).then((res) => {
                 this.setState(res);
             }, (errMsg) => {
                 _mm.errorTips(errMsg);
             });
         }
     }
-    // 简单字段的改变，比如轮播图名称，描述，价格，库存
+    // 简单字段的改变，比如品类名称，描述，价格，库存
     onValueChange(e){
         let name = e.target.name,
             value = e.target.value.trim();
@@ -56,7 +56,7 @@ class BannerSave extends React.Component{
     onUploadSuccess(res){
         console.log(res);
         this.setState({
-            imgurl           : res.uri,
+            img           : res.uri,
         });
     }
     // 上传图片失败
@@ -67,56 +67,54 @@ class BannerSave extends React.Component{
 
     // 提交表单
     onSubmit(){
-        let banner = {
-            title        : this.state.title,
-            imgurl    : this.state.imgurl,
-            jumpurl      : this.state.jumpurl,
-            sort       : parseInt(this.state.sort),
-            status      : this.state.status
+        let category = {
+            name        : this.state.name,
+            img         : this.state.img,
+            sortOrder   : parseInt(this.state.sortOrder)
         },
 
-        bannerCheckResult = _article.checkBanner(banner);
+        categoryCheckResult = _product.checkCategory(category);
         if(this.state.id){
-            banner.id = this.state.id;
+            category.id = this.state.id;
         }
         // 表单验证成功
-        if(bannerCheckResult.status){
-            _article.saveBanner(banner).then((res) => {
+        if(categoryCheckResult.status){
+            _product.saveManageCategory(category).then((res) => {
                 _mm.successTips(res);
-                this.props.history.push('/banner/index');
+                this.props.history.push('/product-category/index');
             }, (errMsg) => {
                 _mm.errorTips(errMsg);
             });
         }
         // 表单验证失败
         else{
-            _mm.errorTips(bannerCheckResult.msg);
+            _mm.errorTips(categoryCheckResult.msg);
         }
         
     }
     render(){
         return (
             <div id="page-wrapper">
-                <PageTitle title={this.state.id ? '编辑轮播图' : '添加轮播图'} />
+                <PageTitle title={this.state.id ? '编辑品类' : '添加品类'} />
                 <div className="form-horizontal">
                     <div className="form-group">
-                        <label className="col-md-2 control-label">轮播图标题</label>
+                        <label className="col-md-2 control-label">品类标题</label>
                         <div className="col-md-5">
                             <input type="text" className="form-control" 
-                                placeholder="请输入轮播图标题"
+                                placeholder="请输入品类标题"
                                 name="title"
-                                value={this.state.title}
+                                value={this.state.name}
                                 onChange={(e) => this.onValueChange(e)}/>
                         </div>
                     </div>
                     
                     <div className="form-group">
-                        <label className="col-md-2 control-label">轮播图图片</label>
+                        <label className="col-md-2 control-label">品类图片</label>
                         <div className="col-md-10">
                           
                                
-                        <div className="img-con">
-                            <img className="banner-img" src={this.state.imgHost+this.state.imgurl} />
+                        <div className="category-img-con">
+                            <img className="category-img" src={this.state.imgHost+this.state.img} />
                             <i className="fa fa-close"></i>
                         </div>
                         
@@ -128,24 +126,14 @@ class BannerSave extends React.Component{
                                 onError={(errMsg) => this.onUploadError(errMsg)}/>
                         </div>
                     </div>
-                    <div className="form-group">
-                        <label className="col-md-2 control-label">轮播图点击跳转地址</label>
-                        <div className="col-md-5">
-                            <input type="text" className="form-control" 
-                                placeholder="请输入轮播图点击跳转地址"
-                                name="jumpurl"
-                                value={this.state.jumpurl}
-                                onChange={(e) => this.onValueChange(e)}/>
-                        </div>
-                    </div>
 
                     <div className="form-group">
                         <label className="col-md-2 control-label">排序权重</label>
                         <div className="col-md-5">
                             <input type="text" className="form-control" 
-                                placeholder="请输入轮播图排序权重"
-                                name="sort"
-                                value={this.state.sort}
+                                placeholder="请输入品类排序权重"
+                                name="sortOrder"
+                                value={this.state.sortOrder}
                                 onChange={(e) => this.onValueChange(e)}/>
                         </div>
                     </div>
@@ -160,4 +148,4 @@ class BannerSave extends React.Component{
         )
     }
 }
-export default BannerSave;
+export default CategorySave;

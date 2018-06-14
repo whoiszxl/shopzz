@@ -29,7 +29,7 @@ public interface ArticleService {
 	ServerResponse<String> saveOrUpdateBanner(Banner banner);
 
 
-	ServerResponse<Banner> manageBannerDetail(Integer bannerId);
+	ServerResponse<BannerVo> manageBannerDetail(Integer bannerId);
 
 
 	ServerResponse<List<List<String>>> getKeywordsList();

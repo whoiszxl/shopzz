@@ -172,5 +172,6 @@ public class Const {
 	public interface Article {
 		int BANNER_LIST_COUNT = 5; //banner轮播图数量
 		String INDEX_KEYWORDS_REDIS_KEY = "index_keywords"; //主頁關鍵詞在redis的key
+		int CATEGORY_MAIN_COUNT = 6; //主页推荐分类的大类的数量
 	}
 }

@@ -50,7 +50,6 @@ class BannerList extends React.Component{
         });
     }
     render(){
-        console.log("aa"+JSON.stringify(this.state[0]));
         let listBody = this.state.list.map((banner, index) => {
             return (
                 <tr key={index}>
@@ -62,7 +61,7 @@ class BannerList extends React.Component{
                     <td>{banner.jumpurl}</td>
                     <td>{banner.sort}</td>
                     <td>{banner.status == 1 ? '有效' : '无效'}</td>
-                    <td>{banner.createTime}</td>
+                    <td>{new Date(banner.createTime).toLocaleString()}</td>
                     <td>
                         <Link className="opear" to={ `/banner/save/${banner.id}` }>编辑</Link>
                     </td>

@@ -61,7 +61,6 @@ class KeywordsList extends React.Component{
     }
 
     render(){
-        console.log("aa"+JSON.stringify(this.state[0]));
         let listBody = this.state.list.map((keywords, index) => {
             return (
                 <tr key={index}>

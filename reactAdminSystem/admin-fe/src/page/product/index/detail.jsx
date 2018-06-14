@@ -105,7 +105,7 @@ class ProductDetail extends React.Component{
                                 this.state.subImages.length ? this.state.subImages.map(
                                     (image, index) => (
                                     <div className="img-con" key={index}>
-                                        <img className="img" src={image.url} />
+                                        <img className="product-img" src={image.url} />
                                     </div>)
                                 ) : (<div>暂无图片</div>)
                             }

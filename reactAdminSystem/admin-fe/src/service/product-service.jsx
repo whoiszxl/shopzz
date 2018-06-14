@@ -89,6 +89,25 @@ class Product{
         
         return result;
     }
+
+
+    // 检查分类表单数据
+    checkCategory(category){
+        let result = {
+            status: true,
+            msg: '验证通过'
+        };
+        // 判断用户名为空
+        if(typeof category.name !== 'string' || category.name.length ===0){
+            return {
+                status: false,
+                msg: '分类名称不能为空！'
+            }
+        }
+        
+        return result;
+    }
+    
     // 保存商品
     saveProduct(product){
         return _mm.request({
@@ -110,6 +129,27 @@ class Product{
             }
         });
     }
+
+    // 保存品类
+    saveManageCategory(category){
+        return _mm.request({
+            type    : 'post',
+            url     : _mm.apiUrl + '/manage/category/save',
+            data    : category
+        });
+    }
+
+    // 获取品类详情
+    getCategory(categoryId){
+        return _mm.request({
+            type    : 'post',
+            url     : _mm.apiUrl + '/manage/category/detail',
+            data    : {
+                categoryId : categoryId || 0
+            }
+        });
+    }
+
     // 新增品类
     saveCategory(category){
         return _mm.request({
