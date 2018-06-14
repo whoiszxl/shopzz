@@ -40,37 +40,37 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Override
 	public List<BannerVo> getBannerList(int num) {
-		List<Banner> banners = bannerMapper.selectBannersByNum(num);
-		ArrayList<BannerVo> bannerVoList = Lists.newArrayList();
-		for (Banner banner : banners) {
-			BannerVo bannerVo = new BannerVo();
-			BeanUtils.copyProperties(banner, bannerVo);
-			bannerVo.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+bannerVo.getImgurl());
-			bannerVoList.add(bannerVo);
-		}
-		return bannerVoList;
+		
+		String cache_banner = RedisShardedPoolUtil.get(Const.Article.INDEX_BANNER_REDIS_KEY);
+		List<BannerVo> result = null;
+		if(cache_banner != null) {
+			//缓存有直接返回
+			result = JsonUtil.string2Obj(cache_banner, List.class);
+			logger.info("從redis取出了banner");
+		}else {
+			List<Banner> banners = bannerMapper.selectBannersByNum(num);
+			result = Lists.newArrayList();
+			for (Banner banner : banners) {
+				BannerVo bannerVo = new BannerVo();
+				BeanUtils.copyProperties(banner, bannerVo);
+				bannerVo.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+bannerVo.getImgurl());
+				result.add(bannerVo);
+			}
+			RedisShardedPoolUtil.set(Const.Article.INDEX_BANNER_REDIS_KEY, JsonUtil.obj2String(result));
+		}	
+		return result;
 	}
 
 	@Override
 	public ServerResponse<List<Banner>> getBannerManageList(int num) {
 		
-		String cache_banner = RedisShardedPoolUtil.get(Const.Article.INDEX_BANNER_REDIS_KEY);
-		List<Banner> result = null;
-		if(cache_banner != null) {
-			//缓存有直接返回
-			result = JsonUtil.string2Obj(cache_banner, List.class);
-			logger.info("從redis取出了banner");
-		}else{
-			//从数据库拿
-			result = bannerMapper.selectBannersByNum(num);
-			for (Banner banner : result) {
-				banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+banner.getImgurl());
-			}
-			RedisShardedPoolUtil.set(Const.Article.INDEX_BANNER_REDIS_KEY, JsonUtil.obj2String(result));
-			logger.info("從数据库取出了banner");
+		//从数据库拿
+		List<Banner> banners = bannerMapper.selectBannersByNum(num);
+		for (Banner banner : banners) {
+			banner.setImgurl(PropertiesUtil.getProperty("ftp.server.http.prefix")+banner.getImgurl());
 		}
-		
-		return ServerResponse.createBySuccess(result);
+
+		return ServerResponse.createBySuccess(banners);
 	}
 
 	@Override

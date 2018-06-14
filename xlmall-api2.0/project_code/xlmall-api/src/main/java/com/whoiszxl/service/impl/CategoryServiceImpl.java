@@ -181,6 +181,7 @@ public class CategoryServiceImpl implements CategoryService {
 		List<HashMap<String, Object>> result = null;
 		if(cache_category != null) {
 			result = JsonUtil.string2Obj(cache_category, List.class);
+			logger.info("从redis获取了category");
 		}else {
 			//获取最顶级的分类
 			List<Category> categoryList = categoryMapper.selectCategoryChildrenByParentIdAndCount(0, categoryMainCount);
@@ -200,6 +201,7 @@ public class CategoryServiceImpl implements CategoryService {
 	        	result.add(item);
 			}
 	        
+	        logger.info("从数据库获取了category");
 	        RedisShardedPoolUtil.set(Const.Article.INDEX_CATEGORY_REDIS_KEY, JsonUtil.obj2String(result));
 		}
 		
