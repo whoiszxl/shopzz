@@ -49,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
 					product.setMainImage(subImageArray[0]);
 				}
 			}
-
+			product.setStatus(0);
 			if (product.getId() != null) {
 				int rowCount = productMapper.updateByPrimaryKey(product);
 				if (rowCount > 0) {
@@ -59,7 +59,6 @@ public class ProductServiceImpl implements ProductService {
 				}
 
 			} else {
-				System.out.println(product);
 				int rowCount = productMapper.insert(product);
 				if (rowCount > 0) {
 					return ServerResponse.createBySuccessMessage("新增产品成功");
