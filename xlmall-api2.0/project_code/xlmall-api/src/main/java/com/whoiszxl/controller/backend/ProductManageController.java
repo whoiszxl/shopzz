@@ -113,7 +113,7 @@ public class ProductManageController {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@PostMapping("richtext_img_upload")
+	@PostMapping("richtext_img_upload_bak")
 	@ApiOperation(value = "后台富文本图片上传")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN }, logical=Logical.OR)
 	public Map richtextImgUpload_bak(HttpSession session,
