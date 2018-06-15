@@ -10,3 +10,5 @@ cd ~/AYANAMI/xlmall-api2.0/project_code/xlmall-api/ && /root/soft/apache-maven-3
 # 运行项目
 cd ~/AYANAMI/xlmall-api2.0/project_code/xlmall-api/target && nohup java -jar xlmall-api-1.0.0.jar --server.port=10001 &
 
+cd ~/AYANAMI/xlmall-api2.0/project_code/xlmall-api/target && tail -f nohup.out
+
