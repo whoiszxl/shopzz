@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-06-08 12:26:50 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-11 23:15:34
+ * @Last Modified time: 2018-06-15 11:28:50
  */
 
 const path = require('path');
@@ -84,6 +84,10 @@ module.exports = {
                 ]
             }
         ]
+    },
+
+    externals: {
+        'html_beautify':'html_beautify',
     },
 
     plugins: [

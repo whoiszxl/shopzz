@@ -2,14 +2,14 @@
 * @Author: whoiszxl
 * @Date:   2018-01-23 22:54:28
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-06-14 18:30:19
+ * @Last Modified time: 2018-06-15 11:29:03
 */
 
 class MUtil{
 
     constructor() {
-        //this.apiUrl = "http://118.126.92.128:10101";
-        this.apiUrl = "http://localhost:8888";
+        this.apiUrl = "http://118.126.92.128:10101";
+        //this.apiUrl = "http://localhost:8888";
     }
 
     request(param){

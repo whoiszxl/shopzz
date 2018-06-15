@@ -63,7 +63,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获
         getSubject(request, response).login(token);
         // 如果没有抛出异常则代表登入成功，返回true
-        return true;  
+        return true;
     }
 
     /**

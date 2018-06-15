@@ -1,13 +1,16 @@
 /*
 * @Author: whoiszxl
 * @Date:   2018-02-02 17:13:05
-* @Last Modified by:   whoiszxl
-* @Last Modified time: 2018-02-02 21:46:07
+ * @Last Modified by: whoiszxl
+ * @Last Modified time: 2018-06-15 15:21:18
 */
 import React        from 'react';
 import Simditor     from 'simditor';
 import 'simditor/styles/simditor.scss';
 import './index.scss';
+import MUtil        from 'util/mm.jsx';
+
+const _mm           = new MUtil();
 // 通用的富文本编辑器，依赖jquery
 class RichEditor extends React.Component{
     constructor(props){
@@ -27,10 +30,13 @@ class RichEditor extends React.Component{
             textarea: $(element),
             defaultValue: this.props.placeholder || '请输入内容',
             upload: {
-                url             : '/manage/product/richtext_img_upload',
+                url             : _mm.apiUrl+'/manage/product/richtext_img_upload',
                 defaultImage    : '',
+                params          : {
+                    'auth_token': _mm.getToken()
+                },
                 fileKey         : 'upload_file'
-            }
+            },
         });
         this.bindEditorEvent();
     }
