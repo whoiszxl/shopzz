@@ -160,9 +160,11 @@ public class ProductManageController {
         }
         
         //再校驗一下token的用戶名是否在數據庫存在吧，沒有傳密碼過來無法對token進行校驗
-        Integer userId = JWTUtil.getUserId(auth_token);
-        ServerResponse<User> information = userService.getInformation(userId);
-        if(!information.isSuccess()) {
+        System.out.println("接收的toekn："+auth_token);
+        String username = JWTUtil.getUsername(auth_token);
+        ServerResponse<String> question = userService.selectQuestion(username);
+        System.out.println(question.getData());
+        if(!question.isSuccess()) {
         	logger.error("token里根本沒有這個用戶，無效");
         	throw new RuntimeException("token不存在當前用戶，無效");
         }
