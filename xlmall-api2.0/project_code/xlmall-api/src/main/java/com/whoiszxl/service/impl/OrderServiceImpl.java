@@ -45,6 +45,7 @@ import com.whoiszxl.entity.OrderItem;
 import com.whoiszxl.entity.PayInfo;
 import com.whoiszxl.entity.Product;
 import com.whoiszxl.entity.Shipping;
+import com.whoiszxl.service.FileService;
 import com.whoiszxl.service.OrderService;
 import com.whoiszxl.utils.BigDecimalUtil;
 import com.whoiszxl.utils.DateTimeUtil;
@@ -66,6 +67,10 @@ public class OrderServiceImpl implements OrderService {
 	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 	
 	private static  AlipayTradeService tradeService;
+	
+	@Autowired
+	private FileService fileService;
+	
     static {
 
         /** 一定要在创建AlipayTradeService之前调用Configs.init()设置默认参数
@@ -473,22 +478,25 @@ public class OrderServiceImpl implements OrderService {
 
                 AlipayTradePrecreateResponse response = result.getResponse();
                 dumpResponse(response);
-
-                File folder = new File(path);
-                if(!folder.exists()){
-                    folder.setWritable(true);
-                    folder.mkdirs();
-                }
-
+                
+                File fileDir = new File(path);
+        		if(!fileDir.exists()) {
+        			fileDir.setWritable(true);
+        			fileDir.mkdirs();
+        		}
                 // 需要修改为运行机器上的路径
                 String qrPath = String.format(path+"/qr-%s.png",response.getOutTradeNo());
                 String qrFileName = String.format("qr-%s.png",response.getOutTradeNo());
                 ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrPath);
-
+                
+                
+        		
                 File targetFile = new File(path,qrFileName);
                 try {
-                    FTPUtil.uploadFile(Lists.newArrayList(targetFile));
-                } catch (IOException e) {
+                	targetFile.createNewFile();
+                    //FTPUtil.uploadFile(Lists.newArrayList(targetFile));
+                	fileService.uploadToQiniu(targetFile, qrPath);
+                } catch (Exception e) {
                     logger.error("上传二维码异常",e);
                 }
                 logger.info("qrPath:" + qrPath);
