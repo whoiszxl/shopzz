@@ -35,3 +35,4 @@ Servers
 node_modules
 
 dist
+.idea
