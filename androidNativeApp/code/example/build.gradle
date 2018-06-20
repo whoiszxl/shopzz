@@ -22,4 +22,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':xl-compiler')
     annotationProcessor project(':xl-ec')
+    implementation project(path: ':xl-core')
 }
