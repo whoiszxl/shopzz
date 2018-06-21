@@ -7,6 +7,7 @@ import com.whoiszxl.xl.net.callback.IFailure;
 import com.whoiszxl.xl.net.callback.IRequest;
 import com.whoiszxl.xl.net.callback.ISuccess;
 import com.whoiszxl.xl.net.callback.RequestCallbacks;
+import com.whoiszxl.xl.net.download.DownloadHandler;
 import com.whoiszxl.xl.ui.loader.AVLoader;
 import com.whoiszxl.xl.ui.loader.LoaderStyle;
 
@@ -175,4 +176,9 @@ public class RestClient {
         request(HttpMethod.UPLOAD);
     }
 
+    public final void download() {
+        new DownloadHandler(URL, REQUEST, DOWNLOAD_DIR, EXTENSION, NAME,
+                SUCCESS, FAILURE, ERROR)
+                .handleDownload();
+    }
 }
