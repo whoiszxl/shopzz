@@ -1,1 +1,1 @@
-include ':example', ':xl-annotations', ':xl-compiler', ':xl-core', ':xl-ec'
+include ':example', ':xl-annotations', ':xl-compiler', ':xl-core', ':xl-ec', ':xl-compiler'
