@@ -21,13 +21,13 @@ public class ExampleDelegate extends XlDelegate {
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         RestClient.builder()
-                .url("http://www.baidu.com/")
+                .url("http://118.126.92.128:10101/article/banners/")
                 .loader(getContext())
                 .params("","")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
                     }
                 })
                 .failure(new IFailure() {

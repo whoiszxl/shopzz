@@ -2,7 +2,10 @@ package com.whoiszxl.xl.app;
 
 import android.os.Handler;
 
+import java.util.ArrayList;
 import java.util.WeakHashMap;
+
+import okhttp3.Interceptor;
 
 /**
  * @author whoiszxl
@@ -15,6 +18,7 @@ public class Configurator {
      */
     private static final WeakHashMap<Object, Object> XL_CONFIGS = new WeakHashMap<>();
     private static final Handler HANDLER = new Handler();
+    private static final ArrayList<Interceptor>  INTERCEPTORS = new ArrayList<>();
 
     /**
      * 构造函数，创建当前对象的时候传入标志，表示还未初始化好
@@ -82,6 +86,19 @@ public class Configurator {
      */
     public final Configurator withLoaderDelayed(long delayed) {
         XL_CONFIGS.put(ConfigKeys.LOADER_DELAYED, delayed);
+        return this;
+    }
+
+
+    public final Configurator withInterceptor(Interceptor interceptor) {
+        INTERCEPTORS.add(interceptor);
+        XL_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
+
+    public final Configurator withInterceptors(ArrayList<Interceptor> interceptors) {
+        INTERCEPTORS.addAll(interceptors);
+        XL_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
         return this;
     }
 

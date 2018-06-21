@@ -3,6 +3,7 @@ package com.whoiszxl.xlmall.example;
 import android.app.Application;
 
 import com.whoiszxl.xl.app.Starter;
+import com.whoiszxl.xl.net.interceptors.DebugInterceptor;
 
 /**
  * @author whoiszxl
@@ -16,6 +17,7 @@ public class ExampleApp extends Application{
         Starter.init(this)
                 .withLoaderDelayed(1000)
                 .withApiHost("http://localhost:8888/")
+                .withInterceptor(new DebugInterceptor("helllllo", 1))
                 .configure();
     }
 }
