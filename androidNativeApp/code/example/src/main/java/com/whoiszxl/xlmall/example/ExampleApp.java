@@ -14,6 +14,7 @@ public class ExampleApp extends Application{
     public void onCreate() {
         super.onCreate();
         Starter.init(this)
+                .withLoaderDelayed(1000)
                 .withApiHost("http://localhost:8888/")
                 .configure();
     }

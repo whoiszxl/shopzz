@@ -43,7 +43,17 @@ dependencies {
     //字体图标
     api 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
     api 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+
     //ButterKnife依赖
     api 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    //网络请求依赖
+    api 'com.squareup.okio:okio:1.13.0'
+    api 'com.squareup.okhttp3:okhttp:3.8.1'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:converter-scalars:2.3.0'
+
+    //Loader依赖
+    api 'com.wang.avi:library:2.1.3'
 }
