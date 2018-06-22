@@ -2,6 +2,9 @@ package com.whoiszxl.xl.app;
 
 import android.os.Handler;
 
+import com.joanzapata.iconify.IconFontDescriptor;
+import com.joanzapata.iconify.Iconify;
+
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
@@ -18,6 +21,7 @@ public class Configurator {
      */
     private static final WeakHashMap<Object, Object> XL_CONFIGS = new WeakHashMap<>();
     private static final Handler HANDLER = new Handler();
+    private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
     private static final ArrayList<Interceptor>  INTERCEPTORS = new ArrayList<>();
 
     /**
@@ -56,6 +60,7 @@ public class Configurator {
      * 调用其表示配置已经初始化好了
      */
     public final void configure() {
+        initIcons();
         XL_CONFIGS.put(ConfigKeys.CONFIG_READY, true);
     }
 
@@ -89,6 +94,22 @@ public class Configurator {
         return this;
     }
 
+    /**
+     * 初始化icon
+     */
+    private void initIcons() {
+        if (ICONS.size() > 0) {
+            final Iconify.IconifyInitializer initializer = Iconify.with(ICONS.get(0));
+            for (int i = 1; i < ICONS.size(); i++) {
+                initializer.with(ICONS.get(i));
+            }
+        }
+    }
+
+    public final Configurator withIcon(IconFontDescriptor descriptor) {
+        ICONS.add(descriptor);
+        return this;
+    }
 
     public final Configurator withInterceptor(Interceptor interceptor) {
         INTERCEPTORS.add(interceptor);
