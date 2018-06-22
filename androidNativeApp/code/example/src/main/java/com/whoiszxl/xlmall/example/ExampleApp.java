@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.whoiszxl.xl.app.Starter;
+import com.whoiszxl.xl.ec.database.DatabaseManager;
 import com.whoiszxl.xl.ec.icon.FontEcModule;
 import com.whoiszxl.xl.net.interceptors.DebugInterceptor;
 
@@ -23,5 +24,7 @@ public class ExampleApp extends Application{
                 .withApiHost("http://localhost:8888/")
                 .withInterceptor(new DebugInterceptor("helllllo", 1))
                 .configure();
+
+        DatabaseManager.getInstance().init(this);
     }
 }

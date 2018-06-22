@@ -1,5 +1,6 @@
 package com.whoiszxl.xl.ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.whoiszxl.xl.delegates.XlDelegate;
 import com.whoiszxl.xl.ec.R;
 import com.whoiszxl.xl.ec.R2;
+import com.whoiszxl.xl.ec.api.Api;
 import com.whoiszxl.xl.net.RestClient;
 import com.whoiszxl.xl.net.callback.ISuccess;
 import com.whoiszxl.xl.util.log.XLLogger;
@@ -39,6 +41,41 @@ public class SignUpDelegate extends XlDelegate {
 
     @BindView(R2.id.edit_sign_up_answer)
     TextInputEditText mAnswer = null;
+
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof ISignListener) {
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
+    @OnClick(R2.id.btn_sign_up)
+    void onClickSignUp() {
+        if (checkForm()) {
+            RestClient.builder()
+                    .url(Api.register)
+                    .params("username", mName.getText().toString())
+                    .params("password", mPassword.getText().toString())
+                    .params("passwordConfirm", mRePassword.getText().toString())
+                    .params("phone", mPhone.getText().toString())
+                    .params("email", mEmail.getText().toString())
+                    .params("question", mQuestion.getText().toString())
+                    .params("answer", mAnswer.getText().toString())
+                    .success(new ISuccess() {
+                        @Override
+                        public void onSuccess(String response) {
+                            XLLogger.json("USER_PROFILE", response);
+                            //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                            SignHandler.onSignUp(response, mISignListener, getSupportDelegate());
+                        }
+                    })
+                    .build()
+                    .post();
+        }
+    }
 
     /**
      * 本地校验注册表单参数是否有效
@@ -107,28 +144,11 @@ public class SignUpDelegate extends XlDelegate {
         return isPass;
     }
 
-    @OnClick(R2.id.btn_sign_up)
-    void onClickSignUp() {
-        if (checkForm()) {
-            RestClient.builder()
-                    .url("http://118.126.92.128:10101/user/register")
-                    .params("username", mName.getText().toString())
-                    .params("password", mPassword.getText().toString())
-                    .params("passwordConfirm", mRePassword.getText().toString())
-                    .params("phone", mPhone.getText().toString())
-                    .params("email", mEmail.getText().toString())
-                    .params("question", mQuestion.getText().toString())
-                    .params("answer", mAnswer.getText().toString())
-                    .success(new ISuccess() {
-                        @Override
-                        public void onSuccess(String response) {
-                            XLLogger.json("USER_PROFILE", response);
-                            Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .build()
-                    .post();
-        }
+
+
+    @OnClick(R2.id.tv_link_sign_in)
+    void onClickLink() {
+        getSupportDelegate().start(new SignInDelegate());
     }
 
 

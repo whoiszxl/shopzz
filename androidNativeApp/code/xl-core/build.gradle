@@ -71,4 +71,8 @@ dependencies {
 
     //Log
     api 'com.orhanobut:logger:2.1.1'
+
+    //数据库依赖
+    api 'org.greenrobot:greendao-generator:3.2.0'
+    api 'org.greenrobot:greendao:3.2.0'
 }
