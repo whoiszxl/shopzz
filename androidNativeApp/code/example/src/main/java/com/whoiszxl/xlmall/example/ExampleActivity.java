@@ -36,6 +36,6 @@ public class ExampleActivity extends ProxyActivity implements ISignListener{
 
     @Override
     public void onSignUpSuccess() {
-        Toast.makeText(this, "注册成功", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "注册成功", Toast.LENGTH_LONG).show();
     }
 }

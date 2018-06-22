@@ -1,6 +1,8 @@
 package com.whoiszxl.xl.app;
 
 import android.os.Handler;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
@@ -8,6 +10,7 @@ import com.joanzapata.iconify.Iconify;
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.Interceptor;
 
 /**
@@ -104,6 +107,24 @@ public class Configurator {
                 initializer.with(ICONS.get(i));
             }
         }
+    }
+
+    /**
+     * 初始化toast样式的颜色
+     * @return
+     */
+    public final Configurator initToast() {
+//        Toasty.Config.getInstance()
+//                .setErrorColor(@ColorInt int errorColor) // optional
+//                .setInfoColor(@ColorInt int infoColor) // optional
+//                .setSuccessColor(@ColorInt int successColor) // optional
+//                .setWarningColor(@ColorInt int warningColor) // optional
+//                .setTextColor(@ColorInt int textColor) // optional
+//                .tintIcon(boolean tintIcon) // optional (apply textColor also to the icon)
+//                .setToastTypeface(@NonNull Typeface typeface) // optional
+//                            .setTextSize(int sizeInSp) // optional
+//                .apply(); // required
+        return this;
     }
 
     public final Configurator withIcon(IconFontDescriptor descriptor) {

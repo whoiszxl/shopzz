@@ -15,6 +15,7 @@ import com.whoiszxl.xl.delegates.BaseDelegate;
 import com.whoiszxl.xl.ec.database.DatabaseManager;
 import com.whoiszxl.xl.ec.database.UserProfile;
 
+import es.dmoral.toasty.Toasty;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
 
 /**
@@ -34,8 +35,9 @@ public class SignHandler {
                 mUsername.setError(msg);
             }
         }else {
-            //TODO 这里的toast弹出，在小米手机上还会在最前面带上应用名，需要弄个github插件 https://github.com/GrenderG/Toasty
-            Toast.makeText((Context) Starter.getConfiguration(ConfigKeys.APPLICATION_CONTEXT),msg,Toast.LENGTH_LONG).show();
+            //这里的toast弹出，在小米手机上还会在最前面带上应用名，需要弄个github插件 https://github.com/GrenderG/Toasty
+            //Toast.makeText((Context) Starter.getConfiguration(ConfigKeys.APPLICATION_CONTEXT),msg,Toast.LENGTH_LONG).show();
+            Toasty.success((Context) Starter.getConfiguration(ConfigKeys.APPLICATION_CONTEXT),msg,Toast.LENGTH_SHORT,true).show();
             final String token = jsonObject.getString("data");
             final UserProfile profile = new UserProfile(token);
             DatabaseManager.getInstance().getDao().insert(profile);
@@ -53,7 +55,8 @@ public class SignHandler {
 
         final int status = jsonObject.getInteger("status");
         final String msg = jsonObject.getString("msg");
-        Toast.makeText((Context) Starter.getConfiguration(ConfigKeys.APPLICATION_CONTEXT),msg,Toast.LENGTH_LONG).show();
+        //Toast.makeText((Context) Starter.getConfiguration(ConfigKeys.APPLICATION_CONTEXT),msg,Toast.LENGTH_LONG).show();
+        Toasty.success((Context) Starter.getConfiguration(ConfigKeys.APPLICATION_CONTEXT),msg,Toast.LENGTH_SHORT,true).show();
         if(status == 0) {
             //注册成功,需要直接跳转到登录界面
             jump.start(new SignInDelegate(), 2);
