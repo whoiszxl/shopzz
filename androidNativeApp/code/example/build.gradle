@@ -19,8 +19,8 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api project(':xl-ec')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':xl-ec')
     compileOnly project(':xl-annotations')
     annotationProcessor project(':xl-compiler')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'

@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import com.whoiszxl.xl.activities.ProxyActivity;
 import com.whoiszxl.xl.delegates.XlDelegate;
 import com.whoiszxl.xl.ec.launcher.LauncherDelegate;
+import com.whoiszxl.xl.ec.sign.SignUpDelegate;
 
 public class ExampleActivity extends ProxyActivity{
 
@@ -22,6 +23,6 @@ public class ExampleActivity extends ProxyActivity{
 
     @Override
     public XlDelegate setRootDelegate() {
-        return new LauncherDelegate();
+        return new SignUpDelegate();
     }
 }
