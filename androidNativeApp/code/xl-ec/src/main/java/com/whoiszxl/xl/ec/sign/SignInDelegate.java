@@ -1,5 +1,6 @@
 package com.whoiszxl.xl.ec.sign;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,9 +16,12 @@ import com.whoiszxl.xl.ec.api.Api;
 import com.whoiszxl.xl.net.RestClient;
 import com.whoiszxl.xl.net.callback.ISuccess;
 import com.whoiszxl.xl.util.log.XLLogger;
+import com.whoiszxl.xl.wechat.XLWechat;
+import com.whoiszxl.xl.wechat.callback.IWeChatSignInCallback;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 
 /**
  * @author whoiszxl
@@ -61,6 +65,17 @@ public class SignInDelegate extends XlDelegate{
         }
     }
 
+    @OnClick(R2.id.icon_sign_in_wechat)
+    void onClickWechat() {
+        //获取微信实例然后设置登录成功处理的回调，然后调用signIn登录函数
+        XLWechat.getInstance().onSignSuccess(new IWeChatSignInCallback() {
+            @SuppressLint("CheckResult")
+            @Override
+            public void onSignInSuccess(String userInfo) {
+                Toasty.success(getContext(), userInfo , 0 , true);
+            }
+        }).signIn();
+    }
 
     @OnClick(R2.id.tv_link_sign_up)
     void onClickLink() {

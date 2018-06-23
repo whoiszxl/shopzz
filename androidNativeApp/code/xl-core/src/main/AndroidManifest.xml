@@ -3,4 +3,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <application>
+        <activity android:name=".wechat.templates.WXEntryTemplate" />
+    </application>
 </manifest>

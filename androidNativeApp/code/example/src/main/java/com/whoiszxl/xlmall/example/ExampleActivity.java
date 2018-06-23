@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
 import com.whoiszxl.xl.activities.ProxyActivity;
+import com.whoiszxl.xl.app.Starter;
 import com.whoiszxl.xl.delegates.XlDelegate;
 import com.whoiszxl.xl.ec.launcher.LauncherDelegate;
 import com.whoiszxl.xl.ec.sign.ISignListener;
@@ -22,6 +23,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener{
         if(actionBar != null) {
             actionBar.hide();
         }
+        Starter.getConfigurator().withActivity(this);
     }
 
     @Override

@@ -23,6 +23,8 @@ public class ExampleApp extends Application{
                 .withLoaderDelayed(1000)
                 .withApiHost("http://localhost:8888/")
                 .withInterceptor(new DebugInterceptor("helllllo", 1))
+                .withWeChatAppId("app_id")
+                .withWeChatAppSecret("app_secret")
                 .configure();
 
         DatabaseManager.getInstance().init(this);
