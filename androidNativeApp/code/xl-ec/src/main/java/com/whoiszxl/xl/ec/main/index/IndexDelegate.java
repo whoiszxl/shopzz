@@ -12,6 +12,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.whoiszxl.xl.delegates.bottom.BottomItemDelegate;
 import com.whoiszxl.xl.ec.R;
 import com.whoiszxl.xl.ec.R2;
+import com.whoiszxl.xl.ec.api.Api;
 import com.whoiszxl.xl.ui.refresh.RefreshHandler;
 
 import butterknife.BindView;
@@ -54,6 +55,7 @@ public class IndexDelegate extends BottomItemDelegate {
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
         initRefreshLayout();
+        mRefreshHandler.firstPage(Api.index_goods);
     }
 
     @Override

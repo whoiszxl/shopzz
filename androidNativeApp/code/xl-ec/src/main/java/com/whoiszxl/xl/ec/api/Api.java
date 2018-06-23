@@ -17,4 +17,7 @@ public class Api {
     public static final String register = host + "/user/register";
 
 
+    public static final String index_goods = host + "/product/list?pageSize=8";
+
+
 }

@@ -3,6 +3,10 @@ package com.whoiszxl.xl.ui.refresh;
 import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.whoiszxl.xl.app.Starter;
+import com.whoiszxl.xl.net.RestClient;
+import com.whoiszxl.xl.net.callback.ISuccess;
+
+import es.dmoral.toasty.Toasty;
 
 public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener{
 
@@ -23,6 +27,19 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener{
                 REFRESH_LAYOUT.setRefreshing(false);
             }
         },2000);
+    }
+
+    public void firstPage(String url) {
+        RestClient.builder()
+                .url(url)
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        Toasty.warning(Starter.getApplicationContext(), response).show();
+                    }
+                })
+                .build()
+                .get();
     }
 
     @Override
