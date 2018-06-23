@@ -8,12 +8,14 @@ import android.widget.Toast;
 import com.whoiszxl.xl.activities.ProxyActivity;
 import com.whoiszxl.xl.app.Starter;
 import com.whoiszxl.xl.delegates.XlDelegate;
+import com.whoiszxl.xl.ec.launcher.ILauncherListener;
 import com.whoiszxl.xl.ec.launcher.LauncherDelegate;
+import com.whoiszxl.xl.ec.launcher.OnLauncherFinishTag;
+import com.whoiszxl.xl.ec.main.EcBottomDelegate;
 import com.whoiszxl.xl.ec.sign.ISignListener;
 import com.whoiszxl.xl.ec.sign.SignInDelegate;
-import com.whoiszxl.xl.ec.sign.SignUpDelegate;
 
-public class ExampleActivity extends ProxyActivity implements ISignListener{
+public class ExampleActivity extends ProxyActivity implements ISignListener, ILauncherListener{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener{
 
     @Override
     public XlDelegate setRootDelegate() {
-        return new SignInDelegate();
+        return new LauncherDelegate();
     }
 
     @Override
@@ -39,5 +41,20 @@ public class ExampleActivity extends ProxyActivity implements ISignListener{
     @Override
     public void onSignUpSuccess() {
         //Toast.makeText(this, "注册成功", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onLauncherFinish(OnLauncherFinishTag tag) {
+        switch (tag) {
+            case SIGNED:
+                getSupportDelegate().startWithPop(new EcBottomDelegate());
+                break;
+
+            case NOT_SIGNED:
+                getSupportDelegate().startWithPop(new SignInDelegate());
+                break;
+            default:
+                break;
+        }
     }
 }

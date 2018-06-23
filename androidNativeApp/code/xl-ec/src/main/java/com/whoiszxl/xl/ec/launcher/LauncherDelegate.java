@@ -1,10 +1,13 @@
 package com.whoiszxl.xl.ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.whoiszxl.xl.app.AccountManager;
+import com.whoiszxl.xl.app.IUserChecker;
 import com.whoiszxl.xl.delegates.XlDelegate;
 import com.whoiszxl.xl.ec.R;
 import com.whoiszxl.xl.ec.R2;
@@ -41,6 +44,7 @@ public class LauncherDelegate extends XlDelegate implements ITimerListener {
      */
     private int mCount = 5;
 
+    private ILauncherListener mILauncherListener = null;
 
     /**
      * 点击倒计时控件的事件
@@ -56,6 +60,14 @@ public class LauncherDelegate extends XlDelegate implements ITimerListener {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
+    }
+
+    @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         initTimer();
     }
@@ -63,9 +75,24 @@ public class LauncherDelegate extends XlDelegate implements ITimerListener {
     //判断是否要显示滑动轮播
     private void checkIsShowScroll() {
         if(!XLPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())) {
-            start(new LauncherScrollDelegate(), SINGLETASK);
+            getSupportDelegate().start(new LauncherScrollDelegate(), SINGLETASK);
         }else {
-            //TODO 检查用户是否登录
+            //检查用户是否登录了APP
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 

@@ -14,6 +14,7 @@ import com.whoiszxl.xl.app.Starter;
 import com.whoiszxl.xl.delegates.BaseDelegate;
 import com.whoiszxl.xl.ec.database.DatabaseManager;
 import com.whoiszxl.xl.ec.database.UserProfile;
+import com.whoiszxl.xl.ec.main.EcBottomDelegate;
 
 import es.dmoral.toasty.Toasty;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
@@ -59,7 +60,7 @@ public class SignHandler {
         Toasty.success((Context) Starter.getConfiguration(ConfigKeys.APPLICATION_CONTEXT),msg,Toast.LENGTH_SHORT,true).show();
         if(status == 0) {
             //注册成功,需要直接跳转到登录界面
-            jump.start(new SignInDelegate(), 2);
+            jump.startWithPop(new EcBottomDelegate());
         }
     }
 

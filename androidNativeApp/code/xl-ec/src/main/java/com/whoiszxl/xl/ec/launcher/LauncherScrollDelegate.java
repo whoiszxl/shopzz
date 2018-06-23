@@ -1,11 +1,14 @@
 package com.whoiszxl.xl.ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.whoiszxl.xl.app.AccountManager;
+import com.whoiszxl.xl.app.IUserChecker;
 import com.whoiszxl.xl.delegates.XlDelegate;
 import com.whoiszxl.xl.ec.R;
 import com.whoiszxl.xl.ui.launcher.LauncherHolderCreator;
@@ -29,6 +32,17 @@ public class LauncherScrollDelegate extends XlDelegate implements OnItemClickLis
      * 存储轮播图资源id的List
      */
     private static final ArrayList<Integer> INTEGERS = new ArrayList<>();
+
+
+    private ILauncherListener mILauncherListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener) {
+            mILauncherListener = (ILauncherListener) activity;
+        }
+    }
 
     /**
      * 初始化轮播图
@@ -66,7 +80,18 @@ public class LauncherScrollDelegate extends XlDelegate implements OnItemClickLis
         //点击最后一个
         if(position == INTEGERS.size()-1) {
             XLPreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(), true);
-            //TODO 检查用户是否登录
+            //检查用户是否登录
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                }
+            });
         }
     }
 }

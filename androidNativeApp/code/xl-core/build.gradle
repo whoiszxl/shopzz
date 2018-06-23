@@ -42,8 +42,8 @@ dependencies {
     api project(':xl-annotations')
 
     //Fragment依赖
-    api 'me.yokeyword:fragmentation:1.0.3'
-    api 'me.yokeyword:fragmentation-swipeback:1.0.3'
+    api 'me.yokeyword:fragmentation:1.3.5'
+    api 'me.yokeyword:fragmentation-swipeback:1.3.5'
 
     //字体图标
     api 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
@@ -80,5 +80,5 @@ dependencies {
     api 'com.github.GrenderG:Toasty:1.3.0'
 
     //微信依赖（包含统计）
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.3.4'
+    api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.3.4'
 }
