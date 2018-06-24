@@ -15,6 +15,8 @@ import com.whoiszxl.xl.ec.main.EcBottomDelegate;
 import com.whoiszxl.xl.ec.sign.ISignListener;
 import com.whoiszxl.xl.ec.sign.SignInDelegate;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class ExampleActivity extends ProxyActivity implements ISignListener, ILauncherListener{
 
     @Override
@@ -26,6 +28,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
             actionBar.hide();
         }
         Starter.getConfigurator().withActivity(this);
+        StatusBarCompat.translucentStatusBar(this, true);
     }
 
     @Override

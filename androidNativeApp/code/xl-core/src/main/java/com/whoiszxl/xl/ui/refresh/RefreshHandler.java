@@ -35,14 +35,26 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener,Base
         REFRESH_LAYOUT.setOnRefreshListener(this);
     }
 
+    /**
+     * 简单工厂模式，通过new出自己类的私有构造函数来创建一个当前对象
+     * @param REFRESH_LAYOUT
+     * @param recyclerView
+     * @param converter
+     * @return
+     */
     public static RefreshHandler create(SwipeRefreshLayout REFRESH_LAYOUT,
                                         RecyclerView recyclerView,
                                         DataConverter converter) {
         return new RefreshHandler(REFRESH_LAYOUT,recyclerView,converter,new PagingBean());
     }
 
+    /**
+     * 刷新的时候调用
+     */
     private void refresh() {
+        //在网络请求前将REFRESH_LAYOUT，也就是那个刷新球显示出来
         REFRESH_LAYOUT.setRefreshing(true);
+        //开始做一个两秒的延时,在延时中做网络刷新请求，刷新完成之后将刷新球的状态设置为false隐藏
         Starter.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -53,20 +65,29 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener,Base
         },2000);
     }
 
+    /**
+     * 通过api url初始化首页数据
+     * @param url
+     */
     public void firstPage(String url) {
+        //设置1秒的延迟
         BEAN.setDelayed(1000);
         RestClient.builder()
                 .url(url)
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
+
+                        //获取到接口json返回的data数据
                         final JSONObject object = JSON.parseObject(response).getJSONObject("data");
+                        //设置分页需要的总条数和每页数量
                         BEAN.setTotal(object.getInteger("total"))
                                 .setPageSize(object.getInteger("pageSize"));
                         //设置adapter
                         mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(response));
                         mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLERVIEW);
                         RECYCLERVIEW.setAdapter(mAdapter);
+                        //页数自增1
                         BEAN.addIndex();
                     }
                 })

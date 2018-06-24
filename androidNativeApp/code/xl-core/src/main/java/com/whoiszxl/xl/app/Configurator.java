@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.WeakHashMap;
@@ -65,6 +67,7 @@ public class Configurator {
      */
     public final void configure() {
         initIcons();
+        Logger.addLogAdapter(new AndroidLogAdapter());
         XL_CONFIGS.put(ConfigKeys.CONFIG_READY, true);
     }
 

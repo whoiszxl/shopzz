@@ -8,6 +8,9 @@ import java.util.ArrayList;
  */
 public abstract class DataConverter {
 
+    /**
+     * 存储json数据转换实体的集合
+     */
     protected final ArrayList<MultipleItemEntity> ENTITIES = new ArrayList<>();
     private String mJsonData = null;
 

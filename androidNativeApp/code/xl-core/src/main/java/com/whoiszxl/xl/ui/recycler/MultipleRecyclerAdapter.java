@@ -38,13 +38,22 @@ public class MultipleRecyclerAdapter
         return new MultipleRecyclerAdapter(data);
     }
 
+    /**
+     * 拿到数据转换器调用convert会返回json对应的实体集合
+     * 然后会将这个实体数据传递到当前类的父类的Adapter中
+     * @param converter
+     * @return
+     */
     public static MultipleRecyclerAdapter create(DataConverter converter) {
         return new MultipleRecyclerAdapter(converter.convert());
     }
 
 
+    /**
+     * 初始化
+     */
     private void init() {
-        //设置不同的item布局
+        //设置不同的item布局，将每种布局的xml都添加到适配器中
         addItemType(ItemType.TEXT, R.layout.item_multiple_text);
         addItemType(ItemType.IMAGE, R.layout.item_multiple_image);
         addItemType(ItemType.TEXT_IMAGE, R.layout.item_multiple_image_text);
@@ -63,17 +72,25 @@ public class MultipleRecyclerAdapter
         return MultipleViewHolder.create(view);
     }
 
+    /**
+     * 转换数据
+     * @param holder
+     * @param entity
+     */
     @Override
     protected void convert(MultipleViewHolder holder, MultipleItemEntity entity) {
         final String text;
         final String imageUrl;
         final ArrayList<String> bannerImages;
+        //开始遍历适配器中存在的ItemType
         switch (holder.getItemViewType()) {
             case ItemType.TEXT:
+                //纯文本模式，从entity实体中拿到文本，再通过holder设置到这个xml布局的控件中
                 text = entity.getField(MultipleFields.TEXT);
                 holder.setText(R.id.text_single, text);
                 break;
             case ItemType.IMAGE:
+                //纯图片模式，通过Glide将图片into到img_single的控件中去
                 imageUrl = entity.getField(MultipleFields.IMAGE_URL);
                 Glide.with(mContext)
                         .load(imageUrl)
@@ -103,11 +120,21 @@ public class MultipleRecyclerAdapter
         }
     }
 
+    /**
+     * 从这里拿到item的size
+     * @param gridLayoutManager
+     * @param position
+     * @return
+     */
     @Override
     public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
         return getData().get(position).getField(MultipleFields.SPAN_SIZE);
     }
 
+    /**
+     * 点击事件
+     * @param position
+     */
     @Override
     public void onItemClick(int position) {
 
