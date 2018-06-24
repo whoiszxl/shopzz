@@ -67,7 +67,7 @@ dependencies {
     api 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 
     //JSON依赖
-    api 'com.alibaba:fastjson:1.2.31'
+    api 'com.alibaba:fastjson:1.1.57.android'
 
     //Log
     api 'com.orhanobut:logger:2.1.1'
@@ -81,4 +81,20 @@ dependencies {
 
     //微信依赖（包含统计）
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.3.4'
+
+    //RecyclerView依赖
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    //RecyclerView 分割线
+    api 'com.choices.divider:RecyclerView_Divider:1.0.0'
+
+    //图片处理
+    api 'com.github.bumptech.glide:glide:4.0.0-RC0'
+    api 'com.github.bumptech.glide:okhttp3-integration:4.0.0-RC0@aar'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+    //Banner依赖
+    api 'com.bigkoo:convenientbanner:2.0.5'
+    api 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    //auto
+    compileOnly 'com.google.auto.value:auto-value:1.4.1'
+    annotationProcessor "com.google.auto.value:auto-value:1.4.1"
 }
