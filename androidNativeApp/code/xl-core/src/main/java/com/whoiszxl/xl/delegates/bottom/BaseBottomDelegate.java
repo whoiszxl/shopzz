@@ -103,7 +103,7 @@ public abstract class BaseBottomDelegate extends XlDelegate implements View.OnCl
         }
 
         String s = JSON.toJSONString(TAB_BEANS);
-        Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
     }
 
     @Override

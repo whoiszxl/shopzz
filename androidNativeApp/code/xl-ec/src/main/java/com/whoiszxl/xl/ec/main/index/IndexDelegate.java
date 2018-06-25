@@ -15,17 +15,11 @@ import com.whoiszxl.xl.delegates.bottom.BottomItemDelegate;
 import com.whoiszxl.xl.ec.R;
 import com.whoiszxl.xl.ec.R2;
 import com.whoiszxl.xl.ec.api.Api;
-import com.whoiszxl.xl.net.RestClient;
-import com.whoiszxl.xl.net.callback.ISuccess;
 import com.whoiszxl.xl.ui.recycler.BaseDecoration;
-import com.whoiszxl.xl.ui.recycler.MultipleFields;
-import com.whoiszxl.xl.ui.recycler.MultipleItemEntity;
 import com.whoiszxl.xl.ui.refresh.RefreshHandler;
 
-import java.util.ArrayList;
 
 import butterknife.BindView;
-import es.dmoral.toasty.Toasty;
 
 /**
  * @author whoiszxl
