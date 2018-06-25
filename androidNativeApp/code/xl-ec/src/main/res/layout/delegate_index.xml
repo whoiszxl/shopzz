@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         app:layout_behavior="com.whoiszxl.xl.ec.main.index.TranslucentBehavior"
         android:background="@android:color/transparent"
-        android:layout_height="70dp">
+        android:layout_height="60dp">
 
         <android.support.v7.widget.LinearLayoutCompat
             android:layout_width="match_parent"

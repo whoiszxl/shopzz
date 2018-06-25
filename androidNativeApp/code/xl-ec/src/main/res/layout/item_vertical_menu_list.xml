@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_vertical_list_container"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@android:color/white">
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_vertical_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_toRightOf="@+id/view_line"
+        android:textColor="@android:color/black"
+        tools:ignore="RtlHardcoded" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="#c9c9c9" />
+</RelativeLayout>

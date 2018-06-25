@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.whoiszxl.xl.delegates.bottom.BottomItemDelegate;
 import com.whoiszxl.xl.ec.R;
+import com.whoiszxl.xl.ec.main.sort.content.ContentDelegate;
 import com.whoiszxl.xl.ec.main.sort.list.VerticalListDelegate;
 
 /**
@@ -29,6 +30,8 @@ public class SortDelegate extends BottomItemDelegate {
         super.onLazyInitView(savedInstanceState);
         // 將VerticalListDelegate的布局加载到vertical_list_container这个的控件里
         final VerticalListDelegate listDelegate = new VerticalListDelegate();
-        loadRootFragment(R.id.vertical_list_container, listDelegate);
+        getSupportDelegate().loadRootFragment(R.id.vertical_list_container, listDelegate);
+        //设置右侧第一个分类的默认显示分类100060
+        getSupportDelegate().loadRootFragment(R.id.sort_content_container, ContentDelegate.newInstance(100060));
     }
 }
