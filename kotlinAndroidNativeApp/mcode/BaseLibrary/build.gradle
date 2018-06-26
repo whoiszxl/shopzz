@@ -38,6 +38,18 @@ dependencies {
     api "org.jetbrains.anko:anko-commons:$anko_version"
     // Support-v4 (only Anko Commons)
     api "org.jetbrains.anko:anko-support-v4-commons:$anko_version"
+
+    // RxKotlin and RxAndroid
+    api "io.reactivex:rxkotlin:$rx_kotlin_version"
+    api "io.reactivex:rxandroid:${rx_android_version}"
+
+    //Retrofit
+    api "com.squareup.okhttp3:okhttp:${ok_http_version}"
+    api "com.squareup.retrofit2:retrofit:${retrofit_version}"
+    api "com.squareup.okhttp3:logging-interceptor:${ok_http_version}"
+    api "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+    api "com.squareup.retrofit2:adapter-rxjava:${retrofit_version}"
+
 }
 repositories {
     mavenCentral()
