@@ -2,9 +2,9 @@ package com.whoiszxl.user.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.whoiszxl.user.R
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.mRegisterBtn
+import org.jetbrains.anko.longToast
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -13,7 +13,7 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         mRegisterBtn.setOnClickListener {
-            Toast.makeText(this, "注册了", Toast.LENGTH_SHORT).show()
+            longToast("hello world")
         }
     }
 }
