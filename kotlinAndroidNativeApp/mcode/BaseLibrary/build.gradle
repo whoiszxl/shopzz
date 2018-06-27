@@ -59,6 +59,9 @@ dependencies {
     api "com.trello:rxlifecycle-kotlin:$rx_lifecycle_version"
     api "com.trello:rxlifecycle-components:$rx_lifecycle_version"
 
+    //toasty个性吐司
+    api 'com.github.GrenderG:Toasty:1.3.0'
+
 }
 repositories {
     mavenCentral()
