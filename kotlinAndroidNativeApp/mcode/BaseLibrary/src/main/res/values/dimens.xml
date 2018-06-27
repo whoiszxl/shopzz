@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_divider_height">1px</dimen>
+    <dimen name="common_divider_width">1px</dimen>
+    <dimen name="common_header_bar_height">50dp</dimen>
+    <dimen name="common_icon_height">60dp</dimen>
+    <dimen name="common_icon_width">60dp</dimen>
+    <dimen name="common_line_height">50dp</dimen>
+    <dimen name="common_margin">15dp</dimen>
+    <dimen name="common_margin_middle">10dp</dimen>
+    <dimen name="common_margin_small">5dp</dimen>
+    <dimen name="common_padding">15dp</dimen>
+    <dimen name="common_padding_middle">10dp</dimen>
+    <dimen name="common_padding_small">5dp</dimen>
+    <dimen name="common_radius">6dp</dimen>
+    <dimen name="common_border_size">1px</dimen>
+
+    <dimen name="text_small_size">12sp</dimen>
+    <dimen name="text_middle_size">14sp</dimen>
+    <dimen name="text_big_size">16sp</dimen>
+    <dimen name="text_large_size">18sp</dimen>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- HeaderBar自定义属性 -->
+    <declare-styleable name="HeaderBar">
+        <attr name="isShowBack" format="boolean"/>
+        <attr name="titleText" format="string"/>
+        <attr name="rightText" format="string"/>
+    </declare-styleable>
+
+    <!-- LabelText自定义属性 -->
+    <declare-styleable name="LabelText">
+        <attr name="labelText" format="string"/>
+        <attr name="contentText" format="string"/>
+    </declare-styleable>
+</resources>

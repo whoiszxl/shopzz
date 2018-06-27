@@ -2,7 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <com.whoiszxl.base.widgets.HeaderBar
+        style="@style/MatchWrap"
+        app:isShowBack="false"
+        app:titleText="注册"
+        app:rightText="登录"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
