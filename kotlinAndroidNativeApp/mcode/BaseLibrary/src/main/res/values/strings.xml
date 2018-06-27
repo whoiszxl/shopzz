@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">BaseLibrary</string>
+
+    <string name="coming_soon_tip">敬请期待~~~</string>
+    <string name="common_complete">完成</string>
+    <string name="common_confirm">确认</string>
+    <string name="common_edit">编辑</string>
+    <string name="common_delete">删除</string>
+    <string name="common_next">下一步</string>
+    <string name="common_save">保存</string>
+    <string name="no_data_tip">暂无数据~~~</string>
+
+    <string name="nav_bar_home">主页</string>
+    <string name="nav_bar_category">分类</string>
+    <string name="nav_bar_cart">购物车</string>
+    <string name="nav_bar_msg">消息</string>
+    <string name="nav_bar_user">我的</string>
 </resources>

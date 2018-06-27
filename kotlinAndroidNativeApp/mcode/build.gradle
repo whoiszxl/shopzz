@@ -2,9 +2,12 @@
 
 buildscript {
     ext.kotlin_version = '1.2.50'
-
     ext.anko_version = '0.10.2'
-
+    ext.compile_sdk_version = 25
+    ext.build_tools_version = "25.0.2"
+    ext.min_sdk_version = 15
+    ext.target_sdk_version = 25
+    ext.android_support_version = "25.3.1"
 
 
 

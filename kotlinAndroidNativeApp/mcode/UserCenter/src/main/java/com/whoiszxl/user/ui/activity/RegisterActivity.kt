@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.whoiszxl.base.common.AppManager
 import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.activity.BaseMvpActivity
+import com.whoiszxl.base.widgets.VerifyButton
 import com.whoiszxl.user.R
 import com.whoiszxl.user.injection.component.DaggerUserComponent
 import com.whoiszxl.user.injection.module.UserModule
@@ -55,6 +56,12 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
                 mPresenter.register(mMobileEt.text.toString(),mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
             }
         }
+
+        mGetVerifyCodeBtn.onClick {
+            mGetVerifyCodeBtn.requestSendVerifyNumber()
+        }
+
+
     }
 
     override fun onBackPressed() {

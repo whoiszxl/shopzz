@@ -2,8 +2,6 @@ package com.whoiszxl.base.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
-
 /*
     网络工具
  */

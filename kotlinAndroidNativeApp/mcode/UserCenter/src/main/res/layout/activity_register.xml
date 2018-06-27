@@ -24,7 +24,8 @@
             android:hint="请输入手机号码"
             />
 
-        <Button
+        <com.whoiszxl.base.widgets.VerifyButton
+            android:id="@+id/mGetVerifyCodeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="获取验证码" />
