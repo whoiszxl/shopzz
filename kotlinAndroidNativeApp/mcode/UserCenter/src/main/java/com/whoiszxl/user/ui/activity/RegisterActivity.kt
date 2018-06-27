@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.whoiszxl.base.common.AppManager
+import com.whoiszxl.base.ext.enable
 import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.activity.BaseMvpActivity
 import com.whoiszxl.base.widgets.VerifyButton
@@ -17,7 +18,12 @@ import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
-class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
+/**
+ * @author whoiszxl
+ * 注册activity
+ */
+class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, View.OnClickListener {
+
 
     private var pressTime:Long = 0
 
@@ -46,21 +52,25 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         //不需要实例化mPresenter了，依赖注入了
         //mPresenter.mView = this
 
+
+
+        initView()
+
+    }
+
+    /**
+     * 初始化视图
+     */
+    private fun initView() {
+
+        mRegisterBtn.enable(mMobileEt, {isBtnEnable()})
+        mRegisterBtn.enable(mVerifyCodeEt, {isBtnEnable()})
+        mRegisterBtn.enable(mPwdConfirmEt, {isBtnEnable()})
+        mRegisterBtn.enable(mPwdEt, {isBtnEnable()})
+
+        mVerifyCodeBtn.onClick(this)
         //调用click事件
-        mRegisterBtn.onClick{
-            toast(mMobileEt.text.toString())
-            if(mPwdEt.text.toString() != mRePwdEt.text.toString()){
-                toast("两次输入的密码不一致")
-            }else{
-                //调用Presenter的register方法，register里面又会铜鼓mView调用当前类里面的onRegisterResukt方法
-                mPresenter.register(mMobileEt.text.toString(),mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
-            }
-        }
-
-        mGetVerifyCodeBtn.onClick {
-            mGetVerifyCodeBtn.requestSendVerifyNumber()
-        }
-
+        mRegisterBtn.onClick(this)
 
     }
 
@@ -74,4 +84,25 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
         }
     }
 
+    override fun onClick(view: View) {
+        when(view.id) {
+            R.id.mVerifyCodeBtn -> {
+                mVerifyCodeBtn.requestSendVerifyNumber()
+                toast("发送验证码成功")
+            }
+            R.id.mRegisterBtn -> {
+
+            }
+        }
+    }
+
+    /**
+     * 判断注册页面的是个按钮是否为空
+     */
+    private fun isBtnEnable():Boolean{
+        return mMobileEt.text.isNullOrEmpty().not() &&
+                mVerifyCodeEt.text.isNullOrEmpty().not() &&
+                mPwdEt.text.isNullOrEmpty().not() &&
+                mPwdConfirmEt.text.isNullOrEmpty().not()
+    }
 }
