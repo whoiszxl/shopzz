@@ -3,8 +3,10 @@ package com.whoiszxl.user.presenter
 import com.whoiszxl.base.ext.execute
 import com.whoiszxl.base.presenter.BasePresenter
 import com.whoiszxl.base.rx.BaseSubscriber
+import com.whoiszxl.base.utils.NetWorkUtils
 import com.whoiszxl.user.presenter.view.RegisterView
 import com.whoiszxl.user.service.UserService
+import es.dmoral.toasty.Toasty
 import javax.inject.Inject
 
 
@@ -16,12 +18,19 @@ class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
     @Inject
     lateinit var userService: UserService
 
-    fun register(mobile:String, verifyCode:String, pwd:String){
-        userService.register(mobile, verifyCode, pwd)
-                .execute(object:BaseSubscriber<Boolean>(){
+    fun register(mobile:String, pwd:String, verifyCode:String){
+
+        if(!checkNetWork()){
+            return
+        }
+
+        mView.showLoading()
+        userService.register(mobile, pwd, verifyCode)
+                .execute(object:BaseSubscriber<Boolean>(mView){
                     override fun onNext(t: Boolean) {
                         if(t){
                             mView.onRegisterResukt("注册成功")
+                            mView.hideLoading()
                         }
 
                     }

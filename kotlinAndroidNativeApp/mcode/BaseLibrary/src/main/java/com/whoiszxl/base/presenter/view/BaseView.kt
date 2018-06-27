@@ -4,5 +4,5 @@ interface BaseView {
 
     fun showLoading()
     fun hideLoading()
-    fun onError()
+    fun onError(text:String)
 }

@@ -18,7 +18,7 @@ open abstract class BaseMvpFragment<T:BasePresenter<*>>:BaseFragment(),BaseView 
     override fun hideLoading() {
     }
 
-    override fun onError() {
+    override fun onError(text:String) {
     }
 
     @Inject
