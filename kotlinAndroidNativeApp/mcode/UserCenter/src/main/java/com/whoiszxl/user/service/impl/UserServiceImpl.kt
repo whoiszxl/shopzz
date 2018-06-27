@@ -1,6 +1,7 @@
 package com.whoiszxl.user.service.impl
 
 import com.whoiszxl.base.data.protocol.BaseResp
+import com.whoiszxl.base.rx.BaseException
 import com.whoiszxl.user.data.repository.UserRepository
 import com.whoiszxl.user.service.UserService
 import rx.Observable
@@ -16,7 +17,7 @@ class UserServiceImpl : UserService {
                     override fun call(t: BaseResp<String>):
                             Observable<Boolean> {
                         if(t.status != 0){
-                            return Observable.error()
+                            return Observable.error(BaseException(t.status, t.message))
                         }
                         return Observable.just(true)
                     }

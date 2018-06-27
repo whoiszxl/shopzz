@@ -29,8 +29,12 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView {
 
         //调用click事件
         mRegisterBtn.setOnClickListener {
-            //调用Presenter的register方法，register里面又会铜鼓mView调用当前类里面的onRegisterResukt方法
-            mPresenter.register("","", "")
+            if(mPwdEt.text.toString() != mRePwdEt.text.toString()){
+                toast("两次输入的密码不一致")
+            }else{
+                //调用Presenter的register方法，register里面又会铜鼓mView调用当前类里面的onRegisterResukt方法
+                mPresenter.register(mMobileEt.text.toString(),mVerifyCodeEt.text.toString(), mPwdEt.text.toString())
+            }
         }
     }
 }
