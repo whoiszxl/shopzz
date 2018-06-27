@@ -74,6 +74,13 @@ dependencies {
     //Circle ImageView
     api "de.hdodenhof:circleimageview:${circle_imageView_version}"
 
+
+
+
+
+    //MulitStateView
+    api "com.github.Kennyc1012:MultiStateView:$multi_state_view_version"
+
 }
 repositories {
     mavenCentral()
