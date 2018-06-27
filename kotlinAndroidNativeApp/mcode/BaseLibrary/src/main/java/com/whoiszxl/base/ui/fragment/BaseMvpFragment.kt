@@ -1,4 +1,4 @@
-package com.whoiszxl.base.ui.activity
+package com.whoiszxl.base.ui.fragment
 
 import android.os.Bundle
 import com.whoiszxl.base.common.BaseApplication
@@ -10,7 +10,7 @@ import com.whoiszxl.base.presenter.BasePresenter
 import com.whoiszxl.base.presenter.view.BaseView
 import javax.inject.Inject
 
-open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView {
+open abstract class BaseMvpFragment<T:BasePresenter<*>>:BaseFragment(),BaseView {
     override fun showLoading() {
 
     }
@@ -36,8 +36,8 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView 
 
     private fun initActivityInjection() {
         activityComponent = DaggerActivityComponent.builder()
-                .appComponent((application as BaseApplication).appComponent)
-                .activityModule(ActivityModule(this))
+                .appComponent((activity.application as BaseApplication).appComponent)
+                .activityModule(ActivityModule(activity))
                 .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
     }
