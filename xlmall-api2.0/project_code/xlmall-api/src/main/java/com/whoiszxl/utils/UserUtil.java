@@ -28,6 +28,7 @@ public class UserUtil {
 		
 		String userJsonStr = RedisShardedPoolUtil.get(loginToken);
 		User user = JsonUtil.string2Obj(userJsonStr, User.class);
+		
 		return user;
 	}
 	

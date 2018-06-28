@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.dao.BannerMapper;
 import com.whoiszxl.dao.UserMapper;
@@ -15,6 +16,7 @@ import com.whoiszxl.entity.Banner;
 import com.whoiszxl.entity.Keywords;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.service.ArticleService;
+import com.whoiszxl.utils.AliSmsSender;
 import com.whoiszxl.vo.BannerVo;
 
 @RunWith(SpringRunner.class)
@@ -63,4 +65,11 @@ public class AppTests {
 		}
 	}
 
+	
+	@Test
+	public void message() throws Exception {
+		
+		SendSmsResponse sendSms = AliSmsSender.sendVerifyCode("17688900411",6);
+		System.out.println("send sms:"+sendSms.getMessage());
+	}
 }

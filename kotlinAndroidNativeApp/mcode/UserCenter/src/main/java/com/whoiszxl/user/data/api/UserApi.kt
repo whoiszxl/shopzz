@@ -21,4 +21,12 @@ interface UserApi {
             @Field("username") username:String,
             @Field("password") password:String,
             @Field("push_id") push_id:String):Observable<BaseResp<UserInfo>>
+
+
+    @FormUrlEncoded
+    @POST("/user/app_login")
+    fun forgetPwd(
+            @Field("username") username:String,
+            @Field("password") password:String,
+            @Field("push_id") push_id:String):Observable<BaseResp<UserInfo>>
 }

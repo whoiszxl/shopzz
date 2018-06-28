@@ -39,12 +39,30 @@ public interface UserMapper {
     int checkEmail(String email);
     
     /**
+     * 通过手机号校验用户是否存在
+     * @param phone
+     * @return
+     */
+    int checkPhone(String phone);
+    
+    /**
      * 通过username和password登录
      * @param username
      * @param password
      * @return
      */
     User selectLogin(@Param("username") String username,@Param("password") String password);
+    
+    
+    /**
+     * 通过phone和password登录
+     * @param phone
+     * @param password
+     * @return
+     */
+    User selectLoginByPhone(@Param("phone") String phone,@Param("password") String password);
+    
+    
     
     /**
      * 查询输入用户的密保问题
@@ -75,4 +93,6 @@ public interface UserMapper {
     List<User> selectAllUser();
 
 	int selectUserCount();
+
+	
 }

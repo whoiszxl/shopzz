@@ -15,6 +15,7 @@ public class Const {
 	
 	public static final String EMAIL = "email";
 	public static final String USERNAME = "username";
+	public static final String PHONE = "phone";
 	
 	public static final String TOKEN_PREFIX = "token_";
 	
@@ -175,5 +176,10 @@ public class Const {
 		String INDEX_BANNER_REDIS_KEY = "index_banner"; //主頁轮播图在redis的key
 		String INDEX_CATEGORY_REDIS_KEY = "index_category"; //主頁推荐分类在redis的key
 		int CATEGORY_MAIN_COUNT = 6; //主页推荐分类的大类的数量
+	}
+	
+	public interface SMS {
+		String SMS_ALI_VERIFY_CODE_PREFIX = "ali_verifycode_";
+		int VERIFYCODE_LENGTH = 6;
 	}
 }

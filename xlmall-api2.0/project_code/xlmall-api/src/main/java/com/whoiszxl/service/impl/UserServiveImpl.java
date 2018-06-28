@@ -12,21 +12,15 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
-import com.whoiszxl.common.TokenCache;
 import com.whoiszxl.dao.UserMapper;
-import com.whoiszxl.entity.Order;
-import com.whoiszxl.entity.OrderItem;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.jwt.JWTUtil;
 import com.whoiszxl.service.UserService;
-import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.MD5Util;
 import com.whoiszxl.utils.PropertiesUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
-import com.whoiszxl.vo.OrderVo;
 import com.whoiszxl.vo.UserVo;
 
 @Service("userService")
@@ -108,6 +102,13 @@ public class UserServiveImpl implements UserService {
 				int resultCount = userMapper.checkEmail(str);
 				if(resultCount > 0) {
 					return ServerResponse.createByErrorMessage("email已存在");
+				}
+			}
+			
+			if(Const.PHONE.equals(type)) {
+				int resultCount = userMapper.checkPhone(str);
+				if(resultCount > 0) {
+					return ServerResponse.createByErrorMessage("手机号已存在");
 				}
 			}
 		}else {
@@ -244,20 +245,20 @@ public class UserServiveImpl implements UserService {
 	}
 
 	@Override
-	public ServerResponse<UserVo> app_login(String username, String password, String pushId) {
-		int resultCount = userMapper.checkUsername(username);
+	public ServerResponse<UserVo> app_login(String phone, String password, String pushId) {
+		int resultCount = userMapper.checkPhone(phone);
 		if(resultCount == 0) {
-			return ServerResponse.createByErrorMessage("用户名不存在");
+			return ServerResponse.createByErrorMessage("手机号不存在");
 		}
 		
 		//密码md5登录
-		User user = userMapper.selectLogin(username, MD5Util.MD5EncodeUtf8(password));
+		User user = userMapper.selectLoginByPhone(phone, MD5Util.MD5EncodeUtf8(password));
 		if(user == null) {
 			return ServerResponse.createByErrorMessage("密码错误");
 		}
 		
 		//签名token并存入redis
-		String token = JWTUtil.sign(username, password, user.getId());
+		String token = JWTUtil.sign(user.getUsername(), password, user.getId());
 		RedisShardedPoolUtil.setEx(token, "1", (int)(Const.JWTTokenCache.JWT_TOKEN_EXTIME/1000));
 		
 		//app登录后还需要更新push_id推送消息id
@@ -271,6 +272,38 @@ public class UserServiveImpl implements UserService {
 		BeanUtils.copyProperties(user, userVo);
 		userVo.setToken(token);
 		return ServerResponse.createBySuccess("登录成功", userVo);
+	}
+
+	@Override
+	public ServerResponse<String> app_register(String phone, String password, String verifyCode) {
+		//校验用户是否存在 
+		ServerResponse<String> response = this.checkVaild(phone, Const.PHONE);
+		if(!response.isSuccess()) {
+			return response;
+		}
+	
+		//校验传递过来的验证码是否有效
+		if(!RedisShardedPoolUtil.get(Const.SMS.SMS_ALI_VERIFY_CODE_PREFIX+phone).equals(verifyCode)) {
+			return ServerResponse.createBySuccessMessage("验证码已经失效");
+		}
+		
+		//全部校验通过了之后呢构建一个用户对象保存到数据库中
+		User user = new User();
+		user.setUsername(phone);
+		//MD5加密
+		user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
+		user.setRole(Const.Role.ROLE_CUSTOMER);
+		Date currentTime = new Date();
+		user.setCreateTime(currentTime);
+		user.setUpdateTime(currentTime);
+		
+		int resultCount = userMapper.insertSelective(user);
+		if(resultCount == 0) {
+			return ServerResponse.createByErrorMessage("注册失败");
+		}
+		//注册成功后删除redis中的验证码
+		RedisShardedPoolUtil.del(Const.SMS.SMS_ALI_VERIFY_CODE_PREFIX+phone);
+		return ServerResponse.createBySuccessMessage("注册成功");
 	}
 
 }

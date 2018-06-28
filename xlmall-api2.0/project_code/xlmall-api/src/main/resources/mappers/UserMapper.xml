@@ -236,6 +236,12 @@
 		from xl_user
 		where email = #{email}
 	</select>
+	
+	<select id="checkPhone" resultType="int" parameterType="string">
+		select count(1)
+		from xl_user
+		where phone = #{phone}
+	</select>
 
 	<select id="selectLogin" resultMap="BaseResultMap"
 		parameterType="map">
@@ -243,6 +249,16 @@
 		<include refid="Base_Column_List" />
 		from xl_user
 		where username = #{username}
+		and password = #{password}
+	</select>
+	
+	
+	<select id="selectLoginByPhone" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from xl_user
+		where phone = #{phone}
 		and password = #{password}
 	</select>
 

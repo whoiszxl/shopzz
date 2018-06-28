@@ -18,6 +18,7 @@ import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
 import com.whoiszxl.jwt.JWTUtil;
 import com.whoiszxl.jwt.JwtUserService;
+import com.whoiszxl.service.SmsService;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
@@ -43,6 +44,9 @@ public class UserController {
 	
 	@Autowired
 	private JwtUserService jwtUserService;
+	
+	@Autowired
+	private SmsService smsService;
 
 	/**
 	 * 用户登录
@@ -92,6 +96,20 @@ public class UserController {
 	@ApiOperation(value = "APP账号密码登录接口")
 	public ServerResponse<UserVo> app_login(String username, String password, String pushId) {
 		ServerResponse<UserVo> response = userService.app_login(username, password, pushId);
+		return response;
+	}
+	
+	@PostMapping("app_register")
+	@ApiOperation(value = "APP用户手机注册接口")
+	public ServerResponse<String> app_register(String phone, String password, String verifyCode) {
+		ServerResponse<String> response = userService.app_register(phone, password, verifyCode);
+		return response;
+	}
+	
+	@PostMapping("verifycode")
+	@ApiOperation(value = "APP用户手机注册接口")
+	public ServerResponse<String> verifycode(String phone) {
+		ServerResponse<String> response = smsService.sendVerifyCode(phone, Const.SMS.VERIFYCODE_LENGTH);
 		return response;
 	}
 
