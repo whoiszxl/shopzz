@@ -6,24 +6,18 @@ import com.whoiszxl.base.ext.enable
 import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.activity.BaseMvpActivity
 import com.whoiszxl.user.R
-import com.whoiszxl.user.data.protocol.UserInfo
 import com.whoiszxl.user.injection.component.DaggerUserComponent
 import com.whoiszxl.user.injection.module.UserModule
-import com.whoiszxl.user.presenter.LoginPresenter
-import com.whoiszxl.user.presenter.view.LoginView
-import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.startActivity
+import com.whoiszxl.user.presenter.ResetPwdPresenter
+import com.whoiszxl.user.presenter.view.ResetPwdView
+import kotlinx.android.synthetic.main.activity_reset_pwd.*
 import org.jetbrains.anko.toast
 
 /**
  * @author whoiszxl
- * 登录activity
+ * 忘记密码activity
  */
-class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
-
-
-
-    private var pressTime:Long = 0
+class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView {
 
     override fun injectComponent() {
         //这个需要编辑一个UserComponent类，然后重新编译生成DaggerUserComponent,然后构建注入this类，才能让依赖注入生效
@@ -33,16 +27,15 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
     }
 
     /**
-     * 处理登录成功后的回调事件
+     * 处理重置密码后的回调事件
      */
-    override fun onLoginResukt(result: UserInfo) {
-        toast(result.userName)
+    override fun onResetPwdResukt(result: String) {
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
+        setContentView(R.layout.activity_reset_pwd)
         //从这里实例化这个注册Presenter
         //mPresenter = RegisterPresenter()
         //然后初始化Presenter中的mView，因为当前Activity实现了RegisterView，RegisterView又实现了BaseView，所以是同一类型
@@ -61,33 +54,26 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
      */
     private fun initView() {
 
-        mLoginBtn.enable(mMobileEt, {isBtnEnable()})
-        mLoginBtn.enable(mPwdEt, {isBtnEnable()})
+        mConfirmBtn.enable(mPwdEt, {isBtnEnable()})
+        mConfirmBtn.enable(mPwdConfirmEt, {isBtnEnable()})
 
-        mHeaderBar.getRightView().onClick(this)
         //调用click事件
-        mLoginBtn.onClick(this)
-        mForgetPwdTv.onClick(this)
-
-    }
-
-
-    override fun onClick(view: View) {
-        when(view.id) {
-            R.id.mRightTv -> { startActivity<RegisterActivity>() }
-            R.id.mForgetPwdTv -> { startActivity<ForgetPwdActivity>() }
-            R.id.mLoginBtn -> {
-                mPresenter.login(mMobileEt.text.toString(), mPwdEt.text.toString(),"000000")
+        mConfirmBtn.onClick {
+            if(mPwdEt.text.toString() != mPwdConfirmEt.text.toString()) {
+                toast("两次输入密码不一致")
+                return@onClick
             }
-
+            mPresenter.resetPwd(intent.getStringExtra("mobile"), mPwdEt.text.toString())
         }
+
     }
+
 
     /**
      * 判断注册页面的是个按钮是否为空
      */
     private fun isBtnEnable():Boolean{
-        return mMobileEt.text.isNullOrEmpty().not() &&
-                mPwdEt.text.isNullOrEmpty().not()
+        return mConfirmBtn.text.isNullOrEmpty().not() &&
+                mConfirmBtn.text.isNullOrEmpty().not()
     }
 }

@@ -2,7 +2,7 @@ package com.whoiszxl.user.presenter.view
 
 import com.whoiszxl.base.presenter.view.BaseView
 
-interface ForgetPwdView:BaseView {
+interface ResetPwdView:BaseView {
 
-    fun onForgetPwdResukt(result:String)
+    fun onResetPwdResukt(result:String)
 }

@@ -37,4 +37,19 @@ class RegisterPresenter @Inject constructor():BasePresenter<RegisterView>() {
                 }, lifecycleProvider)
 
     }
+
+    fun verifycode(mobile: String) {
+        if(!checkNetWork()){
+            return
+        }
+
+        userService.verifycode(mobile)
+                .execute(object:BaseSubscriber<Boolean>(mView){
+                    override fun onNext(t: Boolean) {
+                        if(t) {
+                            mView.onSendVerifyCodeResult("验证码发送成功")
+                        }
+                    }
+                },lifecycleProvider)
+    }
 }

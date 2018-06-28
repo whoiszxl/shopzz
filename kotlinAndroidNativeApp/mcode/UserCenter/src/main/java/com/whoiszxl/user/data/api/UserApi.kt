@@ -12,21 +12,37 @@ import rx.Observable
 
 interface UserApi {
 
-    @POST("/user/register")
-    fun register(@Body req : RegisterReq):Observable<BaseResp<String>>
+    @FormUrlEncoded
+    @POST("/user/app_register")
+    fun register(
+            @Field("phone") phone: String,
+            @Field("password") password: String,
+            @Field("verifyCode") verifyCode: String
+    ): Observable<BaseResp<String>>
+
+    @FormUrlEncoded
+    @POST("/user/verifycode")
+    fun verifycode(
+            @Field("phone") phone: String
+    ): Observable<BaseResp<String>>
 
     @FormUrlEncoded
     @POST("/user/app_login")
     fun login(
-            @Field("username") username:String,
-            @Field("password") password:String,
-            @Field("push_id") push_id:String):Observable<BaseResp<UserInfo>>
+            @Field("username") username: String,
+            @Field("password") password: String,
+            @Field("push_id") push_id: String): Observable<BaseResp<UserInfo>>
 
 
     @FormUrlEncoded
-    @POST("/user/app_login")
+    @POST("/user/forgetPwd")
     fun forgetPwd(
-            @Field("username") username:String,
-            @Field("password") password:String,
-            @Field("push_id") push_id:String):Observable<BaseResp<UserInfo>>
+            @Field("phone") phone: String,
+            @Field("verifyCode") verifyCode: String): Observable<BaseResp<String>>
+
+    @FormUrlEncoded
+    @POST("/user/resetPwd")
+    fun resetPwd(
+            @Field("phone") phone: String,
+            @Field("password") password: String): Observable<BaseResp<String>>
 }

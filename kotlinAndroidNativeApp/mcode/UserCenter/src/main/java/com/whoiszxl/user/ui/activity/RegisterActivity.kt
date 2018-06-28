@@ -25,6 +25,7 @@ import org.jetbrains.anko.toast
 class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, View.OnClickListener {
 
 
+
     private var pressTime:Long = 0
 
     override fun injectComponent() {
@@ -38,6 +39,10 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
      * 处理注册后的回调事件
      */
     override fun onRegisterResukt(result: String) {
+        toast(result)
+    }
+
+    override fun onSendVerifyCodeResult(result: String) {
         toast(result)
     }
 
@@ -87,11 +92,12 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
     override fun onClick(view: View) {
         when(view.id) {
             R.id.mVerifyCodeBtn -> {
+                mPresenter.verifycode(mMobileEt.text.toString())
                 mVerifyCodeBtn.requestSendVerifyNumber()
                 toast("发送验证码成功")
             }
             R.id.mRegisterBtn -> {
-
+                mPresenter.register(mMobileEt.text.toString(),mPwdEt.text.toString(),mVerifyCodeEt.text.toString())
             }
         }
     }

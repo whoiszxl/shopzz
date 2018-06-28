@@ -11,13 +11,43 @@ import javax.inject.Inject
 
 class UserRepository @Inject constructor(){
 
-    fun register(mobile:String,pwd:String,verifyCode:String):Observable<BaseResp<String>>{
+    /**
+     * 发送注册验证码
+     */
+    fun verifycode(phone:String):Observable<BaseResp<String>>{
         return RetrofitFactory.instance.create(UserApi::class.java)
-                .register(RegisterReq(mobile, pwd, verifyCode))
+                .verifycode(phone)
     }
 
-    fun login(mobile:String, pwd:String, pushId:String):Observable<BaseResp<UserInfo>>{
+    /**
+     * 注册
+     */
+    fun register(phone:String,pwd:String,verifyCode:String):Observable<BaseResp<String>>{
         return RetrofitFactory.instance.create(UserApi::class.java)
-                .login(mobile, pwd, pushId)
+                .register(phone, pwd, verifyCode)
+    }
+
+    /**
+     * 登录
+     */
+    fun login(phone:String, pwd:String, pushId:String):Observable<BaseResp<UserInfo>>{
+        return RetrofitFactory.instance.create(UserApi::class.java)
+                .login(phone, pwd, pushId)
+    }
+
+    /**
+     * 忘记密码
+     */
+    fun forgetPwd(phone:String, verifyCode:String):Observable<BaseResp<String>>{
+        return RetrofitFactory.instance.create(UserApi::class.java)
+                .forgetPwd(phone, verifyCode)
+    }
+
+    /**
+     * 重置密码
+     */
+    fun resetPwd(phone:String, pwd:String):Observable<BaseResp<String>>{
+        return RetrofitFactory.instance.create(UserApi::class.java)
+                .resetPwd(phone, pwd)
     }
 }

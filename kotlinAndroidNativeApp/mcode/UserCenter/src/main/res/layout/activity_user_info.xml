@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              style="@style/MatchMatch.Vertical.Common">
+    <com.whoiszxl.base.widgets.HeaderBar android:id="@id/mHeaderBar"
+                                       app:titleText="个人信息"
+                                       app:rightText="@string/common_save"
+                                       style="@style/MatchWrap"/>
+    <RelativeLayout android:id="@+id/mUserIconView"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    style="@style/user_info_line_style"
+                    android:paddingBottom="@dimen/common_padding_middle"
+                    android:paddingTop="@dimen/common_padding_middle"
+    >
+        <TextView android:text="头像"
+                  style="@style/user_info_label_style"/>
+        <ImageView android:id="@+id/mArrowIv"
+                   style="@style/WrapWrap"
+                   android:src="@drawable/icon_arrow"
+                   android:layout_alignParentRight="true"
+                   android:layout_centerVertical="true"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/mUserIconIv"
+                android:layout_width="@dimen/common_icon_width"
+                android:layout_height="@dimen/common_icon_height"
+                android:layout_marginRight="20.0dip"
+                android:src="@drawable/icon_default_user"
+                android:layout_toLeftOf="@id/mArrowIv"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <RelativeLayout style="@style/user_info_line_style">
+        <TextView android:text="昵称"
+                  style="@style/user_info_label_style"/>
+        <EditText android:id="@+id/mUserNameEt"
+                  android:background="@null"
+                  android:hint="请称呼我"
+                  android:maxLength="10"
+                  style="@style/user_info_content_style"/>
+    </RelativeLayout>
+    <RelativeLayout style="@style/user_info_line_style">
+        <TextView android:text="性别"
+                  style="@style/user_info_label_style"/>
+        <RadioGroup android:orientation="horizontal"
+                    style="@style/WrapWrap"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+            <RadioButton android:textSize="@dimen/text_middle_size"
+                         android:textColor="@drawable/gender_text_selector"
+                         android:gravity="center"
+                         android:id="@+id/mGenderMaleRb"
+                         android:background="@drawable/gender_bg_selector"
+                         android:layout_width="28.0dip"
+                         android:layout_height="28.0dip"
+                         android:layout_marginRight="@dimen/common_margin"
+                         android:checked="true"
+                         android:button="@null"
+                         android:text="男"/>
+            <RadioButton android:textSize="@dimen/text_middle_size"
+                         android:textColor="@drawable/gender_text_selector"
+                         android:gravity="center"
+                         android:id="@+id/mGenderFemaleRb"
+                         android:background="@drawable/gender_bg_selector"
+                         android:layout_width="28.0dip"
+                         android:layout_height="28.0dip"
+                         android:button="@null"
+                         android:text="女"/>
+        </RadioGroup>
+    </RelativeLayout>
+    <RelativeLayout style="@style/user_info_line_style">
+        <TextView android:text="手机"
+                  style="@style/user_info_label_style"/>
+        <TextView android:id="@+id/mUserMobileTv"
+                  style="@style/user_info_content_style"/>
+    </RelativeLayout>
+    <RelativeLayout style="@style/user_info_line_style">
+        <TextView android:text="签名"
+                  style="@style/user_info_label_style"/>
+        <EditText android:id="@+id/mUserSignEt"
+                  android:background="@null"
+                  android:hint="请您填写签名"
+                  android:inputType="textEmailAddress"
+                  style="@style/user_info_content_style"/>
+    </RelativeLayout>
+</LinearLayout>
