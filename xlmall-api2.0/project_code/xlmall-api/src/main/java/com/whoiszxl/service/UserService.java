@@ -5,6 +5,7 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
+import com.whoiszxl.vo.UserVo;
 
 /**
  * 用户操作服务
@@ -39,6 +40,8 @@ public interface UserService {
 	ServerResponse<PageInfo> getUserList(int pageNum, int pageSize);
 
 	int selectUserCount();
+
+	ServerResponse<UserVo> app_login(String username, String password, String pushId);
 
 	
 }

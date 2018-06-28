@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchMatch.Vertical.Common">
+    <com.whoiszxl.base.widgets.HeaderBar
+        android:id="@+id/mHeaderBar"
+        style="@style/MatchWrap"
+        app:titleText="登录"
+        app:rightText="注册"
+        />
+    <LinearLayout android:background="@drawable/border_corner_all"
+        android:layout_margin="@dimen/common_margin"
+        style="@style/MatchWrap.Vertical">
+        <EditText android:id="@+id/mMobileEt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_line_height"
+            android:background="@null"
+            android:paddingLeft="@dimen/common_padding_small"
+            android:hint="请输入手机号码"
+            android:drawableLeft="@drawable/icon_user_name"
+            android:drawablePadding="@dimen/common_padding_small"
+            android:inputType="phone"/>
+        <View style="@style/DividerFixedHeight"/>
+        <EditText android:id="@+id/mPwdEt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_line_height"
+            android:background="@null"
+            android:paddingLeft="@dimen/common_padding_small"
+            android:hint="请输入密码"
+            android:drawableLeft="@drawable/icon_pwd"
+            android:drawablePadding="@dimen/common_padding_small"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/mLoginBtn"
+        style="@style/FullBtnStyle"
+        android:text="登录"/>
+    <TextView
+        android:id="@+id/mForgetPwdTv"
+        style="@style/WrapWrap"
+        android:textColor="@color/common_blue"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/common_margin"
+        android:text="忘记密码？"/>
+</LinearLayout>

@@ -1,10 +1,12 @@
 package com.whoiszxl.service.impl;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,7 @@ import com.whoiszxl.utils.MD5Util;
 import com.whoiszxl.utils.PropertiesUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
 import com.whoiszxl.vo.OrderVo;
+import com.whoiszxl.vo.UserVo;
 
 @Service("userService")
 public class UserServiveImpl implements UserService {
@@ -238,6 +241,36 @@ public class UserServiveImpl implements UserService {
 	@Override
 	public int selectUserCount() {
 		return userMapper.selectUserCount();
+	}
+
+	@Override
+	public ServerResponse<UserVo> app_login(String username, String password, String pushId) {
+		int resultCount = userMapper.checkUsername(username);
+		if(resultCount == 0) {
+			return ServerResponse.createByErrorMessage("用户名不存在");
+		}
+		
+		//密码md5登录
+		User user = userMapper.selectLogin(username, MD5Util.MD5EncodeUtf8(password));
+		if(user == null) {
+			return ServerResponse.createByErrorMessage("密码错误");
+		}
+		
+		//签名token并存入redis
+		String token = JWTUtil.sign(username, password, user.getId());
+		RedisShardedPoolUtil.setEx(token, "1", (int)(Const.JWTTokenCache.JWT_TOKEN_EXTIME/1000));
+		
+		//app登录后还需要更新push_id推送消息id
+		User pushUser = new User();
+		pushUser.setId(user.getId());
+		pushUser.setPushId(pushId);
+		pushUser.setLastLoginTime(new Date());
+		userMapper.updateByPrimaryKeySelective(pushUser);
+		
+		UserVo userVo = new UserVo();
+		BeanUtils.copyProperties(user, userVo);
+		userVo.setToken(token);
+		return ServerResponse.createBySuccess("登录成功", userVo);
 	}
 
 }

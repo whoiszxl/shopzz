@@ -1,138 +1,155 @@
 package com.whoiszxl.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class User {
+    private Integer id;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    private String username;
 
-	private Integer id;
+    private String password;
 
-	private String username;
+    private String icon;
 
-	private String password;
+    private String email;
 
-	private String email;
+    private String userIdentityCard;
 
-	private String phone;
+    private String phone;
 
-	private String question;
+    private String question;
 
-	private String answer;
+    private String answer;
 
-	private Integer role;
+    private Integer role;
 
-	private Date createTime;
+    private String pushId;
 
-	private Date updateTime;
+    private Date lastLoginTime;
 
-	public User(Integer id, String username, String password, String email, String phone, String question,
-			String answer, Integer role, Date createTime, Date updateTime) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.phone = phone;
-		this.question = question;
-		this.answer = answer;
-		this.role = role;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-	}
+    private String lastLoginIp;
 
-	public User() {
-		super();
-	}
+    private Date createTime;
 
-	public Integer getId() {
-		return id;
-	}
+    private Date updateTime;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setUsername(String username) {
-		this.username = username == null ? null : username.trim();
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
 
-	public void setPassword(String password) {
-		this.password = password == null ? null : password.trim();
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
 
-	public void setEmail(String email) {
-		this.email = email == null ? null : email.trim();
-	}
+    public String getIcon() {
+        return icon;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone == null ? null : phone.trim();
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getQuestion() {
-		return question;
-	}
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
 
-	public void setQuestion(String question) {
-		this.question = question == null ? null : question.trim();
-	}
+    public String getUserIdentityCard() {
+        return userIdentityCard;
+    }
 
-	public String getAnswer() {
-		return answer;
-	}
+    public void setUserIdentityCard(String userIdentityCard) {
+        this.userIdentityCard = userIdentityCard == null ? null : userIdentityCard.trim();
+    }
 
-	public void setAnswer(String answer) {
-		this.answer = answer == null ? null : answer.trim();
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public Integer getRole() {
-		return role;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
+    }
 
-	public void setRole(Integer role) {
-		this.role = role;
-	}
+    public String getQuestion() {
+        return question;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public void setQuestion(String question) {
+        this.question = question == null ? null : question.trim();
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public String getAnswer() {
+        return answer;
+    }
 
-	public Date getUpdateTime() {
-		return updateTime;
-	}
+    public void setAnswer(String answer) {
+        this.answer = answer == null ? null : answer.trim();
+    }
 
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
+    public Integer getRole() {
+        return role;
+    }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", phone="
-				+ phone + ", question=" + question + ", answer=" + answer + ", role=" + role + ", createTime="
-				+ createTime + ", updateTime=" + updateTime + "]";
-	}
+    public void setRole(Integer role) {
+        this.role = role;
+    }
 
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId == null ? null : pushId.trim();
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 }

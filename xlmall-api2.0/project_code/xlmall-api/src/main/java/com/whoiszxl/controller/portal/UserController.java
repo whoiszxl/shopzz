@@ -22,7 +22,7 @@ import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
-import com.whoiszxl.utils.UserUtil;
+import com.whoiszxl.vo.UserVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -84,6 +84,14 @@ public class UserController {
 	@ApiOperation(value = "账号密码登录接口")
 	public ServerResponse<String> jwt_login(String username, String password) {
 		ServerResponse<String> response = userService.jwt_login(username, password);
+		return response;
+	}
+	
+	
+	@PostMapping("app_login")
+	@ApiOperation(value = "APP账号密码登录接口")
+	public ServerResponse<UserVo> app_login(String username, String password, String pushId) {
+		ServerResponse<UserVo> response = userService.app_login(username, password, pushId);
 		return response;
 	}
 

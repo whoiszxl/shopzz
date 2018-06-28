@@ -13,4 +13,9 @@ class UserRepository @Inject constructor(){
         return RetrofitFactory.instance.create(UserApi::class.java)
                 .register(RegisterReq(mobile, pwd, verifyCode))
     }
+
+    fun login(mobile:String,pwd:String,pushId:String):Observable<BaseResp<String>>{
+        return RetrofitFactory.instance.create(UserApi::class.java)
+                .register(RegisterReq(mobile, pwd, verifyCode))
+    }
 }

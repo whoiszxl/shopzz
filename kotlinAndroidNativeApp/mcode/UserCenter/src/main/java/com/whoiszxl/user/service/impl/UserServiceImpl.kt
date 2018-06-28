@@ -4,6 +4,7 @@ import com.whoiszxl.base.data.protocol.BaseResp
 import com.whoiszxl.base.ext.convertBoolean
 import com.whoiszxl.base.rx.BaseException
 import com.whoiszxl.base.rx.BaseFuncBoolean
+import com.whoiszxl.user.data.protocol.UserInfo
 import com.whoiszxl.user.data.repository.UserRepository
 import com.whoiszxl.user.service.UserService
 import rx.Observable
@@ -12,6 +13,7 @@ import javax.inject.Inject
 
 class UserServiceImpl @Inject constructor() : UserService {
 
+
     @Inject
     lateinit var repository: UserRepository
 
@@ -19,5 +21,9 @@ class UserServiceImpl @Inject constructor() : UserService {
 
         return repository.register(mobile, pwd, verifyCode)
                 .convertBoolean()
+    }
+
+    override fun login(mobile: String, pwd: String, pushId: String): Observable<UserInfo> {
+
     }
 }

@@ -38,7 +38,9 @@
 		</javaClientGenerator>
 		<!--生成对应表及类名 -->
 
-		<table tableName="xl_keywords" domainObjectName="Keywords"
+		<!-- 运行maven命令：`mvn mybatis-generator:generate`，生成! -->
+
+		<table tableName="xl_message" domainObjectName="Message"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>
