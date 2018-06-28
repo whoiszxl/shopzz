@@ -4,6 +4,7 @@ import com.whoiszxl.base.ext.execute
 import com.whoiszxl.base.presenter.BasePresenter
 import com.whoiszxl.base.rx.BaseSubscriber
 import com.whoiszxl.base.utils.NetWorkUtils
+import com.whoiszxl.user.data.protocol.UserInfo
 import com.whoiszxl.user.presenter.view.LoginView
 import com.whoiszxl.user.presenter.view.RegisterView
 import com.whoiszxl.user.service.UserService
@@ -26,14 +27,10 @@ class LoginPresenter @Inject constructor():BasePresenter<LoginView>() {
         }
 
         mView.showLoading()
-        userService.register(mobile, pwd, verifyCode)
-                .execute(object:BaseSubscriber<Boolean>(mView){
-                    override fun onNext(t: Boolean) {
-                        if(t){
-                            mView.onRegisterResukt("注册成功")
-                            mView.hideLoading()
-                        }
-
+        userService.login(mobile, pwd, pushId)
+                .execute(object:BaseSubscriber<UserInfo>(mView){
+                    override fun onNext(t: UserInfo) {
+                        mView.onLoginResukt(t)
                     }
                 }, lifecycleProvider)
 

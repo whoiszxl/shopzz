@@ -3,6 +3,7 @@ package com.whoiszxl.user.injection.component
 import com.whoiszxl.base.injection.PerComponentScope
 import com.whoiszxl.base.injection.component.ActivityComponent
 import com.whoiszxl.user.injection.module.UserModule
+import com.whoiszxl.user.ui.activity.LoginActivity
 import com.whoiszxl.user.ui.activity.RegisterActivity
 import dagger.Component
 
@@ -13,4 +14,5 @@ import dagger.Component
 interface UserComponent {
 
     fun inject(activity: RegisterActivity)
+    fun inject(activity: LoginActivity)
 }

@@ -1,5 +1,5 @@
 package com.whoiszxl.user.data.protocol
 
-data class LoginReq(val mobile:String, val pwd:String, val pushId:String) {
+data class LoginReq(val username:String, val password:String, val pushId:String) {
 
 }

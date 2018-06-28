@@ -2,18 +2,17 @@ package com.whoiszxl.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import com.whoiszxl.base.common.AppManager
 import com.whoiszxl.base.ext.enable
 import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.activity.BaseMvpActivity
 import com.whoiszxl.user.R
+import com.whoiszxl.user.data.protocol.UserInfo
 import com.whoiszxl.user.injection.component.DaggerUserComponent
 import com.whoiszxl.user.injection.module.UserModule
 import com.whoiszxl.user.presenter.LoginPresenter
-import com.whoiszxl.user.presenter.RegisterPresenter
 import com.whoiszxl.user.presenter.view.LoginView
-import com.whoiszxl.user.presenter.view.RegisterView
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -29,15 +28,15 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
     override fun injectComponent() {
         //这个需要编辑一个UserComponent类，然后重新编译生成DaggerUserComponent,然后构建注入this类，才能让依赖注入生效
         //太麻烦了叭
-        //DaggerUserComponent.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
+        DaggerUserComponent.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
         mPresenter.mView = this
     }
 
     /**
      * 处理登录成功后的回调事件
      */
-    override fun onLoginResukt(result: String) {
-
+    override fun onLoginResukt(result: UserInfo) {
+        toast(result.userName)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +63,8 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
 
         mLoginBtn.enable(mMobileEt, {isBtnEnable()})
         mLoginBtn.enable(mPwdEt, {isBtnEnable()})
+
+        mHeaderBar.getRightView().onClick(this)
         //调用click事件
         mLoginBtn.onClick(this)
 
@@ -72,8 +73,9 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
 
     override fun onClick(view: View) {
         when(view.id) {
+            R.id.mRightTv -> { startActivity<RegisterActivity>() }
             R.id.mLoginBtn -> {
-
+                mPresenter.login(mMobileEt.text.toString(), mPwdEt.text.toString(),"000000")
             }
         }
     }
