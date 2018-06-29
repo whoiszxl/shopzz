@@ -12,6 +12,6 @@ interface UploadApi {
     /*
         获取七牛云上传凭证
      */
-    @POST("user/getUploadToken")
+    @POST("common/getUploadToken")
     fun getUploadToken(): Observable<BaseResp<String>>
 }
