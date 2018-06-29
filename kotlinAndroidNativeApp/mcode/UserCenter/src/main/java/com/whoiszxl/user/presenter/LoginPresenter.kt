@@ -3,12 +3,9 @@ package com.whoiszxl.user.presenter
 import com.whoiszxl.base.ext.execute
 import com.whoiszxl.base.presenter.BasePresenter
 import com.whoiszxl.base.rx.BaseSubscriber
-import com.whoiszxl.base.utils.NetWorkUtils
 import com.whoiszxl.user.data.protocol.UserInfo
 import com.whoiszxl.user.presenter.view.LoginView
-import com.whoiszxl.user.presenter.view.RegisterView
 import com.whoiszxl.user.service.UserService
-import es.dmoral.toasty.Toasty
 import javax.inject.Inject
 
 
@@ -30,7 +27,7 @@ class LoginPresenter @Inject constructor():BasePresenter<LoginView>() {
         userService.login(mobile, pwd, pushId)
                 .execute(object:BaseSubscriber<UserInfo>(mView){
                     override fun onNext(t: UserInfo) {
-                        mView.onLoginResukt(t)
+                        mView.onLoginResult(t)
                     }
                 }, lifecycleProvider)
 

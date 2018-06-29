@@ -72,10 +72,19 @@ dependencies {
     //Circle ImageView
     api "de.hdodenhof:circleimageview:${circle_imageView_version}"
 
+    //Take Photo
+    api "com.jph.takephoto:takephoto_library:${take_photo_version}"
+    //Alert View
+    api "com.bigkoo:alertview:${alert_view_version}"
+    //七牛
+    api 'com.qiniu:qiniu-android-sdk:7.3.+'
 
 
 
 
+
+    //ARouter
+    api "com.alibaba:arouter-api:$arouter_api_version"
     //MulitStateView
     api "com.github.Kennyc1012:MultiStateView:$multi_state_view_version"
 

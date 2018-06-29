@@ -2,6 +2,7 @@ package com.whoiszxl.base.common
 
 import android.app.Application
 import android.content.Context
+import com.alibaba.android.arouter.launcher.ARouter
 import com.whoiszxl.base.injection.component.AppComponent
 import com.whoiszxl.base.injection.component.DaggerAppComponent
 import com.whoiszxl.base.injection.module.AppModule
@@ -16,6 +17,11 @@ class BaseApplication : Application(){
         initAppInjection()
 
         context = this
+
+        //ARouter初始化
+        ARouter.openLog()    // 打印日志
+        ARouter.openDebug()
+        ARouter.init(this)
     }
 
     /**

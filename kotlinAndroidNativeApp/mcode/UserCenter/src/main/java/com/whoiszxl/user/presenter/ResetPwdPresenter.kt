@@ -3,12 +3,8 @@ package com.whoiszxl.user.presenter
 import com.whoiszxl.base.ext.execute
 import com.whoiszxl.base.presenter.BasePresenter
 import com.whoiszxl.base.rx.BaseSubscriber
-import com.whoiszxl.base.utils.NetWorkUtils
-import com.whoiszxl.user.presenter.view.ForgetPwdView
-import com.whoiszxl.user.presenter.view.RegisterView
 import com.whoiszxl.user.presenter.view.ResetPwdView
 import com.whoiszxl.user.service.UserService
-import es.dmoral.toasty.Toasty
 import javax.inject.Inject
 
 
@@ -20,18 +16,18 @@ class ResetPwdPresenter @Inject constructor():BasePresenter<ResetPwdView>() {
     @Inject
     lateinit var userService: UserService
 
-    fun resetPwd(mobile:String, pwd:String){
+    fun resetPwd(mobile:String, pwd:String, verifyCode: String){
 
         if(!checkNetWork()){
             return
         }
 
         mView.showLoading()
-        userService.resetPwd(mobile, pwd)
+        userService.resetPwd(mobile, pwd, verifyCode)
                 .execute(object:BaseSubscriber<Boolean>(mView){
                     override fun onNext(t: Boolean) {
                         if(t){
-                            mView.onResetPwdResukt("验证成功")
+                            mView.onResetPwdResult("修改成功")
                             mView.hideLoading()
                         }
 

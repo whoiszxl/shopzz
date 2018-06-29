@@ -38,7 +38,7 @@ interface UserApi {
     fun login(
             @Field("username") username: String,
             @Field("password") password: String,
-            @Field("push_id") push_id: String): Observable<BaseResp<UserInfo>>
+            @Field("pushId") push_id: String): Observable<BaseResp<UserInfo>>
 
 
     @FormUrlEncoded
@@ -51,5 +51,15 @@ interface UserApi {
     @POST("/user/resetPwd")
     fun resetPwd(
             @Field("phone") phone: String,
-            @Field("password") password: String): Observable<BaseResp<String>>
+            @Field("password") password: String,
+            @Field("verifyCode") verifyCode: String): Observable<BaseResp<String>>
+
+    @FormUrlEncoded
+    @POST("/user/editUser")
+    fun editUser(
+            @Field("userIcon") userIcon: String,
+            @Field("userName") userName: String,
+            @Field("userGender") userGender: String,
+            @Field("userSign") userSign: String): Observable<BaseResp<UserInfo>>
 }
+

@@ -32,7 +32,7 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
     /**
      * 处理忘记密码后的回调事件
      */
-    override fun onForgetPwdResukt(result: String) {
+    override fun onForgetPwdResult(result: String) {
         toast(result)
         startActivity<ResetPwdActivity>(
                 "mobile" to mMobileEt.text.toString(),
@@ -40,7 +40,7 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
     }
 
     override fun onSendVerifyCodeResult(result: String) {
-        toast(result)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +76,7 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
     override fun onClick(view: View) {
         when(view.id) {
             R.id.mVerifyCodeBtn -> {
+                print("点击了忘记密码发送短信验证码")
                 mPresenter.forgetpwd_verifycode(mMobileEt.text.toString())
                 mVerifyCodeBtn.requestSendVerifyNumber()
             }

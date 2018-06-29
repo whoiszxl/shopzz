@@ -3,11 +3,8 @@ package com.whoiszxl.user.presenter
 import com.whoiszxl.base.ext.execute
 import com.whoiszxl.base.presenter.BasePresenter
 import com.whoiszxl.base.rx.BaseSubscriber
-import com.whoiszxl.base.utils.NetWorkUtils
 import com.whoiszxl.user.presenter.view.ForgetPwdView
-import com.whoiszxl.user.presenter.view.RegisterView
 import com.whoiszxl.user.service.UserService
-import es.dmoral.toasty.Toasty
 import javax.inject.Inject
 
 
@@ -30,8 +27,11 @@ class ForgetPwdPresenter @Inject constructor():BasePresenter<ForgetPwdView>() {
                 .execute(object:BaseSubscriber<Boolean>(mView){
                     override fun onNext(t: Boolean) {
                         if(t){
-                            mView.onForgetPwdResukt("验证成功")
+                            mView.onForgetPwdResult("验证成功")
                             mView.hideLoading()
+                        }else{
+                            mView.onForgetPwdResult("验证失败")
+                            return
                         }
 
                     }
@@ -39,6 +39,23 @@ class ForgetPwdPresenter @Inject constructor():BasePresenter<ForgetPwdView>() {
     }
 
 
+    fun resetPwd(mobile:String, password:String, verifyCode:String){
+
+        if(!checkNetWork()){
+            return
+        }
+
+        mView.showLoading()
+        userService.resetPwd(mobile, password, verifyCode)
+                .execute(object:BaseSubscriber<Boolean>(mView){
+                    override fun onNext(t: Boolean) {
+                        if(t){
+                            mView.onForgetPwdResult("修改成功")
+                            mView.hideLoading()
+                        }
+                    }
+                }, lifecycleProvider)
+    }
 
     fun forgetpwd_verifycode(mobile: String) {
         if(!checkNetWork()){
@@ -50,6 +67,11 @@ class ForgetPwdPresenter @Inject constructor():BasePresenter<ForgetPwdView>() {
                         if(t) {
                             mView.onSendVerifyCodeResult("验证码发送成功")
                         }
+                    }
+
+                    override fun onError(e: Throwable?) {
+                        mView.onSendVerifyCodeResult("验证码发送失败")
+                        return
                     }
                 },lifecycleProvider)
     }

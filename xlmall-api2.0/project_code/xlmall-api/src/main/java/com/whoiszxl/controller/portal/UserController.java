@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 
+import com.qiniu.util.Auth;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.User;
@@ -22,6 +23,7 @@ import com.whoiszxl.service.SmsService;
 import com.whoiszxl.service.UserService;
 import com.whoiszxl.utils.CookieUtil;
 import com.whoiszxl.utils.JsonUtil;
+import com.whoiszxl.utils.PropertiesUtil;
 import com.whoiszxl.utils.RedisShardedPoolUtil;
 import com.whoiszxl.vo.UserVo;
 
@@ -209,5 +211,20 @@ public class UserController {
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public ServerResponse<String> unauthorized() {
 		return ServerResponse.createByErrorCodeMessage(401, "Unauthorized");
+	}
+	
+	
+	
+	@PostMapping("getUploadToken")
+	@ApiOperation(value = "获取七牛云上传凭证")
+	//@RequiresRoles(value = { Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical = Logical.OR)
+	public ServerResponse<String> getUploadToken(HttpServletRequest request) {
+		String accessKey = PropertiesUtil.getProperty("qiniu.accessKey");
+		String secretKey = PropertiesUtil.getProperty("qiniu.secretKey");
+		String bucket = PropertiesUtil.getProperty("qiniu.bucket");
+        Auth auth = Auth.create(accessKey, secretKey);
+        String upToken = auth.uploadToken(bucket);
+        
+        return ServerResponse.createBySuccess(upToken);
 	}
 }

@@ -32,6 +32,7 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView 
 
     override fun onError(text:String) {
         Toasty.error(this, text).show()
+        return
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

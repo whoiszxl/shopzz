@@ -54,8 +54,15 @@ class UserRepository @Inject constructor(){
     /**
      * 重置密码
      */
-    fun resetPwd(phone:String, pwd:String):Observable<BaseResp<String>>{
+    fun resetPwd(phone:String, pwd:String, verifyCode: String):Observable<BaseResp<String>>{
         return RetrofitFactory.instance.create(UserApi::class.java)
-                .resetPwd(phone, pwd)
+                .resetPwd(phone, pwd, verifyCode)
+    }
+
+    /**
+     * 编辑用户资料
+     */
+    fun editUser(userIcon:String,userName:String,userGender:String,userSign:String):Observable<BaseResp<UserInfo>>{
+        return RetrofitFactory.instance.create(UserApi::class.java).editUser(userIcon,userName,userGender,userSign)
     }
 }

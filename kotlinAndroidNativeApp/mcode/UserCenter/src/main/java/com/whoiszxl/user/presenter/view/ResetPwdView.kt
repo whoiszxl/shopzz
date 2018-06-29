@@ -4,5 +4,5 @@ import com.whoiszxl.base.presenter.view.BaseView
 
 interface ResetPwdView:BaseView {
 
-    fun onResetPwdResukt(result:String)
+    fun onResetPwdResult(result:String)
 }

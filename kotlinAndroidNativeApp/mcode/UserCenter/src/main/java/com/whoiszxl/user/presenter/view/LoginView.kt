@@ -5,5 +5,5 @@ import com.whoiszxl.user.data.protocol.UserInfo
 
 interface LoginView:BaseView {
 
-    fun onLoginResukt(result:UserInfo)
+    fun onLoginResult(result:UserInfo)
 }

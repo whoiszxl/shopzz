@@ -11,6 +11,7 @@ import com.whoiszxl.user.injection.component.DaggerUserComponent
 import com.whoiszxl.user.injection.module.UserModule
 import com.whoiszxl.user.presenter.LoginPresenter
 import com.whoiszxl.user.presenter.view.LoginView
+import com.whoiszxl.user.utils.UserPrefsUtils
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -35,8 +36,10 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
     /**
      * 处理登录成功后的回调事件
      */
-    override fun onLoginResukt(result: UserInfo) {
-        toast(result.userName)
+    override fun onLoginResult(result: UserInfo) {
+        toast("登录成功")
+        UserPrefsUtils.putUserInfo(result)
+        startActivity<UserInfoActivity>()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +80,7 @@ class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClick
             R.id.mRightTv -> { startActivity<RegisterActivity>() }
             R.id.mForgetPwdTv -> { startActivity<ForgetPwdActivity>() }
             R.id.mLoginBtn -> {
-                mPresenter.login(mMobileEt.text.toString(), mPwdEt.text.toString(),"000000")
+                mPresenter.login(mMobileEt.text.toString(), mPwdEt.text.toString(),"123666")
             }
 
         }
