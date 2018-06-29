@@ -308,7 +308,7 @@ public class UserServiveImpl implements UserService {
 	public ServerResponse<String> forgetPwd(String phone, String verifyCode) {
 		// 校验用户是否存在
 		ServerResponse<String> response = this.checkVaild(phone, Const.PHONE);
-		if (!response.isSuccess()) {
+		if (response.isSuccess()) {
 			return ServerResponse.createByErrorMessage("该手机号用户不存在");
 		}
 
