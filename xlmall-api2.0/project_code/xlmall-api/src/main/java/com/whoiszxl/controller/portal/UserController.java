@@ -213,18 +213,4 @@ public class UserController {
 		return ServerResponse.createByErrorCodeMessage(401, "Unauthorized");
 	}
 	
-	
-	
-	@PostMapping("getUploadToken")
-	@ApiOperation(value = "获取七牛云上传凭证")
-	//@RequiresRoles(value = { Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical = Logical.OR)
-	public ServerResponse<String> getUploadToken(HttpServletRequest request) {
-		String accessKey = PropertiesUtil.getProperty("qiniu.accessKey");
-		String secretKey = PropertiesUtil.getProperty("qiniu.secretKey");
-		String bucket = PropertiesUtil.getProperty("qiniu.bucket");
-        Auth auth = Auth.create(accessKey, secretKey);
-        String upToken = auth.uploadToken(bucket);
-        
-        return ServerResponse.createBySuccess(upToken);
-	}
 }
