@@ -80,6 +80,13 @@ public interface UserMapper {
     User selectUserByUsername(String username);
     
     
+    /**
+     * 通过用户手机号查询到用户的所有信息咯
+     * @param username 用户名
+     * @return 查询的对象实体 
+     */
+    User selectUserByPhone(String phone);
+    
     
     int checkAnswer(@Param("username") String username,@Param("question") String question,@Param("answer") String answer);
     

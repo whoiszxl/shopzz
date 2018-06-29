@@ -33,7 +33,9 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
      */
     override fun onForgetPwdResukt(result: String) {
         toast(result)
-        startActivity<ResetPwdActivity>("mobile" to mMobileEt.text.toString())
+        startActivity<ResetPwdActivity>(
+                "mobile" to mMobileEt.text.toString(),
+                "verifyCode" to mVerifyCodeEt.text.toString())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

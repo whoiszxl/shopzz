@@ -7,7 +7,7 @@ buildscript {
     ext.build_tools_version = "25.0.2"
     ext.min_sdk_version = 15
     ext.target_sdk_version = 25
-    ext.android_support_version = "25.3.1"
+    ext.android_support_version = "26.1.0"
 
 
 

@@ -269,6 +269,14 @@
 		from xl_user
 		where username = #{username}
 	</select>
+	
+	<select id="selectUserByPhone" resultMap="BaseResultMap"
+		parameterType="string">
+		select
+		<include refid="Base_Column_List" />
+		from xl_user
+		where phone = #{phone}
+	</select>
 
 
 	<select id="selectQuestionByUsername" resultType="string"

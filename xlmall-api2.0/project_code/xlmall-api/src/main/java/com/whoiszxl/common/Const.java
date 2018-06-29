@@ -180,6 +180,7 @@ public class Const {
 	
 	public interface SMS {
 		String SMS_ALI_VERIFY_CODE_PREFIX = "ali_verifycode_";
+		String SMS_ALI_FORGET_PWD_PREFIX = "ali_forgetpwd_";
 		int VERIFYCODE_LENGTH = 6;
 	}
 }

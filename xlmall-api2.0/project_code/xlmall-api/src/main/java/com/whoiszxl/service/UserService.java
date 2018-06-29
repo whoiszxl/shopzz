@@ -44,5 +44,9 @@ public interface UserService {
 	ServerResponse<UserVo> app_login(String username, String password, String pushId);
 
 	ServerResponse<String> app_register(String username, String password, String verifyCode);
+
+	ServerResponse<String> forgetPwd(String phone, String verifyCode);
+
+	ServerResponse<String> resetPwd(String phone, String password, String verifyCode);
 	
 }

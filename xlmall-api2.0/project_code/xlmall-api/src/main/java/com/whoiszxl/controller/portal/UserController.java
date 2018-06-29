@@ -41,10 +41,10 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private JwtUserService jwtUserService;
-	
+
 	@Autowired
 	private SmsService smsService;
 
@@ -64,24 +64,22 @@ public class UserController {
 		if (response.isSuccess()) {
 			// session.setAttribute(Const.CURRENT_USER, response.getData());
 
-			//单点登录:写入token
+			// 单点登录:写入token
 			CookieUtil.writeLoginToken(httpServletResponse, session.getId());
 			RedisShardedPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()),
-			Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
+					Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
 		}
 		return response;
 	}
-	
-	
-	
+
 	/**
-	 * jwt用户登录
-	 * 校验数据库，通过后颁发签名
-	 * 颁发签名后将签名存入redis做有效性验证
-	 * 每次校验token的时候先判断redis是否存在token
+	 * jwt用户登录 校验数据库，通过后颁发签名 颁发签名后将签名存入redis做有效性验证 每次校验token的时候先判断redis是否存在token
 	 * 登出的时候清除掉token
-	 * @param username 用户账号
-	 * @param password 用户密码
+	 * 
+	 * @param username
+	 *            用户账号
+	 * @param password
+	 *            用户密码
 	 * @return 用户token
 	 */
 	@PostMapping("jwt_login")
@@ -90,32 +88,52 @@ public class UserController {
 		ServerResponse<String> response = userService.jwt_login(username, password);
 		return response;
 	}
-	
-	
+
 	@PostMapping("app_login")
 	@ApiOperation(value = "APP账号密码登录接口")
 	public ServerResponse<UserVo> app_login(String username, String password, String pushId) {
 		ServerResponse<UserVo> response = userService.app_login(username, password, pushId);
 		return response;
 	}
-	
+
 	@PostMapping("app_register")
 	@ApiOperation(value = "APP用户手机注册接口")
 	public ServerResponse<String> app_register(String phone, String password, String verifyCode) {
 		ServerResponse<String> response = userService.app_register(phone, password, verifyCode);
 		return response;
 	}
-	
+
 	@PostMapping("verifycode")
-	@ApiOperation(value = "APP用户手机注册接口")
+	@ApiOperation(value = "APP用户手机注册短信验证码接口")
 	public ServerResponse<String> verifycode(String phone) {
 		ServerResponse<String> response = smsService.sendVerifyCode(phone, Const.SMS.VERIFYCODE_LENGTH);
 		return response;
 	}
 
+	@PostMapping("forgetpwd_verifycode")
+	@ApiOperation(value = "APP忘记密码短信验证码发送接口")
+	public ServerResponse<String> forgetpwd_verifycode(String phone) {
+		ServerResponse<String> response = smsService.sendForgetPwdVerifyCode(phone, Const.SMS.VERIFYCODE_LENGTH);
+		return response;
+	}
+
+	@PostMapping("forgetPwd")
+	@ApiOperation(value = "APP忘记密码验证接口")
+	public ServerResponse<String> forgetPwd(String phone, String verifyCode) {
+		ServerResponse<String> response = userService.forgetPwd(phone, verifyCode);
+		return response;
+	}
+	
+	@PostMapping("resetPwd")
+	@ApiOperation(value = "APP重置密码验证接口")
+	public ServerResponse<String> resetPwd(String phone, String password, String verifyCode) {
+		ServerResponse<String> response = userService.resetPwd(phone, password, verifyCode);
+		return response;
+	}
+
 	@PostMapping("logout")
 	@ApiOperation(value = "登出接口")
-	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
+	@RequiresRoles(value = { Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical = Logical.OR)
 	public ServerResponse<String> logout(HttpServletResponse response, HttpServletRequest request) {
 		return ServerResponse.createBySuccess();
 	}
@@ -134,7 +152,7 @@ public class UserController {
 
 	@PostMapping("get_user_info")
 	@ApiOperation(value = "获取用户信息的接口")
-	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
+	@RequiresRoles(value = { Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical = Logical.OR)
 	public ServerResponse<User> getUserInfo(HttpServletRequest request) {
 		User user = jwtUserService.getCurrentUser(request);
 		return ServerResponse.createBySuccess(user);
@@ -160,7 +178,7 @@ public class UserController {
 
 	@PostMapping("reset_password")
 	@ApiOperation(value = "通过旧密码重置密码的接口")
-	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
+	@RequiresRoles(value = { Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical = Logical.OR)
 	public ServerResponse<String> resetPassword(HttpServletRequest request, String passwordOld, String passwordNew) {
 		User user = jwtUserService.getCurrentUser(request);
 		return userService.resetPassword(passwordOld, passwordNew, user);
@@ -168,7 +186,7 @@ public class UserController {
 
 	@PostMapping("update_information")
 	@ApiOperation(value = "更新用户信息接口")
-	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
+	@RequiresRoles(value = { Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical = Logical.OR)
 	public ServerResponse<User> update_information(HttpServletRequest request, User user) {
 		String token = request.getHeader("Authorization");
 		String username = JWTUtil.getUsername(token);
@@ -181,15 +199,15 @@ public class UserController {
 
 	@PostMapping("get_information")
 	@ApiOperation(value = "获取用户信息的接口")
-	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
+	@RequiresRoles(value = { Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical = Logical.OR)
 	public ServerResponse<User> get_information(HttpServletRequest request) {
 		User user = jwtUserService.getCurrentUser(request);
 		return ServerResponse.createBySuccess(user);
 	}
-	
+
 	@RequestMapping(path = "/401")
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ServerResponse<String> unauthorized() {
-        return ServerResponse.createByErrorCodeMessage(401, "Unauthorized");
-    }
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	public ServerResponse<String> unauthorized() {
+		return ServerResponse.createByErrorCodeMessage(401, "Unauthorized");
+	}
 }
