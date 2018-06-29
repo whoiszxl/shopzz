@@ -36,6 +36,21 @@ class ForgetPwdPresenter @Inject constructor():BasePresenter<ForgetPwdView>() {
 
                     }
                 }, lifecycleProvider)
+    }
 
+
+
+    fun forgetpwd_verifycode(mobile: String) {
+        if(!checkNetWork()){
+            return
+        }
+        userService.forgetpwdVerifycode(mobile)
+                .execute(object:BaseSubscriber<Boolean>(mView){
+                    override fun onNext(t: Boolean) {
+                        if(t) {
+                            mView.onSendVerifyCodeResult("验证码发送成功")
+                        }
+                    }
+                },lifecycleProvider)
     }
 }

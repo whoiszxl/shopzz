@@ -51,8 +51,8 @@ public class AliSmsServiceImpl implements SmsService {
 	public ServerResponse<String> sendForgetPwdVerifyCode(String phoneNumber, int verifyCodeLength) {
 		// 發送驗證碼之前先校验手机号是否存在
 		ServerResponse<String> response = userService.checkVaild(phoneNumber, Const.PHONE);
-		if (!response.isSuccess()) {
-			return response;
+		if (response.isSuccess()) {
+			return ServerResponse.createByErrorMessage("当前用户不存在");
 		}
 
 		try {

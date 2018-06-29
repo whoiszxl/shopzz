@@ -15,7 +15,6 @@ import javax.inject.Inject
 class UserServiceImpl @Inject constructor() : UserService {
 
 
-
     @Inject
     lateinit var repository: UserRepository
 
@@ -32,6 +31,13 @@ class UserServiceImpl @Inject constructor() : UserService {
      */
     override fun verifycode(mobile: String): Observable<Boolean> {
         return repository.verifycode(mobile).convertBoolean()
+    }
+
+    /**
+     * 忘记密码验证码接口
+     */
+    override fun forgetpwdVerifycode(mobile: String): Observable<Boolean> {
+        return repository.forgetpwd_verifycode(mobile).convertBoolean()
     }
 
     /**

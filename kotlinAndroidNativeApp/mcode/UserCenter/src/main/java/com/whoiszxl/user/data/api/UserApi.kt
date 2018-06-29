@@ -27,6 +27,13 @@ interface UserApi {
     ): Observable<BaseResp<String>>
 
     @FormUrlEncoded
+    @POST("/user/forgetpwd_verifycode")
+    fun forgetpwd_verifycode(
+            @Field("phone") phone: String
+    ): Observable<BaseResp<String>>
+
+
+    @FormUrlEncoded
     @POST("/user/app_login")
     fun login(
             @Field("username") username: String,

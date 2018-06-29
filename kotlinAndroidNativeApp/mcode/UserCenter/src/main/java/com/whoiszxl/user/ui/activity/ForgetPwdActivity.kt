@@ -19,6 +19,9 @@ import org.jetbrains.anko.toast
  * 忘记密码activity
  */
 class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, View.OnClickListener {
+    override fun onSendVerifyCodeResult(result: String) {
+
+    }
 
 
     override fun injectComponent() {
@@ -71,8 +74,8 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
     override fun onClick(view: View) {
         when(view.id) {
             R.id.mVerifyCodeBtn -> {
+                mPresenter.forgetpwd_verifycode(mMobileEt.text.toString())
                 mVerifyCodeBtn.requestSendVerifyNumber()
-                toast("发送验证码成功")
             }
             R.id.mNextBtn -> {
                 mPresenter.forgetPwd(mMobileEt.text.toString(), mVerifyCodeEt.text.toString())

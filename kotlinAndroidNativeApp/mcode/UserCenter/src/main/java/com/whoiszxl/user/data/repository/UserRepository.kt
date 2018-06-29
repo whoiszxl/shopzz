@@ -20,6 +20,14 @@ class UserRepository @Inject constructor(){
     }
 
     /**
+     * 发送注册验证码
+     */
+    fun forgetpwd_verifycode(phone:String):Observable<BaseResp<String>>{
+        return RetrofitFactory.instance.create(UserApi::class.java)
+                .forgetpwd_verifycode(phone)
+    }
+
+    /**
      * 注册
      */
     fun register(phone:String,pwd:String,verifyCode:String):Observable<BaseResp<String>>{
