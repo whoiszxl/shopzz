@@ -282,7 +282,7 @@ public class UserServiveImpl implements UserService {
 
 		// 校验传递过来的验证码是否有效
 		if (!RedisShardedPoolUtil.get(Const.SMS.SMS_ALI_VERIFY_CODE_PREFIX + phone).equals(verifyCode)) {
-			return ServerResponse.createBySuccessMessage("验证码已经失效");
+			return ServerResponse.createByErrorMessage("验证码已经失效");
 		}
 
 		// 全部校验通过了之后呢构建一个用户对象保存到数据库中
@@ -314,7 +314,7 @@ public class UserServiveImpl implements UserService {
 
 		// 校验传递过来的验证码是否有效
 		if (!RedisShardedPoolUtil.get(Const.SMS.SMS_ALI_FORGET_PWD_PREFIX + phone).equals(verifyCode)) {
-			return ServerResponse.createBySuccessMessage("验证码已经失效");
+			return ServerResponse.createByErrorMessage("验证码已经失效");
 		}
 
 		return ServerResponse.createBySuccessMessage("校验成功");
@@ -330,7 +330,7 @@ public class UserServiveImpl implements UserService {
 
 		// 校验传递过来的验证码是否有效
 		if (!RedisShardedPoolUtil.get(Const.SMS.SMS_ALI_FORGET_PWD_PREFIX + phone).equals(verifyCode)) {
-			return ServerResponse.createBySuccessMessage("验证码已经失效");
+			return ServerResponse.createByErrorMessage("验证码已经失效");
 		}
 
 		// 全部校验通过了之后呢需要重置一下当前这个用户的密码

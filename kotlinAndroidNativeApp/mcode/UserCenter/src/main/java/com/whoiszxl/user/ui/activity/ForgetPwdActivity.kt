@@ -19,9 +19,7 @@ import org.jetbrains.anko.toast
  * 忘记密码activity
  */
 class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, View.OnClickListener {
-    override fun onSendVerifyCodeResult(result: String) {
 
-    }
 
 
     override fun injectComponent() {
@@ -39,6 +37,10 @@ class ForgetPwdActivity : BaseMvpActivity<ForgetPwdPresenter>(), ForgetPwdView, 
         startActivity<ResetPwdActivity>(
                 "mobile" to mMobileEt.text.toString(),
                 "verifyCode" to mVerifyCodeEt.text.toString())
+    }
+
+    override fun onSendVerifyCodeResult(result: String) {
+        toast(result)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
