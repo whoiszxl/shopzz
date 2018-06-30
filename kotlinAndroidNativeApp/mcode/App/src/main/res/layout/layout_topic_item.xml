@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/WrapWrap"
+    app:cardBackgroundColor="@color/common_white"
+    app:cardCornerRadius="@dimen/common_radius"
+    app:cardElevation="2.0dip">
+    <LinearLayout style="@style/MatchWrap.Vertical">
+        <com.whoiszxl.base.widgets.RoundRectImageView
+            android:id="@+id/mTopicIv"
+            android:layout_width="200.0dip"
+            android:layout_height="120.0dip"
+            android:scaleType="centerCrop"/>
+        <TextView android:textColor="@color/text_light_dark"
+            style="@style/WrapWrap"
+            android:layout_marginLeft="@dimen/common_margin_small"
+            android:layout_marginTop="@dimen/common_margin_small"
+            android:text="爱生活"/>
+        <TextView android:textSize="@dimen/text_small_size"
+            android:textColor="@color/text_dark"
+            style="@style/WrapWrap"
+            android:layout_marginLeft="@dimen/common_margin_small"
+            android:text="有品有范有时尚"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
