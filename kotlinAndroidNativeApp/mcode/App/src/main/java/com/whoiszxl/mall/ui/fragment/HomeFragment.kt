@@ -5,11 +5,18 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.fragment.BaseFragment
+import com.whoiszxl.base.ui.fragment.BaseMvpFragment
 import com.whoiszxl.base.widgets.BannerImageLoader
 import com.whoiszxl.mall.R
 import com.whoiszxl.mall.common.*
+import com.whoiszxl.mall.data.protocol.Banner
+import com.whoiszxl.mall.injection.component.DaggerHomeComponent
+import com.whoiszxl.mall.injection.module.HomeModule
+import com.whoiszxl.mall.presenter.HomePresenter
+import com.whoiszxl.mall.presenter.view.HomeView
 import com.whoiszxl.mall.ui.adapter.HomeDiscountAdapter
 import com.whoiszxl.mall.ui.adapter.TopicAdapter
 import com.youth.banner.BannerConfig
@@ -17,8 +24,29 @@ import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.crosswall.lib.coverflow.CoverFlow
 import org.jetbrains.anko.support.v4.toast
+import java.util.*
 
-class HomeFragment:BaseFragment() {
+class HomeFragment:BaseMvpFragment<HomePresenter>(),HomeView {
+
+    override fun injectComponent() {
+        DaggerHomeComponent
+                .builder()
+                .activityComponent(mActivityComponent)
+                .homeModule(HomeModule())
+                .build()
+                .inject(this)
+        mPresenter.mView = this
+    }
+
+    override fun onBannerResult(t: MutableList<Banner>?) {
+        var mBannerList = LinkedList<String>()
+        if (t != null) {
+            for (item in t) {
+                mBannerList.add(item.imgurl)
+            }
+        }
+        initBanner(mBannerList)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container,savedInstanceState)
@@ -27,8 +55,8 @@ class HomeFragment:BaseFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mPresenter.getBanner()
         initView()
-        initBanner()
         initNews()
         initDiscount()
         initTopic()
@@ -44,18 +72,19 @@ class HomeFragment:BaseFragment() {
         }
 
         mScanIv.onClick {
-            toast(R.string.coming_soon_tip)
+            toast("敬请期待！~")
         }
     }
 
     /*
         初始化Banner
      */
-    private fun initBanner() {
+    private fun initBanner(mBannerList:LinkedList<String>) {
         //设置轮播图的loader
         mHomeBanner.setImageLoader(BannerImageLoader())
-        //TODO 读取轮播图
-        mHomeBanner.setImages(listOf(HOME_BANNER_ONE, HOME_BANNER_TWO, HOME_BANNER_THREE, HOME_BANNER_FOUR))
+        //读取轮播图
+        //mHomeBanner.setImages(listOf(HOME_BANNER_ONE, HOME_BANNER_TWO, HOME_BANNER_THREE, HOME_BANNER_FOUR))
+        mHomeBanner.setImages(mBannerList)
         //设置轮播图的动画
         mHomeBanner.setBannerAnimation(Transformer.Default)
         //设置轮播跳转时间

@@ -1,7 +1,6 @@
 package com.whoiszxl.user.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import com.whoiszxl.base.ext.enable
 import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.activity.BaseMvpActivity
@@ -34,7 +33,7 @@ class ResetPwdActivity : BaseMvpActivity<ResetPwdPresenter>(), ResetPwdView {
     override fun injectComponent() {
         //这个需要编辑一个UserComponent类，然后重新编译生成DaggerUserComponent,然后构建注入this类，才能让依赖注入生效
         //太麻烦了叭
-        DaggerUserComponent.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
+        DaggerUserComponent.builder().activityComponent(mActivityComponent).userModule(UserModule()).build().inject(this)
         mPresenter.mView = this
     }
 

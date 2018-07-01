@@ -1,20 +1,16 @@
 package com.whoiszxl.user.ui.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.whoiszxl.base.common.AppManager
 import com.whoiszxl.base.ext.enable
 import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.activity.BaseMvpActivity
-import com.whoiszxl.base.widgets.VerifyButton
 import com.whoiszxl.user.R
 import com.whoiszxl.user.injection.component.DaggerUserComponent
 import com.whoiszxl.user.injection.module.UserModule
 import com.whoiszxl.user.presenter.RegisterPresenter
 import com.whoiszxl.user.presenter.view.RegisterView
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.toast
 
@@ -31,7 +27,7 @@ class RegisterActivity : BaseMvpActivity<RegisterPresenter>(), RegisterView, Vie
     override fun injectComponent() {
         //这个需要编辑一个UserComponent类，然后重新编译生成DaggerUserComponent,然后构建注入this类，才能让依赖注入生效
         //太麻烦了叭
-        DaggerUserComponent.builder().activityComponent(activityComponent).userModule(UserModule()).build().inject(this)
+        DaggerUserComponent.builder().activityComponent(mActivityComponent).userModule(UserModule()).build().inject(this)
         mPresenter.mView = this
     }
 
