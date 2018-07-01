@@ -11,14 +11,16 @@ import com.whoiszxl.base.utils.GlideUtils
 import com.whoiszxl.mall.R
 import kotlinx.android.synthetic.main.layout_home_discount_item.view.*
 
-/*
-    首页折扣区域Adapter
+/**
+ * 首页折扣区域Adapter
  */
 class HomeDiscountAdapter(context:Context):BaseRecyclerViewAdapter<String,HomeDiscountAdapter.ViewHolder>(context) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        //加载折扣的布局
         val view = LayoutInflater.from(mContext)
                 .inflate(R.layout.layout_home_discount_item,parent,false)
 
+        //在设置样式后返回
         return ViewHolder(view)
     }
 

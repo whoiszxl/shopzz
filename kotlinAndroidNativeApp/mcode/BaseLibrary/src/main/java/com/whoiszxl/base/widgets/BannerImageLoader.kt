@@ -7,6 +7,7 @@ import com.youth.banner.loader.ImageLoader
 
 class BannerImageLoader:ImageLoader() {
     override fun displayImage(context: Context, path: Any, imageView: ImageView) {
+        //使用glide加载url的图片
         GlideUtils.loadUrlImage(context, path.toString(), imageView)
     }
 }

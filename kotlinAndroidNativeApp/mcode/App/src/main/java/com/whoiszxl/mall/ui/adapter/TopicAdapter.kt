@@ -23,8 +23,11 @@ class TopicAdapter(private val context: Context, private val list: List<String>)
     }
 
     override fun instantiateItem(parent: ViewGroup, position: Int): Any {
+        //将需要遍历的item布局加载
         val rooView = LayoutInflater.from(this.context).inflate(R.layout.layout_topic_item, null)
+        //通过扩展的loadUrl方法加载列表中的图片
         rooView.mTopicIv.loadUrl(list[position])
+        //当前的布局加载到父布局里
         parent.addView(rooView)
         return rooView
     }
