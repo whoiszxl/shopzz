@@ -2,9 +2,11 @@ package com.whoiszxl.user.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.whoiszxl.base.ext.enable
 import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.activity.BaseMvpActivity
+import com.whoiszxl.provider.router.RouterPath
 import com.whoiszxl.user.R
 import com.whoiszxl.user.data.protocol.UserInfo
 import com.whoiszxl.user.injection.component.DaggerUserComponent
@@ -20,6 +22,7 @@ import org.jetbrains.anko.toast
  * @author whoiszxl
  * 登录activity
  */
+@Route(path = RouterPath.UserCenter.PATH_LOGIN)
 class LoginActivity : BaseMvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
 

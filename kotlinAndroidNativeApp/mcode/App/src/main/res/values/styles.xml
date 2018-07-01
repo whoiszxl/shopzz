@@ -1,3 +1,32 @@
 <resources>
-
+    <!-- "我的" 订单标签样式 -->
+    <style name="MeOrderLabelStyle">
+        <item name="android:textSize">@dimen/text_small_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">0.0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/common_padding_small</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+    <!-- "我的" 单项样式 -->
+    <style name="MeItemStyle">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@drawable/border_bottom</item>
+        <item name="android:paddingLeft">@dimen/common_padding</item>
+        <item name="android:paddingTop">@dimen/common_padding_middle</item>
+        <item name="android:paddingRight">@dimen/common_padding</item>
+        <item name="android:paddingBottom">@dimen/common_padding_middle</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableRight">@drawable/icon_arrow</item>
+        <item name="android:drawablePadding">@dimen/common_padding_small</item>
+    </style>
+    <!-- 设置界面单项样式 -->
+    <style name="SettingItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableRight">@drawable/icon_arrow</item>
+        <item name="android:background">@drawable/border_bottom</item>
+        <item name="android:padding">@dimen/common_padding</item>
+    </style>
 </resources>
