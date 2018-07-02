@@ -82,14 +82,14 @@ class MeFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.mUserIconIv, R.id.mUserNameTv -> {
-//                afterLogin {
-//                    startActivity<UserInfoActivity>()
-//                }
-                if (isLogined()){
+                afterLogin {
                     startActivity<UserInfoActivity>()
-                }else{
-                    startActivity<LoginActivity>()
                 }
+//                if (isLogined()){
+//                    startActivity<UserInfoActivity>()
+//                }else{
+//                    startActivity<LoginActivity>()
+//                }
             }
 
             R.id.mWaitPayOrderTv -> {

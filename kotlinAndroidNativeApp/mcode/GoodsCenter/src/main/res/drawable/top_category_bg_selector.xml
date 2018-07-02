@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  	<item android:state_selected="true" android:drawable="@color/common_bg" />
+    <item android:state_selected="false" android:drawable="@drawable/border_all" />
+    <item android:drawable="@drawable/border_all" />
+</selector>

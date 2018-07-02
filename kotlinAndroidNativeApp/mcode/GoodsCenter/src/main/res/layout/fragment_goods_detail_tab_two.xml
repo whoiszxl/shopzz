@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/MatchMatch.Vertical">
+    <ScrollView style="@style/MatchMatch">
+        <LinearLayout style="@style/MatchWrap.Vertical">
+            <ImageView
+                    android:id="@+id/mGoodsDetailOneIv"
+                    style="@style/MatchWrap"
+                    android:scaleType="fitXY"/>
+            <ImageView
+                    android:id="@+id/mGoodsDetailTwoIv"
+                    style="@style/MatchWrap"
+                    android:scaleType="fitXY"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

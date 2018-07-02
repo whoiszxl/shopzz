@@ -20,8 +20,7 @@ fun afterLogin(method:()->Unit){
     if (isLogined()){
         method()
     }else{
-        //TODO ARouter跳转不了
-        // ARouter.getInstance().build(RouterPath.UserCenter.PATH_LOGIN).navigation()
+        ARouter.getInstance().build(RouterPath.UserCenter.PATH_LOGIN).navigation()
     }
 }
 

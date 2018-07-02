@@ -66,6 +66,9 @@ dependencies {
     //Dagger2
     api "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //ARouter
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 }
 
 apply plugin: 'kotlin-android-extensions'

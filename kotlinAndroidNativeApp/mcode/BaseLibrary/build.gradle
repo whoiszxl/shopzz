@@ -88,7 +88,15 @@ dependencies {
     //画廊
     api 'com.github.crosswall:Android-Coverflow:release-v1.0.4'
 
+    //上下拉刷新
+    api 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
+    //Kotlin Bus
+    api 'com.eightbitlab:rxbus:1.0.2'
+    //FlowLayout
+    api 'com.zhy:flowlayout-lib:1.0.3'
 
+    //BadgeView
+    api 'q.rorbin:badgeview:1.1.2'
 
     //ARouter
     api "com.alibaba:arouter-api:$arouter_api_version"

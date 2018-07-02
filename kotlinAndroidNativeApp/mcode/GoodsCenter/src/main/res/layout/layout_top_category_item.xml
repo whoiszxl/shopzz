@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/MatchWrap">
+    <TextView
+            android:id="@+id/mTopCategoryNameTv"
+            style="@style/MatchWrap"
+            android:background="@drawable/top_category_bg_selector"
+            android:gravity="center"
+            android:textColor="@drawable/top_category_text_selector"
+            android:padding="@dimen/common_padding_middle"/>
+</LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:zhy="http://schemas.android.com/apk/res-auto"
+              style="@style/MatchWrap.Vertical">
+    <TextView
+            android:id="@+id/mSkuTitleTv"
+            style="@style/WrapWrap"
+            android:textSize="@dimen/text_small_size"
+            android:textColor="@color/text_dark"
+            android:layout_marginTop="@dimen/common_margin_small"
+            android:layout_marginBottom="@dimen/common_margin"/>
+    <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/mSkuContentView"
+            style="@style/MatchWrap"
+            zhy:max_select="1"/>
+</LinearLayout>

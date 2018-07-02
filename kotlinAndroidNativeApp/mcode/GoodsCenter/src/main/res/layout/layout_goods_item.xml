@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/WrapWrap.Vertical"
+              android:gravity="center_horizontal"
+              android:padding="@dimen/common_padding_small"
+              android:background="@drawable/border_all"
+              android:layout_margin="2dp">
+    <ImageView
+            android:id="@+id/mGoodsIconIv"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"/>
+    <TextView
+            android:id="@+id/mGoodsDescTv"
+            style="@style/WrapWrap"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/text_small_size"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+    <TextView
+            android:id="@+id/mGoodsPriceTv"
+            style="@style/MatchWrap"
+            android:textColor="@color/common_red"
+            android:layout_marginTop="@dimen/common_margin_small"/>
+    <TextView
+            android:id="@+id/mGoodsSalesStockTv"
+            style="@style/MatchWrap"
+            android:textSize="@dimen/text_small_size"
+            android:textColor="@color/text_dark"
+            android:layout_marginTop="@dimen/common_margin_small"/>
+</LinearLayout>

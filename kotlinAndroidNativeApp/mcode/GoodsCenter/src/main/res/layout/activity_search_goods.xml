@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/MatchMatch.Vertical">
+
+    <LinearLayout style="@style/SearchHeaderStyle">
+        <ImageView
+                android:id="@+id/mLeftIv"
+                style="@style/WrapMatch"
+                android:src="@drawable/icon_back"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding"/>
+        <EditText
+                android:id="@+id/mKeywordEt"
+                style="@style/SearchHeaderEtStyle"
+                android:hint="搜索商品/品类"/>
+        <TextView
+                android:id="@+id/mSearchTv"
+                style="@style/WrapWrap"
+                android:text="搜索"
+                android:textColor="@color/common_white"/>
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/mNoDataTv"
+            style="@style/MatchMatch"
+            android:text="暂无历史记录"
+            android:gravity="center"/>
+
+    <LinearLayout
+            android:id="@+id/mDataView"
+            style="@style/MatchMatch"
+            android:orientation="vertical">
+        <TextView
+                style="@style/WrapWrap"
+                android:layout_margin="@dimen/common_margin"
+                android:text="你最近的搜索历史"/>
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/mSearchHistoryRv"
+                android:layout_height="wrap_content"
+                style="@style/commonRecyclerView"/>
+        <Button
+                android:id="@+id/mClearBtn"
+                style="@style/MatchWrap"
+                android:layout_margin="30dp"
+                android:background="@drawable/corner_gray_white_bg"
+                android:padding="@dimen/common_padding"
+                android:text="清空历史搜索"
+                android:textColor="@color/text_dark"/>
+    </LinearLayout>
+</LinearLayout>
