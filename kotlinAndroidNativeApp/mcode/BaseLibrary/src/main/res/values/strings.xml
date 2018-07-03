@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BaseLibrary</string>
 
-    <string name="coming_soon_tip">敬请期待~~~</string>
+    <string name="coming_soon_tip">暂无商品噢~~~</string>
     <string name="common_complete">完成</string>
     <string name="common_confirm">确认</string>
     <string name="common_edit">编辑</string>

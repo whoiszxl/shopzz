@@ -10,6 +10,7 @@ import com.whoiszxl.base.ext.onClick
 import com.whoiszxl.base.ui.fragment.BaseFragment
 import com.whoiszxl.base.ui.fragment.BaseMvpFragment
 import com.whoiszxl.base.widgets.BannerImageLoader
+import com.whoiszxl.goods.ui.activity.SearchGoodsActivity
 import com.whoiszxl.mall.R
 import com.whoiszxl.mall.common.*
 import com.whoiszxl.mall.data.protocol.Banner
@@ -23,6 +24,7 @@ import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.crosswall.lib.coverflow.CoverFlow
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
@@ -67,8 +69,7 @@ class HomeFragment:BaseMvpFragment<HomePresenter>(),HomeView {
      */
     private fun initView() {
         mSearchEt.onClick {
-            toast("点击跳转搜索Goods了")
-            //startActivity<SearchGoodsActivity>()
+            startActivity<SearchGoodsActivity>()
         }
 
         mScanIv.onClick {
