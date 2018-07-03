@@ -163,6 +163,7 @@ public class ProductServiceImpl implements ProductService {
         productListVo.setPrice(product.getPrice());
         productListVo.setSubtitle(product.getSubtitle());
         productListVo.setStatus(product.getStatus());
+        productListVo.setStock(product.getStock());
         return productListVo;
     }
 
