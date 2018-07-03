@@ -8,6 +8,7 @@
 
         <activity android:name=".ui.activity.GoodsActivity"/>
         <activity android:name=".ui.activity.SearchGoodsActivity"/>
+        <activity android:name=".ui.activity.GoodsDetailActivity"/>
     </application>
 
 </manifest>

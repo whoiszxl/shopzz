@@ -18,6 +18,7 @@ import com.whoiszxl.goods.presenter.GoodsListPresenter
 import com.whoiszxl.goods.presenter.view.GoodsListView
 import com.whoiszxl.goods.ui.adapter.GoodsAdapter
 import kotlinx.android.synthetic.main.activity_goods.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class GoodsActivity: BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGARefreshLayout.BGARefreshLayoutDelegate {
@@ -47,8 +48,8 @@ class GoodsActivity: BaseMvpActivity<GoodsListPresenter>(), GoodsListView, BGARe
 
         mGoodsAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Goods>{
             override fun onItemClick(item: Goods, position: Int) {
-                toast("点击咯${item.name}")
-                //startActivity<GoodsDetailActivity>(GoodsConstant.KEY_GOODS_ID to item.id)
+                //toast("点击咯${item.name}")
+                startActivity<GoodsDetailActivity>(GoodsConstant.KEY_GOODS_ID to item.id)
             }
         })
     }
