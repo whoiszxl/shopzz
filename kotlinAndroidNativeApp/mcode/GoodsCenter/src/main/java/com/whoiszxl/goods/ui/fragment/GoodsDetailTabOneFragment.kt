@@ -1,4 +1,5 @@
 package com.whoiszxl.goods.ui.fragment
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -156,6 +157,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
     /*
         监听SKU变化及加入购物车事件
      */
+    @SuppressLint("SetTextI18n")
     private fun initObserve(){
         Bus.observe<SkuChangedEvent>()
                 .subscribe {

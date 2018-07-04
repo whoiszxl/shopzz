@@ -15,8 +15,10 @@ import com.whoiszxl.common.ResponseCode;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.dao.CategoryMapper;
 import com.whoiszxl.dao.ProductMapper;
+import com.whoiszxl.dao.SkuMapper;
 import com.whoiszxl.entity.Category;
 import com.whoiszxl.entity.Product;
+import com.whoiszxl.entity.Sku;
 import com.whoiszxl.service.CategoryService;
 import com.whoiszxl.service.ProductService;
 import com.whoiszxl.utils.DateTimeUtil;
@@ -37,6 +39,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private CategoryMapper categoryMapper;
+	
+	@Autowired
+	private SkuMapper skuMapper;
 	
 	@Autowired
 	private CategoryService categoryService;
@@ -100,8 +105,11 @@ public class ProductServiceImpl implements ProductService {
 		ProductDetailVo productDetailVo = assembleProductDetailVo(product);
 		return ServerResponse.createBySuccess(productDetailVo);
 	}
-
+	
 	private ProductDetailVo assembleProductDetailVo(Product product) {
+		return assembleProductDetailVo(product, null);
+	}
+	private ProductDetailVo assembleProductDetailVo(Product product, List<Sku> skus) {
 		ProductDetailVo productDetailVo = new ProductDetailVo();
 		productDetailVo.setId(product.getId());
 		productDetailVo.setSubtitle(product.getSubtitle());
@@ -113,7 +121,9 @@ public class ProductServiceImpl implements ProductService {
 		productDetailVo.setName(product.getName());
 		productDetailVo.setStatus(product.getStatus());
 		productDetailVo.setStock(product.getStock());
-
+		if(skus != null) {
+			productDetailVo.setSkus(skus);
+		}
 		//设置图片路径
 		productDetailVo
 				.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix", "http://image.chenyuspace.com/"));
@@ -202,8 +212,11 @@ public class ProductServiceImpl implements ProductService {
         if(product.getStatus() != Const.ProductStatusEnum.ON_SALE.getCode()){
             return ServerResponse.createByErrorMessage("产品已下架或者删除");
         }
+        
+        //查詢這個商品的sku
+        List<Sku> skus = skuMapper.selectSkuByProductId(productId);
         //转换成vo对象返回给前端
-        ProductDetailVo productDetailVo = assembleProductDetailVo(product);
+        ProductDetailVo productDetailVo = assembleProductDetailVo(product, skus);
         return ServerResponse.createBySuccess(productDetailVo);
 	}
 

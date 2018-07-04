@@ -1,6 +1,9 @@
 package com.whoiszxl.vo;
 
 import java.math.BigDecimal;
+import java.util.List;
+
+import com.whoiszxl.entity.Sku;
 
 /**
  * 
@@ -18,9 +21,9 @@ public class ProductDetailVo {
     private BigDecimal price;
     private Integer stock;
     private Integer status;
+    private List<Sku> skus;
     private String createTime;
     private String updateTime;
-	
     private String imageHost;
     private Integer parentCategoryId;
 	public Integer getId() {
@@ -107,10 +110,11 @@ public class ProductDetailVo {
 	public void setParentCategoryId(Integer parentCategoryId) {
 		this.parentCategoryId = parentCategoryId;
 	}
-    
-    
-    
-    
-    
+	public List<Sku> getSkus() {
+		return skus;
+	}
+	public void setSkus(List<Sku> skus) {
+		this.skus = skus;
+	}
     
 }
