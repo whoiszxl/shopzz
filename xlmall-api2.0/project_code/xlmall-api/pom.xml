@@ -306,7 +306,7 @@
 			</plugin>
 
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
 				<version>1.3.5</version>
@@ -336,7 +336,7 @@
 					<overwrite>true</overwrite>
 					<configurationFile> src/main/resources/mybatis-generator.xml</configurationFile>
 				</configuration>
-			</plugin>
+			</plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
