@@ -17,6 +17,6 @@ data class Goods(
         val imageHost: String,//商品图域名地址
         val goodsDefaultSku: String = "一件",//默认SKU
         val goodsBanner: String,//商品banner图
-        val goodsSku:List<GoodsSku>,//商品SKU
+        val skus:List<GoodsSku>,//商品SKU
         val maxPage:Int//最大页码
 )

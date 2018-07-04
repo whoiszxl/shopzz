@@ -1,9 +1,11 @@
 package com.whoiszxl.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,7 @@ import com.whoiszxl.utils.DateTimeUtil;
 import com.whoiszxl.utils.PropertiesUtil;
 import com.whoiszxl.vo.ProductDetailVo;
 import com.whoiszxl.vo.ProductListVo;
+import com.whoiszxl.vo.SkuVo;
 
 /**
  * 
@@ -109,7 +112,7 @@ public class ProductServiceImpl implements ProductService {
 	private ProductDetailVo assembleProductDetailVo(Product product) {
 		return assembleProductDetailVo(product, null);
 	}
-	private ProductDetailVo assembleProductDetailVo(Product product, List<Sku> skus) {
+	private ProductDetailVo assembleProductDetailVo(Product product, List<SkuVo> skus) {
 		ProductDetailVo productDetailVo = new ProductDetailVo();
 		productDetailVo.setId(product.getId());
 		productDetailVo.setSubtitle(product.getSubtitle());
@@ -215,8 +218,22 @@ public class ProductServiceImpl implements ProductService {
         
         //查詢這個商品的sku
         List<Sku> skus = skuMapper.selectSkuByProductId(productId);
+        
+        List<SkuVo> skuVoList = new ArrayList<>();
+        for (Sku sku : skus) {
+			SkuVo skuVo = new SkuVo();
+			skuVo.setId(sku.getId());
+			skuVo.setSkuTitle(sku.getProductSkuTitle());
+			if(sku.getProductSkuContent().indexOf(",") != -1) {
+				skuVo.setSkuContent(Arrays.asList(sku.getProductSkuContent()));
+			}else {
+				skuVo.setSkuContent(Arrays.asList(sku.getProductSkuContent().split(",")));
+			}
+			skuVoList.add(skuVo);
+		}
+        
         //转换成vo对象返回给前端
-        ProductDetailVo productDetailVo = assembleProductDetailVo(product, skus);
+        ProductDetailVo productDetailVo = assembleProductDetailVo(product, skuVoList);
         return ServerResponse.createBySuccess(productDetailVo);
 	}
 

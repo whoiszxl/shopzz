@@ -21,7 +21,7 @@ public class ProductDetailVo {
     private BigDecimal price;
     private Integer stock;
     private Integer status;
-    private List<Sku> skus;
+    private List<SkuVo> skus;
     private String createTime;
     private String updateTime;
     private String imageHost;
@@ -110,11 +110,12 @@ public class ProductDetailVo {
 	public void setParentCategoryId(Integer parentCategoryId) {
 		this.parentCategoryId = parentCategoryId;
 	}
-	public List<Sku> getSkus() {
+	public List<SkuVo> getSkus() {
 		return skus;
 	}
-	public void setSkus(List<Sku> skus) {
+	public void setSkus(List<SkuVo> skus) {
 		this.skus = skus;
 	}
+	
     
 }

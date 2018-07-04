@@ -126,7 +126,6 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         mCurGoods = result
 
         var bannerList = LinkedList<String>()
-        bannerList.add(result.imageHost+result.mainImage)
         for (subBanner in result.subImages.split(",")) {
             bannerList.add(result.imageHost + subBanner)
         }
