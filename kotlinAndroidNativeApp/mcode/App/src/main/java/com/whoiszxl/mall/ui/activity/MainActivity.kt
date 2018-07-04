@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
+import com.whoiszxl.goods.ui.fragment.CartFragment
 import com.whoiszxl.goods.ui.fragment.CategoryFragment
 import com.whoiszxl.mall.R
 import com.whoiszxl.mall.ui.fragment.HomeFragment
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     //商品分类Fragment
     private val mCategoryFragment by lazy { CategoryFragment() }
     //购物车Fragment
-    private val mCartFragment by lazy { HomeFragment() }
+    private val mCartFragment by lazy { CartFragment() }
     //消息Fragment
     private val mMsgFragment by lazy { HomeFragment() }
     //"我的"Fragment

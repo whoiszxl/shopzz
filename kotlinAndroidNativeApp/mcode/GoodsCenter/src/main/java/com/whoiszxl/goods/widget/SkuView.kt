@@ -22,6 +22,8 @@ class SkuView @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
 
     private lateinit var mGoodsSku: GoodsSku
 
+    private var mPosition: Int = 0
+
     init {
         View.inflate(context,R.layout.layout_sku_view, this)
     }
@@ -45,7 +47,8 @@ class SkuView @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
 
         mSkuContentView.adapter.setSelectedList(0)
 
-        mSkuContentView.setOnTagClickListener { view, position, parent ->
+        mSkuContentView.setOnTagClickListener { _, position, _ ->
+            mPosition = position
             Bus.send(SkuChangedEvent())
             true
         }
@@ -56,7 +59,7 @@ class SkuView @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
      */
     fun getSkuInfo(): String {
         if(mSkuContentView.selectedList==null || mSkuContentView.selectedList.size == 0){
-            return mSkuTitleTv.text.toString() + GoodsConstant.SKU_SEPARATOR + mGoodsSku.skuContent[0]
+            return mSkuTitleTv.text.toString() + GoodsConstant.SKU_SEPARATOR + mGoodsSku.skuContent[mPosition]
         }else {
             return mSkuTitleTv.text.toString() + GoodsConstant.SKU_SEPARATOR + mGoodsSku.skuContent[mSkuContentView.selectedList.first()]
         }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import com.whoiszxl.base.R
 import com.whoiszxl.base.ext.onClick
@@ -35,15 +36,21 @@ class HeaderBar @JvmOverloads constructor(
     private fun initView() {
         View.inflate(context, R.layout.layout_header_bar, this)
         mLeftIv.visibility = if (isShowBack) View.VISIBLE else View.GONE
-        //如果不为空就执行这个并将当前参数作为it传入
+        //标题不为空，设置值
         titleText?.let {
             mTitleTv.text = it
         }
+        /**
+         * 右侧文字不为空，设置值
+         */
         rightText?.let {
             mRightTv.text = it
             mRightTv.visibility = View.VISIBLE
         }
 
+        /**
+         * 返回图标默认实现（关闭Activity）
+         */
         mLeftIv.onClick {
             if(context is Activity) {
                 (context as Activity).finish()
@@ -51,7 +58,24 @@ class HeaderBar @JvmOverloads constructor(
         }
     }
 
+    /**
+     * 获取左侧视图
+     */
+    fun getLeftView(): ImageView {
+        return mLeftIv
+    }
+
+    /**
+     * 获取右侧视图
+     */
     fun getRightView():TextView{
         return mRightTv
+    }
+
+    /**
+     * 获取右侧文字
+     */
+    fun getRightText():String{
+        return mRightTv.text.toString()
     }
 }
