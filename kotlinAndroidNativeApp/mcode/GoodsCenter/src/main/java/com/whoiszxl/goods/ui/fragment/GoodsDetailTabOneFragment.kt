@@ -84,12 +84,12 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
    */
     private fun initAnim() {
         mAnimationStart = ScaleAnimation(
-                1f, 0.95f, 1f, 0.95f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+                1f, 0.99f, 1f, 0.99f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         mAnimationStart.duration = 500
         mAnimationStart.fillAfter = true
 
         mAnimationEnd = ScaleAnimation(
-                0.95f, 1f, 0.95f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+                0.99f, 1f, 0.99f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
         mAnimationEnd.duration = 500
         mAnimationEnd.fillAfter = true
     }
@@ -149,7 +149,7 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         mSkuPop.setGoodsIcon(result.mainImage)
         mSkuPop.setGoodsCode(result.id.toString())
         mSkuPop.setGoodsPrice(result.price)
-        mSkuPop.setSkuData(result.goodsSku)
+        mSkuPop.setSkuData(result.skus)
 
     }
 

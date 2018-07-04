@@ -27,16 +27,14 @@ class SkuView @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
     }
 
     /*
-        TODO 这个先写死来，暂时没有SKU功能
         动态设置SKU数据
      */
     fun setSkuData(goodsSku: GoodsSku) {
         mGoodsSku = goodsSku
-        //mSkuTitleTv.text = goodsSku.skuTitle
-        mSkuTitleTv.text = "一件"
+        mSkuTitleTv.text = goodsSku.skuTitle
 
         //FlowLayout设置数据
-        mSkuContentView.adapter = object :TagAdapter<String>(arrayListOf("一件")){
+        mSkuContentView.adapter = object :TagAdapter<String>(goodsSku.skuContent){
             override fun getView(parent: FlowLayout?, position: Int, t: String?): View {
                 val view = LayoutInflater.from(context)
                         .inflate(R.layout.layout_sku_item,parent,false) as TextView

@@ -83,9 +83,8 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<select id="selectSkuByProductId" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
+	<select id="selectSkuByProductId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+	select
 		<include refid="Base_Column_List" />
 		from xl_sku
 		where product_id = #{product_id}
