@@ -45,7 +45,7 @@ class SkuView @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
 
         mSkuContentView.adapter.setSelectedList(0)
 
-        mSkuContentView.setOnTagClickListener { _, _, _ ->
+        mSkuContentView.setOnTagClickListener { view, position, parent ->
             Bus.send(SkuChangedEvent())
             true
         }
@@ -55,7 +55,11 @@ class SkuView @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
         获取选中的SKU
      */
     fun getSkuInfo(): String {
-        return mSkuTitleTv.text.toString() + GoodsConstant.SKU_SEPARATOR +
-                mGoodsSku.skuContent[mSkuContentView.selectedList.first()]
+        if(mSkuContentView.selectedList==null || mSkuContentView.selectedList.size == 0){
+            return mSkuTitleTv.text.toString() + GoodsConstant.SKU_SEPARATOR + mGoodsSku.skuContent[0]
+        }else {
+            return mSkuTitleTv.text.toString() + GoodsConstant.SKU_SEPARATOR + mGoodsSku.skuContent[mSkuContentView.selectedList.first()]
+        }
+
     }
 }

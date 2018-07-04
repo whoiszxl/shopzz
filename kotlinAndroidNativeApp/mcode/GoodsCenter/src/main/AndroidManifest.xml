@@ -8,7 +8,7 @@
 
         <activity android:name=".ui.activity.GoodsActivity"/>
         <activity android:name=".ui.activity.SearchGoodsActivity"/>
-        <activity android:name=".ui.activity.GoodsDetailActivity"/>
+        <activity android:name=".ui.activity.GoodsDetailActivity" android:theme="@style/AppTheme.Black"/>
     </application>
 
 </manifest>

@@ -84,13 +84,13 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
    */
     private fun initAnim() {
         mAnimationStart = ScaleAnimation(
-                1f, 0.99f, 1f, 0.99f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-        mAnimationStart.duration = 500
+                1f, 0.98f, 1f, 0.98f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        mAnimationStart.duration = 300
         mAnimationStart.fillAfter = true
 
         mAnimationEnd = ScaleAnimation(
-                0.99f, 1f, 0.99f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
-        mAnimationEnd.duration = 500
+                0.98f, 1f, 0.98f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+        mAnimationEnd.duration = 300
         mAnimationEnd.fillAfter = true
     }
 
