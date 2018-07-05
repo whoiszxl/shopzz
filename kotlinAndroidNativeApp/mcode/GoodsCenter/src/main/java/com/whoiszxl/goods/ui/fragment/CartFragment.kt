@@ -142,7 +142,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
      */
     override fun onGetCartListResult(result: Cart?) {
         if (result != null && result.cartProductVoList.isNotEmpty()) {
-            //mAdapter.setData(result.cartProductVoList)
+            mAdapter.setData(result.cartProductVoList)
             mHeaderBar.getRightView().setVisible(true)
             mAllCheckedCb.isChecked = false
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT

@@ -14,5 +14,5 @@ data class CartGoods(
         val productPrice: Long,//商品单价
         var quantity: Int,//商品数量
         val productTotalPrice:Long,//商品总价
-        var userId:Boolean//购买的用户id
+        var userId:Long//购买的用户id
 )
