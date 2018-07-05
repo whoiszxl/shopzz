@@ -15,6 +15,7 @@ public class CartProductVo {
 	private Integer quantity;
 	private String productName;
 	private String productSubtitle;
+	private String imageHost;
 	private String productMainImage;
 	private BigDecimal productPrice;
 	private Integer productStatus;
@@ -127,8 +128,13 @@ public class CartProductVo {
 	public void setLimitQuantity(String limitQuantity) {
 		this.limitQuantity = limitQuantity;
 	}
-	
-	
-	
+
+	public String getImageHost() {
+		return imageHost;
+	}
+
+	public void setImageHost(String imageHost) {
+		this.imageHost = imageHost;
+	}
 	
 }

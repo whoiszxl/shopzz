@@ -145,6 +145,7 @@ public class CartServiceImpl implements CartService {
                     cartProductVo.setProductStatus(product.getStatus());
                     cartProductVo.setProductPrice(product.getPrice());
                     cartProductVo.setProductStock(product.getStock());
+                    cartProductVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
                     //判断库存
                     int buyLimitCount = 0;
                     if(product.getStock() >= cartItem.getQuantity()){
