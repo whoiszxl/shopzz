@@ -41,7 +41,7 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
         //是否选中
         holder.itemView.mCheckedCb.isChecked = model.isChecked
         //加载商品图片
-        holder.itemView.mGoodsIconIv.loadUrl(model.productMainImage)
+        holder.itemView.mGoodsIconIv.loadUrl(model.imageHost+model.productMainImage)
         //商品描述
         holder.itemView.mGoodsDescTv.text = model.productName
         //商品SKU
@@ -55,7 +55,7 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
             model.isChecked = holder.itemView.mCheckedCb.isChecked
             val isAllChecked = dataList.all {it.isChecked }
             Bus.send(CartAllCheckedEvent(isAllChecked))
-            notifyDataSetChanged()
+            //notifyDataSetChanged()
         }
 
         //商品数量变化监听

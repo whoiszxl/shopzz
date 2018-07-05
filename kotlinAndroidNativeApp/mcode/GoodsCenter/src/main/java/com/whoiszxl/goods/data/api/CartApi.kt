@@ -2,10 +2,7 @@ package com.whoiszxl.goods.data.api
 
 import com.whoiszxl.base.data.protocol.BaseResp
 import com.whoiszxl.goods.data.protocol.Cart
-import retrofit2.http.Field
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 import rx.Observable
 
 interface CartApi {
@@ -21,6 +18,7 @@ interface CartApi {
     /**
      * 通过商品id添加到购物车
      */
+    @FormUrlEncoded
     @POST("/cart/add")
     fun addCart(
             @Header("Authorization") authorization: String,
@@ -30,6 +28,7 @@ interface CartApi {
     /**
      * 删除购物车的商品 通过逗号分隔的商品id字符串
      */
+    @FormUrlEncoded
     @POST("/cart/delete_product")
     fun deleteCartList(
             @Header("Authorization") authorization: String,
@@ -39,6 +38,7 @@ interface CartApi {
     /**
      * 选中单个商品
      */
+    @FormUrlEncoded
     @POST("/cart/select")
     fun selectCartOne(
             @Header("Authorization") authorization: String,
@@ -48,6 +48,7 @@ interface CartApi {
     /**
      * 不选中单个商品
      */
+    @FormUrlEncoded
     @POST("/cart/un_select")
     fun selectUnCartOne(
             @Header("Authorization") authorization: String,
@@ -58,6 +59,7 @@ interface CartApi {
     /**
      * 选中所有商品
      */
+    @FormUrlEncoded
     @POST("/cart/select_all")
     fun selectCartAll(
             @Header("Authorization") authorization: String
@@ -66,6 +68,7 @@ interface CartApi {
     /**
      * 不选中所有商品
      */
+    @FormUrlEncoded
     @POST("/cart/un_select_all")
     fun selectUnCartAll(
             @Header("Authorization") authorization: String
@@ -75,6 +78,7 @@ interface CartApi {
     /**
      * 更新购物车的商品
      */
+    @FormUrlEncoded
     @POST("/cart/update")
     fun updateCart(
             @Header("Authorization") authorization: String,

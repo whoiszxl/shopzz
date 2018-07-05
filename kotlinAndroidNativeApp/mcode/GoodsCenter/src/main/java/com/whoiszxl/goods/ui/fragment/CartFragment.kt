@@ -32,6 +32,7 @@ import com.whoiszxl.provider.common.ProviderConstant
 import com.whoiszxl.provider.router.RouterPath
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.toast
+
 /*
     购物车 Fragment
  */
@@ -41,8 +42,8 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
     private var mTotalPrice: Long = 0
 
-    /*
-        Dagger注册
+    /**
+     * Dagger注册
      */
     override fun injectComponent() {
         DaggerCartComponent.builder().activityComponent(mActivityComponent).cartModule(CartModule()).build().inject(this)
@@ -61,16 +62,16 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         initObserve()
     }
 
-    /*
-        加载数据
+    /**
+     * 加载数据
      */
     override fun onStart() {
         super.onStart()
         loadData()
     }
 
-    /*
-        初始化视图和事件
+    /**
+     * 初始化视图和事件
      */
     private fun initView() {
         mCartGoodsRv.layoutManager = LinearLayoutManager(context)
@@ -97,7 +98,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
                     .mapTo(cartIdList) { it.id }
             if (cartIdList.size == 0) {
                 toast("请选择需要删除的数据")
-            }else {
+            } else {
                 //mPresenter.deleteCartList(cartIdList)
             }
         }
@@ -106,10 +107,10 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         mSettleAccountsBtn.onClick {
             val cartGoodsList: MutableList<CartGoods> = arrayListOf()
             mAdapter.dataList.filter { it.isChecked }
-                    .mapTo(cartGoodsList){it}
+                    .mapTo(cartGoodsList) { it }
             if (cartGoodsList.size == 0) {
                 toast("请选择需要提交的数据")
-            }else {
+            } else {
                 ///mPresenter.submitCart(cartGoodsList,mTotalPrice)
             }
         }
@@ -153,7 +154,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
         //本地存储并发送事件刷新UI
         if (result != null) {
-            AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE,result.cartProductVoList.size?:0)
+            AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE, result.cartProductVoList.size ?: 0)
         }
         Bus.send(UpdateCartSizeEvent())
         //更新总价
@@ -169,13 +170,11 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
                 mAllCheckedCb.isChecked = t.isAllChecked
                 updateTotalPrice()
             }
-        }
-                .registerInBus(this)
+        }.registerInBus(this)
 
         Bus.observe<UpdateTotalPriceEvent>().subscribe {
             updateTotalPrice()
-        }
-                .registerInBus(this)
+        }.registerInBus(this)
 
     }
 
@@ -198,6 +197,11 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
                 .sum()
 
         mTotalPriceTv.text = "合计:${YuanFenConverter.changeF2YWithUnit(mTotalPrice)}"
+
+        //TODO 还需要更新一下接口的
+        for (it in mAdapter.dataList) {
+            mPresenter.updateCartNum(it.quantity, it.productId)
+        }
     }
 
     /*
@@ -214,14 +218,14 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
      */
     override fun onSubmitCartListResult(result: Int) {
         ARouter.getInstance().build(RouterPath.OrderCenter.PATH_ORDER_CONFIRM)
-                .withInt(ProviderConstant.KEY_ORDER_ID,result)
+                .withInt(ProviderConstant.KEY_ORDER_ID, result)
                 .navigation()
     }
 
     /*
         设置Back是否可见
      */
-    fun setBackVisible(isVisible:Boolean){
+    fun setBackVisible(isVisible: Boolean) {
         mHeaderBar.getLeftView().setVisible(isVisible)
     }
 }
