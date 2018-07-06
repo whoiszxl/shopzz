@@ -89,18 +89,35 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
                 item.productCheckedBoolean = mAllCheckedCb.isChecked
             }
             mAdapter.notifyDataSetChanged()
+            /**
+             * 调用全选接口
+             * 当前这里是onClick点击后的状态，所以isChecked是选中状态的话
+             * 那就要执行选中状态的接口
+             */
+            if(mAllCheckedCb.isChecked) {
+                mPresenter.selectCartAll()
+            }else{
+                mPresenter.selectUnCartAll()
+            }
             updateTotalPrice()
         }
 
         //删除按钮事件
         mDeleteBtn.onClick {
-            val cartIdList: MutableList<Int> = arrayListOf()
-            mAdapter.dataList.filter { it.productCheckedBoolean }
-                    .mapTo(cartIdList) { it.id }
-            if (cartIdList.size == 0) {
+
+            var cartIdListStr = StringBuilder()
+            mAdapter.dataList.forEach {
+                if(it.productCheckedBoolean){
+                    cartIdListStr.append(it.productId).append(",")
+                }
+            }
+
+            cartIdListStr.deleteCharAt(cartIdListStr.length - 1)
+
+            if (cartIdListStr == null) {
                 toast("请选择需要删除的数据")
             } else {
-                //mPresenter.deleteCartList(cartIdList)
+                mPresenter.deleteCartList(cartIdListStr.toString())
             }
         }
 
@@ -160,13 +177,14 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         Bus.send(UpdateCartSizeEvent())
         //更新总价
         updateTotalPrice()
-        updateAllCartNum()
+        updateAllCartNumOfApi()
     }
 
     /*
         注册监听
      */
     private fun initObserve() {
+        //选择所有  购物车商品事件
         Bus.observe<CartAllCheckedEvent>().subscribe { t: CartAllCheckedEvent ->
             run {
                 mAllCheckedCb.isChecked = t.isAllChecked
@@ -181,17 +199,18 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
             }
         }.registerInBus(this)
 
+        // 更新总价
         Bus.observe<UpdateTotalPriceEvent>().subscribe {
-            toast("UpdateTotalPriceEvent")
             updateTotalPrice()
-            updateAllCartNum()
+            //updateAllCartNumOfApi()
+            updateSingleCartNumOfApi(it.count, it.productId)
         }
                 .registerInBus(this)
 
+        //单个选中 回调
         Bus.observe<CartSingleCheckedEvent>().subscribe{ t: CartSingleCheckedEvent ->
             run {
                 //调用单选接口
-                toast("t:ischecked:${t.isChecked}")
                 if(t.isChecked) {
                     mPresenter.selectUnCartOne(t.productId)
                 }else {
@@ -229,10 +248,14 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
     /**
      * 更新所有在数据库中购物车商品的数量
      */
-    private fun updateAllCartNum() {
+    private fun updateAllCartNumOfApi() {
         for (it in mAdapter.dataList) {
             mPresenter.updateCartNum(it.quantity, it.productId)
         }
+    }
+
+    private fun updateSingleCartNumOfApi(count:Int, productId:Int) {
+        mPresenter.updateCartNum(count, productId)
     }
 
     /*

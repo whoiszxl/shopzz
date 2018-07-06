@@ -3,6 +3,7 @@ package com.whoiszxl.goods.ui.activity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.Gravity
+import android.widget.Toast
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.whoiszxl.base.ext.onClick
@@ -14,6 +15,7 @@ import com.whoiszxl.goods.event.AddCartEvent
 import com.whoiszxl.goods.event.UpdateCartSizeEvent
 import com.whoiszxl.goods.ui.adapter.GoodsDetailVpAdapter
 import com.whoiszxl.provider.common.afterLogin
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -47,7 +49,7 @@ class GoodsDetailActivity : BaseActivity() {
 
         mAddCartBtn.onClick {
             afterLogin {
-                toast("点击添加购物车了")
+                Toasty.info(this, "购物车添加成功",Toast.LENGTH_SHORT).show()
                 Bus.send(AddCartEvent())
             }
         }

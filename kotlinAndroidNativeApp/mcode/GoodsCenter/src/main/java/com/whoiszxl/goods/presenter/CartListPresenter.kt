@@ -36,6 +36,15 @@ class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
 
     }
 
+    fun deleteCartList(productIds: String){
+        if(!checkNetWork()) return
+        cartService.deleteCartList(authToken, productIds).execute(object : BaseSubscriber<Cart>(mView) {
+            override fun onNext(t: Cart) {
+                mView.onDeleteCartListResult(true)
+            }
+        }, lifecycleProvider)
+    }
+
 
     fun updateCartNum(count: Int, productId: Int) {
         if(!checkNetWork()) return
@@ -100,4 +109,6 @@ class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
             }
         }, lifecycleProvider)
     }
+
+
 }
