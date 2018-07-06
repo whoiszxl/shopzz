@@ -165,6 +165,7 @@ public class CartServiceImpl implements CartService {
                     //计算总价
                     cartProductVo.setProductTotalPrice(BigDecimalUtil.mul(product.getPrice().doubleValue(),cartProductVo.getQuantity()));
                     cartProductVo.setProductChecked(cartItem.getChecked());
+                    cartProductVo.setProductCheckedBoolean(cartItem.getChecked() == 1);
                 }
 
                 if(cartItem.getChecked() == Const.Cart.CHECKED){
