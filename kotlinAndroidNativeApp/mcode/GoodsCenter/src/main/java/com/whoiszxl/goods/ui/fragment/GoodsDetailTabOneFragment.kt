@@ -30,7 +30,6 @@ import com.whoiszxl.goods.widget.GoodsSkuPopView
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_detail_tab_one.*
-import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
 /**
@@ -181,15 +180,9 @@ class GoodsDetailTabOneFragment : BaseMvpFragment<GoodsDetailPresenter>(), Goods
         加入购物车
      */
     private fun addCart(){
-//        mCurGoods?.let {
-//            mPresenter.addCart(it.id,
-//                    it.goodsDesc,
-//                    it.goodsDefaultIcon,
-//                    it.goodsDefaultPrice,
-//                    mSkuPop.getSelectCount(),
-//                    mSkuPop.getSelectSku()
-//            )
-//        }
+        mCurGoods?.let {
+            mPresenter.addCart(1, it.id)
+        }
 
     }
 

@@ -59,7 +59,6 @@ interface CartApi {
     /**
      * 选中所有商品
      */
-    @FormUrlEncoded
     @POST("/cart/select_all")
     fun selectCartAll(
             @Header("Authorization") authorization: String
@@ -68,7 +67,6 @@ interface CartApi {
     /**
      * 不选中所有商品
      */
-    @FormUrlEncoded
     @POST("/cart/un_select_all")
     fun selectUnCartAll(
             @Header("Authorization") authorization: String

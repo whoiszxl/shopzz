@@ -86,7 +86,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         //全选按钮事件
         mAllCheckedCb.onClick {
             for (item in mAdapter.dataList) {
-                item.isChecked = mAllCheckedCb.isChecked
+                item.productCheckedBoolean = mAllCheckedCb.isChecked
             }
             mAdapter.notifyDataSetChanged()
             updateTotalPrice()
@@ -95,7 +95,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         //删除按钮事件
         mDeleteBtn.onClick {
             val cartIdList: MutableList<Int> = arrayListOf()
-            mAdapter.dataList.filter { it.isChecked }
+            mAdapter.dataList.filter { it.productCheckedBoolean }
                     .mapTo(cartIdList) { it.id }
             if (cartIdList.size == 0) {
                 toast("请选择需要删除的数据")
@@ -107,7 +107,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         //结算按钮事件
         mSettleAccountsBtn.onClick {
             val cartGoodsList: MutableList<CartGoods> = arrayListOf()
-            mAdapter.dataList.filter { it.isChecked }
+            mAdapter.dataList.filter { it.productCheckedBoolean }
                     .mapTo(cartGoodsList) { it }
             if (cartGoodsList.size == 0) {
                 toast("请选择需要提交的数据")
@@ -145,8 +145,6 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
     override fun onGetCartListResult(result: Cart?) {
         if (result != null && result.cartProductVoList.isNotEmpty()) {
             mAdapter.setData(result.cartProductVoList)
-            mTotalPrice = result.cartTotalPrice
-            mTotalPriceTv.text = "合计:${YuanFenConverter.changeF2YWithUnit(mTotalPrice)}"
             mHeaderBar.getRightView().setVisible(true)
             mAllCheckedCb.isChecked = false
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
@@ -157,7 +155,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
         //本地存储并发送事件刷新UI
         if (result != null) {
-            AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE, result.cartProductVoList.size ?: 0)
+            AppPrefsUtils.putInt(GoodsConstant.SP_CART_SIZE, result.cartProductVoList.size)
         }
         Bus.send(UpdateCartSizeEvent())
         //更新总价
@@ -172,27 +170,37 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         Bus.observe<CartAllCheckedEvent>().subscribe { t: CartAllCheckedEvent ->
             run {
                 mAllCheckedCb.isChecked = t.isAllChecked
-                updateTotalPrice()
+                //调用接口选中or不选中所有
+                if(t.isAllChecked) {
+                    mPresenter.selectUnCartAll()
+                }else{
+                    mPresenter.selectCartAll()
+                    updateTotalPrice()
+                }
+
             }
         }.registerInBus(this)
 
         Bus.observe<UpdateTotalPriceEvent>().subscribe {
+            toast("UpdateTotalPriceEvent")
             updateTotalPrice()
             updateAllCartNum()
-        }.registerInBus(this)
+        }
+                .registerInBus(this)
 
         Bus.observe<CartSingleCheckedEvent>().subscribe{ t: CartSingleCheckedEvent ->
             run {
                 //调用单选接口
+                toast("t:ischecked:${t.isChecked}")
                 if(t.isChecked) {
-                    toast("调用不选中")
                     mPresenter.selectUnCartOne(t.productId)
                 }else {
-                    toast("调用选中")
                     mPresenter.selectCartOne(t.productId)
                 }
+                updateTotalPrice()
             }
-        }.registerInBus(this)
+        }
+                .registerInBus(this)
     }
 
     /*
@@ -209,7 +217,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
     @SuppressLint("SetTextI18n")
     private fun updateTotalPrice() {
         mTotalPrice = mAdapter.dataList
-                .filter { it.isChecked }
+                .filter { it.productCheckedBoolean }
                 .map { it.quantity * it.productPrice }
                 .sum()
 

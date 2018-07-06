@@ -11,6 +11,7 @@ import com.whoiszxl.base.utils.AppPrefsUtils
 import com.whoiszxl.goods.R
 import com.whoiszxl.goods.common.GoodsConstant
 import com.whoiszxl.goods.event.AddCartEvent
+import com.whoiszxl.goods.event.UpdateCartSizeEvent
 import com.whoiszxl.goods.ui.adapter.GoodsDetailVpAdapter
 import com.whoiszxl.provider.common.afterLogin
 import kotlinx.android.synthetic.main.activity_goods_detail.*
@@ -52,8 +53,7 @@ class GoodsDetailActivity : BaseActivity() {
         }
 
         mEnterCartTv.onClick {
-            toast("点击进入购物车了")
-            //startActivity<CartActivity>()
+            startActivity<CartActivity>()
         }
 
         mLeftIv.onClick {
@@ -74,10 +74,10 @@ class GoodsDetailActivity : BaseActivity() {
         监听购物车数量变化
      */
     private fun initObserve(){
-//        Bus.observe<UpdateCartSizeEvent>()
-//                .subscribe {
-//                    setCartBadge()
-//                }.registerInBus(this)
+        Bus.observe<UpdateCartSizeEvent>()
+                .subscribe {
+                    setCartBadge()
+                }.registerInBus(this)
     }
 
     /*

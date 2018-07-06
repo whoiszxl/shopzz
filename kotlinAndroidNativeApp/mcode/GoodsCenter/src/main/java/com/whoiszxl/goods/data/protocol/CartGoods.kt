@@ -7,9 +7,7 @@ data class CartGoods(
         val id: Int,//购物车ID
         val limitQuantity: String,//是否还有库存：LIMIT_NUM_SUCCESS and LIMIT_NUM_FAIL
         var productChecked: Int,//是否选中, 1选中   0未选中
-        var isChecked: Boolean, //todo 是否选中 Boolean
         var productCheckedBoolean: Boolean, //是否选中 Boolean
-        var productAllChecked: Boolean, //是否全部选中 Boolean
         val productId:Int,//具体商品ID
         val productMainImage: String,//商品图片
         val productName: String,//商品名称

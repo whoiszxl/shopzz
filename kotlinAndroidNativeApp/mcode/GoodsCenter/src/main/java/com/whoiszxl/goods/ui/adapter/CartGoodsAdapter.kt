@@ -36,26 +36,30 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         val model = dataList[position]
-        model.isChecked = model.productChecked == 1
         //是否选中
-        holder.itemView.mCheckedCb.isChecked = model.isChecked
+        holder.itemView.mCheckedCb.isChecked = model.productCheckedBoolean
         //加载商品图片
         holder.itemView.mGoodsIconIv.loadUrl(model.imageHost+model.productMainImage)
         //商品描述
         holder.itemView.mGoodsDescTv.text = model.productName
         //商品SKU
-        holder.itemView.mGoodsSkuTv.text = "精品"
+        holder.itemView.mGoodsSkuTv.text = model.productCheckedBoolean.toString()
         //商品价格
         holder.itemView.mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(model.productPrice)
         //商品数量
         holder.itemView.mGoodsCountBtn.setCurrentNumber(model.quantity)
         //选中按钮事件
         holder.itemView.mCheckedCb.onClick {
-            model.isChecked = holder.itemView.mCheckedCb.isChecked
-            val isAllChecked = dataList.all {it.isChecked }
-            Bus.send(CartAllCheckedEvent(isAllChecked))
-            Bus.send(CartSingleCheckedEvent(model.productId, model.isChecked))
-            notifyDataSetChanged()
+            //发送单个点击事件，改变一下单个购物车商品的选中状态
+            Bus.send(CartSingleCheckedEvent(model.productId, model.productCheckedBoolean))
+            //修改当前model item的选中状态为点击后的状态
+            model.productCheckedBoolean = holder.itemView.mCheckedCb.isChecked
+            //遍历一下可以判断是否全选了
+            //val isAllChecked = dataList.all { it.productCheckedBoolean }
+            //再发送全选事件到事件回调方法中
+            //Bus.send(CartAllCheckedEvent(isAllChecked))
+            //通知一下改变数据
+            //notifyDataSetChanged()
         }
 
         //商品数量变化监听
