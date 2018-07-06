@@ -2,11 +2,9 @@ package com.whoiszxl.goods.ui.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import com.eightbitlab.rxbus.Bus
 import com.whoiszxl.base.ext.loadUrl
 import com.whoiszxl.base.ext.onClick
@@ -16,12 +14,13 @@ import com.whoiszxl.base.widgets.DefaultTextWatcher
 import com.whoiszxl.goods.R
 import com.whoiszxl.goods.data.protocol.CartGoods
 import com.whoiszxl.goods.event.CartAllCheckedEvent
+import com.whoiszxl.goods.event.CartSingleCheckedEvent
 import com.whoiszxl.goods.event.UpdateTotalPriceEvent
 import com.whoiszxl.goods.getEditText
 import kotlinx.android.synthetic.main.layout_cart_goods_item.view.*
 
-/*
-    购物车数据适配器
+/**
+ * 购物车数据适配器
  */
 class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, CartGoodsAdapter.ViewHolder>(context) {
 
@@ -47,7 +46,7 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
         //商品SKU
         holder.itemView.mGoodsSkuTv.text = "精品"
         //商品价格
-        holder.itemView.mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(model.productTotalPrice)
+        holder.itemView.mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(model.productPrice)
         //商品数量
         holder.itemView.mGoodsCountBtn.setCurrentNumber(model.quantity)
         //选中按钮事件
@@ -55,7 +54,8 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
             model.isChecked = holder.itemView.mCheckedCb.isChecked
             val isAllChecked = dataList.all {it.isChecked }
             Bus.send(CartAllCheckedEvent(isAllChecked))
-            //notifyDataSetChanged()
+            Bus.send(CartSingleCheckedEvent(model.productId, model.isChecked))
+            notifyDataSetChanged()
         }
 
         //商品数量变化监听

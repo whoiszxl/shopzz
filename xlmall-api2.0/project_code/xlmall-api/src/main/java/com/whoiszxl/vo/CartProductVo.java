@@ -22,6 +22,7 @@ public class CartProductVo {
 	private BigDecimal productTotalPrice;
 	private Integer productStock;
 	private Integer productChecked;
+	private Boolean productCheckedBoolean;
 	
 	private String limitQuantity;
 
@@ -136,5 +137,14 @@ public class CartProductVo {
 	public void setImageHost(String imageHost) {
 		this.imageHost = imageHost;
 	}
+
+	public Boolean getProductCheckedBoolean() {
+		return productCheckedBoolean;
+	}
+
+	public void setProductCheckedBoolean(Boolean productCheckedBoolean) {
+		this.productCheckedBoolean = productCheckedBoolean;
+	}
+
 	
 }

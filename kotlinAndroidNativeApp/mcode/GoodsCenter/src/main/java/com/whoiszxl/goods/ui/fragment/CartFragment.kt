@@ -21,6 +21,7 @@ import com.whoiszxl.goods.common.GoodsConstant
 import com.whoiszxl.goods.data.protocol.Cart
 import com.whoiszxl.goods.data.protocol.CartGoods
 import com.whoiszxl.goods.event.CartAllCheckedEvent
+import com.whoiszxl.goods.event.CartSingleCheckedEvent
 import com.whoiszxl.goods.event.UpdateCartSizeEvent
 import com.whoiszxl.goods.event.UpdateTotalPriceEvent
 import com.whoiszxl.goods.injection.component.DaggerCartComponent
@@ -33,8 +34,8 @@ import com.whoiszxl.provider.router.RouterPath
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.toast
 
-/*
-    购物车 Fragment
+/**
+ * 购物车 Fragment
  */
 class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
@@ -144,6 +145,8 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
     override fun onGetCartListResult(result: Cart?) {
         if (result != null && result.cartProductVoList.isNotEmpty()) {
             mAdapter.setData(result.cartProductVoList)
+            mTotalPrice = result.cartTotalPrice
+            mTotalPriceTv.text = "合计:${YuanFenConverter.changeF2YWithUnit(mTotalPrice)}"
             mHeaderBar.getRightView().setVisible(true)
             mAllCheckedCb.isChecked = false
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
@@ -159,6 +162,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         Bus.send(UpdateCartSizeEvent())
         //更新总价
         updateTotalPrice()
+        updateAllCartNum()
     }
 
     /*
@@ -174,8 +178,21 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
         Bus.observe<UpdateTotalPriceEvent>().subscribe {
             updateTotalPrice()
+            updateAllCartNum()
         }.registerInBus(this)
 
+        Bus.observe<CartSingleCheckedEvent>().subscribe{ t: CartSingleCheckedEvent ->
+            run {
+                //调用单选接口
+                if(t.isChecked) {
+                    toast("调用不选中")
+                    mPresenter.selectUnCartOne(t.productId)
+                }else {
+                    toast("调用选中")
+                    mPresenter.selectCartOne(t.productId)
+                }
+            }
+        }.registerInBus(this)
     }
 
     /*
@@ -198,7 +215,13 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
         mTotalPriceTv.text = "合计:${YuanFenConverter.changeF2YWithUnit(mTotalPrice)}"
 
-        //TODO 还需要更新一下接口的
+
+    }
+
+    /**
+     * 更新所有在数据库中购物车商品的数量
+     */
+    private fun updateAllCartNum() {
         for (it in mAdapter.dataList) {
             mPresenter.updateCartNum(it.quantity, it.productId)
         }
