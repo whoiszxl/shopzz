@@ -4,12 +4,19 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
+import com.eightbitlab.rxbus.Bus
+import com.eightbitlab.rxbus.registerInBus
+import com.whoiszxl.base.common.AppManager
+import com.whoiszxl.base.utils.AppPrefsUtils
+import com.whoiszxl.goods.common.GoodsConstant
+import com.whoiszxl.goods.event.UpdateCartSizeEvent
 import com.whoiszxl.goods.ui.fragment.CartFragment
 import com.whoiszxl.goods.ui.fragment.CategoryFragment
 import com.whoiszxl.mall.R
 import com.whoiszxl.mall.ui.fragment.HomeFragment
 import com.whoiszxl.mall.ui.fragment.MeFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +44,9 @@ class MainActivity : AppCompatActivity() {
         initFragment()
         initBottomNav()
         changeFragment(0)
+        initObserve()
+        loadCartSize()
+
     }
 
     /**
@@ -58,8 +68,8 @@ class MainActivity : AppCompatActivity() {
         mBottomNavBar.checkMsgBadge(false)
     }
 
-    /*
-        切换Tab，切换对应的Fragment
+    /**
+     * 切换Tab，切换对应的Fragment
      */
     private fun changeFragment(position: Int) {
         val manager = supportFragmentManager.beginTransaction()
@@ -86,5 +96,51 @@ class MainActivity : AppCompatActivity() {
         mStack.add(mCartFragment)
         mStack.add(mMsgFragment)
         mStack.add(mMeFragment)
+    }
+
+    /*
+        初始化监听，购物车数量变化及消息标签是否显示
+     */
+    private fun initObserve(){
+        Bus.observe<UpdateCartSizeEvent>()
+                .subscribe {
+                    loadCartSize()
+                }.registerInBus(this)
+
+//        Bus.observe<MessageBadgeEvent>()
+//                .subscribe {
+//                    t: MessageBadgeEvent ->
+//                    run {
+//                        mBottomNavBar.checkMsgBadge(t.isVisible)
+//                    }
+//                }.registerInBus(this)
+    }
+
+    /*
+        加载购物车数量
+     */
+    private fun loadCartSize(){
+        mBottomNavBar.checkCartBadge(AppPrefsUtils.getInt(GoodsConstant.SP_CART_SIZE))
+    }
+
+    /*
+        取消Bus事件监听
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+        Bus.unregister(this)
+    }
+
+    /*
+        重写Back事件，双击退出
+     */
+    override fun onBackPressed() {
+        val time = System.currentTimeMillis()
+        if (time - pressTime > 2000){
+            toast("再按一次退出程序")
+            pressTime = time
+        } else{
+            AppManager.instance.exitApp(this)
+        }
     }
 }

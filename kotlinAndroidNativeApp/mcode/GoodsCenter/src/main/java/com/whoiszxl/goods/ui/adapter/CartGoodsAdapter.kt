@@ -55,9 +55,9 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
             //修改当前model item的选中状态为点击后的状态
             model.productCheckedBoolean = holder.itemView.mCheckedCb.isChecked
             //遍历一下可以判断是否全选了
-            val isAllChecked = dataList.all { it.productCheckedBoolean }
+            //val isAllChecked = dataList.all { it.productCheckedBoolean }
             //再发送全选事件到事件回调方法中
-            Bus.send(CartAllCheckedEvent(isAllChecked))
+            //Bus.send(CartAllCheckedEvent(isAllChecked))
             //通知一下改变数据
             //notifyDataSetChanged()
         }
@@ -65,8 +65,13 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
         //商品数量变化监听
         holder.itemView.mGoodsCountBtn.getEditText().addTextChangedListener(object:DefaultTextWatcher(){
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                model.quantity = s.toString().toInt()
-                Bus.send(UpdateTotalPriceEvent(s.toString().toInt(), model.productId))
+                if(s.isNullOrBlank()){
+                    model.quantity = 1
+                    Bus.send(UpdateTotalPriceEvent(1, model.productId))
+                }else{
+                    model.quantity = s.toString().toInt()
+                    Bus.send(UpdateTotalPriceEvent(s.toString().toInt(), model.productId))
+                }
             }
         })
 

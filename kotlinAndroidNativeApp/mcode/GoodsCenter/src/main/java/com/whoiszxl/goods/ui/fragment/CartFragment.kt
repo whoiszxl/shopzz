@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.alibaba.android.arouter.launcher.ARouter
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
@@ -31,6 +32,7 @@ import com.whoiszxl.goods.presenter.view.CartListView
 import com.whoiszxl.goods.ui.adapter.CartGoodsAdapter
 import com.whoiszxl.provider.common.ProviderConstant
 import com.whoiszxl.provider.router.RouterPath
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.layout_cart_goods_item.*
 import org.jetbrains.anko.support.v4.toast
@@ -61,7 +63,9 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Toasty.error(context, "调用了cart",Toast.LENGTH_SHORT).show()
         initView()
+        initClick()
         initObserve()
     }
 
@@ -80,7 +84,12 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
         mCartGoodsRv.layoutManager = LinearLayoutManager(context)
         mAdapter = CartGoodsAdapter(context)
         mCartGoodsRv.adapter = mAdapter
+    }
 
+    /**
+     * 初始化各种点击事件
+     */
+    private fun initClick() {
         mHeaderBar.getRightView().onClick {
             refreshEditStatus()
         }
@@ -292,5 +301,10 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
      */
     fun setBackVisible(isVisible: Boolean) {
         mHeaderBar.getLeftView().setVisible(isVisible)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mAdapter.notifyDataSetChanged()
     }
 }
