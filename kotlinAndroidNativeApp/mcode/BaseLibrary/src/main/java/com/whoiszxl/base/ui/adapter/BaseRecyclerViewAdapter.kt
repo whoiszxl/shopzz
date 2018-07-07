@@ -14,9 +14,8 @@ abstract class BaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(var mCon
     //数据集合
     var dataList: MutableList<T> = mutableListOf()
 
-    /*
-        设置数据
-        Presenter处理过为null的情况，所以为不会为Null
+    /**
+     * 设置数据,Presenter处理过为null的情况，所以为不会为Null
      */
     fun setData(sources: MutableList<T>) {
         dataList = sources

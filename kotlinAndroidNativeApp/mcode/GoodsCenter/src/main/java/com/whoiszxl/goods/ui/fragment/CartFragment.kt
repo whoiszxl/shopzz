@@ -305,6 +305,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
     override fun onResume() {
         super.onResume()
-        mAdapter.notifyDataSetChanged()
+        initView()
+        Toasty.error(context, "onResume", Toast.LENGTH_SHORT).show()
     }
 }
