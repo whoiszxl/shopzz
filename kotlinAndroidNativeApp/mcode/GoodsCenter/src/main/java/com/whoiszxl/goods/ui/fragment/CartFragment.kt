@@ -204,7 +204,7 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
         // 更新总价
         Bus.observe<UpdateTotalPriceEvent>().subscribe {
-            updateTotalPrice()
+            //updateTotalPrice()
             //updateAllCartNumOfApi()
             updateSingleCartNumOfApi(it.count, it.productId)
         }

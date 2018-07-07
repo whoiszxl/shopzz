@@ -51,7 +51,7 @@ class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
 
         cartService.updateCart(authToken, count, productId).execute(object : BaseSubscriber<Cart>(mView) {
             override fun onNext(t: Cart) {
-
+                mView.onSelectOrUnSelectResult(t.cartTotalPrice)
             }
         }, lifecycleProvider)
     }
