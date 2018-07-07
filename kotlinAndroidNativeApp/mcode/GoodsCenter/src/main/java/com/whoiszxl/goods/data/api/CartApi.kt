@@ -84,5 +84,10 @@ interface CartApi {
             @Field("productId")productId:Int): Observable<BaseResp<Cart>>
 
 
-
+    @FormUrlEncoded
+    @POST("/order/create")
+    fun createOrder(
+            @Header("Authorization") authorization: String,
+            @Field("shippingId")shippingId:Int
+    ): Observable<BaseResp<String>>
 }

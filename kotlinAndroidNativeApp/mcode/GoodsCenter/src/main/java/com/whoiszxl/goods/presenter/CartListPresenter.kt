@@ -65,7 +65,7 @@ class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
 
         cartService.selectCartOne(authToken, productIds).execute(object : BaseSubscriber<Cart>(mView) {
             override fun onNext(t: Cart) {
-
+                mView.onSelectOrUnSelectResult(t.cartTotalPrice)
             }
         }, lifecycleProvider)
 
@@ -78,7 +78,7 @@ class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
 
         cartService.selectUnCartOne(authToken, productIds).execute(object : BaseSubscriber<Cart>(mView) {
             override fun onNext(t: Cart) {
-
+                mView.onSelectOrUnSelectResult(t.cartTotalPrice)
             }
         }, lifecycleProvider)
     }
@@ -92,7 +92,7 @@ class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
 
         cartService.selectCartAll(authToken).execute(object : BaseSubscriber<Cart>(mView) {
             override fun onNext(t: Cart) {
-
+                mView.onSelectOrUnSelectResult(t.cartTotalPrice)
             }
         }, lifecycleProvider)
     }
@@ -105,7 +105,7 @@ class CartListPresenter @Inject constructor() : BasePresenter<CartListView>() {
 
         cartService.selectUnCartAll(authToken).execute(object : BaseSubscriber<Cart>(mView) {
             override fun onNext(t: Cart) {
-
+                mView.onSelectOrUnSelectResult(t.cartTotalPrice)
             }
         }, lifecycleProvider)
     }

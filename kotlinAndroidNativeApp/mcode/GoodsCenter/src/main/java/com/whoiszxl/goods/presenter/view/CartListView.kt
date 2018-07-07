@@ -14,4 +14,6 @@ interface CartListView : BaseView {
     fun onDeleteCartListResult(result: Boolean)
     //提交购物车
     fun onSubmitCartListResult(result: Int)
+
+    fun onSelectOrUnSelectResult(result: Long)
 }

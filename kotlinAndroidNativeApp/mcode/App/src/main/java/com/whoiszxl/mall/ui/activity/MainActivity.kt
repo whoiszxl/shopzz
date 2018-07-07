@@ -34,9 +34,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mBottomNavBar.checkMsgBadge(false)
-        mBottomNavBar.checkCartBadge(20)
-
         initFragment()
         initBottomNav()
         changeFragment(0)
