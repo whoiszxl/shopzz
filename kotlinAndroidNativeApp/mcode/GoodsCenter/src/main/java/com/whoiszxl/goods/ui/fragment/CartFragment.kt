@@ -87,10 +87,9 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
         //全选按钮事件
         mAllCheckedCb.onClick {
-            mCheckedCb.isChecked = mAllCheckedCb.isChecked
-            //for (item in mAdapter.dataList) {
-                //item.productCheckedBoolean = mAllCheckedCb.isChecked
-            //}
+            for (item in mAdapter.dataList) {
+                item.productCheckedBoolean = mAllCheckedCb.isChecked
+            }
             //mAdapter.notifyDataSetChanged()
             /**
              * 调用全选接口
@@ -190,15 +189,20 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
     private fun initObserve() {
         //选择所有  购物车商品事件
         Bus.observe<CartAllCheckedEvent>().subscribe { t: CartAllCheckedEvent ->
+//            run {
+//                mAllCheckedCb.isChecked = t.isAllChecked
+//                //调用接口选中or不选中所有
+//                if(t.isAllChecked) {
+//                    mPresenter.selectUnCartAll()
+//                }else{
+//                    mPresenter.selectCartAll()
+//                }
+//                updateTotalPrice()
+//            }
+
+            //从单选这里判断是不是全部选中了，需要改变全选checkbox的状态
             run {
                 mAllCheckedCb.isChecked = t.isAllChecked
-                //调用接口选中or不选中所有
-                if(t.isAllChecked) {
-                    mPresenter.selectUnCartAll()
-                }else{
-                    mPresenter.selectCartAll()
-                }
-                updateTotalPrice()
             }
         }.registerInBus(this)
 

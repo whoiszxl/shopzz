@@ -55,9 +55,9 @@ class CartGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<CartGoods, Ca
             //修改当前model item的选中状态为点击后的状态
             model.productCheckedBoolean = holder.itemView.mCheckedCb.isChecked
             //遍历一下可以判断是否全选了
-            //val isAllChecked = dataList.all { it.productCheckedBoolean }
+            val isAllChecked = dataList.all { it.productCheckedBoolean }
             //再发送全选事件到事件回调方法中
-            //Bus.send(CartAllCheckedEvent(isAllChecked))
+            Bus.send(CartAllCheckedEvent(isAllChecked))
             //通知一下改变数据
             //notifyDataSetChanged()
         }

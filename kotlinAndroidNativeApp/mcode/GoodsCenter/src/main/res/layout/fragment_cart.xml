@@ -27,6 +27,7 @@
                     android:background="@drawable/border_all">
 
                 <CheckBox
+                        android:visibility="gone"
                         android:id="@+id/mAllCheckedCb"
                         style="@style/WrapWrap"
                         android:layout_centerVertical="true"
