@@ -22,5 +22,5 @@ interface OrderService {
     /*
         提交订单
      */
-    fun submitOrder(shippingId: Int): Observable<String>
+    fun submitOrder(shippingId: Int): Observable<Boolean>
 }

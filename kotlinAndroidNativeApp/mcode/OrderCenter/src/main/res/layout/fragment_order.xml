@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              style="@style/MatchMatch.Vertical.Common">
+    <com.kennyc.view.MultiStateView
+            android:id="@+id/mMultiStateView"
+            style="@style/MultiStateStyle"
+            android:layout_below="@id/mHeaderBar">
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/mOrderRv"
+            style="@style/commonRecyclerView"/>
+    </com.kennyc.view.MultiStateView>
+
+</LinearLayout>
