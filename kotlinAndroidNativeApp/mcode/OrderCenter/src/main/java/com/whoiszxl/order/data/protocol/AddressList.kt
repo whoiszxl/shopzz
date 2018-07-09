@@ -6,5 +6,5 @@ package com.whoiszxl.order.data.protocol
 data class AddressList (
         val pageSize: Int,
         val total: Int,
-        val list: MutableList<ShipAddress>
+        val list: MutableList<ShipAddress>?
 )

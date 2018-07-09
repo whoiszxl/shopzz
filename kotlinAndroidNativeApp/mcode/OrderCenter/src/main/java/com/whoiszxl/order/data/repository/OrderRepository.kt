@@ -4,6 +4,7 @@ import com.whoiszxl.base.data.net.RetrofitFactory
 import com.whoiszxl.base.data.protocol.BaseResp
 import com.whoiszxl.order.data.api.OrderApi
 import com.whoiszxl.order.data.protocol.Order
+import com.whoiszxl.order.data.protocol.OrderList
 import rx.Observable
 import javax.inject.Inject
 
@@ -29,15 +30,15 @@ class OrderRepository @Inject constructor() {
     /*
         根据状态查询订单列表
      */
-    fun getOrderList(orderStatus: Int): Observable<BaseResp<MutableList<Order>?>> {
-        return RetrofitFactory.instance.create(OrderApi::class.java).getOrderList(GetOrderListReq(orderStatus))
+    fun getOrderList(status: Int,pageSize: Int): Observable<BaseResp<OrderList>> {
+        return RetrofitFactory.instance.create(OrderApi::class.java).orderList(status, pageSize)
     }
 
     /*
         提交订单
      */
-    fun submitOrder(order: Order): Observable<BaseResp<String>> {
-        return RetrofitFactory.instance.create(OrderApi::class.java).submitOrder(SubmitOrderReq(order))
+    fun submitOrder(shippingId: Int): Observable<BaseResp<String>> {
+        return RetrofitFactory.instance.create(OrderApi::class.java).orderCreate(shippingId)
     }
 
 }
