@@ -225,6 +225,18 @@
 
 
 
+
+
+  <select id="selectByUserIdAndOrderStatus" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+      <include refid="Base_Column_List"/>
+    from xl_order
+    where user_id = #{userId}
+    and status = #{status}
+    order by create_time desc
+  </select>
+
+
   <select id="selectAllOrder" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>

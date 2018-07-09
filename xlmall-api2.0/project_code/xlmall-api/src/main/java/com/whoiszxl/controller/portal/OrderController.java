@@ -89,9 +89,13 @@ public class OrderController {
     @GetMapping("list")
     @ApiOperation(value = "获取订单列表接口")
     @RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
-    public ServerResponse list(HttpServletRequest request, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+    public ServerResponse list(
+    		HttpServletRequest request, 
+    		@RequestParam(value = "pageNum",defaultValue = "1") int pageNum, 
+    		@RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
+    		@RequestParam(value = "status", defaultValue = "-1") int status){
     	User user = jwtUserService.getCurrentUser(request);
-        return orderService.getOrderList(user.getId(),pageNum,pageSize);
+        return orderService.getOrderList(user.getId(),pageNum,pageSize,status);
     }
 
 	

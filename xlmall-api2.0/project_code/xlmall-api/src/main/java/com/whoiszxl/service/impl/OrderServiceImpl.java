@@ -651,11 +651,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public ServerResponse<PageInfo> getOrderList(Integer userId, int pageNum, int pageSize) {
+	public ServerResponse<PageInfo> getOrderList(Integer userId, int pageNum, int pageSize, int status) {
 		//开启分页
+		List<Order> orderList = null;
 		PageHelper.startPage(pageNum,pageSize);
 		//通过用户id查询到所有的订单
-        List<Order> orderList = orderMapper.selectByUserId(userId);
+		//订单状态:0-已取消-10-未付款，20-已付款，40-已发货，50-交易成功，60-交易关闭
+		if(status == -1) {
+			orderList = orderMapper.selectByUserId(userId);
+		}else {
+			orderList = orderMapper.selectByUserIdAndOrderStatus(userId, status);
+		}
+        
         //将其转换成订单vo对象
         List<OrderVo> orderVoList = assembleOrderVoList(orderList,userId);
         //通过分页的模式返回

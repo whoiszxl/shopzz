@@ -21,7 +21,6 @@ interface OrderApi {
     @FormUrlEncoded
     @POST("/order/create")
     fun orderCreate(
-            @Header("Authorization") authorization: String,
             @Field("shippingId")shippingId:Int): Observable<BaseResp<String>>
 
 
@@ -31,8 +30,7 @@ interface OrderApi {
     @FormUrlEncoded
     @POST("/order/cancel")
     fun orderCancel(
-            @Header("Authorization") authorization: String,
-            @Field("orderNo")orderNo:Long): Observable<BaseResp<String>>
+            @Field("orderNo")orderNo:String): Observable<BaseResp<String>>
 
 
     /**
@@ -41,7 +39,6 @@ interface OrderApi {
     @FormUrlEncoded
     @POST("/order/detail")
     fun orderDetail(
-            @Header("Authorization") authorization: String,
             @Field("orderNo")orderNo:String): Observable<BaseResp<Order>>
 
 
@@ -51,7 +48,6 @@ interface OrderApi {
     @FormUrlEncoded
     @POST("/order/list")
     fun orderList(
-            @Header("Authorization") authorization: String,
             @Field("shippingId")shippingId:Int): Observable<BaseResp<OrderList>>
 
 

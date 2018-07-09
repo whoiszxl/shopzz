@@ -45,4 +45,6 @@ public interface OrderMapper {
     int closeOrderByOrderId(Integer id);
 
 	int selectOrderCount();
+
+	List<Order> selectByUserIdAndOrderStatus(@Param("userId") Integer userId, @Param("status") int status);
 }

@@ -1,6 +1,7 @@
 package com.whoiszxl.base.data.net
 
 import com.whoiszxl.base.common.BaseConstant
+import com.whoiszxl.base.utils.AppPrefsUtils
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,6 +25,7 @@ class RetrofitFactory private constructor() {
                     .newBuilder()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("charset", "utf-8")
+                    .addHeader("Authorization", AppPrefsUtils.getString(BaseConstant.KEY_SP_TOKEN))
                     .build()
             chain.proceed(request)
         }
