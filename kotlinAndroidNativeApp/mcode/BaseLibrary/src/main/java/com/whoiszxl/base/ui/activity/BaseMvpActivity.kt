@@ -1,6 +1,7 @@
 package com.whoiszxl.base.ui.activity
 
 import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
 import com.whoiszxl.base.common.BaseApplication
 import com.whoiszxl.base.injection.component.ActivityComponent
 import com.whoiszxl.base.injection.component.DaggerActivityComponent
@@ -41,6 +42,7 @@ open abstract class BaseMvpActivity<T:BasePresenter<*>>:BaseActivity(),BaseView 
         injectComponent()
 
         mLoadingDialog = ProgressLoading.create(this)
+        ARouter.getInstance().inject(this)
     }
 
     abstract fun injectComponent()
