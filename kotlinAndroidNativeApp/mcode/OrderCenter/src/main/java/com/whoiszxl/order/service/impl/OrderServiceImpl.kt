@@ -14,23 +14,27 @@ import javax.inject.Inject
  */
 class OrderServiceImpl @Inject constructor(): OrderService {
 
+
     @Inject
     lateinit var repository: OrderRepository
 
-    override fun orderCancel(orderNo: String): Observable<String> {
-        return repository.orderCancel(orderNo).convert()
+    override fun orderCancel(authorization: String, orderNo: String): Observable<String> {
+        return repository.orderCancel(authorization, orderNo).convert()
     }
 
-    override fun orderDetail(orderNo: String): Observable<Order> {
-        return repository.orderDetail(orderNo).convert()
+    override fun orderDetail(authorization: String, orderNo: String): Observable<Order> {
+        return repository.orderDetail(authorization, orderNo).convert()
     }
 
-    override fun getOrderList(status: Int, pageSize: Int): Observable<OrderList> {
-        return repository.getOrderList(status, pageSize).convert()
+    override fun getOrderList(authorization: String, status: Int, pageSize: Int): Observable<OrderList> {
+        return repository.orderList(authorization, status, pageSize).convert()
     }
 
-    override fun submitOrder(shippingId: Int): Observable<Boolean> {
-        return  repository.submitOrder(shippingId).convertBoolean()
+    override fun submitOrder(authorization: String, shippingId: Int): Observable<Boolean> {
+        return  repository.submitOrder(authorization, shippingId).convertBoolean()
     }
 
+    override fun orderCartProduct(authorization: String): Observable<Order> {
+        return repository.orderCartProduct(authorization).convert()
+    }
 }

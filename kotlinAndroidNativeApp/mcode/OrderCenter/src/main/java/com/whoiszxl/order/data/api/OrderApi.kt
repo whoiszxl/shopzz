@@ -5,6 +5,7 @@ import com.whoiszxl.order.data.protocol.Order
 import com.whoiszxl.order.data.protocol.OrderList
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.Header
 import retrofit2.http.POST
 import rx.Observable
 
@@ -20,6 +21,7 @@ interface OrderApi {
     @FormUrlEncoded
     @POST("/order/create")
     fun orderCreate(
+            @Header("Authorization") authorization: String,
             @Field("shippingId")shippingId:Int): Observable<BaseResp<String>>
 
 
@@ -29,8 +31,17 @@ interface OrderApi {
     @FormUrlEncoded
     @POST("/order/cancel")
     fun orderCancel(
+            @Header("Authorization") authorization: String,
             @Field("orderNo")orderNo:String): Observable<BaseResp<String>>
 
+
+    /**
+     * 获取当前购物车中的选中商品
+     */
+    @POST("/order/get_order_cart_product")
+    fun orderCartProduct(
+            @Header("Authorization") authorization: String
+    ): Observable<BaseResp<Order>>
 
     /**
      * 获取订单详情
@@ -38,6 +49,7 @@ interface OrderApi {
     @FormUrlEncoded
     @POST("/order/detail")
     fun orderDetail(
+            @Header("Authorization") authorization: String,
             @Field("orderNo")orderNo:String): Observable<BaseResp<Order>>
 
 
@@ -47,6 +59,7 @@ interface OrderApi {
     @FormUrlEncoded
     @POST("/order/list")
     fun orderList(
+            @Header("Authorization") authorization: String,
             @Field("status")status:Int,
             @Field("pageSize")pageSize:Int): Observable<BaseResp<OrderList>>
 

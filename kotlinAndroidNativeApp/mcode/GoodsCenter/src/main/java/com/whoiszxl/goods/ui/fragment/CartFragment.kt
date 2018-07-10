@@ -63,7 +63,6 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Toasty.error(context, "调用了cart",Toast.LENGTH_SHORT).show()
         initView()
         initClick()
         initObserve()
@@ -139,7 +138,9 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
             if (cartGoodsList.size == 0) {
                 toast("请选择需要提交的数据")
             } else {
-                ///mPresenter.submitCart(cartGoodsList,mTotalPrice)
+                //通过ARouter跳转到确认订单页面
+                ARouter.getInstance().build(RouterPath.OrderCenter.PATH_ORDER_CONFIRM)
+                        .navigation()
             }
         }
     }
@@ -306,6 +307,5 @@ class CartFragment : BaseMvpFragment<CartListPresenter>(), CartListView {
     override fun onResume() {
         super.onResume()
         initView()
-        Toasty.error(context, "onResume", Toast.LENGTH_SHORT).show()
     }
 }

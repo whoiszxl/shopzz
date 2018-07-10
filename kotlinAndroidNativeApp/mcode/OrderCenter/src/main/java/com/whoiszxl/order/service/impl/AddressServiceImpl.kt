@@ -17,24 +17,24 @@ class AddressServiceImpl @Inject constructor(): AddressService {
     @Inject
     lateinit var repository:AddressRepository
 
-    override fun addressAdd(receiverName: String, receiverProvince: String, receiverCity: String, receiverAddress: String, receiverPhone: String, receiverZip: String): Observable<Boolean> {
-        return repository.addressAdd(receiverName, receiverProvince, receiverCity, receiverAddress, receiverPhone, receiverZip).convertBoolean()
+    override fun addressAdd(authorization: String, receiverName: String, receiverProvince: String, receiverCity: String, receiverAddress: String, receiverPhone: String, receiverZip: String): Observable<Boolean> {
+        return repository.addressAdd(authorization, receiverName, receiverProvince, receiverCity, receiverAddress, receiverPhone, receiverZip).convertBoolean()
     }
 
-    override fun addressDelete(shippingId: Int): Observable<Boolean> {
-        return repository.addressDelete(shippingId).convertBoolean()
+    override fun addressDelete(authorization: String, shippingId: Int): Observable<Boolean> {
+        return repository.addressDelete(authorization, shippingId).convertBoolean()
     }
 
-    override fun addressUpdate(receiverName: String, receiverProvince: String, receiverCity: String, receiverAddress: String, receiverPhone: String, receiverZip: String, id: String): Observable<Boolean> {
-        return repository.addressUpdate(receiverName, receiverProvince, receiverCity, receiverAddress, receiverPhone, receiverZip, id).convertBoolean()
+    override fun addressUpdate(authorization: String, receiverName: String, receiverProvince: String, receiverCity: String, receiverAddress: String, receiverPhone: String, receiverZip: String, id: String): Observable<Boolean> {
+        return repository.addressUpdate(authorization, receiverName, receiverProvince, receiverCity, receiverAddress, receiverPhone, receiverZip, id).convertBoolean()
     }
 
-    override fun addressList(pageSize: Int): Observable<AddressList> {
-        return repository.addressList(pageSize).convert()
+    override fun addressList(authorization: String, pageSize: Int): Observable<AddressList> {
+        return repository.addressList(authorization, pageSize).convert()
     }
 
-    override fun addressSelects(shippingId: Int): Observable<ShipAddress> {
-        return repository.addressSelects(shippingId).convert()
+    override fun addressSelects(authorization: String, shippingId: Int): Observable<ShipAddress> {
+        return repository.addressSelects(authorization, shippingId).convert()
     }
 
 }

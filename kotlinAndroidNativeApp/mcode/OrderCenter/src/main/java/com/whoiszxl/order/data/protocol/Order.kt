@@ -16,5 +16,6 @@ data class Order(
         var shippingVo: ShipAddress?,
         val status: Int,
         var statusDesc: String,
+        var productTotalPrice: Long,
         val orderItemVoList: MutableList<OrderGoods>
 )

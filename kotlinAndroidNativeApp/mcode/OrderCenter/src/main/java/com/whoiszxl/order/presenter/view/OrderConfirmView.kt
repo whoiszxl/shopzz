@@ -9,7 +9,7 @@ import com.whoiszxl.order.data.protocol.Order
 interface OrderConfirmView : BaseView {
 
     //获取订单回调
-    fun onGetOrderByIdResult(result: Order)
+    fun onGetOrderCheckProductResult(result: Order)
     //提交订单回调
     fun onSubmitOrderResult(result:Boolean)
 }

@@ -18,6 +18,9 @@ class RetrofitFactory private constructor() {
     private val retrofit:Retrofit
     private val interceptor:Interceptor
 
+
+    //addHeader("Authorization", AppPrefsUtils.getString(BaseConstant.KEY_SP_TOKEN))
+    //TODO 这里进行auth鉴权会影响一些接口使用，暂时不这样用
     init {
         interceptor = Interceptor { 
             chain ->
@@ -25,7 +28,6 @@ class RetrofitFactory private constructor() {
                     .newBuilder()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("charset", "utf-8")
-                    .addHeader("Authorization", AppPrefsUtils.getString(BaseConstant.KEY_SP_TOKEN))
                     .build()
             chain.proceed(request)
         }

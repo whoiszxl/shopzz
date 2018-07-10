@@ -3,9 +3,11 @@ package com.whoiszxl.order.presenter
 import com.whoiszxl.base.ext.execute
 import com.whoiszxl.base.presenter.BasePresenter
 import com.whoiszxl.base.rx.BaseSubscriber
+import com.whoiszxl.base.utils.AppPrefsUtils
 import com.whoiszxl.order.data.protocol.Order
 import com.whoiszxl.order.presenter.view.OrderConfirmView
 import com.whoiszxl.order.service.OrderService
+import com.whoiszxl.provider.common.ProviderConstant
 import javax.inject.Inject
 
 /**
@@ -16,18 +18,20 @@ class OrderConfirmPresenter @Inject constructor() : BasePresenter<OrderConfirmVi
     @Inject
     lateinit var orderService: OrderService
 
+    private var authToken = AppPrefsUtils.getString(ProviderConstant.KEY_SP_USER_SIGN)
+
     /**
-     * 根据订单的编号获取到订单
+     * 获取购物车中选中的提交订单商品
      */
-    fun getOrderById(orderNo: String) {
+    fun getOrderCheckProduct() {
         if (!checkNetWork()) {
             return
         }
         mView.showLoading()
 
-        orderService.orderDetail(orderNo).execute(object : BaseSubscriber<Order>(mView) {
+        orderService.orderCartProduct(authToken).execute(object : BaseSubscriber<Order>(mView) {
             override fun onNext(t: Order) {
-                mView.onGetOrderByIdResult(t)
+                mView.onGetOrderCheckProductResult(t)
             }
         }, lifecycleProvider)
     }
@@ -38,7 +42,7 @@ class OrderConfirmPresenter @Inject constructor() : BasePresenter<OrderConfirmVi
             return
         }
         mView.showLoading()
-        orderService.submitOrder(shippingId).execute(object : BaseSubscriber<Boolean>(mView) {
+        orderService.submitOrder(authToken, shippingId).execute(object : BaseSubscriber<Boolean>(mView) {
             override fun onNext(t: Boolean) {
                 mView.onSubmitOrderResult(t)
             }

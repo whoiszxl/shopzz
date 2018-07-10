@@ -43,6 +43,7 @@ dependencies {
     }
 
     api project(':GoodsCenter')
+    api project(':OrderCenter')
 
 
     kapt "com.google.dagger:dagger-compiler:$dagger_version"

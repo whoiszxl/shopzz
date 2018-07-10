@@ -13,32 +13,39 @@ import javax.inject.Inject
  */
 class OrderRepository @Inject constructor() {
 
-    /*
-        取消订单
+    /**
+     * 取消订单
      */
-    fun orderCancel(orderNo: String): Observable<BaseResp<String>> {
-        return RetrofitFactory.instance.create(OrderApi::class.java).orderCancel(orderNo)
+    fun orderCancel(authorization: String, orderNo: String): Observable<BaseResp<String>> {
+        return RetrofitFactory.instance.create(OrderApi::class.java).orderCancel(authorization, orderNo)
     }
 
-    /*
-        根据ID查询订单
+    /**
+     * 根据ID查询订单
      */
-    fun orderDetail(orderNo: String): Observable<BaseResp<Order>> {
-        return RetrofitFactory.instance.create(OrderApi::class.java).orderDetail(orderNo)
+    fun orderDetail(authorization: String, orderNo: String): Observable<BaseResp<Order>> {
+        return RetrofitFactory.instance.create(OrderApi::class.java).orderDetail(authorization, orderNo)
     }
 
-    /*
-        根据状态查询订单列表
+    /**
+     * 获取当前购物车中的选中商品
      */
-    fun getOrderList(status: Int,pageSize: Int): Observable<BaseResp<OrderList>> {
-        return RetrofitFactory.instance.create(OrderApi::class.java).orderList(status, pageSize)
+    fun orderCartProduct(authorization: String): Observable<BaseResp<Order>> {
+        return RetrofitFactory.instance.create(OrderApi::class.java).orderCartProduct(authorization)
     }
 
-    /*
-        提交订单
+    /**
+     * 根据状态查询订单列表
      */
-    fun submitOrder(shippingId: Int): Observable<BaseResp<String>> {
-        return RetrofitFactory.instance.create(OrderApi::class.java).orderCreate(shippingId)
+    fun orderList(authorization: String, status: Int, pageSize: Int): Observable<BaseResp<OrderList>> {
+        return RetrofitFactory.instance.create(OrderApi::class.java).orderList(authorization, status, pageSize)
+    }
+
+    /**
+     * 提交订单
+     */
+    fun submitOrder(authorization: String, shippingId: Int): Observable<BaseResp<String>> {
+        return RetrofitFactory.instance.create(OrderApi::class.java).orderCreate(authorization, shippingId)
     }
 
 }

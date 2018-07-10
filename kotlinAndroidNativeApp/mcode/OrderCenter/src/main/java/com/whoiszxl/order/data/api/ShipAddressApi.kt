@@ -20,6 +20,7 @@ interface ShipAddressApi {
     @FormUrlEncoded
     @POST("/shipping/add")
     fun addressAdd(
+            @Header("Authorization") authorization: String,
             @Field("receiverName")receiverName:String,
             @Field("receiverProvince")receiverProvince:String,
             @Field("receiverCity")receiverCity:String,
@@ -33,6 +34,7 @@ interface ShipAddressApi {
     @FormUrlEncoded
     @POST("/shipping/delete")
     fun addressDelete(
+            @Header("Authorization") authorization: String,
             @Field("shippingId")shippingId:Int
     ): Observable<BaseResp<String>>
 
@@ -42,6 +44,7 @@ interface ShipAddressApi {
     @FormUrlEncoded
     @POST("/shipping/update")
     fun addressUpdate(
+            @Header("Authorization") authorization: String,
             @Field("receiverName")receiverName:String,
             @Field("receiverProvince")receiverProvince:String,
             @Field("receiverCity")receiverCity:String,
@@ -56,6 +59,7 @@ interface ShipAddressApi {
     @FormUrlEncoded
     @POST("/shipping/list")
     fun addressList(
+            @Header("Authorization") authorization: String,
             @Field("pageSize")pageSize:Int
     ): Observable<BaseResp<AddressList>>
 
@@ -66,6 +70,7 @@ interface ShipAddressApi {
     @FormUrlEncoded
     @POST("/shipping/selects")
     fun addressSelects(
+            @Header("Authorization") authorization: String,
             @Field("shippingId")shippingId:Int
     ): Observable<BaseResp<ShipAddress>>
 

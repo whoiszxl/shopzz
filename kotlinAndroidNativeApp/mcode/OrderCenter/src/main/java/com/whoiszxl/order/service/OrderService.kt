@@ -8,19 +8,22 @@ interface OrderService {
     /*
         取消订单
      */
-    fun orderCancel(orderNo: String): Observable<String>
+    fun orderCancel(authorization: String, orderNo: String): Observable<String>
 
     /*
         根据ID查询订单
      */
-    fun orderDetail(orderNo: String): Observable<Order>
+    fun orderDetail(authorization: String, orderNo: String): Observable<Order>
 
     /*
         根据状态查询订单列表
      */
-    fun getOrderList(status: Int,pageSize: Int): Observable<OrderList>
+    fun getOrderList(authorization: String, status: Int,pageSize: Int): Observable<OrderList>
     /*
         提交订单
      */
-    fun submitOrder(shippingId: Int): Observable<Boolean>
+    fun submitOrder(authorization: String, shippingId: Int): Observable<Boolean>
+
+
+    fun orderCartProduct(authorization: String): Observable<Order>
 }

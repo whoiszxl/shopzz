@@ -9,6 +9,7 @@ interface AddressService {
      * 添加收货地址
      */
     fun addressAdd(
+            authorization: String,
             receiverName: String,
             receiverProvince: String,
             receiverCity: String,
@@ -20,6 +21,7 @@ interface AddressService {
      * 删除收货地址
      */
     fun addressDelete(
+            authorization: String,
             shippingId: Int
     ): Observable<Boolean>
 
@@ -27,6 +29,7 @@ interface AddressService {
      * 修改收货地址
      */
     fun addressUpdate(
+            authorization: String,
             receiverName: String,
             receiverProvince: String,
             receiverCity: String,
@@ -39,6 +42,7 @@ interface AddressService {
      * 查询收货地址列表
      */
     fun addressList(
+            authorization: String,
             pageSize: Int
     ): Observable<AddressList>
 
@@ -47,6 +51,7 @@ interface AddressService {
      * 通过id查询地址
      */
     fun addressSelects(
+            authorization: String,
             shippingId: Int
     ): Observable<ShipAddress>
 }
