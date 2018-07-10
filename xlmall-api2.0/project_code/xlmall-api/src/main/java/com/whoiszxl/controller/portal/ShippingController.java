@@ -86,5 +86,14 @@ public class ShippingController {
     	User user = jwtUserService.getCurrentUser(request);
         return shippingService.list(user.getId(),pageNum,pageSize);
     }
+    
+    
+    @PostMapping("setdeafult")
+	@ApiOperation(value = "将地址设置为默认地址")
+	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
+    public ServerResponse setDefault(HttpServletRequest request,int shippingId){
+		User user = jwtUserService.getCurrentUser(request);
+        return shippingService.setDefault(user.getId(), shippingId);
+    }
 	
 }

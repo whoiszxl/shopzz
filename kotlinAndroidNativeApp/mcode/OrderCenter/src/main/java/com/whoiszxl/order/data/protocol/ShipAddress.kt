@@ -13,5 +13,5 @@ data class ShipAddress (
         var receiverDistrict: String?,
         var receiverAddress: String,
         var receiverZip: String,
-        var shipIsDefault: Int
+        var isDefault: Boolean
 ):Parcelable

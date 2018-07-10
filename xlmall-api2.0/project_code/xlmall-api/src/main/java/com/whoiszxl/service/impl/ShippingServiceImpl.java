@@ -74,5 +74,22 @@ public class ShippingServiceImpl implements ShippingService {
         return ServerResponse.createBySuccess(pageInfo);
 	}
 
+	@Override
+	public ServerResponse setDefault(Integer userId, int shippingId) {
+		//先将当前用户的所有地址的is_default状态设置为0
+		int result = shippingMapper.updateAllIsNotDefault(userId);
+		if(result == 0) {
+			return ServerResponse.createByErrorMessage("修改默认地址失败");
+		}
+		
+		//再更新选中的地址id为默认地址
+		result = shippingMapper.updateIsDefaultByUserIdAndShippingId(userId, shippingId);
+		if(result == 0) {
+			return ServerResponse.createByErrorMessage("修改默认地址失败");
+		}
+		
+		return ServerResponse.createBySuccessMessage("修改默认地址成功");
+	}
+
 }
 

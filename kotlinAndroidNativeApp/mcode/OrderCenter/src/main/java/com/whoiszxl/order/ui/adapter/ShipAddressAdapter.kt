@@ -33,7 +33,7 @@ class ShipAddressAdapter(context: Context) : BaseRecyclerViewAdapter<ShipAddress
         super.onBindViewHolder(holder, position)
         val model = dataList[position]
 
-        holder.itemView.mSetDefaultTv.isSelected = (model.shipIsDefault == 0)
+        holder.itemView.mSetDefaultTv.isSelected = model.isDefault
         holder.itemView.mShipNameTv.text = model.receiverName + "    " + model.receiverPhone
         holder.itemView.mShipAddressTv.text = model.receiverProvince + model.receiverCity + model.receiverAddress
         holder.itemView.mSetDefaultTv.onClick {
@@ -41,7 +41,7 @@ class ShipAddressAdapter(context: Context) : BaseRecyclerViewAdapter<ShipAddress
                 if (holder.itemView.mSetDefaultTv.isSelected){
                     return@onClick
                 }
-                model.shipIsDefault = 0
+                model.isDefault = false
                 it.onSetDefault(model)
             }
         }
