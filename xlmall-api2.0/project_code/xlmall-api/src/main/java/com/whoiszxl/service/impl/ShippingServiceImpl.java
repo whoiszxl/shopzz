@@ -30,9 +30,9 @@ public class ShippingServiceImpl implements ShippingService {
 		shipping.setUserId(userId);
 		int rowCount = shippingMapper.insert(shipping);
 		if(rowCount > 0) {
-			HashMap<Object, Object> result = Maps.newHashMap();
-			result.put("shippingId", shipping.getId());
-			return ServerResponse.createBySuccess("新建地址成功",  result);
+//			HashMap<Object, Object> result = Maps.newHashMap();
+//			result.put("shippingId", shipping.getId());
+			return ServerResponse.createBySuccess("新建地址成功");
 		}
 		
 		return ServerResponse.createByErrorMessage("新建地址失败");
