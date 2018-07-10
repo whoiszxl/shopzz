@@ -68,4 +68,6 @@ class AddressRepository @Inject constructor() {
     ): Observable<BaseResp<ShipAddress>> {
         return RetrofitFactory.instance.create(ShipAddressApi::class.java).addressSelects(authorization, shippingId)
     }
+
+    fun addressSetDefault()
 }

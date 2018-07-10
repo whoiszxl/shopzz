@@ -88,7 +88,7 @@ public class ShippingController {
     }
     
     
-    @PostMapping("setdeafult")
+    @PostMapping("setdefault")
 	@ApiOperation(value = "将地址设置为默认地址")
 	@RequiresRoles(value={ Const.ShiroRole.ROLE_ADMIN, Const.ShiroRole.ROLE_CUSTOMER }, logical=Logical.OR)
     public ServerResponse setDefault(HttpServletRequest request,int shippingId){

@@ -232,7 +232,6 @@
 		and user_id = #{userId}
 	</select>
 
-
 	<select id="selectByUserId" resultMap="BaseResultMap"
 		parameterType="map">
 		SELECT

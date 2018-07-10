@@ -74,4 +74,15 @@ interface ShipAddressApi {
             @Field("shippingId")shippingId:Int
     ): Observable<BaseResp<ShipAddress>>
 
+
+    /**
+     * 通过id设置地址为默认地址
+     */
+    @FormUrlEncoded
+    @POST("/shipping/setdeafult")
+    fun addressSetDefault(
+            @Header("Authorization") authorization: String,
+            @Field("shippingId")shippingId:Int
+    ): Observable<BaseResp<String>>
+
 }
