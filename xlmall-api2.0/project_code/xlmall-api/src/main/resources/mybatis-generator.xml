@@ -40,7 +40,7 @@
 
 		<!-- 运行maven命令：`mvn mybatis-generator:generate`，生成! -->
 
-		<table tableName="xl_sku" domainObjectName="Sku"
+		<table tableName="xl_shipping" domainObjectName="Shipping"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false"></table>

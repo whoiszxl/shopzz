@@ -1,189 +1,192 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.whoiszxl.dao.ShippingMapper">
-	<resultMap id="BaseResultMap" type="com.whoiszxl.entity.Shipping">
-		<constructor>
-			<idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-			<arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-			<arg column="receiver_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-			<arg column="receiver_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
-			<arg column="receiver_mobile" jdbcType="VARCHAR" javaType="java.lang.String" />
-			<arg column="receiver_province" jdbcType="VARCHAR" javaType="java.lang.String" />
-			<arg column="receiver_city" jdbcType="VARCHAR" javaType="java.lang.String" />
-			<arg column="receiver_district" jdbcType="VARCHAR" javaType="java.lang.String" />
-			<arg column="receiver_address" jdbcType="VARCHAR" javaType="java.lang.String" />
-			<arg column="receiver_zip" jdbcType="VARCHAR" javaType="java.lang.String" />
-			<arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-			<arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-		</constructor>
-	</resultMap>
-	<sql id="Base_Column_List">
-		id, user_id, receiver_name, receiver_phone, receiver_mobile,
-		receiver_province, receiver_city,
-		receiver_district, receiver_address, receiver_zip, create_time, update_time
-	</sql>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from xl_shipping
-		where id = #{id,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from xl_shipping
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
-	<insert id="insert" parameterType="com.whoiszxl.entity.Shipping">
-		insert into xl_shipping (id, user_id, receiver_name,
-		receiver_phone, receiver_mobile, receiver_province,
-		receiver_city, receiver_district, receiver_address,
-		receiver_zip, create_time, update_time
-		)
-		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
-		#{receiverName,jdbcType=VARCHAR},
-		#{receiverPhone,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR},
-		#{receiverProvince,jdbcType=VARCHAR},
-		#{receiverCity,jdbcType=VARCHAR},
-		#{receiverDistrict,jdbcType=VARCHAR},
-		#{receiverAddress,jdbcType=VARCHAR},
-		#{receiverZip,jdbcType=VARCHAR}, now(), now()
-		)
-	</insert>
-	<insert id="insertSelective" parameterType="com.whoiszxl.entity.Shipping">
-		insert into xl_shipping
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="userId != null">
-				user_id,
-			</if>
-			<if test="receiverName != null">
-				receiver_name,
-			</if>
-			<if test="receiverPhone != null">
-				receiver_phone,
-			</if>
-			<if test="receiverMobile != null">
-				receiver_mobile,
-			</if>
-			<if test="receiverProvince != null">
-				receiver_province,
-			</if>
-			<if test="receiverCity != null">
-				receiver_city,
-			</if>
-			<if test="receiverDistrict != null">
-				receiver_district,
-			</if>
-			<if test="receiverAddress != null">
-				receiver_address,
-			</if>
-			<if test="receiverZip != null">
-				receiver_zip,
-			</if>
-			<if test="createTime != null">
-				create_time,
-			</if>
-			<if test="updateTime != null">
-				update_time,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="userId != null">
-				#{userId,jdbcType=INTEGER},
-			</if>
-			<if test="receiverName != null">
-				#{receiverName,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverPhone != null">
-				#{receiverPhone,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverMobile != null">
-				#{receiverMobile,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverProvince != null">
-				#{receiverProvince,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverCity != null">
-				#{receiverCity,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverDistrict != null">
-				#{receiverDistrict,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverAddress != null">
-				#{receiverAddress,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverZip != null">
-				#{receiverZip,jdbcType=VARCHAR},
-			</if>
-			<if test="createTime != null">
-				now(),
-			</if>
-			<if test="updateTime != null">
-				now(),
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.whoiszxl.entity.Shipping">
-		update xl_shipping
-		<set>
-			<if test="userId != null">
-				user_id = #{userId,jdbcType=INTEGER},
-			</if>
-			<if test="receiverName != null">
-				receiver_name = #{receiverName,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverPhone != null">
-				receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverMobile != null">
-				receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverProvince != null">
-				receiver_province = #{receiverProvince,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverCity != null">
-				receiver_city = #{receiverCity,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverDistrict != null">
-				receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverAddress != null">
-				receiver_address = #{receiverAddress,jdbcType=VARCHAR},
-			</if>
-			<if test="receiverZip != null">
-				receiver_zip = #{receiverZip,jdbcType=VARCHAR},
-			</if>
-			<if test="createTime != null">
-				create_time = #{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null">
-				update_time = now(),
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.whoiszxl.entity.Shipping">
-		update xl_shipping
-		set user_id = #{userId,jdbcType=INTEGER},
-		receiver_name = #{receiverName,jdbcType=VARCHAR},
-		receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
-		receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
-		receiver_province = #{receiverProvince,jdbcType=VARCHAR},
-		receiver_city = #{receiverCity,jdbcType=VARCHAR},
-		receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
-		receiver_address = #{receiverAddress,jdbcType=VARCHAR},
-		receiver_zip = #{receiverZip,jdbcType=VARCHAR},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
-		update_time = now()
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-
-	<delete id="deleteByShippingIdUserId" parameterType="map">
+  <resultMap id="BaseResultMap" type="com.whoiszxl.entity.Shipping">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="is_default" jdbcType="BIT" property="isDefault" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_phone" jdbcType="VARCHAR" property="receiverPhone" />
+    <result column="receiver_mobile" jdbcType="VARCHAR" property="receiverMobile" />
+    <result column="receiver_province" jdbcType="VARCHAR" property="receiverProvince" />
+    <result column="receiver_city" jdbcType="VARCHAR" property="receiverCity" />
+    <result column="receiver_district" jdbcType="VARCHAR" property="receiverDistrict" />
+    <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
+    <result column="receiver_zip" jdbcType="VARCHAR" property="receiverZip" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, is_default, receiver_name, receiver_phone, receiver_mobile, receiver_province, 
+    receiver_city, receiver_district, receiver_address, receiver_zip, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xl_shipping
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xl_shipping
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.whoiszxl.entity.Shipping">
+    insert into xl_shipping (id, user_id, is_default, 
+      receiver_name, receiver_phone, receiver_mobile, 
+      receiver_province, receiver_city, receiver_district, 
+      receiver_address, receiver_zip, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{isDefault,jdbcType=BIT}, 
+      #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR}, 
+      #{receiverProvince,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR}, #{receiverDistrict,jdbcType=VARCHAR}, 
+      #{receiverAddress,jdbcType=VARCHAR}, #{receiverZip,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whoiszxl.entity.Shipping">
+    insert into xl_shipping
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="isDefault != null">
+        is_default,
+      </if>
+      <if test="receiverName != null">
+        receiver_name,
+      </if>
+      <if test="receiverPhone != null">
+        receiver_phone,
+      </if>
+      <if test="receiverMobile != null">
+        receiver_mobile,
+      </if>
+      <if test="receiverProvince != null">
+        receiver_province,
+      </if>
+      <if test="receiverCity != null">
+        receiver_city,
+      </if>
+      <if test="receiverDistrict != null">
+        receiver_district,
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address,
+      </if>
+      <if test="receiverZip != null">
+        receiver_zip,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null">
+        #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobile != null">
+        #{receiverMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverProvince != null">
+        #{receiverProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverCity != null">
+        #{receiverCity,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverDistrict != null">
+        #{receiverDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverZip != null">
+        #{receiverZip,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whoiszxl.entity.Shipping">
+    update xl_shipping
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isDefault != null">
+        is_default = #{isDefault,jdbcType=BIT},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverMobile != null">
+        receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverProvince != null">
+        receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverCity != null">
+        receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverDistrict != null">
+        receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverZip != null">
+        receiver_zip = #{receiverZip,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whoiszxl.entity.Shipping">
+    update xl_shipping
+    set user_id = #{userId,jdbcType=INTEGER},
+      is_default = #{isDefault,jdbcType=BIT},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
+      receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+      receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+      receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      receiver_zip = #{receiverZip,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <delete id="deleteByShippingIdUserId" parameterType="map">
 		DELETE FROM xl_shipping
 		where id = #{shippingId}
 		and user_id = #{userId}

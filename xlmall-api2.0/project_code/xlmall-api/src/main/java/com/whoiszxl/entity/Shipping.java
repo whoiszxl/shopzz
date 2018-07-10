@@ -3,145 +3,133 @@ package com.whoiszxl.entity;
 import java.util.Date;
 
 public class Shipping {
+    private Integer id;
 
-	private Integer id;
+    private Integer userId;
 
-	private Integer userId;
+    private Boolean isDefault;
 
-	private String receiverName;
+    private String receiverName;
 
-	private String receiverPhone;
+    private String receiverPhone;
 
-	private String receiverMobile;
+    private String receiverMobile;
 
-	private String receiverProvince;
+    private String receiverProvince;
 
-	private String receiverCity;
+    private String receiverCity;
 
-	private String receiverDistrict;
+    private String receiverDistrict;
 
-	private String receiverAddress;
+    private String receiverAddress;
 
-	private String receiverZip;
+    private String receiverZip;
 
-	private Date createTime;
+    private Date createTime;
 
-	private Date updateTime;
+    private Date updateTime;
 
-	public Shipping(Integer id, Integer userId, String receiverName, String receiverPhone, String receiverMobile,
-			String receiverProvince, String receiverCity, String receiverDistrict, String receiverAddress,
-			String receiverZip, Date createTime, Date updateTime) {
-		this.id = id;
-		this.userId = userId;
-		this.receiverName = receiverName;
-		this.receiverPhone = receiverPhone;
-		this.receiverMobile = receiverMobile;
-		this.receiverProvince = receiverProvince;
-		this.receiverCity = receiverCity;
-		this.receiverDistrict = receiverDistrict;
-		this.receiverAddress = receiverAddress;
-		this.receiverZip = receiverZip;
-		this.createTime = createTime;
-		this.updateTime = updateTime;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Shipping() {
-		super();
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
 
-	public String getReceiverName() {
-		return receiverName;
-	}
+    public String getReceiverName() {
+        return receiverName;
+    }
 
-	public void setReceiverName(String receiverName) {
-		this.receiverName = receiverName == null ? null : receiverName.trim();
-	}
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName == null ? null : receiverName.trim();
+    }
 
-	public String getReceiverPhone() {
-		return receiverPhone;
-	}
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
 
-	public void setReceiverPhone(String receiverPhone) {
-		this.receiverPhone = receiverPhone == null ? null : receiverPhone.trim();
-	}
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone == null ? null : receiverPhone.trim();
+    }
 
-	public String getReceiverMobile() {
-		return receiverMobile;
-	}
+    public String getReceiverMobile() {
+        return receiverMobile;
+    }
 
-	public void setReceiverMobile(String receiverMobile) {
-		this.receiverMobile = receiverMobile == null ? null : receiverMobile.trim();
-	}
+    public void setReceiverMobile(String receiverMobile) {
+        this.receiverMobile = receiverMobile == null ? null : receiverMobile.trim();
+    }
 
-	public String getReceiverProvince() {
-		return receiverProvince;
-	}
+    public String getReceiverProvince() {
+        return receiverProvince;
+    }
 
-	public void setReceiverProvince(String receiverProvince) {
-		this.receiverProvince = receiverProvince == null ? null : receiverProvince.trim();
-	}
+    public void setReceiverProvince(String receiverProvince) {
+        this.receiverProvince = receiverProvince == null ? null : receiverProvince.trim();
+    }
 
-	public String getReceiverCity() {
-		return receiverCity;
-	}
+    public String getReceiverCity() {
+        return receiverCity;
+    }
 
-	public void setReceiverCity(String receiverCity) {
-		this.receiverCity = receiverCity == null ? null : receiverCity.trim();
-	}
+    public void setReceiverCity(String receiverCity) {
+        this.receiverCity = receiverCity == null ? null : receiverCity.trim();
+    }
 
-	public String getReceiverDistrict() {
-		return receiverDistrict;
-	}
+    public String getReceiverDistrict() {
+        return receiverDistrict;
+    }
 
-	public void setReceiverDistrict(String receiverDistrict) {
-		this.receiverDistrict = receiverDistrict == null ? null : receiverDistrict.trim();
-	}
+    public void setReceiverDistrict(String receiverDistrict) {
+        this.receiverDistrict = receiverDistrict == null ? null : receiverDistrict.trim();
+    }
 
-	public String getReceiverAddress() {
-		return receiverAddress;
-	}
+    public String getReceiverAddress() {
+        return receiverAddress;
+    }
 
-	public void setReceiverAddress(String receiverAddress) {
-		this.receiverAddress = receiverAddress == null ? null : receiverAddress.trim();
-	}
+    public void setReceiverAddress(String receiverAddress) {
+        this.receiverAddress = receiverAddress == null ? null : receiverAddress.trim();
+    }
 
-	public String getReceiverZip() {
-		return receiverZip;
-	}
+    public String getReceiverZip() {
+        return receiverZip;
+    }
 
-	public void setReceiverZip(String receiverZip) {
-		this.receiverZip = receiverZip == null ? null : receiverZip.trim();
-	}
+    public void setReceiverZip(String receiverZip) {
+        this.receiverZip = receiverZip == null ? null : receiverZip.trim();
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public Date getUpdateTime() {
-		return updateTime;
-	}
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 }

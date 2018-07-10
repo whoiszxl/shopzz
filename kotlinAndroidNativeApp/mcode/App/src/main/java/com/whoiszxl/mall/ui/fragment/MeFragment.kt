@@ -10,6 +10,7 @@ import com.whoiszxl.base.ui.fragment.BaseFragment
 import com.whoiszxl.base.utils.AppPrefsUtils
 import com.whoiszxl.mall.R
 import com.whoiszxl.mall.ui.activity.SettingActivity
+import com.whoiszxl.order.ui.activity.ShipAddressActivity
 import com.whoiszxl.provider.common.ProviderConstant
 import com.whoiszxl.provider.common.afterLogin
 import com.whoiszxl.provider.common.isLogined
@@ -85,11 +86,6 @@ class MeFragment : BaseFragment(), View.OnClickListener {
                 afterLogin {
                     startActivity<UserInfoActivity>()
                 }
-//                if (isLogined()){
-//                    startActivity<UserInfoActivity>()
-//                }else{
-//                    startActivity<LoginActivity>()
-//                }
             }
 
             R.id.mWaitPayOrderTv -> {
@@ -113,8 +109,7 @@ class MeFragment : BaseFragment(), View.OnClickListener {
 
             R.id.mAddressTv -> {
                 afterLogin {
-                    toast("ShipAddressActivity jumop")
-                    //startActivity<ShipAddressActivity>()
+                    startActivity<ShipAddressActivity>()
                 }
             }
             R.id.mShareTv -> {
