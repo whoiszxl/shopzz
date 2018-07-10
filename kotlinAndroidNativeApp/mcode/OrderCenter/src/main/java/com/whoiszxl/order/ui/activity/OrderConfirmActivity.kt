@@ -53,10 +53,10 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(),OrderConfi
      */
     private fun initView() {
         mShipView.onClick {
-            //startActivity<ShipAddressActivity>()
+            startActivity<ShipAddressActivity>()
         }
         mSelectShipTv.onClick {
-            //startActivity<ShipAddressActivity>()
+            startActivity<ShipAddressActivity>()
 
         }
 

@@ -39,10 +39,45 @@
                 android:background="@null"
                 android:inputType="phone"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mShipProvinceView"
+        android:background="@drawable/border_bottom"
+        android:layout_below="@id/mShipMobileView"
+        style="@style/MatchWrap.Horizontal">
+        <TextView
+            style="@style/WrapMatch"
+            android:text="省份:"
+            android:textColor="@color/text_light_dark"
+            android:padding="@dimen/common_padding"/>
+        <EditText
+            android:id="@+id/mShipProvinceEt"
+            style="@style/WeightMatch"
+            android:textColor="@color/text_light_dark"
+            android:background="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mShipCityView"
+        android:background="@drawable/border_bottom"
+        android:layout_below="@id/mShipProvinceView"
+        style="@style/MatchWrap.Horizontal">
+        <TextView
+            style="@style/WrapMatch"
+            android:text="城市:"
+            android:textColor="@color/text_light_dark"
+            android:padding="@dimen/common_padding"/>
+        <EditText
+            android:id="@+id/mShipCityEt"
+            style="@style/WeightMatch"
+            android:textColor="@color/text_light_dark"
+            android:background="@null"/>
+    </LinearLayout>
+
     <LinearLayout
             android:id="@+id/mShipAddressView"
             android:background="@drawable/border_bottom"
-            android:layout_below="@id/mShipMobileView"
+            android:layout_below="@id/mShipCityView"
             style="@style/MatchWrap.Horizontal">
         <TextView
                 style="@style/WrapMatch"
@@ -54,6 +89,23 @@
                 style="@style/WeightMatch"
                 android:textColor="@color/text_light_dark"
                 android:background="@null"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mShipZipView"
+        android:background="@drawable/border_bottom"
+        android:layout_below="@id/mShipAddressView"
+        style="@style/MatchWrap.Horizontal">
+        <TextView
+            style="@style/WrapMatch"
+            android:text="邮政编码:"
+            android:textColor="@color/text_light_dark"
+            android:padding="@dimen/common_padding"/>
+        <EditText
+            android:id="@+id/mShipZipEt"
+            style="@style/WeightMatch"
+            android:textColor="@color/text_light_dark"
+            android:background="@null"/>
     </LinearLayout>
     <Button
             android:id="@+id/mSaveBtn"

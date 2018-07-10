@@ -10,7 +10,7 @@ data class ShipAddress (
         var receiverPhone: String,
         var receiverProvince: String,
         var receiverCity: String,
-        var receiverDistrict: String,
+        var receiverDistrict: String?,
         var receiverAddress: String,
         var receiverZip: String,
         var shipIsDefault: Int
