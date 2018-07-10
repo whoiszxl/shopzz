@@ -54,4 +54,12 @@ interface AddressService {
             authorization: String,
             shippingId: Int
     ): Observable<ShipAddress>
+
+    /**
+     * 设置默认地址
+     */
+    fun addressSetDefault(
+            authorization: String,
+            shippingId: Int
+    ): Observable<Boolean>
 }

@@ -16,4 +16,5 @@ interface ShipAddressView : BaseView {
     //删除收货人回调
     fun onDeleteResult(result: Boolean)
 
+
 }

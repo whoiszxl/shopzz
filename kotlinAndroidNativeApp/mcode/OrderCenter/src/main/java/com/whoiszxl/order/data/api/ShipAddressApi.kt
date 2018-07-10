@@ -79,7 +79,7 @@ interface ShipAddressApi {
      * 通过id设置地址为默认地址
      */
     @FormUrlEncoded
-    @POST("/shipping/setdeafult")
+    @POST("/shipping/setdefault")
     fun addressSetDefault(
             @Header("Authorization") authorization: String,
             @Field("shippingId")shippingId:Int

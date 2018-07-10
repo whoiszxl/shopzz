@@ -14,6 +14,7 @@ import javax.inject.Inject
  */
 class AddressServiceImpl @Inject constructor(): AddressService {
 
+
     @Inject
     lateinit var repository:AddressRepository
 
@@ -35,6 +36,10 @@ class AddressServiceImpl @Inject constructor(): AddressService {
 
     override fun addressSelects(authorization: String, shippingId: Int): Observable<ShipAddress> {
         return repository.addressSelects(authorization, shippingId).convert()
+    }
+
+    override fun addressSetDefault(authorization: String, shippingId: Int): Observable<Boolean> {
+        return repository.addressSetDefault(authorization, shippingId).convertBoolean()
     }
 
 }

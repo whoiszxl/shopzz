@@ -49,4 +49,16 @@ class ShipAddressPresenter @Inject constructor(): BasePresenter<ShipAddressView>
         }, lifecycleProvider)
 
     }
+
+    fun setAddressIsDefault(shippingId: Int) {
+        if (!checkNetWork()) {
+            return
+        }
+        mView.showLoading()
+        addressService.addressSetDefault(authToken, shippingId).execute(object : BaseSubscriber<Boolean>(mView) {
+            override fun onNext(t: Boolean) {
+                mView.onSetDefaultResult(t)
+            }
+        }, lifecycleProvider)
+    }
 }

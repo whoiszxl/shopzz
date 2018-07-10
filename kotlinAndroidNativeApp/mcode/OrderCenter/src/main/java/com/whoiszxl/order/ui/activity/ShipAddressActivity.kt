@@ -72,7 +72,7 @@ class ShipAddressActivity: BaseMvpActivity<ShipAddressPresenter>(), ShipAddressV
         mAdapter.mOptClickListener = object : ShipAddressAdapter.OnOptClickListener {
             override fun onSetDefault(address: ShipAddress) {
                 //todo 设置默认地址事件
-                toast("设置默认地址")
+                mPresenter.setAddressIsDefault(address.id)
             }
 
             override fun onEdit(address: ShipAddress) {
