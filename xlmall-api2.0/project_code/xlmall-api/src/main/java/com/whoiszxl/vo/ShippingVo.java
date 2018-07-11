@@ -5,6 +5,9 @@ package com.whoiszxl.vo;
  *
  */
 public class ShippingVo {
+	
+	private Integer id;
+	
 	private String receiverName;
 
     private String receiverPhone;
@@ -25,7 +28,15 @@ public class ShippingVo {
 
     
     
-    public Boolean getIsDefault() {
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Boolean getIsDefault() {
 		return isDefault;
 	}
 
