@@ -6,5 +6,5 @@ package com.whoiszxl.order.data.protocol
 data class OrderList (
     val pageSize: Int,
     val total: Int,
-    val list: MutableList<Order>
+    val list: MutableList<Order>?
 )

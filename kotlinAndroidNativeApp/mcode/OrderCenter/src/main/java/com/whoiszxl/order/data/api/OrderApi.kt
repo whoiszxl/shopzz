@@ -3,10 +3,7 @@ package com.whoiszxl.order.data.api
 import com.whoiszxl.base.data.protocol.BaseResp
 import com.whoiszxl.order.data.protocol.Order
 import com.whoiszxl.order.data.protocol.OrderList
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 import rx.Observable
 
 /**
@@ -56,12 +53,11 @@ interface OrderApi {
     /**
      * 获取订单列表
      */
-    @FormUrlEncoded
-    @POST("/order/list")
+    @GET("/order/list")
     fun orderList(
             @Header("Authorization") authorization: String,
-            @Field("status")status:Int,
-            @Field("pageSize")pageSize:Int): Observable<BaseResp<OrderList>>
+            @Query("status")status:Int,
+            @Query("pageSize")pageSize:Int): Observable<BaseResp<OrderList>>
 
 
 }

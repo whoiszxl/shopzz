@@ -8,7 +8,7 @@ interface OrderService {
     /*
         取消订单
      */
-    fun orderCancel(authorization: String, orderNo: String): Observable<String>
+    fun orderCancel(authorization: String, orderNo: String): Observable<Boolean>
 
     /*
         根据ID查询订单

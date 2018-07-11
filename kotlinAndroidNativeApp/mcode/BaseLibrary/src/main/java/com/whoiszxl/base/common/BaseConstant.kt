@@ -28,5 +28,10 @@ class BaseConstant {
          * 收货地址显示数量
          */
         const val ADDRESS_SHOW_COUNT = 20
+
+        /**
+         * TODO 暂时没有分页的订单显示数量
+         */
+        const val ORDER_SHOW_COUNT = 100000
     }
 }

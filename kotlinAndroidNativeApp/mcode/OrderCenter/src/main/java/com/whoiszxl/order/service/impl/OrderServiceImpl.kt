@@ -18,8 +18,8 @@ class OrderServiceImpl @Inject constructor(): OrderService {
     @Inject
     lateinit var repository: OrderRepository
 
-    override fun orderCancel(authorization: String, orderNo: String): Observable<String> {
-        return repository.orderCancel(authorization, orderNo).convert()
+    override fun orderCancel(authorization: String, orderNo: String): Observable<Boolean> {
+        return repository.orderCancel(authorization, orderNo).convertBoolean()
     }
 
     override fun orderDetail(authorization: String, orderNo: String): Observable<Order> {

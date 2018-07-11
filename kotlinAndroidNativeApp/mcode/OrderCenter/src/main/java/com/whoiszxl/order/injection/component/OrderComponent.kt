@@ -4,6 +4,7 @@ import com.whoiszxl.base.injection.PerComponentScope
 import com.whoiszxl.base.injection.component.ActivityComponent
 import com.whoiszxl.order.injection.module.OrderModule
 import com.whoiszxl.order.ui.activity.OrderConfirmActivity
+import com.whoiszxl.order.ui.fragment.OrderFragment
 import dagger.Component
 
 /**
@@ -14,5 +15,6 @@ import dagger.Component
 interface OrderComponent {
 
     fun inject(activity: OrderConfirmActivity)
+    fun inject(fragment: OrderFragment)
 
 }
