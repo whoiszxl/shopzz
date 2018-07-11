@@ -3,6 +3,8 @@ package com.whoiszxl.vo;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.whoiszxl.entity.Shipping;
+
 /**
  * 
  * @author whoiszxl
@@ -24,6 +26,20 @@ public class OrderProductVo {
      * 订单缩略图
      */
     private String imageHost;
+    
+    /**
+     * 一個默認地址
+     */
+    private ShippingVo shippingVo;
+    
+
+	public ShippingVo getShippingVo() {
+		return shippingVo;
+	}
+
+	public void setShippingVo(ShippingVo shippingVo) {
+		this.shippingVo = shippingVo;
+	}
 
 	public List<OrderItemVo> getOrderItemVoList() {
 		return orderItemVoList;

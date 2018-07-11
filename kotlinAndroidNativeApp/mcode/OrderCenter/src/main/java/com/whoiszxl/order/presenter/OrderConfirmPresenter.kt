@@ -31,7 +31,7 @@ class OrderConfirmPresenter @Inject constructor() : BasePresenter<OrderConfirmVi
 
         orderService.orderCartProduct(authToken).execute(object : BaseSubscriber<Order>(mView) {
             override fun onNext(t: Order) {
-                mView.onGetOrderCheckProductResult(t)
+                mView.onGetOrderCartProductResult(t)
             }
         }, lifecycleProvider)
     }

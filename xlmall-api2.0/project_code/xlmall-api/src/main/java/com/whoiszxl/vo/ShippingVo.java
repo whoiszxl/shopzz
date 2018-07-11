@@ -20,8 +20,20 @@ public class ShippingVo {
     private String receiverAddress;
 
     private String receiverZip;
+    
+    private Boolean isDefault;
 
-    public String getReceiverName() {
+    
+    
+    public Boolean getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(Boolean isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	public String getReceiverName() {
         return receiverName;
     }
 

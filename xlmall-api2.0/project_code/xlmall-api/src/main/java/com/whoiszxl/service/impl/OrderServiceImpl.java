@@ -14,6 +14,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -632,6 +633,12 @@ public class OrderServiceImpl implements OrderService {
         orderProductVo.setOrderItemVoList(orderItemVoList);
         //设置图片的前缀
         orderProductVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
+        
+        //查詢這個用戶的默認地址
+        Shipping shipping = shippingMapper.selectByUserIdAndIsDefault(userId);
+        ShippingVo shippingVo = new ShippingVo();
+        BeanUtils.copyProperties(shipping, shippingVo);
+        orderProductVo.setShippingVo(shippingVo);
         return ServerResponse.createBySuccess(orderProductVo);
 	}
 

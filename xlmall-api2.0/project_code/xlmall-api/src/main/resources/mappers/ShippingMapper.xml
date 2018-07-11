@@ -239,4 +239,14 @@
 		from xl_shipping
 		where user_id = #{userId}
 	</select>
+	
+	
+	<select id="selectByUserIdAndIsDefault" resultMap="BaseResultMap"
+		parameterType="map">
+		SELECT
+		<include refid="Base_Column_List" />
+		from xl_shipping
+		where user_id = #{userId}
+		and is_default = 1
+	</select>
 </mapper>
