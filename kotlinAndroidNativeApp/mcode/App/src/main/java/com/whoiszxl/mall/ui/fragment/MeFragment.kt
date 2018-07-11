@@ -10,6 +10,9 @@ import com.whoiszxl.base.ui.fragment.BaseFragment
 import com.whoiszxl.base.utils.AppPrefsUtils
 import com.whoiszxl.mall.R
 import com.whoiszxl.mall.ui.activity.SettingActivity
+import com.whoiszxl.order.common.OrderConstant
+import com.whoiszxl.order.common.OrderStatus
+import com.whoiszxl.order.ui.activity.OrderActivity
 import com.whoiszxl.order.ui.activity.ShipAddressActivity
 import com.whoiszxl.provider.common.ProviderConstant
 import com.whoiszxl.provider.common.afterLogin
@@ -89,21 +92,17 @@ class MeFragment : BaseFragment(), View.OnClickListener {
             }
 
             R.id.mWaitPayOrderTv -> {
-                toast("mWaitPayOrderTv")
-                //startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
             }
             R.id.mWaitConfirmOrderTv -> {
-                toast("mWaitConfirmOrderTv")
-                //startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
             }
             R.id.mCompleteOrderTv -> {
-                toast("mCompleteOrderTv")
-                //startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
+                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
             }
             R.id.mAllOrderTv -> {
                 afterLogin {
-                    toast("orderActiovity jumop")
-                    //startActivity<OrderActivity>()
+                    startActivity<OrderActivity>()
                 }
             }
 
