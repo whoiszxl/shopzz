@@ -91,7 +91,7 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
             OrderStatus.ORDER_WAIT_CONFIRM -> {
                 holder.itemView.mOrderStatusNameTv.text = "待收货"
                 holder.itemView.mOrderStatusNameTv.setTextColor(mContext.resources.getColor(R.color.common_blue))
-                setOptVisible(true,false,true,holder)
+                setOptVisible(true,false,false,holder)
             }
 
             OrderStatus.ORDER_COMPLETED -> {
