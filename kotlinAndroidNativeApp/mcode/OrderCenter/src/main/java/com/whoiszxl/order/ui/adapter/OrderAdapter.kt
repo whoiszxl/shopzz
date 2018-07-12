@@ -50,15 +50,17 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
         val model = dataList[position]
 
         var mTotalCount = 0
+        var mTotalPrice: Long = 0
         if (model.orderItemVoList.size == 1){//单个商品
             holder.itemView.mSingleGoodsView.setVisible(true)
             holder.itemView.mMultiGoodsView.setVisible(false)//单个商品隐藏多个商品视图
             val orderGoods = model.orderItemVoList[0]
-            holder.itemView.mGoodsIconIv.loadUrl(orderGoods.productImage)//商品图标
+            holder.itemView.mGoodsIconIv.loadUrl(this.imageHost + orderGoods.productImage)//商品图标
             holder.itemView.mGoodsDescTv.text = orderGoods.productName//商品描述
             holder.itemView.mGoodsPriceTv.text = YuanFenConverter.changeF2YWithUnit(orderGoods.currentUnitPrice)//商品价格
             holder.itemView.mGoodsCountTv.text = "x${orderGoods.quantity}"//商品数量
             mTotalCount = orderGoods.quantity
+            mTotalPrice = orderGoods.totalPrice
 
         }else{//多个商品视图展示
             holder.itemView.mSingleGoodsView.setVisible(false)//多个商品隐藏单个商品视图
@@ -69,16 +71,16 @@ class OrderAdapter(context: Context) : BaseRecyclerViewAdapter<Order, OrderAdapt
                 val lp = ViewGroup.MarginLayoutParams(mContext.dip(60.0f),mContext.dip(60.0f))
                 lp.rightMargin = mContext.dip(15f)
                 imageView.layoutParams = lp
-                imageView.loadUrl(orderGoods.productImage)
+                imageView.loadUrl(this.imageHost + orderGoods.productImage)
 
                 holder.itemView.mMultiGoodsView.addView(imageView)
 
                 mTotalCount += orderGoods.quantity
+                mTotalPrice += orderGoods.totalPrice
             }
         }
 
-        holder.itemView.mOrderInfoTv.text = "合计${mTotalCount}件商品，总价${YuanFenConverter.changeF2YWithUnit(model.productTotalPrice)}"
-
+        holder.itemView.mOrderInfoTv.text = "合计${mTotalCount}件商品，总价${YuanFenConverter.changeF2YWithUnit(mTotalPrice)}"
 
         when(model.status){//根据订单状态设置颜色、文案及对应操作按钮
             OrderStatus.ORDER_WAIT_PAY -> {

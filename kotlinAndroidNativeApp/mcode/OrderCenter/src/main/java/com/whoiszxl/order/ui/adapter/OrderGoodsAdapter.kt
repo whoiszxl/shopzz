@@ -1,6 +1,7 @@
 package com.whoiszxl.order.ui.adapter
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -36,11 +37,13 @@ class OrderGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<OrderGoods, 
         this.imageHost = imageHost
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
         val model = dataList[position]
 
         holder.itemView.mGoodsIconIv.loadUrl(this.imageHost + model.productImage)
+        Log.d("imageHostss",this.imageHost + model.productImage )
         holder.itemView.mGoodsDescTv.text = model.productName
         //TODO sku还有问题哦
         holder.itemView.mGoodsSkuTv.text = "精品"

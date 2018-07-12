@@ -122,6 +122,7 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
      */
     override fun onGetOrderListResult(result: OrderList) {
         if (result.list != null && result.list.size > 0){
+            mAdapter.setImageHost(result.list[0].imageHost)
             mAdapter.setData(result.list)
             mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
         }else{
