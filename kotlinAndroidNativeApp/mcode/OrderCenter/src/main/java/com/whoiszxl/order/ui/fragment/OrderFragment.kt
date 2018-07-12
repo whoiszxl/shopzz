@@ -11,7 +11,6 @@ import com.bigkoo.alertview.OnItemClickListener
 import com.kennyc.view.MultiStateView
 import com.whoiszxl.base.ext.startLoading
 import com.whoiszxl.base.ui.adapter.BaseRecyclerViewAdapter
-import com.whoiszxl.base.ui.fragment.BaseFragment
 import com.whoiszxl.base.ui.fragment.BaseMvpFragment
 import com.whoiszxl.order.R
 import com.whoiszxl.order.common.OrderConstant
@@ -21,24 +20,27 @@ import com.whoiszxl.order.injection.component.DaggerOrderComponent
 import com.whoiszxl.order.injection.module.OrderModule
 import com.whoiszxl.order.presenter.OrderListPresenter
 import com.whoiszxl.order.presenter.view.OrderListView
+import com.whoiszxl.order.ui.activity.OrderDetailActivity
 import com.whoiszxl.order.ui.adapter.OrderAdapter
 import com.whoiszxl.order.utils.OrderStatusConverter
 import com.whoiszxl.provider.common.ProviderConstant
 import com.whoiszxl.provider.router.RouterPath
 import org.jetbrains.anko.support.v4.toast
 import kotlinx.android.synthetic.main.fragment_order.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
 
     private lateinit var mAdapter:OrderAdapter
 
-    /*
-        Dagger注册
+    /**
+     * Dagger注册
      */
     override fun injectComponent() {
         DaggerOrderComponent.builder().activityComponent(mActivityComponent).orderModule(OrderModule()).build().inject(this)
         mPresenter.mView = this
     }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater?.inflate(R.layout.fragment_order,container,false)
@@ -54,16 +56,16 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
         loadData()
     }
 
-    /*
-        初始化视图
+    /**
+     * 初始化视图
      */
     private fun initView() {
         mOrderRv.layoutManager = LinearLayoutManager(activity)
         mAdapter = OrderAdapter(activity)
         mOrderRv.adapter = mAdapter
 
-        /*
-            订单对应操作
+        /**
+         * 订单对应操作
          */
         mAdapter.listener = object :OrderAdapter.OnOptClickListener {
             override fun onOptClick(optType: Int, order: Order) {
@@ -78,7 +80,6 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
                         //mPresenter.confirmOrder(order.orderNo)
                     }
                     OrderConstant.OPT_ORDER_CANCEL -> {
-                        //mPresenter.cancelOrder(order.id)
                         showCancelDialog(order)
                     }
                 }
@@ -90,11 +91,24 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
          */
         mAdapter.setOnItemClickListener(object : BaseRecyclerViewAdapter.OnItemClickListener<Order> {
             override fun onItemClick(item: Order, position: Int) {
-                //startActivity<OrderDetailActivity>(ProviderConstant.KEY_ORDER_ID to item.id)
+                startActivity<OrderDetailActivity>(ProviderConstant.KEY_ORDER_ID to item.orderNo)
             }
         })
 
 
+    }
+
+    /**
+     * 确认收货对话框
+     */
+    private fun showConfirmDialog(order:Order) {
+        AlertView("确认订单", "是否确认收货？", "取消", null, arrayOf("确定"), activity, AlertView.Style.Alert, OnItemClickListener { o, position ->
+            if (position == 0){
+                //mPresenter.confirmOrder(order.orderNo)
+            }
+        }
+
+        ).show()
     }
 
     /*

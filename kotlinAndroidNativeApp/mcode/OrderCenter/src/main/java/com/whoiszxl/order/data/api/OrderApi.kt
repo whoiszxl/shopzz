@@ -43,11 +43,10 @@ interface OrderApi {
     /**
      * 获取订单详情
      */
-    @FormUrlEncoded
-    @POST("/order/detail")
+    @GET("/order/detail")
     fun orderDetail(
             @Header("Authorization") authorization: String,
-            @Field("orderNo")orderNo:String): Observable<BaseResp<Order>>
+            @Query("orderNo")orderNo:String): Observable<BaseResp<Order>>
 
 
     /**

@@ -9,7 +9,6 @@ import com.whoiszxl.order.common.OrderStatus
 import com.whoiszxl.order.ui.adapter.OrderVpAdapter
 import com.whoiszxl.order.utils.OrderStatusConverter
 import kotlinx.android.synthetic.main.activity_order.*
-import org.jetbrains.anko.toast
 
 /**
  * 订单Activity
@@ -24,7 +23,11 @@ class OrderActivity: BaseActivity() {
         initView()
     }
 
+    /**
+     * 初始化视图
+     */
     private fun initView() {
+        //通过OrderVpAdapter设置TabLayout ViewPager滑动显示的栏和内容
         mOrderTab.tabMode = TabLayout.MODE_FIXED
         mOrderVp.adapter = OrderVpAdapter(supportFragmentManager,this)
         mOrderTab.setupWithViewPager(mOrderVp)

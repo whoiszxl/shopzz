@@ -69,8 +69,8 @@ class OrderConfirmActivity : BaseMvpActivity<OrderConfirmPresenter>(),OrderConfi
 
         mSubmitOrderBtn.onClick {
             mCurrentOrder?.let {
-                if(it.shippingVo!!.id > 0) {
-                    mPresenter.submitOrder(it.shippingVo!!.id)
+                if(it.shippingVo!!.id!! > 0) {
+                    mPresenter.submitOrder(it.shippingVo!!.id!!)
                 }else{
                     Toasty.error(this, "请选择收货人", Toast.LENGTH_SHORT).show()
                 }

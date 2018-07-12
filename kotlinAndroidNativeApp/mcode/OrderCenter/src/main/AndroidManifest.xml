@@ -11,6 +11,7 @@ android:supportsRtl="true"
     <activity android:name=".ui.activity.ShipAddressActivity"/>
     <activity android:name=".ui.activity.ShipAddressEditActivity"/>
     <activity android:name=".ui.activity.OrderActivity"/>
+    <activity android:name=".ui.activity.OrderDetailActivity"/>
 
 </application>
 

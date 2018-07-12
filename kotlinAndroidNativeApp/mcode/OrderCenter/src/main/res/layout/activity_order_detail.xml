@@ -20,19 +20,19 @@
                     android:paddingTop="@dimen/common_margin"
                     android:paddingBottom="@dimen/common_margin_small"
                     android:text="配送信息"/>
-            <com.kotlin.base.widgets.LabelTextView
+            <com.whoiszxl.base.widgets.LabelTextView
                     android:id="@+id/mShipNameTv"
                     style="@style/MatchWrap"
                     app:labelText="收货人:"/>
-            <com.kotlin.base.widgets.LabelTextView
+            <com.whoiszxl.base.widgets.LabelTextView
                     android:id="@+id/mShipMobileTv"
                     style="@style/MatchWrap"
                     app:labelText="收货电话:"/>
-            <com.kotlin.base.widgets.LabelTextView
+            <com.whoiszxl.base.widgets.LabelTextView
                     android:id="@+id/mShipAddressTv"
                     style="@style/MatchWrap"
                     app:labelText="收货地址:"/>
-            <com.kotlin.base.widgets.LabelTextView
+            <com.whoiszxl.base.widgets.LabelTextView
                     style="@style/MatchWrap"
                     app:labelText="配送方式:"
                     app:contentText="快递运输"/>
@@ -44,15 +44,15 @@
                     android:paddingTop="@dimen/common_margin"
                     android:paddingBottom="@dimen/common_margin_small"
                     android:text="支付信息"/>
-            <com.kotlin.base.widgets.LabelTextView
+            <com.whoiszxl.base.widgets.LabelTextView
                     style="@style/MatchWrap"
                     app:labelText="支付类型:"
                     app:contentText="在线支付"/>
-            <com.kotlin.base.widgets.LabelTextView
+            <com.whoiszxl.base.widgets.LabelTextView
                     style="@style/MatchWrap"
                     app:labelText="支付方式:"
                     app:contentText="支付宝支付"/>
-            <com.kotlin.base.widgets.LabelTextView
+            <com.whoiszxl.base.widgets.LabelTextView
                     android:id="@+id/mTotalPriceTv"
                     style="@style/MatchWrap"
                     app:labelText="实付费用:"/>
