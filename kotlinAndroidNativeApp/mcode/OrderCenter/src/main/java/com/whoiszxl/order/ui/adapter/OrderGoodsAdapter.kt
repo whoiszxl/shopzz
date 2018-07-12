@@ -43,7 +43,6 @@ class OrderGoodsAdapter(context: Context) : BaseRecyclerViewAdapter<OrderGoods, 
         val model = dataList[position]
 
         holder.itemView.mGoodsIconIv.loadUrl(this.imageHost + model.productImage)
-        Log.d("imageHostss",this.imageHost + model.productImage )
         holder.itemView.mGoodsDescTv.text = model.productName
         //TODO sku还有问题哦
         holder.itemView.mGoodsSkuTv.text = "精品"

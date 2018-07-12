@@ -33,9 +33,10 @@
                     style="@style/MatchWrap"
                     app:labelText="收货地址:"/>
             <com.whoiszxl.base.widgets.LabelTextView
+                android:id="@+id/mExpressMethodTv"
                     style="@style/MatchWrap"
                     app:labelText="配送方式:"
-                    app:contentText="快递运输"/>
+                    />
             <TextView
                     style="@style/MatchWrap"
                     android:textColor="@color/text_light_dark"
@@ -45,13 +46,13 @@
                     android:paddingBottom="@dimen/common_margin_small"
                     android:text="支付信息"/>
             <com.whoiszxl.base.widgets.LabelTextView
+                    android:id="@+id/mPayTypeTv"
                     style="@style/MatchWrap"
-                    app:labelText="支付类型:"
-                    app:contentText="在线支付"/>
+                    app:labelText="支付类型:"/>
             <com.whoiszxl.base.widgets.LabelTextView
+                    android:id="@+id/mPayAppTv"
                     style="@style/MatchWrap"
-                    app:labelText="支付方式:"
-                    app:contentText="支付宝支付"/>
+                    app:labelText="支付方式:"/>
             <com.whoiszxl.base.widgets.LabelTextView
                     android:id="@+id/mTotalPriceTv"
                     style="@style/MatchWrap"
