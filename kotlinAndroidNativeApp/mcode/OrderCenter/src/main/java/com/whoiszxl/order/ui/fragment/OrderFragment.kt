@@ -22,6 +22,7 @@ import com.whoiszxl.order.injection.module.OrderModule
 import com.whoiszxl.order.presenter.OrderListPresenter
 import com.whoiszxl.order.presenter.view.OrderListView
 import com.whoiszxl.order.ui.adapter.OrderAdapter
+import com.whoiszxl.order.utils.OrderStatusConverter
 import com.whoiszxl.provider.common.ProviderConstant
 import com.whoiszxl.provider.router.RouterPath
 import org.jetbrains.anko.support.v4.toast
@@ -114,7 +115,7 @@ class OrderFragment:BaseMvpFragment<OrderListPresenter>(),OrderListView {
      */
     private fun loadData() {
         mMultiStateView.startLoading()
-        mPresenter.getOrderList(arguments.getInt(OrderConstant.KEY_ORDER_STATUS,-1))
+        mPresenter.getOrderList(OrderStatusConverter.App2Api(arguments.getInt(OrderConstant.KEY_ORDER_STATUS,-1)))
     }
 
     /*

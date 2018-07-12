@@ -7,7 +7,9 @@ import com.whoiszxl.order.R
 import com.whoiszxl.order.common.OrderConstant
 import com.whoiszxl.order.common.OrderStatus
 import com.whoiszxl.order.ui.adapter.OrderVpAdapter
+import com.whoiszxl.order.utils.OrderStatusConverter
 import kotlinx.android.synthetic.main.activity_order.*
+import org.jetbrains.anko.toast
 
 /**
  * 订单Activity
@@ -27,7 +29,14 @@ class OrderActivity: BaseActivity() {
         mOrderVp.adapter = OrderVpAdapter(supportFragmentManager,this)
         mOrderTab.setupWithViewPager(mOrderVp)
 
+
+
+
+        //因為接口返回的訂單狀態和viewPager的下標對不上，所以要進行一下轉換
+        var beforePosition:Int = intent.getIntExtra(OrderConstant.KEY_ORDER_STATUS, OrderStatus.ORDER_ALL)
+        var afterPosition = OrderStatusConverter.Api2App(beforePosition)
+
         //根据订单状态设置当前页面
-        mOrderVp.currentItem = intent.getIntExtra(OrderConstant.KEY_ORDER_STATUS, OrderStatus.ORDER_ALL)
+        mOrderVp.currentItem = afterPosition
     }
 }
