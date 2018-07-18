@@ -113,6 +113,15 @@ public class AliSmsSender {
     			templateParams);
     }
     
+    public static SendSmsResponse sendNoTemplateSMS(String phoneNum) throws ClientException {
+    	HashMap<String, String> templateParams = new HashMap<>();
+    	return sendSms(
+    			phoneNum,
+    			PropertiesUtil.getProperty("alisms.verifyCode.signName"), 
+    			PropertiesUtil.getProperty("alisms.verifyCode.templateCode"), 
+    			templateParams);
+    }
+    
     /**
      * 生成随机验证码.
      *

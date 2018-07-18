@@ -69,7 +69,7 @@ public class AppTests {
 	@Test
 	public void message() throws Exception {
 		
-		SendSmsResponse sendSms = AliSmsSender.sendVerifyCode("17688900411",6);
+		SendSmsResponse sendSms = AliSmsSender.sendNoTemplateSMS("17688900411");
 		System.out.println("send sms:"+sendSms.getMessage());
 	}
 }

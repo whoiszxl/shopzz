@@ -2,7 +2,7 @@
  * @Author: whoiszxl 
  * @Date: 2018-05-11 10:32:51 
  * @Last Modified by: whoiszxl
- * @Last Modified time: 2018-05-26 10:00:13
+ * @Last Modified time: 2018-07-13 14:51:18
  */
 var webpack = require('webpack');
 var Ex = require('extract-text-webpack-plugin');
@@ -15,7 +15,7 @@ var WEBPACK_ENV         = process.env.WEBPACK_ENV || 'dev';
 var getHtmlConfig = function(name, title){
     return {
         template    : './src/view/' + name + '.html',
-        filename    : 'view/' + name + '.html',
+        filename    : name + '.html',
         title       : title,
         favicon: "./favicon.jpg",
         inject      : true,

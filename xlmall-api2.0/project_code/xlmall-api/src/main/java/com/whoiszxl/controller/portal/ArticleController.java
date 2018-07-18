@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
 import com.whoiszxl.common.Const;
 import com.whoiszxl.common.ServerResponse;
 import com.whoiszxl.entity.Keywords;
 import com.whoiszxl.service.ArticleService;
+import com.whoiszxl.utils.AliSmsSender;
 import com.whoiszxl.vo.BannerVo;
 
 import io.swagger.annotations.Api;
@@ -46,5 +49,17 @@ public class ArticleController {
 	@ApiOperation(value = "獲取主頁關鍵詞")
 	public ServerResponse<List<List<String>>> keywordsList() {
 		return articleService.getKeywordsList();
+	}
+	
+	@GetMapping("sms")
+	@ApiOperation(value = "发一个短信")
+	public ServerResponse<String> sendSMS(String phoneNum) {
+		SendSmsResponse sendSms = null;
+		try {
+			sendSms = AliSmsSender.sendNoTemplateSMS(phoneNum);
+			return ServerResponse.createBySuccessMessage("发送成功");
+		} catch (ClientException e) {
+			return ServerResponse.createBySuccessMessage("发送失败");
+		}
 	}
 }
