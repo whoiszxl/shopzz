@@ -9,6 +9,9 @@
     - [xlmall-api2.0](#xlmall-api20)
 
 <!-- /TOC -->
+
+# 0.测试demo，支付等功能未开发。
+
 # 1. AYANAMI
 基于Java SpringBoot实现的前后端分离商城(PC前端，APP及H5移动端)
 
