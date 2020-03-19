@@ -1,6 +1,6 @@
 ## 基于Java SpringCloud实现的前后端分离商城
 [![MyWebSite](https://img.shields.io/badge/我的站点-whoiszxl-blue.svg)](https://whoiszxl.github.io)
-[![docs](https://img.shields.io/badge/docs-reference-green.svg)](https://whoiszxl.github.io)
+[![docs](https://img.shields.io/badge/docs-reference-green.svg)](http://zmall.whoiszxl.com)
 [![teach](https://img.shields.io/badge/教程-BohemianRhapsody-orange.svg)](https://github.com/whoiszxl/AYANAMI)
 [![email](https://img.shields.io/badge/email-whoiszxl@gmail.com-red.svg)](https://whoiszxl.github.io)
 
@@ -12,18 +12,18 @@
 ▓░░░░░░░░░░░░░░░░░░░ 1% 开发中
 
 ### 项目文档
-文档地址: http://wmall.whoiszxl.com
+文档地址: http://zmall.whoiszxl.com
 
 ### 项目架构
 ```
-wmall
-├── wmall-core            -- 基础核心代码
-├── wmall-oauth           -- oauth2认证代码
-├── wmall-gateway         -- 网关
-├── wmall-manager         -- 管理后台代码
-├── wmall-chat            -- 聊天模块
-├── wmall-trade           -- 交易模块
-└── wmall-user            -- 用户模块
+zmall
+├── zmall-core            -- 基础核心代码
+├── zmall-oauth           -- oauth2认证代码
+├── zmall-gateway         -- 网关
+├── zmall-manager         -- 管理后台代码
+├── zmall-chat            -- 聊天模块
+├── zmall-trade           -- 交易模块
+└── zmall-user            -- 用户模块
 docs                      -- 文档目录
 ```
 
