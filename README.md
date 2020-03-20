@@ -17,13 +17,20 @@
 ### 项目架构
 ```
 zmall
-├── zmall-core            -- 基础核心代码
-├── zmall-oauth           -- oauth2认证代码
-├── zmall-gateway         -- 网关
-├── zmall-manager         -- 管理后台代码
-├── zmall-chat            -- 聊天模块
-├── zmall-trade           -- 交易模块
-└── zmall-user            -- 用户模块
+├── zmall-cms             -- 基础内容管理模块
+├── zmall-common          -- 公共代码模块
+├── zmall-gateway         -- 网关模块
+├── zmall-oauth           -- oauth登录模块
+├── zmall-order           -- 订单模块
+├── zmall-oss             -- oss文件上传模块
+├── zmall-pay             -- 订单支付模块
+├── zmall-product         -- 商品模块
+├── zmall-search          -- 搜索模块
+├── zmall-seckill         -- 秒杀模块
+├── zmall-task            -- 定时任务模块
+├── zmall-user            -- 用户模块
+└── generator             -- 代码生成工具
+
 docs                      -- 文档目录
 ```
 
