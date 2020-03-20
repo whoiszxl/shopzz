@@ -10,6 +10,7 @@
     <version>1.0.0</version>
     <modules>
         <module>zmall-common</module>
+        <module>zmall-product</module>
     </modules>
 
     <parent>
