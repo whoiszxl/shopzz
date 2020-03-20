@@ -12,6 +12,15 @@
         <module>zmall-common</module>
         <module>zmall-product</module>
         <module>zmall-oss</module>
+        <module>zmall-order</module>
+        <module>zmall-user</module>
+        <module>zmall-gateway</module>
+        <module>zmall-cms</module>
+        <module>zmall-search</module>
+        <module>zmall-seckill</module>
+        <module>zmall-pay</module>
+        <module>zmall-oauth</module>
+        <module>zmall-task</module>
     </modules>
 
     <parent>
