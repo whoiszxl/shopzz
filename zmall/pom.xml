@@ -11,6 +11,7 @@
     <modules>
         <module>zmall-common</module>
         <module>zmall-product</module>
+        <module>zmall-oss</module>
     </modules>
 
     <parent>
