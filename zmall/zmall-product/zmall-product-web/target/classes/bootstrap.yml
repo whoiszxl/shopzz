@@ -21,7 +21,7 @@ spring:
         server-addr: ${nacos.server.addr} # 配置中心地址
         file-extension: yaml
         namespace: 9117d15b-b0e2-46c5-8921-4fdfb9130dd6 # 命令行注入
-        group: ZMALL_GROUP # 聚合支付业务组
+        group: ZMALL_GROUP # ZMALL业务组
         ext-config:
         -
           refresh: true
@@ -33,20 +33,6 @@ spring:
         - refresh: true
           data-id: spring-boot-mybatis-plus.yaml # spring boot mybatisplus配置
           group: COMMON_GROUP # 通用配置组
-
-  #SpringMVC上传文件配置
-  servlet:
-    multipart:
-      #默认支持文件上传.
-      enabled: true
-      #支持文件写入磁盘.
-      file-size-threshold: 0
-      # 上传文件的临时目录
-      location:
-      # 最大支持文件大小
-      max-file-size: 1MB
-      # 最大支持请求大小
-      max-request-size: 30MB
 
 logging:
   config: classpath:log4j2.xml

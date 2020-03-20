@@ -112,9 +112,11 @@ public class BrandController {
         return Result.success(pageResult);
     }
 
-//    @GetMapping("/category/{categoryName}")
-//    public Result<List<Map>> findBrandListByCategoryName(@PathVariable("categoryName")String categoryName){
-//        List<Map> brandList = brandService.findBrandListByCategoryName(categoryName);
-//        return new Result<>(true,StatusCode.OK,"查询成功",brandList);
-//    }
+    @ApiOperation("根据分类名称查询品牌列表")
+    @ApiImplicitParam(value = "分类名称",name = "categoryName",dataType = "string",paramType = "path")
+    @GetMapping("/category/{categoryName}")
+    public Result<List<Map>> findBrandListByCategoryName(@PathVariable("categoryName")String categoryName){
+        List<Map> brandList = mallBrandService.findBrandListByCategoryName(categoryName);
+        return Result.success(brandList);
+    }
 }
