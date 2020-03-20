@@ -1,15 +1,13 @@
 package com.whoiszxl.product.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.common.entity.PageResult;
 import com.whoiszxl.common.entity.Result;
-import com.whoiszxl.product.entity.MallBrand;
-import com.whoiszxl.product.entity.MallSku;
+import com.whoiszxl.product.entity.Brand;
 import com.whoiszxl.product.entity.vo.BrandSearchVo;
-import com.whoiszxl.product.service.MallBrandService;
+import com.whoiszxl.product.service.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,7 +16,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +30,12 @@ import java.util.Map;
 public class BrandController {
 
     @Autowired
-    private MallBrandService mallBrandService;
+    private BrandService mallBrandService;
 
     @ApiOperation("查询所有的品牌")
     @GetMapping
-    public Result<List<MallBrand>> findAll() {
-        List<MallBrand> list = mallBrandService.list();
+    public Result<List<Brand>> findAll() {
+        List<Brand> list = mallBrandService.list();
         return Result.success(list);
     }
 
@@ -46,25 +43,25 @@ public class BrandController {
     @ApiImplicitParam(value = "品牌ID",name = "id",dataType = "integer",paramType = "path")
     @GetMapping("/{id}")
     public Result findById(@PathVariable Integer id){
-        MallBrand brand = mallBrandService.getById(id);
+        Brand brand = mallBrandService.getById(id);
         return Result.success(brand);
     }
 
     @ApiOperation("新增品牌数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "brand", value = "品牌对象", required = true, dataType = "MallBrand", paramType = "body")})
+            @ApiImplicitParam(name = "brand", value = "品牌对象", required = true, dataType = "Brand", paramType = "body")})
     @PostMapping
-    public Result add(@RequestBody MallBrand brand){
+    public Result add(@RequestBody Brand brand){
         boolean isSave = mallBrandService.save(brand);
         return isSave ? Result.success() : Result.fail("add fail");
     }
 
     @ApiOperation("修改品牌数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "brand", value = "品牌对象", required = true, dataType = "MallBrand", paramType = "body"),
+            @ApiImplicitParam(name = "brand", value = "品牌对象", required = true, dataType = "Brand", paramType = "body"),
             @ApiImplicitParam(name = "id", value = "品牌ID", dataType = "integer",paramType = "path")})
     @PutMapping(value="/{id}")
-    public Result update(@RequestBody MallBrand brand, @PathVariable Integer id){
+    public Result update(@RequestBody Brand brand, @PathVariable Integer id){
         brand.setId(id);
         boolean isUpdate = mallBrandService.updateById(brand);
         return isUpdate ? Result.success() : Result.fail("update fail");
@@ -106,7 +103,7 @@ public class BrandController {
             queryWrapper.like("letter", "%" + brandSearchVo.getLetter() + "%");
         }
 
-        IPage<MallBrand> iPage = new Page<>(brandSearchVo.getPage(), brandSearchVo.getSize());
+        IPage<Brand> iPage = new Page<>(brandSearchVo.getPage(), brandSearchVo.getSize());
         IPage page1 = mallBrandService.page(iPage, queryWrapper);
         PageResult pageResult=new PageResult(page1.getTotal(), page1.getRecords());
         return Result.success(pageResult);

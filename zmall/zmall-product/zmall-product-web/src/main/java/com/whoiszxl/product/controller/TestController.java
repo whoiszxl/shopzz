@@ -1,7 +1,7 @@
 package com.whoiszxl.product.controller;
 
-import com.whoiszxl.product.entity.MallSku;
-import com.whoiszxl.product.service.MallSkuService;
+import com.whoiszxl.product.entity.Sku;
+import com.whoiszxl.product.service.SkuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -24,12 +24,12 @@ public class TestController {
     private String showName;
 
     @Autowired
-    private MallSkuService mallSkuService;
+    private SkuService mallSkuService;
 
     @ApiOperation("测试查询所有sku")
     @ApiImplicitParam(name = "skuId", value = "sku ID", required = true, dataType = "string")
     @GetMapping("/test")
-    public MallSku test(@RequestParam String skuId) {
+    public Sku test(@RequestParam String skuId) {
         return mallSkuService.getById(skuId);
     }
 }

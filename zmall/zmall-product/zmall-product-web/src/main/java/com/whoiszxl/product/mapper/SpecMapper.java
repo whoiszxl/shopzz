@@ -1,7 +1,7 @@
 package com.whoiszxl.product.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.whoiszxl.product.entity.MallSpec;
+import com.whoiszxl.product.entity.Spec;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -18,7 +18,7 @@ import java.util.Map;
  * @since 2020-03-20
  */
 @Repository
-public interface SpecMapper extends BaseMapper<MallSpec> {
+public interface SpecMapper extends BaseMapper<Spec> {
 
 
     @Select("SELECT name,options FROM mall_spec WHERE template_id IN ( SELECT template_id FROM mall_category WHERE NAME=#{categoryName}) order by seq")

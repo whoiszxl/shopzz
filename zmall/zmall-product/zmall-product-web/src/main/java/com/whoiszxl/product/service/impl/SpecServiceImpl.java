@@ -2,7 +2,7 @@ package com.whoiszxl.product.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.product.mapper.SpecMapper;
-import com.whoiszxl.product.entity.MallSpec;
+import com.whoiszxl.product.entity.Spec;
 import com.whoiszxl.product.service.SpecService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 @Service
 @Transactional
-public class SpecServiceImpl extends ServiceImpl<SpecMapper, MallSpec> implements SpecService {
+public class SpecServiceImpl extends ServiceImpl<SpecMapper, Spec> implements SpecService {
 
     @Autowired
     private SpecMapper specMapper;
