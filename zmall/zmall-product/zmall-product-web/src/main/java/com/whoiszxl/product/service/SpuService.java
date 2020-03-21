@@ -1,6 +1,7 @@
 package com.whoiszxl.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.product.entity.Product;
 import com.whoiszxl.product.entity.Spu;
 
 /**
@@ -13,4 +14,9 @@ import com.whoiszxl.product.entity.Spu;
  */
 public interface SpuService extends IService<Spu> {
 
+    /**
+     * 新增商品
+     * @param product
+     */
+    void add(Product product);
 }
