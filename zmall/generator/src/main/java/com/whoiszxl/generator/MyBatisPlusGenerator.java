@@ -64,7 +64,7 @@ public class MyBatisPlusGenerator {
 
 		// 交易服务
 		dataSourceConfig
-				.setUrl("jdbc:mysql://rm-wz9p7ne0m7sqb751fao.mysql.rds.aliyuncs.com:3306/zmall");
+				.setUrl("jdbc:mysql://rm-wz9p7ne0m7sqb751fao.mysql.rds.aliyuncs.com:3306/zmall_system");
 		// dataSourceConfig.setSchemaName("public");
 		dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
 		dataSourceConfig.setUsername("zmall");
@@ -85,7 +85,6 @@ public class MyBatisPlusGenerator {
                 // to do nothing
             }
         };
-
         // 如果模板引擎是 freemarker
         String templatePath = "/templates/mapper.xml.ftl";
 
@@ -136,6 +135,7 @@ public class MyBatisPlusGenerator {
         //自动将数据库中表名为 user_info 格式的转为 UserInfo 命名
         strategyConfig.setTablePrefix(packageConfig.getModuleName() + "_");//表名映射到实体名称去掉前缀
         strategyConfig.setEntityBooleanColumnRemoveIsPrefix(true);// Boolean类型字段是否移除is前缀处理
+        strategyConfig.setTablePrefix("mall_");
         autoGenerator.setStrategy(strategyConfig);
         autoGenerator.setTemplateEngine(new FreemarkerTemplateEngine());
         System.out.println("===================== MyBatis Plus Generator ==================");
