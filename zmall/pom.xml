@@ -21,6 +21,7 @@
         <module>zmall-pay</module>
         <module>zmall-oauth</module>
         <module>zmall-task</module>
+        <module>zmall-system</module>
     </modules>
 
     <parent>
