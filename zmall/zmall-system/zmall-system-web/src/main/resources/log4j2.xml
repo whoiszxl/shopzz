@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="180" packages="">
+    <properties>
+        <property name="prjname">${project.name}</property>
+        <property name="logdir">logs</property>
+        <property name="PATTERN">[${project.name}][${env:SERVER_PORT}] %date{YYYY-MM-dd HH:mm:ss,SSS} %highlight{%level} [%thread][%file:%line] - %msg%n%throwable</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+
+        <RollingFile name="ErrorAppender" fileName="${logdir}/${prjname}_error.log"
+                     filePattern="${logdir}/$${date:yyyy-MM-dd}/${prjname}_error.%d{yyyy-MM-dd-HH}.log" append="true">
+            <PatternLayout pattern="${PATTERN}"/>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="DebugAppender" fileName="${logdir}/${prjname}_info.log"
+                     filePattern="${logdir}/$${date:yyyy-MM-dd}/${prjname}_info.%d{yyyy-MM-dd-HH}.log" append="true">
+            <PatternLayout pattern="${PATTERN}"/>
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <!--异步appender-->
+        <Async name="AsyncAppender" includeLocation="true">
+            <AppenderRef ref="ErrorAppender"/>
+            <AppenderRef ref="DebugAppender"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <!--过滤掉spring和mybatis的一些无用的debug信息-->
+        <logger name="org.springframework" level="INFO">
+        </logger>
+        <logger name="org.mybatis" level="INFO">
+        </logger>
+        <logger name="springfox" level="INFO">
+        </logger>
+        <logger name="org.apache.http" level="INFO">
+        </logger>
+        <logger name="com.alibaba.nacos" level="WARN">
+        </logger>
+
+        <!--OFF   0-->
+        <!--FATAL   100-->
+        <!--ERROR   200-->
+        <!--WARN   300-->
+        <!--INFO   400-->
+        <!--DEBUG   500-->
+        <!--TRACE   600-->
+        <!--ALL   Integer.MAX_VALUE-->
+        <Root level="INFO" includeLocation="true">
+            <AppenderRef ref="AsyncAppender"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
