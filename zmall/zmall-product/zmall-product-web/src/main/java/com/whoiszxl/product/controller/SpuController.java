@@ -1,8 +1,10 @@
 package com.whoiszxl.product.controller;
 
+import com.whoiszxl.common.config.RocketMQConfig;
 import com.whoiszxl.common.entity.Result;
 import com.whoiszxl.product.entity.Product;
 import com.whoiszxl.product.entity.Spu;
+import com.whoiszxl.product.listener.RocketMQSender;
 import com.whoiszxl.product.service.SkuService;
 import com.whoiszxl.product.service.SpuService;
 import io.swagger.annotations.Api;
@@ -29,6 +31,9 @@ public class SpuController {
 
     @Autowired
     private SkuService skuService;
+
+    @Autowired
+    private RocketMQSender rocketMQSender;
 
     @ApiOperation("查询所有的SPU")
     @GetMapping
@@ -83,6 +88,8 @@ public class SpuController {
     @PutMapping("/audit/{id}")
     public Result audit(@PathVariable String id) {
         spuService.audit(id);
+        //调用MQ更新es
+        rocketMQSender.send(id, RocketMQConfig.PRODUCT_UP);
         return Result.success();
     }
 
@@ -91,6 +98,8 @@ public class SpuController {
     @PutMapping("/pull/{id}")
     public Result pull(@PathVariable String id) {
         spuService.pull(id);
+        //调用MQ更新es
+        rocketMQSender.send(id, RocketMQConfig.PRODUCT_DOWN);
         return Result.success();
     }
 
@@ -99,6 +108,8 @@ public class SpuController {
     @PutMapping("/put/{id}")
     public Result put(@PathVariable String id) {
         spuService.put(id);
+        //调用MQ更新es
+        rocketMQSender.send(id, RocketMQConfig.PRODUCT_UP);
         return Result.success();
     }
 
