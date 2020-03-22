@@ -45,24 +45,24 @@ public class SpuController {
         return Result.success(product);
     }
 
-    @ApiOperation("新增SPU数据")
+    @ApiOperation("新增商品数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "spu", value = "SPU对象", required = true, dataType = "Spu", paramType = "body")})
+            @ApiImplicitParam(name = "product", value = "商品对象", required = true, dataType = "Product", paramType = "body")})
     @PostMapping
     public Result add(@RequestBody Product product){
         spuService.add(product);
         return Result.success();
     }
 
-    @ApiOperation("修改SPU数据")
-    @ApiImplicitParam(name = "spu", value = "SPU对象", required = true, dataType = "Spu", paramType = "body")
+    @ApiOperation("修改商品数据")
+    @ApiImplicitParam(name = "product", value = "商品对象", required = true, dataType = "Product", paramType = "body")
     @PutMapping
     public Result update(@RequestBody Product product){
         spuService.update(product);
         return null;
     }
 
-    @ApiOperation("根据ID删除SPU数据")
+    @ApiOperation("根据ID删除商品数据")
     @ApiImplicitParam(value = "id",name = "id",dataType = "string",paramType = "path")
     @DeleteMapping(value = "/{id}" )
     public Result delete(@PathVariable String id){

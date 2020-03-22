@@ -64,7 +64,7 @@ public class MyBatisPlusGenerator {
 
 		// 交易服务
 		dataSourceConfig
-				.setUrl("jdbc:mysql://rm-wz9p7ne0m7sqb751fao.mysql.rds.aliyuncs.com:3306/zmall_system");
+				.setUrl("jdbc:mysql://rm-wz9p7ne0m7sqb751fao.mysql.rds.aliyuncs.com:3306/zmall_cms");
 		// dataSourceConfig.setSchemaName("public");
 		dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
 		dataSourceConfig.setUsername("zmall");
