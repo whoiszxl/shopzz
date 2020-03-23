@@ -40,3 +40,5 @@ dist
 
 .project
 .settings
+
+.classpath

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration monitorInterval="180" packages="">
     <properties>
-        <property name="prjname">${project.name}</property>
+        <property name="prjname">zmall-oss</property>
         <property name="logdir">logs</property>
-        <property name="PATTERN">[${project.name}][${env:SERVER_PORT}] %date{YYYY-MM-dd HH:mm:ss,SSS} %highlight{%level} [%thread][%file:%line] - %msg%n%throwable</property>
+        <property name="PATTERN">[zmall-oss][${env:SERVER_PORT}] %date{YYYY-MM-dd HH:mm:ss,SSS} %highlight{%level} [%thread][%file:%line] - %msg%n%throwable</property>
     </properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
