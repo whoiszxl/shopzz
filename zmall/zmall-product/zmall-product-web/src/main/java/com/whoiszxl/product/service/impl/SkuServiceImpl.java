@@ -6,6 +6,7 @@ import com.whoiszxl.product.mapper.SkuMapper;
 import com.whoiszxl.product.entity.Sku;
 import com.whoiszxl.product.service.SkuService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,11 +28,13 @@ import java.util.Map;
 public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuService {
 
 
+    @Autowired
+    private SkuMapper skuMapper;
 
     @Override
     public List<Sku> findList(Map<String, Object> searchMap) {
         QueryWrapper queryMapper = createQueryWrapper(searchMap);
-        return null;
+        return skuMapper.selectList(queryMapper);
     }
 
     /**
@@ -64,15 +67,15 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
             }
             // SPUID
             if(searchMap.get("spuId")!=null && !"".equals(searchMap.get("spuId"))){
-                queryWrapper.eq("spuId",searchMap.get("spuId"));
+                queryWrapper.eq("spu_id",searchMap.get("spuId"));
             }
             // 类目名称
             if(searchMap.get("categoryName")!=null && !"".equals(searchMap.get("categoryName"))){
-                queryWrapper.like("categoryName","%"+searchMap.get("categoryName")+"%");
+                queryWrapper.like("category_name","%"+searchMap.get("categoryName")+"%");
             }
             // 品牌名称
             if(searchMap.get("brandName")!=null && !"".equals(searchMap.get("brandName"))){
-                queryWrapper.like("brandName","%"+searchMap.get("brandName")+"%");
+                queryWrapper.like("brand_name","%"+searchMap.get("brandName")+"%");
             }
             // 规格
             if(searchMap.get("spec")!=null && !"".equals(searchMap.get("spec"))){
@@ -93,7 +96,7 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
             }
             // 库存预警数量
             if(searchMap.get("alertNum")!=null ){
-                queryWrapper.eq("alertNum",searchMap.get("alertNum"));
+                queryWrapper.eq("alert_num",searchMap.get("alertNum"));
             }
             // 重量（克）
             if(searchMap.get("weight")!=null ){
@@ -101,15 +104,15 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
             }
             // 类目ID
             if(searchMap.get("categoryId")!=null ){
-                queryWrapper.eq("categoryId",searchMap.get("categoryId"));
+                queryWrapper.eq("category_id",searchMap.get("categoryId"));
             }
             // 销量
             if(searchMap.get("saleNum")!=null ){
-                queryWrapper.eq("saleNum",searchMap.get("saleNum"));
+                queryWrapper.eq("sale_num",searchMap.get("saleNum"));
             }
             // 评论数
             if(searchMap.get("commentNum")!=null ){
-                queryWrapper.eq("commentNum",searchMap.get("commentNum"));
+                queryWrapper.eq("comment_num",searchMap.get("commentNum"));
             }
         }
 

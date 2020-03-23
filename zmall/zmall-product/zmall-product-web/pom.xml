@@ -67,13 +67,6 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>com.aliyun.mq</groupId>
-            <artifactId>mq-http-sdk</artifactId>
-            <version>1.0.1</version>
-            <classifier>jar-with-dependencies</classifier>
-        </dependency>
-
         <!-- 健康检查，运维相关 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -149,6 +142,13 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${org.mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aliyun.mq</groupId>
+            <artifactId>mq-http-sdk</artifactId>
+            <version>1.0.1</version>
+            <classifier>jar-with-dependencies</classifier>
         </dependency>
 
     </dependencies>

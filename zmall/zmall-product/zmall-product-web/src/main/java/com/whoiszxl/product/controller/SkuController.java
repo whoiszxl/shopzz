@@ -72,7 +72,7 @@ public class SkuController {
     }
 
 
-    @GetMapping("/spu/{spuId}")
+    @PostMapping("/spu/{spuId}")
     public List<Sku> findSkuListBySpuId(@PathVariable("spuId") String spuId){
         Map<String,Object> searchMap = new HashMap<>();
 
