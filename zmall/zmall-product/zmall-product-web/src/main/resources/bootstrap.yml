@@ -39,3 +39,19 @@ spring:
 
 logging:
   config: classpath:log4j2.xml
+
+
+
+kafka:
+    bootstrap-servers: 193.112.137.231:9092 #(kafka生产集群ip+port端口)
+    producer:
+      buffer-memory: 40960
+      retries: 0
+      batch-size: 4096
+      properties:
+        linger.ms: 1
+    consumer:
+      enable-auto-commit: true #(是否自动提交)
+      auto-commit-interval: 100ms
+      auto-offset-reset: latest #(实时生产，实时消费，不会从头开始消费)
+      group-id: test #(消费组)

@@ -1,4 +1,4 @@
-package com.whoiszxl.search.feign;
+package com.whoiszxl.product.feign;
 
 import com.whoiszxl.product.entity.Sku;
 import org.springframework.cloud.openfeign.FeignClient;

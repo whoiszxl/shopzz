@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @MapperScan("com.whoiszxl.search.mapper")
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {"com.whoiszxl.search.feign"})
+@EnableFeignClients(basePackages = {"com.whoiszxl.product.feign"})
 public class SearchApplication {
 
 

@@ -32,13 +32,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.whoiszxl</groupId>
-            <artifactId>zmall-product-api</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-
 
     </dependencies>
 </project>
