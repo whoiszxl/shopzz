@@ -26,13 +26,13 @@ public class SwaggerConfiguration {
     @Bean
     public Docket buildDocket() {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(buildApiInfo()).select() // 要扫描的API(Controller)基础包
-                .apis(RequestHandlerSelectors.basePackage("com.whoiszxl.cms.controller")).paths(PathSelectors.any()).build();
+                .apis(RequestHandlerSelectors.basePackage("com.whoiszxl.search.controller")).paths(PathSelectors.any()).build();
     }
 
 
     private ApiInfo buildApiInfo() {
         Contact contact = new Contact("whoiszxl", "", "whoiszxl@gmail.com");
-        return new ApiInfoBuilder().title("ZMALL - 电商CMS模块文档").description("zmall cms module desc").contact(contact).version("1.0.0").build();
+        return new ApiInfoBuilder().title("ZMALL - 电商搜索模块文档").description("zmall search module desc").contact(contact).version("1.0.0").build();
     }
 
 
