@@ -1,0 +1,98 @@
+.logoArea {
+  height: 78px;
+}
+a {
+  color: #666;
+}
+.btn-danger:active,
+.btn-danger.active,
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #ff4301;
+  border: 1px solid #ff4301;
+}
+.logo {
+  background: url(../img/icons.png) no-repeat;
+  width: 182px;
+  height: 78px;
+  position: absolute;
+  background-position: -367px 4px;
+}
+.registerArea {
+  margin: 15px 0;
+  border: 1px solid #dfdfdf;
+  font-family: "微软雅黑";
+}
+.registerArea h3 {
+  background: #ececec;
+  margin: 0;
+  padding: 6px 15px;
+  color: #333;
+  border-bottom: 1px solid #dfdfdf;
+}
+h3 .go {
+  font-size: 14px;
+  float: right;
+}
+h3 .go a{
+    color:#ff4301;
+}
+.btn-reg {
+  width: 270px;
+}
+.info {
+  width: 600px;
+  margin: 40px auto;
+}
+.control-label {
+  font-size: 14px;
+}
+.sui-form input[type="text"].input-xfat.input-xlarge,
+.sui-form input[type="password"].input-xfat.input-xlarge {
+  width: 250px;
+  border-radius: 0;
+  border: 1px solid #999;
+  height: 24px;
+}
+.sui-form .control-group label {
+  *display: inline;
+  *zoom: 1;
+  *float: left;
+}
+#submit {
+  padding: 5px 80px;
+  font-family: "微软雅黑";
+  background-color: #ff4301;
+}
+.reg {
+  width: 221px;
+}
+.zhuce {
+  *width: 221px;
+  float: right;
+}
+.btn-reg .btn-danger {
+  background-color: #ff713f;
+  border: 1px solid #ff713f;
+  padding: 6px;
+  border-radius: 0;
+  font-size: 16px;
+  font-family: 微软雅黑;
+  word-spacing: 4px;
+}
+.copyright {
+  text-align: center;
+  line-height: 24px;
+}
+.copyright ul li {
+  list-style-type: none;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  border-right: 1px solid #e4e4e4;
+  padding: 0 20px;
+  margin: 15px 0;
+}
+.copyright ul li:last-child {
+  border-right: 0;
+}

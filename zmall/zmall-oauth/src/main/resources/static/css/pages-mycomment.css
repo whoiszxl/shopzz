@@ -1,0 +1,433 @@
+.mycomment {
+    background-color: #f5f5f5
+}
+
+.mycomment p {
+    margin: 0;
+    line-height: 26px
+}
+
+.mycomment .gray {
+    color: #999
+}
+
+.mycomment .head {
+    padding: 10px 0;
+    text-align: center
+}
+
+.mycomment .head .tit {
+    font-size: 16px;
+    font-weight: 700
+}
+
+.mycomment .service {
+    border-top: 1px solid #e4e4e4;
+    background-color: #fff
+}
+
+.mycomment .service .left {
+    width: 322px;
+    float: left;
+    text-align: center;
+    border-right: 1px solid #f5f5f5
+}
+
+.mycomment .service .left .inner {
+    width: 260px;
+    margin: 0 auto;
+    padding: 10px 0
+}
+
+/* add */
+.mycomment .service .left .remark {
+    list-style-type: none;
+}
+.mycomment .service .left .remark li {
+    float: left;
+    margin-right: 10px;
+}
+.mycomment .service .left .remark li span {
+    display: block;
+}
+
+
+
+
+
+
+.mycomment .service .left img {
+    float: left;
+    vertical-align: middle;
+    width: 70px;
+    height: 70px
+}
+
+.mycomment .service .left .text {
+    text-align: left;
+    float: left;
+    margin-top: 7px;
+    margin-left: 10px
+}
+
+.mycomment .service .left p {
+    line-height: 28px
+}
+
+.mycomment .service .left .title {
+    font-size: 14px;
+    font-weight: 700
+}
+
+.mycomment .service .stars {
+    float: left;
+    height: 90px;
+    line-height: 90px;
+    padding-left: 20px
+}
+
+.mycomment .service .stars ul {
+    list-style: none
+}
+
+.mycomment .service .stars ul li {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 20px;
+}
+.mycomment .service .stars ul li i {
+    color: #c81623
+}
+.mycomment .goods {
+    margin-top: 12px;
+    background-color: #fff
+}
+
+.mycomment .goods a {
+    color: #555;
+    font-size: 13px
+}
+
+.mycomment .goods .good-item .left {
+    float: left;
+    width: 322px;
+    border-right: 1px solid #f5f5f5;
+    position: relative;
+    text-align: center
+}
+
+.mycomment .good-item .img-intro {
+    vertical-align: middle;
+    padding: 25px 10px
+}
+
+.mycomment .goods .good-item .right {
+    float: left;
+    padding: 10px;
+    width: 70%;
+}
+
+.mycomment .goods .good-item .right .warn {
+    color: #fc982c
+}
+
+.summary-wrap {
+    overflow: hidden;
+    line-height: 28px;
+    margin-left: 20px
+}
+
+.summary-wrap dl {
+    overflow: hidden
+}
+
+.summary-wrap dl .input {
+    width: 87%;
+    display: inline-block
+}
+
+.summary-wrap dl .input textarea {
+    width: 95%;
+    min-height: 100px;
+    padding: 8px
+}
+.summary-wrap dl .sui-icon {
+    color: #c81623
+}
+.summary-wrap dt,
+.summary-wrap dd {
+    margin: 0;
+    overflow: hidden;
+    display: inline-block
+}
+
+.summary-wrap dt {
+    margin-right: 25px;
+    float: left;
+}
+
+.summary-wrap dd a {
+    color: #666;
+    line-height: 24px;
+    padding: 2px 14px;
+    margin-right: 5px;
+    display: block;
+    float: left;
+    position: relative;
+    outline: 0;
+    border-top: 1px solid #eee;
+    border-right: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    border-left: 1px solid #eee;
+    background-color: #fff;
+    text-decoration: none
+}
+
+.summary-wrap .selected {
+    border: 1px solid #c81623
+}
+
+.summary-wrap a span {
+    width: 13px;
+    height: 13px;
+    display: none;
+    position: absolute;
+    right: 0;
+    _right: -1px;
+    bottom: 0;
+    _bottom: -1px;
+    overflow: hidden;
+    background: url(./img/choosed.png) no-repeat
+}
+
+.summary-wrap .selected span {
+    display: block
+}
+
+.submit {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    background: #fff
+}
+
+.submit .btn-submit {
+    width: 220px;
+    height: 48px;
+    line-height: 48px;
+    margin-right: 10px;
+    padding: 0;
+    font-family: "Microsoft YaHei";
+    font-size: 18px
+}
+
+.stars {
+    display: inline-block
+}
+
+.clearfix::after {
+    display: block;
+    content: '';
+    height: 0;
+    overflow: hidden;
+    clear: both
+}
+
+.block {
+    width: 100%;
+    margin: 0 0 20px;
+    padding-top: 10px;
+    padding-left: 50px;
+    line-height: 21px
+}
+
+.block .star_score {
+    float: left
+}
+
+.star_list {
+    height: 21px;
+    margin: 50px;
+    line-height: 21px
+}
+
+.block p,
+.block .attitude {
+    padding-left: 20px;
+    line-height: 21px;
+    display: inline-block
+}
+
+.block p span {
+    color: #C00;
+    font-size: 16px;
+    font-family: Georgia, "Times New Roman", Times, serif
+}
+
+.star_score {
+    background: url(../../assets/img/mycomment/stark2.png);
+    width: 160px;
+    height: 21px;
+    position: relative
+}
+
+.star_score a {
+    height: 21px;
+    display: block;
+    text-indent: -999em;
+    position: absolute;
+    left: 0
+}
+
+.star_score a:hover {
+    background: url(../../assets/img/mycomment/stars2.png);
+    left: 0
+}
+
+.star_score a.clibg {
+    background: url(../../assets/img/mycomment/stars2.png);
+    left: 0
+}
+
+#starttwo .star_score {
+    background: url(../../assets/img/mycomment/starky.png)
+}
+
+#starttwo .star_score a:hover {
+    background: url(../../assets/img/mycomment/starsy.png);
+    left: 0
+}
+
+#starttwo .star_score a.clibg {
+    background: url(../../assets/img/mycomment/starsy.png);
+    left: 0
+}
+
+.show_number {
+    padding-left: 50px;
+    padding-top: 20px
+}
+
+.show_number li {
+    width: 240px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 5px;
+    margin-bottom: 20px
+}
+
+.atar_Show {
+    background: url(../../assets/img/mycomment/stark2.png);
+    width: 160px;
+    height: 21px;
+    position: relative;
+    float: left
+}
+
+.atar_Show p {
+    background: url(../../assets/img/mycomment/stars2.png);
+    left: 0;
+    height: 21px;
+    width: 134px
+}
+
+.show_number li span {
+    display: inline-block;
+    line-height: 21px
+}
+.
+/* add */
+.bottom-tool {
+
+}
+.bottom-tool .wordnumber {
+    float: right;
+    margin-right: 6%;
+}
+.image-upload {
+    margin-left: 70px;
+    margin-top: -20px;
+}
+.upimg {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid #bdb7b7;
+    background: url(../img/addimg.svg) no-repeat;
+    background-position: 33px;
+}
+
+.upimg input {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+#showui {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#showui li {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-right: 5px;
+}
+#showimg {
+    float: left;
+}
+.upimg {
+    float: left;
+    cursor: pointer;
+}
+#showui li img.showimg {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+}
+
+.showdiv {
+    position: absolute;
+    z-index: 9;
+    bottom: 0;
+    width: calc(100% - 20px);
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, .6);
+}
+
+.showdiv img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#showui li:first-child img.left {
+    opacity: .6;
+    cursor: no-drop;
+}
+
+#showui li:last-child img.right {
+    opacity: .6;
+    cursor: no-drop;
+}
+
+.oneright {
+    opacity: .6;
+    cursor: no-drop !important;
+}
+/* comment star */
+.icon-tb-favor,
+.icon-tb-favorfill {
+    cursor: pointer;
+}

@@ -1,0 +1,62 @@
+.NavList {
+  display: none;
+}
+.hotwords {
+  margin-top: -17px !important;
+}
+a {
+  color: #666;
+}
+.banner {
+  width: 100%;
+  height: 300px;
+  background: url(../img/_/cooperation_banner.jpg) no-repeat center center;
+}
+.cooperation {
+  position: relative;
+  margin-top: -190px;
+  margin-bottom: 60px;
+}
+.cooperation .title {
+  text-align: center;
+  color: #fff;
+}
+.cooperation .title h1 {
+  font-size: 40px;
+}
+.cooperation .co-list {
+  position: relative;
+  margin-top: 45px;
+}
+.cooperation .co-list .list-title {
+  position: absolute;
+  left: 42%;
+  top: 55px;
+  font-size: 40px;
+  color: #fff;
+}
+.co-list .list-title .btn-shop {
+  font-size: 16px;
+  border-color: #fff;
+  color: #fff;
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 6px 36px;
+  border-radius: 29px;
+  margin-left: 19px;
+}
+.cooperation .co-list .list-title h1 {
+  font-size: 34px;
+}
+.cooperation .co-list .list {
+  margin: 10px 0;
+  overflow: hidden;
+  font-size: 15px;
+}
+.cooperation .co-list .list ul li {
+  list-style: none;
+  float: left;
+  border-right: 2px solid #aeaeae;
+  padding-right: 10px;
+  padding-left: 10px;
+}

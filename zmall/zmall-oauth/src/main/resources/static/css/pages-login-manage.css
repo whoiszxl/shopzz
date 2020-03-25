@@ -1,0 +1,169 @@
+.loginmanage {
+  height: 500px;
+  width: 1920px;
+  background: url(../img/seckill/manage-bg.png);
+  vertical-align: middle;
+  display: table-cell;
+}
+.loginmanage .manage-title {
+  width: 420px;
+  margin: 0 auto;
+  font-size: 30px;
+  color: #fff;
+  letter-spacing: 5px;
+  text-shadow: 2px 2px 0 #646464;
+}
+.loginform {
+  width: 380px;
+  background: #fff;
+  margin: 45px auto 0;
+  position: relative;
+  padding: 20px;
+}
+img {
+  display: block;
+  margin: 0 auto;
+}
+.sui-form {
+  margin-top: 15px;
+}
+span.loginname {
+  background-image: url(../img/icons.png);
+  background-position: -10px -201px;
+}
+.sui-form .input-prepend {
+  margin-bottom: 16px;
+}
+.sui-nav.nav-tabs.tab-wraped > li {
+  width: 50%;
+}
+.sui-nav.nav-tabs.tab-wraped > li.active > a {
+  padding-top: 0;
+  border-top: 1px solid #28a3ef;
+}
+.sui-nav.nav-tabs.tab-wraped > li > a {
+  padding: 0;
+}
+.sui-nav.nav-tabs.tab-wraped > li.active h3 {
+  color: #ff713f;
+}
+.sui-form .input-prepend .add-on {
+  padding: 6px 5px;
+  background-color: #cfcdcd;
+  width: 25px;
+  height: 23px;
+  *float: left;
+}
+.sui-form input[type="text"],
+.sui-form input[type="password"] {
+  height: 23px;
+}
+.sui-form input.span2 {
+  width: 284px;
+  *float: left;
+}
+.loginpwd {
+  background-image: url(../img/icons.png);
+  background-position: -72px -201px;
+  display: block;
+  width: 25px;
+  height: 23px;
+}
+.setting {
+  position: relative;
+  margin: 0 0 15px;
+}
+.setting .forget {
+  position: absolute;
+  right: 0;
+}
+.btn-danger {
+  background-color: #ff713f;
+  border-color: #ff713f;
+  padding: 6px;
+  border-radius: 0;
+  font-size: 16px;
+  font-family: 微软雅黑;
+  word-spacing: 4px;
+}
+.otherlogin {
+  position: relative;
+  margin-top: 30px;
+}
+.otherlogin .register {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 15px;
+}
+.types ul li {
+  list-style-type: none;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  width: 40px;
+  height: 55px;
+}
+#slider {
+  width: 300px;
+  height: 40px;
+  position: relative;
+  border-radius: 2px;
+  background-color: #dae2d0;
+  overflow: hidden;
+  text-align: center;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+#slider_bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #ff713f;
+  z-index: 1;
+}
+#label {
+  width: 46px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 38px;
+  line-height: 38px;
+  border: 1px solid #ccc;
+  background: #fff;
+  z-index: 3;
+  cursor: move;
+  color: #ff9e77;
+  font-size: 16px;
+  font-weight: 900;
+}
+#labelTip {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  font-family: "Microsoft Yahei", serif;
+  color: #787878;
+  line-height: 38px;
+  text-align: center;
+  z-index: 2;
+}
+.copyright {
+  margin-top: 10px;
+  text-align: center;
+}
+.copyright ul li {
+  list-style-type: none;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  border-right: 1px solid #e4e4e4;
+  padding: 0 20px;
+  margin: 15px 0;
+}
+.copyright ul li:last-child {
+  border-right: 0;
+}

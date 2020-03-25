@@ -1,0 +1,91 @@
+{
+  "brand" : [
+    {"id":"1101","name":"联想","img":"http://img30.360buyimg.com/popshop/jfs/t2245/352/2799358636/7121/a295eeba/5719dd01Nc6e67028.jpg"},
+    {"id":"1102","name":"戴尔","img":"http://img30.360buyimg.com/popshop/jfs/t2821/310/38900209/6075/4c69eda3/56fc9d73N9b713ada.png"},
+    {"id":"1103","name":"小米","img":"http://img30.360buyimg.com/popshop/jfs/t2365/311/2902780631/4872/72b8e3d8/56fe1ec7N0c3302e2.jpg"},
+    {"id":"1104","name":"ThinkPad","img":"http://img30.360buyimg.com/popshop/jfs/t1942/324/2199852492/5097/ec93bd23/56ca5bc8N20a06bc4.png"},
+    {"id":"1105","name":"华硕","img":"http://img30.360buyimg.com/popshop/jfs/t3253/35/3166587018/6222/30160834/57ecd5a6N4f0e49bf.png"},
+    {"id":"1106","name":"苹果","img":"http://img30.360buyimg.com/popshop/jfs/t2989/240/151377693/3895/30ad9044/574d36dbN262ef26d.jpg"},
+    {"id":"1107","name":"ACER","img":"http://img30.360buyimg.com/popshop/jfs/t2092/46/2121751562/4086/c57f3b5/56ab1f83N5bcc41b7.jpg"},
+    {"id":"1108","name":"SAMSUNG","img":"http://img30.360buyimg.com/popshop/jfs/t2701/34/484677369/7439/ee13e8fa/5716e2c4Nc925baf3.jpg"}
+  ],
+  "category" : [
+    {
+      "name":"电脑整机",
+      "items":[
+        {"id":"601","name":"笔记本"},
+        {"id":"602","name":"游戏本"},
+        {"id":"603","name":"平板电脑"},
+        {"id":"604","name":"服务器"},
+        {"id":"605","name":"工作站"},
+        {"id":"606","name":"一体机台式机"}
+      ]
+    },
+    {
+      "name":"屏幕尺寸",
+      "items":[
+        {"id":"701","name":"11.6英寸"},
+        {"id":"702","name":"12.5英寸"},
+        {"id":"703","name":"13.3英寸"},
+        {"id":"704","name":"14.0英寸"},
+        {"id":"705","name":"15.6英寸"},
+        {"id":"706","name":"17.3英寸"}
+      ]
+    },
+    {
+      "name":"处理器",
+      "items":[
+        {"id":"801","name":"Intel i3"},
+        {"id":"802","name":"Intel i5低功耗版"},
+        {"id":"803","name":"Intel i5标准电压版"},
+        {"id":"804","name":"Intel i7标准电压版"},
+        {"id":"805","name":"Intel i7低功耗版"},
+        {"id":"806","name":"AMD系列"}
+      ]
+    }
+  ],
+  "advop" : [
+    {
+      "name":"内存容量",
+      "items":[
+        {"id":"2201","name":"2G"},
+        {"id":"2202","name":"4G"},
+        {"id":"2203","name":"8G"},
+        {"id":"2204","name":"16G"},
+        {"id":"2205","name":"32G"}
+      ]
+    },
+    {
+      "name":"硬盘容量",
+      "items":[
+        {"id":"2301","name":"500G"},
+        {"id":"2302","name":"1T"},
+        {"id":"2303","name":"128G固态"},
+        {"id":"2304","name":"256G固态"},
+        {"id":"2305","name":"256G固态+1T"},
+        {"id":"2306","name":"其它"}
+      ]
+    },
+    {
+      "name":"分辨率",
+      "items":[
+        {"id":"2401","name":"超高清屏(2K/3k/4K)"},
+        {"id":"2402","name":"标准屏(1366×768)"},
+        {"id":"2403","name":"高分屏(1600×900)"},
+        {"id":"2404","name":"全高清屏(1920×1080)"},
+        {"id":"2405","name":"其他"}
+      ]
+    },
+    {
+      "name":"系统",
+      "items":[
+        {"id":"2501","name":"Windows 10"},
+        {"id":"2502","name":"Windows 7"},
+        {"id":"2503","name":"Windows 8"},
+        {"id":"2504","name":"DOS/Linux"},
+        {"id":"2505","name":"MAC"},
+        {"id":"2506","name":"其他"}
+      ]
+    }
+  ]
+}

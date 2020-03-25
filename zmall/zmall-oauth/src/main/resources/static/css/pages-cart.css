@@ -1,0 +1,249 @@
+.top {
+  background-color: #f1f1f1;
+}
+a {
+  color: #666;
+  text-decoration: none;
+}
+.sumbtn a:hover {
+  color: #fff;
+}
+.logoArea {
+  overflow: hidden;
+  position: relative;
+}
+.logo {
+  background: url(../img/icons.png) no-repeat;
+  background-position: -370px 3px;
+  width: 177px;
+  height: 75px;
+}
+.logo .title {
+  font: 19px "微软雅黑";
+  position: absolute;
+  top: 24px;
+  left: 190px;
+}
+.search {
+  position: absolute;
+  right: 0;
+  top: 22px;
+  font-size: 16px;
+}
+.search .btn-danger {
+  font-size: 16px;
+}
+.cart-th {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+.cart-shop {
+  border-bottom: 2px solid #ddd;
+  padding: 10px 9px 5px;
+}
+.cart-tool {
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+.cart-shop .self {
+  color: #fff;
+  background: #ff4301;
+  padding: 2px;
+}
+.cart-body,
+.deled {
+  margin: 15px 0;
+}
+.cart-body {
+  border: 1px solid #ddd;
+}
+.cart-list ul {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.cart-list ul li {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+.price,
+.sum,
+.shopname,
+.itxt {
+  font-family: "微软雅黑";
+}
+.shopname {
+  font-size: 14px;
+}
+.self {
+  font-size: 12px;
+}
+.price,
+.sum {
+  font-size: 16px;
+}
+.good-item {
+  width: 260px;
+}
+.item-img {
+  float: left;
+  width: 100px;
+  height: 90px;
+}
+.item-txt {
+  width: 200px;
+}
+.goods-list input {
+  border: 1px solid #ddd;
+}
+a.increment {
+  text-decoration: none;
+  width: 6px;
+  text-align: center;
+  padding: 8px;
+  -moz-padding-top: 10px;
+  -moz-padding-bottom: 13px;
+  -webkit-padding-top: 10px;
+  -webkit-padding-bottom: 13px;
+}
+.mins {
+  border: 1px solid #ddd;
+  border-right: 0;
+  float: left;
+}
+.plus {
+  border: 1px solid #ddd;
+  border-left: 0;
+  float: left;
+}
+.itxt {
+  width: 40px;
+  height: 32px;
+  float: left;
+  text-align: center;
+  font-size: 14px;
+  zoom: 1;
+}
+.select-all,
+.option {
+  padding: 10px;
+  overflow: hidden;
+  float: left;
+}
+.option a {
+  float: left;
+  padding: 0 10px;
+}
+.money-box {
+  float: right;
+}
+.chosed,
+.sumprice {
+  float: left;
+  padding: 0 10px;
+}
+.chosed {
+  line-height: 26px;
+}
+.sumprice {
+  width: 200px;
+  line-height: 22px;
+}
+.sumprice em {
+  text-align: right;
+}
+.sumbtn {
+  float: right;
+}
+.summoney {
+  color: #c81623;
+  font: 16px "微软雅黑";
+}
+a.sum-btn {
+  display: block;
+  position: relative;
+  width: 96px;
+  height: 52px;
+  line-height: 52px;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  font-family: "Microsoft YaHei";
+  background: #ff4301;
+  overflow: hidden;
+}
+.del {
+  background: #fffdee;
+}
+.del .goods-list {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 15px;
+}
+.sui-nav.nav-tabs {
+  background: #f1f1f1;
+  padding-left: 0;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+.sui-nav.nav-tabs > li > a {
+  border: 0;
+  padding: 10px 20px;
+  font-family: "微软雅黑";
+}
+.sui-nav.nav-tabs > .active > a {
+  background-color: #ff4301;
+  color: #fff;
+  border-radius: 0;
+  border: 0;
+}
+.item ul {
+  width: 1000px;
+  margin: 0 auto;
+}
+.item ul li {
+  list-style-type: none;
+  display: inline-block;
+  margin-right: -7px;
+  border: 1px dashed #ddd;
+  padding: 20px;
+  *display: inline;
+  *zoom: 1;
+  position: relative;
+  zoom: 1;
+}
+.carousel-control {
+  border-radius: 0;
+  width: 22px;
+  border: 0;
+  background: #ddd;
+}
+.intro,
+.money,
+.incar {
+  line-height: 20px;
+}
+.money,
+.incar {
+  text-align: center;
+}
+.money {
+  font: 14px "微软雅黑";
+  color: #c81623;
+}
+.incar {
+  margin: 10px 0;
+}
+.car {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background: url(../img/icons.png) no-repeat;
+  background-position: -422px -135px;
+}
+.cartxt {
+  padding-left: 23px;
+}

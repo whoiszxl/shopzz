@@ -1,0 +1,51 @@
+a {
+  color: #666;
+}
+.top {
+  background-color: #f1f1f1;
+}
+.logoArea {
+  overflow: hidden;
+  position: relative;
+}
+.logo {
+  background: url(../img/icons.png) no-repeat;
+  background-position: -370px 0;
+  width: 177px;
+  height: 75px;
+}
+.logo .title {
+  font: 19px "微软雅黑";
+  position: absolute;
+  top: 24px;
+  left: 190px;
+}
+.payfail {
+  padding: 25px;
+  margin: 20px 0;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  font-family: "微软雅黑";
+}
+.payfail .btn-danger {
+  border: 1px solid #ea4a36;
+}
+.payfail .fail {
+  width: 500px;
+  margin: 0 auto;
+}
+.fail h3 {
+  font-weight: 700;
+}
+.fail .fail-text {
+  float: left;
+  margin-left: 66px;
+  line-height: 26px;
+  font-size: 15px;
+}
+.fail .fail-text a{
+    color:#fff
+}
+.fail-text .button {
+  margin: 16px 0;
+}

@@ -1,0 +1,130 @@
+a {
+  color: #666;
+}
+.col666{
+  color: #999;
+}
+.fontSize{
+  font-size: 18px;
+  color: #ff3041;
+}
+.top {
+  background-color: #f1f1f1;
+}
+.logoArea {
+  overflow: hidden;
+  position: relative;
+}
+.logo {
+  background: url(../img/icons.png) no-repeat;
+  background-position: -370px 3px;
+  width: 177px;
+  height: 75px;
+}
+.logo .title {
+  font: 19px "微软雅黑";
+  position: absolute;
+  top: 24px;
+  left: 190px;
+}
+.paysuccess {
+  padding: 25px;
+  margin: 20px 0;
+  border: 1px solid #ddd;
+  font-family: "微软雅黑";
+}
+.paysuccess .success {
+  width: 500px;
+  margin: 0 auto;
+}
+.success h3 {
+  margin: 20px 0;
+  font-weight: 700;
+  font-size: 20px;
+}
+.success .paydetail {
+  margin-left: 66px;
+  font-size: 15px;
+}
+.paydetail p {
+  line-height: 26px;
+}
+p.button {
+  margin: 30px 0;
+}
+.paydetail .sui-btn.btn-xlarge {
+  font-size: 18px;
+  background-color: #ff4301;
+  border: 1px solid #ff4301;
+}
+.paydetail .sui-btn.btn-goshop {
+  background-color: #eee;
+  border: 1px solid #e1e1e1;
+}
+.submit{
+  text-align: center;
+}
+.submit .btn-submit {
+  width: 220px;
+  height: 48px;
+  line-height: 48px;
+  margin-right: 10px;
+  padding: 0;
+  font-family: "Microsoft YaHei";
+  font-size: 18px;
+}
+.recharge{
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.rechargeCon{
+  width: 500px;
+  margin: 0 auto;
+}
+.rechargeCon h3{
+  padding: 0 0 15px;
+}
+.rechargeCon p label{
+  display: inline-block;
+  width: 100px;
+  text-align:right;
+  float: left;
+}
+.rechargeCon p{
+  padding: 5px 0;
+  font-size: 14px;
+}
+.rechargeCon .textR{
+  display: block;
+  margin-left: 110px;
+}
+.rechargeCon .textR .Info{
+  border:1px solid #ccc;
+  display: inline-block;
+  width: 60px;
+  line-height: 24px;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.rechargeCon .textR .Info.on{
+  border: 1px solid #ff4301;
+  position: relative;
+}
+.rechargeCon .textR .Info.on em{
+  background:url(../img/choosed.png) no-repeat;
+  width: 14px;
+  height: 15px;
+  position: absolute;
+  bottom:0px;
+  right: 0px;
+}
+.inputInfo{
+  
+  height: 24px;
+  line-height: 24px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
+

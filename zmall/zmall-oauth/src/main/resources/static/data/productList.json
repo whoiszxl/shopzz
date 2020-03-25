@@ -1,0 +1,102 @@
+{
+  "page" : 1,
+  "allPages" : 225,
+  "items" :[
+    {
+      "pid" : "1001",
+      "title" : "联想ZUK Z1221 移动联通电信 全网通4G智能手机 64GB 灰色",
+      "img" : "https://img10.360buyimg.com/n7/jfs/t3139/321/2862305788/45655/9c0b2635/57e784edN212e45c3.jpg",
+      "price" : 1399,
+      "comments" : 20,
+      "promotion" : "券99-6本商品可领用优惠券"
+    },
+    {
+      "pid" : "1001",
+      "title" : "小米(MI) 小米5 全网通4G 双卡双待手机 黑色 全网通(3G RAM+32G ROM)标准版",
+      "img" : "https://img12.360buyimg.com/n7/jfs/t3778/23/248159574/113545/b18d9302/5805c281N105b26ef.jpg",
+      "price" : 1668,
+      "comments" : 30,
+      "promotion" : "购买本商品送赠品"
+    },
+    {
+      "pid" : "1001",
+      "title" : "魅族(MEIZU) 魅蓝E 智能手机 4G双卡双待 星空灰 全网通(3G+32G)标配",
+      "img" : "https://img13.360buyimg.com/n7/jfs/t3745/264/95881333/50578/ef2f8299/5800ada7N2a02e9b8.jpg",
+      "price" : 1168,
+      "comments" : 11,
+      "promotion" : ""
+    },
+    {
+      "pid" : "1001",
+      "title" : "小米 Mi 小米5S Plus 手机 金色 全网通高配版(6G RAM+128G ROM)标配",
+      "img" : "https://img13.360buyimg.com/n7/jfs/t3052/262/3765174058/199143/2b735e53/57f8a7d8Nc9457c17.jpg",
+      "price" : 2888,
+      "comments" : 20,
+      "promotion" : "购买本商品送赠品"
+    },
+    {
+      "pid" : "1001",
+      "title" : "小米 Mi 小米5S 手机 金色 全网通4G(3G RAM+64G ROM)标配 无孔式指纹识别",
+      "img" : "https://img11.360buyimg.com/n7/jfs/t3226/59/3735280855/185854/84024698/57f7735eN6c91f04e.jpg",
+      "price" : 2138,
+      "comments" : 22,
+      "promotion" : ""
+    },
+    {
+      "pid" : "1001",
+      "title" : "小米 小米5S Plus 手机 金色 全网通4G(6G RAM+128G ROM)标配",
+      "img" : "https://img14.360buyimg.com/n7/jfs/t3184/314/3130913372/140809/9fa67abf/57ec861cN711404e3.jpg",
+      "price" : 2799,
+      "comments" : 200,
+      "promotion" : "券999-50本商品可领用优惠券"
+    },
+    {
+      "pid" : "1001",
+      "title" : "小米5S 全网通 移动联通电信4G 双卡双待 手机 灰色 全网通(3G+64G) ",
+      "img" : "https://img14.360buyimg.com/n7/jfs/t3304/251/3035115695/141340/230fede/57eb8c3eN4164df6e.jpg",
+      "price" : 2199,
+      "comments" : 20,
+      "promotion" : ""
+    },
+    {
+      "pid" : "1001",
+      "title" : "小米（MI）小米5s Plus 移动联通电信4G手机 拉丝深灰 全网通",
+      "img" : "https://img13.360buyimg.com/n7/jfs/t3175/3/3106291287/121971/69a2558a/57ec63a7Nda8e21c6.jpg",
+      "price" : 2899,
+      "comments" : 80,
+      "promotion" : "券999-50本商品可领用优惠券"
+    },
+    {
+      "pid" : "1001",
+      "title" : "小米 Mi 小米5 手机 黑色 全网通尊享版(4G RAM+128G ROM)标配",
+      "img" : "https://img10.360buyimg.com/n7/jfs/t3208/19/1872203964/125889/76055799/57d65e52N3b7e0422.jpg",
+      "price" : 2599,
+      "comments" : 20,
+      "promotion" : "购买本商品送赠品"
+    },
+    {
+      "pid" : "1001",
+      "title" : "锤子M1L 4G手机 白-哑光铝合金 全网通(6G RAM+64GROM)标配",
+      "img" : "https://img12.360buyimg.com/n7/jfs/t3436/237/324029206/54724/141c3435/5806513dNb296ea8a.jpg",
+      "price" : 3299,
+      "comments" : 20,
+      "promotion" : "赠购买本商品送赠品"
+    },
+    {
+      "pid" : "1001",
+      "title" : "锤子(smartisan) M1/M1L 锤子手机 白-镜面不锈钢 锤子M1L全网通",
+      "img" : "https://img13.360buyimg.com/n7/jfs/t3508/171/588200126/155661/8b87b98b/580dcf7cNdfc384ee.jpg",
+      "price" : 3649,
+      "comments" : 10,
+      "promotion" : ""
+    },
+    {
+      "pid" : "1001",
+      "title" : "苹果（Apple）iPhone7 plus智能手机 4G全网通 亮黑色 官方标配",
+      "img" : "https://img14.360buyimg.com/n7/jfs/t3190/215/3685228128/78832/67af4093/57f73fc9N0db1e264.jpg",
+      "price" : 7799,
+      "comments" : 30,
+      "promotion" : "赠购买本商品送赠品"
+    }
+  ]
+}

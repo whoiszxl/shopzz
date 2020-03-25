@@ -1,0 +1,425 @@
+.home {
+  padding: 10px;
+  color: #333;
+}
+a {
+  color: #666;
+}
+.sui-btn.btn-bordered.btn-danger:hover,
+.sui-btn.btn-bordered.btn-danger:focus,
+.operate .sui-btn.btn-bordered.btn-danger:active,
+.operate .sui-btn.btn-bordered.btn-danger.active {
+  border: 1px solid #ff713f;
+  background-color: #ff713f;
+}
+.choose-order .sui-pagination ul > li > a:hover,
+.sui-pagination ul > li > a:focus {
+  background-color: #ff713f;
+  border-color: #ff713f;
+}
+.list a {
+  text-decoration: none;
+}
+.list .list-items dd a.list-active {
+  color: #ff4301;
+}
+.list .list-items {
+  margin-top: 10px;
+  background: #f1f1f1;
+}
+.list dl {
+  margin: 0;
+}
+.list dl a {
+  color: #000;
+}
+.list dt,
+dd {
+  line-height: 28px;
+}
+.list dt {
+  font-weight: 700;
+  padding: 5px;
+}
+.list dt i {
+  color: #77b72c;
+}
+.list dd {
+  margin: 0 0 6px;
+  border-bottom: 1px solid #ededed;
+  text-align: center;
+}
+.list .list-items dd a {
+  color: #555;
+}
+.list .list-items dd a:hover {
+  color: #ff4301;
+}
+.person-info {
+  padding: 10px;
+  background: #f1f1f1;
+}
+.person-info .person-photo {
+  float: left;
+}
+.person-info .person-account {
+  float: left;
+  margin-left: 10px;
+  margin-top: -3px;
+  font-size: 14px;
+}
+.person-info .person-account span {
+  display: block;
+  line-height: 26px;
+}
+.body {
+  padding: 0 25px;
+  color: #555;
+}
+.table-title .order-table {
+  background: #f1f1f1;
+}
+.table-title .order-table th {
+  text-align: center;
+}
+.guige {
+  line-height: 36px;
+  color: #a8a6a6;
+}
+.o-price {
+  text-decoration: line-through;
+  color: #a8a6a6;
+}
+.sui-btn.btn-bordered.btn-danger {
+  border: 1px solid #ff4301;
+  color: #ff4301;
+}
+.sui-pagination {
+  float: right;
+}
+.btn-info {
+  color: #fff;
+  background-color: #ff713f;
+  border: 1px solid #ff713f;
+}
+.sui-pagination ul > .active > a,
+.sui-pagination ul > .active > span {
+  background-color: #ff713f;
+  color: #fff;
+  border-color: #ff713f;
+}
+.sui-nav.nav-tabs > .active > a,
+.sui-nav.nav-tabs > li > a:hover {
+  color: #ff4301;
+}
+.sui-nav.nav-tabs.nav-primary {
+  border-bottom: 2px solid #ff4301;
+}
+.sui-nav.nav-tabs.nav-primary > .active > a {
+  border-color: #ff4301;
+  color: #fff;
+  background: #ff4301;
+}
+.sui-pagination ul > .active > a:hover,
+.sui-pagination ul > .active > span:hover,
+.sui-pagination ul > .active > a:focus,
+.sui-pagination ul > .active > span:focus {
+  background-color: #ff4301;
+  color: #fff;
+  border-color: #ff4301;
+}
+.sui-pagination ul > li > a,
+.sui-pagination ul > li > span {
+  color: #ff4301;
+}
+.pagination-large div .page-num + .page-confirm {
+  background-color: #ff713f;
+  color: #fff;
+  border-color: #ff713f;
+}
+.like-title {
+  overflow: hidden;
+  padding: 12px 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+.like-list {
+  padding: 20px;
+  color: #666;
+  border: 1px solid #ddd;
+  border-top: 0;
+}
+.like-list ul li .attr,
+.like-list ul li .price,
+.like-list ul li .commit {
+  padding-left: 15px;
+}
+.like-list ul li .attr {
+  padding-bottom: 10px;
+}
+.list-wrap .price {
+  font: 16px "微软雅黑";
+  color: #e4393c;
+}
+.like-list ul li .list-wrap {
+  line-height: 22px;
+}
+.sui-steps-round > .finished .bar {
+  background-color: #ff713f;
+}
+.sui-steps-round > .finished .round {
+  border-color: #ff713f;
+  background-color: #ff713f;
+}
+.sui-steps-round > .current .round {
+  border-color: #ff713f;
+  background-color: #ff713f;
+}
+.sui-steps-round > .current .bar {
+  background-color: #ff713f;
+}
+.sui-steps-round > div .bar {
+  width: 160px;
+}
+.sui-steps-round > div > label {
+  color: #ff713f;
+  height: auto;
+  line-height: 18px;
+}
+.sui-steps-round > div > label span {
+  display: block;
+}
+.order-state {
+  font-size: 16px;
+}
+.red {
+  color: #e4393c;
+  font-weight: 700;
+  font-size: 20px;
+}
+.order-info {
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  background-color: #f1f1f1;
+}
+.order-info h5 {
+  line-height: 24px;
+  border-bottom: 1px solid #a8a6a6;
+}
+.order-info p {
+  margin-bottom: 0;
+  line-height: 24px;
+}
+.order-goods {
+  margin-bottom: 15px;
+  padding: 8px;
+  background-color: #f1f1f1;
+}
+.order-goods table {
+  margin-bottom: 0;
+}
+.order-goods tbody {
+  background-color: #fff;
+}
+.order-goods span {
+  display: block;
+  text-align: left;
+  max-width: 350px;
+  float: none;
+}
+.order-price {
+  float: right;
+  padding: 15px;
+}
+.order-price p {
+  margin-bottom: 0;
+}
+.userInfo .sui-nav.nav-tabs > li > a {
+  font-weight: 700;
+  font-size: 14px;
+}
+.controls select {
+  margin-right: 7px;
+}
+.controls .area {
+  display: inline-block;
+}
+.userInfo .sui-form.form-horizontal .control-label {
+  width: 85px;
+}
+.userInfo .new-photo {
+  padding-left: 20px;
+}
+.userInfo .new-photo img {
+  display: block;
+  margin-bottom: 15px;
+  width: 100px;
+  height: 100px !important;
+}
+.userInfo .new-photo .upload {
+  margin-left: 20px;
+}
+.userAddress .address-title {
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  line-height: 32px;
+  background-color: #f1f1f1;
+}
+.userAddress .address-title .title {
+  line-height: 40px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.userAddress .address-title .add-new {
+  float: right;
+  line-height: 24px;
+  margin: 5px 0;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #ff713f;
+  border: 1px solid #ff713f;
+}
+.sui-steps .current {
+  background-color: #ff713f;
+}
+.sui-steps .current .triangle-right {
+  border-color: transparent transparent transparent #ff713f;
+}
+.userSafe .sui-nav {
+  margin-bottom: 0;
+}
+.userSafe .sui-nav.nav-tabs {
+  padding-left: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+.userSafe .tab-content {
+  padding: 8px;
+  border: 2px solid #ff713f;
+  border-top: 0;
+}
+.btn-primary {
+  background: #ff713f;
+  border: 1px solid #ff713f;
+}
+.userSafe .tab-content form {
+  margin: 3% 6%;
+}
+.userSafe .fixed {
+  line-height: 24px;
+}
+.error {
+  color: #b1191a;
+  margin-left: 5px;
+}
+.next-btn {
+  margin-left: 100px;
+}
+.userSafe .overed {
+  width: 400px;
+  padding: 8% 0;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  border: 2px solid #cbcbcb;
+}
+.userSafe .overed .content {
+  width: 280px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.userSafe .overed img {
+  float: left;
+  overflow: hidden;
+}
+.userSafe .overed .text {
+  float: left;
+  margin-left: 10px;
+}
+.userSafe .overed .text .success {
+  font-size: 18px;
+  font-weight: 700;
+  color: #b1191a;
+}
+.collect {
+  padding: 10px;
+  color: #333;
+}
+.goods-list {
+  margin: 20px 0;
+}
+.goods-list ul li {
+  margin-top: 10px;
+  line-height: 28px;
+}
+.goods-list ul li:hover {
+  box-shadow: 0 0 10px 2px #ededed;
+}
+.goods-list .p-img {
+  width: 215px;
+  height: 255px;
+}
+.p-img,
+.price,
+.attr,
+.cu,
+.commit,
+.operate {
+  padding-left: 15px;
+  line-height: 2;
+}
+.price {
+  font-size: 18px;
+  color: #c81623;
+}
+.price i {
+  margin-left: -5px;
+}
+.cu span {
+  background: #ff713f;
+  color: #fff;
+  padding: 3px;
+  margin-right: 3px;
+}
+.operate {
+  padding: 12px 15px;
+}
+.operate .sui-btn {
+  padding: 2px 6px;
+  margin-right: 5px;
+}
+.order-pay label {
+  float: left;
+  padding-left: 10px;
+}
+.order-pay .top-pages {
+  margin: 0 10px 6px;
+}
+.order-pay .hepay-btn {
+  margin-left: 10px;
+}
+.order-pay .choose-title {
+  padding: 2px 0;
+  margin-top: 10px;
+  line-height: 28px;
+  border: 1px solid #ddd;
+  border-bottom: 0;
+  overflow: hidden;
+  background: #f1f1f1;
+}
+.order-pay .share-btn {
+  float: right;
+  margin-top: 3px;
+  margin-right: 5px;
+}
+.order-pay .order-datatable {
+  margin-bottom: 0;
+}
+.order-pay .choose-order {
+  overflow: hidden;
+  margin-top: 10px;
+}
+.order-pay .order-detail {
+  margin-bottom: 10px;
+}

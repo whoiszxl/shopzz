@@ -1,0 +1,83 @@
+input {
+  *display: inline;
+  *zoom: 1;
+}
+.home {
+  padding: 10px;
+  color: #333;
+}
+.sui-modal {
+  width: 565px;
+}
+.sui-modal .othername {
+  margin-left: 10px;
+}
+a {
+  color: #666;
+}
+.list dl {
+  margin: 0;
+}
+.list dt,
+dd {
+  line-height: 28px;
+}
+.list dt {
+  font-weight: 700;
+  padding: 5px;
+}
+.list dt i {
+  color: #ff4301;
+}
+.list dd {
+  margin: 0 0 6px;
+  border-bottom: 1px solid #ededed;
+  text-align: center;
+}
+.list dd.active {
+  color: #ff4301;
+  font-weight: 700;
+}
+.body {
+  color: #666;
+}
+.addressList {
+  border: 1px solid #ddd;
+  margin: 0 20px;
+}
+.addressList .mt {
+  overflow: hidden;
+  padding: 12px 10px;
+  background-color: #f1f1f1;
+  font-size: 15px;
+}
+.address-detail {
+  margin: 0 20px;
+  padding: 15px;
+}
+.addresses .address-item {
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  padding: 10px 10px 15px;
+  line-height: 28px;
+}
+.address-item .smt {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 36px;
+}
+.address-item .operate {
+  margin-top: -30px;
+}
+.smc .item .label {
+  color: #a09e9e;
+}
+.editinfo .address-item h5 {
+  font-weight: 700;
+}
+.editinfo .address-item {
+  line-height: 26px;
+}
+.editinfo .address-item label {
+  margin-right: 5px;
+}

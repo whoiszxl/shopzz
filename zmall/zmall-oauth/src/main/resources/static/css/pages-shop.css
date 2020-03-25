@@ -1,0 +1,250 @@
+.sui-btn.btn-bordered.btn-danger {
+  border: 1px solid #ff713f;
+  color: #ff713f;
+}
+.sui-btn.btn-bordered.btn-danger:hover,
+.sui-btn.btn-bordered.btn-danger:focus,
+.sui-btn.btn-bordered.btn-danger:active,
+.sui-btn.btn-bordered.btn-danger.active {
+  background: #ff713f;
+  border: 1px solid #ff713f;
+  color: #fff;
+}
+.shop .head-nav {
+  background: #fff;
+}
+.sui-navbar .sui-nav > li > a {
+  padding: 9px 15px;
+}
+.shop .shop-name {
+  text-align: right;
+  background: #f1f1f1;
+  padding-right: 5px;
+  line-height: 28px;
+}
+.shop .shop-logo .shop-vip {
+  padding: 15px;
+  width: 220px;
+  float: right;
+  text-align: right;
+}
+.shop .shop-logo .shop-vip .pay {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  padding-right: 5px;
+  color: #7a7a7a;
+}
+.shop .shop-logo .shop-vip .pay .car {
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.shop .shop-logo .shop-vip .vip {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  padding-left: 5px;
+  border-left: 1px solid #6e6e6e;
+  color: #6e6e6e;
+}
+.shop .head-nav .sui-navbar .navbar-inner {
+  border: 0;
+  font-size: 14px;
+  box-shadow: none;
+  background: transparent;
+}
+.shop .sui-navbar .sui-nav > li.active a {
+  background-color: #fff;
+  color: #050505;
+}
+.shop .sui-navbar .sui-nav > li > a {
+  color: #666;
+}
+.shop .sui-navbar .sui-btn {
+  margin-left: -5px;
+  background-color: #555;
+  color: #fff;
+}
+.shop .default-list {
+  margin-top: 20px;
+}
+.shop .default-list .title {
+  text-align: center;
+  color: #000;
+}
+.shop .default-list .title h1 {
+  font-size: 38px;
+}
+.shop .default-list .title h2 {
+  font-size: 23px;
+  font-weight: 500;
+}
+.goods-list {
+  margin: 20px 0;
+}
+.goods-list ul li {
+  margin-top: 10px;
+  line-height: 28px;
+}
+.goods-list ul li:hover {
+  box-shadow: 0 0 10px 2px #ededed;
+}
+.p-img {
+  text-align: center;
+}
+.p-img,
+.price,
+.attr,
+.cu,
+.commit,
+.operate {
+  padding-left: 15px;
+}
+.attr,
+.cu,
+.commit {
+  height: 22px;
+}
+.price {
+  font-size: 18px;
+  color: #e60012;
+}
+.price i {
+  margin-left: -5px;
+}
+.cu span {
+  background: #e60012;
+  color: #fff;
+  padding: 3px;
+  margin-right: 3px;
+}
+.operate {
+  padding: 12px 15px;
+}
+.operate .sui-btn {
+  margin-right: 4px;
+}
+.default-list .tab-content {
+  margin-top: 10px;
+}
+.header {
+  border-bottom: 0 !important;
+}
+.NavList {
+  display: none !important;
+}
+.cd-top {
+  position: fixed;
+  right: 13%;
+  bottom: 25%;
+  z-index: 100;
+  text-align: center;
+  color: #fff;
+  background-color: #ff713f;
+}
+.cd-top .top {
+  padding: 5px;
+  background-color: #ff713f;
+  cursor: pointer;
+}
+.top b {
+  display: block;
+  margin-top: -5px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 26px;
+}
+.cd-top .code {
+  border-top: 1px solid #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.cd-top .erweima {
+  display: none;
+  position: fixed;
+  right: 17.5%;
+  z-index: 200;
+  bottom: 19%;
+  border: 2px solid #77b72c;
+}
+.cd-top .erweima s {
+  position: absolute;
+  right: -15px;
+  top: 39%;
+  border-width: 7px;
+  border-style: solid;
+  border-color: transparent transparent transparent #77b72c;
+  z-index: 4;
+}
+.sui-navbar {
+  margin-bottom: 0;
+}
+.shop .sui-navbar .sui-nav > li.active a {
+  color: #b1191a;
+  font-weight: bolder;
+}
+.sui-navbar .sui-nav > li {
+  margin-right: 20px;
+}
+.sui-nav .all-list {
+  line-height: 36px;
+}
+.sui-navbar .navbar-inner {
+  position: relative;
+}
+ul.sui-nav {
+  height: 100%;
+  list-style-type: none;
+}
+ul.sui-nav span {
+  display: inline-block;
+  margin-left: 5px;
+  width: 7px;
+  height: 7px;
+  background: url(../img/_/down-icon.png) no-repeat;
+}
+.hover-up {
+  transition-duration: 0.5s;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  margin-bottom: 5px !important;
+}
+.hover-down {
+  transition-duration: 0.5s;
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+}
+div.hidden-box {
+  width: 106px;
+  border-top: 0;
+  position: absolute;
+  display: none;
+  background: #fff;
+  top: 36px;
+}
+.hidden-box > ul {
+  list-style-type: none;
+  color: #643519;
+  cursor: pointer;
+}
+.hidden-box li {
+  padding-left: 4px;
+  line-height: 26px;
+  color: #b1191a;
+}
+.hidden-box li:hover {
+  background: #b1191a;
+  color: #fff;
+}
+.hidden-loc-index {
+  left: 93px;
+}
+.hidden-loc-us {
+  left: 242px;
+}
+.hidden-loc-info {
+  left: 363px;
+}
+.box04 {
+  left: 485px;
+}

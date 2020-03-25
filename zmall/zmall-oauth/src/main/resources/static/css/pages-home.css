@@ -1,0 +1,306 @@
+input {
+  *display: inline;
+  *zoom: 1;
+}
+a {
+  color: #666;
+}
+.home {
+  padding: 10px;
+  color: #333;
+}
+.list dl {
+  margin: 0;
+}
+.list dt,
+dd {
+  line-height: 28px;
+}
+.list dt {
+  font-weight: 700;
+  padding: 5px;
+}
+.list dt i {
+  color: #77b72c;
+}
+.list dd {
+  margin: 0 0 6px;
+  border-bottom: 1px solid #ededed;
+  text-align: center;
+}
+.body {
+  color: #666;
+}
+.set {
+  background: #f7f7f7;
+  margin: 0 2px;
+  height: 217px;
+}
+.info,
+.fixed,
+.package {
+  padding: 8px 0;
+}
+.u-pic,
+.u-name,
+.u-rank {
+  text-align: center;
+  font-family: "微软雅黑";
+}
+.u-safe,
+.u-medal {
+  width: 195px;
+  margin: 15px auto;
+}
+.u-name {
+  font-size: 14px;
+}
+.u-rank {
+  color: #fff;
+  background: #f2a123;
+  width: 94px;
+  margin: 0 auto;
+  border-radius: 9px;
+}
+.u-safe {
+  margin-top: 15px;
+}
+.ads {
+  margin-left: 10px;
+}
+.body .aboutme,
+.body .order,
+.body .discount {
+  border: 1px solid #ddd;
+  margin: 20px;
+}
+.body .aboutme {
+  border: 0;
+}
+.body .ever {
+  margin: 20px;
+}
+.order .mt {
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+  line-height: 25px;
+  padding: 0 5px;
+}
+.order .order-detail {
+  padding: 10px;
+  text-align: center;
+}
+.order-detail .none {
+  color: #666;
+  font-size: 16px;
+}
+.acc-item {
+  line-height: 28px;
+  color: #999;
+  margin: 15px 40px;
+  width: 156px;
+  position: relative;
+}
+.acc-item .list {
+  padding: 0 20px;
+}
+.acc-item i {
+  background: url(../img/icons.png) no-repeat;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  margin: 0 -22px;
+}
+.acc-item b {
+  font-weight: 400;
+  line-height: 26px;
+  height: 26px;
+}
+.acc-item em {
+  color: #ff4301;
+  padding: 0 5px;
+  font-weight: 700;
+}
+.list1,
+.list2,
+.list3,
+.list4 {
+  position: relative;
+}
+.acc-item span {
+  position: absolute;
+  right: 0;
+}
+.list1 i {
+  background-position: -529px -70px;
+}
+.list2 i {
+  background-position: -529px -101px;
+}
+.list3 i {
+  background-position: -529px -130px;
+}
+.list4 i {
+  background-position: -529px -160px;
+}
+.td ul li {
+  list-style-type: none;
+  width: 45%;
+  height: 80px;
+  text-align: center;
+  line-height: 26px;
+}
+.td ul li div {
+  background-image: url(../img/icons.png);
+  width: 50px;
+  height: 50px;
+  position: absolute;
+}
+.td {
+  width: 200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: inline-block;
+  position: relative;
+}
+.td span {
+  color: #999;
+}
+.td .td1 {
+  background-position: -314px -4px;
+  position: absolute;
+  top: 25px;
+  left: 40px;
+}
+.td .td2 {
+  background-position: -319px -51px;
+  position: absolute;
+  top: 25px;
+  right: 53px;
+}
+.td .td3 {
+  background-position: -319px -94px;
+  position: absolute;
+  top: 109px;
+  left: 46px;
+}
+.td .td4 {
+  background-position: -319px -140px;
+  position: absolute;
+  top: 107px;
+  right: 54px;
+}
+.space {
+  background-color: #ddd;
+}
+.space-x {
+  width: 178px;
+  height: 0;
+  position: absolute;
+  top: 80px;
+  left: 11px;
+  border-bottom: 1px solid #ddd;
+}
+.space-y {
+  height: 159px;
+  position: absolute;
+  top: 2px;
+  left: 105px;
+  border-right: 1px solid #ddd;
+}
+.minus,
+.change {
+  border-right: 1px solid #ddd;
+  margin-right: -1px;
+}
+.title {
+  padding: 20px 10px 10px;
+  color: #666;
+}
+.carousel-control {
+  left: 0;
+  top: 47%;
+  border: 0;
+  background: #c3c3c3;
+  width: 20px;
+  border-radius: 0;
+}
+.carousel-inner > .item > img {
+  width: 238px;
+  margin: 0 auto;
+}
+.jifen {
+  overflow: hidden;
+  padding: 10px;
+  margin: 5px 0;
+}
+.jifen .fr {
+  width: 185px;
+}
+.fen {
+  line-height: 28px;
+}
+.fen i {
+  color: red;
+}
+.dui {
+  padding-right: 10px;
+}
+.chong {
+  margin-top: 10px;
+}
+.sui-form.form-horizontal .control-group {
+  margin-bottom: 9px;
+  *margin-bottom: 11px;
+  *padding-bottom: 11px;
+}
+.control-group .control-label {
+  float: left;
+  width: 96px;
+  ooverflow: hidden;
+}
+.control-group .controls {
+  float: left;
+  width: 139px;
+}
+.ever .tab-content {
+  border: 1px solid #ddd;
+  border-top: 0;
+}
+.sui-nav.nav-tabs {
+  background: #f1f1f1;
+  padding-left: 0;
+  border: 1px solid #ddd;
+  margin: 0;
+  overflow: hidden;
+}
+.sui-nav.nav-tabs > li > a {
+  border: 0;
+  padding: 10px 20px;
+  font-family: "微软雅黑";
+}
+.sui-nav.nav-tabs > .active > a {
+  background-color: #ff4301;
+  color: #fff;
+  border-radius: 0;
+  border: 0;
+}
+.like-list {
+  padding: 20px;
+  color: #666;
+}
+.like-list ul li .attr,
+.like-list ul li .price,
+.like-list ul li .commit {
+  padding-left: 15px;
+}
+.like-list ul li .attr {
+  padding-bottom: 10px;
+}
+.list-wrap .price {
+  font: 16px "微软雅黑";
+  color: #e4393c;
+}
+.like-list ul li .list-wrap {
+  line-height: 22px;
+}

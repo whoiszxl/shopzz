@@ -1,0 +1,296 @@
+.main {
+  margin: 10px 0;
+}
+a {
+  color: #666;
+}
+em,
+i {
+  font-style: normal;
+}
+.sui-btn.btn-bordered.btn-danger:hover,
+.sui-btn.btn-bordered.btn-danger:focus,
+.operate .sui-btn.btn-bordered.btn-danger:active,
+.operate .sui-btn.btn-bordered.btn-danger.active {
+  border: 1px solid #ff4301;
+  background-color: #ff4301;
+}
+.typeNav {
+  border-bottom: 2px solid #ff713f;
+}
+.bread,
+.selector,
+.type-wrap,
+.value {
+  overflow: hidden;
+}
+.bread,
+.selector,
+.details,
+.hot-sale {
+  margin-bottom: 5px;
+}
+.bread .form-dark {
+  margin-bottom: 5px;
+}
+.hot-sale,
+.selector,
+.filter {
+  border: 1px solid #ddd;
+}
+.key {
+  padding: 10px 10px 0 15px;
+}
+.type-wrap ul li {
+  float: left;
+  list-style-type: none;
+}
+.sui-btn {
+  border-radius: 0;
+}
+.bread .sui-breadcrumb {
+  padding: 3px 15px;
+  margin: 0;
+}
+.bread .sui-tag {
+  margin-top: -5px;
+}
+.type-wrap {
+  margin: 0;
+  position: relative;
+  border-top: 1px solid #ddd;
+}
+.type-wrap:first-child {
+  border-top: 0;
+}
+.type-wrap .key {
+  width: 100px;
+  background: #f1f1f1;
+  line-height: 26px;
+  text-align: right;
+}
+.logo .brand {
+  padding-bottom: 87px;
+}
+.type-wrap .value {
+  padding: 10px 0 0 15px;
+  color: #333;
+}
+.type-wrap .logos {
+  margin-left: 120px;
+  padding-right: 90px;
+}
+.type-wrap .ext {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.ext .sui-btn {
+  padding: 0 10px;
+  background: #fff;
+}
+.ext a {
+  color: #666;
+}
+ul.type-list li {
+  display: block;
+  margin-right: 30px;
+  line-height: 26px;
+}
+ul.type-list li a {
+  cursor: pointer;
+  color: #555;
+  padding: 2px;
+  text-decoration: none;
+}
+ul.type-list li a.redhover {
+  background: #ff4301;
+  color: #fff;
+  padding: 2px;
+  text-decoration: none;
+}
+ul.type-list li a.grayhover {
+  color: #555;
+}
+ul.logo-list li {
+  border: 1px solid #e4e4e4;
+  margin: -1px -1px 0 0;
+  width: 105px;
+  height: 52px;
+  text-align: center;
+  line-height: 52px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 700;
+  color: #ff703f;
+  font-style: italic;
+  font-size: 14px;
+}
+.filter {
+  background: #f1f1f1;
+}
+.sui-navbar {
+  margin-bottom: 0;
+}
+.sui-navbar .navbar-inner {
+  padding-left: 0;
+  border-radius: 0;
+}
+.sui-navbar .sui-nav > .active > a {
+  background: #ff713f;
+  color: #fff;
+}
+.goods-list {
+  margin: 20px 0;
+}
+.goods-list ul li {
+  margin-top: 10px;
+  line-height: 28px;
+}
+.goods-list ul li:hover {
+  box-shadow: 0 0 10px 2px #ededed;
+}
+.goods-list .p-img {
+  width: 215px;
+  height: 255px;
+}
+.p-img,
+.price,
+.attr,
+.cu,
+.commit,
+.operate {
+  padding-left: 15px;
+}
+.attr {
+  width: 85%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 8px;
+  min-height: 38px;
+  cursor: pointer;
+  line-height: 1.8;
+}
+.attr a {
+  color: #333;
+  text-decoration: none;
+}
+.attr a:hover {
+  color: #c81623;
+}
+.cu,
+.commit {
+  height: 22px;
+}
+.commit {
+  font-size: 13px;
+  color: #a7a7a7;
+}
+.commit .command span {
+  font-weight: 700;
+  color: #646fb0;
+}
+.price {
+  font-size: 18px;
+  color: #c81623;
+}
+.price i {
+  margin-left: -5px;
+}
+.cu span {
+  background: #c81623;
+  color: #fff;
+  padding: 3px;
+  margin-right: 3px;
+}
+.operate {
+  padding: 12px 15px;
+}
+.operate .sui-btn.btn-bordered {
+  min-width: 85px;
+}
+.sui-btn.btn-bordered.btn-danger {
+  margin-right: 15px;
+  border: 1px solid #ff4301;
+  color: #ff4301;
+}
+.sui-pagination ul > li > a:hover,
+.sui-pagination ul > li > a:focus {
+  border: 1px solid #ff4301;
+  background: #ff4301;
+}
+.page {
+  width: 733px;
+  height: 66px;
+  overflow: hidden;
+}
+.sui-pagination div {
+  float: right;
+  width: 241px;
+}
+.sui-pagination ul {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  width: 490px;
+  float: left;
+}
+.sui-pagination ul > .active > a {
+  background-color: #fff;
+  color: #ff4301;
+  border-color: #fff;
+  cursor: default;
+}
+.sui-pagination ul > .active > a:hover {
+  background: #ccc;
+  border: 1px solid #ddd;
+}
+.sui-pagination ul > li {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+.pagination-large ul > li > a,
+.pagination-large ul > li > span {
+  padding: 9px 18px;
+  color: #333;
+}
+.sui-pagination ul > li > a:hover {
+  background: #ccc;
+  border: 1px solid #ddd;
+}
+.sui-pagination ul > .dotted > span,
+.sui-pagination ul > .dotted > a {
+  border: 0;
+}
+.pagination-large div .page-num {
+  padding: 9px 18px;
+}
+.pagination-large div .page-num + . {
+  padding: 7px 16px;
+  color: #666;
+  background-color: #f6f6f6;
+  border: 1px solid #ddd;
+}
+.sui-pagination div {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+.hot-sale .hot-list {
+  padding: 15px;
+}
+.hot-sale .title {
+  border-bottom: 1px solid #ddd;
+  background: #f1f1f1;
+  color: #333;
+  margin: 0;
+  padding: 5px 0 5px 15px;
+}
+.sort {
+  position: absolute;
+  display: none;
+}

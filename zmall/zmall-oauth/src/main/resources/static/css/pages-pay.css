@@ -1,0 +1,193 @@
+.checkout h5 {
+  font-weight: 700;
+  margin: 0;
+}
+.hr {
+  height: 1px;
+  background-color: #ddd;
+}
+a {
+  color: #666;
+}
+.top {
+  background-color: #f1f1f1;
+}
+.logoArea {
+  overflow: hidden;
+  position: relative;
+}
+.logo {
+  background: url(../img/icons.png) no-repeat;
+  background-position: -370px 3px;
+  width: 177px;
+  height: 75px;
+}
+.logo .title {
+  font: 19px "微软雅黑";
+  position: absolute;
+  top: 24px;
+  left: 190px;
+}
+.checkout-steps {
+  border: 1px solid #ddd;
+  padding: 25px;
+}
+.step-tit {
+  line-height: 36px;
+  margin: 15px 0;
+}
+.step-cont {
+  margin: 0 10px 10px 20px;
+}
+.step-cont ul li {
+  list-style-type: none;
+  overflow: hidden;
+}
+.step-cont .con {
+  float: left;
+  padding: 5px 10px;
+}
+.seven {
+  color: #c81623;
+  margin-top: 20px;
+}
+.price {
+  font: 14px "微软雅黑";
+  font-weight: 700;
+  color: #e12228;
+}
+ul.addr-detail li {
+  width: 99%;
+  margin: 6px 0;
+}
+.recommendAddr {
+  margin-top: 10px;
+}
+ul.payType li {
+  display: inline-block;
+  padding: 5px 20px;
+  border: 1px solid #ddd;
+  *display: inline;
+  _zoom: 1;
+  *margin: 5px 10px;
+  cursor: pointer;
+}
+.addr-item .name {
+  width: 120px;
+  border: 1px solid #ddd;
+  height: 18px;
+  padding: 5px 10px;
+  text-align: center;
+}
+.payshipInfo span {
+  font-weight: 700;
+}
+ul.send-detail li {
+  margin-top: 10px;
+}
+.sendType .express {
+  border: 1px solid #ddd;
+  width: 120px;
+  text-align: center;
+}
+.sendType,
+.sendGoods {
+  padding: 15px;
+}
+.sendType {
+  background: #f4f4f4;
+  margin-bottom: 2px;
+}
+.sendGoods {
+  background: #feedef;
+}
+.num,
+.exit {
+  text-align: center;
+}
+.order-summary {
+  overflow: hidden;
+  padding-right: 20px;
+}
+.list,
+.trade {
+  line-height: 26px;
+}
+.list span {
+  float: left;
+  width: 160px;
+}
+.trade {
+  padding: 10px;
+  margin: 10px 0;
+  text-align: right;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+}
+.trade .fc-receiverInfo {
+  color: #999;
+}
+.pay {
+  font-family: "微软雅黑";
+}
+.pay .orange {
+  color: #ea4d08;
+}
+.pay .money {
+  font-size: 18px;
+}
+.pay .checkout-tit {
+  padding: 10px;
+}
+.pay .paymark {
+  overflow: hidden;
+  line-height: 26px;
+  text-indent: 38px;
+}
+.pay .success-icon {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background: url(../img/_/icon.png);
+  background-position: 0 0;
+}
+.pay .success-info {
+  padding: 0 8px;
+  line-height: 30px;
+  vertical-align: top;
+}
+.submit .btn-xlarge {
+  padding: 15px 45px;
+  margin: 15px 0 10px;
+  font: 18px "微软雅黑";
+  font-weight: 700;
+  border-radius: 0;
+  background-color: #ff713f;
+  border: 1px solid #ff713f;
+}
+.check-info {
+  padding-left: 25px;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  border: 2px solid #ff713f;
+}
+.check-info h4 {
+  color: #ff713f;
+}
+.check-info .save {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff713f;
+}
+.check-info ol,
+.check-info ul {
+  padding-left: 25px;
+}
+.zfb {
+  color: #ff713f;
+  font-weight: 700;
+}
+.check-info li {
+  line-height: 24px;
+  font-size: 14px;
+}

@@ -1,0 +1,226 @@
+{
+  "pid" : "3242343",
+  "title" : "Apple iPhone 7 (A1660) 128G 黑色 移动联通电信4G手机",
+  "images" : [
+    {
+      "imgSmall" : "https://img12.360buyimg.com/n5/s54x54_jfs/t2992/179/632438099/131730/73b9b20b/5760fcb9N0790316b.jpg",
+      "imgBig" : "https://img12.360buyimg.com/n1/s450x450_jfs/t2992/179/632438099/131730/73b9b20b/5760fcb9N0790316b.jpg"
+    },
+    {
+      "imgSmall" : "https://img12.360buyimg.com/n5/s54x54_jfs/t2923/198/603183300/107456/41d4401b/5760fcacNe164b13b.jpg",
+      "imgBig" : "https://img12.360buyimg.com/n1/s450x450_jfs/t2923/198/603183300/107456/41d4401b/5760fcacNe164b13b.jpg"
+    },
+    {
+      "imgSmall" : "https://img12.360buyimg.com/n5/s54x54_jfs/t2632/167/2348816147/82508/4f340ef0/5760fcb3Ncc5d51c6.jpg",
+      "imgBig" : "https://img12.360buyimg.com/n1/s450x450_jfs/t2632/167/2348816147/82508/4f340ef0/5760fcb3Ncc5d51c6.jpg"
+    },
+    {
+      "imgSmall" : "https://img12.360buyimg.com/n5/s54x54_jfs/t2638/217/2354750434/69102/49fd2bfb/5760fcbfN45a23eb5.jpg",
+      "imgBig" : "https://img12.360buyimg.com/n1/s450x450_jfs/t2638/217/2354750434/69102/49fd2bfb/5760fcbfN45a23eb5.jpg"
+    },
+    {
+      "imgSmall" : "https://img12.360buyimg.com/n5/s54x54_jfs/t2617/170/2326139827/24881/94030eed/5760fcc4N53354ffb.jpg",
+      "imgBig" : "https://img12.360buyimg.com/n1/s450x450_jfs/t2617/170/2326139827/24881/94030eed/5760fcc4N53354ffb.jpg"
+    }
+  ],
+  "salesDeclarer" : "10.26-11.12购机享20天价保",
+  "promotion" : "选择【移动优惠购-买手机送话费】，不换号，购新机，还可赠送话费！",
+  "price" : 4999,
+  "toOldChangeNew" : true,
+  "sellingStyles" : [
+    {
+      "option" : false,
+      "style" : "选择颜色",
+      "items" : [
+        {
+          "sid" : "s01",
+          "title" : "金色",
+          "price" : 5999,
+          "image" : "https://img11.360buyimg.com/n9/s40x40_jfs/t3193/308/1586388837/134147/92414e51/57d0c55bNa8230260.jpg"
+        },
+        {
+          "sid" : "s01",
+          "title" : "玫瑰金色",
+          "price" : 5966,
+          "image" : "https://img13.360buyimg.com/n9/s40x40_jfs/t3301/16/1615084619/137077/bc52150e/57d0c513Nd51ff9a3.jpg"
+        },
+        {
+          "sid" : "s01",
+          "title" : "银色",
+          "price" : 5988,
+          "image" : "https://img10.360buyimg.com/n9/s40x40_jfs/t3019/321/2010642678/131397/e9f2fcf9/57d0c468N85c77866.jpg"
+        },
+        {
+          "sid" : "s01",
+          "title" : "黑色",
+          "price" : 5955,
+          "image" : "https://img12.360buyimg.com/n9/s40x40_jfs/t3298/58/1622979569/120892/64989235/57d0d400Nfd249af4.jpg"
+        },
+        {
+          "sid" : "s01",
+          "title" : "亮黑色",
+          "price" : 5977,
+          "image" : "https://img14.360buyimg.com/n9/s40x40_jfs/t3157/63/1645131029/112074/f4f79169/57d0d44dN8cddf5c5.jpg"
+        }
+      ]
+    },
+    {
+      "option" : false,
+      "style" : "选择版本",
+      "items" : [
+        {
+          "sid" : "s11",
+          "title" : "公开版",
+          "price" : 6222,
+          "image" : ""
+        },
+        {
+          "sid" : "s12",
+          "title" : "移动4G",
+          "price" : 6122,
+          "image" : ""
+        }
+      ]
+    },
+    {
+      "option" : false,
+      "style" : "选择容量",
+      "items" : [
+        {
+          "sid" : "s21",
+          "title" : "32GB",
+          "price" : 5999,
+          "image" : ""
+        },
+        {
+          "sid" : "s22",
+          "title" : "128GB",
+          "price" : 6299,
+          "image" : ""
+        },
+        {
+          "sid" : "s23",
+          "title" : "256GB",
+          "price" : 7299,
+          "image" : ""
+        }
+      ]
+    },
+    {
+      "option" : false,
+      "style" : "购买方式",
+      "items" : [
+        {
+          "sid" : "s31",
+          "title" : "官方标配",
+          "price" : 5999,
+          "image" : ""
+        },
+        {
+          "sid" : "s32",
+          "title" : "移动优惠购",
+          "price" : 5666,
+          "image" : ""
+        },
+        {
+          "sid" : "s33",
+          "title" : "电信优惠购",
+          "price" : 5777,
+          "image" : ""
+        }
+      ]
+    },
+    {
+      "option" : true,
+      "style" : "套  装",
+      "items" : [
+        {
+          "sid" : "s41",
+          "title" : "保护套装",
+          "price" : 7299,
+          "image" : ""
+        },
+        {
+          "sid" : "s42",
+          "title" : "充电套装",
+          "price" : 7399,
+          "image" : ""
+        }
+      ]
+    }
+  ],
+  "standard" : [
+    {
+      "type":"主体",
+      "items":[
+        {
+          "key" : "型号",
+          "val" : "ONEPLUS A3000"
+        },
+        {
+          "key" : "入网型号",
+          "val" : "ONEPLUS A3000"
+        },
+        {
+          "key" : "上市年份",
+          "val" : "2016年"
+        },
+        {
+          "key" : "上市月份",
+          "val" : "6月"
+        }
+      ]
+    },
+    {
+      "type":"基本信息",
+      "items":[
+        {
+          "key" : "机身颜色",
+          "val" : "冰川灰"
+        },
+        {
+          "key" : "机身长度（mm）",
+          "val" : "152.7"
+        },
+        {
+          "key" : "机身宽度（mm）",
+          "val" : "74.7"
+        },
+        {
+          "key" : "机身厚度（mm）",
+          "val" : "7.35"
+        },
+        {
+          "key" : "机身重量（g）",
+          "val" : "158"
+        },
+        {
+          "key" : "输入方式",
+          "val" : "触控"
+        },
+        {
+          "key" : "运营商标志或内容",
+          "val" : "机身；在外包装"
+        },
+        {
+          "key" : "机身材质分类",
+          "val" : "金属边框；金属后盖"
+        }
+      ]
+    },
+    {
+      "type":"操作系统",
+      "items":[
+        {
+          "key" : "操作系统",
+          "val" : "Android"
+        },
+        {
+          "key" : "操作系统版本",
+          "val" : "H2OS1.4"
+        }
+      ]
+    }
+  ],
+  "introduction" : "<img width='750' height='988' alt='' class='' src='//img11.360buyimg.com/cms/jfs/t2686/100/2791945193/303254/261fe97b/57733e93Na96b38d4.jpg'><img width='750' height='1057' alt='' class='' src='//img12.360buyimg.com/cms/jfs/t2881/284/2488613366/124624/6f428280/5768e962N3b48638b.jpg'><img width='750' height='1209' alt='' class='' src='//img14.360buyimg.com/cms/jfs/t2860/18/2536949046/127212/56eafba7/5768e962N3e1cffcd.jpg'><img width='750' height='1147' alt='' class='' src='//img11.360buyimg.com/cms/jfs/t2749/5/2695139017/123859/88ee7e7a/5770abc0N6150866a.jpg'> <img width='750' height='1116' alt='' class='' src='//img10.360buyimg.com/cms/jfs/t2938/92/992100185/95810/1a50938d/5770aca8N673a9a54.jpg'><img width='750' height='1052' alt='' class='' src='//img10.360buyimg.com/cms/jfs/t2830/340/2457114093/115387/52d2c7af/5768e964N5dc07684.jpg'><img width='750' height='1078' alt='' class='' src='//img12.360buyimg.com/cms/jfs/t2623/353/2516133745/116366/c686a11f/5768e964Nfe876c04.jpg'>"
+}
