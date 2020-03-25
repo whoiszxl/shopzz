@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>zmall-gateway-system</module>
+        <module>zmall-gateway-web</module>
     </modules>
 
 
