@@ -29,6 +29,15 @@ public class CartController {
         return Result.success();
     }
 
+    @GetMapping("/list")
+    public Result list() {
+        String username = "wanjiu";
+        return Result.success(cartService.list(username));
+    }
+
+
+
+
 }
 
 
