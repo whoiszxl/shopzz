@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -75,6 +76,7 @@ public class UserController {
     @ApiOperation("根据ID删除用户数据")
     @ApiImplicitParam(value = "用户名",name = "username",dataType = "string",paramType = "path")
     @DeleteMapping(value = "/{username}" )
+    @PreAuthorize("hasAnyAuthority('admin', 'deleteman')")
     public Result delete(@PathVariable String username){
         boolean isDelete = userService.removeById(username);
         return isDelete ? Result.success() : Result.fail("delete fail");
