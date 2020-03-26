@@ -70,7 +70,7 @@ public class AuthController {
         //3. 存入cookie
         this.saveJtiToCookie(authToken.getJti(),response);
 
-        return Result.success(authToken.getJti());
+        return Result.success(authToken);
     }
 
 
