@@ -1,5 +1,5 @@
 server:
-  port: 10010 #启动端口 命令行注入
+  port: 10016 #启动端口 命令行注入
   max-http-header-size: 100KB
 
 nacos:
@@ -8,7 +8,7 @@ nacos:
 
 spring:
   application:
-    name: zmall-product-web
+    name: zmall-order-web
   main:
     allow-bean-definition-overriding: true # Spring Boot 2.1 需要设定
   cloud:
@@ -35,6 +35,9 @@ spring:
           group: COMMON_GROUP # 通用配置组
         - refresh: true
           data-id: zmall-rocket-mq.yaml # aliyun rocket mq配置
+          group: COMMON_GROUP # 通用配置组
+        - refresh: true
+          data-id: spring-boot-redis.yaml # redis配置
           group: COMMON_GROUP # 通用配置组
 
 logging:

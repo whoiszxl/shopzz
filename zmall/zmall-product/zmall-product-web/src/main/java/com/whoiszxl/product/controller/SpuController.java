@@ -42,12 +42,20 @@ public class SpuController {
         return Result.success(list);
     }
 
-    @ApiOperation("根据ID查询SPU")
+    @ApiOperation("根据ID查询商品")
     @ApiImplicitParam(value = "id",name = "id",dataType = "string",paramType = "path")
     @GetMapping("/{id}")
     public Result findById(@PathVariable String id){
         Product product = spuService.findProductById(id);
         return Result.success(product);
+    }
+
+    @ApiOperation("根据ID查询SPU")
+    @ApiImplicitParam(value = "id",name = "id",dataType = "string",paramType = "path")
+    @GetMapping("/findSpuById/{id}")
+    public Result<Spu> findSpuById(@PathVariable("id") String id){
+        Spu spu = spuService.getById(id);
+        return Result.success(spu);
     }
 
     @ApiOperation("新增商品数据")
