@@ -83,4 +83,10 @@ public class SkuController {
         List<Sku> skuList = skuService.findList(searchMap);
         return skuList;
     }
+
+    @PostMapping("/decr/count")
+    public Result decrCount(@RequestParam("username") String username){
+        skuService.decrCount(username);
+        return Result.success();
+    }
 }

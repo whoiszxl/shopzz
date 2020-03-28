@@ -2,6 +2,7 @@ package com.whoiszxl.order.controller;
 
 
 import com.whoiszxl.common.entity.Result;
+import com.whoiszxl.order.config.TokenDecode;
 import com.whoiszxl.order.entity.Order;
 import com.whoiszxl.order.service.OrderService;
 import io.swagger.annotations.Api;
@@ -26,6 +27,9 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private TokenDecode tokenDecode;
+
     @ApiOperation("查询所有的订单")
     @GetMapping
     public Result<List<Order>> findAll() {
@@ -42,11 +46,12 @@ public class OrderController {
     }
 
     @ApiOperation("新增订单数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "order", value = "订单对象", required = true, dataType = "Order", paramType = "body")})
+    @ApiImplicitParam(name = "order", value = "订单对象", required = true, dataType = "Order", paramType = "body")
     @PostMapping
     public Result add(@RequestBody Order order){
-        boolean isSave = orderService.save(order);
+        String username = tokenDecode.getUsername();
+        order.setUsername(username);
+        boolean isSave = orderService.addOrder(order);
         return isSave ? Result.success() : Result.fail("orderd fail");
     }
 

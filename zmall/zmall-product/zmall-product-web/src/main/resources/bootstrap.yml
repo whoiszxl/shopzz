@@ -36,6 +36,9 @@ spring:
         - refresh: true
           data-id: zmall-rocket-mq.yaml # aliyun rocket mq配置
           group: COMMON_GROUP # 通用配置组
+        - refresh: true
+          data-id: spring-boot-redis.yaml # redis配置
+          group: COMMON_GROUP # 通用配置组
 
 logging:
   config: classpath:log4j2.xml

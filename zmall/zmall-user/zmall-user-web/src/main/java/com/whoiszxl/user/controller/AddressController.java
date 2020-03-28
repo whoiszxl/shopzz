@@ -1,7 +1,9 @@
 package com.whoiszxl.user.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.whoiszxl.common.entity.Result;
+import com.whoiszxl.user.config.TokenDecode;
 import com.whoiszxl.user.entity.Address;
 import com.whoiszxl.user.service.AddressService;
 import io.swagger.annotations.Api;
@@ -29,17 +31,23 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private TokenDecode tokenDecode;
+
     @ApiOperation("查询所有的地址")
     @GetMapping
     public Result<List<Address>> findAll() {
-        List<Address> list = addressService.list();
+        String username = tokenDecode.getUsername();
+        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        List<Address> list = addressService.list(queryWrapper);
         return Result.success(list);
     }
 
     @ApiOperation("根据ID查询地址")
     @ApiImplicitParam(value = "地址ID",name = "id",dataType = "integer",paramType = "path")
     @GetMapping("/{id}")
-    public Result findById(@PathVariable Integer id){
+    public Result<Address> findById(@PathVariable Integer id){
         Address address = addressService.getById(id);
         return Result.success(address);
     }

@@ -15,6 +15,6 @@ import java.util.List;
 @FeignClient(name = "zmall-user-web")
 public interface AddressFeign {
 
-    @GetMapping("/address/list")
+    @GetMapping("/address")
     Result<List<Address>> list();
 }

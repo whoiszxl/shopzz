@@ -22,4 +22,10 @@ public interface SkuService extends IService<Sku> {
      * @return
      */
     List<Sku> findList(Map<String, Object> searchMap);
+
+    /**
+     * 扣减库存
+     * @param username
+     */
+    void decrCount(String username);
 }

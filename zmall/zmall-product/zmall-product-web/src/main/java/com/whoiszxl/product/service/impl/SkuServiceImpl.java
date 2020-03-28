@@ -2,11 +2,13 @@ package com.whoiszxl.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.whoiszxl.order.entity.OrderItem;
 import com.whoiszxl.product.mapper.SkuMapper;
 import com.whoiszxl.product.entity.Sku;
 import com.whoiszxl.product.service.SkuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,10 +33,27 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Autowired
     private SkuMapper skuMapper;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Override
     public List<Sku> findList(Map<String, Object> searchMap) {
         QueryWrapper queryMapper = createQueryWrapper(searchMap);
         return skuMapper.selectList(queryMapper);
+    }
+
+    @Override
+    public void decrCount(String username) {
+        //1.获取购物车中的数据
+        List<OrderItem> orderItemList = redisTemplate.boundHashOps("cart_" + username).values();
+
+        //2.循环扣减库存并增加销量
+        for (OrderItem orderItem : orderItemList) {
+            int count = skuMapper.decrCount(orderItem);
+            if(count <= 0) {
+                throw new RuntimeException("库存不足");
+            }
+        }
     }
 
     /**

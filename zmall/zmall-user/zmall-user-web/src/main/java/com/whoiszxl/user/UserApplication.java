@@ -1,6 +1,7 @@
 package com.whoiszxl.user;
 
 import com.whoiszxl.common.utils.IdWorker;
+import com.whoiszxl.user.config.TokenDecode;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -33,5 +34,10 @@ public class UserApplication {
     @Bean
     public IdWorker idWorker(){
         return new IdWorker(workerId,datacenterId);
+    }
+
+    @Bean
+    public TokenDecode tokenDecode() {
+        return new TokenDecode();
     }
 }

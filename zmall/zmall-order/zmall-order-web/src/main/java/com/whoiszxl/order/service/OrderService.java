@@ -13,4 +13,5 @@ import com.whoiszxl.order.entity.Order;
  */
 public interface OrderService extends IService<Order> {
 
+    boolean addOrder(Order order);
 }
