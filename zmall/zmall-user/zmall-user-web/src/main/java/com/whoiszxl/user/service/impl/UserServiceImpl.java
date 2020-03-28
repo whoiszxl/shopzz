@@ -5,6 +5,7 @@ import com.whoiszxl.user.entity.User;
 import com.whoiszxl.user.mapper.UserMapper;
 import com.whoiszxl.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,4 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public int addUserPoints(String username, Integer point) {
+        return userMapper.updateUserPoint(username, point);
+    }
 }

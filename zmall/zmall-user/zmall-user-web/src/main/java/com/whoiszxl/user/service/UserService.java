@@ -13,4 +13,12 @@ import com.whoiszxl.user.entity.User;
  */
 public interface UserService extends IService<User> {
 
+
+    /**
+     * 增加用户积分
+     * @param username
+     * @param point
+     * @return
+     */
+    int addUserPoints(String username, Integer point);
 }

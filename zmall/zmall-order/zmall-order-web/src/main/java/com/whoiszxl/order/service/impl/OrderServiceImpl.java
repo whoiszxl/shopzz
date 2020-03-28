@@ -10,6 +10,7 @@ import com.whoiszxl.order.mapper.OrderMapper;
 import com.whoiszxl.order.service.CartService;
 import com.whoiszxl.order.service.OrderService;
 import com.whoiszxl.product.feign.SkuFeign;
+import com.whoiszxl.user.feign.UserFeign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -51,6 +52,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Resource
     private SkuFeign skuFeign;
 
+    @Resource
+    private UserFeign userFeign;
+
     @Override
     public boolean addOrder(Order order) {
         //1. 获取购物车商品
@@ -81,6 +85,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         //扣减库存
         skuFeign.decrCount(order.getUsername());
+
+        //增加积分
+        userFeign.addPoints(1);
 
         redisTemplate.delete("cart_" + order.getUsername());
         return true;

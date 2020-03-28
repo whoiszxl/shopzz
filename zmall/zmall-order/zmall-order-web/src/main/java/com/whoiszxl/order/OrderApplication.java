@@ -20,7 +20,7 @@ import org.springframework.context.annotation.ComponentScan;
 @MapperScan("com.whoiszxl.order.mapper")
 @ComponentScan(basePackages = {"com.whoiszxl.order"})
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {"com.whoiszxl.product.feign"})
+@EnableFeignClients(basePackages = {"com.whoiszxl.product.feign", "com.whoiszxl.user.feign"})
 public class OrderApplication {
 
     @Value("${workerId}")

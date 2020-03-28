@@ -2,6 +2,7 @@ package com.whoiszxl.user.controller;
 
 
 import com.whoiszxl.common.entity.Result;
+import com.whoiszxl.user.config.TokenDecode;
 import com.whoiszxl.user.entity.User;
 import com.whoiszxl.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -30,11 +31,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TokenDecode tokenDecode;
+
     @ApiOperation("查询所有的用户")
     @GetMapping
     public Result<List<User>> findAll() {
         List<User> list = userService.list();
         return Result.success(list);
+    }
+
+    @ApiOperation("增加用户积分")
+    @GetMapping("/points/add")
+    public Result addPoints(Integer point) {
+        String username = tokenDecode.getUsername();
+        userService.addUserPoints(username, point);
+        return Result.success();
     }
 
     @ApiOperation("根据用户名查询用户")
