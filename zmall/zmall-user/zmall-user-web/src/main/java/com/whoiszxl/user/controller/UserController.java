@@ -42,10 +42,9 @@ public class UserController {
     }
 
     @ApiOperation("增加用户积分")
-    @GetMapping("/points/add")
-    public Result addPoints(Integer point) {
-        String username = tokenDecode.getUsername();
-        userService.addUserPoints(username, point);
+    @GetMapping("/points/add/{username}")
+    public Result addPoints(@PathVariable("username") String username) {
+        userService.addUserPoints(username, 1);
         return Result.success();
     }
 

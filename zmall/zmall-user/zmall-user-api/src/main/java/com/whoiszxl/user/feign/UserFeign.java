@@ -18,6 +18,6 @@ public interface UserFeign {
     @GetMapping("/user/load/{username}")
     User findUserInfo(@PathVariable("username") String username);
 
-    @GetMapping("/points/add")
-    Result addPoints(@RequestParam("points") Integer points);
+    @GetMapping("/user/points/add/{username}")
+    Result addPoints(@PathVariable("username") String username);
 }

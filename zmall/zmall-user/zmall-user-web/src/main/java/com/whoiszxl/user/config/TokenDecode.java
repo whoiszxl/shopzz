@@ -30,7 +30,8 @@ public class TokenDecode {
 
 
     public String getUsername() {
-        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        Object obj = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails)obj;
         return decodeToken(details.getTokenValue()).get("username");
     }
 

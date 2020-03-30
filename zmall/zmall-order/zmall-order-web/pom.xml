@@ -24,6 +24,12 @@
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
+            <artifactId>zmall-seata</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- spring oauth2 -->
         <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>

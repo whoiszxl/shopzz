@@ -1,5 +1,6 @@
 package com.whoiszxl.order.service.impl;
 
+import com.alibaba.fescar.spring.annotation.GlobalTransactional;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.common.constant.*;
 import com.whoiszxl.common.utils.IdWorker;
@@ -55,6 +56,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Resource
     private UserFeign userFeign;
 
+    @GlobalTransactional(name = "order_add")
     @Override
     public boolean addOrder(Order order) {
         //1. 获取购物车商品
@@ -87,7 +89,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         skuFeign.decrCount(order.getUsername());
 
         //增加积分
-        userFeign.addPoints(1);
+        userFeign.addPoints(order.getUsername());
 
         redisTemplate.delete("cart_" + order.getUsername());
         return true;
