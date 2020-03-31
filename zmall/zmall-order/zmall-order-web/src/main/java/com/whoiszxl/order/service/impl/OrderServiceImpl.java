@@ -58,7 +58,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @GlobalTransactional(name = "order_add")
     @Override
-    public boolean addOrder(Order order) {
+    public String addOrder(Order order) {
         //1. 获取购物车商品
         Map cartData = cartService.list(order.getUsername());
         List<OrderItem> orderItemList = (List<OrderItem>)cartData.get("orderItemList");
@@ -92,6 +92,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         userFeign.addPoints(order.getUsername());
 
         redisTemplate.delete("cart_" + order.getUsername());
-        return true;
+        return order.getId();
     }
 }

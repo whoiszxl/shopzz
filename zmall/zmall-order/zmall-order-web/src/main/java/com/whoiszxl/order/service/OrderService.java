@@ -13,5 +13,10 @@ import com.whoiszxl.order.entity.Order;
  */
 public interface OrderService extends IService<Order> {
 
-    boolean addOrder(Order order);
+    /**
+     * 下单操作
+     * @param order 订单实体
+     * @return
+     */
+    String addOrder(Order order);
 }

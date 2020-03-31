@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,8 +52,8 @@ public class OrderController {
     public Result add(@RequestBody Order order){
         String username = tokenDecode.getUsername();
         order.setUsername(username);
-        boolean isSave = orderService.addOrder(order);
-        return isSave ? Result.success() : Result.fail("orderd fail");
+        String orderId = orderService.addOrder(order);
+        return StringUtils.isNotEmpty(orderId) ? Result.success(orderId) : Result.fail("add order fail");
     }
 
     @ApiOperation("修改订单数据")
