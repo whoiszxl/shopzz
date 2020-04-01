@@ -7,6 +7,8 @@ import com.aliyun.mq.http.model.Message;
 import com.whoiszxl.common.config.MqTopicEnums;
 import com.whoiszxl.common.config.RocketMQConfig;
 import com.whoiszxl.common.listener.RocketMQSender;
+import com.whoiszxl.order.entity.Order;
+import com.whoiszxl.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,6 +44,8 @@ public class OrderPayListener {
     @Value("${rocketmq.groupId}")
     private String groupId;
 
+    @Autowired
+    private OrderService orderService;
 
     @Scheduled(initialDelay = 1000, fixedDelay = 5000)
     public void execute() {
@@ -88,16 +92,15 @@ public class OrderPayListener {
 
             // 处理业务逻辑
             for (Message message : messages) {
-                String messageTag = message.getMessageTag();
-                if(messageTag.equals(RocketMQConfig.PAY_QUERY)) {
-                    String groupMessage = message.getMessageBodyString();
-                    String[] split = groupMessage.split(":::::");
-                    String mallOrderId = split[0];
-                    String alipayOrderId = split[1];
-                    log.info("接收到了订单支付成功的消息，商城订单ID是：{}, 支付宝订单ID是：{}", mallOrderId, alipayOrderId);
+                String groupMessage = message.getMessageBodyString();
+                String[] split = groupMessage.split(":::::");
+                String mallOrderId = split[0];
+                String alipayOrderId = split[1];
+                log.info("接收到了订单支付成功的消息，商城订单ID是：{}, 支付宝订单ID是：{}", mallOrderId, alipayOrderId);
 
-                    //调用order业务，修改数据库
-                }
+                //调用order业务，修改数据库
+                orderService.updatePayStatusToPaid(mallOrderId, alipayOrderId);
+
                 System.out.println("Receive message: " + message);
             }
 

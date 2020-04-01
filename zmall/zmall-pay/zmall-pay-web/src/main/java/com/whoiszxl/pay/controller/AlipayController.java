@@ -27,7 +27,7 @@ public class AlipayController {
 
     @ApiOperation("支付宝支付")
     @GetMapping("/nativePay")
-    public Result nativePay(HttpServletRequest request, HttpServletResponse response, @RequestParam("orderId") String orderId, @RequestParam("money")Integer money){
+    public void nativePay(HttpServletRequest request, HttpServletResponse response, @RequestParam("orderId") String orderId, @RequestParam("money")Integer money){
         try {
             String finalAmount = AmountUtil.changeF2Y(money.longValue());
             PaymentResponseDTO paymentResponseDTO = payService.nativePay(orderId, finalAmount);
@@ -40,7 +40,6 @@ public class AlipayController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Result.fail("下单失败");
     }
 
 

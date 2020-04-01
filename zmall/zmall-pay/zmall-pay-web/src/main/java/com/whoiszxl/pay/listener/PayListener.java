@@ -35,10 +35,6 @@ public class PayListener {
     @Value("${aliyun.accessKey}")
     private String accessKey;
 
-    /** 所属的 Topic */
-    @Value("${rocketmq.topic}")
-    private String topic;
-
     /** Topic所属实例ID，默认实例为空 */
     @Value("${rocketmq.instanceId}")
     private String instanceId;
@@ -67,9 +63,9 @@ public class PayListener {
 
         final MQConsumer consumer;
         if (instanceId != null && instanceId != "") {
-            consumer = mqClient.getConsumer(instanceId, topic, groupId, null);
+            consumer = mqClient.getConsumer(instanceId, MqTopicEnums.PAY_QUERY_TOPIC.getName(), groupId, null);
         } else {
-            consumer = mqClient.getConsumer(topic, groupId);
+            consumer = mqClient.getConsumer(MqTopicEnums.PAY_QUERY_TOPIC.getName(), groupId);
         }
 
 

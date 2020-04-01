@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @description: 支付服务启动类
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.whoiszxl.pay", "com.whoiszxl.common.listener"})
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.whoiszxl.product.feign", "com.whoiszxl.user.feign"})
+@EnableScheduling
 public class PayApplication {
 
     @Value("${workerId}")
