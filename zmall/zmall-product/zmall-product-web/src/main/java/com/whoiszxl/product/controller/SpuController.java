@@ -1,10 +1,11 @@
 package com.whoiszxl.product.controller;
 
+import com.whoiszxl.common.config.MqTopicEnums;
 import com.whoiszxl.common.config.RocketMQConfig;
 import com.whoiszxl.common.entity.Result;
+import com.whoiszxl.common.listener.RocketMQSender;
 import com.whoiszxl.product.entity.Product;
 import com.whoiszxl.product.entity.Spu;
-import com.whoiszxl.product.listener.RocketMQSender;
 import com.whoiszxl.product.service.SkuService;
 import com.whoiszxl.product.service.SpuService;
 import io.swagger.annotations.Api;
@@ -97,7 +98,7 @@ public class SpuController {
     public Result audit(@PathVariable String id) {
         spuService.audit(id);
         //调用MQ更新es
-        rocketMQSender.send(id, RocketMQConfig.PRODUCT_UP);
+        rocketMQSender.send(MqTopicEnums.SEARCH_TOPIC.getName(), id, RocketMQConfig.PRODUCT_UP);
         return Result.success();
     }
 
@@ -107,7 +108,7 @@ public class SpuController {
     public Result pull(@PathVariable String id) {
         spuService.pull(id);
         //调用MQ更新es
-        rocketMQSender.send(id, RocketMQConfig.PRODUCT_DOWN);
+        rocketMQSender.send(MqTopicEnums.SEARCH_TOPIC.getName(), id, RocketMQConfig.PRODUCT_DOWN);
         return Result.success();
     }
 
@@ -117,7 +118,7 @@ public class SpuController {
     public Result put(@PathVariable String id) {
         spuService.put(id);
         //调用MQ更新es
-        rocketMQSender.send(id, RocketMQConfig.PRODUCT_UP);
+        rocketMQSender.send(MqTopicEnums.SEARCH_TOPIC.getName(), id, RocketMQConfig.PRODUCT_UP);
         return Result.success();
     }
 

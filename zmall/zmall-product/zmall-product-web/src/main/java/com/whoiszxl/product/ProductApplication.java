@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
  **/
 @SpringBootApplication
 @MapperScan("com.whoiszxl.product.mapper")
-@ComponentScan(basePackages = {"com.whoiszxl.product"})
+@ComponentScan(basePackages = {"com.whoiszxl.product", "com.whoiszxl.common.listener"})
 @EnableDiscoveryClient
 public class ProductApplication {
 

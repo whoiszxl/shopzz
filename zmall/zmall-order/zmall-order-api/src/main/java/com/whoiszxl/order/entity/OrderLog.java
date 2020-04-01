@@ -33,7 +33,7 @@ public class OrderLog implements Serializable {
     /**
      * 订单ID
      */
-    private Long orderId;
+    private String orderId;
 
     /**
      * 订单状态

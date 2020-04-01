@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
  **/
 @SpringBootApplication
 @MapperScan("com.whoiszxl.pay.mapper")
-@ComponentScan(basePackages = {"com.whoiszxl.pay"})
+@ComponentScan(basePackages = {"com.whoiszxl.pay", "com.whoiszxl.common.listener"})
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.whoiszxl.product.feign", "com.whoiszxl.user.feign"})
 public class PayApplication {

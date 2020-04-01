@@ -6,7 +6,9 @@ import com.whoiszxl.common.constant.*;
 import com.whoiszxl.common.utils.IdWorker;
 import com.whoiszxl.order.entity.Order;
 import com.whoiszxl.order.entity.OrderItem;
+import com.whoiszxl.order.entity.OrderLog;
 import com.whoiszxl.order.mapper.OrderItemMapper;
+import com.whoiszxl.order.mapper.OrderLogMapper;
 import com.whoiszxl.order.mapper.OrderMapper;
 import com.whoiszxl.order.service.CartService;
 import com.whoiszxl.order.service.OrderService;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +49,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private OrderItemMapper orderItemMapper;
+
+    @Autowired
+    private OrderLogMapper orderLogMapper;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -93,5 +99,29 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         redisTemplate.delete("cart_" + order.getUsername());
         return order.getId();
+    }
+
+    @Override
+    public void updatePayStatusToPaid(String mallOrderId, String alipayOrderId) {
+        Order order = orderMapper.selectById(mallOrderId);
+        if(order != null && order.getPayStatus().equals(PayStatusEnum.NOT_PAY.getStatus())) {
+            order.setPayStatus(PayStatusEnum.ALREADY_PAY.getStatus());
+            order.setOrderStatus(OrderStatusEnum.ALREADY_COMPLETE.getStatus());
+            order.setUpdateTime(LocalDateTime.now());
+            order.setPayTime(LocalDateTime.now());
+            order.setTransactionId(alipayOrderId);
+            orderMapper.updateById(order);
+
+            //记录订单变动日志
+            OrderLog orderLog = new OrderLog();
+            orderLog.setId(idWorker.nextId() + "");
+            orderLog.setOperater("system");
+            orderLog.setOperateTime(LocalDateTime.now());
+            orderLog.setOrderStatus(OrderStatusEnum.ALREADY_COMPLETE.getStatus());
+            orderLog.setPayStatus(PayStatusEnum.ALREADY_PAY.getStatus());
+            orderLog.setRemarks("支付宝支付流水号：" + alipayOrderId);
+            orderLog.setOrderId(order.getId());
+            orderLogMapper.insert(orderLog);
+        }
     }
 }

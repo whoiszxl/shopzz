@@ -4,7 +4,7 @@ server:
 
 nacos:
   server:
-    addr: 127.0.0.1:8848
+    addr: 47.106.236.32:8848
 
 spring:
   application:

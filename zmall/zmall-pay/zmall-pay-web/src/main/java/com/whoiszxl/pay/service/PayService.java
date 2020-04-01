@@ -11,4 +11,11 @@ public interface PayService {
      * @return
      */
     PaymentResponseDTO nativePay(String orderId, String money);
+
+    /**
+     * 查询支付宝订单状态
+     * @param outTradeNo ZMALL的商家订单号
+     * @return
+     */
+    PaymentResponseDTO queryPayOrderByAli(String outTradeNo);
 }

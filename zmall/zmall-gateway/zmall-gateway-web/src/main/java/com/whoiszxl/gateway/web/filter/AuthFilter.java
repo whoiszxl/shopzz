@@ -40,6 +40,10 @@ public class AuthFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
 
+        if ("/api/pay/alipay/notifyPay".equals(path)){
+            return chain.filter(exchange);
+        }
+
         //2.从header中获取token
         HttpHeaders headers = request.getHeaders();
         String authorization = headers.getFirst("jti");

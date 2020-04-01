@@ -19,4 +19,12 @@ public interface OrderService extends IService<Order> {
      * @return
      */
     String addOrder(Order order);
+
+
+    /**
+     * 修改订单为已支付
+     * @param mallOrderId
+     * @param alipayOrderId
+     */
+    void updatePayStatusToPaid(String mallOrderId, String alipayOrderId);
 }

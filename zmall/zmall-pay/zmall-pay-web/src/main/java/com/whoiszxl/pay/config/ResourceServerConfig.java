@@ -78,6 +78,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("/swagger-ui.html").permitAll() //配置地址放行
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/v2/**").permitAll()
+                .antMatchers("/pay/alipay/notifyPay").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .anyRequest()
                 .authenticated();    //其他地址需要认证授权

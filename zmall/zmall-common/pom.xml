@@ -12,6 +12,14 @@
     <artifactId>zmall-common</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.aliyun.mq</groupId>
+            <artifactId>mq-http-sdk</artifactId>
+            <version>1.0.1</version>
+            <classifier>jar-with-dependencies</classifier>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
