@@ -7,6 +7,7 @@ import com.whoiszxl.pay.entity.PaymentResponseDTO;
 import com.whoiszxl.pay.service.PayService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,11 @@ public class AlipayController {
             e.printStackTrace();
         }
         return Result.fail("下单失败");
+    }
+
+    public static void main(String[] args) {
+        String encode = new BCryptPasswordEncoder().encode("669731945");
+        System.out.println(encode);
     }
 
 
