@@ -12,6 +12,7 @@
     <artifactId>zmall-oauth</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>com.whoiszxl</groupId>
             <artifactId>zmall-common</artifactId>

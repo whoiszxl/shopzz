@@ -4,6 +4,7 @@ import com.whoiszxl.common.entity.Result;
 import com.whoiszxl.oauth.service.AuthService;
 import com.whoiszxl.oauth.utils.AuthToken;
 import com.whoiszxl.oauth.utils.CookieUtil;
+import com.whoiszxl.user.entity.request.LoginRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,11 +43,6 @@ public class AuthController {
     @Value("${auth.cookieMaxAge}")
     private int cookieMaxAge;
 
-    @RequestMapping("/toLogin")
-    public String toLogin(@RequestParam(value = "FROM",required = false,defaultValue = "") String from, Model model){
-        model.addAttribute("from",from);
-        return "login";
-    }
 
     public static void main(String[] args) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -55,20 +52,20 @@ public class AuthController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Result login(String username, String password, HttpServletResponse response) {
+    public Result login(@RequestBody LoginRequest loginRequest) {
         //1, 校验参数
-            if(StringUtils.isEmpty(username)) {
+        if(StringUtils.isEmpty(loginRequest.getUsername())) {
             throw new RuntimeException("请输入用户名");
         }
-        if (StringUtils.isEmpty(password)){
+        if (StringUtils.isEmpty(loginRequest.getPassword())){
             throw new RuntimeException("请输入密码");
         }
 
-        //2. 申请令牌
-        AuthToken authToken = authService.login(username, password, "changgou", "changgou");
+        //2.校验谷歌验证码
+        
 
-        //3. 存入cookie
-        this.saveJtiToCookie(authToken.getJti(),response);
+        //3. 申请令牌
+        AuthToken authToken = authService.login(loginRequest.getUsername(), loginRequest.getPassword(), "zmall", "123456");
 
         return Result.success(authToken);
     }
