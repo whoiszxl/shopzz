@@ -20,7 +20,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan("com.whoiszxl.pay.mapper")
 @ComponentScan(basePackages = {"com.whoiszxl.pay", "com.whoiszxl.common.listener"})
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {"com.whoiszxl.product.feign", "com.whoiszxl.user.feign"})
+@EnableFeignClients(basePackages = {"com.whoiszxl.product.feign", "com.whoiszxl.user.feign", "com.whoiszxl.order.feign"})
 @EnableScheduling
 public class PayApplication {
 

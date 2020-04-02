@@ -13,6 +13,13 @@
 
     <dependencies>
 
+
+        <!-- redis 使用-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.aliyun.mq</groupId>
             <artifactId>mq-http-sdk</artifactId>

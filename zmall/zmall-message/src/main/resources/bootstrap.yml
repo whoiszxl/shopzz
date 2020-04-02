@@ -1,5 +1,5 @@
 server:
-  port: 10015 #启动端口 命令行注入
+  port: 10018 #启动端口 命令行注入
   max-http-header-size: 100KB
 
 nacos:
@@ -8,7 +8,7 @@ nacos:
 
 spring:
   application:
-    name: zmall-user-web
+    name: zmall-message-web
   main:
     allow-bean-definition-overriding: true # Spring Boot 2.1 需要设定
   cloud:
@@ -39,21 +39,7 @@ spring:
         - refresh: true
           data-id: spring-boot-redis.yaml # aliyun rocket mq配置
           group: COMMON_GROUP # 通用配置组
+
+
 logging:
   config: classpath:log4j2.xml
-
-
-
-kafka:
-    bootstrap-servers: 193.112.137.231:9092 #(kafka生产集群ip+port端口)
-    producer:
-      buffer-memory: 40960
-      retries: 0
-      batch-size: 4096
-      properties:
-        linger.ms: 1
-    consumer:
-      enable-auto-commit: true #(是否自动提交)
-      auto-commit-interval: 100ms
-      auto-offset-reset: latest #(实时生产，实时消费，不会从头开始消费)
-      group-id: test #(消费组)

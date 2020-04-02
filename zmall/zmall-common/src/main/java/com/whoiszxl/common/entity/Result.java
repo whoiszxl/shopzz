@@ -28,9 +28,22 @@ public class Result<T> {
         return new Result<T>();
     }
 
+    public static Result successMsg(String msg) {
+        Result response = new Result();
+        response.setMsg(msg);
+        return response;
+    }
+
     public static <T> Result<T> success(T result) {
         Result<T> response = new Result<T>();
         response.setResult(result);
+        return response;
+    }
+
+    public static <T> Result<T> fail(Integer code, String msg) {
+        Result<T> response = new Result<T>();
+        response.setCode(code);
+        response.setMsg(msg);
         return response;
     }
 

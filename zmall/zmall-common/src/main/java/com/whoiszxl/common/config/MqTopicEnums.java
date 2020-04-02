@@ -15,7 +15,8 @@ public enum MqTopicEnums {
 
     PAY_RESULT_TOPIC("pay-result-topic"),
     PAY_QUERY_TOPIC("pay-query-topic"),
-    SEARCH_TOPIC("search-topic");
+    SEARCH_TOPIC("search-topic"),
+    MESSAGE_SMS_TOPIC("message-sms-topic");
 
     @Setter
     private String name;

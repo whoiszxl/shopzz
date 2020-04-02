@@ -23,6 +23,7 @@
         <module>zmall-task</module>
         <module>zmall-system</module>
         <module>zmall-seata</module>
+        <module>zmall-message</module>
     </modules>
 
     <parent>
