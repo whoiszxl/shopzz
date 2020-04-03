@@ -21,6 +21,18 @@ public class GoogleAuthUtils {
         return key.getKey();
     }
 
+
+    /**
+     * 获取谷歌验证码扫描用的二维码
+     * @param typeName 类型名称，一般为公司品牌名，如：zmall
+     * @param username 用户名，用户扫描二维码后绑定格式为[typeName:username],方便用户区分多个google验证码
+     * @param secret 秘钥，储存在用户表中
+     * @return
+     */
+    public static String getQrCode(String typeName, String username, String secret) {
+        return "otpauth://totp/" + typeName + ":" + username + "?secret=" + secret;
+    }
+
     /**
      * 校验谷歌验证码
      * @param key 用户数据库中储存的key

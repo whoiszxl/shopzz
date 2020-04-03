@@ -10,6 +10,12 @@ import lombok.Data;
 @Data
 public class LoginRequest {
 
+    /** 用户名 */
     private String username;
+
+    /** 密码 */
     private String password;
+
+    /** 用户输入的谷歌验证码 */
+    private Integer googleCode;
 }

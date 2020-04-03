@@ -26,6 +26,16 @@ public class User implements Serializable {
     private String password;
 
     /**
+     * 谷歌秘钥
+     */
+    private String googleKey;
+
+    /**
+     * 是否打开谷歌验证
+     */
+    private String googleKeySwitch;
+
+    /**
      * 注册手机号
      */
     private String phone;

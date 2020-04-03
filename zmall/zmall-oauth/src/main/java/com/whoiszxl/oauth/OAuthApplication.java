@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("com.whoiszxl.oauth.mapper")
-@ComponentScan(basePackages = {"com.whoiszxl.oauth"})
+@ComponentScan(basePackages = {"com.whoiszxl.oauth", "com.whoiszxl.common.exception"})
 @EnableFeignClients(basePackages = {"com.whoiszxl.user.feign"})
 public class OAuthApplication {
 
