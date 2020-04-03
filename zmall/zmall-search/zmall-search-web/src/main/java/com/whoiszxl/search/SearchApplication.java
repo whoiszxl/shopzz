@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author: whoiszxl
  * @create: 2020-03-19
  **/
-@ComponentScan(basePackages = {"com.whoiszxl.search"})
+@ComponentScan(basePackages = {"com.whoiszxl.search", "com.whoiszxl.common.exception"})
 @SpringBootApplication
 @MapperScan("com.whoiszxl.search.mapper")
 @EnableDiscoveryClient

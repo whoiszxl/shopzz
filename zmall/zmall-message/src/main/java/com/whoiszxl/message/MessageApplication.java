@@ -12,7 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @create: 2020-04-02
  **/
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.whoiszxl.message"})
+@ComponentScan(basePackages = {"com.whoiszxl.message", "com.whoiszxl.common.exception"})
 @EnableDiscoveryClient
 @EnableScheduling
 public class MessageApplication {

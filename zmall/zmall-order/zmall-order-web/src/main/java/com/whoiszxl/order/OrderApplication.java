@@ -19,7 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  **/
 @SpringBootApplication
 @MapperScan("com.whoiszxl.order.mapper")
-@ComponentScan(basePackages = {"com.whoiszxl.order"})
+@ComponentScan(basePackages = {"com.whoiszxl.order", "com.whoiszxl.common.exception"})
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {"com.whoiszxl.product.feign", "com.whoiszxl.user.feign"})
 @EnableScheduling
