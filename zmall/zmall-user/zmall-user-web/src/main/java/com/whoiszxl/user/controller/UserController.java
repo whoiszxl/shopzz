@@ -63,6 +63,19 @@ public class UserController {
         return smsSender.sendVerifySms(smsRequest.getMobile(), isMock);
     }
 
+
+    /**
+     * 发送短信接口
+     * @return
+     */
+    @PostMapping("/sendVerifySmsToMyself")
+    public Result sendVerifySmsToMyself() {
+        String username = tokenDecode.getUsername();
+        User currentUser = userService.getById(username);
+        return smsSender.sendVerifySms(currentUser.getPhone(), isMock);
+    }
+
+
     /**
      * 注册
      * @return
