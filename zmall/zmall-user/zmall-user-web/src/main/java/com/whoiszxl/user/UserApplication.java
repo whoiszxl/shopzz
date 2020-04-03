@@ -1,5 +1,6 @@
 package com.whoiszxl.user;
 
+import com.whoiszxl.common.interceptor.FeignInterceptor;
 import com.whoiszxl.common.utils.IdWorker;
 import com.whoiszxl.common.utils.RedisUtils;
 import com.whoiszxl.common.sms.SmsSender;
@@ -57,5 +58,10 @@ public class UserApplication {
     @Bean
     public SmsSender smsSender() {
         return new SmsSender();
+    }
+
+    @Bean
+    public FeignInterceptor feignInterceptor() {
+        return new FeignInterceptor();
     }
 }

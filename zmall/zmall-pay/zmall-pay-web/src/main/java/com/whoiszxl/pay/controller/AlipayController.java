@@ -42,7 +42,7 @@ public class AlipayController {
             Result<Order> orderResult = orderFeign.findById(orderId);
             Order order = orderResult.getResult();
             Integer payMoney = order.getPayMoney();
-            String finalAmount = AmountUtil.changeF2Y(payMoney.longValue());
+            String finalAmount = AmountUtil.changeF2Y(String.valueOf(payMoney.longValue()));
             PaymentResponseDTO paymentResponseDTO = payService.nativePay(orderId, finalAmount);
             //支付宝下单接口响应
             String content = (String) paymentResponseDTO.getContent();

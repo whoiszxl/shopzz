@@ -1,5 +1,6 @@
 package com.whoiszxl.order;
 
+import com.whoiszxl.common.interceptor.FeignInterceptor;
 import com.whoiszxl.common.utils.IdWorker;
 import com.whoiszxl.order.config.TokenDecode;
 import org.mybatis.spring.annotation.MapperScan;
@@ -43,5 +44,10 @@ public class OrderApplication {
     @Bean
     public TokenDecode tokenDecode() {
         return new TokenDecode();
+    }
+
+    @Bean
+    public FeignInterceptor feignInterceptor() {
+        return new FeignInterceptor();
     }
 }

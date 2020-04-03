@@ -1,5 +1,6 @@
 package com.whoiszxl.pay;
 
+import com.whoiszxl.common.interceptor.FeignInterceptor;
 import com.whoiszxl.common.utils.IdWorker;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,5 +38,10 @@ public class PayApplication {
     @Bean
     public IdWorker idWorker() {
         return new IdWorker(workerId, datacenterId);
+    }
+
+    @Bean
+    public FeignInterceptor feignInterceptor() {
+        return new FeignInterceptor();
     }
 }

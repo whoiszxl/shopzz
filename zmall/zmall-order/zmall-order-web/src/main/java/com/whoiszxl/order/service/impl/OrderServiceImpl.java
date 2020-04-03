@@ -74,6 +74,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         order.setTotalNum((Integer) cartData.get("totalNum"));
         order.setTotalMoney((Integer) cartData.get("totalMoney"));
+        order.setPayMoney((Integer) cartData.get("totalMoney"));
+        order.setPreMoney((Integer) cartData.get("totalMoney"));
         order.setUpdateTime(order.getCreateTime());
         order.setBuyerRate(BooleanEnum.IS_FALSE.getBool());
         order.setSourceType(SourceTypeEnum.APP.getSource());

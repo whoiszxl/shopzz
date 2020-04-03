@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author: whoiszxl
  * @create: 2020-03-31
  **/
-@FeignClient(name = "order")
+@FeignClient(name = "zmall-order-web")
 public interface OrderFeign {
 
     @PostMapping("/order")
