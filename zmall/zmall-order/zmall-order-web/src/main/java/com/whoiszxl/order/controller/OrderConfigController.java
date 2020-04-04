@@ -32,41 +32,5 @@ public class OrderConfigController {
         List<OrderConfig> list = orderConfigService.list();
         return Result.success(list);
     }
-
-    @ApiOperation("根据ID查询订单配置")
-    @ApiImplicitParam(value = "订单配置ID",name = "id",dataType = "integer",paramType = "path")
-    @GetMapping("/{id}")
-    public Result findById(@PathVariable Integer id){
-        OrderConfig orderConfig = orderConfigService.getById(id);
-        return Result.success(orderConfig);
-    }
-
-    @ApiOperation("新增订单配置数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "orderConfig", value = "订单配置对象", required = true, dataType = "OrderConfig", paramType = "body")})
-    @PostMapping
-    public Result add(@RequestBody OrderConfig orderConfig){
-        boolean isSave = orderConfigService.save(orderConfig);
-        return isSave ? Result.success() : Result.fail("orderConfigd fail");
-    }
-
-    @ApiOperation("修改订单配置数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "orderConfig", value = "订单配置对象", required = true, dataType = "OrderConfig", paramType = "body"),
-            @ApiImplicitParam(name = "id", value = "订单配置ID", dataType = "integer",paramType = "path")})
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody OrderConfig orderConfig, @PathVariable Integer id){
-        orderConfig.setId(id);
-        boolean isUpdate = orderConfigService.updateById(orderConfig);
-        return isUpdate ? Result.success() : Result.fail("update fail");
-    }
-
-    @ApiOperation("根据ID删除订单配置数据")
-    @ApiImplicitParam(value = "订单配置ID",name = "id",dataType = "integer",paramType = "path")
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
-        boolean isDelete = orderConfigService.removeById(id);
-        return isDelete ? Result.success() : Result.fail("delete fail");
-    }
 }
 

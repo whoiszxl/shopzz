@@ -23,7 +23,7 @@ public class ReturnOrder implements Serializable {
     /**
      * 订单号
      */
-    private Long orderId;
+    private String orderId;
 
     /**
      * 申请时间
@@ -33,7 +33,7 @@ public class ReturnOrder implements Serializable {
     /**
      * 用户ID
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 用户账号

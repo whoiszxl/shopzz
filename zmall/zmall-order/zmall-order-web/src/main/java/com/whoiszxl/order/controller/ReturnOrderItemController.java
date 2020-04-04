@@ -2,6 +2,7 @@ package com.whoiszxl.order.controller;
 
 
 import com.whoiszxl.common.entity.Result;
+import com.whoiszxl.order.config.TokenDecode;
 import com.whoiszxl.order.entity.ReturnOrderItem;
 import com.whoiszxl.order.service.ReturnOrderItemService;
 import io.swagger.annotations.Api;
@@ -22,6 +23,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/returnReturnOrderItemItem")
 public class ReturnOrderItemController {
+
+    @Autowired
+    private TokenDecode tokenDecode;
 
     @Autowired
     private ReturnOrderItemService returnReturnOrderItemItemService;

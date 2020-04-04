@@ -1,6 +1,7 @@
 package com.whoiszxl.order.service.impl;
 
 import com.alibaba.fescar.spring.annotation.GlobalTransactional;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.common.constant.*;
 import com.whoiszxl.common.utils.IdWorker;
@@ -125,5 +126,13 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             orderLog.setOrderId(order.getId());
             orderLogMapper.insert(orderLog);
         }
+    }
+
+    @Override
+    public Order findByUsernameAndOrderId(String username, String orderId) {
+        QueryWrapper<Order> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);
+        queryWrapper.eq("id", orderId);
+        return orderMapper.selectOne(queryWrapper);
     }
 }

@@ -41,31 +41,31 @@ public class AdController {
         return Result.success(ad);
     }
 
-    @ApiOperation("新增广告数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "ad", value = "广告对象", required = true, dataType = "Ad", paramType = "body")})
-    @PostMapping
-    public Result add(@RequestBody Ad ad){
-        boolean isSave = adService.save(ad);
-        return isSave ? Result.success() : Result.fail("add fail");
-    }
-
-    @ApiOperation("修改广告数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "ad", value = "广告对象", required = true, dataType = "Ad", paramType = "body"),
-            @ApiImplicitParam(name = "id", value = "广告ID", dataType = "integer",paramType = "path")})
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody Ad ad, @PathVariable Integer id){
-        ad.setId(id);
-        boolean isUpdate = adService.updateById(ad);
-        return isUpdate ? Result.success() : Result.fail("update fail");
-    }
-
-    @ApiOperation("根据ID删除广告数据")
-    @ApiImplicitParam(value = "广告ID",name = "id",dataType = "integer",paramType = "path")
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
-        boolean isDelete = adService.removeById(id);
-        return isDelete ? Result.success() : Result.fail("delete fail");
-    }
+//    @ApiOperation("新增广告数据")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "ad", value = "广告对象", required = true, dataType = "Ad", paramType = "body")})
+//    @PostMapping
+//    public Result add(@RequestBody Ad ad){
+//        boolean isSave = adService.save(ad);
+//        return isSave ? Result.success() : Result.fail("add fail");
+//    }
+//
+//    @ApiOperation("修改广告数据")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "ad", value = "广告对象", required = true, dataType = "Ad", paramType = "body"),
+//            @ApiImplicitParam(name = "id", value = "广告ID", dataType = "integer",paramType = "path")})
+//    @PutMapping(value="/{id}")
+//    public Result update(@RequestBody Ad ad, @PathVariable Integer id){
+//        ad.setId(id);
+//        boolean isUpdate = adService.updateById(ad);
+//        return isUpdate ? Result.success() : Result.fail("update fail");
+//    }
+//
+//    @ApiOperation("根据ID删除广告数据")
+//    @ApiImplicitParam(value = "广告ID",name = "id",dataType = "integer",paramType = "path")
+//    @DeleteMapping(value = "/{id}" )
+//    public Result delete(@PathVariable Integer id){
+//        boolean isDelete = adService.removeById(id);
+//        return isDelete ? Result.success() : Result.fail("delete fail");
+//    }
 }

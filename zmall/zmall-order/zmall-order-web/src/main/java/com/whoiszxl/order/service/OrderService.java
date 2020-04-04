@@ -27,4 +27,13 @@ public interface OrderService extends IService<Order> {
      * @param alipayOrderId
      */
     void updatePayStatusToPaid(String mallOrderId, String alipayOrderId);
+
+
+    /**
+     * 通过用户名和订单号查询到订单详情
+     * @param username 用户名
+     * @param orderId 订单号
+     * @return
+     */
+    Order findByUsernameAndOrderId(String username, String orderId);
 }

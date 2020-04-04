@@ -41,31 +41,31 @@ public class ActivityController {
         return Result.success(activity);
     }
 
-    @ApiOperation("新增活动数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "activity", value = "活动对象", required = true, dataType = "Activity", paramType = "body")})
-    @PostMapping
-    public Result add(@RequestBody Activity activity){
-        boolean isSave = activityService.save(activity);
-        return isSave ? Result.success() : Result.fail("add fail");
-    }
-
-    @ApiOperation("修改活动数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "activity", value = "活动对象", required = true, dataType = "Activity", paramType = "body"),
-            @ApiImplicitParam(name = "id", value = "活动ID", dataType = "integer",paramType = "path")})
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody Activity activity, @PathVariable Integer id){
-        activity.setId(id);
-        boolean isUpdate = activityService.updateById(activity);
-        return isUpdate ? Result.success() : Result.fail("update fail");
-    }
-
-    @ApiOperation("根据ID删除活动数据")
-    @ApiImplicitParam(value = "活动ID",name = "id",dataType = "integer",paramType = "path")
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
-        boolean isDelete = activityService.removeById(id);
-        return isDelete ? Result.success() : Result.fail("delete fail");
-    }
+//    @ApiOperation("新增活动数据")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "activity", value = "活动对象", required = true, dataType = "Activity", paramType = "body")})
+//    @PostMapping
+//    public Result add(@RequestBody Activity activity){
+//        boolean isSave = activityService.save(activity);
+//        return isSave ? Result.success() : Result.fail("add fail");
+//    }
+//
+//    @ApiOperation("修改活动数据")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "activity", value = "活动对象", required = true, dataType = "Activity", paramType = "body"),
+//            @ApiImplicitParam(name = "id", value = "活动ID", dataType = "integer",paramType = "path")})
+//    @PutMapping(value="/{id}")
+//    public Result update(@RequestBody Activity activity, @PathVariable Integer id){
+//        activity.setId(id);
+//        boolean isUpdate = activityService.updateById(activity);
+//        return isUpdate ? Result.success() : Result.fail("update fail");
+//    }
+//
+//    @ApiOperation("根据ID删除活动数据")
+//    @ApiImplicitParam(value = "活动ID",name = "id",dataType = "integer",paramType = "path")
+//    @DeleteMapping(value = "/{id}" )
+//    public Result delete(@PathVariable Integer id){
+//        boolean isDelete = activityService.removeById(id);
+//        return isDelete ? Result.success() : Result.fail("delete fail");
+//    }
 }

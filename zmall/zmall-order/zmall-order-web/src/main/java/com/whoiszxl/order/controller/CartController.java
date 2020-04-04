@@ -4,6 +4,7 @@ import com.whoiszxl.common.entity.Result;
 import com.whoiszxl.order.config.TokenDecode;
 import com.whoiszxl.order.service.CartService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ public class CartController {
     @Autowired
     private TokenDecode tokenDecode;
 
+    @ApiOperation("添加商品到购物车")
     @GetMapping("/add")
     public Result add(@RequestParam("skuId") String skuId, @RequestParam("num") Integer num) {
         String username = tokenDecode.getUsername();
@@ -31,6 +33,7 @@ public class CartController {
         return Result.success();
     }
 
+    @ApiOperation("获取购物车列表")
     @GetMapping("/list")
     public Result list() {
         String username = tokenDecode.getUsername();

@@ -1,13 +1,19 @@
 package com.whoiszxl.order.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.whoiszxl.common.constant.BooleanEnum;
 import com.whoiszxl.common.entity.Result;
+import com.whoiszxl.order.config.TokenDecode;
+import com.whoiszxl.order.entity.Order;
 import com.whoiszxl.order.entity.ReturnOrder;
+import com.whoiszxl.order.service.OrderService;
 import com.whoiszxl.order.service.ReturnOrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,12 +30,21 @@ import java.util.List;
 public class ReturnOrderController {
 
     @Autowired
+    private TokenDecode tokenDecode;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
     private ReturnOrderService returnOrderService;
 
-    @ApiOperation("查询所有的退款订单")
+    @ApiOperation("查询当前用户所有的退款订单")
     @GetMapping
     public Result<List<ReturnOrder>> findAll() {
-        List<ReturnOrder> list = returnOrderService.list();
+        String username = tokenDecode.getUsername();
+        QueryWrapper<ReturnOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_account", username);
+        List<ReturnOrder> list = returnOrderService.list(queryWrapper);
         return Result.success(list);
     }
 
@@ -37,7 +52,11 @@ public class ReturnOrderController {
     @ApiImplicitParam(value = "退款订单ID",name = "id",dataType = "integer",paramType = "path")
     @GetMapping("/{id}")
     public Result findById(@PathVariable String id){
-        ReturnOrder returnOrder = returnOrderService.getById(id);
+        String username = tokenDecode.getUsername();
+        QueryWrapper<ReturnOrder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_account", username);
+        queryWrapper.eq("id", id);
+        ReturnOrder returnOrder = returnOrderService.getOne(queryWrapper);
         return Result.success(returnOrder);
     }
 
@@ -45,7 +64,17 @@ public class ReturnOrderController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "returnOrder", value = "退款订单对象", required = true, dataType = "ReturnOrder", paramType = "body")})
     @PostMapping
-    public Result returnOrderd(@RequestBody ReturnOrder returnOrder){
+    public Result addReturnOrder(@RequestBody ReturnOrder returnOrder){
+        //判断订单是否是当前用户的
+        String username = tokenDecode.getUsername();
+        Order order = orderService.findByUsernameAndOrderId(username, returnOrder.getOrderId());
+        if(order == null) {
+            return Result.fail("订单号错误");
+        }
+
+        returnOrder.setUserId(username);
+        returnOrder.setUserAccount(username);
+        returnOrder.setStatus(BooleanEnum.IS_FALSE.getBool());
         boolean isSave = returnOrderService.save(returnOrder);
         return isSave ? Result.success() : Result.fail("returnOrderd fail");
     }
@@ -56,6 +85,12 @@ public class ReturnOrderController {
             @ApiImplicitParam(name = "id", value = "退款订单ID", dataType = "string",paramType = "path")})
     @PutMapping(value="/{id}")
     public Result update(@RequestBody ReturnOrder returnOrder, @PathVariable String id){
+        //判断订单是否是当前用户的
+        String username = tokenDecode.getUsername();
+        Order order = orderService.findByUsernameAndOrderId(username, returnOrder.getOrderId());
+        if(order == null) {
+            return Result.fail("订单号错误");
+        }
         returnOrder.setId(id);
         boolean isUpdate = returnOrderService.updateById(returnOrder);
         return isUpdate ? Result.success() : Result.fail("update fail");
@@ -65,6 +100,12 @@ public class ReturnOrderController {
     @ApiImplicitParam(value = "退款订单ID",name = "id",dataType = "string",paramType = "path")
     @DeleteMapping(value = "/{id}" )
     public Result delete(@PathVariable String id){
+        //判断退款订单是否是当前用户的
+        String username = tokenDecode.getUsername();
+        ReturnOrder returnOrder = returnOrderService.getById(id);
+        if(!StringUtils.equals(username, returnOrder.getUserAccount())) {
+            return Result.fail("退款申请ID错误");
+        }
         boolean isDelete = returnOrderService.removeById(id);
         return isDelete ? Result.success() : Result.fail("delete fail");
     }
