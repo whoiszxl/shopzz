@@ -9,6 +9,7 @@ import com.whoiszxl.user.entity.User;
 import com.whoiszxl.user.entity.request.GoogleBindRequest;
 import com.whoiszxl.user.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description: 谷歌验证控制器
@@ -38,12 +41,23 @@ public class GoogleAuthController {
     @Value("${message.isMock}")
     private Boolean isMock;
 
-    /**
-     * 注册
-     * @return
-     */
+
+    @ApiOperation("生成谷歌验证码")
+    @PostMapping("/generate")
+    public Result generate() {
+        String username = tokenDecode.getUsername();
+        String key = GoogleAuthUtils.createKey();
+        String qrCode = GoogleAuthUtils.getQrCode("ZMALL", username, key);
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("key", key);
+        resultMap.put("qrCode", qrCode);
+        return Result.success(resultMap);
+    }
+
+
+        @ApiOperation("绑定谷歌验证码接口")
     @PostMapping("/bind")
-    public Result register(@RequestBody GoogleBindRequest googleBindRequest){
+    public Result bind(@RequestBody GoogleBindRequest googleBindRequest){
 
         //获取当前用户的信息
         String username = tokenDecode.getUsername();
