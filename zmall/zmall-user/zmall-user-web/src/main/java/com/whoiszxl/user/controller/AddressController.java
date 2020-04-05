@@ -2,6 +2,7 @@ package com.whoiszxl.user.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.whoiszxl.common.entity.Result;
 import com.whoiszxl.user.config.TokenDecode;
 import com.whoiszxl.user.entity.Address;
@@ -56,19 +57,21 @@ public class AddressController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "address", value = "地址对象", required = true, dataType = "Address", paramType = "body")})
     @PostMapping
-    public Result addressd(@RequestBody Address address){
+    public Result add(@RequestBody Address address){
+        String username = tokenDecode.getUsername();
+        address.setUsername(username);
         boolean isSave = addressService.save(address);
         return isSave ? Result.success() : Result.fail("addressd fail");
     }
 
     @ApiOperation("修改地址数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "address", value = "地址对象", required = true, dataType = "Address", paramType = "body"),
-            @ApiImplicitParam(name = "id", value = "地址ID", dataType = "integer",paramType = "path")})
+    @ApiImplicitParam(name = "address", value = "地址对象", required = true, dataType = "Address", paramType = "body")
     @PutMapping(value="/{id}")
-    public Result update(@RequestBody Address address, @PathVariable Integer id){
-        address.setId(id);
-        boolean isUpdate = addressService.updateById(address);
+    public Result update(@RequestBody Address address){
+        String username = tokenDecode.getUsername();
+        UpdateWrapper<Address> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("username", username);
+        boolean isUpdate = addressService.update(address, updateWrapper);
         return isUpdate ? Result.success() : Result.fail("update fail");
     }
 
@@ -76,7 +79,11 @@ public class AddressController {
     @ApiImplicitParam(value = "地址ID",name = "id",dataType = "integer",paramType = "path")
     @DeleteMapping(value = "/{id}" )
     public Result delete(@PathVariable Integer id){
-        boolean isDelete = addressService.removeById(id);
+        String username = tokenDecode.getUsername();
+        QueryWrapper<Address> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", id);
+        queryWrapper.eq("username", username);
+        boolean isDelete = addressService.remove(queryWrapper);
         return isDelete ? Result.success() : Result.fail("delete fail");
     }
 }

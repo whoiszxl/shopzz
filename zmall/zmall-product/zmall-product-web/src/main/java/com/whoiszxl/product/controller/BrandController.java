@@ -47,34 +47,6 @@ public class BrandController {
         return Result.success(brand);
     }
 
-    @ApiOperation("新增品牌数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "brand", value = "品牌对象", required = true, dataType = "Brand", paramType = "body")})
-    @PostMapping
-    public Result add(@RequestBody Brand brand){
-        boolean isSave = mallBrandService.save(brand);
-        return isSave ? Result.success() : Result.fail("add fail");
-    }
-
-    @ApiOperation("修改品牌数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "brand", value = "品牌对象", required = true, dataType = "Brand", paramType = "body"),
-            @ApiImplicitParam(name = "id", value = "品牌ID", dataType = "integer",paramType = "path")})
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody Brand brand, @PathVariable Integer id){
-        brand.setId(id);
-        boolean isUpdate = mallBrandService.updateById(brand);
-        return isUpdate ? Result.success() : Result.fail("update fail");
-    }
-
-    @ApiOperation("根据ID删除品牌数据")
-    @ApiImplicitParam(value = "品牌ID",name = "id",dataType = "integer",paramType = "path")
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
-        boolean isDelete = mallBrandService.removeById(id);
-        return isDelete ? Result.success() : Result.fail("delete fail");
-    }
-
     @ApiOperation("多条件搜索品牌数据")
     @ApiImplicitParam(value = "搜索条件",name = "brandSearchVo",dataType = "BrandSearchVo",paramType = "body")
     @PostMapping(value = "/search" )

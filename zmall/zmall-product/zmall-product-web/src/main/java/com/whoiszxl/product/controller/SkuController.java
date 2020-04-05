@@ -43,35 +43,6 @@ public class SkuController {
         return Result.success(sku);
     }
 
-    @ApiOperation("新增SKU数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "sku", value = "SKU对象", required = true, dataType = "Sku", paramType = "body")})
-    @PostMapping
-    public Result add(@RequestBody Sku sku){
-        boolean isSave = skuService.save(sku);
-        return isSave ? Result.success() : Result.fail("add fail");
-    }
-
-    @ApiOperation("修改SKU数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "sku", value = "SKU对象", required = true, dataType = "Sku", paramType = "body"),
-            @ApiImplicitParam(name = "id", value = "id", dataType = "integer",paramType = "path")})
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody Sku sku, @PathVariable String id){
-        sku.setId(id);
-        boolean isUpdate = skuService.updateById(sku);
-        return isUpdate ? Result.success() : Result.fail("update fail");
-    }
-
-    @ApiOperation("根据ID删除SKU数据")
-    @ApiImplicitParam(value = "id",name = "id",dataType = "integer",paramType = "path")
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable String id){
-        boolean isDelete = skuService.removeById(id);
-        return isDelete ? Result.success() : Result.fail("delete fail");
-    }
-
-
     @PostMapping("/spu/{spuId}")
     public List<Sku> findSkuListBySpuId(@PathVariable("spuId") String spuId){
         Map<String,Object> searchMap = new HashMap<>();

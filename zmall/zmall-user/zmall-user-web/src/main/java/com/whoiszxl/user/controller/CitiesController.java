@@ -45,32 +45,4 @@ public class CitiesController {
         Cities cities = citiesService.getById(id);
         return Result.success(cities);
     }
-
-    @ApiOperation("新增城市数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "cities", value = "城市对象", required = true, dataType = "Cities", paramType = "body")})
-    @PostMapping
-    public Result citiesd(@RequestBody Cities cities){
-        boolean isSave = citiesService.save(cities);
-        return isSave ? Result.success() : Result.fail("citiesd fail");
-    }
-
-    @ApiOperation("修改城市数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "cities", value = "城市对象", required = true, dataType = "Cities", paramType = "body"),
-            @ApiImplicitParam(name = "id", value = "城市ID", dataType = "integer",paramType = "path")})
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody Cities cities, @PathVariable String id){
-        cities.setCityid(id);
-        boolean isUpdate = citiesService.updateById(cities);
-        return isUpdate ? Result.success() : Result.fail("update fail");
-    }
-
-    @ApiOperation("根据ID删除城市数据")
-    @ApiImplicitParam(value = "城市ID",name = "id",dataType = "integer",paramType = "path")
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
-        boolean isDelete = citiesService.removeById(id);
-        return isDelete ? Result.success() : Result.fail("delete fail");
-    }
 }

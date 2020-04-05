@@ -124,20 +124,11 @@ public class UserController {
         return userService.getById(username);
     }
 
-
-    @ApiOperation("新增用户数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "user", value = "用户对象", required = true, dataType = "User", paramType = "body")})
-    @PostMapping
-    public Result add(@RequestBody User user){
-        boolean isSave = userService.save(user);
-        return isSave ? Result.success() : Result.fail("userd fail");
-    }
-
     @ApiOperation("修改用户数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "user", value = "用户对象", required = true, dataType = "User", paramType = "body"),
             @ApiImplicitParam(name = "username", value = "用户名", dataType = "integer",paramType = "path")})
+    @PreAuthorize("hasAnyAuthority('admin')")
     @PutMapping(value="/{username}")
     public Result update(@RequestBody User user, @PathVariable String username){
         user.setUsername(username);
@@ -148,7 +139,7 @@ public class UserController {
     @ApiOperation("根据ID删除用户数据")
     @ApiImplicitParam(value = "用户名",name = "username",dataType = "string",paramType = "path")
     @DeleteMapping(value = "/{username}" )
-    @PreAuthorize("hasAnyAuthority('admin', 'deleteman')")
+    @PreAuthorize("hasAnyAuthority('admin')")
     public Result delete(@PathVariable String username){
         boolean isDelete = userService.removeById(username);
         return isDelete ? Result.success() : Result.fail("delete fail");

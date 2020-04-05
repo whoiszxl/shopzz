@@ -45,32 +45,4 @@ public class ProvincesController {
         Provinces ad = adService.getById(id);
         return Result.success(ad);
     }
-
-    @ApiOperation("新增省份数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "ad", value = "省份对象", required = true, dataType = "Provinces", paramType = "body")})
-    @PostMapping
-    public Result add(@RequestBody Provinces ad){
-        boolean isSave = adService.save(ad);
-        return isSave ? Result.success() : Result.fail("add fail");
-    }
-
-    @ApiOperation("修改省份数据")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "ad", value = "省份对象", required = true, dataType = "Provinces", paramType = "body"),
-            @ApiImplicitParam(name = "id", value = "省份ID", dataType = "integer",paramType = "path")})
-    @PutMapping(value="/{id}")
-    public Result update(@RequestBody Provinces ad, @PathVariable String id){
-        ad.setProvinceid(id);
-        boolean isUpdate = adService.updateById(ad);
-        return isUpdate ? Result.success() : Result.fail("update fail");
-    }
-
-    @ApiOperation("根据ID删除省份数据")
-    @ApiImplicitParam(value = "省份ID",name = "id",dataType = "integer",paramType = "path")
-    @DeleteMapping(value = "/{id}" )
-    public Result delete(@PathVariable Integer id){
-        boolean isDelete = adService.removeById(id);
-        return isDelete ? Result.success() : Result.fail("delete fail");
-    }
 }
