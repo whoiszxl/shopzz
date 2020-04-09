@@ -1,4 +1,4 @@
-## 基于Java SpringCloud实现的前后端分离商城
+## 基于JavaSpringCloud实现的前后端分离商城
 [![MyWebSite](https://img.shields.io/badge/我的站点-whoiszxl-blue.svg)](https://whoiszxl.github.io)
 [![docs](https://img.shields.io/badge/docs-reference-green.svg)](http://zmall.whoiszxl.com)
 [![teach](https://img.shields.io/badge/教程-BohemianRhapsody-orange.svg)](https://github.com/whoiszxl/AYANAMI)
