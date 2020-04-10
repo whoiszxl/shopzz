@@ -2,11 +2,10 @@
   * [1.序言](markdown/0_start/1.序言)
 
 * 电商技术架构概览与初始化
-  * [1.后台框架选型之SpringCloudAlibaba](markdown/1_init/1.后台框架选型之SpringCloudAlibaba)
-  * [2.后台主流技术概览](markdown/1_init/2.后台主流技术概览)
-  * [3.后台增强技术概览](markdown/1_init/3.后台增强技术概览)
-  * [4.前端技术概览](markdown/1_init/4.前端技术概览)
-  * [5.表结构分析](markdown/1_init/4.表结构分析)
+  * [1.后台主流技术概览](markdown/1_init/1.后台主流技术概览)
+  * [2.后台增强技术概览](markdown/1_init/2.后台增强技术概览)
+  * [3.前端技术概览](markdown/1_init/3.前端技术概览)
+  * [4.表结构分析](markdown/1_init/4.表结构分析)
 
 
 * 电商技术框架构建
