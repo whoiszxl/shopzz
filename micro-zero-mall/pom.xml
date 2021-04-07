@@ -38,7 +38,7 @@
         <net.sf.supercsv.version>2.4.0</net.sf.supercsv.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <springside-utils.version>5.0.0-RC1</springside-utils.version>
-        <mysql-connector-java.version>5.1.47</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
     </properties>
 
     <parent>
