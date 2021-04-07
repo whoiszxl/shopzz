@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.whoiszxl.zero</groupId>
+    <artifactId>micro-zero-mall</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0</version>
+
+    <name>micro-zero-mall</name>
+    <description>微服务电商系统</description>
+
+    <url>https://github.com/whoiszxl/zero-mall</url>
+
+    <developers>
+        <developer>
+            <name>whoiszxl</name>
+            <email>whoiszxl@gmail.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <flyway.version>7.7.2</flyway.version>
+        <swagger3.version>3.0.0</swagger3.version>
+        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
+        <com-alibaba-cloud.version>2.2.1.RELEASE</com-alibaba-cloud.version>
+        <redisson-spring-boot-starter.version>3.13.3</redisson-spring-boot-starter.version>
+        <jetcache-starter-redis.version>2.6.0</jetcache-starter-redis.version>
+        <googleauth.version>1.1.5</googleauth.version>
+        <aliyun-sdk-oss.version>3.1.0</aliyun-sdk-oss.version>
+        <aliyun-java-sdk-core.version>4.0.3</aliyun-java-sdk-core.version>
+        <aliyun-java-sdk-dm.version>3.3.1</aliyun-java-sdk-dm.version>
+        <net.sf.supercsv.version>2.4.0</net.sf.supercsv.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <springside-utils.version>5.0.0-RC1</springside-utils.version>
+        <mysql-connector-java.version>5.1.47</mysql-connector-java.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>${com-alibaba-cloud.version}</version>
+        <relativePath/>
+    </parent>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${com-alibaba-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alicp.jetcache</groupId>
+                <artifactId>jetcache-starter-redis</artifactId>
+                <version>${jetcache-starter-redis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springside</groupId>
+                <artifactId>springside-utils</artifactId>
+                <version>${springside-utils.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.sf.supercsv</groupId>
+                <artifactId>super-csv</artifactId>
+                <version>${net.sf.supercsv.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-core</artifactId>
+                <version>${flyway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-sdk-oss.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-java-sdk-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-dm</artifactId>
+                <version>${aliyun-java-sdk-dm.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>zero-task</module>
+        <module>zero-core</module>
+        <module>zero-member</module>
+        <module>zero-order</module>
+        <module>zero-promotion</module>
+        <module>zero-finance</module>
+        <module>zero-wms</module>
+        <module>zero-pay</module>
+        <module>zero-bitpay</module>
+        <module>zero-pay</module>
+        <module>zero-wms</module>
+        <module>zero-finance</module>
+        <module>zero-oss</module>
+        <module>zero-admin</module>
+        <module>zero-product</module>
+        <module>zero-statistics</module>
+        <module>zero-comment</module>
+        <module>zero-message</module>
+        <module>zero-push</module>
+        <module>zero-erp</module>
+        <module>zero-search</module>
+        <module>zero-cart</module>
+        <module>zero-iaas</module>
+        <module>zero-bitpay/zero-bitpay-api</module>
+        <module>zero-bitpay/zero-bitpay-web</module>
+        <module>zero-cart/zero-cart-api</module>
+        <module>zero-cart/zero-cart-web</module>
+        <module>zero-finance/zero-finance-api</module>
+        <module>zero-finance/zero-finance-web</module>
+        <module>zero-iaas/zero-gateway</module>
+        <module>zero-iaas/zero-authentication</module>
+        <module>zero-message/zero-message-api</module>
+        <module>zero-message/zero-message-web</module>
+        <module>zero-order/zero-order-api</module>
+        <module>zero-order/zero-order-web</module>
+        <module>zero-pay/zero-pay-api</module>
+        <module>zero-pay/zero-pay-web</module>
+        <module>zero-product/zero-product-api</module>
+        <module>zero-product/zero-product-web</module>
+        <module>zero-promotion/zero-promotion-api</module>
+        <module>zero-promotion/zero-promotion-web</module>
+        <module>zero-push/zero-push-api</module>
+        <module>zero-push/zero-push-web</module>
+        <module>zero-search/zero-search-api</module>
+        <module>zero-search/zero-search-web</module>
+        <module>zero-statistics/zero-statistics-api</module>
+        <module>zero-statistics/zero-statistics-web</module>
+        <module>zero-purchase</module>
+        <module>zero-purchase/zero-purchase-api</module>
+        <module>zero-purchase/zero-purchase-web</module>
+    </modules>
+
+</project>
