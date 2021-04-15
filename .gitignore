@@ -1,0 +1,65 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# my configuration
+.metadata
+RemoteSystemsTempFiles
+.mvn
+mvnw
+mvnw.cmd
+.recommenders
+Servers
+
+
+# frontend configuration
+node_modules
+
+dist
+.idea
+*.iml
+
+.project
+.settings
+
+.classpath
+
+target
+
+
+
+# PHP ADMIN 
+vendor/
+node_modules/
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+bootstrap/cache/
+.env.*.php
+.env.php
+.env
+
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/

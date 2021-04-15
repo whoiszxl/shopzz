@@ -1,0 +1,167 @@
+server:
+  port: 80
+spring:
+  application:
+    name: zero-gateway
+  cloud:
+    nacos:
+      server-addr: aliyun.whoiszxl.com:8848
+      config:
+        server-addr: aliyun.whoiszxl.com:8848
+        file-extension: yaml
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: zero-admin-web_router
+          uri: lb://zero-admin-web   # 转发到那个目的地
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1 # 当前端访问/admin/login - >login 将admin自动的去掉
+
+        - id: zero-bitpay-web_router
+          uri: lb://zero-bitpay-web
+          predicates:
+            - Path=/bitpay/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-cart-web_router
+          uri: lb://zero-cart-web-service
+          predicates:
+            - Path=/cart/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-comment-web_router
+          uri: lb://zero-comment-web
+          predicates:
+            - Path=/comment/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-erp-web_router
+          uri: lb://zero-erp-web
+          predicates:
+            - Path=/erp/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-finance-web_router
+          uri: lb://zero-finance-web
+          predicates:
+            - Path=/finance/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-member-web_router
+          uri: lb://zero-member-web
+          predicates:
+            - Path=/member/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-message-web_router
+          uri: lb://zero-message-web
+          predicates:
+            - Path=/message/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-order-web_router
+          uri: lb://zero-order-web
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-oss-web_router
+          uri: lb://zero-oss-web
+          predicates:
+            - Path=/oss/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-pay-web_router
+          uri: lb://zero-pay-web
+          predicates:
+            - Path=/pay/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-product-web_router
+          uri: lb://zero-product-web
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-promotion-web_router
+          uri: lb://zero-promotion-web
+          predicates:
+            - Path=/promotion/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-purchase-web_router
+          uri: lb://zero-purchase-web
+          predicates:
+            - Path=/purchase/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-push-web_router
+          uri: lb://zero-push-web
+          predicates:
+            - Path=/push/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-search-web_router
+          uri: lb://zero-search-web
+          predicates:
+            - Path=/search/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-statistics-web_router
+          uri: lb://zero-statistics-web
+          predicates:
+            - Path=/statistics/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-wms-web_router
+          uri: lb://zero-wms-web
+          predicates:
+            - Path=/wms/**
+          filters:
+            - StripPrefix=1
+
+        - id: zero-task_router
+          uri: lb://zero-task
+          predicates:
+            - Path=/task/**
+          filters:
+            - StripPrefix=1
+
+        - id: test_router
+          uri: http://www.aliyun.com
+          predicates:
+            - Path=/activity
+
+    sentinel:
+      transport:
+        dashboard: 159.75.31.203:8858
+      datasource:
+        ds1.nacos:
+          serverAddr: aliyun.whoiszxl.com:8848
+          dataId: gw-flow
+          ruleType: gw_flow
+        ds2.nacos:
+          serverAddr: aliyun.whoiszxl.com:8848
+          dataId: api-group
+          ruleType: gw_api_group
