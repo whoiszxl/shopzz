@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mall/util/color.dart';
 
 ///自定义商品价格Bar
 productPriceBar(String productPrice) {
@@ -137,5 +138,74 @@ serviceGuarantees(String info) {
                 fontWeight: FontWeight.w500, fontSize: 11, color: Colors.black87)),
       ],
     ),
+  );
+}
+
+///地址设计
+addressSet(String address, String type, String message) {
+  return RichText(
+    text: TextSpan(
+      children: [
+        WidgetSpan(child: Column(
+          children: [
+            Text("送至",
+                style: TextStyle(fontSize: 11, color: Colors.grey)
+            ),
+            Text("")
+          ],
+        )),
+        
+        WidgetSpan(child: SizedBox(width: 6)),
+
+        WidgetSpan(child: Column(
+          children: [
+            Row(
+              children: [
+                Text(address, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11, color: Colors.black87), textAlign: TextAlign.start),
+                Text("")
+              ],
+            ),
+            Row(
+              children: [
+                Text(type, style: TextStyle(fontWeight: FontWeight.w600, fontSize: 11, color: primary)),
+                SizedBox(width: 3),
+                Text(message, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 11, color: Colors.black87)),
+              ],
+            )
+          ],
+        ))
+      ],
+    ),
+  );
+}
+
+///评价框
+productComment(int commentCount, double niceCommentRate) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      RichText(
+        text: TextSpan(children: [
+          WidgetSpan(
+            child: new Container(
+              padding: const EdgeInsets.only(left: 2, right: 2, top: 0, bottom: 1),
+              child: Text("评价 " + commentCount.toString() + "+ | 好评率 " + niceCommentRate.toString(), style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w500,
+              )),
+            ),
+          ),
+          WidgetSpan(child: SizedBox(width: 3)),
+        ]),
+      ),
+
+
+      Row(
+        children: [
+          Text("查看更多", style: TextStyle(fontSize: 11, color: Colors.grey)),
+          Icon(Icons.keyboard_arrow_right, color: Colors.grey)
+        ],
+      ),
+    ],
   );
 }

@@ -8,5 +8,6 @@ List noLoginRoute = [
   RouteStatus.category,
   RouteStatus.login,
   RouteStatus.category,
-  RouteStatus.discovery
+  RouteStatus.discovery,
+  RouteStatus.product_list
 ];

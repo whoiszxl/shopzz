@@ -9,6 +9,7 @@ import 'package:flutter_mall/navigator/bottom_navigator.dart';
 import 'package:flutter_mall/navigator/zero_navigator.dart';
 import 'package:flutter_mall/page/detail_page.dart';
 import 'package:flutter_mall/page/login_page.dart';
+import 'package:flutter_mall/page/product_list_page.dart';
 import 'package:flutter_mall/page/register_page.dart';
 import 'package:flutter_mall/util/color.dart';
 import 'package:flutter_mall/util/toast.dart';
@@ -54,6 +55,7 @@ class ZeroRouteDelegate extends RouterDelegate<ZeroRoutePath>
   RouteStatus _routeStatus = RouteStatus.home;
   List<MaterialPage> pages = [];
   ProductModel productModel;
+  String searchQuery;
 
   ZeroRouteDelegate() : navigatorKey = GlobalKey<NavigatorState>() {
     //路由跳转
@@ -62,6 +64,10 @@ class ZeroRouteDelegate extends RouterDelegate<ZeroRoutePath>
           _routeStatus = routeStatus;
           if(routeStatus == RouteStatus.detail) {
             this.productModel = args['productModel'];
+          }
+
+          if(routeStatus == RouteStatus.product_list) {
+            this.searchQuery = args['query'];
           }
 
           notifyListeners();
@@ -111,6 +117,9 @@ class ZeroRouteDelegate extends RouterDelegate<ZeroRoutePath>
         break;
       case RouteStatus.detail:
         page = pageWrap(DetailPage(productModel));
+        break;
+      case RouteStatus.product_list:
+        page = pageWrap(ProductListPage(searchQuery));
         break;
       case RouteStatus.login:
         page = pageWrap(LoginPage());

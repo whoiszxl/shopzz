@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                   //沉浸式Appbar
                   NavigationBar(
                     height: 50,
-                    child: homeAppBar(),
+                    child: homeAppBar(context),
                     color: Colors.white,
                     statusStyle: StatusStyle.DARK_CONTENT,
                   ),

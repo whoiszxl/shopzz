@@ -97,7 +97,7 @@ class _SaleAttrSelector extends State<SaleAttrSelector> {
 
                               children: [
                                 //构建图片头
-                                imageHeader(widget.productVO),
+                                imageHeader(widget.productVO, currentSkuId == null ? null : widget.skus.firstWhere((element) => element.id.toString() == currentSkuId)),
                                 //属性选择组件
                                 attrSelect(widget.saleAttrGroup),
 
@@ -153,6 +153,9 @@ class _SaleAttrSelector extends State<SaleAttrSelector> {
                     })?.toList(),
                     selectedIdList: _selectedButtonIdList,
                     onSelect: (selected, isSelected) {
+                      setState(() {
+
+                      });
                       _selectedButtonIdList[index] = selected?.id;
                       currentSelectedAttr[index] = selected?.value;
 
@@ -221,14 +224,14 @@ attrNameTitle({@required String title, Widget rightAction}) {
 
 
 //构建图片头
-Widget imageHeader(ProductVO productVO) {
+Widget imageHeader(ProductVO productVO, Skus skus) {
   return Container(
     height: 120,
     width: ScreenUtil.getInstance().screenWidth,
     padding: EdgeInsets.only(bottom: 10),
     child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: <Widget>[
       //sku圖片展示
-      skuImage(productVO.defaultPic),
+      skuImage(skus == null ? productVO.defaultPic : skus.imgUrl),
 
       //sku標語展示
       Padding(

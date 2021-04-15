@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/navigator/zero_navigator.dart';
+import 'package:flutter_mall/page/my_search_delegate.dart';
+import 'package:flutter_mall/util/toast.dart';
 
 ///主页appbar
-homeAppBar() {
+homeAppBar(BuildContext context) {
 
   return Padding(
       padding: EdgeInsets.only(left: 10, right: 10),
@@ -25,14 +27,20 @@ homeAppBar() {
           Expanded(
               child: Padding(
                 padding: EdgeInsets.only(left: 15, right: 15),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(13),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 10),
-                    height: 32,
-                    alignment: Alignment.centerLeft,
-                    child: Icon(Icons.search, color: Colors.grey),
-                    decoration: BoxDecoration(color: Colors.grey[100]),
+                child: InkWell(
+                  onTap: () {
+                    showToast("点击搜索了");
+                    showSearch(context: context, delegate: MySearchDelegate());
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(13),
+                    child: Container(
+                      padding: EdgeInsets.only(left: 10),
+                      height: 32,
+                      alignment: Alignment.centerLeft,
+                      child: Icon(Icons.search, color: Colors.grey),
+                      decoration: BoxDecoration(color: Colors.grey[100]),
+                    ),
                   ),
                 ),
               )),

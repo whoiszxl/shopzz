@@ -8,6 +8,7 @@ import 'package:flutter_mall/page/detail_page.dart';
 import 'package:flutter_mall/page/discovery_page.dart';
 import 'package:flutter_mall/page/login_page.dart';
 import 'package:flutter_mall/page/member_page.dart';
+import 'package:flutter_mall/page/product_list_page.dart';
 import 'package:flutter_mall/page/register_page.dart';
 
 typedef RouteChangeListener(RouteStatusInfo current, RouteStatusInfo pre);
@@ -30,7 +31,7 @@ int getPageIndex(List<MaterialPage> pages, RouteStatus routeStatus) {
 }
 
 ///自定义路由封装，路由状态
-enum RouteStatus { login, register, home, category, discovery, cart, member, detail, unknown }
+enum RouteStatus { login, register, home, category, discovery, cart, member, detail, product_list, unknown }
 
 ///获取page对应的RouteStatus
 RouteStatus getStatus(MaterialPage page) {
@@ -50,7 +51,9 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.member;
   } else if (page.child is DetailPage) {
     return RouteStatus.detail;
-  }else {
+  } else if (page.child is ProductListPage) {
+    return RouteStatus.product_list;
+  } else {
     return RouteStatus.unknown;
   }
 }
