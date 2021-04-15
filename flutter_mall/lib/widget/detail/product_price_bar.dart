@@ -41,7 +41,7 @@ productTitleBar(String title) {
         ),
         WidgetSpan( child: SizedBox( width: 5, )),
 
-        TextSpan(text: title, style: TextStyle(fontWeight: FontWeight.w600)),
+        TextSpan(text: title, style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black)),
       ],
     ),
   );

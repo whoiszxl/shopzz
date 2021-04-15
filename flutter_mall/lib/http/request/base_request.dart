@@ -25,7 +25,7 @@ abstract class BaseRequest {
 
 
   String domainName() {
-    return "localhost";
+    return "192.168.3.13";
   }
 
   ///重写配置请求方式

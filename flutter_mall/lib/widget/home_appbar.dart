@@ -29,7 +29,6 @@ homeAppBar(BuildContext context) {
                 padding: EdgeInsets.only(left: 15, right: 15),
                 child: InkWell(
                   onTap: () {
-                    showToast("点击搜索了");
                     showSearch(context: context, delegate: MySearchDelegate());
                   },
                   child: ClipRRect(

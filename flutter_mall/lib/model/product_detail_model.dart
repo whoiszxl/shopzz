@@ -85,9 +85,9 @@ class ProductVO {
   int brandId;
   String brandName;
   double grossWeight;
-  int length;
-  int width;
-  int height;
+  double length;
+  double width;
+  double height;
   String serviceGuarantees;
   String packageList;
   int freightTemplateId;
@@ -155,9 +155,9 @@ class Skus {
   String skuName;
   int brandId;
   String imgUrl;
-  int purchasePrice;
-  int promotionPrice;
-  int salePrice;
+  double purchasePrice;
+  double promotionPrice;
+  double salePrice;
   String saleData;
 
   Skus(

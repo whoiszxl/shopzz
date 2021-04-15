@@ -119,7 +119,7 @@ class ZeroRouteDelegate extends RouterDelegate<ZeroRoutePath>
         page = pageWrap(DetailPage(productModel));
         break;
       case RouteStatus.product_list:
-        page = pageWrap(ProductListPage(searchQuery));
+        page = pageWrap(ProductListPage(query: searchQuery));
         break;
       case RouteStatus.login:
         page = pageWrap(LoginPage());

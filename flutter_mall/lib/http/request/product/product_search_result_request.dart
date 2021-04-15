@@ -1,8 +1,8 @@
 
 import 'package:flutter_mall/http/request/base_request.dart';
 
-///商详请求类
-class ProductDetailRequest extends BaseRequest {
+///商品搜索请求类
+class ProductSearchResultRequest extends BaseRequest {
 
   @override
   bool needLogin() {
@@ -11,7 +11,7 @@ class ProductDetailRequest extends BaseRequest {
 
   @override
   String path() {
-    return "/product/product/detail/";
+    return "/product/product/search";
   }
 
   @override

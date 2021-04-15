@@ -7,7 +7,6 @@ class MySearchDelegate extends SearchDelegate<String> {
 
 
   @override
-  // TODO: implement searchFieldLabel
   String get searchFieldLabel => "";
 
   final recommendList = [
@@ -48,11 +47,9 @@ class MySearchDelegate extends SearchDelegate<String> {
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    // action for apps bar
     return [
       IconButton(
         icon: Icon(Icons.clear),
-        // ketika klik clean maka hapus query
         onPressed: () {
           query = "";
         },
@@ -75,7 +72,10 @@ class MySearchDelegate extends SearchDelegate<String> {
 
 
   @override
-  Widget buildResults(BuildContext context) {
+  Widget buildResults(BuildContext context) => Container();
+
+  @override
+  void showResults(BuildContext context) {
     ZeroNavigator.getInstance().onJumpTo(RouteStatus.product_list, args: {'query': query});
   }
 
