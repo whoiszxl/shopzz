@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/navigator/zero_navigator.dart';
+import 'package:flutter_mall/util/color.dart';
 import 'package:flutter_mall/widget/tag.dart';
 
 class MySearchDelegate extends SearchDelegate<String> {
@@ -12,36 +13,14 @@ class MySearchDelegate extends SearchDelegate<String> {
   final recommendList = [
     "小米",
     "苹果",
-    "Visakhapatham",
-    "Coimbatore",
-    "Delhi",
-    "Bengalore",
-    "Pune",
-    "Nagpur",
-    "Lucknow",
-    "Vadodara",
-    "Indore",
-    "Jalalpur",
-    "Bhopal",
-    "Kolkata",
-    "Kanpur",
-    "New Delhi",
-    "Faridabad",
-    "Rajkot",
-    "Ghaziabad",
-    "Chennai",
-    "Meerut",
-    "Agra",
-    "Jaipur",
-    "Varanasi",
-    "Allahabad",
-    "Hyderabad",
-    "Noida",
-    "Howrah",
-    "Thane"
+    "T恤",
+    "安踏",
+    "手机",
+    "平板电脑",
+    "猕猴桃"
   ];
 
-  final recentList = ["小米", "苹果", "Java", "Flutter"];
+  final recentList = ["小米", "苹果", "Java", "Flutter", "手机", "华为"];
 
 
 
@@ -110,7 +89,7 @@ class MySearchDelegate extends SearchDelegate<String> {
         onTap:(){
           showResults(context);
         },
-        leading: Icon(Icons.location_city),
+        leading: Icon(Icons.adb),
         title: RichText(
           text: TextSpan(
               text: suggestionList[index].substring(0, query.length),
@@ -126,4 +105,22 @@ class MySearchDelegate extends SearchDelegate<String> {
     );
   }
 
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    assert(context != null);
+    final ThemeData theme = Theme.of(context);
+    assert(theme != null);
+
+    return theme.copyWith(
+      //设置光标颜色
+      textSelectionTheme: TextSelectionThemeData(cursorColor: primary),
+
+      //主色亮度
+      primaryColorBrightness: Brightness.dark,
+      textTheme: theme.textTheme.copyWith(
+        headline6: TextStyle(fontWeight: FontWeight.normal),
+      ),
+    );
+  }
 }

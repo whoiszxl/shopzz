@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_statusbar_manager/flutter_statusbar_manager.dart';
 
 ///带缓存的image
-Widget cachedImage(String url, {double width, double height}) {
+Widget cachedImage(String url, {double width, double height, BoxFit fit}) {
   return CachedNetworkImage(
       height: height,
       width: width,
-      fit: BoxFit.cover,
+      fit: fit,
       placeholder: (
           BuildContext context,
           String url,

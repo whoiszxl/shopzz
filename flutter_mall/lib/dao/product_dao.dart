@@ -21,9 +21,10 @@ class ProductDao {
 
 
   ///获取商品搜索列表
-  static Future searchProduct(String keywords, int priceSort) async {
+  static Future searchProduct(String keywords, int priceSort, int pageNumber, int pageSize) async {
     ProductSearchResultRequest productSearchResultRequest = new ProductSearchResultRequest();
     productSearchResultRequest.addParam("keywords", keywords).addParam("priceSort", priceSort);
+    productSearchResultRequest.addParam("pageNumber", pageNumber).addParam("pageSize", pageSize);
 
     var result = await ZeroNet.getInstance().request(productSearchResultRequest);
     Log.debug("search product list: " + result['data'].toString());

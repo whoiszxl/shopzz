@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/model/product_search_result_model.dart';
-import 'package:flutter_mall/widget/product_card.dart';
+import 'package:flutter_mall/widget/product_grid_card.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class GridProductView extends StatelessWidget {

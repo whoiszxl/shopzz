@@ -6,11 +6,13 @@ class FilterParamTab extends StatefulWidget {
   FilterParamTab({
     @required this.onTabChangedListener,
     @required this.onTabStyleChangedListener,
+    this.clickItemPositionCallback,
     this.initialSelection = 0,
     this.showTag = 0,
   }) : assert(onTabChangedListener != null);
   final Function(int position) onTabChangedListener;
   final Function(int position) onTabStyleChangedListener;
+  final ValueChanged<int> clickItemPositionCallback;
   int initialSelection;
   int showTag;
 
@@ -102,6 +104,7 @@ class _FilterParamTabState extends State<FilterParamTab> {
   }
 
   void _setTab(int position) {
+    widget.clickItemPositionCallback(position);
     widget.onTabChangedListener(position);
     setState(() {
       widget.initialSelection = position;

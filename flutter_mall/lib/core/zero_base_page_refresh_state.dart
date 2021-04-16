@@ -21,7 +21,7 @@ abstract class ZeroBasePageRefreshState<M, L, T extends StatefulWidget> extends 
     loadData();
     scrollController.addListener(() {
       var dis = scrollController.position.maxScrollExtent - scrollController.position.pixels;
-
+      print(dis.toString());
       if (dis < 300 && !loading && scrollController.position.maxScrollExtent != 0) {
         loadData(loadMore: true);
       }
@@ -40,7 +40,7 @@ abstract class ZeroBasePageRefreshState<M, L, T extends StatefulWidget> extends 
     return RefreshIndicator(
       onRefresh: loadData,
       color: primary,
-      child: MediaQuery.removePadding(context: context, child: contentChild, removeTop: true),
+      child: contentChild,
     );
   }
 
