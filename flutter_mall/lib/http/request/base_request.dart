@@ -1,3 +1,5 @@
+import 'package:flutter_mall/config/common_config.dart';
+
 ///http请求方法枚举
 enum RequestMethod {
   GET,
@@ -25,7 +27,7 @@ abstract class BaseRequest {
 
 
   String domainName() {
-    return "192.168.3.13";
+    return CommonConfig.apiUrl;
   }
 
   ///重写配置请求方式

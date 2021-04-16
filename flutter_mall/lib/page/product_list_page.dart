@@ -55,11 +55,11 @@ class _ProductListPageState extends State<ProductListPage>
             List<dynamic> results = snapshot.data;
             ProductSearchResultModel productSearchResult = results[0];
 
-            if(productSearchResult.content.length == 0) {
-              return Center(child: Text("木有搜到商品"));
-            }
+            // if(productSearchResult.content.length == 0) {
+            //   return Center(child: Text("木有搜到商品"));
+            // }
 
-            showToast(productSearchResult?.content[0]?.name);
+            //showToast(productSearchResult?.content[0]?.name);
             return Container(
               color: Colors.white,
               child: Column(

@@ -94,7 +94,12 @@ class MySearchDelegate extends SearchDelegate<String> {
           children: <Widget>[
 
             ...recentList.map((p) {
-              return Tag(text: Text(p), borderColor: Colors.transparent, color: Colors.grey[300]);
+              return InkWell(
+                onTap: () {
+                  ZeroNavigator.getInstance().onJumpTo(RouteStatus.product_list, args: {'query': p});
+                },
+                child: Tag(text: Text(p), borderColor: Colors.transparent, color: Colors.grey[300]),
+              );
             })
           ],
         ),
