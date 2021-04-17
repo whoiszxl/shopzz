@@ -12,6 +12,14 @@
 ![后端项目结构](https://zero-mall.oss-cn-shenzhen.aliyuncs.com/docs/zero-mall-project.png)
 
 
+### FlutterApp截图
+
+![主页](https://zero-mall.oss-cn-shenzhen.aliyuncs.com/docs/flutter/flutter_index.png)
+![分类](https://zero-mall.oss-cn-shenzhen.aliyuncs.com/docs/flutter/flutter_category.png)
+![详情](https://zero-mall.oss-cn-shenzhen.aliyuncs.com/docs/flutter/flutter_detail.png)
+![搜索列表](https://zero-mall.oss-cn-shenzhen.aliyuncs.com/docs/flutter/flutter_search.png)
+![搜索网格](https://zero-mall.oss-cn-shenzhen.aliyuncs.com/docs/flutter/flutter_search_grid.png =250x250)
+
 #### 架构图
 
 
