@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_statusbar_manager/flutter_statusbar_manager.dart';
 
 ///带缓存的image
 Widget cachedImage(String url, {double width, double height, BoxFit fit}) {

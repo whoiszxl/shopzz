@@ -148,10 +148,10 @@ class ZeroRouteDelegate extends RouterDelegate<ZeroRoutePath>
           if(route.settings is MaterialPage) {
             //登录页未登录返回拦截
             if ((route.settings as MaterialPage).child is LoginPage) {
-              if (!hasLogin) {
-                showErrorToast("请先登录");
-                return false;
-              }
+//              if (!hasLogin) {
+//                showErrorToast("请先登录");
+//                return false;
+//              }
             }
           }
           //执行返回操作

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/navigator/zero_navigator.dart';
 import 'package:flutter_mall/page/cart_page.dart';
-import 'package:flutter_mall/page/category_page.dart';
+import 'package:flutter_mall/page/category/category_page.dart';
 import 'package:flutter_mall/page/discovery_page.dart';
 import 'package:flutter_mall/page/home_page.dart';
 import 'package:flutter_mall/page/member_page.dart';

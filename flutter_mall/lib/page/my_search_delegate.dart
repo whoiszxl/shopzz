@@ -61,7 +61,6 @@ class MySearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     final suggestionList = query.isEmpty ? recentList : recommendList.where((p) => p.startsWith(query)).toList();
-
     if(query.isEmpty) {
       return Container(
         margin: EdgeInsets.all(10),

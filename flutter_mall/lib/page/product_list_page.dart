@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/widget/grid_and_list_widget.dart';
-import 'package:flutter_mall/widget/home_appbar.dart';
+import 'package:flutter_mall/widget/search_appbar.dart';
 import 'package:flutter_mall/widget/navigation_bar.dart';
 import 'package:flutter_mall/widget/product/filter_param_tab.dart';
 
@@ -45,7 +45,7 @@ class _ProductListPageState extends State<ProductListPage>
           //搜索栏
           NavigationBar(
             height: 50,
-            child: homeAppBar(context),
+            child: searchAppBar(context, widget.query),
             color: Colors.white,
             statusStyle: StatusStyle.DARK_CONTENT,
           ),
@@ -60,8 +60,6 @@ class _ProductListPageState extends State<ProductListPage>
                 setState(() {
                   priceSort = -priceSort;
                 });
-
-
               },
               onTabStyleChangedListener: (position) {
                 setState(() {

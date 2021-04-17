@@ -63,7 +63,7 @@ public class ExceptionCatchAdvice {
     @ResponseBody
     public Result exception(Exception exception){
         //记录日志
-        log.error("全局异常捕捉:{}",exception.getMessage());
+        log.error("全局异常捕捉:{}",exception);
         if(exceptions == null){
             exceptions = builder.build();//EXCEPTIONS构建成功
         }

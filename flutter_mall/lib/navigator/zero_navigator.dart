@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/navigator/bottom_navigator.dart';
 import 'package:flutter_mall/page/cart_page.dart';
-import 'package:flutter_mall/page/category_page.dart';
+import 'package:flutter_mall/page/category/category_page.dart';
 import 'package:flutter_mall/page/detail_page.dart';
 import 'package:flutter_mall/page/discovery_page.dart';
 import 'package:flutter_mall/page/login_page.dart';
