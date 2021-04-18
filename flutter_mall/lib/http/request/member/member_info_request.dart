@@ -14,7 +14,7 @@ class MemberInfoRequest extends BaseRequest {
 
   @override
   String path() {
-    return "/member/info";
+    return "/member/member/info";
   }
 
 

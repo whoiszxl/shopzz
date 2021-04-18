@@ -77,7 +77,7 @@ abstract class BaseRequest {
 
   ///添加token
   BaseRequest addHeaderToken(String token) {
-    headers['Authorization'] = "Bearer " + token;
+    headers['Authorization'] = token;
     return this;
   }
 

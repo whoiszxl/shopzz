@@ -66,8 +66,7 @@ public class AuthenticationConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     public TokenStore jwtTokenStore() {
-        JwtTokenStore jwtTokenStore = new JwtTokenStore(jwtAccessTokenConverter());
-        return jwtTokenStore;
+        return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
     public JwtAccessTokenConverter jwtAccessTokenConverter() {

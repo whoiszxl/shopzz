@@ -1,5 +1,6 @@
-package com.whoiszxl.authentication.entity;
+package com.whoiszxl.zero.entity;
 
+import com.whoiszxl.zero.bean.AbstractObject;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import java.util.Date;
 @Data
 @Table(name = "ums_member")
 @Entity
-public class Member implements Serializable {
+public class Member extends AbstractObject implements Serializable {
     private static final long serialVersionUID = 990936872328330808L;
     /**
     * 主键ID

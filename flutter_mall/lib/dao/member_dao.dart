@@ -1,17 +1,18 @@
 import 'dart:convert';
 
 import 'package:flutter_mall/cache/sp_cache.dart';
+import 'package:flutter_mall/config/common_config.dart';
 import 'package:flutter_mall/http/core/zero_net.dart';
 import 'package:flutter_mall/http/request/member/login_request.dart';
 import 'package:flutter_mall/http/request/member/member_info_request.dart';
 import 'package:flutter_mall/http/request/member/register_request.dart';
 import 'package:flutter_mall/http/request/member/register_sms_request.dart';
+import 'package:flutter_mall/model/member_detail_model.dart';
+import 'package:flutter_mall/util/log_util.dart';
 import 'package:flutter_mall/util/string_util.dart';
 
 ///用户DAO层
 class MemberDao {
-
-  static const LOCAL_TOKEN = "LOCAL_TOKEN";
 
   ///登录
   static login(String username, String password) async {
@@ -25,7 +26,7 @@ class MemberDao {
 
     if(result['code'] == 0 && result['data'] != null) {
       //登录成功，保存jwt token，country code and username
-      SpCache.getInstance().setString(LOCAL_TOKEN, json.encoder.convert(result['data']));
+      SpCache.getInstance().setString(CommonConfig.LOCAL_TOKEN, json.encoder.convert(result['data']));
     }
     return result;
   }
@@ -48,21 +49,20 @@ class MemberDao {
   ///通过本地token获取用户信息
   static userInfo() async {
     //从本地获取用户token
-    String localToken = SpCache.getInstance().get(LOCAL_TOKEN);
+    String localToken = SpCache.getInstance().get(CommonConfig.LOCAL_TOKEN);
     if(isEmpty(localToken)) {
       return null;
     }
     var tokenObj = json.decoder.convert(localToken);
-    String token = tokenObj['token'];
+    String token = tokenObj['accessToken'];
 
     //构建请求
     MemberInfoRequest memberInfoRequest = new MemberInfoRequest();
     memberInfoRequest.addHeaderToken(token);
 
     var result = await ZeroNet.getInstance().request(memberInfoRequest);
-    print("获取用户信息结果：" + result.toString());
-
-    return result;
+    Log.info("获取到用户信息: " + result.toString());
+    return MemberDetailModel.fromJson(result['data']);
   }
 
 
@@ -79,6 +79,6 @@ class MemberDao {
 
   ///获取本地token
   static getLocalToken() {
-    return SpCache.getInstance().get(LOCAL_TOKEN);
+    return SpCache.getInstance().get(CommonConfig.LOCAL_TOKEN);
   }
 }

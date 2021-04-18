@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/cache/sp_cache.dart';
+import 'package:flutter_mall/config/common_config.dart';
 import 'package:flutter_mall/config/no_login_route_config.dart';
 import 'package:flutter_mall/dao/member_dao.dart';
 import 'package:flutter_mall/http/core/zero_error.dart';
@@ -75,7 +76,7 @@ class ZeroRouteDelegate extends RouterDelegate<ZeroRoutePath>
 
     ZeroNet.getInstance().setErrorInterceptor((error) {
       if(error is NeedLogin) {
-        SpCache.getInstance().setString(MemberDao.LOCAL_TOKEN, null);
+        SpCache.getInstance().setString(CommonConfig.LOCAL_TOKEN, null);
         ZeroNavigator.getInstance().onJumpTo(RouteStatus.login);
       }
 
