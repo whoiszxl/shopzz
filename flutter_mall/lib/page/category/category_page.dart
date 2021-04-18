@@ -7,6 +7,7 @@ import 'package:flutter_mall/page/category/one_category_tab.dart';
 import 'package:flutter_mall/page/category/two_category_tab.dart';
 import 'package:flutter_mall/util/log_util.dart';
 import 'package:flutter_mall/widget/category/category_app_bar.dart';
+import 'package:flutter_mall/widget/loading.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -36,7 +37,7 @@ class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClie
   @override
   Widget build(BuildContext context) {
     if(loading) {
-      return Center(child: Text("加载中"),);
+      return zeroLoading();
     }else {
       return Scaffold(
         appBar: categoryAppBar(context),
