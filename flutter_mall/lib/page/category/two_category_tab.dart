@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_mall/model/category_tree_model.dart';
 import 'package:flutter_mall/model/index_banner_model.dart';
+import 'package:flutter_mall/navigator/zero_navigator.dart';
 import 'package:flutter_mall/util/view_util.dart';
 import 'package:flutter_mall/widget/zero_banner.dart';
 
@@ -110,17 +111,22 @@ class TwoCategoryTabState extends State<TwoCategoryTab> {
               children: twoCate?.children?.map((threeCate) {
 
                 //构建三级分类样式
-                return Container(
-                  color: Colors.white,
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: <Widget>[
-                      //cachedImage(mockCateImages[rng.nextInt(mockCateImages.length)], height: 70, width: 60, fit: BoxFit.fill),
-                      cachedImage(threeCate.icon, height: 70, width: 60, fit: BoxFit.fill),
+                return InkWell(
+                  onTap: () {
+                    ZeroNavigator.getInstance().onJumpTo(RouteStatus.product_list, args: {'query': threeCate.name});
+                  },
+                  child: Container(
+                    color: Colors.white,
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: <Widget>[
+                        //cachedImage(mockCateImages[rng.nextInt(mockCateImages.length)], height: 70, width: 60, fit: BoxFit.fill),
+                        cachedImage(threeCate.icon, height: 70, width: 60, fit: BoxFit.fill),
 
-                      //三级分类名称
-                      threeCategoryName(threeCate.name)
-                    ],
+                        //三级分类名称
+                        threeCategoryName(threeCate.name)
+                      ],
+                    ),
                   ),
                 );
               })?.toList(),
