@@ -16,7 +16,8 @@ import 'package:flutter_mall/util/log_util.dart';
 import 'package:flutter_mall/util/string_util.dart';
 import 'package:flutter_mall/widget/home_grid_navigator.dart';
 import 'package:flutter_mall/widget/loading.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_mall/widget/member_appbar.dart';
+import 'package:flutter_mall/widget/navigation_bar.dart';
 
 
 class MemberPage extends StatefulWidget {
@@ -62,6 +63,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
+
       body: EasyRefresh(
 
         footer: ClassicalFooter(
@@ -77,8 +79,19 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
           shrinkWrap: true,
           children: <Widget>[
 
-            //会员信息头部
-            MemberHeader(memberVO: memberVO, memberInfoVO: memberInfoVO),
+            //沉浸式Appbar
+            Stack(
+              children: [
+                //会员信息头部
+                MemberHeader(memberVO: memberVO, memberInfoVO: memberInfoVO),
+                NavigationBar(
+                  height: 50,
+                  color: Colors.transparent,
+                  statusStyle: StatusStyle.DARK_CONTENT,
+                  child: memberAppBar(context),
+                ),
+              ],
+            ),
 
             //会员订单栏
             Padding(

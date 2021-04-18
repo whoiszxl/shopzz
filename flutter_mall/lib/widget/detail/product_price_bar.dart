@@ -151,7 +151,6 @@ addressSet(String address, String type, String message) {
             Text("送至",
                 style: TextStyle(fontSize: 11, color: Colors.grey)
             ),
-            Text("")
           ],
         )),
         
