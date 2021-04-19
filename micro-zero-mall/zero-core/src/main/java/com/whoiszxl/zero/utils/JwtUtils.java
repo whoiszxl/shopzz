@@ -3,6 +3,9 @@ package com.whoiszxl.zero.utils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+/**
+ * jwt工具类
+ */
 public class JwtUtils {
 
 
@@ -13,4 +16,10 @@ public class JwtUtils {
     public static String getUsername() {
         return getAuthentication().getPrincipal().toString();
     }
+
+    public static Long getId() {
+        return Long.parseLong(getUsername());
+    }
+
+    private JwtUtils() {}
 }
