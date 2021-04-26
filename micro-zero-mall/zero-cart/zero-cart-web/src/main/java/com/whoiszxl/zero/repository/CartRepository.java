@@ -21,4 +21,18 @@ public interface CartRepository extends BaseRepository<Cart> {
      */
     int deleteCartByIdAndMemberId(Long id, Long memberId);
 
+
+    /**
+     * 通过主键id和会员id查询购物车详情
+     * @return
+     */
+    Cart findByIdAndMemberIdAndStatus(Long id, Long memberId, Integer status);
+
+
+    /**
+     * 通过sku id和会员id查询购物车详情
+     * @return
+     */
+    Cart findBySkuIdAndMemberIdAndStatus(Long skuId, Long memberId, Integer status);
+
 }

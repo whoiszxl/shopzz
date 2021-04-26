@@ -24,4 +24,9 @@ public class SkuDaoImpl implements SkuDao {
     public List<Sku> findAllByProductId(Long productId) {
         return skuRepository.findAllByProductId(productId);
     }
+
+    @Override
+    public Sku findById(Long skuId) {
+        return skuRepository.findById(skuId).orElse(null);
+    }
 }

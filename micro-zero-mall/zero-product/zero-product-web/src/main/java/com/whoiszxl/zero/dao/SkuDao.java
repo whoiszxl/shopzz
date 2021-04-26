@@ -12,4 +12,11 @@ public interface SkuDao {
      * @return
      */
     List<Sku> findAllByProductId(Long productId);
+
+    /**
+     * 通过主键查找SKU信息
+     * @param skuId 主键ID
+     * @return
+     */
+    Sku findById(Long skuId);
 }

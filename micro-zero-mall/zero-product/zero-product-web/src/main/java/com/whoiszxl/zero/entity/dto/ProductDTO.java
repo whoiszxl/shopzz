@@ -13,7 +13,6 @@ import java.util.Date;
  * 
  * @author whoiszxl
  * @email whoiszxl@gmail.com
- * @date 2021-04-10 18:07:19
  */
 @Data
 public class ProductDTO extends AbstractObject implements Serializable {

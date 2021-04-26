@@ -13,7 +13,7 @@ import java.util.List;
  * 
  * @author whoiszxl
  * @email whoiszxl@gmail.com
- * @date 2021-04-10 18:07:18
+ * 
  */
 @Data
 public class CategoryVO extends AbstractObject implements Serializable {

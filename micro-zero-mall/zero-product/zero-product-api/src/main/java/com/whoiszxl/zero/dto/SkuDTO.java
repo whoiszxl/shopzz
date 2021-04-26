@@ -1,9 +1,8 @@
-package com.whoiszxl.zero.entity.dto;
+package com.whoiszxl.zero.dto;
 
 import com.whoiszxl.zero.bean.AbstractObject;
 import lombok.Data;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,7 +12,6 @@ import java.util.Date;
  * 
  * @author whoiszxl
  * @email whoiszxl@gmail.com
- * @date 2021-04-10 18:07:18
  */
 @Data
 public class SkuDTO extends AbstractObject implements Serializable {
@@ -22,7 +20,6 @@ public class SkuDTO extends AbstractObject implements Serializable {
 	/**
 	 * sku主键ID
 	 */
-	@Id
 	private Long id;
 	/**
 	 * 商品SPU的ID

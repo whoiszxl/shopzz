@@ -5,7 +5,7 @@ import com.whoiszxl.zero.dao.ProductDao;
 import com.whoiszxl.zero.dao.ProductImagesDao;
 import com.whoiszxl.zero.entity.Product;
 import com.whoiszxl.zero.entity.ProductImages;
-import com.whoiszxl.zero.entity.dto.SkuDTO;
+import com.whoiszxl.zero.dto.SkuDTO;
 import com.whoiszxl.zero.entity.params.SearchParams;
 import com.whoiszxl.zero.entity.vo.*;
 import com.whoiszxl.zero.service.ProductAttributeValueService;

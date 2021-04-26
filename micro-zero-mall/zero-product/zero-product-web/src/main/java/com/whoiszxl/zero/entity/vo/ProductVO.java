@@ -12,7 +12,6 @@ import java.util.Date;
  * 
  * @author whoiszxl
  * @email whoiszxl@gmail.com
- * @date 2021-04-10 18:07:19
  */
 @Data
 public class ProductVO extends AbstractObject implements Serializable {

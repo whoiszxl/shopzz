@@ -28,6 +28,16 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
+    public Cart findByIdAndMemberIdAndStatus(Long id, Long memberId, Integer status){
+        return cartRepository.findByIdAndMemberIdAndStatus(id, memberId, status);
+    }
+
+    @Override
+    public Cart findBySkuIdAndMemberIdAndStatus(Long skuId, Long memberId, Integer status) {
+        return cartRepository.findBySkuIdAndMemberIdAndStatus(skuId, memberId, status);
+    }
+
+    @Override
     public List<Cart> findAll() {
         return cartRepository.findAll();
     }

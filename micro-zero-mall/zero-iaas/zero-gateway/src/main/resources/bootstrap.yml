@@ -30,7 +30,7 @@ spring:
             - StripPrefix=1
 
         - id: zero-cart-web_router
-          uri: lb://zero-cart-web-service
+          uri: lb://zero-cart-web
           predicates:
             - Path=/cart/**
           filters:
