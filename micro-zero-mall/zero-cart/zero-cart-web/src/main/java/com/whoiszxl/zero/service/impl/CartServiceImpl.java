@@ -20,13 +20,14 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int deleteAll() {
-        JwtUtils.getUsername()
-        return 0;
+        Long memberId = JwtUtils.getMemberId();
+        return cartDao.deleteCartsByMemberId(memberId);
     }
 
     @Override
     public int delete(CartDeleteParam cartDeleteParam) {
-        return 0;
+        Long memberId = JwtUtils.getMemberId();
+        return cartDao.deleteCartByIdAndMemberId(cartDeleteParam.getId(), memberId);
     }
 
     @Override

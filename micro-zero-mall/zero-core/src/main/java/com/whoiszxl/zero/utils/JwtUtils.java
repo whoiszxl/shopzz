@@ -17,7 +17,7 @@ public class JwtUtils {
         return getAuthentication().getPrincipal().toString();
     }
 
-    public static Long getId() {
+    public static Long getMemberId() {
         return Long.parseLong(getUsername());
     }
 

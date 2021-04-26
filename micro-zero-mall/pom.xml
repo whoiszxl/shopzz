@@ -25,6 +25,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <scala.version>2.11</scala.version>
         <flyway.version>7.7.2</flyway.version>
         <swagger3.version>3.0.0</swagger3.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
@@ -194,6 +195,7 @@
         <module>zero-home</module>
         <module>zero-home/zero-home-api</module>
         <module>zero-home/zero-home-web</module>
+        <module>zero-flink-processing</module>
     </modules>
 
 </project>
