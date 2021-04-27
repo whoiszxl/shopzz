@@ -1,24 +1,25 @@
 package com.whoiszxl.zero.controller;
 
 import com.whoiszxl.zero.bean.Result;
-import com.whoiszxl.zero.entity.dto.CartDTO;
+import com.whoiszxl.zero.dto.CartDTO;
+import com.whoiszxl.zero.dto.CartListParam;
 import com.whoiszxl.zero.entity.params.CartAddParam;
 import com.whoiszxl.zero.entity.params.CartDeleteParam;
 import com.whoiszxl.zero.entity.params.CartQuantityUpdateParam;
 import com.whoiszxl.zero.entity.vo.CartVO;
+import com.whoiszxl.zero.feign.CartFeign;
 import com.whoiszxl.zero.service.CartService;
 import com.whoiszxl.zero.utils.BeanCopierUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Api(tags = "购物车控制器")
 @RestController
-public class CartController {
+public class CartController implements CartFeign {
 
     @Autowired
     private CartService cartService;
@@ -58,5 +59,12 @@ public class CartController {
     public Result deleteAll() {
         int i = cartService.deleteAll();
         return i == 0 ? Result.buildError() : Result.buildSuccess();
+    }
+
+
+    @Override
+    public Result<List<CartDTO>> cartCheckedList(CartListParam cartListParam) {
+        List<CartDTO> cartDTOS = cartService.findAllCheckedCartByMemberId(cartListParam.getMemberId());
+        return Result.buildSuccess(cartDTOS);
     }
 }

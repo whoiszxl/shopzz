@@ -1,10 +1,11 @@
 package com.whoiszxl.zero.service.impl;
 
 import com.whoiszxl.zero.bean.BaseParam;
+import com.whoiszxl.zero.bean.Result;
 import com.whoiszxl.zero.dao.CartDao;
+import com.whoiszxl.zero.dto.CartDTO;
 import com.whoiszxl.zero.dto.SkuDTO;
 import com.whoiszxl.zero.entity.Cart;
-import com.whoiszxl.zero.entity.dto.CartDTO;
 import com.whoiszxl.zero.entity.params.CartAddParam;
 import com.whoiszxl.zero.entity.params.CartDeleteParam;
 import com.whoiszxl.zero.entity.params.CartQuantityUpdateParam;
@@ -90,5 +91,12 @@ public class CartServiceImpl implements CartService {
     public List<CartDTO> list() {
         List<Cart> carts = cartDao.findAll();
         return BeanCopierUtils.copyListProperties(carts, CartDTO::new);
+    }
+
+    @Override
+    public List<CartDTO> findAllCheckedCartByMemberId(Long memberId) {
+        List<Cart> carts = cartDao.findAllByMemberIdAndChecked(memberId, StatusEnum.OPEN.getCode());
+        List<CartDTO> cartDTOS = BeanCopierUtils.copyListProperties(carts, CartDTO::new);
+        return cartDTOS;
     }
 }

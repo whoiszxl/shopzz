@@ -14,6 +14,8 @@ public interface DateProvider {
 	 */
 	LocalDateTime now();
 
+	Date dateNow();
+
 
 	/**
 	 * Date 转 LocalDateTime

@@ -41,6 +41,23 @@ CREATE TABLE `ums_member_info`(
 	PRIMARY KEY (`member_id`)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '会员详情表';
 
+DROP TABLE IF EXISTS `ums_member_address`;
+CREATE TABLE `ums_member_address` (
+  `id` bigint(20) NOT NULL COMMENT '主键ID',
+  `member_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `reciver_name` varchar(1024) NOT NULL COMMENT '收货人',
+  `reciver_phone` varchar(1024) NOT NULL COMMENT '收货人电话号码',
+  `province` varchar(1024) NOT NULL COMMENT '省',
+  `city` varchar(1024) NOT NULL COMMENT '市',
+  `district` varchar(1024) NOT NULL COMMENT '区',
+  `detail_address` varchar(1024) NOT NULL COMMENT '收货地址',
+  `is_default` tinyint(1) NOT NULL default 0 comment '是否默认 1:默认 2:非默认',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+	`updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_member_id` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员收货地址表';
+
 
 
 

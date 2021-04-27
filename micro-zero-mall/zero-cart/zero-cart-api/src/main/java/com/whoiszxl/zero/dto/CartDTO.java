@@ -1,4 +1,4 @@
-package com.whoiszxl.zero.entity.dto;
+package com.whoiszxl.zero.dto;
 
 import com.whoiszxl.zero.bean.AbstractObject;
 import lombok.Data;

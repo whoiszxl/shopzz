@@ -3,6 +3,8 @@ package com.whoiszxl.zero.dao;
 import com.whoiszxl.zero.bean.BaseDao;
 import com.whoiszxl.zero.entity.Cart;
 
+import java.util.List;
+
 public interface CartDao extends BaseDao<Cart, Long> {
 
     /**
@@ -31,4 +33,13 @@ public interface CartDao extends BaseDao<Cart, Long> {
      * @return
      */
     Cart findBySkuIdAndMemberIdAndStatus(Long skuId, Long memberId, Integer status);
+
+    /**
+     * 通过用户ID和是否选中获取购物车内容
+     * @param memberId 用户ID
+     * @param checked 是否选中
+     * @return
+     */
+    List<Cart> findAllByMemberIdAndChecked(Long memberId, Integer checked);
+
 }

@@ -38,6 +38,11 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
+    public List<Cart> findAllByMemberIdAndChecked(Long memberId, Integer checked) {
+        return cartRepository.findAllByMemberIdAndChecked(memberId, checked);
+    }
+
+    @Override
     public List<Cart> findAll() {
         return cartRepository.findAll();
     }

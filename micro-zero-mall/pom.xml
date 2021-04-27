@@ -195,7 +195,6 @@
         <module>zero-home</module>
         <module>zero-home/zero-home-api</module>
         <module>zero-home/zero-home-web</module>
-        <module>zero-flink-processing</module>
     </modules>
 
 </project>

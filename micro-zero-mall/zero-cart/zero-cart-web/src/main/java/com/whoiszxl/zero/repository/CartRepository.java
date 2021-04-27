@@ -3,6 +3,8 @@ package com.whoiszxl.zero.repository;
 import com.whoiszxl.zero.bean.BaseRepository;
 import com.whoiszxl.zero.entity.Cart;
 
+import java.util.List;
+
 public interface CartRepository extends BaseRepository<Cart> {
 
 
@@ -35,4 +37,11 @@ public interface CartRepository extends BaseRepository<Cart> {
      */
     Cart findBySkuIdAndMemberIdAndStatus(Long skuId, Long memberId, Integer status);
 
+    /**
+     * 通过用户ID和是否选中获取购物车内容
+     * @param memberId 用户ID
+     * @param checked 是否选中
+     * @return
+     */
+    List<Cart> findAllByMemberIdAndChecked(Long memberId, Integer checked);
 }

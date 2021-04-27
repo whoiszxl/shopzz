@@ -1,6 +1,6 @@
 package com.whoiszxl.zero.service;
 
-import com.whoiszxl.zero.entity.dto.CartDTO;
+import com.whoiszxl.zero.dto.CartDTO;
 import com.whoiszxl.zero.entity.params.CartAddParam;
 import com.whoiszxl.zero.entity.params.CartDeleteParam;
 import com.whoiszxl.zero.entity.params.CartQuantityUpdateParam;
@@ -45,4 +45,10 @@ public interface CartService {
      */
     List<CartDTO> list();
 
+    /**
+     * 获取用户选中的购物车内容
+     * @param memberId 会员ID
+     * @return
+     */
+    List<CartDTO> findAllCheckedCartByMemberId(Long memberId);
 }
