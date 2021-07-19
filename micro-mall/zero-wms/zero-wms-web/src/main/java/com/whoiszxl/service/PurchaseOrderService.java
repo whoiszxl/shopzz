@@ -1,0 +1,45 @@
+package com.whoiszxl.service;
+
+import com.whoiszxl.dto.PurchaseOrderDTO;
+import com.whoiszxl.entity.PurchaseOrder;
+import com.baomidou.mybatisplus.extension.service.IService;
+
+/**
+ * <p>
+ * 采购订单表 服务类
+ * </p>
+ *
+ * @author whoiszxl
+ * @since 2021-07-19
+ */
+public interface PurchaseOrderService extends IService<PurchaseOrder> {
+
+    /**
+     * 新增一个采购订单
+     * @param purchaseOrderDTO 提交过来的采购订单信息
+     * @return 是否新增成功
+     */
+    boolean savePurchaseOrder(PurchaseOrderDTO purchaseOrderDTO);
+
+    /**
+     * 通过主键ID查询一个采购订单
+     * @param id 采购订单ID
+     * @return 采购订单信息
+     */
+    PurchaseOrderDTO getPurchaseOrderById(Long id);
+
+    /**
+     * 更新一个采购订单
+     * @param purchaseOrderDTO 采购订单信息
+     * @return 是否更新成功
+     */
+    Boolean updatePurchaseOrder(PurchaseOrderDTO purchaseOrderDTO);
+
+    /**
+     * 更新采购订单状态
+     * @param id 采购订单ID
+     * @param status 采购订单状态
+     * @return
+     */
+    boolean updateStatus(Long id, Integer status);
+}

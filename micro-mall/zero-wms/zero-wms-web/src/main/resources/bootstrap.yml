@@ -1,0 +1,31 @@
+server:
+  port: 10001
+
+spring:
+  application:
+    name: zero-wms-web
+  cloud:
+    nacos:
+      server-addr: aliyun.whoiszxl.com:8848
+      config:
+        server-addr: aliyun.whoiszxl.com:8848
+        namespace: edu
+        file-extension: yaml
+
+    sentinel:
+      transport:
+        dashboard: 159.75.31.203:8858:8858
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/zero-wms?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: mall
+    password: mall1020!!
+  redis:
+    host: aliyun.whoiszxl.com
+    port: 16379
+    password: zxl123456!!
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
