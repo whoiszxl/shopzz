@@ -17,8 +17,8 @@ public class EntityMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("createdBy", "defaullt", metaObject);
-        this.setFieldValByName("updatedBy", "defaullt", metaObject);
+        this.setFieldValByName("createdBy", "default", metaObject);
+        this.setFieldValByName("updatedBy", "default", metaObject);
         this.setFieldValByName("createdAt", new Date(), metaObject);
         this.setFieldValByName("updatedAt", new Date(), metaObject);
     }
@@ -26,6 +26,6 @@ public class EntityMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         this.setFieldValByName("updatedAt", new Date(), metaObject);
-
+        this.setFieldValByName("updatedBy", "default", metaObject);
     }
 }

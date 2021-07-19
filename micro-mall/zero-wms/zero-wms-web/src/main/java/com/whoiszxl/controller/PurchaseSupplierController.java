@@ -41,10 +41,10 @@ public class PurchaseSupplierController {
     public ResponseResult<IPage<PurchaseSupplier>> list(SupplierQuery query) {
         QueryWrapper<PurchaseSupplier> wrapper = new QueryWrapper<>();
         if(query.getSupplierName() != null) {
-            wrapper.eq("supplier_name", query.getSupplierName());
+            wrapper.like("supplier_name", "%" + query.getSupplierName() + "%");
         }
         if(query.getAccountPeriod() != null) {
-            wrapper.or().eq("account_period", query.getAccountPeriod());
+            wrapper.eq("account_period", query.getAccountPeriod());
         }
         IPage<PurchaseSupplier> result = purchaseSupplierService.page(new Page<>(query.getPage(), query.getSize()), wrapper);
         return ResponseResult.buildSuccess(result);
@@ -54,7 +54,7 @@ public class PurchaseSupplierController {
     @ApiOperation(value = "提交采购单去审核", notes = "提交采购单去审核", response = PurchaseSupplierVO.class)
     public ResponseResult<PurchaseSupplierVO> getSupplierById(@PathVariable Long id) {
         PurchaseSupplier purchaseSupplier = purchaseSupplierService.getById(id);
-        return ResponseResult.buildSuccess(purchaseSupplier.clone(PurchaseSupplierVO.class));
+        return purchaseSupplier == null ? ResponseResult.buildSuccess() : ResponseResult.buildSuccess(purchaseSupplier.clone(PurchaseSupplierVO.class));
     }
 
     @PostMapping

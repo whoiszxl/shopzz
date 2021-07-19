@@ -3,6 +3,7 @@ package com.whoiszxl.service;
 import com.whoiszxl.dto.PurchaseOrderDTO;
 import com.whoiszxl.entity.PurchaseOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.entity.vo.PurchaseOrderVO;
 
 /**
  * <p>
@@ -16,10 +17,10 @@ public interface PurchaseOrderService extends IService<PurchaseOrder> {
 
     /**
      * 新增一个采购订单
-     * @param purchaseOrderDTO 提交过来的采购订单信息
+     * @param purchaseOrderVO 提交过来的采购订单信息
      * @return 是否新增成功
      */
-    boolean savePurchaseOrder(PurchaseOrderDTO purchaseOrderDTO);
+    boolean savePurchaseOrder(PurchaseOrderVO purchaseOrderVO);
 
     /**
      * 通过主键ID查询一个采购订单
@@ -33,7 +34,7 @@ public interface PurchaseOrderService extends IService<PurchaseOrder> {
      * @param purchaseOrderDTO 采购订单信息
      * @return 是否更新成功
      */
-    Boolean updatePurchaseOrder(PurchaseOrderDTO purchaseOrderDTO);
+    Boolean updatePurchaseOrder(PurchaseOrderVO purchaseOrderVO);
 
     /**
      * 更新采购订单状态

@@ -6,6 +6,8 @@ import com.whoiszxl.dto.PurchaseOrderDTO;
 import com.whoiszxl.dto.PurchaseOrderItemDTO;
 import com.whoiszxl.entity.PurchaseOrder;
 import com.whoiszxl.entity.PurchaseOrderItem;
+import com.whoiszxl.entity.vo.PurchaseOrderItemVO;
+import com.whoiszxl.entity.vo.PurchaseOrderVO;
 import com.whoiszxl.enums.PurchaseOrderStatusEnum;
 import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.mapper.PurchaseOrderMapper;
@@ -36,15 +38,18 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, P
 
     @Transactional
     @Override
-    public boolean savePurchaseOrder(PurchaseOrderDTO purchaseOrderDTO) {
+    public boolean savePurchaseOrder(PurchaseOrderVO purchaseOrderVO) {
         //1. 新增采购订单
-        purchaseOrderDTO.setPurchaseOrderStatus(PurchaseOrderStatusEnum.EDITING.getCode());
-        PurchaseOrder purchaseOrder = purchaseOrderDTO.clone(PurchaseOrder.class);
+        purchaseOrderVO.setPurchaseOrderStatus(PurchaseOrderStatusEnum.EDITING.getCode());
+        PurchaseOrder purchaseOrder = purchaseOrderVO.clone(PurchaseOrder.class);
         boolean orderFlag = this.save(purchaseOrder);
 
         //2. 新增采购订单中的商品详情
-        List<PurchaseOrderItemDTO> items = purchaseOrderDTO.getItems();
-        items.forEach(item -> item.setPurchaseOrderId(purchaseOrder.getId()));
+        List<PurchaseOrderItemVO> items = purchaseOrderVO.getItems();
+        for (PurchaseOrderItemVO item : items) {
+            item.setPurchaseOrderId(purchaseOrder.getId());
+        }
+
         List<PurchaseOrderItem> purchaseOrderItems = BeanCopierUtils.copyListProperties(items, PurchaseOrderItem::new);
         boolean itemFlag = purchaseOrderItemService.saveBatch(purchaseOrderItems);
 
@@ -71,18 +76,18 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, P
 
     @Transactional
     @Override
-    public Boolean updatePurchaseOrder(PurchaseOrderDTO purchaseOrderDTO) {
+    public Boolean updatePurchaseOrder(PurchaseOrderVO purchaseOrderVO) {
         //1. 更新采购订单
-        purchaseOrderDTO.setPurchaseOrderStatus(PurchaseOrderStatusEnum.EDITING.getCode());
-        PurchaseOrder purchaseOrder = purchaseOrderDTO.clone(PurchaseOrder.class);
+        purchaseOrderVO.setPurchaseOrderStatus(PurchaseOrderStatusEnum.EDITING.getCode());
+        PurchaseOrder purchaseOrder = purchaseOrderVO.clone(PurchaseOrder.class);
         boolean orderFlag = this.updateById(purchaseOrder);
 
         //2. 删除原来的订单商品详情
         boolean removeFlag = purchaseOrderItemService.remove(new UpdateWrapper<PurchaseOrderItem>()
-                .eq("purchase_order_id", purchaseOrderDTO.getId()));
+                .eq("purchase_order_id", purchaseOrderVO.getId()));
 
         //2. 新增订单商品详情
-        List<PurchaseOrderItemDTO> items = purchaseOrderDTO.getItems();
+        List<PurchaseOrderItemVO> items = purchaseOrderVO.getItems();
         items.forEach(item -> item.setPurchaseOrderId(purchaseOrder.getId()));
         List<PurchaseOrderItem> purchaseOrderItems = BeanCopierUtils.copyListProperties(items, PurchaseOrderItem::new);
         boolean itemFlag = purchaseOrderItemService.saveBatch(purchaseOrderItems);
@@ -96,9 +101,9 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, P
     @Transactional
     @Override
     public boolean updateStatus(Long id, Integer status) {
-        UpdateWrapper<PurchaseOrder> updateWrapper = new UpdateWrapper<PurchaseOrder>();
-        updateWrapper.eq("id", id);
-        updateWrapper.set("purchase_order_status", status);
-        return this.update(null, updateWrapper);
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        purchaseOrder.setId(id);
+        purchaseOrder.setPurchaseOrderStatus(status);
+        return this.updateById(purchaseOrder);
     }
 }

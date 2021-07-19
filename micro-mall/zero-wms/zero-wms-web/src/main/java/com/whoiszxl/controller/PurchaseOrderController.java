@@ -56,7 +56,7 @@ public class PurchaseOrderController {
     @PostMapping
     @ApiOperation(value = "新增采购订单", notes = "新增采购订单", response = ResponseResult.class)
     public ResponseResult<Boolean> save(@RequestBody PurchaseOrderVO purchaseOrderVO) {
-        boolean saveFlag = purchaseOrderService.savePurchaseOrder(purchaseOrderVO.clone(PurchaseOrderDTO.class));
+        boolean saveFlag = purchaseOrderService.savePurchaseOrder(purchaseOrderVO);
         return ResponseResult.buildByFlag(saveFlag);
     }
 
@@ -71,7 +71,7 @@ public class PurchaseOrderController {
     @PutMapping
     @ApiOperation(value = "更新采购订单", notes = "更新采购订单", response = ResponseResult.class)
     public ResponseResult<Boolean> updatePurchaseOrder(@RequestBody PurchaseOrderVO purchaseOrderVO) {
-        Boolean updateFlag = purchaseOrderService.updatePurchaseOrder(purchaseOrderVO.clone(PurchaseOrderDTO.class));
+        Boolean updateFlag = purchaseOrderService.updatePurchaseOrder(purchaseOrderVO);
         return ResponseResult.buildByFlag(updateFlag);
     }
 

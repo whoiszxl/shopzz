@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 public class SupplierQuery extends PageQuery {
 
     @ApiModelProperty(value = "供应商名称")
-    private Integer supplierName;
+    private String supplierName;
 
     @ApiModelProperty(value = "供应商结算周期")
     private Integer accountPeriod;
