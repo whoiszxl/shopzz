@@ -1,0 +1,41 @@
+server:
+  port: 80
+spring:
+  application:
+    name: zero-gateway
+  cloud:
+    nacos:
+      server-addr: aliyun.whoiszxl.com:8848
+      config:
+        server-addr: aliyun.whoiszxl.com:8848
+        file-extension: yaml
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: zero-wms-web_router
+          uri: lb://zero-wms-web   # 转发到那个目的地
+          predicates:
+            - Path=/wms/**
+          filters:
+            - StripPrefix=1 # 当前端访问/admin/login - >login 将admin自动的去掉
+
+        - id: test_router
+          uri: http://www.aliyun.com
+          predicates:
+            - Path=/activity
+
+    sentinel:
+      transport:
+        dashboard: 159.75.31.203:8858
+      datasource:
+        ds1.nacos:
+          serverAddr: aliyun.whoiszxl.com:8848
+          dataId: gw-flow
+          ruleType: gw_flow
+        ds2.nacos:
+          serverAddr: aliyun.whoiszxl.com:8848
+          dataId: api-group
+          ruleType: gw_api_group

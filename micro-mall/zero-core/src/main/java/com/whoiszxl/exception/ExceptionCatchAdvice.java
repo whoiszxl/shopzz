@@ -1,5 +1,7 @@
 package com.whoiszxl.exception;
 
+import cn.dev33.satoken.exception.NotLoginException;
+import cn.dev33.satoken.exception.NotPermissionException;
 import com.google.common.collect.ImmutableMap;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.exception.custom.DataNullException;
@@ -50,12 +52,19 @@ public class ExceptionCatchAdvice {
         //定义异常类型所对应的错误代码 TODO 后续修改到其他地方初始化
 
         //业务级别异常
-        builder.put(JwtAuthException.class, ResponseResult.buildError(101001, "用户验证失败"));
+
+        //SA token
+        builder.put(NotPermissionException.class, ResponseResult.buildError(101001, "无权限"));
+        builder.put(NotLoginException.class, ResponseResult.buildError(101002, "用户未登录"));
 
         //系统级别异常
         builder.put(HttpMessageNotReadableException.class, ResponseResult.buildError(200001, "消息体不可读"));
         builder.put(IllegalArgumentException.class, ResponseResult.buildError(200002, "参数填写错误"));
         builder.put(HttpRequestMethodNotSupportedException.class, ResponseResult.buildError(200003, "不支持当前请求方式"));
+
+
+
+
     }
 
     //捕获Exception此类异常
@@ -69,7 +78,7 @@ public class ExceptionCatchAdvice {
         }
         //从EXCEPTIONS中找异常类型所对应的错误代码，如果找到了将错误代码响应给用户，如果找不到给用户响应异常
         ResponseResult result = exceptions.get(exception.getClass());
-        if(result !=null){
+        if(result != null){
             return result;
         }else{
             //返回报错
@@ -99,5 +108,6 @@ public class ExceptionCatchAdvice {
         }
         return ex.getResult();
     }
+
 
 }

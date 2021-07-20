@@ -15,7 +15,6 @@ import lombok.experimental.Accessors;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @ApiModel(value="供应商查询对象", description="供应商查询对象")
 public class SupplierQuery extends PageQuery {
 

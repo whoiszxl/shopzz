@@ -81,7 +81,6 @@ CREATE TABLE `oms_order_operate_history` (
 
 
 DROP TABLE IF EXISTS `oms_order_return_apply`;
-
 CREATE TABLE `oms_order_return_apply` (
   `id` bigint(20) NOT NULL COMMENT '主键',
   `order_id` bigint(20) NOT NULL COMMENT '订单ID',
@@ -89,6 +88,7 @@ CREATE TABLE `oms_order_return_apply` (
   `order_sn` char(16) NOT NULL COMMENT '订单编号',
   `sku_id` bigint(20) NOT NULL COMMENT '订单中SKU的ID',
   `username` varchar(50) NOT NULL COMMENT '用户名',
+  `freight` decimal(8,2) not null comment '运费',
   `return_count` int(3) NOT NULL comment '退货数量',
   `return_reason` tinyint(4) NOT NULL COMMENT '退货原因，1：质量不好，2：商品不满意，3：买错了，4：无理由退货',
   `return_comment` varchar(255) NOT NULL COMMENT '退货备注',
