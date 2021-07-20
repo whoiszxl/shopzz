@@ -16,7 +16,7 @@ public class PurchaseInboundOrderStatus {
 	/**
 	 * 已入库
 	 */
-	public static final Integer FINISH_INPUT = 3;
+	public static final Integer FINISH_INBOUND = 3;
 	/**
 	 * 待结算
 	 */

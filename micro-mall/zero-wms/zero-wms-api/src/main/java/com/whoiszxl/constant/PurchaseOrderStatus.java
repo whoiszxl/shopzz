@@ -20,11 +20,11 @@ public class PurchaseOrderStatus {
 	/**
 	 * 待入库
 	 */
-	public static final Integer WAIT_FOR_INPUT = 4;
+	public static final Integer WAIT_FOR_INBOUND = 4;
 	/**
 	 * 已入库
 	 */
-	public static final Integer FINISHED_INPUT = 5;
+	public static final Integer FINISHED_INBOUND = 5;
 	/**
 	 * 待结算
 	 */

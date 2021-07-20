@@ -45,6 +45,12 @@ public class DispatchClientImpl implements DispatchClient {
         return true;
     }
 
+    @Override
+    public Boolean notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
+        //TODO
+        return null;
+    }
+
     /**
      * 将采购单条目对象转换为入库单条目对象
      * @param item 采购单条目

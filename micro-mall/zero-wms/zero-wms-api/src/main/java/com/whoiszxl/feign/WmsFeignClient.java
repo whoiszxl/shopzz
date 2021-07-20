@@ -18,7 +18,7 @@ public interface WmsFeignClient {
 
     /**
      * 创建采购入库订单
-     * @param purchaseInputOrderDTO 采购入库订单DTO
+     * @param purchaseInboundOrderDTO 采购入库订单DTO
      * @return 处理结果
      */
     @PostMapping("/createPurchaseInboundOrder")

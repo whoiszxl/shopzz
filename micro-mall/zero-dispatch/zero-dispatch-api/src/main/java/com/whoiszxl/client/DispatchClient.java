@@ -1,9 +1,10 @@
 package com.whoiszxl.client;
 
-import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
+import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
@@ -20,6 +21,14 @@ public interface DispatchClient {
      * @param purchaseOrderDTO 采购订单DTO
      * @return 是否调度成功
      */
+    @PostMapping("/dispatchPurchaseInBound")
     Boolean dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO);
 
+    /**
+     *
+     * @param purchaseInboundOrderDTO
+     * @return
+     */
+    @PostMapping("/notifyPurchaseInboundFinished")
+    Boolean notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO);
 }

@@ -2,7 +2,6 @@ package com.whoiszxl.client;
 
 import com.whoiszxl.constant.PurchaseOrderStatus;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
-import com.whoiszxl.entity.PurchaseInboundOnItem;
 import com.whoiszxl.entity.PurchaseInboundOrder;
 import com.whoiszxl.entity.PurchaseInboundOrderItem;
 import com.whoiszxl.feign.WmsFeignClient;
@@ -48,7 +47,7 @@ public class WmsFeignClientImpl implements WmsFeignClient {
         purchaseInboundOrderItemService.saveBatch(purchaseInboundOrderItems);
 
         //3. 更新采购单的状态为待入库
-        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_INPUT);
+        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_INBOUND);
         return true;
     }
 }
