@@ -22,6 +22,13 @@ spring:
           filters:
             - StripPrefix=1 # 当前端访问/admin/login - >login 将admin自动的去掉
 
+        - id: zero-authentication_router
+          uri: lb://zero-authentication   # 转发到那个目的地
+          predicates:
+            - Path=/authentication/**
+          filters:
+            - StripPrefix=1 # 当前端访问/admin/login - >login 将admin自动的去掉
+
         - id: test_router
           uri: http://www.aliyun.com
           predicates:

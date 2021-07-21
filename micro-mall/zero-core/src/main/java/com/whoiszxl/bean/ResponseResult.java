@@ -11,6 +11,7 @@ import lombok.experimental.Accessors;
  * @create: 2020-01-03
  **/
 @Data
+@Accessors
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseResult<T> {
@@ -33,17 +34,23 @@ public class ResponseResult<T> {
 
     public static <T> ResponseResult<T> buildError() {
         ResponseResult<T> result = new ResponseResult<T>();
-        return result.setCode(StatusCode.ERROR).setMessage("error");
+        result.setCode(StatusCode.ERROR);
+        result.setMessage("error");
+        return result;
     }
 
     public static <T> ResponseResult<T> buildError(String message) {
         ResponseResult<T> result = new ResponseResult<T>();
-        return result.setCode(StatusCode.ERROR).setMessage(message);
+        result.setCode(StatusCode.ERROR);
+        result.setMessage(message);
+        return result;
     }
 
     public static <T> ResponseResult<T> buildError(int errorCode, String message) {
         ResponseResult<T> result = new ResponseResult<T>();
-        return result.setCode(errorCode).setMessage(message);
+        result.setCode(errorCode);
+        result.setMessage(message);
+        return result;
     }
 
     public static <T> ResponseResult<T> buildSuccess(T data) {
@@ -52,13 +59,17 @@ public class ResponseResult<T> {
 
     public static <T> ResponseResult<T> buildSuccess(String message, T data) {
         ResponseResult<T> result = new ResponseResult<T>();
-        result.setCode(StatusCode.OK).setMessage(message).setData(data);
+        result.setCode(StatusCode.OK);
+        result.setMessage(message);
+        result.setData(data);
         return result;
     }
 
     public static <T> ResponseResult<T> buildSuccess() {
         ResponseResult<T> result = new ResponseResult<T>();
-        return result.setCode(StatusCode.OK).setMessage("success");
+        result.setCode(StatusCode.OK);
+        result.setMessage("success");
+        return result;
     }
 
     public static <T> ResponseResult<T> buildByFlag(boolean flag) {

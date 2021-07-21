@@ -45,8 +45,11 @@ public class PermissionInterfaceImpl implements StpInterface {
     public List<String> getRoleList(Object loginId, String loginType) {
         // TODO 从Redis中拿到此用户的角色集合
         List<String> list = new ArrayList<>();
-        list.add("admin");
-        list.add("super-admin");
+        if(loginId.equals("admin")) {
+            list.add("admin");
+        }else {
+            list.add("member");
+        }
         return list;
     }
 }

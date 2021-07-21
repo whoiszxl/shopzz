@@ -11,13 +11,12 @@ import com.whoiszxl.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = "登录相关接口")
-public class LoginController {
+public class MemberLoginController {
 
     @Autowired
     private MemberService memberService;
@@ -25,7 +24,7 @@ public class LoginController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping("/login")
+    @PostMapping("/member/login")
     @ApiOperation(value = "账号密码登录", notes = "账号密码登录", response = ResponseResult.class)
     public ResponseResult<String> login(@RequestBody LoginQuery loginQuery) {
         //1. 从数据库查询用户名和密码是否匹配
@@ -43,7 +42,7 @@ public class LoginController {
     @SaCheckLogin
     @SaCheckPermission("member:logout")
     @GetMapping("/logout/{loginId}")
-    @ApiOperation(value = "将用户", notes = "账号密码登录", response = ResponseResult.class)
+    @ApiOperation(value = "将用户踢出", notes = "将用户踢出", response = ResponseResult.class)
     public ResponseResult<String> logout(@PathVariable String loginId) {
         StpUtil.logoutByLoginId(loginId);
         return ResponseResult.buildSuccess();
