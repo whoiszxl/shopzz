@@ -45,6 +45,11 @@ public class DispatchClientImpl implements DispatchClient {
         return true;
     }
 
+    /**
+     * 通知库存中心，“采购入库完成”事件发生了
+     * @param purchaseInboundOrderDTO 采购入库单DTO
+     * @return 是否处理成功
+     */
     @Override
     public Boolean notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         //TODO

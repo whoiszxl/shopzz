@@ -6,12 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * TODO
- *
- * @author zhouxiaolong
- * @date 2021/7/20
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="采购入库单查询对象", description="采购入库单查询对象")

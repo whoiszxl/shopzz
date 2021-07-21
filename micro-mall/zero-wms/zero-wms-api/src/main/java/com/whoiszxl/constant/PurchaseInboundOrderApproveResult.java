@@ -2,8 +2,6 @@ package com.whoiszxl.constant;
 
 /**
  * 采购入库单审核结果
- * @author zhonghuashishan
- *
  */
 public class PurchaseInboundOrderApproveResult {
 

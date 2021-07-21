@@ -17,6 +17,8 @@ import com.whoiszxl.entity.query.PurchaseInBoundOrderQuery;
 import com.whoiszxl.entity.vo.PurchaseInboundOnItemVO;
 import com.whoiszxl.entity.vo.PurchaseInboundOrderVO;
 import com.whoiszxl.entity.vo.PurchaseOrderVO;
+import com.whoiszxl.factory.PurchaseInboundOrderHandler;
+import com.whoiszxl.factory.PurchaseInboundOrderHandlerFactory;
 import com.whoiszxl.service.PurchaseInboundOnItemService;
 import com.whoiszxl.service.PurchaseInboundOrderService;
 import com.whoiszxl.utils.BeanCopierUtils;
@@ -45,6 +47,9 @@ public class PurchaseInboundOrderController {
 
     @Autowired
     private PurchaseInboundOnItemService purchaseInboundOnItemService;
+
+    @Autowired
+    private PurchaseInboundOrderHandlerFactory handlerFactory;
 
     @GetMapping
     @ApiOperation(value = "分页查询采购入库单列表", notes = "分页查询采购入库单列表", response = PurchaseOrder.class)
@@ -103,10 +108,10 @@ public class PurchaseInboundOrderController {
             purchaseInboundOrderService.updateStatus(id, PurchaseInboundOrderStatus.EDITING);
 
         }else {
+            //2. 如果是通过，则需要调用责任链来更新处理一系列信息
             PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(id);
-
-            //TODO 采购入库handler工厂
-
+            PurchaseInboundOrderHandler handlerChain = handlerFactory.getHandlerChain();
+            handlerChain.execute(purchaseInboundOrder.clone(PurchaseInboundOrderDTO.class));
         }
 
         return ResponseResult.buildSuccess();

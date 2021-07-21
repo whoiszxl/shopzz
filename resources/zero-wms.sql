@@ -108,6 +108,26 @@ create table wms_product_allocation_stock
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='货位库存表';
 
 
+-- 货位库存详情表
+drop table if exists wms_product_allocation_stock_detail;
+create table wms_product_allocation_stock_detail (
+    `id`                            bigint not null auto_increment comment '主键',
+    `product_allocation_id`         bigint not null comment '货位ID',
+    `product_sku_id`                bigint not null comment '商品SKU ID',
+    `put_on_time`                   datetime not null comment '商品的上架时间',
+    `put_on_quantity`               int(10) not null comment '商品的上架数量',
+    `current_stock_quantity`        int(10) not null comment '上架的商品当前还剩余的库存数量',
+    `locked_stock_quantity`         bigint not null comment '锁定库存数量',
+    `version`                       bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                    tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
+    `created_by`                    varchar(50) NOT NULL COMMENT '创建者',
+    `updated_by`                    varchar(50) NOT NULL COMMENT '更新者',
+    `created_at`                    datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                    datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='货位库存详情表';
+
+
 -- 采购入库订单表
 drop table if exists wms_purchase_inbound_order;
 create table wms_purchase_inbound_order

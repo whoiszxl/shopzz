@@ -2,8 +2,6 @@ package com.whoiszxl.constant;
 
 /**
  * 库存更新事件
- * @author zhonghuashishan
- *
  */
 public class WmsStockUpdateEvent {
 

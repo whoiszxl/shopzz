@@ -31,7 +31,7 @@ public interface PurchaseOrderService extends IService<PurchaseOrder> {
 
     /**
      * 更新一个采购订单
-     * @param purchaseOrderDTO 采购订单信息
+     * @param purchaseOrderVO 采购订单信息
      * @return 是否更新成功
      */
     Boolean updatePurchaseOrder(PurchaseOrderVO purchaseOrderVO);
