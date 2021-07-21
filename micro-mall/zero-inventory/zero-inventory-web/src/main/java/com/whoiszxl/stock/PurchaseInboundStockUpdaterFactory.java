@@ -72,7 +72,6 @@ public class PurchaseInboundStockUpdaterFactory<T> extends AbstractStockUpdaterF
             }
         }
 
-        //TODO
-        return null;
+        return new PurchaseInboundStockUpdater(productStocks, productStockService, itemDTOMap);
     }
 }

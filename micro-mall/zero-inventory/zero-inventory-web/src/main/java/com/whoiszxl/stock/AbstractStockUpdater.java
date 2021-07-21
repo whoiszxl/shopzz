@@ -28,10 +28,19 @@ public abstract class AbstractStockUpdater implements StockUpdater {
     @Override
     public Boolean updateProductStock() {
         try {
+            //更新销售库存
             updateSaleStockQuantity();
+
+            //更新锁定库存
             updateLockedStockQuantity();
+
+            //更新已售库存
             updateSaledStockQuantity();
+
+            //更新库存状态
             updateStockStatus();
+
+            //执行更新操作
             executeUpdateProductStock();
         } catch (Exception e) {
             log.error("updateProductStock 更新商品库存发生异常", e);
@@ -59,7 +68,7 @@ public abstract class AbstractStockUpdater implements StockUpdater {
      */
     private void updateStockStatus() {
         for(ProductStock productStock : productStocks) {
-            if(productStock.getSaleStockQuantity() > 0L) {
+            if(productStock.getSaleStockQuantity() > 0) {
                 productStock.setStockStatus(StockStatus.IN_STOCK);
             } else {
                 productStock.setStockStatus(StockStatus.NOT_IN_STOCK);
@@ -70,7 +79,6 @@ public abstract class AbstractStockUpdater implements StockUpdater {
 
     /**
      * 实际执行更新商品库存的操作
-     * @throws Exception
      */
     private void executeUpdateProductStock() {
         productStockService.updateBatchById(productStocks);

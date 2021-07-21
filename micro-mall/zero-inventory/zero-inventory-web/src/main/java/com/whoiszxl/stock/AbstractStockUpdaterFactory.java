@@ -30,7 +30,10 @@ public abstract class AbstractStockUpdaterFactory<T> implements StockUpdaterFact
      */
     @Override
     public StockUpdater create(T parameter) {
+        //1. 从传入的参数中拿到所有的skuId
         List<Long> productSkuIds = getProductSkuIds(parameter);
+
+        //2. 通过所有的skuId创建出商品库存对象集合来
         List<ProductStock> productStocks = createProductStocks(productSkuIds);
         return create(productStocks, parameter);
     }
