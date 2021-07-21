@@ -178,6 +178,7 @@ create table wms_purchase_inbound_on_item (
     `id`                                bigint not null auto_increment comment '主键',
     `purchase_inbound_order_item_id`    bigint not null comment '采购入库单条目ID',
     `product_allocation_id`             bigint not null comment '货位ID',
+    `product_sku_id`                    bigint not null comment '商品SKU ID',
     `put_on_shelves_count`              int(10) not null comment '上架数量',
     `version`                           bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                        tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',

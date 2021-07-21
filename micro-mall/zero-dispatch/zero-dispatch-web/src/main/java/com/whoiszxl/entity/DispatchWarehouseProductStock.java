@@ -20,7 +20,6 @@ import lombok.experimental.Accessors;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @ApiModel(value="DispatchWarehouseProductStock对象", description="调度中心商品库存表")
 public class DispatchWarehouseProductStock implements Serializable {
 
@@ -40,7 +39,7 @@ public class DispatchWarehouseProductStock implements Serializable {
     private Integer lockedStockQuantity;
 
     @ApiModelProperty(value = "已出库库存数量")
-    private Long deliveriedStockQuantity;
+    private Integer deliveriedStockQuantity;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

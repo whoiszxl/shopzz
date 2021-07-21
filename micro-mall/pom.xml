@@ -19,6 +19,9 @@
         <module>zero-dispatch</module>
         <module>zero-dispatch/zero-dispatch-api</module>
         <module>zero-dispatch/zero-dispatch-web</module>
+        <module>zero-finance</module>
+        <module>zero-finance/zero-finance-api</module>
+        <module>zero-inventory</module>
     </modules>
 
     <name>micro-mall</name>

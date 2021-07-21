@@ -32,6 +32,9 @@ public class PurchaseInboundOrderVO extends AbstractObject implements Serializab
     @ApiModelProperty(value = "主键")
     private Long id;
 
+    @ApiModelProperty(value = "采购单id")
+    private Long purchaseOrderId;
+
     @ApiModelProperty(value = "供应商ID")
     private Long supplierId;
 

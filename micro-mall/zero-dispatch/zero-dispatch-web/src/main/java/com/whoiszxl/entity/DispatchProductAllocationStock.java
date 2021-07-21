@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -20,7 +19,6 @@ import lombok.experimental.Accessors;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @ApiModel(value="DispatchProductAllocationStock对象", description="调度中心货位库存表")
 public class DispatchProductAllocationStock implements Serializable {
 
@@ -37,13 +35,13 @@ public class DispatchProductAllocationStock implements Serializable {
     private Long productSkuId;
 
     @ApiModelProperty(value = "可用库存数量")
-    private Long availableStockQuantity;
+    private Integer availableStockQuantity;
 
     @ApiModelProperty(value = "锁定库存数量")
-    private Long lockedStockQuantity;
+    private Integer lockedStockQuantity;
 
     @ApiModelProperty(value = "已出库库存数量")
-    private Long deliveriedStockQuantity;
+    private Integer deliveriedStockQuantity;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

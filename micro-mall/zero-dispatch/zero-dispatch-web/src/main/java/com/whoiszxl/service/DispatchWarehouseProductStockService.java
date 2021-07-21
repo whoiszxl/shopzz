@@ -13,4 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface DispatchWarehouseProductStockService extends IService<DispatchWarehouseProductStock> {
 
+    /**
+     * 根据商品SKU ID获取调度库存信息，如果不存在则创建
+     * @param productSkuId 商品SKU ID
+     * @return 调度库存信息
+     */
+    DispatchWarehouseProductStock getOrSave(Long productSkuId);
 }

@@ -1,11 +1,15 @@
 package com.whoiszxl.client;
 
 import com.whoiszxl.constant.PurchaseInboundOrderStatus;
+import com.whoiszxl.constant.WmsStockUpdateEvent;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
 import com.whoiszxl.dto.PurchaseOrderDTO;
 import com.whoiszxl.dto.PurchaseOrderItemDTO;
+import com.whoiszxl.feign.InventoryFeignClient;
 import com.whoiszxl.feign.WmsFeignClient;
+import com.whoiszxl.stock.DispatchStockUpdater;
+import com.whoiszxl.stock.DispatchStockUpdaterFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +31,11 @@ public class DispatchClientImpl implements DispatchClient {
     @Autowired
     private WmsFeignClient wmsFeignClient;
 
+    @Autowired
+    private DispatchStockUpdaterFactory dispatchStockUpdaterFactory;
+
+    @Autowired
+    private InventoryFeignClient inventoryFeignClient;
 
     @Override
     public Boolean dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {
@@ -52,8 +61,14 @@ public class DispatchClientImpl implements DispatchClient {
      */
     @Override
     public Boolean notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
-        //TODO
-        return null;
+        //1. 通过库存更新工厂创建对应的组件
+        DispatchStockUpdater stockUpdater = dispatchStockUpdaterFactory.create(WmsStockUpdateEvent.PURCHASE_INBOUND, purchaseInboundOrderDTO);
+        stockUpdater.update();
+
+        //2. 通知库存中心采购入库已经完成了
+        inventoryFeignClient.notifyPurchaseInboundFinished(purchaseInboundOrderDTO);
+
+        return true;
     }
 
     /**

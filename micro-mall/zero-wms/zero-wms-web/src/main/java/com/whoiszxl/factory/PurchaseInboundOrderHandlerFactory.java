@@ -1,5 +1,6 @@
 package com.whoiszxl.factory;
 
+import com.whoiszxl.factory.handler.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -49,12 +50,13 @@ public class PurchaseInboundOrderHandlerFactory {
      * 1. 先调用更新采购入库单状态为已入库
      * 2. 再去更新库存信息
      * 3. 再去通知调度中心去处理一些信息
-     * 4. 再去通知财务中心去处理财务信息
+     * 4. 再去通知财务中心去处理财务信息，财务中心会创建一个编辑中的采购结算单
      */
     private void buildHandlerChain() {
         updatePurchaseInboundOrderStatusHandler.setSuccessor(notifyPurchaseCenterHandler);
         notifyPurchaseCenterHandler.setSuccessor(updateStockHandler);
         updateStockHandler.setSuccessor(notifyDispatchCenterHandler);
         notifyDispatchCenterHandler.setSuccessor(notifyFinanceCenterHandler);
+        this.isBuildedHandlerChain = true;
     }
 }

@@ -23,4 +23,14 @@ public interface WmsFeignClient {
      */
     @PostMapping("/createPurchaseInboundOrder")
     Boolean createPurchaseInboundOrder(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+
+
+    /**
+     * 通过WMS中心，采购结算单审核已经通过了
+     * @param purchaseInboundOrderId 采购入库单ID
+     * @return 是否处理成功
+     */
+    @PostMapping("/notifyFinishedPurchaseSettlementOrderEvent")
+    Boolean notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId);
+
 }

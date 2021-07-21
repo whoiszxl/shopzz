@@ -13,7 +13,6 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Accessors(chain = true)
 public class ResponseResult<T> {
 
     /** 返回码 */

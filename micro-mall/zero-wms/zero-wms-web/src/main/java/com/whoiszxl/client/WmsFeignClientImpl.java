@@ -1,5 +1,6 @@
 package com.whoiszxl.client;
 
+import com.whoiszxl.constant.PurchaseInboundOrderStatus;
 import com.whoiszxl.constant.PurchaseOrderStatus;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.entity.PurchaseInboundOrder;
@@ -48,6 +49,22 @@ public class WmsFeignClientImpl implements WmsFeignClient {
 
         //3. 更新采购单的状态为待入库
         purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_INBOUND);
+        return true;
+    }
+
+    /**
+     * 通过WMS中心，采购结算单审核已经通过了
+     * @param purchaseInboundOrderId 采购入库单ID
+     * @return 是否处理成功
+     */
+    @Override
+    public Boolean notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId) {
+        //1. 更新采购入库单状态为已完成
+        purchaseInboundOrderService.updateStatus(purchaseInboundOrderId, PurchaseInboundOrderStatus.FINISHED);
+
+        //2. 更新采购单状态为已完成
+        PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(purchaseInboundOrderId);
+        purchaseOrderService.updateStatus(purchaseInboundOrder.getPurchaseOrderId(), PurchaseOrderStatus.FINISHED);
         return true;
     }
 }

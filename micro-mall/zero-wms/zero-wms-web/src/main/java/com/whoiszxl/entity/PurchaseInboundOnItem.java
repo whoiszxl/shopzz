@@ -38,6 +38,9 @@ public class PurchaseInboundOnItem extends AbstractObject implements Serializabl
     @ApiModelProperty(value = "货位ID")
     private Long productAllocationId;
 
+    @ApiModelProperty(value = "商品SKU ID")
+    private Long productSkuId;
+
     @ApiModelProperty(value = "上架数量")
     private Integer putOnShelvesCount;
 

@@ -15,7 +15,7 @@ public class PurchaseInboundOrderResult {
     /** 是否执行下一个handler */
     private Boolean doNext = true;
 
-    PurchaseInboundOrderResult(Boolean result) {
+    public PurchaseInboundOrderResult(Boolean result) {
         this.result = result;
     }
 }

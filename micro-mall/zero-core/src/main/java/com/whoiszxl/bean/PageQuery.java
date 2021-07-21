@@ -16,7 +16,6 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @ApiModel(value="分页查询对象", description="分页查询对象")
 public class PageQuery implements Serializable {
 

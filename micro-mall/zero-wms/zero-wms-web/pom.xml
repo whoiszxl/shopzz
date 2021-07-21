@@ -13,6 +13,11 @@
     <artifactId>zero-wms-web</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
+            <artifactId>zero-finance-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
         <dependency>
             <groupId>com.whoiszxl</groupId>

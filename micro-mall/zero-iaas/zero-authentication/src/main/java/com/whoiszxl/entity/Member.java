@@ -21,7 +21,6 @@ import lombok.experimental.Accessors;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("ums_member")
 @ApiModel(value="Member对象", description="会员表")
 public class Member implements Serializable {

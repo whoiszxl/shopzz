@@ -32,6 +32,9 @@ public class PurchaseInboundOrder extends AbstractObject implements Serializable
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @ApiModelProperty(value = "采购单id")
+    private Long purchaseOrderId;
+
     @ApiModelProperty(value = "供应商ID")
     private Long supplierId;
 
