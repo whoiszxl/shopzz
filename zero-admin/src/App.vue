@@ -16,29 +16,41 @@
         >
           <el-submenu index="1">
             <template #title>
-              <span>采购管理</span>
+              <span>Dashboard</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/purchase/list"><i class="el-icon-data-line" />采购列表</el-menu-item>
-              <el-menu-item index="/purchase/add"><i class="el-icon-data-line" />新增采购</el-menu-item>
+              <el-menu-item index="/"><i class="el-icon-odometer" />首页</el-menu-item>
+              <el-menu-item index="/add"><i class="el-icon-plus" />添加商品</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
 
           <el-submenu index="2">
             <template #title>
-              <span>WMS管理</span>
+              <span>管理员管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/allocation/list"><i class="el-icon-data-line" />货位管理</el-menu-item>
-              <el-menu-item index="/allocation/inbound"><i class="el-icon-data-line" />入库管理</el-menu-item>
+              <el-menu-item index="/sysUser"><i class="el-icon-star-on" />管理员列表</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+
+          <el-submenu index="3">
+            <template #title>
+              <span>采购管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/supplier"><i class="el-icon-star-on" />供应商管理</el-menu-item>
+            </el-menu-item-group>
+
+            <el-menu-item-group>
+              <el-menu-item index="/purchaseOrder"><i class="el-icon-star-on" />采购单管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
 
         </el-menu>
       </el-aside>
-      <el-container class="container">
+      <el-container class="content">
         <Header />
         <div class="main">
           <router-view />
@@ -46,7 +58,6 @@
         <Footer />
       </el-container>
     </el-container>
-
     <el-container v-else class="container">
       <router-view />
     </el-container>
@@ -56,8 +67,9 @@
 <script>
 import { reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
-import Header from '@/components/Header.vue';
-import Footer from '@/components/Footer.vue';
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+import { localGet, pathMap } from '@/utils'
 export default {
   name: 'App',
   components: {
@@ -68,7 +80,9 @@ export default {
     const noMenu = ['/login']
     const router = useRouter()
     const state = reactive({
-      showMenu: true
+      showMenu: true,
+      defaultOpen: ['1', '2', '3'],
+      currentPath: '/',
     })
 
     router.beforeEach((to, from, next) => {
@@ -86,6 +100,7 @@ export default {
         }
       }
       state.showMenu = !noMenu.includes(to.path)
+      state.currentPath = to.path
       document.title = pathMap[to.name]
     })
 
@@ -99,7 +114,7 @@ export default {
 <style scoped>
 
 .el-menu-item.is-active {
-    color: orange;
+  color: orange;
 }
 
 .layout {
@@ -151,9 +166,33 @@ export default {
 </style>
 
 <style>
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+  body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .el-menu {
+    border-right: none!important;
+  }
+  .el-submenu {
+    border-top: 1px solid hsla(0, 0%, 100%, .05);
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+  }
+  .el-submenu:first-child {
+    border-top: none;
+  }
+  .el-submenu [class^="el-icon-"] {
+    vertical-align: -1px!important;
+  }
+  a {
+    color: #409eff;
+    text-decoration: none;
+  }
+  .el-pagination {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .el-popper__arrow {
+    display: none;
+  }
 </style>

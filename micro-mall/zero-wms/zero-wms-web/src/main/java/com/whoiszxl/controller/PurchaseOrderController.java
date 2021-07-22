@@ -35,7 +35,7 @@ import java.util.List;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping("/wms/purchase-order")
+@RequestMapping("/purchase-order")
 @Api(tags = "采购订单相关接口")
 public class PurchaseOrderController {
 

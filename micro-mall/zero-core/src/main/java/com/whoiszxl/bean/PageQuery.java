@@ -20,8 +20,8 @@ import java.io.Serializable;
 public class PageQuery implements Serializable {
 
     @ApiModelProperty(value = "页码")
-    private Integer page;
+    private Integer page = 1;
 
     @ApiModelProperty(value = "每页数量")
-    private Integer size;
+    private Integer size = 10;
 }

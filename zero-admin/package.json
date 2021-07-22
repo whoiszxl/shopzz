@@ -12,7 +12,8 @@
     "js-md5": "^0.7.3",
     "vant": "3.0.10",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.10"
+    "vue-router": "^4.0.10",
+    "wangeditor": "^4.6.15"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.5",

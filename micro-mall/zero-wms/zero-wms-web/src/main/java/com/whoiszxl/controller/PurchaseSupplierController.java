@@ -6,11 +6,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.dto.PurchaseSupplierDTO;
 import com.whoiszxl.entity.PurchaseSupplier;
 import com.whoiszxl.entity.query.SupplierQuery;
 import com.whoiszxl.entity.vo.PurchaseSupplierVO;
-import com.whoiszxl.enums.CloneDirectionEnum;
 import com.whoiszxl.service.PurchaseSupplierService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping("/wms/purchase-supplier")
+@RequestMapping("/purchase-supplier")
 @Api(tags = "采购供应商相关接口")
 public class PurchaseSupplierController {
 
@@ -53,7 +51,7 @@ public class PurchaseSupplierController {
 
     @SaCheckLogin
     @GetMapping("/{id}")
-    @ApiOperation(value = "提交采购单去审核", notes = "提交采购单去审核", response = PurchaseSupplierVO.class)
+    @ApiOperation(value = "通过主键ID获取供应商", notes = "通过主键ID获取供应商", response = PurchaseSupplierVO.class)
     public ResponseResult<PurchaseSupplierVO> getSupplierById(@PathVariable Long id) {
         PurchaseSupplier purchaseSupplier = purchaseSupplierService.getById(id);
         return purchaseSupplier == null ? ResponseResult.buildSuccess() : ResponseResult.buildSuccess(purchaseSupplier.clone(PurchaseSupplierVO.class));
@@ -62,10 +60,27 @@ public class PurchaseSupplierController {
     @SaCheckLogin
     @PostMapping
     @ApiOperation(value = "新增供应商", notes = "新增供应商", response = ResponseResult.class)
-    public ResponseResult<Boolean> save(@RequestBody PurchaseSupplierVO purchaseSupplierVO) throws Exception {
+    public ResponseResult<Boolean> save(@RequestBody PurchaseSupplierVO purchaseSupplierVO) {
         PurchaseSupplier purchaseSupplier = purchaseSupplierVO.clone(PurchaseSupplier.class);
         boolean saveFlag = purchaseSupplierService.save(purchaseSupplier);
         return ResponseResult.buildByFlag(saveFlag);
+    }
+
+    @SaCheckLogin
+    @PutMapping
+    @ApiOperation(value = "更新供应商", notes = "更新供应商", response = ResponseResult.class)
+    public ResponseResult<Boolean> update(@RequestBody PurchaseSupplierVO purchaseSupplierVO) {
+        PurchaseSupplier purchaseSupplier = purchaseSupplierVO.clone(PurchaseSupplier.class);
+        boolean updateFlag = purchaseSupplierService.updateById(purchaseSupplier);
+        return ResponseResult.buildByFlag(updateFlag);
+    }
+
+    @SaCheckLogin
+    @DeleteMapping("/{id}")
+    @ApiOperation(value = "删除供应商", notes = "删除供应商", response = ResponseResult.class)
+    public ResponseResult<Boolean> delete(@PathVariable Long id) {
+        boolean removeFlag = purchaseSupplierService.removeById(id);
+        return ResponseResult.buildByFlag(removeFlag);
     }
 
 }

@@ -2,10 +2,12 @@ package com.whoiszxl.factory;
 
 import com.whoiszxl.factory.handler.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * 采购入库单的handler工厂，创建一个采购入库的责任链
  */
+@Component
 public class PurchaseInboundOrderHandlerFactory {
 
     /**

@@ -18,5 +18,7 @@ export function localRemove (key) {
 export const pathMap = {
   index: '首页',
   login: '登录',
-  add: '添加商品'
+  add: '添加商品',
+  sysUser: '管理员管理',
+  addSysUser: '添加管理员'
 }
