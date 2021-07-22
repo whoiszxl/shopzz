@@ -41,7 +41,7 @@ public class PurchaseInboundOrderItem extends AbstractObject implements Serializ
     private Long productSkuId;
 
     @ApiModelProperty(value = "采购数量")
-    private Integer purchaseCount;
+    private Integer purchaseQuantity;
 
     @ApiModelProperty(value = "采购价格")
     private BigDecimal purchasePrice;

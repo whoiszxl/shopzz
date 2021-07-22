@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -34,9 +35,9 @@ public class PurchaseOrderItemDTO extends AbstractObject implements Serializable
     private Long productSkuId;
 
     @ApiModelProperty(value = "采购数量")
-    private Long purchaseQuantity;
+    private Integer purchaseQuantity;
 
     @ApiModelProperty(value = "采购价格")
-    private Long purchasePrice;
+    private BigDecimal purchasePrice;
 
 }

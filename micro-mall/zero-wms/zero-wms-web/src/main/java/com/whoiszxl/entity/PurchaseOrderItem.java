@@ -2,6 +2,7 @@ package com.whoiszxl.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -39,10 +40,10 @@ public class PurchaseOrderItem extends AbstractObject implements Serializable {
     private Long productSkuId;
 
     @ApiModelProperty(value = "采购数量")
-    private Long purchaseQuantity;
+    private Integer purchaseQuantity;
 
     @ApiModelProperty(value = "采购价格")
-    private Long purchasePrice;
+    private BigDecimal purchasePrice;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

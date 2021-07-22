@@ -106,7 +106,8 @@ public class PurchaseOrderController {
 
         //通过后发送此采购单到调度中心，调度中心包装成入库单到WMS系统中
         if(PurchaseOrderApproveEnum.PASSED.getCode().equals(status)) {
-            dispatchClient.dispatchPurchaseInBound(purchaseOrderService.getById(id).clone(PurchaseOrderDTO.class));
+            PurchaseOrderDTO purchaseOrderDTO = purchaseOrderService.getPurchaseOrderById(id);
+            dispatchClient.dispatchPurchaseInBound(purchaseOrderDTO);
         }
 
         return ResponseResult.buildByFlag(resultFlag);

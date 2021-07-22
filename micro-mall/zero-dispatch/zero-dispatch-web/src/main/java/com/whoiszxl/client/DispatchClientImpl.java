@@ -1,5 +1,6 @@
 package com.whoiszxl.client;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.constant.PurchaseInboundOrderStatus;
 import com.whoiszxl.constant.WmsStockUpdateEvent;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
@@ -39,8 +40,8 @@ public class DispatchClientImpl implements DispatchClient {
     private InventoryFeignClient inventoryFeignClient;
 
     @Override
-    @PostMapping("/dispatch/dispatchPurchaseInBound")
-    public Boolean dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {
+    @PostMapping("/dispatchPurchaseInBound")
+    public ResponseResult<Boolean> dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {
         //1. 创建采购入库订单
         PurchaseInboundOrderDTO purchaseInboundOrderDTO = createPurchaseInboundOrder(purchaseOrderDTO);
 
@@ -53,7 +54,7 @@ public class DispatchClientImpl implements DispatchClient {
 
         //3. 调用wms模块，将入库单入库
         wmsFeignClient.createPurchaseInboundOrder(purchaseInboundOrderDTO);
-        return true;
+        return ResponseResult.buildSuccess();
     }
 
     /**
@@ -62,7 +63,7 @@ public class DispatchClientImpl implements DispatchClient {
      * @return 是否处理成功
      */
     @Override
-    public Boolean notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
+    public ResponseResult<Boolean> notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         //1. 通过库存更新工厂创建对应的组件
         DispatchStockUpdater stockUpdater = dispatchStockUpdaterFactory.create(WmsStockUpdateEvent.PURCHASE_INBOUND, purchaseInboundOrderDTO);
         stockUpdater.update();
@@ -70,7 +71,7 @@ public class DispatchClientImpl implements DispatchClient {
         //2. 通知库存中心采购入库已经完成了
         inventoryFeignClient.notifyPurchaseInboundFinished(purchaseInboundOrderDTO);
 
-        return true;
+        return ResponseResult.buildSuccess();
     }
 
     /**
@@ -79,8 +80,10 @@ public class DispatchClientImpl implements DispatchClient {
      * @return 入库单条目
      */
     private PurchaseInboundOrderItemDTO createPurchaseInboundOrderItem(PurchaseOrderItemDTO item) {
-        PurchaseInboundOrderItemDTO purchaseInboundOrderItemDTO = item.clone(PurchaseInboundOrderItemDTO.class);
-        purchaseInboundOrderItemDTO.setId(null);
+        PurchaseInboundOrderItemDTO purchaseInboundOrderItemDTO = new PurchaseInboundOrderItemDTO();
+        purchaseInboundOrderItemDTO.setProductSkuId(item.getProductSkuId());
+        purchaseInboundOrderItemDTO.setPurchaseQuantity(item.getPurchaseQuantity());
+        purchaseInboundOrderItemDTO.setPurchasePrice(item.getPurchasePrice());
         return purchaseInboundOrderItemDTO;
     }
 

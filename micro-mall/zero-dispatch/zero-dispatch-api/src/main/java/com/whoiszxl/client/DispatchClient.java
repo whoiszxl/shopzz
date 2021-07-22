@@ -1,5 +1,6 @@
 package com.whoiszxl.client;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseOrderDTO;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author whoiszxl
  * @date 2021/7/20
  */
-@FeignClient(name = "zero-dispatch-web", contextId = "dispatchFeign", configuration = OAuth2FeignConfig.class, path = "/dispatch")
+@FeignClient(name = "zero-dispatch-web", contextId = "dispatchFeign", configuration = OAuth2FeignConfig.class)
 public interface DispatchClient {
 
     /**
@@ -21,8 +22,8 @@ public interface DispatchClient {
      * @param purchaseOrderDTO 采购订单DTO
      * @return 是否调度成功
      */
-    @PostMapping("/dispatch/dispatchPurchaseInBound")
-    Boolean dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO);
+    @PostMapping("/dispatchPurchaseInBound")
+    ResponseResult<Boolean> dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO);
 
     /**
      * 通知库存中心，“采购入库完成”事件发生了
@@ -30,5 +31,5 @@ public interface DispatchClient {
      * @return 是否处理成功
      */
     @PostMapping("/notifyPurchaseInboundFinished")
-    Boolean notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+    ResponseResult<Boolean> notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO);
 }

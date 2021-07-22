@@ -1,5 +1,6 @@
 package com.whoiszxl.feign;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author whoiszxl
  * @date 2021/7/20
  */
-@FeignClient(name = "zero-wms-web", contextId = "wmsFeign", configuration = OAuth2FeignConfig.class, path = "/wms")
+@FeignClient(name = "zero-wms-web", contextId = "wmsFeign", configuration = OAuth2FeignConfig.class)
 public interface WmsFeignClient {
 
 
@@ -22,7 +23,7 @@ public interface WmsFeignClient {
      * @return 处理结果
      */
     @PostMapping("/createPurchaseInboundOrder")
-    Boolean createPurchaseInboundOrder(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+    ResponseResult<Boolean> createPurchaseInboundOrder(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
 
 
     /**
@@ -31,6 +32,6 @@ public interface WmsFeignClient {
      * @return 是否处理成功
      */
     @PostMapping("/notifyFinishedPurchaseSettlementOrderEvent")
-    Boolean notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId);
+    ResponseResult<Boolean> notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId);
 
 }

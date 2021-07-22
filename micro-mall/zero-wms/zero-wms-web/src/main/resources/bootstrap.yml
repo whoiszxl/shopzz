@@ -58,3 +58,7 @@ sa-token:
     password: zxl123456!!
     # 连接超时时间（毫秒）
     timeout: 100ms
+
+feign:
+  httpclient:
+    connection-timeout: 5000

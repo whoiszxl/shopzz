@@ -1,5 +1,6 @@
 package com.whoiszxl.client;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.constant.PurchaseInboundOrderStatus;
 import com.whoiszxl.constant.PurchaseOrderStatus;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
@@ -12,6 +13,8 @@ import com.whoiszxl.service.PurchaseOrderService;
 import com.whoiszxl.utils.BeanCopierUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,20 +39,25 @@ public class WmsFeignClientImpl implements WmsFeignClient {
     private PurchaseOrderService purchaseOrderService;
 
 
+    @Transactional
     @Override
-    public Boolean createPurchaseInboundOrder(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
+    @PostMapping("/createPurchaseInboundOrder")
+    public ResponseResult<Boolean> createPurchaseInboundOrder(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         //1. 将入库单保存到数据库
         PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderDTO.clone(PurchaseInboundOrder.class);
         purchaseInboundOrderService.save(purchaseInboundOrder);
 
         //2. 将入库单商品条目批量保存到数据库
         List<PurchaseInboundOrderItem> purchaseInboundOrderItems = BeanCopierUtils.copyListProperties(purchaseInboundOrderDTO.getItems(), PurchaseInboundOrderItem::new);
-        purchaseInboundOrderItems.forEach(item -> item.setId(purchaseInboundOrder.getId()));
+        purchaseInboundOrderItems.forEach(item -> {
+            item.setPurchaseInboundOrderId(purchaseInboundOrder.getId());
+        });
+
         purchaseInboundOrderItemService.saveBatch(purchaseInboundOrderItems);
 
         //3. 更新采购单的状态为待入库
         purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_INBOUND);
-        return true;
+        return ResponseResult.buildSuccess();
     }
 
     /**
@@ -58,13 +66,14 @@ public class WmsFeignClientImpl implements WmsFeignClient {
      * @return 是否处理成功
      */
     @Override
-    public Boolean notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId) {
+    @PostMapping("/notifyFinishedPurchaseSettlementOrderEvent")
+    public ResponseResult<Boolean> notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId) {
         //1. 更新采购入库单状态为已完成
         purchaseInboundOrderService.updateStatus(purchaseInboundOrderId, PurchaseInboundOrderStatus.FINISHED);
 
         //2. 更新采购单状态为已完成
         PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(purchaseInboundOrderId);
         purchaseOrderService.updateStatus(purchaseInboundOrder.getPurchaseOrderId(), PurchaseOrderStatus.FINISHED);
-        return true;
+        return ResponseResult.buildSuccess();
     }
 }
