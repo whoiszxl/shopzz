@@ -20,6 +20,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -94,6 +95,7 @@ public class PurchaseOrderController {
     }
 
     @SaCheckLogin
+    @Transactional
     @PutMapping("/approve/{id}/{status}")
     @ApiOperation(value = "审核采购单", notes = "审核采购单", response = ResponseResult.class)
     public ResponseResult<Boolean> approve(@PathVariable Long id, @PathVariable Integer status) {

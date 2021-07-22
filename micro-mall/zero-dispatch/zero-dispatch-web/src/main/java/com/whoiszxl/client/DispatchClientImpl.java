@@ -12,6 +12,7 @@ import com.whoiszxl.stock.DispatchStockUpdater;
 import com.whoiszxl.stock.DispatchStockUpdaterFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,7 @@ public class DispatchClientImpl implements DispatchClient {
     private InventoryFeignClient inventoryFeignClient;
 
     @Override
+    @PostMapping("/dispatch/dispatchPurchaseInBound")
     public Boolean dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {
         //1. 创建采购入库订单
         PurchaseInboundOrderDTO purchaseInboundOrderDTO = createPurchaseInboundOrder(purchaseOrderDTO);

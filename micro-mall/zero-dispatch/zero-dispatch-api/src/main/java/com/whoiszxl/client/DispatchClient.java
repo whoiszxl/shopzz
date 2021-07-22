@@ -21,7 +21,7 @@ public interface DispatchClient {
      * @param purchaseOrderDTO 采购订单DTO
      * @return 是否调度成功
      */
-    @PostMapping("/dispatchPurchaseInBound")
+    @PostMapping("/dispatch/dispatchPurchaseInBound")
     Boolean dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO);
 
     /**

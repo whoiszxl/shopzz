@@ -28,7 +28,7 @@ create table wms_purchase_order_item
     `purchase_order_id`         bigint not null comment '采购单ID',
     `product_sku_id`            bigint not null comment '商品SKU ID',
     `purchase_quantity`         bigint not null comment '采购数量',
-    `purchase_price`            bigint not null comment '采购价格',
+    `purchase_price`            decimal(8,2) not null comment '采购价格',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
     `created_by`                varchar(50) NOT NULL COMMENT '创建者',
