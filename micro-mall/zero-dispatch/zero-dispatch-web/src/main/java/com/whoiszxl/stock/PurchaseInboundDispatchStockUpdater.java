@@ -23,7 +23,6 @@ import java.util.List;
 @Scope("prototype")
 public class PurchaseInboundDispatchStockUpdater extends AbstractDispatchStockUpdater {
 
-    @Autowired
     private PurchaseInboundOrderDTO purchaseInboundOrder;
 
     @Autowired

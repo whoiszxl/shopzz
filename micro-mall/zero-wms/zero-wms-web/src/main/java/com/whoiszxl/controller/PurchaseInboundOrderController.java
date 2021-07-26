@@ -22,6 +22,7 @@ import com.whoiszxl.utils.BeanCopierUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -97,6 +98,7 @@ public class PurchaseInboundOrderController {
         return ResponseResult.buildByFlag(updateFlag);
     }
 
+    @Transactional
     @PutMapping("/approve/{id}/{status}")
     @ApiOperation(value = "审核入库单", notes = "审核入库单", response = ResponseResult.class)
     public ResponseResult approve(@PathVariable("id") Long id, @PathVariable("status") Integer status) {
@@ -106,9 +108,9 @@ public class PurchaseInboundOrderController {
 
         }else {
             //2. 如果是通过，则需要调用责任链来更新处理一系列信息
-            PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(id);
+            PurchaseInboundOrderDTO purchaseInboundOrderDTO = purchaseInboundOrderService.getPurchaseInboundOrderById(id);
             PurchaseInboundOrderHandler handlerChain = handlerFactory.getHandlerChain();
-            handlerChain.execute(purchaseInboundOrder.clone(PurchaseInboundOrderDTO.class));
+            handlerChain.execute(purchaseInboundOrderDTO);
         }
 
         return ResponseResult.buildSuccess();

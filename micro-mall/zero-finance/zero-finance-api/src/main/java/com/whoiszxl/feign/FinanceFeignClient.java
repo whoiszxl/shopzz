@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author whoiszxl
  * @date 2021/7/20
  */
-@FeignClient(name = "zero-finance-web", contextId = "financeFeign", configuration = OAuth2FeignConfig.class, path = "/finance")
+@FeignClient(name = "zero-finance-web", contextId = "financeFeign", configuration = OAuth2FeignConfig.class)
 public interface FinanceFeignClient {
 
     /**

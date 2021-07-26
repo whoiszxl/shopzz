@@ -47,8 +47,7 @@ public class PurchaseInboundWmsStockUpdater extends AbstractWmsStockUpdater {
         List<PurchaseInboundOrderItemDTO> items = purchaseInboundOrder.getItems();
         for (PurchaseInboundOrderItemDTO item : items) {
             //2. 从数据库中通过sku_id拿到当前的条目库存
-            WarehouseProductStock warehouseProductStock = warehouseProductStockService.getOne(new QueryWrapper<WarehouseProductStock>()
-                    .eq("product_sku_id", item.getProductSkuId()));
+            WarehouseProductStock warehouseProductStock = warehouseProductStockService.getOrSaveBySkuId(item.getProductSkuId());
 
             //3. 更新可用库存数量
             warehouseProductStock.setAvailableStockQuantity(warehouseProductStock.getAvailableStockQuantity() + item.getArrivalCount());

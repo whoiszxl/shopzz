@@ -2,6 +2,7 @@ package com.whoiszxl.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -42,7 +43,7 @@ public class PurchaseSettlementOrderItem extends AbstractObject implements Seria
     private Long purchaseCount;
 
     @ApiModelProperty(value = "采购价格")
-    private Long purchasePrice;
+    private BigDecimal purchasePrice;
 
     @ApiModelProperty(value = "合格商品的数量")
     private Long qualifiedCount;

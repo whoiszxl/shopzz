@@ -50,7 +50,7 @@ create table finance_purchase_settlement_order_item
     `purchase_settlement_order_id`      bigint not null comment '采购结算单ID',
     `product_sku_id`                    bigint not null comment '商品SKU ID',
     `purchase_count`                    bigint not null comment '采购数量',
-    `purchase_price`                    bigint not null comment '采购价格',
+    `purchase_price`                    decimal(8,2) not null comment '采购价格',
     `qualified_count`                   bigint not null comment '合格商品的数量',
     `arrival_count`                     bigint not null comment '到货的商品数量',
     `version`                           bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',

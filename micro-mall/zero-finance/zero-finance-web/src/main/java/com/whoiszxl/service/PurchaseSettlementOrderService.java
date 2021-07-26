@@ -42,4 +42,10 @@ public interface PurchaseSettlementOrderService extends IService<PurchaseSettlem
      * @param status 状态
      */
     void updateStatus(Long id, Integer status);
+
+    /**
+     * 将采购结算单信息与条目保存到数据库
+     * @param settlementOrderDTO 采购结算单
+     */
+    void savePurchaseSettlementOrderAndItem(PurchaseSettlementOrderDTO settlementOrderDTO);
 }

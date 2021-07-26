@@ -14,6 +14,7 @@ import com.whoiszxl.utils.BeanCopierUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -74,6 +75,18 @@ public class WmsFeignClientImpl implements WmsFeignClient {
         //2. 更新采购单状态为已完成
         PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(purchaseInboundOrderId);
         purchaseOrderService.updateStatus(purchaseInboundOrder.getPurchaseOrderId(), PurchaseOrderStatus.FINISHED);
+        return ResponseResult.buildSuccess();
+    }
+
+    @Override
+    @PostMapping("/notifyCreatePurchaseSettlementOrderEvent/{purchaseInboundOrderId}")
+    public ResponseResult<Boolean> notifyCreatePurchaseSettlementOrderEvent(@PathVariable Long purchaseInboundOrderId) {
+        //1. 更新采购入库单的状态为待结算
+        PurchaseInboundOrderDTO purchaseInboundOrderDTO = purchaseInboundOrderService.getPurchaseInboundOrderById(purchaseInboundOrderId);
+        purchaseInboundOrderService.updateStatus(purchaseInboundOrderId, PurchaseInboundOrderStatus.WAIT_FOR_SETTLEMENT);
+
+        //2. 更新采购单的状态为待结算
+        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_SETTLEMENT);
         return ResponseResult.buildSuccess();
     }
 }

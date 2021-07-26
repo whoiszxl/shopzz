@@ -4,6 +4,7 @@ import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -34,4 +35,11 @@ public interface WmsFeignClient {
     @PostMapping("/notifyFinishedPurchaseSettlementOrderEvent")
     ResponseResult<Boolean> notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId);
 
+    /**
+     * 通知WMS中心，创建采购结算单的事件发生了
+     * @param purchaseInboundOrderId 采购入库单ID
+     * @return
+     */
+    @PostMapping("/notifyCreatePurchaseSettlementOrderEvent/{purchaseInboundOrderId}")
+    ResponseResult<Boolean> notifyCreatePurchaseSettlementOrderEvent(@PathVariable Long purchaseInboundOrderId);
 }

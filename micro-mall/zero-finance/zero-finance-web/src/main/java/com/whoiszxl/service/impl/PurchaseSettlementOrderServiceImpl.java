@@ -17,6 +17,7 @@ import com.whoiszxl.utils.BeanCopierUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -72,5 +73,27 @@ public class PurchaseSettlementOrderServiceImpl extends ServiceImpl<PurchaseSett
 
         result.setStatus(status);
         this.updateById(result);
+    }
+
+    @Override
+    public void savePurchaseSettlementOrderAndItem(PurchaseSettlementOrderDTO settlementOrderDTO) {
+        //1. 新增采购结算单
+        settlementOrderDTO.setStatus(PurchaseSettlementOrderStatus.EDITING);
+
+        BigDecimal totalSettlementAmount = BigDecimal.ZERO;
+        for (PurchaseSettlementOrderItemDTO item : settlementOrderDTO.getItems()) {
+            totalSettlementAmount = totalSettlementAmount.add(item.getPurchasePrice().multiply(new BigDecimal(item.getArrivalCount())));
+        }
+        settlementOrderDTO.setTotalSettlementAmount(totalSettlementAmount);
+
+        PurchaseSettlementOrder purchaseSettlementOrder = settlementOrderDTO.clone(PurchaseSettlementOrder.class);
+        this.save(purchaseSettlementOrder);
+
+        //2. 新增采购结算条目单
+        List<PurchaseSettlementOrderItem> settlementOrderItemList
+                = BeanCopierUtils.copyListProperties(settlementOrderDTO.getItems(), PurchaseSettlementOrderItem::new);
+
+        settlementOrderItemList.forEach(item -> item.setPurchaseSettlementOrderId(purchaseSettlementOrder.getId()));
+        purchaseSettlementOrderItemService.saveBatch(settlementOrderItemList);
     }
 }
