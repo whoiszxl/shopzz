@@ -1,5 +1,6 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.entity.PurchaseInboundOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -35,4 +36,11 @@ public interface PurchaseInboundOrderService extends IService<PurchaseInboundOrd
      * @param status 状态
      */
     void updateStatus(Long id, Integer status);
+
+    /**
+     * 创建采购入库订单
+     * @param purchaseInboundOrderDTO 采购入库订单DTO
+     * @return 处理结果
+     */
+    ResponseResult<Boolean> savePurchaseInboundOrder(PurchaseInboundOrderDTO purchaseInboundOrderDTO);
 }

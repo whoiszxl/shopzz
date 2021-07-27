@@ -7,11 +7,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * <p>
- * 货位库存详情表
+ * 财务中心采购结算单条目明细表
  * </p>
  *
  * @author whoiszxl
@@ -19,31 +20,31 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="ProductAllocationStockDetail对象", description="货位库存详情表")
-public class ProductAllocationStockDetailDTO extends AbstractObject implements Serializable {
+@ApiModel(value="PurchaseSettlementOrderItem对象", description="财务中心采购结算单条目明细表")
+public class PurchaseSettlementOrderItemDTO extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "货位ID")
-    private Long productAllocationId;
+    @ApiModelProperty(value = "采购结算单ID")
+    private Long purchaseSettlementOrderId;
 
     @ApiModelProperty(value = "商品SKU ID")
     private Long productSkuId;
 
-    @ApiModelProperty(value = "商品的上架时间")
-    private Date putOnTime;
+    @ApiModelProperty(value = "采购数量")
+    private Integer purchaseQuantity;
 
-    @ApiModelProperty(value = "商品的上架数量")
-    private Integer putOnQuantity;
+    @ApiModelProperty(value = "采购价格")
+    private BigDecimal purchasePrice;
 
-    @ApiModelProperty(value = "上架的商品当前还剩余的库存数量")
-    private Integer currentStockQuantity;
+    @ApiModelProperty(value = "合格商品的数量")
+    private Integer qualifiedCount;
 
-    @ApiModelProperty(value = "锁定库存数量")
-    private Integer lockedStockQuantity;
+    @ApiModelProperty(value = "到货的商品数量")
+    private Integer arrivalCount;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

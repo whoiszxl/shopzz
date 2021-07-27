@@ -1,5 +1,6 @@
 package com.whoiszxl.client;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.feign.InventoryFeignClient;
 import com.whoiszxl.stock.PurchaseInboundStockUpdaterFactory;
@@ -24,9 +25,9 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
     private PurchaseInboundStockUpdaterFactory<PurchaseInboundOrderDTO> purchaseInboundStockUpdaterFactory;
 
     @Override
-    public Boolean notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
+    public ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         StockUpdater stockUpdater = purchaseInboundStockUpdaterFactory.create(purchaseInboundOrderDTO);
         stockUpdater.updateProductStock();
-        return true;
+        return ResponseResult.buildSuccess();
     }
 }

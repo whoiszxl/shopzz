@@ -39,7 +39,7 @@ public class ReturnProductInboundPutOnItem extends AbstractObject implements Ser
     private Long productAllocationId;
 
     @ApiModelProperty(value = "上架数量")
-    private Long putOnShelvesCount;
+    private Integer putOnShelvesCount;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

@@ -159,7 +159,7 @@ create table wms_purchase_inbound_order_item
     `id`                                bigint not null auto_increment comment '主键',
     `purchase_inbound_order_id`           bigint not null comment '采购入库单ID',
     `product_sku_id`                    bigint not null comment '商品SKU ID',
-    `purchase_count`                    int(10) not null comment '采购数量',
+    `purchase_quantity`                 int(10) not null comment '采购数量',
     `purchase_price`                    decimal(8,2) not null comment '采购价格',
     `qualified_count`                   int(10) not null comment '合格商品的数量',
     `arrival_count`                     int(10) not null comment '到货的商品数量',

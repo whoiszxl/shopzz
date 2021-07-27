@@ -48,7 +48,7 @@ public class ProductAllocationStockDetail extends AbstractObject implements Seri
     private Integer currentStockQuantity;
 
     @ApiModelProperty(value = "锁定库存数量")
-    private Long lockedStockQuantity;
+    private Integer lockedStockQuantity;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

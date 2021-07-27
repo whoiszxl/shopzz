@@ -1,29 +1,29 @@
 package com.whoiszxl.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
+import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * <p>
- * 调度中心货位库存表
+ * 财务中心退货退款流水明细
  * </p>
  *
  * @author whoiszxl
- * @since 2021-07-20
+ * @since 2021-07-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="DispatchProductAllocationStock对象", description="调度中心货位库存表")
-public class DispatchProductAllocationStock implements Serializable {
+@TableName("finance_return_product_refund_detail")
+@ApiModel(value="ReturnProductRefundDetail对象", description="财务中心退货退款流水明细")
+public class ReturnProductRefundDetail extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,20 +31,23 @@ public class DispatchProductAllocationStock implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "货位ID")
-    private Long productAllocationId;
+    @ApiModelProperty(value = "订单ID")
+    private Long orderId;
 
-    @ApiModelProperty(value = "商品sku ID")
-    private Long productSkuId;
+    @ApiModelProperty(value = "订单编号")
+    private String orderNo;
 
-    @ApiModelProperty(value = "可用库存数量")
-    private Integer availableStockQuantity;
+    @ApiModelProperty(value = "退货工单ID")
+    private Long returnProductWorksheetId;
 
-    @ApiModelProperty(value = "锁定库存数量")
-    private Integer lockedStockQuantity;
+    @ApiModelProperty(value = "退货入库单ID")
+    private Long returnProductWarehouseEntryOrderId;
 
-    @ApiModelProperty(value = "已出库库存数量")
-    private Integer deliveriedStockQuantity;
+    @ApiModelProperty(value = "用户账号ID")
+    private Long memberId;
+
+    @ApiModelProperty(value = "退款金额")
+    private BigDecimal refundAmount;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

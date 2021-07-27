@@ -20,12 +20,6 @@
 
         <dependency>
             <groupId>com.whoiszxl</groupId>
-            <artifactId>zero-finance-api</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.whoiszxl</groupId>
             <artifactId>zero-dispatch-api</artifactId>
             <version>1.0.0</version>
         </dependency>
@@ -34,6 +28,13 @@
             <groupId>com.whoiszxl</groupId>
             <artifactId>zero-wms-api</artifactId>
             <version>1.0.0</version>
+        </dependency>
+
+        <!-- alibaba nacos发现服务依赖 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2.2.6.RELEASE</version>
         </dependency>
 
         <!-- Sa-Token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->

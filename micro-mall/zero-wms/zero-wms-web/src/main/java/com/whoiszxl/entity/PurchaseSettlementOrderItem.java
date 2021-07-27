@@ -1,29 +1,29 @@
 package com.whoiszxl.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
+import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * <p>
- * 调度中心货位库存表
+ * 财务中心采购结算单条目明细表
  * </p>
  *
  * @author whoiszxl
- * @since 2021-07-20
+ * @since 2021-07-21
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="DispatchProductAllocationStock对象", description="调度中心货位库存表")
-public class DispatchProductAllocationStock implements Serializable {
+@TableName("finance_purchase_settlement_order_item")
+@ApiModel(value="PurchaseSettlementOrderItem对象", description="财务中心采购结算单条目明细表")
+public class PurchaseSettlementOrderItem extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,20 +31,23 @@ public class DispatchProductAllocationStock implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "货位ID")
-    private Long productAllocationId;
+    @ApiModelProperty(value = "采购结算单ID")
+    private Long purchaseSettlementOrderId;
 
-    @ApiModelProperty(value = "商品sku ID")
+    @ApiModelProperty(value = "商品SKU ID")
     private Long productSkuId;
 
-    @ApiModelProperty(value = "可用库存数量")
-    private Integer availableStockQuantity;
+    @ApiModelProperty(value = "采购数量")
+    private Integer purchaseQuantity;
 
-    @ApiModelProperty(value = "锁定库存数量")
-    private Integer lockedStockQuantity;
+    @ApiModelProperty(value = "采购价格")
+    private BigDecimal purchasePrice;
 
-    @ApiModelProperty(value = "已出库库存数量")
-    private Integer deliveriedStockQuantity;
+    @ApiModelProperty(value = "合格商品的数量")
+    private Integer qualifiedCount;
+
+    @ApiModelProperty(value = "到货的商品数量")
+    private Integer arrivalCount;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;
@@ -67,6 +70,5 @@ public class DispatchProductAllocationStock implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
     private Date updatedAt;
-
 
 }

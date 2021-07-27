@@ -44,7 +44,7 @@ public class DispatchWarehouseProductStock extends AbstractObject implements Ser
     private Integer lockedStockQuantity;
 
     @ApiModelProperty(value = "已出库库存数量")
-    private Long deliveriedStockQuantity;
+    private Integer deliveriedStockQuantity;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

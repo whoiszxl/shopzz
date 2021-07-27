@@ -36,9 +36,9 @@ public class ProductAllocationStockServiceImpl extends ServiceImpl<ProductAlloca
             productAllocationStock = new ProductAllocationStock();
             productAllocationStock.setProductAllocationId(productAllocationId);
             productAllocationStock.setProductSkuId(productSkuId);
-            productAllocationStock.setAvailableStockQuantity(0L);
-            productAllocationStock.setLockedStockQuantity(0L);
-            productAllocationStock.setDeliveriedStockQuantity(0L);
+            productAllocationStock.setAvailableStockQuantity(0);
+            productAllocationStock.setLockedStockQuantity(0);
+            productAllocationStock.setDeliveriedStockQuantity(0);
             this.save(productAllocationStock);
         }
         return productAllocationStock;

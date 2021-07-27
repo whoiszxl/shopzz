@@ -39,13 +39,13 @@ public class ProductAllocationStock extends AbstractObject implements Serializab
     private Long productSkuId;
 
     @ApiModelProperty(value = "可用库存数量")
-    private Long availableStockQuantity;
+    private Integer availableStockQuantity;
 
     @ApiModelProperty(value = "锁定库存数量")
-    private Long lockedStockQuantity;
+    private Integer lockedStockQuantity;
 
     @ApiModelProperty(value = "已出库库存数量")
-    private Long deliveriedStockQuantity;
+    private Integer deliveriedStockQuantity;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

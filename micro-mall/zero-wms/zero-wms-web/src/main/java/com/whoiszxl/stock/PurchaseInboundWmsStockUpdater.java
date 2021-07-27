@@ -95,7 +95,7 @@ public class PurchaseInboundWmsStockUpdater extends AbstractWmsStockUpdater {
                 stockDetail.setPutOnQuantity(onItemDTO.getPutOnShelvesCount());
                 stockDetail.setPutOnTime(onItemDTO.getCreatedAt());
                 stockDetail.setCurrentStockQuantity(stockDetail.getPutOnQuantity());
-                stockDetail.setLockedStockQuantity(0L);
+                stockDetail.setLockedStockQuantity(0);
 
                 productAllocationStockDetailService.save(stockDetail);
                 stockDetails.add(stockDetail);

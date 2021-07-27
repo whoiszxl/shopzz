@@ -1,6 +1,9 @@
 package com.whoiszxl.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.constant.PurchaseInboundOrderStatus;
+import com.whoiszxl.constant.PurchaseOrderStatus;
 import com.whoiszxl.dto.PurchaseInboundOnItemDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
@@ -12,10 +15,11 @@ import com.whoiszxl.mapper.PurchaseInboundOrderMapper;
 import com.whoiszxl.service.PurchaseInboundOnItemService;
 import com.whoiszxl.service.PurchaseInboundOrderItemService;
 import com.whoiszxl.service.PurchaseInboundOrderService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.whoiszxl.service.PurchaseOrderService;
 import com.whoiszxl.utils.BeanCopierUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,6 +39,9 @@ public class PurchaseInboundOrderServiceImpl extends ServiceImpl<PurchaseInbound
 
     @Autowired
     private PurchaseInboundOnItemService purchaseInboundOnItemService;
+
+    @Autowired
+    private PurchaseOrderService purchaseOrderService;
 
     @Override
     public PurchaseInboundOrderDTO getPurchaseInboundOrderById(Long id) {
@@ -87,5 +94,32 @@ public class PurchaseInboundOrderServiceImpl extends ServiceImpl<PurchaseInbound
         purchaseInboundOrder.setId(id);
         purchaseInboundOrder.setPurchaseInboundOrderStatus(status);
         this.updateById(purchaseInboundOrder);
+    }
+
+
+
+    /**
+     * 创建采购入库订单
+     * @param purchaseInboundOrderDTO 采购入库订单DTO
+     * @return 处理结果
+     */
+    @Transactional
+    @Override
+    public ResponseResult<Boolean> savePurchaseInboundOrder(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
+        //1. 将入库单保存到数据库
+        PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderDTO.clone(PurchaseInboundOrder.class);
+        this.save(purchaseInboundOrder);
+
+        //2. 将入库单商品条目批量保存到数据库
+        List<PurchaseInboundOrderItem> purchaseInboundOrderItems = BeanCopierUtils.copyListProperties(purchaseInboundOrderDTO.getItems(), PurchaseInboundOrderItem::new);
+        purchaseInboundOrderItems.forEach(item -> {
+            item.setPurchaseInboundOrderId(purchaseInboundOrder.getId());
+        });
+
+        purchaseInboundOrderItemService.saveBatch(purchaseInboundOrderItems);
+
+        //3. 更新采购单的状态为待入库
+        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_INBOUND);
+        return ResponseResult.buildSuccess();
     }
 }

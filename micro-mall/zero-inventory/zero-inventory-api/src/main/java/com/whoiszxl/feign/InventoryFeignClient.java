@@ -1,5 +1,6 @@
 package com.whoiszxl.feign;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author whoiszxl
  * @date 2021/7/21
  */
-@FeignClient(name = "zero-inventory-web", contextId = "inventoryFeign", configuration = OAuth2FeignConfig.class, path = "/inventory")
+@FeignClient(name = "zero-inventory-web", contextId = "inventoryFeign", configuration = OAuth2FeignConfig.class)
 public interface InventoryFeignClient {
 
 
@@ -22,5 +23,5 @@ public interface InventoryFeignClient {
      * @return 是否处理成功
      */
     @PostMapping("/notifyPurchaseInboundFinished")
-    Boolean notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+    ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
 }

@@ -2,7 +2,7 @@ package com.whoiszxl.factory.handler;
 
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.factory.PurchaseInboundOrderResult;
-import com.whoiszxl.feign.FinanceFeignClient;
+import com.whoiszxl.service.PurchaseSettlementOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 public class NotifyFinanceCenterHandler extends AbstractPurchaseInboundOrderHandler {
 
     @Autowired
-    private FinanceFeignClient financeFeignClient;
+    private PurchaseSettlementOrderService purchaseSettlementOrderService;
 
     @Override
     protected PurchaseInboundOrderResult doExecute(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         //创建一个结算单
-        financeFeignClient.createPurchaseSettlementOrder(purchaseInboundOrderDTO);
+        purchaseSettlementOrderService.createPurchaseSettlementOrder(purchaseInboundOrderDTO);
         return new PurchaseInboundOrderResult(true);
     }
 }

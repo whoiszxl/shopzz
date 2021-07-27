@@ -39,28 +39,6 @@ public class WmsFeignClientImpl implements WmsFeignClient {
     @Autowired
     private PurchaseOrderService purchaseOrderService;
 
-
-    @Transactional
-    @Override
-    @PostMapping("/createPurchaseInboundOrder")
-    public ResponseResult<Boolean> createPurchaseInboundOrder(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
-        //1. 将入库单保存到数据库
-        PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderDTO.clone(PurchaseInboundOrder.class);
-        purchaseInboundOrderService.save(purchaseInboundOrder);
-
-        //2. 将入库单商品条目批量保存到数据库
-        List<PurchaseInboundOrderItem> purchaseInboundOrderItems = BeanCopierUtils.copyListProperties(purchaseInboundOrderDTO.getItems(), PurchaseInboundOrderItem::new);
-        purchaseInboundOrderItems.forEach(item -> {
-            item.setPurchaseInboundOrderId(purchaseInboundOrder.getId());
-        });
-
-        purchaseInboundOrderItemService.saveBatch(purchaseInboundOrderItems);
-
-        //3. 更新采购单的状态为待入库
-        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_INBOUND);
-        return ResponseResult.buildSuccess();
-    }
-
     /**
      * 通过WMS中心，采购结算单审核已经通过了
      * @param purchaseInboundOrderId 采购入库单ID
