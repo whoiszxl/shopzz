@@ -39,24 +39,6 @@ public class DispatchClientImpl implements DispatchClient {
     @Autowired
     private InventoryFeignClient inventoryFeignClient;
 
-    @Override
-    @PostMapping("/dispatchPurchaseInBound")
-    public ResponseResult<Boolean> dispatchPurchaseInBound(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {
-        //1. 创建采购入库订单
-        PurchaseInboundOrderDTO purchaseInboundOrderDTO = createPurchaseInboundOrder(purchaseOrderDTO);
-
-        //2. 创建采购入库订单条目
-        List<PurchaseInboundOrderItemDTO> purchaseInboundOrderItemDTOList = new ArrayList<>();
-        for (PurchaseOrderItemDTO item : purchaseOrderDTO.getItems()) {
-            purchaseInboundOrderItemDTOList.add(createPurchaseInboundOrderItem(item));
-        }
-        purchaseInboundOrderDTO.setItems(purchaseInboundOrderItemDTOList);
-
-        //3. 调用wms模块，将入库单入库
-        wmsFeignClient.createPurchaseInboundOrder(purchaseInboundOrderDTO);
-        return ResponseResult.buildSuccess();
-    }
-
     /**
      * 通知库存中心，“采购入库完成”事件发生了
      * @param purchaseInboundOrderDTO 采购入库单DTO

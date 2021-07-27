@@ -128,8 +128,6 @@ public class PurchaseOrderController {
 
         //通过后新增采购入库单到库中，并更新采购单状态为待入库
         if(PurchaseOrderApproveEnum.PASSED.getCode().equals(status)) {
-            dispatchClient.dispatchPurchaseInBound(purchaseOrderDTO);
-
             //1. 创建采购入库订单
             PurchaseInboundOrderDTO purchaseInboundOrderDTO = createPurchaseInboundOrder(purchaseOrderDTO);
 
