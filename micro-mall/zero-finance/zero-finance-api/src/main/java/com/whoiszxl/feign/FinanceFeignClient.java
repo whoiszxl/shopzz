@@ -1,5 +1,6 @@
 package com.whoiszxl.feign;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -21,6 +22,6 @@ public interface FinanceFeignClient {
      * @return 是否创建成功
      */
     @PostMapping("/createPurchaseSettlementOrder")
-    Boolean createPurchaseSettlementOrder(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+    ResponseResult<Boolean> createPurchaseSettlementOrder(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
 
 }

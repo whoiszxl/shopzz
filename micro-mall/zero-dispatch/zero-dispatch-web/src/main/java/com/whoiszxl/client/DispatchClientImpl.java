@@ -63,7 +63,7 @@ public class DispatchClientImpl implements DispatchClient {
      * @return 是否处理成功
      */
     @Override
-    public ResponseResult<Boolean> notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
+    public ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         //1. 通过库存更新工厂创建对应的组件
         DispatchStockUpdater stockUpdater = dispatchStockUpdaterFactory.create(WmsStockUpdateEvent.PURCHASE_INBOUND, purchaseInboundOrderDTO);
         stockUpdater.update();

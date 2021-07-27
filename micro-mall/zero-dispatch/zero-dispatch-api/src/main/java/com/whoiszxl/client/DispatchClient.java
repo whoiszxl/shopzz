@@ -31,5 +31,5 @@ public interface DispatchClient {
      * @return 是否处理成功
      */
     @PostMapping("/notifyPurchaseInboundFinished")
-    ResponseResult<Boolean> notifyPurchaseInboundFinished(PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+    ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
 }

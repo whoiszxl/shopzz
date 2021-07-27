@@ -1,5 +1,6 @@
 package com.whoiszxl.client;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
 import com.whoiszxl.dto.PurchaseSettlementOrderDTO;
@@ -33,7 +34,7 @@ public class FinanceFeignClientImpl implements FinanceFeignClient {
 
     @Override
     @PostMapping("/createPurchaseSettlementOrder")
-    public Boolean createPurchaseSettlementOrder(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
+    public ResponseResult<Boolean> createPurchaseSettlementOrder(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         //1. 将采购入库单的数据填充到采购结算单中
         PurchaseSettlementOrderDTO settlementOrderDTO = purchaseInboundOrderDTO.clone(PurchaseSettlementOrderDTO.class);
         settlementOrderDTO.setId(null);
@@ -54,6 +55,6 @@ public class FinanceFeignClientImpl implements FinanceFeignClient {
         //4. 通知WMS中心，采购结算单创建了
         wmsFeignClient.notifyCreatePurchaseSettlementOrderEvent(settlementOrderDTO.getPurchaseInboundOrderId());
 
-        return true;
+        return ResponseResult.buildSuccess();
     }
 }

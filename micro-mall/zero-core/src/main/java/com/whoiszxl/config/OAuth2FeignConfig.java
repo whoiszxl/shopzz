@@ -30,10 +30,12 @@ public class OAuth2FeignConfig implements RequestInterceptor {
         assert requestAttributes != null;
         HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
         String header = request.getHeader("zxltoken");
+        String headerAuth = request.getHeader("Authorization");
 
         //使用RequestTemplate传递token
         if (!StringUtils.isEmpty(header)) {
             template.header("zxltoken", header);
+            template.header("Authorization", headerAuth);
         }
     }
 }

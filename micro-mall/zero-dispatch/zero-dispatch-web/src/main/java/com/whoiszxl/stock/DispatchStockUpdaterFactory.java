@@ -30,7 +30,7 @@ public class DispatchStockUpdaterFactory {
         } else if(WmsStockUpdateEvent.PAY_ORDER.equals(stockUpdateEvent)) {
 
         } else if(WmsStockUpdateEvent.PURCHASE_INBOUND.equals(stockUpdateEvent)) {
-            contextUtil.getBean(PurchaseInboundDispatchStockUpdater.class);
+            stockUpdater = contextUtil.getBean(PurchaseInboundDispatchStockUpdater.class);
         } else if(WmsStockUpdateEvent.RETURN_PRODUCT_INBOUND.equals(stockUpdateEvent)) {
 
         }
