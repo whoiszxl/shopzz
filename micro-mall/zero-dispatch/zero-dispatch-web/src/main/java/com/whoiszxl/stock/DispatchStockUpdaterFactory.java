@@ -1,6 +1,6 @@
 package com.whoiszxl.stock;
 
-import com.whoiszxl.constant.WmsStockUpdateEvent;
+import com.whoiszxl.constants.WmsStockUpdateEventConstants;
 import com.whoiszxl.utils.SpringApplicationContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,15 +23,15 @@ public class DispatchStockUpdaterFactory {
     public DispatchStockUpdater create(Integer stockUpdateEvent, Object parameter) {
         DispatchStockUpdater stockUpdater = null;
 
-        if(WmsStockUpdateEvent.SUBMIT_ORDER.equals(stockUpdateEvent)) {
+        if(WmsStockUpdateEventConstants.SUBMIT_ORDER.equals(stockUpdateEvent)) {
 
-        } else if(WmsStockUpdateEvent.CANCEL_ORDER.equals(stockUpdateEvent)) {
+        } else if(WmsStockUpdateEventConstants.CANCEL_ORDER.equals(stockUpdateEvent)) {
 
-        } else if(WmsStockUpdateEvent.PAY_ORDER.equals(stockUpdateEvent)) {
+        } else if(WmsStockUpdateEventConstants.PAY_ORDER.equals(stockUpdateEvent)) {
 
-        } else if(WmsStockUpdateEvent.PURCHASE_INBOUND.equals(stockUpdateEvent)) {
+        } else if(WmsStockUpdateEventConstants.PURCHASE_INBOUND.equals(stockUpdateEvent)) {
             stockUpdater = contextUtil.getBean(PurchaseInboundDispatchStockUpdater.class);
-        } else if(WmsStockUpdateEvent.RETURN_PRODUCT_INBOUND.equals(stockUpdateEvent)) {
+        } else if(WmsStockUpdateEventConstants.RETURN_PRODUCT_INBOUND.equals(stockUpdateEvent)) {
 
         }
 

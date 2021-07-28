@@ -34,7 +34,7 @@ public class MemberLoginController {
         }
 
         //2. 登录并获取token
-        StpUtil.login(loginQuery.getUsername());
+        StpUtil.login(member.getId());
         return ResponseResult.buildSuccess("登录成功", StpUtil.getTokenValue());
     }
 

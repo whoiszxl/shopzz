@@ -2,10 +2,10 @@ package com.whoiszxl.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.whoiszxl.constant.PurchaseInboundOrderStatus;
-import com.whoiszxl.constant.PurchaseOrderStatus;
-import com.whoiszxl.constants.PurchaseSettlementOrderApproveResult;
-import com.whoiszxl.constants.PurchaseSettlementOrderStatus;
+import com.whoiszxl.constants.PurchaseInboundOrderStatusConstants;
+import com.whoiszxl.constants.PurchaseOrderStatusConstants;
+import com.whoiszxl.constants.PurchaseSettlementOrderApproveResultConstants;
+import com.whoiszxl.constants.PurchaseSettlementOrderStatusConstants;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
 import com.whoiszxl.dto.PurchaseSettlementOrderDTO;
@@ -74,10 +74,10 @@ public class PurchaseSettlementOrderServiceImpl extends ServiceImpl<PurchaseSett
 
     @Override
     public void approve(Long id, Integer status) {
-        if(PurchaseSettlementOrderApproveResult.REJECTED.equals(status)) {
-            this.updateStatus(id, PurchaseSettlementOrderStatus.EDITING);
-        }else if(PurchaseSettlementOrderApproveResult.PASSED.equals(status)) {
-            this.updateStatus(id, PurchaseSettlementOrderStatus.FINISHED);
+        if(PurchaseSettlementOrderApproveResultConstants.REJECTED.equals(status)) {
+            this.updateStatus(id, PurchaseSettlementOrderStatusConstants.EDITING);
+        }else if(PurchaseSettlementOrderApproveResultConstants.PASSED.equals(status)) {
+            this.updateStatus(id, PurchaseSettlementOrderStatusConstants.APPROVED);
         }
     }
 
@@ -95,7 +95,7 @@ public class PurchaseSettlementOrderServiceImpl extends ServiceImpl<PurchaseSett
     @Override
     public void savePurchaseSettlementOrderAndItem(PurchaseSettlementOrderDTO settlementOrderDTO) {
         //1. 新增采购结算单
-        settlementOrderDTO.setStatus(PurchaseSettlementOrderStatus.EDITING);
+        settlementOrderDTO.setStatus(PurchaseSettlementOrderStatusConstants.EDITING);
 
         BigDecimal totalSettlementAmount = BigDecimal.ZERO;
         for (PurchaseSettlementOrderItemDTO item : settlementOrderDTO.getItems()) {
@@ -142,10 +142,10 @@ public class PurchaseSettlementOrderServiceImpl extends ServiceImpl<PurchaseSett
 
         //4.1. 更新采购入库单的状态为待结算
         PurchaseInboundOrderDTO updateParams = purchaseInboundOrderService.getPurchaseInboundOrderById(settlementOrderDTO.getPurchaseInboundOrderId());
-        purchaseInboundOrderService.updateStatus(settlementOrderDTO.getPurchaseInboundOrderId(), PurchaseInboundOrderStatus.WAIT_FOR_SETTLEMENT);
+        purchaseInboundOrderService.updateStatus(settlementOrderDTO.getPurchaseInboundOrderId(), PurchaseInboundOrderStatusConstants.WAIT_FOR_SETTLEMENT);
 
         //4.2. 更新采购单的状态为待结算
-        purchaseOrderService.updateStatus(updateParams.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_SETTLEMENT);
+        purchaseOrderService.updateStatus(updateParams.getPurchaseOrderId(), PurchaseOrderStatusConstants.WAIT_FOR_SETTLEMENT);
 
         return true;
     }

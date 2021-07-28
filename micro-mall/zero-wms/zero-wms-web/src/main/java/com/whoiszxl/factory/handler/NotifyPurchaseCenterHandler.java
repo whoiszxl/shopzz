@@ -1,6 +1,6 @@
 package com.whoiszxl.factory.handler;
 
-import com.whoiszxl.constant.PurchaseOrderStatus;
+import com.whoiszxl.constants.PurchaseOrderStatusConstants;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.factory.PurchaseInboundOrderResult;
 import com.whoiszxl.service.PurchaseOrderService;
@@ -19,7 +19,7 @@ public class NotifyPurchaseCenterHandler extends AbstractPurchaseInboundOrderHan
     @Override
     protected PurchaseInboundOrderResult doExecute(PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         //通知采购中心，采购入库已经完成了，需要更新采购单的状态为已入库
-        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.FINISHED_INBOUND);
+        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatusConstants.FINISHED_INBOUND);
         return new PurchaseInboundOrderResult(true);
     }
 }

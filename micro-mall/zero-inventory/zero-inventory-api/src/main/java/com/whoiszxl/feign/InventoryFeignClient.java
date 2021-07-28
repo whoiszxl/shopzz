@@ -2,10 +2,13 @@ package com.whoiszxl.feign;
 
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
+import com.whoiszxl.dto.InventorySkuDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 /**
  * 库存中心 库存对外接口
@@ -24,4 +27,12 @@ public interface InventoryFeignClient {
      */
     @PostMapping("/notifyPurchaseInboundFinished")
     ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+
+    /**
+     * 通过skuId列表获取库存
+     * @param skuIds skuId列表
+     * @return 库存列表
+     */
+    @PostMapping("/getSaleStockQuantity")
+    ResponseResult<List<InventorySkuDTO>> getSaleStockQuantity(@RequestBody List<Long> skuIds);
 }

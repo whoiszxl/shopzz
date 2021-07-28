@@ -26,6 +26,7 @@ public class OAuth2FeignConfig implements RequestInterceptor {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes == null) {
             log.info("无request对象，无法传递");
+            return;
         }
         assert requestAttributes != null;
         HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();

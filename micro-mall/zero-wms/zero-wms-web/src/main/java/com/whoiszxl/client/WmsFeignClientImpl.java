@@ -1,24 +1,19 @@
 package com.whoiszxl.client;
 
 import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.constant.PurchaseInboundOrderStatus;
-import com.whoiszxl.constant.PurchaseOrderStatus;
+import com.whoiszxl.constants.PurchaseInboundOrderStatusConstants;
+import com.whoiszxl.constants.PurchaseOrderStatusConstants;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.entity.PurchaseInboundOrder;
-import com.whoiszxl.entity.PurchaseInboundOrderItem;
 import com.whoiszxl.feign.WmsFeignClient;
 import com.whoiszxl.service.PurchaseInboundOrderItemService;
 import com.whoiszxl.service.PurchaseInboundOrderService;
 import com.whoiszxl.service.PurchaseOrderService;
-import com.whoiszxl.utils.BeanCopierUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * wms feign client
@@ -48,11 +43,11 @@ public class WmsFeignClientImpl implements WmsFeignClient {
     @PostMapping("/notifyFinishedPurchaseSettlementOrderEvent")
     public ResponseResult<Boolean> notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId) {
         //1. 更新采购入库单状态为已完成
-        purchaseInboundOrderService.updateStatus(purchaseInboundOrderId, PurchaseInboundOrderStatus.FINISHED);
+        purchaseInboundOrderService.updateStatus(purchaseInboundOrderId, PurchaseInboundOrderStatusConstants.FINISHED);
 
         //2. 更新采购单状态为已完成
         PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(purchaseInboundOrderId);
-        purchaseOrderService.updateStatus(purchaseInboundOrder.getPurchaseOrderId(), PurchaseOrderStatus.FINISHED);
+        purchaseOrderService.updateStatus(purchaseInboundOrder.getPurchaseOrderId(), PurchaseOrderStatusConstants.FINISHED);
         return ResponseResult.buildSuccess();
     }
 
@@ -61,10 +56,10 @@ public class WmsFeignClientImpl implements WmsFeignClient {
     public ResponseResult<Boolean> notifyCreatePurchaseSettlementOrderEvent(@PathVariable Long purchaseInboundOrderId) {
         //1. 更新采购入库单的状态为待结算
         PurchaseInboundOrderDTO purchaseInboundOrderDTO = purchaseInboundOrderService.getPurchaseInboundOrderById(purchaseInboundOrderId);
-        purchaseInboundOrderService.updateStatus(purchaseInboundOrderId, PurchaseInboundOrderStatus.WAIT_FOR_SETTLEMENT);
+        purchaseInboundOrderService.updateStatus(purchaseInboundOrderId, PurchaseInboundOrderStatusConstants.WAIT_FOR_SETTLEMENT);
 
         //2. 更新采购单的状态为待结算
-        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_SETTLEMENT);
+        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatusConstants.WAIT_FOR_SETTLEMENT);
         return ResponseResult.buildSuccess();
     }
 }

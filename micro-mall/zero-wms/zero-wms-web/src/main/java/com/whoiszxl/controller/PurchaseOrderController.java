@@ -2,15 +2,13 @@ package com.whoiszxl.controller;
 
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import cn.dev33.satoken.annotation.SaCheckPermission;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.client.DispatchClient;
-import com.whoiszxl.constant.PurchaseInboundOrderStatus;
-import com.whoiszxl.constant.PurchaseOrderStatus;
+import com.whoiszxl.constants.PurchaseInboundOrderStatusConstants;
+import com.whoiszxl.constants.PurchaseOrderStatusConstants;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
 import com.whoiszxl.dto.PurchaseOrderDTO;
@@ -102,7 +100,7 @@ public class PurchaseOrderController {
     public ResponseResult<Boolean> submitOrderToApprove(@PathVariable Long id) {
         //1. 进行参数校验
         PurchaseOrder purchaseOrder = purchaseOrderService.getById(id);
-        if(purchaseOrder == null || !purchaseOrder.getPurchaseOrderStatus().equals(PurchaseOrderStatus.EDITING)) {
+        if(purchaseOrder == null || !purchaseOrder.getPurchaseOrderStatus().equals(PurchaseOrderStatusConstants.EDITING)) {
             return ResponseResult.buildError("采购单不存在或者状态不为编辑中");
         }
 
@@ -117,7 +115,7 @@ public class PurchaseOrderController {
     public ResponseResult<Boolean> approve(@PathVariable Long id, @PathVariable Integer status) {
         //校验参数是否正常
         PurchaseOrderDTO purchaseOrderDTO = purchaseOrderService.getPurchaseOrderById(id);
-        if(purchaseOrderDTO == null || !purchaseOrderDTO.getPurchaseOrderStatus().equals(PurchaseOrderStatus.WAIT_FOR_APPROVE)) {
+        if(purchaseOrderDTO == null || !purchaseOrderDTO.getPurchaseOrderStatus().equals(PurchaseOrderStatusConstants.WAIT_FOR_APPROVE)) {
             return ResponseResult.buildError("采购单不存在或者状态不为待审核中");
         }
 
@@ -172,7 +170,7 @@ public class PurchaseOrderController {
         PurchaseInboundOrderDTO purchaseInboundOrderDTO = purchaseOrderDTO.clone(PurchaseInboundOrderDTO.class);
         purchaseInboundOrderDTO.setId(null);
         purchaseInboundOrderDTO.setPurchaseOrderId(purchaseOrderDTO.getId());
-        purchaseInboundOrderDTO.setPurchaseInboundOrderStatus(PurchaseInboundOrderStatus.EDITING);
+        purchaseInboundOrderDTO.setPurchaseInboundOrderStatus(PurchaseInboundOrderStatusConstants.EDITING);
         purchaseInboundOrderDTO.setPurchaseContactor(purchaseOrderDTO.getContactor());
         purchaseInboundOrderDTO.setPurchaseContactPhoneNumber(purchaseOrderDTO.getContactPhoneNumber());
         purchaseInboundOrderDTO.setPurchaseContactEmail(purchaseOrderDTO.getContactEmail());

@@ -2,8 +2,8 @@ package com.whoiszxl.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.constant.PurchaseInboundOrderStatus;
-import com.whoiszxl.constant.PurchaseOrderStatus;
+import com.whoiszxl.constants.PurchaseInboundOrderStatusConstants;
+import com.whoiszxl.constants.PurchaseOrderStatusConstants;
 import com.whoiszxl.dto.PurchaseInboundOnItemDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
@@ -71,7 +71,7 @@ public class PurchaseInboundOrderServiceImpl extends ServiceImpl<PurchaseInbound
         //1. 更新采购入库单的到达时间，更新采购入库单的状态
         PurchaseInboundOrder purchaseInboundOrder = new PurchaseInboundOrder();
         purchaseInboundOrder.setId(purchaseInboundOrderVO.getId());
-        purchaseInboundOrder.setPurchaseInboundOrderStatus(PurchaseInboundOrderStatus.EDITING);
+        purchaseInboundOrder.setPurchaseInboundOrderStatus(PurchaseInboundOrderStatusConstants.EDITING);
         purchaseInboundOrder.setArrivalTime(purchaseInboundOrderVO.getArrivalTime());
         this.updateById(purchaseInboundOrder);
 
@@ -119,7 +119,7 @@ public class PurchaseInboundOrderServiceImpl extends ServiceImpl<PurchaseInbound
         purchaseInboundOrderItemService.saveBatch(purchaseInboundOrderItems);
 
         //3. 更新采购单的状态为待入库
-        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatus.WAIT_FOR_INBOUND);
+        purchaseOrderService.updateStatus(purchaseInboundOrderDTO.getPurchaseOrderId(), PurchaseOrderStatusConstants.WAIT_FOR_INBOUND);
         return ResponseResult.buildSuccess();
     }
 }

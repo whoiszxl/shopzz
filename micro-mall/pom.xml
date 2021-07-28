@@ -20,6 +20,12 @@
         <module>zero-dispatch/zero-dispatch-api</module>
         <module>zero-dispatch/zero-dispatch-web</module>
         <module>zero-inventory</module>
+        <module>zero-product</module>
+        <module>zero-product/zero-product-api</module>
+        <module>zero-product/zero-product-web</module>
+        <module>zero-promotion</module>
+        <module>zero-promotion/zero-promotion-api</module>
+        <module>zero-promotion/zero-promotion-web</module>
     </modules>
 
     <name>micro-mall</name>

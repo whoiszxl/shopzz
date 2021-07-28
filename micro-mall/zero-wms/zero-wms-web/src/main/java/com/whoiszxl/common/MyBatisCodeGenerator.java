@@ -18,7 +18,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  */
 public class MyBatisCodeGenerator {
 
-    public static final String URL = "jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/zero-admin?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false";
+    public static final String URL = "jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/zero-promotion?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false";
     public static final String USERNAME = "mall";
     public static final String PASSWORD = "mall1020!!";
 
@@ -63,9 +63,15 @@ public class MyBatisCodeGenerator {
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setInclude(
-                "sys_user");
+                "promotion_activity",
+                "promotion_activity_product_relation",
+                "promotion_coupon",
+                "promotion_coupon_received_record",
+                "promotion_home_banner",
+                "promotion_recommend"
+                );
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
-        strategy.setTablePrefix("inventory_"); //生成实体时去掉表前缀
+        strategy.setTablePrefix("promotion_"); //生成实体时去掉表前缀
 
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);//数据库表字段映射到实体的命名策略
         strategy.setEntityLombokModel(true); // lombok 模型 @Accessors(chain = true) setter链式操作

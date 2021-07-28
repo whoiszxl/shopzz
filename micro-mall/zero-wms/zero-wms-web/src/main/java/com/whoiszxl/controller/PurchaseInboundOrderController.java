@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.constant.PurchaseInboundOrderApproveResult;
-import com.whoiszxl.constant.PurchaseInboundOrderStatus;
+import com.whoiszxl.constants.PurchaseInboundOrderApproveResultConstants;
+import com.whoiszxl.constants.PurchaseInboundOrderStatusConstants;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.entity.*;
 import com.whoiszxl.entity.query.PurchaseInBoundOrderQuery;
@@ -124,7 +124,7 @@ public class PurchaseInboundOrderController {
 
             purchaseInboundOrderId = inboundOrderItem.getPurchaseInboundOrderId();
             PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(purchaseInboundOrderId);
-            if(purchaseInboundOrder == null || !purchaseInboundOrder.getPurchaseInboundOrderStatus().equals(PurchaseInboundOrderStatus.EDITING)) {
+            if(purchaseInboundOrder == null || !purchaseInboundOrder.getPurchaseInboundOrderStatus().equals(PurchaseInboundOrderStatusConstants.EDITING)) {
                 return ResponseResult.buildError("采购入库单不为编辑状态");
             }
         }
@@ -148,11 +148,11 @@ public class PurchaseInboundOrderController {
     @ApiOperation(value = "提交采购入库单的审核", notes = "提交采购入库单的审核", response = ResponseResult.class)
     public ResponseResult submitOrderToApprove(@PathVariable("id") Long id) {
         PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(id);
-        if(purchaseInboundOrder == null || !purchaseInboundOrder.getPurchaseInboundOrderStatus().equals(PurchaseInboundOrderStatus.EDITING)) {
+        if(purchaseInboundOrder == null || !purchaseInboundOrder.getPurchaseInboundOrderStatus().equals(PurchaseInboundOrderStatusConstants.EDITING)) {
             return ResponseResult.buildError("采购入库单不存在或状态不为编辑中");
         }
 
-        purchaseInboundOrder.setPurchaseInboundOrderStatus(PurchaseInboundOrderStatus.WAIT_FOR_APPROVE);
+        purchaseInboundOrder.setPurchaseInboundOrderStatus(PurchaseInboundOrderStatusConstants.WAIT_FOR_APPROVE);
         boolean updateFlag = purchaseInboundOrderService.updateById(purchaseInboundOrder);
         return ResponseResult.buildByFlag(updateFlag);
     }
@@ -163,18 +163,18 @@ public class PurchaseInboundOrderController {
     public ResponseResult approve(@PathVariable("id") Long id, @PathVariable("status") Integer status) {
         //0. 审核入库单状态判断
         PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(id);
-        if(purchaseInboundOrder == null || !purchaseInboundOrder.getPurchaseInboundOrderStatus().equals(PurchaseInboundOrderStatus.WAIT_FOR_APPROVE)) {
+        if(purchaseInboundOrder == null || !purchaseInboundOrder.getPurchaseInboundOrderStatus().equals(PurchaseInboundOrderStatusConstants.WAIT_FOR_APPROVE)) {
             return ResponseResult.buildError("采购入库单不存在或状态不为待审核中");
         }
 
         //1. 如果是拒绝，则更新为编辑中状态
-        if(PurchaseInboundOrderApproveResult.REJECTED.equals(status)) {
-            purchaseInboundOrderService.updateStatus(id, PurchaseInboundOrderStatus.EDITING);
+        if(PurchaseInboundOrderApproveResultConstants.REJECTED.equals(status)) {
+            purchaseInboundOrderService.updateStatus(id, PurchaseInboundOrderStatusConstants.EDITING);
 
         }else {
             //2. 如果是通过，则需要调用责任链来更新处理一系列信息
             PurchaseInboundOrderDTO purchaseInboundOrderDTO = purchaseInboundOrderService.getPurchaseInboundOrderById(id);
-            if(!purchaseInboundOrderDTO.getPurchaseInboundOrderStatus().equals(PurchaseInboundOrderStatus.WAIT_FOR_APPROVE)) {
+            if(!purchaseInboundOrderDTO.getPurchaseInboundOrderStatus().equals(PurchaseInboundOrderStatusConstants.WAIT_FOR_APPROVE)) {
                 return ResponseResult.buildError("采购入库单状态不为待审核");
             }
             PurchaseInboundOrderHandler handlerChain = handlerFactory.getHandlerChain();

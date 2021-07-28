@@ -66,8 +66,8 @@ public class AdminController {
     @PostMapping("/admin/info")
     @ApiOperation(value = "获取管理员用户信息", notes = "获取管理员用户信息", response = SysUser.class)
     public ResponseResult<SysUser> adminInfo() {
-        String username = StpUtil.getLoginIdAsString();
-        SysUser sysUser = sysUserService.getOne(new QueryWrapper<SysUser>().eq("username", username));
+        Long userId = StpUtil.getLoginIdAsLong();
+        SysUser sysUser = sysUserService.getOne(new QueryWrapper<SysUser>().eq("id", userId));
         return ResponseResult.buildSuccess(sysUser);
     }
 

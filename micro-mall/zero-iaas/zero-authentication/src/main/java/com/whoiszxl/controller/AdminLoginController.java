@@ -36,7 +36,7 @@ public class AdminLoginController {
         }
 
         //2. 登录并获取token
-        StpUtil.login(loginQuery.getUsername());
+        StpUtil.login(adminUser.getId());
         return ResponseResult.buildSuccess("登录成功", StpUtil.getTokenValue());
     }
 

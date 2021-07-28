@@ -5,16 +5,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.constant.PurchaseInboundOrderApproveResult;
-import com.whoiszxl.constant.PurchaseInboundOrderStatus;
-import com.whoiszxl.constant.PurchaseOrderStatus;
-import com.whoiszxl.constants.PurchaseSettlementOrderStatus;
+import com.whoiszxl.constants.*;
 import com.whoiszxl.dto.PurchaseSettlementOrderDTO;
 import com.whoiszxl.entity.PurchaseInboundOrder;
 import com.whoiszxl.entity.PurchaseSettlementOrder;
 import com.whoiszxl.entity.query.PurchaseSettlementOrderQuery;
+import com.whoiszxl.entity.query.SettlementQuery;
 import com.whoiszxl.entity.vo.PurchaseSettlementOrderVO;
-import com.whoiszxl.feign.WmsFeignClient;
+import com.whoiszxl.factory.SettlementFactory;
+import com.whoiszxl.factory.handler.SettlementHandler;
 import com.whoiszxl.service.PurchaseInboundOrderService;
 import com.whoiszxl.service.PurchaseOrderService;
 import com.whoiszxl.service.PurchaseSettlementOrderService;
@@ -47,6 +46,9 @@ public class FinancePurchaseSettlementOrderController {
 
     @Autowired
     private PurchaseOrderService purchaseOrderService;
+
+    @Autowired
+    private SettlementFactory settlementFactory;
 
     @GetMapping
     @ApiOperation(value = "分页查询采购入库单列表", notes = "分页查询采购入库单列表", response = PurchaseSettlementOrder.class)
@@ -82,11 +84,11 @@ public class FinancePurchaseSettlementOrderController {
     public ResponseResult submitOrderToApprove(@PathVariable("id") Long id) {
         //对采购入库单的订单状态进行校验
         PurchaseSettlementOrder purchaseSettlementOrder = purchaseSettlementOrderService.getById(id);
-        if(purchaseSettlementOrder == null || !purchaseSettlementOrder.getStatus().equals(PurchaseSettlementOrderStatus.EDITING)) {
+        if(purchaseSettlementOrder == null || !purchaseSettlementOrder.getStatus().equals(PurchaseSettlementOrderStatusConstants.EDITING)) {
             return ResponseResult.buildError("采购结算单不存在或状态不为编辑中");
         }
 
-        purchaseSettlementOrder.setStatus(PurchaseSettlementOrderStatus.WAIT_FOR_APPROVE);
+        purchaseSettlementOrder.setStatus(PurchaseSettlementOrderStatusConstants.WAIT_FOR_APPROVE);
         boolean updateFlag = purchaseSettlementOrderService.updateById(purchaseSettlementOrder);
         return ResponseResult.buildByFlag(updateFlag);
     }
@@ -96,7 +98,7 @@ public class FinancePurchaseSettlementOrderController {
     public ResponseResult approve(@PathVariable("id") Long id, @PathVariable("status") Integer status) {
         //校验采购结算单状态
         PurchaseSettlementOrder purchaseSettlementOrder = purchaseSettlementOrderService.getById(id);
-        if(purchaseSettlementOrder == null || !purchaseSettlementOrder.getStatus().equals(PurchaseSettlementOrderStatus.WAIT_FOR_APPROVE)) {
+        if(purchaseSettlementOrder == null || !purchaseSettlementOrder.getStatus().equals(PurchaseSettlementOrderStatusConstants.WAIT_FOR_APPROVE)) {
             return ResponseResult.buildError("采购结算单不存在或状态不为待审核中");
         }
 
@@ -104,19 +106,28 @@ public class FinancePurchaseSettlementOrderController {
         purchaseSettlementOrderService.approve(id, status);
 
         //如果审核通过，需要发送给wms进行后续操作
-        if(PurchaseInboundOrderApproveResult.PASSED.equals(status)) {
+        if(PurchaseInboundOrderApproveResultConstants.PASSED.equals(status)) {
             PurchaseSettlementOrderDTO settlementOrderDTO = purchaseSettlementOrderService.getPurchaseSettlementOrderById(id);
             //wmsFeignClient.notifyFinishedPurchaseSettlementOrderEvent(settlementOrderDTO.getPurchaseInboundOrderId());
 
             //1. 更新采购入库单状态为已完成
-            purchaseInboundOrderService.updateStatus(settlementOrderDTO.getPurchaseInboundOrderId(), PurchaseInboundOrderStatus.FINISHED);
+            purchaseInboundOrderService.updateStatus(settlementOrderDTO.getPurchaseInboundOrderId(), PurchaseInboundOrderStatusConstants.FINISHED);
 
             //2. 更新采购单状态为已完成
             PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(settlementOrderDTO.getPurchaseInboundOrderId());
-            purchaseOrderService.updateStatus(purchaseInboundOrder.getPurchaseOrderId(), PurchaseOrderStatus.FINISHED);
+            purchaseOrderService.updateStatus(purchaseInboundOrder.getPurchaseOrderId(), PurchaseOrderStatusConstants.FINISHED);
         }
         return ResponseResult.buildSuccess();
     }
 
+
+    @PostMapping
+    @ApiOperation(value = "进行结算", notes = "按照供应商的结算周期进行结算并进行打款", response = ResponseResult.class)
+    public ResponseResult<Boolean> settlement(@RequestBody SettlementQuery settlementQuery) {
+        //1. 通过结算工厂获取到当前结算类型的对象
+        SettlementHandler settlementHandler = settlementFactory.create(settlementQuery);
+        boolean executeFlag = settlementHandler.execute();
+        return ResponseResult.buildByFlag(executeFlag);
+    }
 }
 
