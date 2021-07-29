@@ -14,7 +14,6 @@
         <module>zero-wms/zero-wms-web</module>
         <module>zero-core</module>
         <module>zero-iaas</module>
-        <module>zero-iaas/zero-authentication</module>
         <module>zero-iaas/zero-gateway</module>
         <module>zero-dispatch</module>
         <module>zero-dispatch/zero-dispatch-api</module>
@@ -26,6 +25,8 @@
         <module>zero-promotion</module>
         <module>zero-promotion/zero-promotion-api</module>
         <module>zero-promotion/zero-promotion-web</module>
+        <module>zero-member</module>
+        <module>zero-cart</module>
     </modules>
 
     <name>micro-mall</name>
@@ -69,6 +70,7 @@
         <commons-io.version>2.6</commons-io.version>
         <poi.version>3.17</poi.version>
         <sa-token.version>1.23.0</sa-token.version>
+        <jasypt.version>2.1.0</jasypt.version>
     </properties>
 
     <!-- springboot版本 -->
@@ -237,6 +239,13 @@
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-spring-boot-starter</artifactId>
                 <version>${sa-token.version}</version>
+            </dependency>
+
+            <!-- YML敏感信息加密 -->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
             </dependency>
 
         </dependencies>

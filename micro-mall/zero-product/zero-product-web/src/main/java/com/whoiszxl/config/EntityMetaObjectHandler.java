@@ -19,8 +19,8 @@ public class EntityMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         Long id = StpUtil.getLoginIdAsLong();
-        this.setFieldValByName("createdBy", id, metaObject);
-        this.setFieldValByName("updatedBy", id, metaObject);
+        this.setFieldValByName("createdBy", id.toString(), metaObject);
+        this.setFieldValByName("updatedBy", id.toString(), metaObject);
         this.setFieldValByName("createdAt", new Date(), metaObject);
         this.setFieldValByName("updatedAt", new Date(), metaObject);
     }
@@ -29,6 +29,6 @@ public class EntityMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         Long id = StpUtil.getLoginIdAsLong();
         this.setFieldValByName("updatedAt", new Date(), metaObject);
-        this.setFieldValByName("updatedBy", id, metaObject);
+        this.setFieldValByName("updatedBy", id.toString(), metaObject);
     }
 }

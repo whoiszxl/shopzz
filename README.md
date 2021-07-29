@@ -11,6 +11,19 @@
 ### 后端项目结构
 ![后端项目结构](https://zero-mall.oss-cn-shenzhen.aliyuncs.com/docs/zero-mall-project.png)
 
+### 服务端口配置
+
+|  服务名称             | 端口号   |
+|  ----                 | ----    |
+| zero-gateway          | 80      |
+| zero-wms-web          | 10001   |
+| zero-dispatch-web     | 10002   |
+| zero-product-web      | 10003   |
+| zero-inventory-web    | 10004   |
+| zero-promotion-web    | 10005   |
+| zero-member-web       | 10006   |
+| zero-cart-web         | 10007   |
+| 。。                  | 10008   |
 
 ### FlutterApp截图
 
