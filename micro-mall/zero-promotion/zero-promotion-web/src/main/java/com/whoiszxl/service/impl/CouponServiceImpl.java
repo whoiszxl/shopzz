@@ -35,12 +35,12 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
     }
 
     @Override
-    public void giveCouponToMember(Long memberId, Long couponId) {
+    public Boolean giveCouponToMember(Long memberId, Long couponId) {
         CouponReceivedRecord receivedRecord = new CouponReceivedRecord();
         receivedRecord.setCouponId(couponId);
         receivedRecord.setMemberId(memberId);
         receivedRecord.setIsUsed(0);
         receivedRecord.setUsedTime(null);
-        couponReceivedRecordService.save(receivedRecord);
+        return couponReceivedRecordService.save(receivedRecord);
     }
 }

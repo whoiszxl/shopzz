@@ -28,6 +28,7 @@ public interface CouponService extends IService<Coupon> {
      * 给用户发放优惠券
      * @param memberId 用户ID
      * @param couponId 优惠券ID
+     * @return 是否发放成功
      */
-    void giveCouponToMember(Long memberId, Long couponId);
+    Boolean giveCouponToMember(Long memberId, Long couponId);
 }
