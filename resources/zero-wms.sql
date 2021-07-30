@@ -362,3 +362,24 @@ create table wms_warehouse_product_stock (
     `updated_at`                            datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='仓库商品库存表';
+
+
+
+-- 运费模板表
+drop table if exists wms_fare_template;
+create table wms_fare_template
+(
+    `id`                                    bigint not null auto_increment comment '主键',
+    `template_name`                         varchar(100) not null comment '运费模板名称',
+    `template_type`                         tinyint not null comment '运费模板类型，1：固定运费，2：满X元包邮，3：自定义规则',
+    `template_rule`                         varchar(1024) not null comment '运费模板的规则',
+    `template_comment`                      varchar(256) not null comment '运费模板的说明备注',
+    `version`                               bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                            tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
+    `created_by`                            varchar(50) NOT NULL COMMENT '创建者',
+    `updated_by`                            varchar(50) NOT NULL COMMENT '更新者',
+    `created_at`                            datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                            datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='运费模板表';
+

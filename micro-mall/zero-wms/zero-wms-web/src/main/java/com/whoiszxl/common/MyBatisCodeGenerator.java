@@ -18,16 +18,21 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  */
 public class MyBatisCodeGenerator {
 
-    public static final String DB_NAME = "zero-cart";
+    //代码生成步骤一：配置连接的数据库、账号和密码
+    public static final String DB_NAME = "zero-wms";
     public static final String URL = "jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/" + DB_NAME + "?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false";
     public static final String USERNAME = "mall";
     public static final String PASSWORD = "mall1020!!";
 
-    public static final String tablePrefix = "oms_";
+    //代码生成步骤二：配置表前缀，生成时自动省略表前缀
+    public static final String tablePrefix = "wms_";
+
+    //代码生成步骤三： 配置需要生成代码的表名
     public static final String[] tableNames = new String[]{
-            "oms_cart"
+            "wms_fare_template"
     };
 
+    //代码生成步骤四：直接运行就能生成了
     public static void main(String[] args) {
         //1. 创建代码生成器
         AutoGenerator generator = new AutoGenerator();
@@ -73,7 +78,7 @@ public class MyBatisCodeGenerator {
         strategy.setTablePrefix(tablePrefix); //生成实体时去掉表前缀
 
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);//数据库表字段映射到实体的命名策略
-        strategy.setEntityLombokModel(true); // lombok 模型 @Accessors(chain = true) setter链式操作
+        strategy.setEntityLombokModel(false); // lombok 模型 @Accessors(chain = true) setter链式操作
 
         strategy.setRestControllerStyle(true); //restful api风格控制器
         strategy.setControllerMappingHyphenStyle(true); //url中驼峰转连字符

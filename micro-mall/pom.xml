@@ -27,6 +27,7 @@
         <module>zero-promotion/zero-promotion-web</module>
         <module>zero-member</module>
         <module>zero-cart</module>
+        <module>zero-order</module>
     </modules>
 
     <name>micro-mall</name>

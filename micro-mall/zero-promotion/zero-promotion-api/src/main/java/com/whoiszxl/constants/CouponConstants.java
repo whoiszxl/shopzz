@@ -30,4 +30,11 @@ public class CouponConstants {
         public Integer EXPIRED = 4;
     }
 
+    public static interface UseStatus {
+
+        public Integer USED = 1;
+
+        public Integer NOT_USED = 0;
+    }
+
 }
