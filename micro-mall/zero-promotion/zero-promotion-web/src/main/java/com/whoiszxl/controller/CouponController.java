@@ -46,9 +46,9 @@ public class CouponController {
     }
 
     @SaCheckLogin
-    @PostMapping("/{couponId}")
+    @PostMapping("/receive/{couponId}")
     @ApiOperation(value = "用户领取优惠券", notes = "用户领取优惠券", response = Boolean.class)
-    public ResponseResult<Boolean> list(@PathVariable Long couponId) {
+    public ResponseResult<Boolean> receive(@PathVariable Long couponId) {
         //1. 校验优惠券是否能被领取
         Coupon coupon = couponService.getById(couponId);
         if(coupon.getType().equals(CouponConstants.GiveType.ONLY_GIVE) ||

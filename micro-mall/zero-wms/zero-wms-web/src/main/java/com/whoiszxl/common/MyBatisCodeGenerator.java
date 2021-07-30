@@ -18,15 +18,14 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  */
 public class MyBatisCodeGenerator {
 
-    public static final String DB_NAME = "zero-admin";
+    public static final String DB_NAME = "zero-cart";
     public static final String URL = "jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/" + DB_NAME + "?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false";
     public static final String USERNAME = "mall";
     public static final String PASSWORD = "mall1020!!";
 
-    public static final String tablePrefix = "ums_";
+    public static final String tablePrefix = "oms_";
     public static final String[] tableNames = new String[]{
-            "ums_member","ums_member_address",
-            "ums_member_info", "ums_member_point", "ums_member_point_log"
+            "oms_cart"
     };
 
     public static void main(String[] args) {
