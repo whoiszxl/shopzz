@@ -59,10 +59,10 @@ public class Cart extends AbstractObject implements Serializable {
     private String saleAttr;
 
     @ApiModelProperty(value = "是否选中 0未选中 1选中")
-    private Boolean checked;
+    private Integer checked;
 
     @ApiModelProperty(value = "状态：0失效 1有效")
-    private Boolean status;
+    private Integer status;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

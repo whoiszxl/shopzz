@@ -49,6 +49,6 @@ public class MemberAddressVO extends AbstractObject implements Serializable {
     private String detailAddress;
 
     @ApiModelProperty(value = "是否默认 1:默认 2:非默认")
-    private Boolean isDefault;
+    private Integer isDefault;
 
 }

@@ -47,7 +47,7 @@ public class Recommend extends AbstractObject implements Serializable {
     private BigDecimal defaultPrice;
 
     @ApiModelProperty(value = "推荐商品类型 1:热门商品 2:精选商品")
-    private Boolean type;
+    private Integer type;
 
     @ApiModelProperty(value = "上下线状态：0->下线；1->上线")
     private Integer status;

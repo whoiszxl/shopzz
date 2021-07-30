@@ -14,6 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>com.whoiszxl</groupId>
+            <artifactId>zero-product-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
             <artifactId>zero-dispatch-api</artifactId>
             <version>1.0.0</version>
         </dependency>
@@ -131,6 +137,12 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
+            <artifactId>zero-cart-api</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

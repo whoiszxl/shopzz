@@ -68,13 +68,13 @@ public class Product extends AbstractObject implements Serializable {
     private String serviceGuarantees;
 
     @ApiModelProperty(value = "删除状态：0->未删除；1->已删除")
-    private Boolean deleteStatus;
+    private Integer deleteStatus;
 
     @ApiModelProperty(value = "上架状态：0->下架；1->上架")
-    private Boolean publishStatus;
+    private Integer publishStatus;
 
     @ApiModelProperty(value = "审核状态：0->未审核；1->审核通过")
-    private Boolean verifyStatus;
+    private Integer verifyStatus;
 
     @ApiModelProperty(value = "包装清单")
     private String packageList;

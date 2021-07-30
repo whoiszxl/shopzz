@@ -52,7 +52,7 @@ public class MemberAddress extends AbstractObject implements Serializable {
     private String detailAddress;
 
     @ApiModelProperty(value = "是否默认 1:默认 2:非默认")
-    private Boolean isDefault;
+    private Integer isDefault;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;

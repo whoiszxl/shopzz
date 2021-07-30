@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
-* TODO
+* 轮播图类型枚举
 *
-* @author zhouxiaolong
+* @author whoiszxl
 * @date 2021/7/29
 */
 @Getter

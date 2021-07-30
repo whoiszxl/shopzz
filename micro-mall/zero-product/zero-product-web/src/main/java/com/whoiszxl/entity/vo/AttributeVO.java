@@ -49,10 +49,10 @@ public class AttributeVO extends AbstractObject implements Serializable {
     private String valueSelect;
 
     @ApiModelProperty(value = "属性类型[0-销售属性，1-基本属性]")
-    private Boolean attributeType;
+    private Integer attributeType;
 
     @ApiModelProperty(value = "启用状态[0 - 禁用，1 - 启用]")
-    private Boolean status;
+    private Integer status;
 
 
 }

@@ -1,4 +1,4 @@
-package com.whoiszxl.entity.vo;
+package com.whoiszxl.dto;
 
 import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
@@ -21,7 +21,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="Cart对象", description="购物车记录表")
-public class CartVO extends AbstractObject implements Serializable {
+public class CartDTO extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -57,5 +57,24 @@ public class CartVO extends AbstractObject implements Serializable {
 
     @ApiModelProperty(value = "状态：0失效 1有效")
     private Integer status;
+
+    @ApiModelProperty(value = "乐观锁")
+    private Long version;
+
+    @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
+    private Integer isDeleted;
+
+    @ApiModelProperty(value = "创建者")
+    private String createdBy;
+
+    @ApiModelProperty(value = "更新者")
+    private String updatedBy;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createdAt;
+
+    @ApiModelProperty(value = "更新时间")
+    private Date updatedAt;
+
 
 }

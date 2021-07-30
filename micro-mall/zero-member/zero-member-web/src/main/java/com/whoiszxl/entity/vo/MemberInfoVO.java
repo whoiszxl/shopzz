@@ -31,7 +31,7 @@ public class MemberInfoVO extends AbstractObject implements Serializable {
     private String profilePhoto;
 
     @ApiModelProperty(value = "性别(0:未知 1:男；2:女)")
-    private Boolean gender;
+    private Integer gender;
 
     @ApiModelProperty(value = "生日")
     private Date birthday;

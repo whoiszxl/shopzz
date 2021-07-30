@@ -40,10 +40,10 @@ public class CategoryVO extends AbstractObject implements Serializable {
     private Long parentId;
 
     @ApiModelProperty(value = "分类级别：1->1级；2->2级 3->3级")
-    private Boolean level;
+    private Integer level;
 
     @ApiModelProperty(value = "是否显示[0-不显示，1显示]")
-    private Boolean status;
+    private Integer status;
 
     @ApiModelProperty(value = "排序")
     private Integer sort;

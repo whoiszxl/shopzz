@@ -17,13 +17,13 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/zero-wms?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/zero-cart?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: mall
-    password: mall1020!!
+    password: ENC(EcewFgIMVyceDWTruaRr2dNM8BGh3Ovo)
   redis:
     host: aliyun.whoiszxl.com
     port: 16379
-    password: zxl123456!!
+    password: ENC(64WbFVEt/8uDyA3CnzPJLMosm0XgDxE7)
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -67,4 +67,8 @@ feign:
 ribbon:
   ReadTimeout: 40000
   ConnectTimeout: 40000
+
+jasypt:
+  encryptor:
+    password: 123456 #配置EncryptPropertiesUtils工具类里填写的秘钥
 

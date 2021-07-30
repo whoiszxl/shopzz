@@ -31,7 +31,7 @@ public class HomeBannerDTO extends AbstractObject implements Serializable {
     private String name;
 
     @ApiModelProperty(value = "轮播位置：0->PC首页轮播；1->app首页轮播 2->app导航小组件")
-    private Boolean type;
+    private Integer type;
 
     @ApiModelProperty(value = "图片地址")
     private String pic;
