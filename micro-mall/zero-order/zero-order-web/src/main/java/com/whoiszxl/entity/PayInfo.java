@@ -1,13 +1,15 @@
 package com.whoiszxl.entity;
 
 import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -17,6 +19,8 @@ import io.swagger.annotations.ApiModelProperty;
  * @author whoiszxl
  * @since 2021-07-30
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("oms_pay_info")
 @ApiModel(value="PayInfo对象", description="第三方支付信息表")
 public class PayInfo implements Serializable {
@@ -57,157 +61,20 @@ public class PayInfo implements Serializable {
     @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
     private Integer isDeleted;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者")
     private String createdBy;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新者")
     private String updatedBy;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date createdAt;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
     private Date updatedAt;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getOrderSn() {
-        return orderSn;
-    }
-
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn;
-    }
-
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
-
-    public BigDecimal getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(BigDecimal totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public Integer getTradeChannel() {
-        return tradeChannel;
-    }
-
-    public void setTradeChannel(Integer tradeChannel) {
-        this.tradeChannel = tradeChannel;
-    }
-
-    public String getTradeNo() {
-        return tradeNo;
-    }
-
-    public void setTradeNo(String tradeNo) {
-        this.tradeNo = tradeNo;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Date getComplatedTime() {
-        return complatedTime;
-    }
-
-    public void setComplatedTime(Date complatedTime) {
-        this.complatedTime = complatedTime;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "PayInfo{" +
-        "id=" + id +
-        ", orderId=" + orderId +
-        ", orderSn=" + orderSn +
-        ", memberId=" + memberId +
-        ", totalAmount=" + totalAmount +
-        ", tradeChannel=" + tradeChannel +
-        ", tradeNo=" + tradeNo +
-        ", status=" + status +
-        ", complatedTime=" + complatedTime +
-        ", version=" + version +
-        ", isDeleted=" + isDeleted +
-        ", createdBy=" + createdBy +
-        ", updatedBy=" + updatedBy +
-        ", createdAt=" + createdAt +
-        ", updatedAt=" + updatedAt +
-        "}";
-    }
 }

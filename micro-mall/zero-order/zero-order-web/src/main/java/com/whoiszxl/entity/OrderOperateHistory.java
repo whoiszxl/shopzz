@@ -1,12 +1,13 @@
 package com.whoiszxl.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,6 +17,8 @@ import io.swagger.annotations.ApiModelProperty;
  * @author whoiszxl
  * @since 2021-07-30
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("oms_order_operate_history")
 @ApiModel(value="OrderOperateHistory对象", description="订单操作历史记录表")
 public class OrderOperateHistory implements Serializable {
@@ -47,130 +50,19 @@ public class OrderOperateHistory implements Serializable {
     @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
     private Integer isDeleted;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者")
     private String createdBy;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新者")
     private String updatedBy;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date createdAt;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
     private Date updatedAt;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Integer getOperateByType() {
-        return operateByType;
-    }
-
-    public void setOperateByType(Integer operateByType) {
-        this.operateByType = operateByType;
-    }
-
-    public String getOperateByName() {
-        return operateByName;
-    }
-
-    public void setOperateByName(String operateByName) {
-        this.operateByName = operateByName;
-    }
-
-    public Integer getOperateType() {
-        return operateType;
-    }
-
-    public void setOperateType(Integer operateType) {
-        this.operateType = operateType;
-    }
-
-    public String getOperateNote() {
-        return operateNote;
-    }
-
-    public void setOperateNote(String operateNote) {
-        this.operateNote = operateNote;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderOperateHistory{" +
-        "id=" + id +
-        ", orderId=" + orderId +
-        ", operateByType=" + operateByType +
-        ", operateByName=" + operateByName +
-        ", operateType=" + operateType +
-        ", operateNote=" + operateNote +
-        ", version=" + version +
-        ", isDeleted=" + isDeleted +
-        ", createdBy=" + createdBy +
-        ", updatedBy=" + updatedBy +
-        ", createdAt=" + createdAt +
-        ", updatedAt=" + updatedAt +
-        "}";
-    }
 }

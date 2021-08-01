@@ -14,6 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>com.whoiszxl</groupId>
+            <artifactId>zero-product-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
             <artifactId>zero-inventory-api</artifactId>
             <version>1.0.0</version>
         </dependency>

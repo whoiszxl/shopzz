@@ -1,13 +1,15 @@
 package com.whoiszxl.entity;
 
 import java.math.BigDecimal;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>
@@ -17,6 +19,8 @@ import io.swagger.annotations.ApiModelProperty;
  * @author whoiszxl
  * @since 2021-07-30
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 @TableName("oms_order_return_apply")
 @ApiModel(value="OrderReturnApply对象", description="订单退货表")
 public class OrderReturnApply implements Serializable {
@@ -90,256 +94,20 @@ public class OrderReturnApply implements Serializable {
     @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
     private Integer isDeleted;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者")
     private String createdBy;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新者")
     private String updatedBy;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date createdAt;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
     private Date updatedAt;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Long getOrderItemId() {
-        return orderItemId;
-    }
-
-    public void setOrderItemId(Long orderItemId) {
-        this.orderItemId = orderItemId;
-    }
-
-    public String getOrderSn() {
-        return orderSn;
-    }
-
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn;
-    }
-
-    public Long getSkuId() {
-        return skuId;
-    }
-
-    public void setSkuId(Long skuId) {
-        this.skuId = skuId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public BigDecimal getFreight() {
-        return freight;
-    }
-
-    public void setFreight(BigDecimal freight) {
-        this.freight = freight;
-    }
-
-    public Integer getReturnCount() {
-        return returnCount;
-    }
-
-    public void setReturnCount(Integer returnCount) {
-        this.returnCount = returnCount;
-    }
-
-    public Integer getReturnReason() {
-        return returnReason;
-    }
-
-    public void setReturnReason(Integer returnReason) {
-        this.returnReason = returnReason;
-    }
-
-    public String getReturnComment() {
-        return returnComment;
-    }
-
-    public void setReturnComment(String returnComment) {
-        this.returnComment = returnComment;
-    }
-
-    public String getReturnPic() {
-        return returnPic;
-    }
-
-    public void setReturnPic(String returnPic) {
-        this.returnPic = returnPic;
-    }
-
-    public Integer getReturnApplyStatus() {
-        return returnApplyStatus;
-    }
-
-    public void setReturnApplyStatus(Integer returnApplyStatus) {
-        this.returnApplyStatus = returnApplyStatus;
-    }
-
-    public String getReturnLogisticCode() {
-        return returnLogisticCode;
-    }
-
-    public void setReturnLogisticCode(String returnLogisticCode) {
-        this.returnLogisticCode = returnLogisticCode;
-    }
-
-    public String getReturnReceiveName() {
-        return returnReceiveName;
-    }
-
-    public void setReturnReceiveName(String returnReceiveName) {
-        this.returnReceiveName = returnReceiveName;
-    }
-
-    public String getReturnReceiveNote() {
-        return returnReceiveNote;
-    }
-
-    public void setReturnReceiveNote(String returnReceiveNote) {
-        this.returnReceiveNote = returnReceiveNote;
-    }
-
-    public String getReturnReceivePhone() {
-        return returnReceivePhone;
-    }
-
-    public void setReturnReceivePhone(String returnReceivePhone) {
-        this.returnReceivePhone = returnReceivePhone;
-    }
-
-    public String getReturnCompanyAddress() {
-        return returnCompanyAddress;
-    }
-
-    public void setReturnCompanyAddress(String returnCompanyAddress) {
-        this.returnCompanyAddress = returnCompanyAddress;
-    }
-
-    public Date getReturnReceiveTime() {
-        return returnReceiveTime;
-    }
-
-    public void setReturnReceiveTime(Date returnReceiveTime) {
-        this.returnReceiveTime = returnReceiveTime;
-    }
-
-    public String getHandleNote() {
-        return handleNote;
-    }
-
-    public void setHandleNote(String handleNote) {
-        this.handleNote = handleNote;
-    }
-
-    public String getHandleBy() {
-        return handleBy;
-    }
-
-    public void setHandleBy(String handleBy) {
-        this.handleBy = handleBy;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderReturnApply{" +
-        "id=" + id +
-        ", orderId=" + orderId +
-        ", orderItemId=" + orderItemId +
-        ", orderSn=" + orderSn +
-        ", skuId=" + skuId +
-        ", username=" + username +
-        ", freight=" + freight +
-        ", returnCount=" + returnCount +
-        ", returnReason=" + returnReason +
-        ", returnComment=" + returnComment +
-        ", returnPic=" + returnPic +
-        ", returnApplyStatus=" + returnApplyStatus +
-        ", returnLogisticCode=" + returnLogisticCode +
-        ", returnReceiveName=" + returnReceiveName +
-        ", returnReceiveNote=" + returnReceiveNote +
-        ", returnReceivePhone=" + returnReceivePhone +
-        ", returnCompanyAddress=" + returnCompanyAddress +
-        ", returnReceiveTime=" + returnReceiveTime +
-        ", handleNote=" + handleNote +
-        ", handleBy=" + handleBy +
-        ", version=" + version +
-        ", isDeleted=" + isDeleted +
-        ", createdBy=" + createdBy +
-        ", updatedBy=" + updatedBy +
-        ", createdAt=" + createdAt +
-        ", updatedAt=" + updatedAt +
-        "}";
-    }
 }

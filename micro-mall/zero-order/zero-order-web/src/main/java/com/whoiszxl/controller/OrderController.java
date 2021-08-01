@@ -1,16 +1,17 @@
 package com.whoiszxl.controller;
 
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.entity.vo.OrderConfirmVO;
+import com.whoiszxl.entity.vo.OrderSubmitVO;
 import com.whoiszxl.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.concurrent.CompletableFuture;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -34,6 +35,15 @@ public class OrderController {
         OrderConfirmVO orderConfirmVO = orderService.getOrderConfirmData();
         return ResponseResult.buildSuccess(orderConfirmVO);
     }
+
+    @GetMapping("/submit")
+    @ApiOperation(value = "提交订单", notes = "提交订单", response = Boolean.class)
+    public ResponseResult<String> submit(@RequestBody OrderSubmitVO orderSubmitVo) {
+        String orderId = orderService.submitOrder(orderSubmitVo);
+        return ResponseResult.buildSuccess(orderId);
+    }
+
+
 
 }
 
