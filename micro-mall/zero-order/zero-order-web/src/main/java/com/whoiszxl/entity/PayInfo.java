@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,7 +25,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("oms_pay_info")
 @ApiModel(value="PayInfo对象", description="第三方支付信息表")
-public class PayInfo implements Serializable {
+public class PayInfo extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

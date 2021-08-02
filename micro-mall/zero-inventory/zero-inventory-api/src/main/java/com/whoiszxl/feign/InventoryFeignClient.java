@@ -1,5 +1,6 @@
 package com.whoiszxl.feign;
 
+import com.whoisxl.dto.OrderDTO;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.InventorySkuDTO;
@@ -35,4 +36,11 @@ public interface InventoryFeignClient {
      */
     @PostMapping("/getSaleStockQuantity")
     ResponseResult<List<InventorySkuDTO>> getSaleStockQuantity(@RequestBody List<Long> skuIds);
+
+    /**
+     * 通知库存中心提交订单的事件发生了
+     * @param order
+     * @return
+     */
+    ResponseResult<Boolean> notifySubmitOrderEvent(OrderDTO order);
 }

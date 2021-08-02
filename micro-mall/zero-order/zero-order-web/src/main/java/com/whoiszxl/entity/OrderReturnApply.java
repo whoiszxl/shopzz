@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,7 +25,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("oms_order_return_apply")
 @ApiModel(value="OrderReturnApply对象", description="订单退货表")
-public class OrderReturnApply implements Serializable {
+public class OrderReturnApply extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

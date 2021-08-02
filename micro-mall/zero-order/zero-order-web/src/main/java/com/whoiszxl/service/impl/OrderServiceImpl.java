@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoisxl.constants.OrderStatusConstants;
+import com.whoisxl.dto.OrderDTO;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.*;
 import com.whoiszxl.entity.Order;
@@ -16,6 +17,7 @@ import com.whoiszxl.feign.*;
 import com.whoiszxl.mapper.OrderMapper;
 import com.whoiszxl.service.OrderItemService;
 import com.whoiszxl.service.OrderService;
+import com.whoiszxl.state.LoggerOrderStateManager;
 import com.whoiszxl.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Or;
@@ -62,6 +64,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private OrderItemService orderItemService;
+
+    @Autowired
+    private LoggerOrderStateManager orderStateManager;
 
     @Autowired
     private IdWorker idWorker;
@@ -136,12 +141,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         orderItemService.saveBatch(orderCreateInfo.getOrderItemList());
 
         //4. 创建一个操作日志订单状态管理器，在订单状态流转到待付款状态时记录操作记录
+        orderStateManager.create(orderCreateInfo.getOrder());
 
-
-        //5. 发送Kafka消息通知库存中心订单提交了，更新库存中心的SKU库存
-
+        //5. 通知库存中心订单提交了，更新库存中心的SKU库存
+        inventoryFeignClient.notifySubmitOrderEvent(orderCreateInfo.getOrder().clone(OrderDTO.class));
 
         //6. 发送Kafka消息到调度中心，进行调度销售出库
+
+
         //6.1 通过商品的SKU ID查询到货位库存的明细条目，并进行遍历，一个SKU可能在多个货位上
         //6.2 创建出需要拣货的条目和发货的条目并进行批量入库
         //6.3 更新调度中心的库存

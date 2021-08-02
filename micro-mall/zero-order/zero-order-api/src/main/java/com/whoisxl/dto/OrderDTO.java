@@ -1,17 +1,14 @@
-package com.whoiszxl.entity;
-
-import java.math.BigDecimal;
-
-import com.baomidou.mybatisplus.annotation.*;
-
-import java.util.Date;
-import java.io.Serializable;
+package com.whoisxl.dto;
 
 import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -23,14 +20,12 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("oms_order")
 @ApiModel(value="Order对象", description="订单表")
-public class Order extends AbstractObject implements Serializable {
+public class OrderDTO extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ID_WORKER)
     private Long id;
 
     @ApiModelProperty(value = "订单编号")
@@ -129,19 +124,15 @@ public class Order extends AbstractObject implements Serializable {
     @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
     private Integer isDeleted;
 
-    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者")
     private String createdBy;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新者")
     private String updatedBy;
 
-    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date createdAt;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
     private Date updatedAt;
 }

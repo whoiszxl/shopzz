@@ -1,6 +1,7 @@
 package com.whoiszxl.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,7 +22,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @TableName("oms_order_operate_history")
 @ApiModel(value="OrderOperateHistory对象", description="订单操作历史记录表")
-public class OrderOperateHistory implements Serializable {
+public class OrderOperateHistory extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
