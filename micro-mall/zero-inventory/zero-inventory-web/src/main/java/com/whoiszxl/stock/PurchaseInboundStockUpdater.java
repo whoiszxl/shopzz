@@ -18,22 +18,23 @@ public class PurchaseInboundStockUpdater extends AbstractStockUpdater {
     }
 
     @Override
-    protected void updateSaleStockQuantity() {
+    protected boolean updateSaleStockQuantity() {
 
         for(ProductStock productStock : productStocks) {
             PurchaseInboundOrderItemDTO purchaseInboundOrderItemDTO = itemDTOMap.get(productStock.getProductSkuId());
             productStock.setSaleStockQuantity(productStock.getSaleStockQuantity() + purchaseInboundOrderItemDTO.getArrivalCount());
         }
 
+        return true;
     }
 
     @Override
-    protected void updateLockedStockQuantity() {
-
+    protected boolean updateLockedStockQuantity() {
+        return true;
     }
 
     @Override
-    protected void updateSaledStockQuantity() {
-
+    protected boolean updateSaledStockQuantity() {
+        return true;
     }
 }

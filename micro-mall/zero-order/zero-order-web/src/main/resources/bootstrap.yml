@@ -17,7 +17,7 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/zero-wms?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/zero-order?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: mall
     password: ENC(EcewFgIMVyceDWTruaRr2dNM8BGh3Ovo)
   redis:

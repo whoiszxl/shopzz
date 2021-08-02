@@ -1,10 +1,13 @@
 package com.whoiszxl.feign;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.ActivityDTO;
 import com.whoiszxl.dto.MemberCouponDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -31,4 +34,11 @@ public interface PromotionFeignClient {
     @GetMapping("/listCurrentActivity")
     List<ActivityDTO> listCurrentActivity();
 
+    /**
+     * 使用优惠券
+     * @param couponId 优惠券ID
+     * @return
+     */
+    @PostMapping("/useCoupon/{couponId}")
+    ResponseResult<Boolean> useCoupon(@PathVariable("couponId") String couponId);
 }

@@ -13,6 +13,9 @@ public class OrderSubmitVO {
     @ApiModelProperty("用户收货地址主键ID")
     private String memberAddressId;
 
+    @ApiModelProperty("优惠券ID")
+    private String couponId;
+
     @ApiModelProperty("用户收货地址主键ID")
     private Integer payType;
 

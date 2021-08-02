@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `oms_order`;
 CREATE TABLE `oms_order` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
-    `order_sn`                  char(16) NOT NULL COMMENT '订单编号',
+    `order_sn`                  varchar(20) NOT NULL COMMENT '订单编号',
     `member_id`                 bigint(20) DEFAULT NULL COMMENT '用户ID',
     `username`                  varchar(50) NOT NULL COMMENT '用户名',
     `order_status`              tinyint(4) NOT NULL COMMENT '订单状态，1：待付款，2：已取消，3：待发货，4：待收货，5：已完成，6：售后中（退货申请待审核），7：交易关闭（退货审核不通过），8：交易中（待寄送退货商品），9：售后中（退货商品待收货），10：售后中（退货待入库），11：（1）售后中（退货已入库），12：交易关闭（完成退款）',
@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS `oms_order_item`;
 CREATE TABLE `oms_order_item` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
-    `order_sn`                  char(16) NOT NULL COMMENT '订单编号',
+    `order_sn`                  varchar(20) NOT NULL COMMENT '订单编号',
     `product_id`                bigint(20) NOT NULL COMMENT '商品id',
     `category_id`               bigint(20) NOT NULL COMMENT '分类id',
     `sku_id`                    bigint(20) NOT NULL COMMENT 'sku id',
@@ -74,8 +74,6 @@ DROP TABLE IF EXISTS `oms_order_operate_history`;
 CREATE TABLE `oms_order_operate_history` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
-    `operate_by_type`           tinyint(2) NOT NULL COMMENT '操作人类型[1:用户；2:系统；3:后台管理员]',
-    `operate_by_name`           varchar(50) NOT NULL COMMENT '操作人名称',
     `operate_type`              tinyint(4) NOT NULL COMMENT '操作类型，1：创建订单，2：手动取消订单，3：自动取消订单，4：支付订单，5：手动确认收货，6：自动确认收货，7：商品发货，8：申请退货，9：退货审核不通过，10：退货审核通过，11：寄送退货商品，12：确认收到退货，13：退货已入库，14：完成退款',
     `operate_note`              varchar(1024) NOT NULL COMMENT '操作备注',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
@@ -96,7 +94,7 @@ CREATE TABLE `oms_order_return_apply` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
     `order_item_id`             bigint(20) NOT NULL COMMENT '订单明细项ID',
-    `order_sn`                  char(16) NOT NULL COMMENT '订单编号',
+    `order_sn`                  varchar(20) NOT NULL COMMENT '订单编号',
     `sku_id`                    bigint(20) NOT NULL COMMENT '订单中SKU的ID',
     `username`                  varchar(50) NOT NULL COMMENT '用户名',
     `freight`                   decimal(8,2) not null comment '运费',
@@ -129,7 +127,7 @@ DROP TABLE IF EXISTS `oms_pay_info`;
 CREATE TABLE `oms_pay_info` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
-    `order_sn`                  char(16) NOT NULL COMMENT '订单编号',
+    `order_sn`                  varchar(20) NOT NULL COMMENT '订单编号',
     `member_id`                 bigint(20) DEFAULT NULL COMMENT '用户ID',
     `total_amount`              decimal(8,2) NOT NULL COMMENT '订单总支付金额',
     `trade_channel`             tinyint(3) NOT NULL COMMENT '交易渠道，1：支付宝，2：微信',
@@ -150,7 +148,7 @@ CREATE TABLE `oms_pay_info` (
 CREATE TABLE `oms_dc_pay_info` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
-    `order_sn`                  char(16) NOT NULL COMMENT '订单编号',
+    `order_sn`                  varchar(20) NOT NULL COMMENT '订单编号',
     `member_id`                 bigint(20) DEFAULT NULL COMMENT '用户ID',
     `currency_id`               int(10) NOT NULL COMMENT '币种ID',
     `currency_name`             varchar(32) NOT NULL COMMENT '货币名称',

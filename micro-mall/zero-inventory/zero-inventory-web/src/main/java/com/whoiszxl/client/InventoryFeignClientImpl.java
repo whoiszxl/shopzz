@@ -1,5 +1,7 @@
 package com.whoiszxl.client;
 
+import com.whoisxl.dto.OrderCreateInfoDTO;
+import com.whoisxl.dto.OrderDTO;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.InventorySkuDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
@@ -8,6 +10,7 @@ import com.whoiszxl.feign.InventoryFeignClient;
 import com.whoiszxl.service.ProductStockService;
 import com.whoiszxl.stock.PurchaseInboundStockUpdaterFactory;
 import com.whoiszxl.stock.StockUpdater;
+import com.whoiszxl.stock.SubmitOrderStockUpdaterFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,11 +36,14 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
     @Autowired
     private ProductStockService productStockService;
 
+    @Autowired
+    private SubmitOrderStockUpdaterFactory<OrderCreateInfoDTO> submitOrderStockUpdaterFactory;
+
     @Override
     public ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         StockUpdater stockUpdater = purchaseInboundStockUpdaterFactory.create(purchaseInboundOrderDTO);
-        stockUpdater.updateProductStock();
-        return ResponseResult.buildSuccess();
+        Boolean updateFlag = stockUpdater.updateProductStock();
+        return ResponseResult.buildByFlag(updateFlag);
     }
 
     @Override
@@ -52,5 +58,15 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
             }
         }
         return ResponseResult.buildSuccess(results);
+    }
+
+
+    @Override
+    public ResponseResult<Boolean> notifySubmitOrderEvent(OrderCreateInfoDTO orderCreateInfoDTO) {
+        //更新库存中心库存
+        StockUpdater stockUpdater = submitOrderStockUpdaterFactory.create(orderCreateInfoDTO);
+        Boolean updateFlag = stockUpdater.updateProductStock();
+
+        return ResponseResult.buildByFlag(updateFlag);
     }
 }

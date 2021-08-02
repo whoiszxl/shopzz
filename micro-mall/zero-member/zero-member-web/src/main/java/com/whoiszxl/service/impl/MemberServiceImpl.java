@@ -40,8 +40,8 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         MemberInfoVO memberInfoVO = memberInfo.clone(MemberInfoVO.class);
 
         MemberDetailVO memberDetailVO = new MemberDetailVO();
-        memberDetailVO.setMemberInfoVO(memberInfoVO);
-        memberDetailVO.setMemberVO(memberVO);
+        memberDetailVO.setMemberInfo(memberInfoVO);
+        memberDetailVO.setMember(memberVO);
         return memberDetailVO;
     }
 }

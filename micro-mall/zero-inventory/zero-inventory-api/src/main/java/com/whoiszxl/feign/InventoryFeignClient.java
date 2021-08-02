@@ -1,5 +1,6 @@
 package com.whoiszxl.feign;
 
+import com.whoisxl.dto.OrderCreateInfoDTO;
 import com.whoisxl.dto.OrderDTO;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
@@ -39,8 +40,9 @@ public interface InventoryFeignClient {
 
     /**
      * 通知库存中心提交订单的事件发生了
-     * @param order
+     * @param orderCreateInfoDTO 订单创建信息DTO
      * @return
      */
-    ResponseResult<Boolean> notifySubmitOrderEvent(OrderDTO order);
+    @PostMapping("/notifySubmitOrderEvent")
+    ResponseResult notifySubmitOrderEvent(@RequestBody OrderCreateInfoDTO orderCreateInfoDTO);
 }

@@ -2,6 +2,7 @@ package com.whoiszxl.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.whoiszxl.entity.Coupon;
+import com.whoiszxl.entity.CouponReceivedRecord;
 import com.whoiszxl.entity.MemberCoupon;
 
 import java.util.List;
@@ -31,4 +32,11 @@ public interface CouponService extends IService<Coupon> {
      * @return 是否发放成功
      */
     Boolean giveCouponToMember(Long memberId, Long couponId);
+
+    /**
+     * 通过用户ID和优惠券ID更新领取记录
+     * @param receivedRecord 领取记录
+     * @return
+     */
+    Boolean updateByMemberIdAndCouponId(CouponReceivedRecord receivedRecord);
 }

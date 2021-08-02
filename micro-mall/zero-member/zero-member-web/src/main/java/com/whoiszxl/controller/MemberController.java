@@ -58,13 +58,13 @@ public class MemberController {
         long memberId = StpUtil.getLoginIdAsLong();
 
         //1. 更新用户信息
-        MemberVO memberVO = memberDetailVO.getMemberVO();
+        MemberVO memberVO = memberDetailVO.getMember();
         Member member = memberVO.clone(Member.class);
         member.setId(memberId);
         memberService.updateById(member);
 
         //2. 更新用户详细信息
-        MemberInfoVO memberInfoVO = memberDetailVO.getMemberInfoVO();
+        MemberInfoVO memberInfoVO = memberDetailVO.getMemberInfo();
         MemberInfo memberInfo = memberInfoVO.clone(MemberInfo.class);
         memberInfo.setMemberId(memberId);
         memberInfoService.updateByMemberId(memberInfo);

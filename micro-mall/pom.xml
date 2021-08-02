@@ -28,6 +28,13 @@
         <module>zero-member</module>
         <module>zero-cart</module>
         <module>zero-order</module>
+        <module>zero-pay</module>
+        <module>zero-dcwallet</module>
+        <module>zero-dcwallet/zero-bitcoin</module>
+        <module>zero-dcwallet/zero-dc-common</module>
+        <module>zero-dcwallet/zero-erc20</module>
+        <module>zero-dcwallet/zero-eth</module>
+        <module>zero-dcwallet/zero-ethereum-common</module>
     </modules>
 
     <name>micro-mall</name>

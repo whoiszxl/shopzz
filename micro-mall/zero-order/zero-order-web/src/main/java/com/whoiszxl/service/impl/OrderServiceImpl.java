@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoisxl.constants.OrderStatusConstants;
+import com.whoisxl.dto.OrderCreateInfoDTO;
 import com.whoisxl.dto.OrderDTO;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.*;
@@ -15,14 +16,20 @@ import com.whoiszxl.entity.vo.OrderSubmitVO;
 import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.feign.*;
 import com.whoiszxl.mapper.OrderMapper;
+import com.whoiszxl.mq.MQConstants;
+import com.whoiszxl.mq.MQEnum;
+import com.whoiszxl.mq.MQSender;
+import com.whoiszxl.mq.MQSenderFactory;
 import com.whoiszxl.service.OrderItemService;
 import com.whoiszxl.service.OrderService;
 import com.whoiszxl.state.LoggerOrderStateManager;
 import com.whoiszxl.utils.IdWorker;
+import com.whoiszxl.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
@@ -67,6 +74,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private LoggerOrderStateManager orderStateManager;
+
+    @Autowired
+    private MQSenderFactory mqSenderFactory;
 
     @Autowired
     private IdWorker idWorker;
@@ -124,9 +134,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
 
     @Override
+    @Transactional
     public String submitOrder(OrderSubmitVO orderSubmitVo) {
         //0. 获取当前登录用户的信息
-        Long memberId = StpUtil.getLoginIdAsLong();
         MemberDetailDTO memberDetailDTO = memberFeignClient.getMemberInfo();
         //1. 创建订单和订单详细条目
         OrderCreateInfo orderCreateInfo = createOrderInfo(memberDetailDTO, orderSubmitVo);
@@ -137,26 +147,35 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         }
 
         //3. 订单与订单详细条目入库
-        this.save(orderCreateInfo.getOrder());
+        Order order = orderCreateInfo.getOrder();
+        this.save(order);
         orderItemService.saveBatch(orderCreateInfo.getOrderItemList());
 
         //4. 创建一个操作日志订单状态管理器，在订单状态流转到待付款状态时记录操作记录
-        orderStateManager.create(orderCreateInfo.getOrder());
+        orderStateManager.create(order);
 
         //5. 通知库存中心订单提交了，更新库存中心的SKU库存
-        inventoryFeignClient.notifySubmitOrderEvent(orderCreateInfo.getOrder().clone(OrderDTO.class));
+        OrderCreateInfoDTO orderRequestParam = orderCreateInfo.clone(OrderCreateInfoDTO.class);
+        ResponseResult updateInventoryResult = inventoryFeignClient.notifySubmitOrderEvent(orderRequestParam);
+        if(!updateInventoryResult.isOk()) {
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError("库存不足"));
+        }
 
-        //6. 发送Kafka消息到调度中心，进行调度销售出库
+        //6. 使用优惠券
+        ResponseResult<Boolean> useCouponResult = promotionFeignClient.useCoupon(orderSubmitVo.getCouponId());
+        if(!useCouponResult.isOk()) {
+            log.error("优惠券使用失败：{}", useCouponResult.getMessage());
+        }
 
+        //7. 发送Kafka消息到调度中心，进行调度销售出库
+        //7.1 通过商品的SKU ID查询到货位库存的明细条目，并进行遍历，一个SKU可能在多个货位上
+        //7.2 创建出需要拣货的条目和发货的条目并进行批量入库
+        //7.3 更新调度中心的库存
+        //7.4 更新wms中心的库存
+//        MQSender kafkaSender = mqSenderFactory.get(MQEnum.KAFKA);
+//        kafkaSender.send(MQConstants.SUBMIT_ORDER_QUEUE, JsonUtil.toJson(orderDTO));
 
-        //6.1 通过商品的SKU ID查询到货位库存的明细条目，并进行遍历，一个SKU可能在多个货位上
-        //6.2 创建出需要拣货的条目和发货的条目并进行批量入库
-        //6.3 更新调度中心的库存
-        //6.4 更新wms中心的库存
-
-
-
-        return null;
+        return order.getOrderSn();
     }
 
     /**
@@ -166,7 +185,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
      * @return
      */
     private OrderCreateInfo createOrderInfo(MemberDetailDTO memberDetailDTO, OrderSubmitVO orderSubmitVo) {
-        MemberDTO member = memberDetailDTO.getMemberDTO();
+        MemberDTO member = memberDetailDTO.getMember();
         //1. 生成订单号
         long orderId = idWorker.nextId();
 
@@ -200,8 +219,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setPointAmount(new BigDecimal("0"));
         order.setCouponAmount(new BigDecimal("0"));
 
+
         BigDecimal total = BigDecimal.ZERO;
         for (OrderItem orderItem : orderItems) {
+            //TODO 暂用sku价格
+            orderItem.setRealAmount(orderItem.getSkuPrice().multiply(new BigDecimal(orderItem.getQuantity().toString())));
+
             total = total.add(orderItem.getRealAmount());
         }
         order.setTotalAmount(total);
@@ -229,23 +252,23 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     /**
      * 创建订单详情单个条目
-     * @param item 购物车条目
+     * @param cartDTO 购物车条目
      * @return 订单条目
      */
-    private OrderItem buildOrderItem(CartDTO item) {
+    private OrderItem buildOrderItem(CartDTO cartDTO) {
         OrderItem orderItem = new OrderItem();
-        Long skuId = item.getSkuId();
+        Long skuId = cartDTO.getSkuId();
 
         //配置sku信息
         orderItem.setSkuId(skuId);
-        orderItem.setSkuName(orderItem.getSkuName());
-        orderItem.setSkuAttrs(orderItem.getSkuAttrs());
-        orderItem.setSkuPic(item.getSkuPic());
-        orderItem.setSkuPrice(item.getPrice());
-        orderItem.setQuantity(item.getQuantity());
+        orderItem.setSkuName(cartDTO.getSkuName());
+        orderItem.setSkuAttrs(cartDTO.getSaleAttr());
+        orderItem.setSkuPic(cartDTO.getSkuPic());
+        orderItem.setSkuPrice(cartDTO.getPrice());
+        orderItem.setQuantity(cartDTO.getQuantity());
 
         //配置spu信息
-        orderItem.setProductId(item.getProductId());
+        orderItem.setProductId(cartDTO.getProductId());
         orderItem.setCategoryId(0L); //TODO
 
         return orderItem;

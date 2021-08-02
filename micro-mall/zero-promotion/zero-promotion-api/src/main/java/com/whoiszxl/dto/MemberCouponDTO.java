@@ -17,6 +17,9 @@ public class MemberCouponDTO extends AbstractObject implements Serializable {
     @ApiModelProperty(value = "主键")
     private Long id;
 
+    @ApiModelProperty(value = "优惠券ID")
+    private Long couponId;
+
     @ApiModelProperty(value = "用户账号ID")
     private Long memberId;
 
@@ -26,21 +29,18 @@ public class MemberCouponDTO extends AbstractObject implements Serializable {
     @ApiModelProperty(value = "使用优惠券的时间")
     private Date usedTime;
 
-    @ApiModelProperty(value = "乐观锁")
-    private Long version;
+    @ApiModelProperty(value = "优惠券名称")
+    private String name;
 
-    @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
-    private Integer isDeleted;
+    @ApiModelProperty(value = "优惠券类型")
+    private Integer type;
 
-    @ApiModelProperty(value = "创建者")
-    private String createdBy;
+    @ApiModelProperty(value = "优惠券规则")
+    private String rule;
 
-    @ApiModelProperty(value = "更新者")
-    private String updatedBy;
+    @ApiModelProperty(value = "开始时间")
+    private Date startTime;
 
-    @ApiModelProperty(value = "创建时间")
-    private Date createdAt;
-
-    @ApiModelProperty(value = "更新时间")
-    private Date updatedAt;
+    @ApiModelProperty(value = "结束时间")
+    private Date endTime;
 }

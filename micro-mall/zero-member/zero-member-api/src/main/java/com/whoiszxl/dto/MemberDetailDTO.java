@@ -16,9 +16,9 @@ public class MemberDetailDTO extends AbstractObject implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("会员基础信息")
-    private MemberDTO memberDTO;
+    private MemberDTO member;
 
     @ApiModelProperty("会员扩展信息")
-    private MemberInfoDTO memberInfoDTO;
+    private MemberInfoDTO memberInfo;
 
 }

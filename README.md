@@ -24,6 +24,11 @@
 | zero-member-web       | 10006   |
 | zero-cart-web         | 10007   |
 | zero-order-web        | 10008   |
+| zero-pay-web          | 10009   |
+| zero-bitcoin          | 10010   |
+| zero-eth              | 10011   |
+| zero-erc20            | 10012   |
+
 
 ### FlutterApp截图
 

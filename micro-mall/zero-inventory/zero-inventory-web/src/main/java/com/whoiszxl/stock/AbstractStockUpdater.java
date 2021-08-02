@@ -29,13 +29,16 @@ public abstract class AbstractStockUpdater implements StockUpdater {
     public Boolean updateProductStock() {
         try {
             //更新销售库存
-            updateSaleStockQuantity();
+            boolean b = updateSaleStockQuantity();
 
             //更新锁定库存
-            updateLockedStockQuantity();
+            boolean b1 = updateLockedStockQuantity();
 
             //更新已售库存
-            updateSaledStockQuantity();
+            boolean b2 = updateSaledStockQuantity();
+            if(!b || !b1 || !b2) {
+                return false;
+            }
 
             //更新库存状态
             updateStockStatus();
@@ -51,17 +54,17 @@ public abstract class AbstractStockUpdater implements StockUpdater {
     /**
      * 更新商品的销售库存
      */
-    protected abstract void updateSaleStockQuantity();
+    protected abstract boolean updateSaleStockQuantity();
 
     /**
      * 更新商品的锁定库存
      */
-    protected abstract void updateLockedStockQuantity();
+    protected abstract boolean updateLockedStockQuantity();
 
     /**
      * 更新商品的已销售库存
      */
-    protected abstract void updateSaledStockQuantity();
+    protected abstract boolean updateSaledStockQuantity();
 
     /**
      * 更新商品的库存状态

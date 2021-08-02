@@ -5,8 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.whoiszxl.dto.MemberAddressDTO;
 import com.whoiszxl.dto.MemberDTO;
 import com.whoiszxl.dto.MemberDetailDTO;
+import com.whoiszxl.dto.MemberInfoDTO;
 import com.whoiszxl.entity.MemberAddress;
+import com.whoiszxl.entity.MemberInfo;
 import com.whoiszxl.entity.vo.MemberDetailVO;
+import com.whoiszxl.enums.CloneDirectionEnum;
 import com.whoiszxl.feign.MemberFeignClient;
 import com.whoiszxl.service.MemberAddressService;
 import com.whoiszxl.service.MemberService;
@@ -42,7 +45,13 @@ public class MemberFeignClientImpl implements MemberFeignClient {
     @Override
     public MemberDetailDTO getMemberInfo() {
         MemberDetailVO memberDetailVO = memberService.memberInfo();
-        return memberDetailVO.clone(MemberDetailDTO.class);
+        MemberDetailDTO memberDetailDTO = new MemberDetailDTO();
+
+        MemberDTO memberDTO = memberDetailVO.getMember().clone(MemberDTO.class);
+        MemberInfoDTO memberInfoDTO = memberDetailVO.getMemberInfo().clone(MemberInfoDTO.class);
+        memberDetailDTO.setMember(memberDTO);
+        memberDetailDTO.setMemberInfo(memberInfoDTO);
+        return memberDetailDTO;
     }
 
     @Override

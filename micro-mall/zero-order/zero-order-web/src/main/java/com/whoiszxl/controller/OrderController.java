@@ -8,10 +8,7 @@ import com.whoiszxl.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -36,7 +33,7 @@ public class OrderController {
         return ResponseResult.buildSuccess(orderConfirmVO);
     }
 
-    @GetMapping("/submit")
+    @PostMapping("/submit")
     @ApiOperation(value = "提交订单", notes = "提交订单", response = Boolean.class)
     public ResponseResult<String> submit(@RequestBody OrderSubmitVO orderSubmitVo) {
         String orderId = orderService.submitOrder(orderSubmitVo);

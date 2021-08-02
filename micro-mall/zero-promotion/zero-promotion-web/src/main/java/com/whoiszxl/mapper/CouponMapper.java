@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface CouponMapper extends BaseMapper<Coupon> {
 
-    @Select("select pcrr.id, pcrr.member_id, pcrr.used_time, pcrr.created_at, pc.name, pc.type, pc.rule, pc.start_time, pc.end_time " +
+    @Select("select pcrr.id, pcrr.coupon_id, pcrr.member_id, pcrr.used_time, pcrr.created_at, pc.name, pc.type, pc.rule, pc.start_time, pc.end_time " +
             "from promotion_coupon_received_record pcrr " +
             "left join promotion_coupon pc " +
             "on pcrr.coupon_id = pc.id " +
