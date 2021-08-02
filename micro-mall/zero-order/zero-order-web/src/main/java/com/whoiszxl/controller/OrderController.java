@@ -42,5 +42,14 @@ public class OrderController {
 
 
 
+    @PostMapping("/pay")
+    @ApiOperation(value = "去支付", notes = "去支付", response = Boolean.class)
+    public ResponseResult<String> pay(@RequestBody OrderSubmitVO orderSubmitVo) {
+        String orderId = orderService.submitOrder(orderSubmitVo);
+        return ResponseResult.buildSuccess(orderId);
+    }
+
+
+
 }
 

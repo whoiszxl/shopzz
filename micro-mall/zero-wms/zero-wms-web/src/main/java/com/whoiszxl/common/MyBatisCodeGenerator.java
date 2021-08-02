@@ -19,17 +19,17 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 public class MyBatisCodeGenerator {
 
     //代码生成步骤一：配置连接的数据库、账号和密码
-    public static final String DB_NAME = "zero-wms";
+    public static final String DB_NAME = "zero-order";
     public static final String URL = "jdbc:mysql://rm-bp1g8o86o5tdyze14xo.mysql.rds.aliyuncs.com/" + DB_NAME + "?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false";
     public static final String USERNAME = "mall";
     public static final String PASSWORD = "mall1020!!";
 
     //代码生成步骤二：配置表前缀，生成时自动省略表前缀
-    public static final String tablePrefix = "wms_";
+    public static final String tablePrefix = "dc_";
 
     //代码生成步骤三： 配置需要生成代码的表名
     public static final String[] tableNames = new String[]{
-            "wms_fare_template"
+            "dc_cold_record", "dc_currency", "dc_currency_account", "dc_height", "dc_recharge"
     };
 
     //代码生成步骤四：直接运行就能生成了

@@ -35,6 +35,7 @@
         <module>zero-dcwallet/zero-erc20</module>
         <module>zero-dcwallet/zero-eth</module>
         <module>zero-dcwallet/zero-ethereum-common</module>
+        <module>zero-dcwallet/zero-dc-api</module>
     </modules>
 
     <name>micro-mall</name>
