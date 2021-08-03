@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
  * 比特币feign接口
  */
 @FeignClient(name = "zero-bitcoin", contextId = "bitcoinFeign", configuration = OAuth2FeignConfig.class)
-public interface BTCFeignClient {
+public interface BTCFeignClient extends CreateAddressFeignClient {
 
+    @Override
     @PostMapping("/createRecharge/{orderId}/{amount}")
-    ResponseResult<RechargeResponse> createRecharge(@PathVariable("orderId") String orderId,@PathVariable("amount") String amount);
+    ResponseResult<RechargeResponse> giveAddress(
+            @PathVariable("orderId") String orderId,
+            @PathVariable("amount") String amount);
 }

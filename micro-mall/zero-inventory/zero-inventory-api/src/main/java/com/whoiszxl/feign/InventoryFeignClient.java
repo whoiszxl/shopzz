@@ -1,7 +1,6 @@
 package com.whoiszxl.feign;
 
-import com.whoisxl.dto.OrderCreateInfoDTO;
-import com.whoisxl.dto.OrderDTO;
+import com.whoiszxl.dto.OrderCreateInfoDTO;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.InventorySkuDTO;

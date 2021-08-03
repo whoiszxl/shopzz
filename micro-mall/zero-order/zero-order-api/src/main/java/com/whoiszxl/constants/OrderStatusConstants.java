@@ -1,4 +1,4 @@
-package com.whoisxl.constants;
+package com.whoiszxl.constants;
 
 /**
  * 订单状态

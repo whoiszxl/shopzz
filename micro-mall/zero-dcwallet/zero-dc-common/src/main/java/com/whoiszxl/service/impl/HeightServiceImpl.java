@@ -1,5 +1,6 @@
 package com.whoiszxl.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.whoiszxl.entity.Height;
 import com.whoiszxl.mapper.HeightMapper;
 import com.whoiszxl.service.HeightService;
@@ -17,4 +18,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class HeightServiceImpl extends ServiceImpl<HeightMapper, Height> implements HeightService {
 
+
+    @Override
+    public Height getHeightByCurrencyName(String currencyName) {
+        LambdaQueryWrapper<Height> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Height::getCurrencyName, currencyName);
+        return this.getOne(queryWrapper);
+    }
 }

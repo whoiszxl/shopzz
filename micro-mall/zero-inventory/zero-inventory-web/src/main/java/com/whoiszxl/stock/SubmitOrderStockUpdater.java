@@ -1,8 +1,7 @@
 package com.whoiszxl.stock;
 
-import com.whoisxl.dto.OrderItemDTO;
+import com.whoiszxl.dto.OrderItemDTO;
 import com.whoiszxl.entity.ProductStock;
-import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.service.ProductStockService;
 
 import java.util.List;

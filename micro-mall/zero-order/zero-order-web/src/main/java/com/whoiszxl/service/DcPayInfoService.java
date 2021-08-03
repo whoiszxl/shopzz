@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface DcPayInfoService extends IService<DcPayInfo> {
 
+    /**
+     * 通过订单ID和会员ID获取DC支付信息
+     * @param orderId 订单ID
+     * @param memberId 会员ID
+     * @return
+     */
+    DcPayInfo getByOrderIdAndMemberId(Long orderId, Long memberId);
 }

@@ -1,8 +1,6 @@
 package com.whoiszxl.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -73,7 +71,7 @@ public class Currency extends AbstractObject implements Serializable {
     private Integer confirms;
 
     @ApiModelProperty(value = "币种状态，0：关闭 1：开启")
-    private Boolean status;
+    private Integer status;
 
     @ApiModelProperty(value = "乐观锁")
     private Long version;
@@ -81,17 +79,20 @@ public class Currency extends AbstractObject implements Serializable {
     @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
     private Integer isDeleted;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者")
     private String createdBy;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新者")
     private String updatedBy;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date createdAt;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间")
     private Date updatedAt;
-
 
 }

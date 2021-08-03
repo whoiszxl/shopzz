@@ -12,6 +12,9 @@ import java.io.Serializable;
 @Data
 public class RechargeResponse implements Serializable {
 
+    @ApiModelProperty("币种ID")
+    private Integer currencyId;
+
     @ApiModelProperty("数字货币地址")
     private String address;
 

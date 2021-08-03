@@ -1,6 +1,6 @@
 package com.whoiszxl.factory;
 
-import com.whoisxl.constants.OrderOperateTypeConstants;
+import com.whoiszxl.constants.OrderOperateTypeConstants;
 import com.whoiszxl.entity.Order;
 import com.whoiszxl.entity.OrderOperateHistory;
 import org.springframework.stereotype.Component;

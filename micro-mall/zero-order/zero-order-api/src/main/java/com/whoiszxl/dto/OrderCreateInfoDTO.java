@@ -1,4 +1,4 @@
-package com.whoisxl.dto;
+package com.whoiszxl.dto;
 
 import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;

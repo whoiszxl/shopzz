@@ -1,7 +1,7 @@
 package com.whoiszxl.state;
 
 
-import com.whoisxl.constants.OrderOperateTypeConstants;
+import com.whoiszxl.constants.OrderOperateTypeConstants;
 import com.whoiszxl.entity.Order;
 import com.whoiszxl.factory.OrderOperateHistoryFactory;
 import com.whoiszxl.service.OrderOperateHistoryService;

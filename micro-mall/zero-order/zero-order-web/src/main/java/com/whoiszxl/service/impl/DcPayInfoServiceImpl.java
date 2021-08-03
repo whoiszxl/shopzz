@@ -1,5 +1,6 @@
 package com.whoiszxl.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.whoiszxl.entity.DcPayInfo;
 import com.whoiszxl.mapper.DcPayInfoMapper;
 import com.whoiszxl.service.DcPayInfoService;
@@ -16,5 +17,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DcPayInfoServiceImpl extends ServiceImpl<DcPayInfoMapper, DcPayInfo> implements DcPayInfoService {
+
+
+    @Override
+    public DcPayInfo getByOrderIdAndMemberId(Long orderId, Long memberId) {
+        LambdaQueryWrapper<DcPayInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(DcPayInfo::getOrderId, orderId);
+        queryWrapper.eq(DcPayInfo::getMemberId, memberId);
+        return this.getOne(queryWrapper);
+    }
 
 }

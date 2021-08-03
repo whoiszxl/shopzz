@@ -1,8 +1,10 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.whoiszxl.entity.vo.OrderConfirmVO;
+import com.whoiszxl.entity.vo.OrderPayVO;
 import com.whoiszxl.entity.vo.OrderSubmitVO;
 
 /**
@@ -35,4 +37,11 @@ public interface OrderService extends IService<Order> {
      * @return 是否更新成功
      */
     Boolean updateStatus(Long id, Integer orderStatus);
+
+    /**
+     * 支付订单
+     * @param orderPayVO 订单支付参数
+     * @return
+     */
+    ResponseResult pay(OrderPayVO orderPayVO);
 }

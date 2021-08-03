@@ -1,7 +1,6 @@
 package com.whoiszxl.client;
 
-import com.whoisxl.dto.OrderCreateInfoDTO;
-import com.whoisxl.dto.OrderDTO;
+import com.whoiszxl.dto.OrderCreateInfoDTO;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.InventorySkuDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;

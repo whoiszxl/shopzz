@@ -1,4 +1,4 @@
-package com.whoisxl.constants;
+package com.whoiszxl.constants;
 
 import io.swagger.annotations.ApiModelProperty;
 

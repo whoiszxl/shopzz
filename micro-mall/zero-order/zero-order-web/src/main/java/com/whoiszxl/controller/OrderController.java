@@ -3,6 +3,7 @@ package com.whoiszxl.controller;
 
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.entity.vo.OrderConfirmVO;
+import com.whoiszxl.entity.vo.OrderPayVO;
 import com.whoiszxl.entity.vo.OrderSubmitVO;
 import com.whoiszxl.service.OrderService;
 import io.swagger.annotations.Api;
@@ -34,7 +35,7 @@ public class OrderController {
     }
 
     @PostMapping("/submit")
-    @ApiOperation(value = "提交订单", notes = "提交订单", response = Boolean.class)
+    @ApiOperation(value = "提交订单", notes = "提交订单", response = String.class)
     public ResponseResult<String> submit(@RequestBody OrderSubmitVO orderSubmitVo) {
         String orderId = orderService.submitOrder(orderSubmitVo);
         return ResponseResult.buildSuccess(orderId);
@@ -44,9 +45,9 @@ public class OrderController {
 
     @PostMapping("/pay")
     @ApiOperation(value = "去支付", notes = "去支付", response = Boolean.class)
-    public ResponseResult<String> pay(@RequestBody OrderSubmitVO orderSubmitVo) {
-        String orderId = orderService.submitOrder(orderSubmitVo);
-        return ResponseResult.buildSuccess(orderId);
+    public ResponseResult<String> pay(@RequestBody OrderPayVO orderPayVO) {
+        ResponseResult result = orderService.pay(orderPayVO);
+        return result;
     }
 
 

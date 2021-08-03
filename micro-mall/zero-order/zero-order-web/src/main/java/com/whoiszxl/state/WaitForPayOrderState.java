@@ -1,6 +1,6 @@
 package com.whoiszxl.state;
 
-import com.whoisxl.constants.OrderStatusConstants;
+import com.whoiszxl.constants.OrderStatusConstants;
 import com.whoiszxl.entity.Order;
 import com.whoiszxl.service.OrderService;
 import org.springframework.stereotype.Component;

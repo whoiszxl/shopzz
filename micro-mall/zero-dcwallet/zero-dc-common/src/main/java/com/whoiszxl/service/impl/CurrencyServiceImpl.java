@@ -1,5 +1,6 @@
 package com.whoiszxl.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.whoiszxl.entity.Currency;
 import com.whoiszxl.mapper.CurrencyMapper;
 import com.whoiszxl.service.CurrencyService;
@@ -17,4 +18,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class CurrencyServiceImpl extends ServiceImpl<CurrencyMapper, Currency> implements CurrencyService {
 
+    @Override
+    public Currency getCurrencyByName(String currencyName) {
+        LambdaQueryWrapper<Currency> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Currency::getCurrencyName, currencyName);
+        return this.getOne(queryWrapper);
+    }
 }

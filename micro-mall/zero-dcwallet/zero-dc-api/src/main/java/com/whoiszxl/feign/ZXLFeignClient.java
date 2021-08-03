@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
  * zxl erc20代币feign接口
  */
 @FeignClient(name = "zero-zxl", contextId = "zxlFeign", configuration = OAuth2FeignConfig.class)
-public interface ZXLFeignClient {
+public interface ZXLFeignClient extends CreateAddressFeignClient {
 
+    @Override
     @PostMapping("/createRecharge/{orderId}/{amount}")
-    ResponseResult<RechargeResponse> createRecharge(@PathVariable("orderId") String orderId,@PathVariable("amount") String amount);
+    ResponseResult<RechargeResponse> giveAddress(
+            @PathVariable("orderId") String orderId,
+            @PathVariable("amount") String amount);
 }
