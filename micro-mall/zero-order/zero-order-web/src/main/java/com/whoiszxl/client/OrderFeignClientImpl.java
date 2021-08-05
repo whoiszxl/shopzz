@@ -33,8 +33,19 @@ public class OrderFeignClientImpl implements OrderFeignClient {
             order.setUpdatedBy("admin");
             return order;
         }).collect(Collectors.toList());
-
         boolean updateFlag = orderService.updateBatchById(orderList);
+
+        //2. 清空购物车
+
+        //3. 通知库存中心更新库存
+
+        //4. 更新调度中心库存
+
+        //5. 通知WMS新增出库单
+
+        //6. 更新会员中心等级与积分
+
+
         return ResponseResult.buildByFlag(updateFlag);
     }
 }

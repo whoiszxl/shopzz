@@ -2,7 +2,6 @@ package com.whoiszxl.stock;
 
 import com.whoiszxl.dto.OrderCreateInfoDTO;
 import com.whoiszxl.dto.OrderItemDTO;
-import com.whoiszxl.entity.ProductStock;
 import com.whoiszxl.service.ProductStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,13 +37,14 @@ public class SubmitOrderStockUpdaterFactory<T> extends AbstractStockUpdaterFacto
     }
 
     @Override
-    protected StockUpdater create(List<ProductStock> productStocks, T parameter) {
+    public StockUpdater createCommand(T parameter) {
         OrderCreateInfoDTO orderCreateInfoDTO = (OrderCreateInfoDTO) parameter;
         Map<Long, OrderItemDTO> orderItemDTOMap = new HashMap<>();
         for (OrderItemDTO item : orderCreateInfoDTO.getOrderItemList()) {
             orderItemDTOMap.put(item.getSkuId(), item);
         }
 
-        return new SubmitOrderStockUpdater(productStocks, productStockService, orderItemDTOMap);
+        return new SubmitOrderStockUpdater(productStockService, orderItemDTOMap);
     }
+
 }

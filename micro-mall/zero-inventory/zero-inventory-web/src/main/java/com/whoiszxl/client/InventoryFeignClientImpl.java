@@ -40,7 +40,7 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
 
     @Override
     public ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
-        StockUpdater stockUpdater = purchaseInboundStockUpdaterFactory.create(purchaseInboundOrderDTO);
+        StockUpdater stockUpdater = purchaseInboundStockUpdaterFactory.createCommand(purchaseInboundOrderDTO);
         Boolean updateFlag = stockUpdater.updateProductStock();
         return ResponseResult.buildByFlag(updateFlag);
     }
@@ -63,7 +63,7 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
     @Override
     public ResponseResult<Boolean> notifySubmitOrderEvent(OrderCreateInfoDTO orderCreateInfoDTO) {
         //更新库存中心库存
-        StockUpdater stockUpdater = submitOrderStockUpdaterFactory.create(orderCreateInfoDTO);
+        StockUpdater stockUpdater = submitOrderStockUpdaterFactory.createCommand(orderCreateInfoDTO);
         Boolean updateFlag = stockUpdater.updateProductStock();
 
         return ResponseResult.buildByFlag(updateFlag);

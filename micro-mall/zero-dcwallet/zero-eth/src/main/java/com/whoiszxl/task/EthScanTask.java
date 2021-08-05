@@ -111,7 +111,6 @@ public class EthScanTask {
                 }
 
                 if(amount.compareTo(dcPayInfo.getTotalAmount()) < 0) {
-                    //TODO 累计充值
                     log.info("链上充值金额小于订单金额, 订单金额为：{}, 链上充值金额为：{}", dcPayInfo.getTotalAmount().toPlainString(), amount.toPlainString());
                     continue;
                 }

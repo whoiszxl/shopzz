@@ -2,7 +2,6 @@ package com.whoiszxl.stock;
 
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
-import com.whoiszxl.entity.ProductStock;
 import com.whoiszxl.service.ProductStockService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,7 @@ public class PurchaseInboundStockUpdaterFactory<T> extends AbstractStockUpdaterF
      * @return 库存更新命令
      */
     @Override
-    protected StockUpdater create(List<ProductStock> productStocks, T parameter) {
+    public StockUpdater createCommand(T parameter) {
         PurchaseInboundOrderDTO purchaseInboundOrderDTO = (PurchaseInboundOrderDTO) parameter;
         List<PurchaseInboundOrderItemDTO> inboundOrderDTOItems = purchaseInboundOrderDTO.getItems();
 
@@ -72,6 +71,6 @@ public class PurchaseInboundStockUpdaterFactory<T> extends AbstractStockUpdaterF
             }
         }
 
-        return new PurchaseInboundStockUpdater(productStocks, productStockService, itemDTOMap);
+        return new PurchaseInboundStockUpdater(productStockService, itemDTOMap);
     }
 }

@@ -35,7 +35,7 @@ public abstract class AbstractStockUpdaterFactory<T> implements StockUpdaterFact
 
         //2. 通过所有的skuId创建出商品库存对象集合来
         List<ProductStock> productStocks = createProductStocks(productSkuIds);
-        return create(productStocks, parameter);
+        return createCommand(parameter);
     }
 
     /**
@@ -51,7 +51,7 @@ public abstract class AbstractStockUpdaterFactory<T> implements StockUpdaterFact
      * @param parameter 参数
      * @return 库存更新命令
      */
-    protected abstract StockUpdater create(List<ProductStock> productStocks, T parameter);
+    protected abstract StockUpdater createCommand(T parameter);
 
     /**
      * 创建商品库存DO对象集合

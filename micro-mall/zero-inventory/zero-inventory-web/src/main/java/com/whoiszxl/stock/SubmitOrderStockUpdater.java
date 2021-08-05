@@ -20,36 +20,21 @@ public class SubmitOrderStockUpdater extends AbstractStockUpdater {
      */
     private Map<Long, OrderItemDTO> orderItemDTOMap;
 
-    public SubmitOrderStockUpdater(List<ProductStock> productStocks, ProductStockService productStockService, Map<Long, OrderItemDTO> orderItemDTOMap) {
-        super(productStocks, productStockService);
+    public SubmitOrderStockUpdater(ProductStockService productStockService, Map<Long, OrderItemDTO> orderItemDTOMap) {
+        super(productStockService);
         this.orderItemDTOMap = orderItemDTOMap;
     }
 
     /**
-     * 更新可销售库存，当会员下单后需要减去销售库存
-     *
-     * TODO 并发情况下这种情况更新会存在误差，需要优化
+     * 更新可销售库存，当会员下单后需要减去销售库存，加上锁定库存
      */
     @Override
-    protected boolean updateSaleStockQuantity() {
-        for (ProductStock productStock : this.productStocks) {
-            OrderItemDTO orderItemDTO = orderItemDTOMap.get(productStock.getProductSkuId());
-            if(productStock.getSaleStockQuantity() - orderItemDTO.getQuantity() < 0) {
+    protected boolean updateSaleStockQuantityAndLockStock() {
+        for (OrderItemDTO orderItem : orderItemDTOMap.values()) {
+            boolean updateFlag = productStockService.subSaleStockAndAddLockStockBySkuId(orderItem.getQuantity(), orderItem.getSkuId());
+            if(!updateFlag) {
                 return false;
             }
-            productStock.setSaleStockQuantity(productStock.getSaleStockQuantity() - orderItemDTO.getQuantity());
-        }
-        return true;
-    }
-
-    /**
-     * 更新锁定库存，当会员下单后需要加上销售库存
-     */
-    @Override
-    protected boolean updateLockedStockQuantity() {
-        for (ProductStock productStock : this.productStocks) {
-            OrderItemDTO orderItemDTO = orderItemDTOMap.get(productStock.getProductSkuId());
-            productStock.setLockedStockQuantity(productStock.getLockedStockQuantity() + orderItemDTO.getQuantity());
         }
         return true;
     }
@@ -57,5 +42,10 @@ public class SubmitOrderStockUpdater extends AbstractStockUpdater {
     @Override
     protected boolean updateSaledStockQuantity() {
         return true;
+    }
+
+    @Override
+    protected boolean updateStockStatus() {
+        return false;
     }
 }

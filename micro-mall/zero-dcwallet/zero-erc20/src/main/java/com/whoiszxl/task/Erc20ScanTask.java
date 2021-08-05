@@ -130,7 +130,6 @@ public class Erc20ScanTask {
                         }
 
                         if(amountDecimal.compareTo(dcPayInfo.getTotalAmount()) < 0) {
-                            //TODO 累计充值
                             log.info("链上充值金额小于订单金额, 订单金额为：{}, 链上充值金额为：{}", dcPayInfo.getTotalAmount().toPlainString(), amountDecimal.toPlainString());
                             continue;
                         }
