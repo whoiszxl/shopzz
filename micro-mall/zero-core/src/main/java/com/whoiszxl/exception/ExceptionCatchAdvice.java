@@ -49,7 +49,7 @@ public class ExceptionCatchAdvice {
     protected static ImmutableMap.Builder<Class<? extends Throwable>,ResponseResult> builder = ImmutableMap.builder();
 
     static {
-        //定义异常类型所对应的错误代码 TODO 后续修改到其他地方初始化
+        //定义异常类型所对应的错误代码 后续修改到其他地方初始化
 
         //业务级别异常
 

@@ -335,6 +335,7 @@ create table wms_sale_delivery_picking_item (
     `id`                                    bigint not null auto_increment comment '主键',
     `sale_delivery_order_item_id`           bigint not null comment '销售出库单条目ID',
     `product_allocation_id`                 bigint not null comment '货位ID',
+    `sku_id`                                bigint not null comment 'skuID',
     `picking_count`                         int(10) not null comment '发多少件商品',
     `version`                               bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                            tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',

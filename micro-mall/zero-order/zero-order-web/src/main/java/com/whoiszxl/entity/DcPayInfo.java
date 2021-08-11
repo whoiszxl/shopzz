@@ -60,6 +60,9 @@ public class DcPayInfo extends AbstractObject implements Serializable {
     @ApiModelProperty(value = "关联的充值地址")
     private String toAddress;
 
+    @ApiModelProperty(value = "二维码数据")
+    private String qrcodeData;
+
     @ApiModelProperty(value = "上链时间")
     private Date upchainAt;
 
@@ -67,7 +70,7 @@ public class DcPayInfo extends AbstractObject implements Serializable {
     private Date upchainSuccessAt;
 
     @ApiModelProperty(value = "上链状态，1：上链并确认成功 2：等待确认中 3：未上链")
-    private Boolean upchainStatus;
+    private Integer upchainStatus;
 
     @ApiModelProperty(value = "当前交易确认数")
     private Long currentConfirm;

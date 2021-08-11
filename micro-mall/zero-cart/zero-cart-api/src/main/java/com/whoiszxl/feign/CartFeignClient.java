@@ -4,6 +4,7 @@ import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.CartDTO;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -23,4 +24,11 @@ public interface CartFeignClient {
      */
     @PostMapping("/getCheckedCartItem")
     ResponseResult<List<CartDTO>> getCheckedCartItem();
+
+    /**
+     * 清空当前用户的选中的购物车
+     * @return
+     */
+    @PostMapping("/clearCheckedCartByMemberId/{memberId}")
+    ResponseResult<Boolean> clearCheckedCartByMemberId(@PathVariable Long memberId);
 }

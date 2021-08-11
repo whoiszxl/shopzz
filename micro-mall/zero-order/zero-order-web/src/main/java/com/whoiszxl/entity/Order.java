@@ -129,11 +129,9 @@ public class Order extends AbstractObject implements Serializable {
     @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
     private Integer isDeleted;
 
-    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建者")
     private String createdBy;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新者")
     private String updatedBy;
 

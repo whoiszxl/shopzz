@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
  * 以太币feign接口
  */
 @FeignClient(name = "zero-eth", contextId = "ethFeign", configuration = OAuth2FeignConfig.class)
-public interface ETHFeignClient {
+public interface ETHFeignClient extends CreateAddressFeignClient {
 
+    @Override
     @PostMapping("/createRecharge/{orderId}/{amount}")
-    ResponseResult<RechargeResponse> createRecharge(@PathVariable("orderId") String orderId,@PathVariable("amount") String amount);
+    ResponseResult<RechargeResponse> giveAddress(
+            @PathVariable("orderId") String orderId,
+            @PathVariable("amount") String amount);
 }

@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CurrencyService extends IService<Currency> {
 
+    /**
+     * 通过币种名称获取币种信息
+     * @param currencyName 币种名称
+     * @return 币种信息
+     */
+    Currency getCurrencyByName(String currencyName);
+
 }

@@ -18,19 +18,19 @@ public class WmsStockUpdaterFactory {
         }
 
         else if(WmsStockUpdateEventConstants.RETURN_PRODUCT_INBOUND.equals(stockUpdateEvent)){
-            //TODO
+            //TODO 退货
         }
 
         else if(WmsStockUpdateEventConstants.SUBMIT_ORDER.equals(stockUpdateEvent)) {
-            //TODO
+            wmsStockUpdater = springApplicationContextUtil.getBean(SubmitOrderWmsStockUpdater.class);
         }
 
         else if(WmsStockUpdateEventConstants.CANCEL_ORDER.equals(stockUpdateEvent)) {
-            //TODO
+            //TODO 取消订单
         }
 
         else if(WmsStockUpdateEventConstants.PAY_ORDER.equals(stockUpdateEvent)) {
-            //TODO
+            //TODO 支付订单
         }
 
         wmsStockUpdater.setParameter(parameter);

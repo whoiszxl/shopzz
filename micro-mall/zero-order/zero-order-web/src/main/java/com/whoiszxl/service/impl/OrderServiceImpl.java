@@ -1,32 +1,38 @@
 package com.whoiszxl.service.impl;
 import java.math.BigDecimal;
 
-import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.whoisxl.constants.OrderStatusConstants;
-import com.whoisxl.dto.OrderCreateInfoDTO;
-import com.whoisxl.dto.OrderDTO;
+import com.whoiszxl.constants.OrderPayTypeConstants;
+import com.whoiszxl.constants.OrderStatusConstants;
+import com.whoiszxl.dto.OrderCreateInfoDTO;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.*;
+import com.whoiszxl.entity.DcPayInfo;
+import com.whoiszxl.entity.DcPayInfoBuilder;
 import com.whoiszxl.entity.Order;
 import com.whoiszxl.entity.OrderItem;
 import com.whoiszxl.entity.vo.OrderConfirmVO;
 import com.whoiszxl.entity.vo.OrderCreateInfo;
+import com.whoiszxl.entity.vo.OrderPayVO;
 import com.whoiszxl.entity.vo.OrderSubmitVO;
 import com.whoiszxl.exception.ExceptionCatcher;
+import com.whoiszxl.factory.CreateDcAddressFactory;
 import com.whoiszxl.feign.*;
 import com.whoiszxl.mapper.OrderMapper;
 import com.whoiszxl.mq.MQConstants;
 import com.whoiszxl.mq.MQEnum;
 import com.whoiszxl.mq.MQSender;
 import com.whoiszxl.mq.MQSenderFactory;
+import com.whoiszxl.service.DcPayInfoService;
 import com.whoiszxl.service.OrderItemService;
 import com.whoiszxl.service.OrderService;
+import com.whoiszxl.service.PayInfoService;
 import com.whoiszxl.state.LoggerOrderStateManager;
+import com.whoiszxl.utils.BeanCopierUtils;
 import com.whoiszxl.utils.IdWorker;
 import com.whoiszxl.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,6 +83,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private MQSenderFactory mqSenderFactory;
+
+    @Autowired
+    private DcPayInfoService dcPayInfoService;
+
+    @Autowired
+    private PayInfoService payInfoService;
+
+    @Autowired
+    private CreateDcAddressFactory createDcAddressFactory;
 
     @Autowired
     private IdWorker idWorker;
@@ -132,6 +147,61 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         return result;
     }
 
+    @Override
+    @Transactional
+    public ResponseResult pay(OrderPayVO orderPayVO) {
+        //1. 判断订单状态是否能支付
+        Order order = this.getById(orderPayVO.getOrderId());
+        if(!OrderStatusConstants.WAIT_FOR_PAY.equals(order.getOrderStatus())) {
+            return ResponseResult.buildError("订单无法支付");
+        }
+
+        //2. 如果是数字货币支付，判断是否存在，不存在则创建
+        if(OrderPayTypeConstants.DC_PAY.equals(orderPayVO.getPayType())) {
+            DcPayInfo dcPayInfo = dcPayInfoService.getByOrderIdAndMemberId(order.getId(), order.getMemberId());
+            if(dcPayInfo != null) {
+                return ResponseResult.buildSuccess(dcPayInfo);
+            }
+
+            dcPayInfo = DcPayInfoBuilder
+                    .get()
+                    .init(createDcAddressFactory, orderPayVO.getDcName())
+                    .buildBaseData(order)
+                    .buildAddress(order)
+                    .initStatus()
+                    .create();
+
+            //汇率换算
+            BigDecimal rateAmount = rateCompute(order.getTotalAmount());
+            dcPayInfo.setTotalAmount(rateAmount);
+
+            boolean saveFlag = dcPayInfoService.save(dcPayInfo);
+            if(saveFlag) {
+                return ResponseResult.buildSuccess(dcPayInfo);
+            }
+            return ResponseResult.buildError("数字货币支付失败");
+        }
+
+        //3. TODO 如果是普通支付
+
+        return ResponseResult.buildError("TODO");
+    }
+
+    @Override
+    public OrderInfoDTO getOrderInfo(Long orderId) {
+        //获取订单信息
+        Order order = this.getById(orderId);
+
+        //获取订单条目信息
+        List<OrderItem> orderItemList = orderItemService.list(new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
+        List<OrderItemDTO> orderItemDTOList = BeanCopierUtils.copyListProperties(orderItemList, OrderItemDTO::new);
+
+        OrderInfoDTO orderInfoDTO = new OrderInfoDTO();
+        orderInfoDTO.setOrderId(order.getId());
+        orderInfoDTO.setMemberId(order.getMemberId());
+        orderInfoDTO.setOrderItemDTOList(orderItemDTOList);
+        return orderInfoDTO;
+    }
 
     @Override
     @Transactional
@@ -167,13 +237,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             log.error("优惠券使用失败：{}", useCouponResult.getMessage());
         }
 
-        //7. 发送Kafka消息到调度中心，进行调度销售出库
+        //7. 发送Kafka消息到WMS中心进行处理
         //7.1 通过商品的SKU ID查询到货位库存的明细条目，并进行遍历，一个SKU可能在多个货位上
         //7.2 创建出需要拣货的条目和发货的条目并进行批量入库
-        //7.3 更新调度中心的库存
         //7.4 更新wms中心的库存
-//        MQSender kafkaSender = mqSenderFactory.get(MQEnum.KAFKA);
-//        kafkaSender.send(MQConstants.SUBMIT_ORDER_QUEUE, JsonUtil.toJson(orderDTO));
+        OrderCreateInfoDTO orderCreateInfoDTO = new OrderCreateInfoDTO();
+        BeanCopierUtils.copyProperties(orderCreateInfo, orderCreateInfoDTO);
+        MQSender kafkaSender = mqSenderFactory.get(MQEnum.KAFKA);
+        kafkaSender.send(MQConstants.SUBMIT_ORDER_QUEUE, JsonUtil.toJson(orderCreateInfoDTO));
 
         return order.getOrderSn();
     }
@@ -300,6 +371,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setReceiverCity(memberAddress.getCity());
         order.setReceiverRegion(memberAddress.getDistrict());
         order.setReceiverDetailAddress(memberAddress.getDetailAddress());
+        order.setCreatedBy(member.getUsername());
+        order.setUpdatedBy(member.getUsername());
 
         //3. 配置支付类型
         order.setPayType(orderSubmitVo.getPayType());
@@ -314,5 +387,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setId(id);
         order.setOrderStatus(orderStatus);
         return this.updateById(order);
+    }
+
+
+    /**
+     * 汇率换算，TODO
+     * @param amount 需要换算的金额
+     * @return 换算后的金额
+     */
+    private BigDecimal rateCompute(BigDecimal amount) {
+        return new BigDecimal("0.1");
     }
 }

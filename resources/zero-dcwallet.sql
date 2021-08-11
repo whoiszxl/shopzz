@@ -78,7 +78,7 @@ DROP TABLE IF EXISTS `dc_height`;
 CREATE TABLE `dc_height` (
     `currency_id`                   int(10) NOT NULL COMMENT '币种ID',
     `currency_name`                 varchar(32) NOT NULL COMMENT '货币名称',
-    `height`                        bigint(20) NOT NULL COMMENT '当前服务扫描区块高度',
+    `current_height`                bigint(20) NOT NULL COMMENT '当前服务扫描区块高度',
     `version`                       bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                    tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
     `created_by`                    varchar(50) NOT NULL COMMENT '创建者',
@@ -91,6 +91,7 @@ CREATE TABLE `dc_height` (
 
 DROP TABLE IF EXISTS `dc_currency_account`;
 CREATE TABLE `dc_currency_account` (
+    `id`                            bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `currency_id`                   int(10) NOT NULL COMMENT '币种ID',
     `currency_name`                 varchar(32) NOT NULL COMMENT '货币名称',
     `keystore_name`                 varchar(256) DEFAULT NULL COMMENT 'keystore文件名',
@@ -102,5 +103,5 @@ CREATE TABLE `dc_currency_account` (
     `updated_by`                    varchar(50) NOT NULL COMMENT '更新者',
     `created_at`                    datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                    datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`currency_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='账号管理表';

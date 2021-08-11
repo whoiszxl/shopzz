@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.client.DispatchClient;
 import com.whoiszxl.constants.PurchaseInboundOrderStatusConstants;
 import com.whoiszxl.constants.PurchaseOrderStatusConstants;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
@@ -50,10 +49,7 @@ public class PurchaseOrderController {
 
     @Autowired
     private PurchaseInboundOrderService purchaseInboundOrderService;
-
-    @Autowired
-    private DispatchClient dispatchClient;
-
+    
     @SaCheckLogin
     //@SaCheckPermission("wms:purchase:list")
     @GetMapping

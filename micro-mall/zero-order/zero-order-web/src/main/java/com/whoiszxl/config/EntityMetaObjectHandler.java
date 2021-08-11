@@ -27,8 +27,6 @@ public class EntityMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        Long id = StpUtil.getLoginIdAsLong();
         this.setFieldValByName("updatedAt", new Date(), metaObject);
-        this.setFieldValByName("updatedBy", id.toString(), metaObject);
     }
 }

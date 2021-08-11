@@ -15,6 +15,18 @@
     <dependencies>
         <dependency>
             <groupId>com.whoiszxl</groupId>
+            <artifactId>zero-order-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
+            <artifactId>zero-dispatch-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
             <artifactId>zero-core</artifactId>
             <version>1.0.0</version>
         </dependency>

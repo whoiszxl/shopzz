@@ -1,6 +1,6 @@
 package com.whoiszxl.mapper;
 
-import com.whoiszxl.entity.SaleDeliveryPickingItem;
+import com.whoiszxl.entity.SaleDeliveryOrderPickingItem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author whoiszxl
  * @since 2021-07-20
  */
-public interface SaleDeliveryPickingItemMapper extends BaseMapper<SaleDeliveryPickingItem> {
+public interface SaleDeliveryPickingItemMapper extends BaseMapper<SaleDeliveryOrderPickingItem> {
 
 }

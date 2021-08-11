@@ -123,7 +123,6 @@ CREATE TABLE `oms_order_return_apply` (
 
 
 DROP TABLE IF EXISTS `oms_pay_info`;
-
 CREATE TABLE `oms_pay_info` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
@@ -145,6 +144,7 @@ CREATE TABLE `oms_pay_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='第三方支付信息表';
 
 
+DROP TABLE IF EXISTS `oms_dc_pay_info`;
 CREATE TABLE `oms_dc_pay_info` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
@@ -152,10 +152,11 @@ CREATE TABLE `oms_dc_pay_info` (
     `member_id`                 bigint(20) DEFAULT NULL COMMENT '用户ID',
     `currency_id`               int(10) NOT NULL COMMENT '币种ID',
     `currency_name`             varchar(32) NOT NULL COMMENT '货币名称',
-    `tx_hash`                   varchar(255) NOT NULL COMMENT '交易hash',
+    `tx_hash`                   varchar(255) NOT NULL DEFAULT '' COMMENT '交易hash',
     `total_amount`              decimal(8,2) NOT NULL COMMENT '订单总支付金额',
-    `from_address`              varchar(255) DEFAULT NULL COMMENT '用户的出币地址',
+    `from_address`              varchar(255) DEFAULT NULL DEFAULT '' COMMENT '用户的出币地址',
     `to_address`                varchar(255) DEFAULT NULL COMMENT '关联的充值地址',
+    `qrcode_data`               varchar(255) DEFAULT NULL DEFAULT '' COMMENT '二维码数据',
     `upchain_at`                datetime COMMENT '上链时间',
     `upchain_success_at`        datetime COMMENT '上链成功时间',
     `upchain_status`            tinyint(1) NOT NULL DEFAULT '2' COMMENT '上链状态，1：上链并确认成功 2：等待确认中 3：未上链',
