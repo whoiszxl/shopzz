@@ -25,4 +25,10 @@ public interface ProductStockMapper extends BaseMapper<ProductStock> {
             "where product_sku_id = #{productSkuId} " +
             "")
     boolean addSaleStock(Integer purchaseQuantity, Long productSkuId);
+
+    @Update("update inventory_product_stock " +
+            "set locked_stock_quantity - #{quantity}, saled_stock_quantity + #{quantity} " +
+            "where product_sku_id = #{skuId} " +
+            "and locked_stock_quantity >= #{quantity}")
+    boolean subLockStockAndAddSaledStockBySkuId(Integer quantity, Long skuId);
 }

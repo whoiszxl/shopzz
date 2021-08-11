@@ -1,6 +1,7 @@
 package com.whoiszxl.service.impl;
 import java.math.BigDecimal;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.constants.OrderPayTypeConstants;
 import com.whoiszxl.constants.OrderStatusConstants;
@@ -19,13 +20,18 @@ import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.factory.CreateDcAddressFactory;
 import com.whoiszxl.feign.*;
 import com.whoiszxl.mapper.OrderMapper;
+import com.whoiszxl.mq.MQConstants;
+import com.whoiszxl.mq.MQEnum;
+import com.whoiszxl.mq.MQSender;
 import com.whoiszxl.mq.MQSenderFactory;
 import com.whoiszxl.service.DcPayInfoService;
 import com.whoiszxl.service.OrderItemService;
 import com.whoiszxl.service.OrderService;
 import com.whoiszxl.service.PayInfoService;
 import com.whoiszxl.state.LoggerOrderStateManager;
+import com.whoiszxl.utils.BeanCopierUtils;
 import com.whoiszxl.utils.IdWorker;
+import com.whoiszxl.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -182,6 +188,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
+    public OrderInfoDTO getOrderInfo(Long orderId) {
+        //获取订单信息
+        Order order = this.getById(orderId);
+
+        //获取订单条目信息
+        List<OrderItem> orderItemList = orderItemService.list(new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
+        List<OrderItemDTO> orderItemDTOList = BeanCopierUtils.copyListProperties(orderItemList, OrderItemDTO::new);
+
+        OrderInfoDTO orderInfoDTO = new OrderInfoDTO();
+        orderInfoDTO.setOrderId(order.getId());
+        orderInfoDTO.setMemberId(order.getMemberId());
+        orderInfoDTO.setOrderItemDTOList(orderItemDTOList);
+        return orderInfoDTO;
+    }
+
+    @Override
     @Transactional
     public String submitOrder(OrderSubmitVO orderSubmitVo) {
         //0. 获取当前登录用户的信息
@@ -215,13 +237,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             log.error("优惠券使用失败：{}", useCouponResult.getMessage());
         }
 
-        //7. 发送Kafka消息到调度中心，进行调度销售出库
+        //7. 发送Kafka消息到WMS中心进行处理
         //7.1 通过商品的SKU ID查询到货位库存的明细条目，并进行遍历，一个SKU可能在多个货位上
         //7.2 创建出需要拣货的条目和发货的条目并进行批量入库
-        //7.3 更新调度中心的库存
         //7.4 更新wms中心的库存
-//        MQSender kafkaSender = mqSenderFactory.get(MQEnum.KAFKA);
-//        kafkaSender.send(MQConstants.SUBMIT_ORDER_QUEUE, JsonUtil.toJson(orderDTO));
+        OrderCreateInfoDTO orderCreateInfoDTO = new OrderCreateInfoDTO();
+        BeanCopierUtils.copyProperties(orderCreateInfo, orderCreateInfoDTO);
+        MQSender kafkaSender = mqSenderFactory.get(MQEnum.KAFKA);
+        kafkaSender.send(MQConstants.SUBMIT_ORDER_QUEUE, JsonUtil.toJson(orderCreateInfoDTO));
 
         return order.getOrderSn();
     }

@@ -1,6 +1,6 @@
 package com.whoiszxl.service;
 
-import com.whoiszxl.entity.SaleDeliveryPickingItem;
+import com.whoiszxl.entity.SaleDeliveryOrderPickingItem;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author whoiszxl
  * @since 2021-07-20
  */
-public interface SaleDeliveryPickingItemService extends IService<SaleDeliveryPickingItem> {
+public interface SaleDeliveryPickingItemService extends IService<SaleDeliveryOrderPickingItem> {
 
 }

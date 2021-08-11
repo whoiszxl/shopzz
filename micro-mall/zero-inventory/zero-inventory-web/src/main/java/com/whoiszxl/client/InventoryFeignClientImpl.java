@@ -1,12 +1,11 @@
 package com.whoiszxl.client;
 
-import com.whoiszxl.dto.OrderCreateInfoDTO;
+import com.whoiszxl.dto.*;
 import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.dto.InventorySkuDTO;
-import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.entity.ProductStock;
 import com.whoiszxl.feign.InventoryFeignClient;
 import com.whoiszxl.service.ProductStockService;
+import com.whoiszxl.stock.PayOrderStockUpdaterFactory;
 import com.whoiszxl.stock.PurchaseInboundStockUpdaterFactory;
 import com.whoiszxl.stock.StockUpdater;
 import com.whoiszxl.stock.SubmitOrderStockUpdaterFactory;
@@ -38,6 +37,9 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
     @Autowired
     private SubmitOrderStockUpdaterFactory<OrderCreateInfoDTO> submitOrderStockUpdaterFactory;
 
+    @Autowired
+    private PayOrderStockUpdaterFactory<OrderInfoDTO> payOrderStockUpdaterFactory;
+
     @Override
     public ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
         StockUpdater stockUpdater = purchaseInboundStockUpdaterFactory.createCommand(purchaseInboundOrderDTO);
@@ -66,6 +68,14 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
         StockUpdater stockUpdater = submitOrderStockUpdaterFactory.createCommand(orderCreateInfoDTO);
         Boolean updateFlag = stockUpdater.updateProductStock();
 
+        return ResponseResult.buildByFlag(updateFlag);
+    }
+
+    @Override
+    public ResponseResult notifyPayOrderEvent(OrderInfoDTO orderInfo) {
+        //使用支付订单库存更新工厂创建出对应的命令来进行更新
+        StockUpdater stockUpdater = payOrderStockUpdaterFactory.create(orderInfo);
+        Boolean updateFlag = stockUpdater.updateProductStock();
         return ResponseResult.buildByFlag(updateFlag);
     }
 }

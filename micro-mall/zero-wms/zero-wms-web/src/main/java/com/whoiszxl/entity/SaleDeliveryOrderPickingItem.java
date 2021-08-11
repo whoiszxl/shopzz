@@ -1,16 +1,14 @@
 package com.whoiszxl.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.util.Date;
-import java.io.Serializable;
-
 import com.whoiszxl.bean.AbstractObject;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -22,9 +20,9 @@ import lombok.experimental.Accessors;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("wms_sale_delivery_picking_item")
-@ApiModel(value="SaleDeliveryPickingItem对象", description="销售出库订单拣货条目表")
-public class SaleDeliveryPickingItem extends AbstractObject implements Serializable {
+@TableName("wms_sale_delivery_order_picking_item")
+@ApiModel(value="SaleDeliveryOrderPickingItem对象", description="销售出库订单拣货条目表")
+public class SaleDeliveryOrderPickingItem extends AbstractObject implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,6 +35,9 @@ public class SaleDeliveryPickingItem extends AbstractObject implements Serializa
 
     @ApiModelProperty(value = "货位ID")
     private Long productAllocationId;
+
+    @ApiModelProperty(value = "SKU ID")
+    private Long skuId;
 
     @ApiModelProperty(value = "发多少件商品")
     private Integer pickingCount;

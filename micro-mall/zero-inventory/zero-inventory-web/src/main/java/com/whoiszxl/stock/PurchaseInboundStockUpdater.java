@@ -15,7 +15,7 @@ public class PurchaseInboundStockUpdater extends AbstractStockUpdater {
     }
 
     @Override
-    protected boolean updateSaleStockQuantityAndLockStock() {
+    protected boolean updateStock() {
         //采购入库，只要新增销售库存就OK
         for (PurchaseInboundOrderItemDTO inboundOrderItemDTO : itemDTOMap.values()) {
             boolean addFlag = productStockService.addSaleStock(inboundOrderItemDTO.getPurchaseQuantity(), inboundOrderItemDTO.getProductSkuId());
@@ -23,11 +23,6 @@ public class PurchaseInboundStockUpdater extends AbstractStockUpdater {
                 return false;
             }
         }
-        return true;
-    }
-
-    @Override
-    protected boolean updateSaledStockQuantity() {
         return true;
     }
 

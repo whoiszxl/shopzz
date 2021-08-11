@@ -1,10 +1,8 @@
 package com.whoiszxl.feign;
 
-import com.whoiszxl.dto.OrderCreateInfoDTO;
+import com.whoiszxl.dto.*;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
-import com.whoiszxl.dto.InventorySkuDTO;
-import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,4 +42,12 @@ public interface InventoryFeignClient {
      */
     @PostMapping("/notifySubmitOrderEvent")
     ResponseResult notifySubmitOrderEvent(@RequestBody OrderCreateInfoDTO orderCreateInfoDTO);
+
+    /**
+     * 通知库存中心支付订单事件完成了
+     * @param orderInfo 订单详细数据
+     * @return
+     */
+    @PostMapping("/notifyPayOrderEvent")
+    ResponseResult notifyPayOrderEvent(@RequestBody OrderInfoDTO orderInfo);
 }

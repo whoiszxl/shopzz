@@ -12,6 +12,7 @@ import com.whoiszxl.service.CartService;
 import com.whoiszxl.utils.BeanCopierUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,5 +39,14 @@ public class CartFeignClientImpl implements CartFeignClient {
         List<Cart> cartList = cartService.list(queryWrapper);
         List<CartDTO> cartDTOList = BeanCopierUtils.copyListProperties(cartList, CartDTO::new);
         return ResponseResult.buildSuccess(cartDTOList);
+    }
+
+    @Override
+    public ResponseResult<Boolean> clearCheckedCartByMemberId(Long memberId) {
+        LambdaQueryWrapper<Cart> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Cart::getMemberId, memberId);
+        queryWrapper.eq(Cart::getChecked, CartCheckConstants.CHECKED);
+        boolean removeFlag = cartService.remove(queryWrapper);
+        return ResponseResult.buildByFlag(removeFlag);
     }
 }

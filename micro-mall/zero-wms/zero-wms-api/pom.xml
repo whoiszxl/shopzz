@@ -32,6 +32,12 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
+            <artifactId>zero-order-api</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

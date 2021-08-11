@@ -41,4 +41,12 @@ public interface ProductStockService extends IService<ProductStock> {
      * @return 是否新增成功
      */
     boolean addSaleStock(Integer purchaseQuantity, Long productSkuId);
+
+    /**
+     * 通过SKU ID 减去锁定库存,增加已销售库存
+     * @param quantity
+     * @param skuId
+     * @return
+     */
+    boolean subLockStockAndAddSaledStockBySkuId(Integer quantity, Long skuId);
 }

@@ -44,4 +44,10 @@ public class ProductStockServiceImpl extends ServiceImpl<ProductStockMapper, Pro
     public boolean addSaleStock(Integer purchaseQuantity, Long productSkuId) {
         return productStockMapper.addSaleStock(purchaseQuantity, productSkuId);
     }
+
+
+    @Override
+    public boolean subLockStockAndAddSaledStockBySkuId(Integer quantity, Long skuId) {
+        return productStockMapper.subLockStockAndAddSaledStockBySkuId(quantity, skuId);
+    }
 }
