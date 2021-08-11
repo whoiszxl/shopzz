@@ -54,7 +54,6 @@ public class PurchaseInboundStockUpdaterFactory<T> extends AbstractStockUpdaterF
 
     /**
      * 创建库存更新命令
-     * @param productStocks 商品库存对象集合
      * @param parameter 参数
      * @return 库存更新命令
      */

@@ -2,9 +2,11 @@ package com.whoiszxl.feign;
 
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
+import com.whoiszxl.dto.OrderInfoDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * wms feign client
@@ -30,4 +32,13 @@ public interface WmsFeignClient {
      */
     @PostMapping("/notifyCreatePurchaseSettlementOrderEvent/{purchaseInboundOrderId}")
     ResponseResult<Boolean> notifyCreatePurchaseSettlementOrderEvent(@PathVariable Long purchaseInboundOrderId);
+
+    /**
+     * 通知WMS中心，支付订单的事件发生了
+     * @param orderInfo 订单信息
+     * @return
+     */
+    @PostMapping("/notifyPayOrderEvent")
+    ResponseResult<Boolean> notifyPayOrderSuccess(@RequestBody OrderInfoDTO orderInfo);
+
 }

@@ -1,22 +1,16 @@
 package com.whoiszxl.stock;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.whoiszxl.dto.ProductAllocationStockDetailDTO;
 import com.whoiszxl.dto.PurchaseInboundOnItemDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
 import com.whoiszxl.entity.ProductAllocationStock;
-import com.whoiszxl.entity.ProductAllocationStockDetail;
 import com.whoiszxl.entity.WarehouseProductStock;
-import com.whoiszxl.service.ProductAllocationStockDetailService;
 import com.whoiszxl.service.ProductAllocationStockService;
 import com.whoiszxl.service.WarehouseProductStockService;
-import com.whoiszxl.utils.BeanCopierUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -33,9 +27,6 @@ public class PurchaseInboundWmsStockUpdater extends AbstractWmsStockUpdater {
 
     @Autowired
     private ProductAllocationStockService productAllocationStockService;
-
-    @Autowired
-    private ProductAllocationStockDetailService productAllocationStockDetailService;
 
 
     /**
@@ -73,37 +64,6 @@ public class PurchaseInboundWmsStockUpdater extends AbstractWmsStockUpdater {
                 productAllocationStockService.updateById(productAllocationStock);
             }
         }
-    }
-
-    /**
-     * 更新货位库存明细数据
-     */
-    @Override
-    protected void updateProductAllocationStockDetail() {
-        //1. 拿到采购入库单条目并进行遍历
-        for (PurchaseInboundOrderItemDTO item : purchaseInboundOrder.getItems()) {
-
-            List<ProductAllocationStockDetail> stockDetails = new ArrayList<>();
-
-            //2. 拿到入库单条目中的上架条目进行遍历
-            for (PurchaseInboundOnItemDTO onItemDTO : item.getOnItemDTOs()) {
-
-                //3. 构建出库存详情对象并新增到数据库中
-                ProductAllocationStockDetail stockDetail = new ProductAllocationStockDetail();
-                stockDetail.setProductAllocationId(onItemDTO.getProductAllocationId());
-                stockDetail.setProductSkuId(onItemDTO.getProductSkuId());
-                stockDetail.setPutOnQuantity(onItemDTO.getPutOnShelvesCount());
-                stockDetail.setPutOnTime(onItemDTO.getCreatedAt());
-                stockDetail.setCurrentStockQuantity(stockDetail.getPutOnQuantity());
-                stockDetail.setLockedStockQuantity(0);
-
-                productAllocationStockDetailService.save(stockDetail);
-                stockDetails.add(stockDetail);
-            }
-
-            item.setStockDetails(BeanCopierUtils.copyListProperties(stockDetails, ProductAllocationStockDetailDTO::new));
-        }
-
     }
 
     @Override

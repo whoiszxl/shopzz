@@ -19,4 +19,20 @@ public interface WarehouseProductStockService extends IService<WarehouseProductS
      * @return 商品库存信息
      */
     WarehouseProductStock getOrSaveBySkuId(Long productSkuId);
+
+    /**
+     * 减去可用库存，增加锁定库存
+     * @param quantity 更新数量
+     * @param skuId sku id
+     * @return 是否更新成功
+     */
+    boolean subAvailableStockAndAddLockedStock(Integer quantity, Long skuId);
+
+    /**
+     * 减去锁定库存加上已出库库存
+     * @param quantity 更新数量
+     * @param skuId sku id
+     * @return 是否更新成功
+     */
+    boolean subLockedStockAndAddDeliveriedStock(Integer quantity, Long skuId);
 }

@@ -20,4 +20,22 @@ public interface ProductAllocationStockService extends IService<ProductAllocatio
      * @return 商品货位库存
      */
     ProductAllocationStock getOrSave(Long productAllocationId, Long productSkuId);
+
+    /**
+     * 减去可用库存，加上锁定库存
+     * @param pickingCount 拣货的数量
+     * @param productAllocationId 货位id
+     * @param skuId sku id
+     * @return 是否更新成功
+     */
+    boolean subAvailableStockAndAddLockedStock(Integer pickingCount, Long productAllocationId, Long skuId);
+
+    /**
+     * 减去锁定库存，加上出库库存
+     * @param pickingCount 拣货数量
+     * @param productAllocationId 商品货位id
+     * @param skuId sku id
+     * @return 是否更新成功
+     */
+    boolean subLockedStockAndAddDeliveriedStock(Integer pickingCount, Long productAllocationId, Long skuId);
 }

@@ -9,7 +9,6 @@ public abstract class AbstractWmsStockUpdater implements WmsStockUpdater {
     public Boolean update() {
         updateProductStock();
         updateProductAllocationStock();
-        updateProductAllocationStockDetail();
         return true;
     }
 
@@ -22,11 +21,5 @@ public abstract class AbstractWmsStockUpdater implements WmsStockUpdater {
      * 更新货位库存
      */
     protected abstract void updateProductAllocationStock();
-
-    /**
-     * 更新货位库存明细
-     * @throws Exception
-     */
-    protected abstract void updateProductAllocationStockDetail();
 
 }

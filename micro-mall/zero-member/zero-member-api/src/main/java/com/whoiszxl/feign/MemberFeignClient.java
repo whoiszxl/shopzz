@@ -1,12 +1,15 @@
 package com.whoiszxl.feign;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.MemberAddressDTO;
 import com.whoiszxl.dto.MemberDetailDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -39,4 +42,13 @@ public interface MemberFeignClient {
      */
     @GetMapping("/getMemberAddress/{addressId}")
     MemberAddressDTO getMemberAddress(@PathVariable String addressId);
+
+    /**
+     * 通过会员中心订单支付成功了，下发积分等
+     * @param memberId 会员ID
+     * @param totalAmount 总金额
+     * @return 是否更新成功
+     */
+    @PostMapping("/notifyPayOrderSuccess/{memberId}/{totalAmount}")
+    ResponseResult<Boolean> notifyPayOrderSuccess(Long memberId, BigDecimal totalAmount);
 }

@@ -30,7 +30,7 @@ public class WmsStockUpdaterFactory {
         }
 
         else if(WmsStockUpdateEventConstants.PAY_ORDER.equals(stockUpdateEvent)) {
-            //TODO 支付订单
+            wmsStockUpdater = springApplicationContextUtil.getBean(PayOrderWmsStockUpdater.class);
         }
 
         wmsStockUpdater.setParameter(parameter);

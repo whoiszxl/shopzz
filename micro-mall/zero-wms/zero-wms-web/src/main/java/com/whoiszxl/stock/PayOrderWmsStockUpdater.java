@@ -11,19 +11,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * 提交订单库存更新者
- *
- * @author whoiszxl
- * @date 2021/8/11
- */
 @Component
 @Scope("prototype")
-public class SubmitOrderWmsStockUpdater extends AbstractWmsStockUpdater {
+public class PayOrderWmsStockUpdater extends AbstractWmsStockUpdater {
 
-    /**
-     * 调度结果
-     */
     private SaleDeliveryScheduleResult scheduleResult;
 
     @Autowired
@@ -32,25 +23,21 @@ public class SubmitOrderWmsStockUpdater extends AbstractWmsStockUpdater {
     @Autowired
     private ProductAllocationStockService productAllocationStockService;
 
-
     @Override
     protected void updateProductStock() {
-        //更新商品库存
         OrderItemDTO orderItem = scheduleResult.getOrderItem();
-        //提交订单，减去可用，增加锁定
-        warehouseProductStockService.subAvailableStockAndAddLockedStock(orderItem.getQuantity(), orderItem.getSkuId());
+        //支付成功，减去锁定，加上出库
+        warehouseProductStockService.subLockedStockAndAddDeliveriedStock(orderItem.getQuantity(), orderItem.getSkuId());
     }
 
     @Override
     protected void updateProductAllocationStock() {
         List<SaleDeliveryOrderPickingItem> pickingItems = scheduleResult.getPickingItems();
+
         for (SaleDeliveryOrderPickingItem pickingItem : pickingItems) {
-            //货位库存减去可用，增加锁定
-            productAllocationStockService.subAvailableStockAndAddLockedStock(
-                    pickingItem.getPickingCount(),
-                    pickingItem.getProductAllocationId(),
-                    pickingItem.getSkuId());
+            productAllocationStockService.subLockedStockAndAddDeliveriedStock(pickingItem.getPickingCount(), pickingItem.getProductAllocationId(), pickingItem.getSkuId());
         }
+
     }
 
     @Override

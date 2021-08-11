@@ -5,6 +5,7 @@ import com.whoiszxl.entity.ProductAllocationStock;
 import com.whoiszxl.mapper.ProductAllocationStockMapper;
 import com.whoiszxl.service.ProductAllocationStockService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductAllocationStockServiceImpl extends ServiceImpl<ProductAllocationStockMapper, ProductAllocationStock> implements ProductAllocationStockService {
+
+    @Autowired
+    private ProductAllocationStockMapper productAllocationStockMapper;
 
     /**
      * 获取商品货位库存，如果不存在则新建一条空记录
@@ -42,5 +46,15 @@ public class ProductAllocationStockServiceImpl extends ServiceImpl<ProductAlloca
             this.save(productAllocationStock);
         }
         return productAllocationStock;
+    }
+
+    @Override
+    public boolean subAvailableStockAndAddLockedStock(Integer pickingCount, Long productAllocationId, Long skuId) {
+        return productAllocationStockMapper.subAvailableStockAndAddLockedStock(pickingCount, productAllocationId, skuId);
+    }
+
+    @Override
+    public boolean subLockedStockAndAddDeliveriedStock(Integer pickingCount, Long productAllocationId, Long skuId) {
+        return productAllocationStockMapper.subLockedStockAndAddDeliveriedStock(pickingCount, productAllocationId, skuId);
     }
 }

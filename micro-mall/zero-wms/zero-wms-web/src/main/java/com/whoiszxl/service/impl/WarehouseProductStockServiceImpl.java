@@ -5,6 +5,7 @@ import com.whoiszxl.entity.WarehouseProductStock;
 import com.whoiszxl.mapper.WarehouseProductStockMapper;
 import com.whoiszxl.service.WarehouseProductStockService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class WarehouseProductStockServiceImpl extends ServiceImpl<WarehouseProductStockMapper, WarehouseProductStock> implements WarehouseProductStockService {
+
+    @Autowired
+    private WarehouseProductStockMapper warehouseProductStockMapper;
 
     @Override
     public WarehouseProductStock getOrSaveBySkuId(Long productSkuId) {
@@ -32,5 +36,16 @@ public class WarehouseProductStockServiceImpl extends ServiceImpl<WarehouseProdu
         }
 
         return warehouseProductStock;
+    }
+
+
+    @Override
+    public boolean subAvailableStockAndAddLockedStock(Integer quantity, Long skuId) {
+        return warehouseProductStockMapper.subAvailableStockAndAddLockedStock(quantity, skuId);
+    }
+
+    @Override
+    public boolean subLockedStockAndAddDeliveriedStock(Integer quantity, Long skuId) {
+        return warehouseProductStockMapper.subLockedStockAndAddDeliveriedStock(quantity, skuId);
     }
 }

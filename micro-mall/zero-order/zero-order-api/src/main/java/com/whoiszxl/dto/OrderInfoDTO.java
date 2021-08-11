@@ -3,6 +3,7 @@ package com.whoiszxl.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ public class OrderInfoDTO implements Serializable {
     private Long memberId;
 
     private Long orderId;
+
+    private BigDecimal totalAmount;
 
     private List<OrderItemDTO> orderItemDTOList;
 

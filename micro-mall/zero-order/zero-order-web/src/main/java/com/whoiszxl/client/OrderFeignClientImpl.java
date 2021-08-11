@@ -1,19 +1,14 @@
 package com.whoiszxl.client;
 
-import com.whoiszxl.constants.OrderStatusConstants;
-import com.whoiszxl.dto.OrderDTO;
-import com.whoiszxl.dto.OrderInfoDTO;
-import com.whoiszxl.feign.CartFeignClient;
-import com.whoiszxl.feign.InventoryFeignClient;
-import com.whoiszxl.feign.OrderFeignClient;
 import com.whoiszxl.bean.ResponseResult;
+import com.whoiszxl.constants.OrderStatusConstants;
+import com.whoiszxl.dto.OrderInfoDTO;
 import com.whoiszxl.entity.Order;
-import com.whoiszxl.feign.WmsFeignClient;
+import com.whoiszxl.feign.*;
 import com.whoiszxl.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-import sun.plugin.com.DispatchClient;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,7 +36,7 @@ public class OrderFeignClientImpl implements OrderFeignClient {
     private WmsFeignClient wmsFeignClient;
 
     @Autowired
-    private DispatchClient dispatchClient;
+    private MemberFeignClient memberFeignClient;
 
     @Override
     public ResponseResult<Boolean> notifyDcPaySuccess(List<Long> orderIds) {
@@ -61,19 +56,18 @@ public class OrderFeignClientImpl implements OrderFeignClient {
 
             //2. 清空购物车
             ResponseResult<Boolean> clearCartResult = cartFeignClient.clearCheckedCartByMemberId(orderInfo.getMemberId());
-            if(!clearCartResult.getData().booleanValue()) {
+            if(!clearCartResult.getData()) {
                 log.error("下单成功，但是清空购物车失败了");
             }
 
             //3. 通知库存中心更新库存
             inventoryFeignClient.notifyPayOrderEvent(orderInfo);
 
-            //4. 更新WMS中心库存
-            wmsFeignClient.notifyPayOrderEvent(orderInfo);
+            //4. 通知WMS订单支付成功，更新WMS中心库存，WMS新增出库单
+            wmsFeignClient.notifyPayOrderSuccess(orderInfo);
 
-            //5. 通知WMS新增出库单
-
-            //6. 更新会员中心等级与积分
+            //5. 更新会员中心等级与积分
+            memberFeignClient.notifyPayOrderSuccess(orderInfo.getMemberId(), orderInfo.getTotalAmount());
         }
 
 

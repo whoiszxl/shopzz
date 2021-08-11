@@ -2,21 +2,26 @@ package com.whoiszxl.client;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dto.MemberAddressDTO;
 import com.whoiszxl.dto.MemberDTO;
 import com.whoiszxl.dto.MemberDetailDTO;
 import com.whoiszxl.dto.MemberInfoDTO;
 import com.whoiszxl.entity.MemberAddress;
 import com.whoiszxl.entity.MemberInfo;
+import com.whoiszxl.entity.MemberPoint;
 import com.whoiszxl.entity.vo.MemberDetailVO;
 import com.whoiszxl.enums.CloneDirectionEnum;
 import com.whoiszxl.feign.MemberFeignClient;
 import com.whoiszxl.service.MemberAddressService;
+import com.whoiszxl.service.MemberPointLogService;
+import com.whoiszxl.service.MemberPointService;
 import com.whoiszxl.service.MemberService;
 import com.whoiszxl.utils.BeanCopierUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -33,6 +38,12 @@ public class MemberFeignClientImpl implements MemberFeignClient {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private MemberPointService memberPointService;
+
+    @Autowired
+    private MemberPointLogService memberPointLogService;
 
     @Override
     public List<MemberAddressDTO> listMemberAddress() {
@@ -61,5 +72,13 @@ public class MemberFeignClientImpl implements MemberFeignClient {
         queryWrapper.eq(MemberAddress::getId, addressId);
         MemberAddress memberAddress = memberAddressService.getOne(queryWrapper);
         return memberAddress.clone(MemberAddressDTO.class);
+    }
+
+
+    @Override
+    public ResponseResult<Boolean> notifyPayOrderSuccess(Long memberId, BigDecimal totalAmount) {
+        //TODO 暂定更新积分为totalAmount*10
+
+        return null;
     }
 }

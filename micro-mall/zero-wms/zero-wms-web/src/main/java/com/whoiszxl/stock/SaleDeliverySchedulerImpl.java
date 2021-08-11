@@ -2,11 +2,12 @@ package com.whoiszxl.stock;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.whoiszxl.dto.OrderItemDTO;
-import com.whoiszxl.entity.ProductAllocationStockDetail;
+import com.whoiszxl.entity.ProductAllocationStock;
 import com.whoiszxl.entity.SaleDeliveryOrderPickingItem;
 import com.whoiszxl.entity.schedule.SaleDeliveryScheduleResult;
-import com.whoiszxl.service.ProductAllocationStockDetailService;
+import com.whoiszxl.service.ProductAllocationStockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,10 +20,11 @@ import java.util.Map;
  * @author whoiszxl
  * @date 2021/8/11
  */
+@Component
 public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 
     @Autowired
-    private ProductAllocationStockDetailService productAllocationStockDetailService;
+    private ProductAllocationStockService productAllocationStockService;
 
     @Override
     public SaleDeliveryScheduleResult schedule(OrderItemDTO orderItem) {
@@ -30,31 +32,29 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
         scheduleResult.setOrderItem(orderItem);
 
         //查询货位库存明细
-        LambdaQueryWrapper<ProductAllocationStockDetail> queryWrapper =
+        LambdaQueryWrapper<ProductAllocationStock> queryWrapper =
                 new LambdaQueryWrapper<>();
-        queryWrapper.eq(ProductAllocationStockDetail::getProductSkuId, orderItem.getSkuId());
-        List<ProductAllocationStockDetail> stockDetailList = productAllocationStockDetailService.list(queryWrapper);
+        queryWrapper.eq(ProductAllocationStock::getProductSkuId, orderItem.getSkuId());
+        List<ProductAllocationStock> stockList = productAllocationStockService.list(queryWrapper);
 
-        Integer quantity = orderItem.getQuantity();
-
-        Integer remainingSendOutQuantity = quantity;
+        Integer remainingSendOutQuantity = orderItem.getQuantity();
 
         Map<Long, SaleDeliveryOrderPickingItem> pickingItems = new HashMap<>(100);
 
-        for (ProductAllocationStockDetail stockDetail : stockDetailList) {
+        for (ProductAllocationStock stock : stockList) {
             //如果这个货位上的库存刚好可以满足发货就直接更新
-            if(stockDetail.getCurrentStockQuantity() >= remainingSendOutQuantity) {
-                updatePickingItem(stockDetail, orderItem.getSkuId(), remainingSendOutQuantity, pickingItems);
+            if(stock.getAvailableStockQuantity() >= remainingSendOutQuantity) {
+                updatePickingItem(stock, orderItem.getSkuId(), remainingSendOutQuantity, pickingItems);
                 break;
             }
 
             //如果不满足，则需要分批处理
 
             //将当前的wms库存货位上的sku数量全部上到拣货里
-            updatePickingItem(stockDetail, orderItem.getSkuId(), stockDetail.getCurrentStockQuantity(), pickingItems);
+            updatePickingItem(stock, orderItem.getSkuId(), stock.getAvailableStockQuantity(), pickingItems);
 
             //剩余发货数量进行扣减
-            remainingSendOutQuantity = remainingSendOutQuantity - stockDetail.getCurrentStockQuantity();
+            remainingSendOutQuantity = remainingSendOutQuantity - stock.getAvailableStockQuantity();
         }
 
         scheduleResult.setPickingItems(new ArrayList<>(pickingItems.values()));
@@ -64,19 +64,19 @@ public class SaleDeliverySchedulerImpl implements SaleDeliveryScheduler {
 
     /**
      * 更新拣货条目
-     * @param stockDetail wms中的库存详细信息
+     * @param stock wms中的库存详细信息
      * @param skuId skuid
      * @param pickingCount 拣货数量
      * @param pickingItems 需要更新的拣货条目
      */
-    private void updatePickingItem(ProductAllocationStockDetail stockDetail, Long skuId, Integer pickingCount, Map<Long, SaleDeliveryOrderPickingItem> pickingItems) {
+    private void updatePickingItem(ProductAllocationStock stock, Long skuId, Integer pickingCount, Map<Long, SaleDeliveryOrderPickingItem> pickingItems) {
         // 通过货位ID从需要拣货的条目中取出来
-        SaleDeliveryOrderPickingItem pickingItem = pickingItems.get(stockDetail.getProductAllocationId());
+        SaleDeliveryOrderPickingItem pickingItem = pickingItems.get(stock.getProductAllocationId());
 
         //如果不存在 ，则创建新增
         if(pickingItem == null) {
-            pickingItem = createPickingItem(skuId, stockDetail.getProductAllocationId(), 0);
-            pickingItems.put(stockDetail.getProductAllocationId(), pickingItem);
+            pickingItem = createPickingItem(skuId, stock.getProductAllocationId(), 0);
+            pickingItems.put(stock.getProductAllocationId(), pickingItem);
         }
 
         pickingItem.setPickingCount(pickingItem.getPickingCount() + pickingCount);

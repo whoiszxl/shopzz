@@ -199,6 +199,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         OrderInfoDTO orderInfoDTO = new OrderInfoDTO();
         orderInfoDTO.setOrderId(order.getId());
         orderInfoDTO.setMemberId(order.getMemberId());
+        orderInfoDTO.setTotalAmount(order.getTotalAmount());
         orderInfoDTO.setOrderItemDTOList(orderItemDTOList);
         return orderInfoDTO;
     }
@@ -224,7 +225,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         //4. 创建一个操作日志订单状态管理器，在订单状态流转到待付款状态时记录操作记录
         orderStateManager.create(order);
 
-        //5. 通知库存中心订单提交了，更新库存中心的SKU库存
+        //5. 通知库存中心订单提交了，锁定库存中心的SKU库存
         OrderCreateInfoDTO orderRequestParam = orderCreateInfo.clone(OrderCreateInfoDTO.class);
         ResponseResult updateInventoryResult = inventoryFeignClient.notifySubmitOrderEvent(orderRequestParam);
         if(!updateInventoryResult.isOk()) {
@@ -396,6 +397,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
      * @return 换算后的金额
      */
     private BigDecimal rateCompute(BigDecimal amount) {
-        return new BigDecimal("0.1");
+        return amount;
     }
 }

@@ -65,15 +65,9 @@ public class PurchaseInboundOrderItemDTO extends AbstractObject implements Seria
     @ApiModelProperty(value = "更新时间")
     private Date updatedAt;
 
-
     /**
      * 采购入库单商品上架条目集合
      */
     private List<PurchaseInboundOnItemDTO> onItemDTOs;
-    /**
-     * 货位库存明细
-     */
-    private List<ProductAllocationStockDetailDTO> stockDetails;
-
 
 }

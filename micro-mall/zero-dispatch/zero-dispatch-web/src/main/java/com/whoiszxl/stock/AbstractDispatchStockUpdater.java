@@ -12,7 +12,6 @@ public abstract class AbstractDispatchStockUpdater implements DispatchStockUpdat
     public Boolean update() {
         updateProductStock();
         updateProductAllocationStock();
-        updateProductAllocationStockDetail();
         return true;
     }
 
@@ -25,10 +24,5 @@ public abstract class AbstractDispatchStockUpdater implements DispatchStockUpdat
      * 更新货位库存
      */
     protected abstract void updateProductAllocationStock();
-
-    /**
-     * 更新货位库存明细
-     */
-    protected abstract void updateProductAllocationStockDetail();
 
 }

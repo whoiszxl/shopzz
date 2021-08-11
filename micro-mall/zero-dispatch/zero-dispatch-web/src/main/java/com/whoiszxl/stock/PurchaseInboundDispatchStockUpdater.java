@@ -1,20 +1,15 @@
 package com.whoiszxl.stock;
 
-import com.whoiszxl.dto.ProductAllocationStockDetailDTO;
 import com.whoiszxl.dto.PurchaseInboundOnItemDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderDTO;
 import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
 import com.whoiszxl.entity.DispatchProductAllocationStock;
-import com.whoiszxl.entity.DispatchProductAllocationStockDetail;
 import com.whoiszxl.entity.DispatchWarehouseProductStock;
-import com.whoiszxl.service.DispatchProductAllocationStockDetailService;
 import com.whoiszxl.service.DispatchProductAllocationStockService;
 import com.whoiszxl.service.DispatchWarehouseProductStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * 调度中心 采购入库库存更新组件
@@ -30,10 +25,6 @@ public class PurchaseInboundDispatchStockUpdater extends AbstractDispatchStockUp
 
     @Autowired
     private DispatchProductAllocationStockService allocationStockService;
-
-    @Autowired
-    private DispatchProductAllocationStockDetailService allocationStockDetailService;
-
 
     /**
      * 更新商品库存
@@ -66,20 +57,6 @@ public class PurchaseInboundDispatchStockUpdater extends AbstractDispatchStockUp
                 //3. 累加可用库存数量并更新
                 allocationStock.setAvailableStockQuantity(allocationStock.getAvailableStockQuantity() + onItemDTO.getPutOnShelvesCount());
                 allocationStockService.updateById(allocationStock);
-            }
-        }
-    }
-
-    /**
-     * 更新货位库存明细
-     */
-    @Override
-    protected void updateProductAllocationStockDetail() {
-        for (PurchaseInboundOrderItemDTO item : purchaseInboundOrder.getItems()) {
-            List<ProductAllocationStockDetailDTO> stockDetails = item.getStockDetails();
-
-            for (ProductAllocationStockDetailDTO stockDetail : stockDetails) {
-                allocationStockDetailService.save(stockDetail.clone(DispatchProductAllocationStockDetail.class));
             }
         }
     }
