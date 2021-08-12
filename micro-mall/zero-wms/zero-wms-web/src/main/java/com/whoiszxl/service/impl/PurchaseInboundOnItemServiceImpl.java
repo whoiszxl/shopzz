@@ -21,9 +21,9 @@ import java.util.List;
 public class PurchaseInboundOnItemServiceImpl extends ServiceImpl<PurchaseInboundOnItemMapper, PurchaseInboundOnItem> implements PurchaseInboundOnItemService {
 
     @Override
-    public List<PurchaseInboundOnItem> listByPurchaseInboundOrderItemId(Long id) {
+    public List<PurchaseInboundOnItem> listByPurchaseOrderItemId(Long id) {
         QueryWrapper wrapper = new QueryWrapper<PurchaseInboundOnItem>();
-        wrapper.eq("purchase_inbound_order_item_id", id);
+        wrapper.eq("purchase_order_item_id", id);
         return this.list(wrapper);
     }
 }

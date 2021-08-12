@@ -15,9 +15,6 @@
         <module>zero-core</module>
         <module>zero-iaas</module>
         <module>zero-iaas/zero-gateway</module>
-        <module>zero-dispatch</module>
-        <module>zero-dispatch/zero-dispatch-api</module>
-        <module>zero-dispatch/zero-dispatch-web</module>
         <module>zero-inventory</module>
         <module>zero-product</module>
         <module>zero-product/zero-product-api</module>

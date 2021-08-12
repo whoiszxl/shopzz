@@ -1,8 +1,8 @@
 package com.whoiszxl.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.whoiszxl.dto.PurchaseOrderDTO;
 import com.whoiszxl.entity.PurchaseOrder;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.whoiszxl.entity.vo.PurchaseOrderVO;
 
 /**
@@ -43,4 +43,10 @@ public interface PurchaseOrderService extends IService<PurchaseOrder> {
      * @return
      */
     boolean updateStatus(Long id, Integer status);
+
+    /**
+     * 更新采购单的状态为已完成，通过采购商ID
+     * @param id 采购商ID
+     */
+    boolean updateFinishedBySupplierId(Long id);
 }

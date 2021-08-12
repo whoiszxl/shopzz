@@ -7,14 +7,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.constants.*;
 import com.whoiszxl.dto.PurchaseSettlementOrderDTO;
-import com.whoiszxl.entity.PurchaseInboundOrder;
 import com.whoiszxl.entity.PurchaseSettlementOrder;
 import com.whoiszxl.entity.query.PurchaseSettlementOrderQuery;
 import com.whoiszxl.entity.query.SettlementQuery;
 import com.whoiszxl.entity.vo.PurchaseSettlementOrderVO;
 import com.whoiszxl.factory.SettlementFactory;
 import com.whoiszxl.factory.handler.SettlementHandler;
-import com.whoiszxl.service.PurchaseInboundOrderService;
+import com.whoiszxl.feign.WmsFeignClient;
 import com.whoiszxl.service.PurchaseOrderService;
 import com.whoiszxl.service.PurchaseSettlementOrderService;
 import io.swagger.annotations.Api;
@@ -42,13 +41,13 @@ public class FinancePurchaseSettlementOrderController {
     private PurchaseSettlementOrderService purchaseSettlementOrderService;
 
     @Autowired
-    private PurchaseInboundOrderService purchaseInboundOrderService;
-
-    @Autowired
     private PurchaseOrderService purchaseOrderService;
 
     @Autowired
     private SettlementFactory settlementFactory;
+
+    @Autowired
+    private WmsFeignClient wmsFeignClient;
 
     @GetMapping
     @ApiOperation(value = "分页查询采购入库单列表", notes = "分页查询采购入库单列表", response = PurchaseSettlementOrder.class)
@@ -105,18 +104,6 @@ public class FinancePurchaseSettlementOrderController {
         //进行审核状态更改
         purchaseSettlementOrderService.approve(id, status);
 
-        //如果审核通过，需要发送给wms进行后续操作
-        if(PurchaseInboundOrderApproveResultConstants.PASSED.equals(status)) {
-            PurchaseSettlementOrderDTO settlementOrderDTO = purchaseSettlementOrderService.getPurchaseSettlementOrderById(id);
-            //wmsFeignClient.notifyFinishedPurchaseSettlementOrderEvent(settlementOrderDTO.getPurchaseInboundOrderId());
-
-            //1. 更新采购入库单状态为已完成
-            purchaseInboundOrderService.updateStatus(settlementOrderDTO.getPurchaseInboundOrderId(), PurchaseInboundOrderStatusConstants.FINISHED);
-
-            //2. 更新采购单状态为已完成
-            PurchaseInboundOrder purchaseInboundOrder = purchaseInboundOrderService.getById(settlementOrderDTO.getPurchaseInboundOrderId());
-            purchaseOrderService.updateStatus(purchaseInboundOrder.getPurchaseOrderId(), PurchaseOrderStatusConstants.FINISHED);
-        }
         return ResponseResult.buildSuccess();
     }
 

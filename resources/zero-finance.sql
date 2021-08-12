@@ -21,7 +21,6 @@ drop table if exists finance_purchase_settlement_order;
 create table finance_purchase_settlement_order
 (
     `id`                                        bigint not null auto_increment comment '主键',
-    `purchase_inbound_order_id`                 bigint not null comment '采购入库单ID',
     `purchase_order_id`                         bigint not null comment '采购单ID',
     `supplier_id`                               bigint not null comment '供应商ID',
     `expect_arrival_time`                       datetime not null comment '预计到货时间',

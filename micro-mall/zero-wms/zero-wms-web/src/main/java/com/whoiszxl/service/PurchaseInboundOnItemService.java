@@ -20,5 +20,5 @@ public interface PurchaseInboundOnItemService extends IService<PurchaseInboundOn
      * @param id 采购入库单条目id
      * @return 上架条目
      */
-    List<PurchaseInboundOnItem> listByPurchaseInboundOrderItemId(Long id);
+    List<PurchaseInboundOnItem> listByPurchaseOrderItemId(Long id);
 }

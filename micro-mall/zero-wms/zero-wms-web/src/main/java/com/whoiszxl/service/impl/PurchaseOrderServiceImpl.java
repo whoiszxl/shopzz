@@ -2,8 +2,11 @@ package com.whoiszxl.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.whoiszxl.constants.PurchaseOrderStatusConstants;
+import com.whoiszxl.dto.PurchaseInboundOnItemDTO;
 import com.whoiszxl.dto.PurchaseOrderDTO;
 import com.whoiszxl.dto.PurchaseOrderItemDTO;
+import com.whoiszxl.entity.PurchaseInboundOnItem;
 import com.whoiszxl.entity.PurchaseOrder;
 import com.whoiszxl.entity.PurchaseOrderItem;
 import com.whoiszxl.entity.vo.PurchaseOrderItemVO;
@@ -11,6 +14,7 @@ import com.whoiszxl.entity.vo.PurchaseOrderVO;
 import com.whoiszxl.enums.PurchaseOrderStatusEnum;
 import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.mapper.PurchaseOrderMapper;
+import com.whoiszxl.service.PurchaseInboundOnItemService;
 import com.whoiszxl.service.PurchaseOrderItemService;
 import com.whoiszxl.service.PurchaseOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -34,6 +38,10 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, P
 
     @Autowired
     private PurchaseOrderItemService purchaseOrderItemService;
+
+    @Autowired
+    private PurchaseInboundOnItemService purchaseInboundOnItemService;
+
 
 
     @Transactional
@@ -62,14 +70,17 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, P
         PurchaseOrder purchaseOrder = this.getById(id);
         PurchaseOrderDTO purchaseOrderDTO = purchaseOrder.clone(PurchaseOrderDTO.class);
 
-        //2. 查询采购订单中的商品详情
-        List<PurchaseOrderItem> purchaseOrderItemList = purchaseOrderItemService.list(new QueryWrapper<PurchaseOrderItem>()
-                .eq("purchase_order_id", id));
-        List<PurchaseOrderItemDTO> purchaseOrderItemDTOList
-                = BeanCopierUtils.copyListProperties(purchaseOrderItemList, PurchaseOrderItemDTO::new);
-
-        //3. 将详情添加到采购订单对象中去
+        //2. 查询采购订单中的商品详情,将详情添加到采购订单对象中去
+        List<PurchaseOrderItem> purchaseOrderItemList = purchaseOrderItemService.list(new QueryWrapper<PurchaseOrderItem>().eq("purchase_order_id", id));
+        List<PurchaseOrderItemDTO> purchaseOrderItemDTOList = BeanCopierUtils.copyListProperties(purchaseOrderItemList, PurchaseOrderItemDTO::new);
         purchaseOrderDTO.setItems(purchaseOrderItemDTOList);
+
+        //4. 获取上架条目信息
+        for (PurchaseOrderItemDTO purchaseOrderItemDTO : purchaseOrderItemDTOList) {
+            List<PurchaseInboundOnItem> onItems = purchaseInboundOnItemService.listByPurchaseOrderItemId(purchaseOrderItemDTO.getId());
+            List<PurchaseInboundOnItemDTO> onItemDTOs = BeanCopierUtils.copyListProperties(onItems, PurchaseInboundOnItemDTO::new);
+            purchaseOrderItemDTO.setOnItems(onItemDTOs);
+        }
 
         return purchaseOrderDTO;
     }
@@ -105,5 +116,16 @@ public class PurchaseOrderServiceImpl extends ServiceImpl<PurchaseOrderMapper, P
         purchaseOrder.setId(id);
         purchaseOrder.setPurchaseOrderStatus(status);
         return this.updateById(purchaseOrder);
+    }
+
+    @Override
+    public boolean updateFinishedBySupplierId(Long id) {
+        UpdateWrapper<PurchaseOrder> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("supplier_id", id);
+
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        purchaseOrder.setSupplierId(id);
+        purchaseOrder.setPurchaseOrderStatus(PurchaseOrderStatusConstants.FINISHED);
+        return this.update(purchaseOrder, updateWrapper);
     }
 }

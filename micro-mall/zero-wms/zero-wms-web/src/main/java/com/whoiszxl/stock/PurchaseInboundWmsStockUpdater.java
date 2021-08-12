@@ -1,8 +1,8 @@
 package com.whoiszxl.stock;
 
 import com.whoiszxl.dto.PurchaseInboundOnItemDTO;
-import com.whoiszxl.dto.PurchaseInboundOrderDTO;
-import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
+import com.whoiszxl.dto.PurchaseOrderDTO;
+import com.whoiszxl.dto.PurchaseOrderItemDTO;
 import com.whoiszxl.entity.ProductAllocationStock;
 import com.whoiszxl.entity.WarehouseProductStock;
 import com.whoiszxl.service.ProductAllocationStockService;
@@ -20,7 +20,7 @@ public class PurchaseInboundWmsStockUpdater extends AbstractWmsStockUpdater {
     /**
      * 采购入库单
      */
-    private PurchaseInboundOrderDTO purchaseInboundOrder;
+    private PurchaseOrderDTO purchaseOrder;
 
     @Autowired
     private WarehouseProductStockService warehouseProductStockService;
@@ -35,8 +35,8 @@ public class PurchaseInboundWmsStockUpdater extends AbstractWmsStockUpdater {
     @Override
     protected void updateProductStock() {
         //1. 拿到采购入库单条目并进行遍历
-        List<PurchaseInboundOrderItemDTO> items = purchaseInboundOrder.getItems();
-        for (PurchaseInboundOrderItemDTO item : items) {
+        List<PurchaseOrderItemDTO> items = purchaseOrder.getItems();
+        for (PurchaseOrderItemDTO item : items) {
             //2. 从数据库中通过sku_id拿到当前的条目库存
             WarehouseProductStock warehouseProductStock = warehouseProductStockService.getOrSaveBySkuId(item.getProductSkuId());
 
@@ -52,10 +52,10 @@ public class PurchaseInboundWmsStockUpdater extends AbstractWmsStockUpdater {
     @Override
     protected void updateProductAllocationStock() {
         //1. 拿到采购入库单条目并进行遍历
-        for (PurchaseInboundOrderItemDTO item : purchaseInboundOrder.getItems()) {
+        for (PurchaseOrderItemDTO item : purchaseOrder.getItems()) {
 
             //2. 再从入库单条目中拿到上架条目
-            for (PurchaseInboundOnItemDTO onItemDTO : item.getOnItemDTOs()) {
+            for (PurchaseInboundOnItemDTO onItemDTO : item.getOnItems()) {
                 //3. 获取商品货位库存，如果货位不存在则新建一个
                 ProductAllocationStock productAllocationStock = productAllocationStockService.getOrSave(onItemDTO.getProductAllocationId(), onItemDTO.getProductSkuId());
 
@@ -68,6 +68,6 @@ public class PurchaseInboundWmsStockUpdater extends AbstractWmsStockUpdater {
 
     @Override
     public void setParameter(Object parameter) {
-        this.purchaseInboundOrder = (PurchaseInboundOrderDTO) parameter;
+        this.purchaseOrder = (PurchaseOrderDTO) parameter;
     }
 }

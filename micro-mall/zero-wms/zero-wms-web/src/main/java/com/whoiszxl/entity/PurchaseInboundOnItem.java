@@ -33,7 +33,7 @@ public class PurchaseInboundOnItem extends AbstractObject implements Serializabl
     private Long id;
 
     @ApiModelProperty(value = "采购入库单条目ID")
-    private Long purchaseInboundOrderItemId;
+    private Long purchaseOrderItemId;
 
     @ApiModelProperty(value = "货位ID")
     private Long productAllocationId;

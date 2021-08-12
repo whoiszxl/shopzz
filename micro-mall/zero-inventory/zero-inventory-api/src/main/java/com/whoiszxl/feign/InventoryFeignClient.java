@@ -21,11 +21,11 @@ public interface InventoryFeignClient {
 
     /**
      * 通知库存中心采购入库已经完成了
-     * @param purchaseInboundOrderDTO 采购入库订单
+     * @param purchaseOrderDTO 采购订单
      * @return 是否处理成功
      */
-    @PostMapping("/notifyPurchaseInboundFinished")
-    ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+    @PostMapping("/notifyPurchaseOrderFinished")
+    ResponseResult<Boolean> notifyPurchaseOrderFinished(@RequestBody PurchaseOrderDTO purchaseOrderDTO);
 
     /**
      * 通过skuId列表获取库存

@@ -2,21 +2,22 @@
 drop table if exists wms_purchase_order;
 create table wms_purchase_order
 (
-    `id`                        bigint not null auto_increment comment '主键',
-    `supplier_id`               bigint not null comment '供应商ID',
-    `expect_arrival_time`       datetime not null comment '预计到货时间',
-    `contactor`                 varchar(100) not null comment '联系人',
-    `contact_phone_number`      varchar(20) not null comment '联系电话',
-    `contact_email`             varchar(100) not null comment '联系邮箱',
-    `comment`                   varchar(256) not null comment '说明备注',
-    `purchaser`                 varchar(256) not null comment '采购员',
-    `purchase_order_status`     tinyint not null comment '采购单状态，1：编辑中，2：待审核，3：已审核，4：待入库，5：待结算，6：已完成',
-    `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
-    `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
-    `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `id`                                    bigint not null auto_increment comment '主键',
+    `supplier_id`                           bigint not null comment '供应商ID',
+    `expect_arrival_time`                   datetime not null comment '预计到货时间',
+    `arrival_time`                          datetime comment '实际到货时间',
+    `purchase_contactor`                    varchar(100) not null comment '采购联系人',
+    `purchase_contact_phone_number`         varchar(20) not null comment '采购人联系电话',
+    `purchase_contact_email`                varchar(100) not null comment '采购人联系邮箱',
+    `comment`                               varchar(256) not null comment '说明备注',
+    `purchaser`                             varchar(256) not null comment '采购员',
+    `purchase_order_status`                 tinyint not null comment '采购单状态，1：编辑中，2：待审核，3：已审核，4：待入库，5：审核待入库，6：已入库，7：待结算，8：已完成',
+    `version`                               bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                            tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
+    `created_by`                            varchar(50) NOT NULL COMMENT '创建者',
+    `updated_by`                            varchar(50) NOT NULL COMMENT '更新者',
+    `created_at`                            datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                            datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     primary key (id)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '采购订单表';
 
@@ -29,6 +30,8 @@ create table wms_purchase_order_item
     `product_sku_id`            bigint not null comment '商品SKU ID',
     `purchase_quantity`         bigint not null comment '采购数量',
     `purchase_price`            decimal(8,2) not null comment '采购价格',
+    `qualified_count`           int(10) not null DEFAULT 0 comment '合格商品的数量',
+    `arrival_count`             int(10) not null DEFAULT 0 comment '到货的商品数量',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
     `created_by`                varchar(50) NOT NULL COMMENT '创建者',
@@ -128,55 +131,14 @@ create table wms_product_allocation_stock_detail (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='货位库存详情表';
 
 
--- 采购入库订单表
-drop table if exists wms_purchase_inbound_order;
-create table wms_purchase_inbound_order
-(
-    `id`                                bigint not null auto_increment comment '主键',
-    `purchase_order_id`                 bigint not null comment '采购单ID',
-    `supplier_id`                       bigint not null comment '供应商ID',
-    `expect_arrival_time`               datetime not null comment '预计到货时间',
-    `arrival_time`                      datetime not null comment '实际到货时间',
-    `purchase_contactor`                varchar(100) not null comment '采购联系人',
-    `purchase_contact_phone_number`     varchar(20) not null comment '采购联系电话',
-    `purchase_contact_email`            varchar(50) not null comment '采购联系邮箱',
-    `purchase_inbound_order_comment`    varchar(256) not null comment '采购入库单的说明备注',
-    `purchaser`                         varchar(30) not null comment '采购员',
-    `purchase_inbound_order_status`     tinyint(3) not null comment '采购入库单状态，1：编辑中，2：待审核，3：已入库，4：待结算，5：已完成',
-    `version`                           bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
-    `is_deleted`                        tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                        varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                        varchar(50) NOT NULL COMMENT '更新者',
-    `created_at`                        datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at`                        datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='采购入库订单表';
 
--- 采购入库订单的商品条目表
-drop table if exists wms_purchase_inbound_order_item;
-create table wms_purchase_inbound_order_item
-(
-    `id`                                bigint not null auto_increment comment '主键',
-    `purchase_inbound_order_id`           bigint not null comment '采购入库单ID',
-    `product_sku_id`                    bigint not null comment '商品SKU ID',
-    `purchase_quantity`                 int(10) not null comment '采购数量',
-    `purchase_price`                    decimal(8,2) not null comment '采购价格',
-    `qualified_count`                   int(10) not null comment '合格商品的数量',
-    `arrival_count`                     int(10) not null comment '到货的商品数量',
-    `version`                           bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
-    `is_deleted`                        tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                        varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                        varchar(50) NOT NULL COMMENT '更新者',
-    `created_at`                        datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `updated_at`                        datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='采购入库订单条目表';
+
 
 -- 采购入库订单条目关联的上架条目表
 drop table if exists wms_purchase_inbound_on_item;
 create table wms_purchase_inbound_on_item (
     `id`                                bigint not null auto_increment comment '主键',
-    `purchase_inbound_order_item_id`    bigint not null comment '采购入库单条目ID',
+    `purchase_order_item_id`            bigint not null comment '采购单条目ID',
     `product_allocation_id`             bigint not null comment '货位ID',
     `product_sku_id`                    bigint not null comment '商品SKU ID',
     `put_on_shelves_count`              int(10) not null comment '上架数量',

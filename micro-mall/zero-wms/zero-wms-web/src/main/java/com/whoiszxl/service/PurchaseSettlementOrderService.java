@@ -1,12 +1,10 @@
 package com.whoiszxl.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.dto.PurchaseInboundOrderDTO;
+import com.whoiszxl.dto.PurchaseOrderDTO;
 import com.whoiszxl.dto.PurchaseSettlementOrderDTO;
 import com.whoiszxl.entity.PurchaseSettlementOrder;
 import com.whoiszxl.entity.vo.PurchaseSettlementOrderVO;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * <p>
@@ -54,8 +52,8 @@ public interface PurchaseSettlementOrderService extends IService<PurchaseSettlem
 
     /**
      * 创建采购结算单
-     * @param purchaseInboundOrderDTO 采购入库单DTO
+     * @param purchaseOrderDTO 采购单DTO
      * @return 是否创建成功
      */
-    boolean createPurchaseSettlementOrder(PurchaseInboundOrderDTO purchaseInboundOrderDTO);
+    boolean createPurchaseSettlementOrder(PurchaseOrderDTO purchaseOrderDTO);
 }

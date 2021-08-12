@@ -22,17 +22,21 @@ public class PurchaseOrderStatusConstants {
 	 */
 	public static final Integer WAIT_FOR_INBOUND = 4;
 	/**
+	 * 审核待入库
+	 */
+	public static final Integer WAIT_FOR_APPROVE_BY_INBOUND = 5;
+	/**
 	 * 已入库
 	 */
-	public static final Integer FINISHED_INBOUND = 5;
+	public static final Integer FINISHED_INBOUND = 6;
 	/**
 	 * 待结算
 	 */
-	public static final Integer WAIT_FOR_SETTLEMENT = 6;
+	public static final Integer WAIT_FOR_SETTLEMENT = 7;
 	/**
 	 * 已完成
 	 */
-	public static final Integer FINISHED = 7;
+	public static final Integer FINISHED = 8;
 	
 	private PurchaseOrderStatusConstants() {}
 	

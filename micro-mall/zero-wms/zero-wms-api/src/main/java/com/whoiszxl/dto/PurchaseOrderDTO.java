@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -35,14 +34,17 @@ public class PurchaseOrderDTO extends AbstractObject implements Serializable {
     @ApiModelProperty(value = "预计到货时间")
     private Date expectArrivalTime;
 
-    @ApiModelProperty(value = "联系人")
-    private String contactor;
+    @ApiModelProperty(value = "实际到货时间")
+    private Date arrivalTime;
 
-    @ApiModelProperty(value = "联系电话")
-    private String contactPhoneNumber;
+    @ApiModelProperty(value = "采购联系人")
+    private String purchaseContactor;
 
-    @ApiModelProperty(value = "联系邮箱")
-    private String contactEmail;
+    @ApiModelProperty(value = "采购人联系电话")
+    private String purchaseContactPhoneNumber;
+
+    @ApiModelProperty(value = "采购人联系邮箱")
+    private String purchaseContactEmail;
 
     @ApiModelProperty(value = "说明备注")
     private String comment;
@@ -55,4 +57,5 @@ public class PurchaseOrderDTO extends AbstractObject implements Serializable {
 
     @ApiModelProperty(value = "采购订单详情")
     private List<PurchaseOrderItemDTO> items;
+
 }

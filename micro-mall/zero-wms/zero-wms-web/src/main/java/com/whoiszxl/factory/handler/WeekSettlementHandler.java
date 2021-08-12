@@ -1,9 +1,13 @@
 package com.whoiszxl.factory.handler;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.whoiszxl.constants.AccountPeriodConstants;
+import com.whoiszxl.entity.PurchaseOrder;
 import com.whoiszxl.entity.PurchaseSettlementOrder;
 import com.whoiszxl.entity.PurchaseSupplier;
+import com.whoiszxl.service.PurchaseOrderService;
 import com.whoiszxl.service.PurchaseSettlementOrderService;
 import com.whoiszxl.service.PurchaseSupplierService;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +35,9 @@ public class WeekSettlementHandler implements SettlementHandler {
     @Autowired
     private PurchaseSettlementOrderService purchaseSettlementOrderService;
 
+    @Autowired
+    private PurchaseOrderService purchaseOrderService;
+
     @Override
     public boolean execute() {
         //1. 通过结算周期获取到所有的供应商
@@ -53,6 +60,9 @@ public class WeekSettlementHandler implements SettlementHandler {
             }
 
             payForSupplier(supplier.getBankName(), supplier.getBankAccount(), supplier.getAccountHolder(), totalSettlementAmount);
+
+            //通过供应商ID更新采购单状态为已完成
+            purchaseOrderService.updateFinishedBySupplierId(supplier.getId());
         }
 
         return true;

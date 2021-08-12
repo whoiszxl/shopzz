@@ -1,12 +1,15 @@
 package com.whoiszxl.client;
 
-import com.whoiszxl.dto.*;
 import com.whoiszxl.bean.ResponseResult;
+import com.whoiszxl.dto.InventorySkuDTO;
+import com.whoiszxl.dto.OrderCreateInfoDTO;
+import com.whoiszxl.dto.OrderInfoDTO;
+import com.whoiszxl.dto.PurchaseOrderDTO;
 import com.whoiszxl.entity.ProductStock;
 import com.whoiszxl.feign.InventoryFeignClient;
 import com.whoiszxl.service.ProductStockService;
 import com.whoiszxl.stock.PayOrderStockUpdaterFactory;
-import com.whoiszxl.stock.PurchaseInboundStockUpdaterFactory;
+import com.whoiszxl.stock.PurchaseStockUpdaterFactory;
 import com.whoiszxl.stock.StockUpdater;
 import com.whoiszxl.stock.SubmitOrderStockUpdaterFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,7 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
      * 采购入库库存更新命令
      */
     @Autowired
-    private PurchaseInboundStockUpdaterFactory<PurchaseInboundOrderDTO> purchaseInboundStockUpdaterFactory;
+    private PurchaseStockUpdaterFactory<PurchaseOrderDTO> purchaseStockUpdaterFactory;
 
     @Autowired
     private ProductStockService productStockService;
@@ -41,8 +44,8 @@ public class InventoryFeignClientImpl implements InventoryFeignClient {
     private PayOrderStockUpdaterFactory<OrderInfoDTO> payOrderStockUpdaterFactory;
 
     @Override
-    public ResponseResult<Boolean> notifyPurchaseInboundFinished(@RequestBody PurchaseInboundOrderDTO purchaseInboundOrderDTO) {
-        StockUpdater stockUpdater = purchaseInboundStockUpdaterFactory.createCommand(purchaseInboundOrderDTO);
+    public ResponseResult<Boolean> notifyPurchaseOrderFinished(@RequestBody PurchaseOrderDTO purchaseOrderDTO) {
+        StockUpdater stockUpdater = purchaseStockUpdaterFactory.createCommand(purchaseOrderDTO);
         Boolean updateFlag = stockUpdater.updateProductStock();
         return ResponseResult.buildByFlag(updateFlag);
     }

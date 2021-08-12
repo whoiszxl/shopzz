@@ -1,7 +1,7 @@
 package com.whoiszxl.stock;
 
-import com.whoiszxl.dto.PurchaseInboundOrderDTO;
-import com.whoiszxl.dto.PurchaseInboundOrderItemDTO;
+import com.whoiszxl.dto.PurchaseOrderDTO;
+import com.whoiszxl.dto.PurchaseOrderItemDTO;
 import com.whoiszxl.service.ProductStockService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,14 @@ import java.util.Map;
  * @date 2021/7/21
  */
 @Component
-public class PurchaseInboundStockUpdaterFactory<T> extends AbstractStockUpdaterFactory<T> {
+public class PurchaseStockUpdaterFactory<T> extends AbstractStockUpdaterFactory<T> {
 
     /**
      * 注入商品库存服务
      * @param productStockService 商品库存服务
      */
     @Autowired
-    public PurchaseInboundStockUpdaterFactory(ProductStockService productStockService) {
+    public PurchaseStockUpdaterFactory(ProductStockService productStockService) {
         super(productStockService);
     }
 
@@ -37,15 +37,15 @@ public class PurchaseInboundStockUpdaterFactory<T> extends AbstractStockUpdaterF
      */
     @Override
     protected List<Long> getProductSkuIds(T parameter) {
-        PurchaseInboundOrderDTO purchaseInboundOrderDTO = (PurchaseInboundOrderDTO) parameter;
-        List<PurchaseInboundOrderItemDTO> inboundOrderDTOItems = purchaseInboundOrderDTO.getItems();
+        PurchaseOrderDTO purchaseOrderDTO = (PurchaseOrderDTO) parameter;
+        List<PurchaseOrderItemDTO> inboundOrderDTOItems = purchaseOrderDTO.getItems();
 
         if(ObjectUtils.isEmpty(inboundOrderDTOItems)) {
             return new ArrayList<>();
         }
 
         List<Long> productSkuIds = new ArrayList<>(inboundOrderDTOItems.size());
-        for (PurchaseInboundOrderItemDTO inboundOrderDTOItem : inboundOrderDTOItems) {
+        for (PurchaseOrderItemDTO inboundOrderDTOItem : inboundOrderDTOItems) {
             productSkuIds.add(inboundOrderDTOItem.getProductSkuId());
         }
 
@@ -59,13 +59,13 @@ public class PurchaseInboundStockUpdaterFactory<T> extends AbstractStockUpdaterF
      */
     @Override
     public StockUpdater createCommand(T parameter) {
-        PurchaseInboundOrderDTO purchaseInboundOrderDTO = (PurchaseInboundOrderDTO) parameter;
-        List<PurchaseInboundOrderItemDTO> inboundOrderDTOItems = purchaseInboundOrderDTO.getItems();
+        PurchaseOrderDTO purchaseOrderDTO = (PurchaseOrderDTO) parameter;
+        List<PurchaseOrderItemDTO> inboundOrderDTOItems = purchaseOrderDTO.getItems();
 
-        Map<Long, PurchaseInboundOrderItemDTO> itemDTOMap = new HashMap<>(100);
+        Map<Long, PurchaseOrderItemDTO> itemDTOMap = new HashMap<>(100);
 
         if(ObjectUtils.isNotEmpty(inboundOrderDTOItems)) {
-            for (PurchaseInboundOrderItemDTO inboundOrderDTOItem : inboundOrderDTOItems) {
+            for (PurchaseOrderItemDTO inboundOrderDTOItem : inboundOrderDTOItems) {
                 itemDTOMap.put(inboundOrderDTOItem.getProductSkuId(), inboundOrderDTOItem);
             }
         }

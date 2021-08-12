@@ -28,7 +28,7 @@ public class PurchaseInboundOnItemVO extends AbstractObject implements Serializa
     private Long id;
 
     @ApiModelProperty(value = "采购入库单条目ID")
-    private Long purchaseInboundOrderItemId;
+    private Long purchaseOrderItemId;
 
     @ApiModelProperty(value = "货位ID")
     private Long productAllocationId;
@@ -38,24 +38,4 @@ public class PurchaseInboundOnItemVO extends AbstractObject implements Serializa
 
     @ApiModelProperty(value = "上架数量")
     private Integer putOnShelvesCount;
-
-    @ApiModelProperty(value = "乐观锁")
-    private Long version;
-
-    @ApiModelProperty(value = "逻辑删除 1: 已删除， 0: 未删除")
-    private Integer isDeleted;
-
-    @ApiModelProperty(value = "创建者")
-    private String createdBy;
-
-    @ApiModelProperty(value = "更新者")
-    private String updatedBy;
-
-    @ApiModelProperty(value = "创建时间")
-    private Date createdAt;
-
-    @ApiModelProperty(value = "更新时间")
-    private Date updatedAt;
-
-
 }

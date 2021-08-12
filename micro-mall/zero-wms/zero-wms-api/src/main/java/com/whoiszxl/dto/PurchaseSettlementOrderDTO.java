@@ -29,9 +29,6 @@ public class PurchaseSettlementOrderDTO extends AbstractObject implements Serial
     @ApiModelProperty(value = "主键")
     private Long id;
 
-    @ApiModelProperty(value = "采购入库单id")
-    private Long purchaseInboundOrderId;
-
     @ApiModelProperty(value = "采购单id")
     private Long purchaseOrderId;
 

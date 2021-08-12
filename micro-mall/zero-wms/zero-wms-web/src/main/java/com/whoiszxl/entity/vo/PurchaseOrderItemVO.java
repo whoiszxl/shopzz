@@ -44,4 +44,10 @@ public class PurchaseOrderItemVO extends AbstractObject implements Serializable 
     @ApiModelProperty(value = "采购价格")
     private BigDecimal purchasePrice;
 
+    @ApiModelProperty(value = "合格商品的数量")
+    private Integer qualifiedCount;
+
+    @ApiModelProperty(value = "到货的商品数量")
+    private Integer arrivalCount;
+
 }

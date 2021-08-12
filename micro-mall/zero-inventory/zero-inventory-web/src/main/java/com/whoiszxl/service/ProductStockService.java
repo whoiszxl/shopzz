@@ -49,4 +49,5 @@ public interface ProductStockService extends IService<ProductStock> {
      * @return
      */
     boolean subLockStockAndAddSaledStockBySkuId(Integer quantity, Long skuId);
+
 }

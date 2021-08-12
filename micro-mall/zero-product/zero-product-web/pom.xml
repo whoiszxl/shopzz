@@ -27,12 +27,6 @@
 
         <dependency>
             <groupId>com.whoiszxl</groupId>
-            <artifactId>zero-dispatch-api</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.whoiszxl</groupId>
             <artifactId>zero-wms-api</artifactId>
             <version>1.0.0</version>
         </dependency>

@@ -50,5 +50,5 @@ public interface MemberFeignClient {
      * @return 是否更新成功
      */
     @PostMapping("/notifyPayOrderSuccess/{memberId}/{totalAmount}")
-    ResponseResult<Boolean> notifyPayOrderSuccess(Long memberId, BigDecimal totalAmount);
+    ResponseResult<Boolean> notifyPayOrderSuccess(@PathVariable Long memberId,@PathVariable BigDecimal totalAmount);
 }

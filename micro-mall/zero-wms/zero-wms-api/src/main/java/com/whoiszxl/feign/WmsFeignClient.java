@@ -18,22 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface WmsFeignClient {
 
     /**
-     * 通过WMS中心，采购结算单审核已经通过了
-     * @param purchaseInboundOrderId 采购入库单ID
-     * @return 是否处理成功
-     */
-    @PostMapping("/notifyFinishedPurchaseSettlementOrderEvent")
-    ResponseResult<Boolean> notifyFinishedPurchaseSettlementOrderEvent(Long purchaseInboundOrderId);
-
-    /**
-     * 通知WMS中心，创建采购结算单的事件发生了
-     * @param purchaseInboundOrderId 采购入库单ID
-     * @return
-     */
-    @PostMapping("/notifyCreatePurchaseSettlementOrderEvent/{purchaseInboundOrderId}")
-    ResponseResult<Boolean> notifyCreatePurchaseSettlementOrderEvent(@PathVariable Long purchaseInboundOrderId);
-
-    /**
      * 通知WMS中心，支付订单的事件发生了
      * @param orderInfo 订单信息
      * @return
