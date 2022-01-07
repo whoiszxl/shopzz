@@ -5,6 +5,7 @@ import 'package:zz_flutter_shop/controller/category_page_controller.dart';
 import 'package:zz_flutter_shop/page/widget/category/category_app_bar.dart';
 import 'package:zz_flutter_shop/page/widget/category/one_category_tab.dart';
 import 'package:zz_flutter_shop/page/widget/category/two_category_tab.dart';
+import 'package:zz_flutter_shop/utils/loading_util.dart';
 
 class CategoryPage extends StatefulWidget {
 
@@ -19,25 +20,26 @@ class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClie
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
   final CategoryPageController _categoryPageController = Get.find<CategoryPageController>();
 
+
   @override
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
-    //_categoryPageController.getCategoryTree(_refreshController);
+    //初始化加载分类树
+    _categoryPageController.getCategoryTree(_refreshController);
+    _categoryPageController.getCategoryBanner(_refreshController);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("分类"),
-    );
-  }
-
-  _buildHome(BuildContext context) {
+    super.build(context);
     return Obx(() {
-      var categorys = _categoryPageController.categorys;
+      if(_categoryPageController.categoryList.isEmpty || _categoryPageController.bannerList.isEmpty) {
+        return normalLoading();
+      }
+
       return Scaffold(
         appBar: categoryAppBar(context),
         body: Row(
@@ -47,17 +49,19 @@ class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClie
             Expanded(
                 flex: 2,
                 child: OneCategoryTab(
-                    categorys: categorys,
+                    categoryList: _categoryPageController.categoryList,
                     onChildClick: (index) {
-                      _categoryPageController.children = categorys[index].children;
+                      _categoryPageController.childrenList.clear();
+                      
+                      _categoryPageController.childrenList.addAll(_categoryPageController.categoryList[index].children);
                     })
             ),
 
             Expanded(
                 flex: 5,
                 child: TwoCategoryTab(
-                  cates: _categoryPageController.children,
-                  //banners: banners,
+                  childrenList: _categoryPageController.childrenList,
+                  banners: _categoryPageController.bannerList,
                   onChildClick: (index) {
 
                   },
@@ -68,5 +72,6 @@ class _CategoryPageState extends State<CategoryPage> with AutomaticKeepAliveClie
       );
     });
   }
+
 
 }

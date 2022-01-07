@@ -6,9 +6,9 @@ class OneCategoryTab extends StatefulWidget {
 
   final Null Function(int) onChildClick;
 
-  List<Categorys> categorys = [];
+  List<Categorys> categoryList = [];
 
-  OneCategoryTab({Key key, @required this.categorys, @required this.onChildClick}) : super(key: key);
+  OneCategoryTab({Key key, @required this.categoryList, @required this.onChildClick}) : super(key: key);
 
   @override
   OneCategoryTabState createState() => OneCategoryTabState();
@@ -26,17 +26,17 @@ class OneCategoryTabState extends State<OneCategoryTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Container(
+    return Obx(() => SizedBox(
       width: 80,
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: widget.categorys.length,
+        itemCount: widget.categoryList.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              this.setState(() {
-                this.activeIndex = index;
+              setState(() {
+                activeIndex = index;
                 widget.onChildClick(index);
               });
             },
@@ -46,15 +46,15 @@ class OneCategoryTabState extends State<OneCategoryTab> {
 
                 Container(
                   height: 35,
-                  color: this.activeIndex == index
-                      ? Color(0xFFFEFFFF)
-                      : Color(0xFFF1F2F3),
+                  color: activeIndex == index
+                      ? const Color(0xFFFEFFFF)
+                      : const Color(0xFFF1F2F3),
                   child: Center(
                     child: Text(
-                      widget.categorys[index].name,
+                      widget.categoryList[index].name,
                       style: TextStyle(
                         fontSize: 12,
-                        fontWeight: this.activeIndex == index ? FontWeight.bold : FontWeight.normal,
+                        fontWeight: activeIndex == index ? FontWeight.bold : FontWeight.normal,
                       ),
                     ),
                   ),
@@ -64,11 +64,11 @@ class OneCategoryTabState extends State<OneCategoryTab> {
                   top: 0,
                   left: 0,
                   child: Offstage(
-                    offstage: this.activeIndex != index,
+                    offstage: activeIndex != index,
                     child: Container(
                       width: 3,
                       height: 35,
-                      color: Color(0xFFDA3E27),
+                      color: const Color(0xFFDA3E27),
                     ),
                   ),
                 ),

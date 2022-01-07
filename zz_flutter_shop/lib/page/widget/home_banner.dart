@@ -9,8 +9,9 @@ class HomeBanner extends StatelessWidget {
   final double bannerHeight;
   final double bannerWidth;
   final EdgeInsetsGeometry padding;
+  final bool showPagination;
 
-  const HomeBanner(this.bannerList, {Key key, this.bannerHeight = 160, this.bannerWidth = 380, this.padding}) : super(key: key);
+  const HomeBanner(this.bannerList, {Key key, this.bannerHeight = 160, this.bannerWidth = 380, this.padding, this.showPagination = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +37,15 @@ class HomeBanner extends StatelessWidget {
         return _image(bannerList[index]);
       },
 
-      pagination: const SwiperPagination(
+      pagination: showPagination ? const SwiperPagination(
           alignment: Alignment.bottomRight,
-          margin: EdgeInsets.only(bottom: 10),
+          margin: EdgeInsets.only(bottom: 10, right: 2),
           builder: DotSwiperPaginationBuilder(
-              color: Colors.white60,
-              size: 6,
-              activeSize: 7,
+            color: Colors.white60,
+            size: 5,
+            activeSize: 6,
           )
-      ),
+      ) : null,
     );
   }
 
