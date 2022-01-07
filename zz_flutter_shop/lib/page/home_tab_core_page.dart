@@ -8,17 +8,17 @@ import 'package:zz_flutter_shop/page/widget/home_banner.dart';
 import 'package:zz_flutter_shop/page/widget/home_grid_navigator.dart';
 import 'package:zz_flutter_shop/page/widget/home_header.dart';
 import 'package:zz_flutter_shop/page/widget/home_recommend_card.dart';
-import 'package:zz_flutter_shop/res/colors_manager.dart';
+import 'package:zz_flutter_shop/utils/loading_util.dart';
 
 ///home主页 主tab页面
 class HomeTabCorePage extends StatefulWidget {
 
   ///内容高度
-  double contentHeight;
+  final double contentHeight;
 
-  PageController pageController;
+  final PageController pageController;
 
-  HomeTabCorePage({Key key,this.contentHeight,this.pageController}) : super(key: key);
+  const HomeTabCorePage({Key key,this.contentHeight,this.pageController}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -32,7 +32,6 @@ class _HomeTabCorePageState extends State<HomeTabCorePage> with AutomaticKeepAli
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
   final HomePageController _homePageController = Get.find<HomePageController>();
 
-  double _screenHeight;
   double _screenWidth;
 
   //在tab切换时保持页面状态
@@ -54,8 +53,8 @@ class _HomeTabCorePageState extends State<HomeTabCorePage> with AutomaticKeepAli
   }
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     //获取屏幕的初始化高度和宽度
-    _screenHeight = MediaQuery.of(context).size.height;
     _screenWidth = MediaQuery.of(context).size.width;
     return SmartRefresher(
       controller: _refreshController,
@@ -73,14 +72,14 @@ class _HomeTabCorePageState extends State<HomeTabCorePage> with AutomaticKeepAli
       List<BannerEntity> bannerList = _homePageController.bannerList;
 
       if(navList.isEmpty && bannerList.isEmpty) {
-        return Container(color: ColorManager.red, child: const Center(child: Text('加载中'),),);
+        return normalLoading();
       }else {
         return Column(children: [
           //头部布局
           Expanded(child: CustomScrollView(
             slivers: <Widget>[
               //header头部，scan和search框等控件
-              HomeHeader(),
+              const HomeHeader(),
 
               SliverToBoxAdapter(
                 child: Column(

@@ -91,25 +91,23 @@ class HomeHeaderState extends State<HomeHeader> {
             onTap: () {
               showSearch(context: context, delegate: MySearchDelegate());
             },
-            child: Container(
-              child: const TextField(
-                textAlign: TextAlign.start,
-                enabled: false,
-                decoration: InputDecoration(
-                  hintStyle: TextStyle(
-                    fontSize: 8,
-                  ),
-                  border: InputBorder.none,
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                    size: 15,
-                  ),
-                  suffixIcon: Icon(
-                    Icons.camera_alt,
-                    color: Colors.grey,
-                    size: 15,
-                  ),
+            child: const TextField(
+              textAlign: TextAlign.start,
+              enabled: false,
+              decoration: InputDecoration(
+                hintStyle: TextStyle(
+                  fontSize: 8,
+                ),
+                border: InputBorder.none,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.grey,
+                  size: 15,
+                ),
+                suffixIcon: Icon(
+                  Icons.camera_alt,
+                  color: Colors.grey,
+                  size: 15,
                 ),
               ),
             )

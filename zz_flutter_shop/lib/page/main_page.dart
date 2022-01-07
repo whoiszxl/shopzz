@@ -78,9 +78,9 @@ class _MainPageState extends State<MainPage> {
               activeIcon: const Icon(Icons.category_outlined),
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.airplane_ticket),
+              icon: const Icon(Icons.person_search),
               label: 'discovery'.tr,
-              activeIcon: const Icon(Icons.airplane_ticket),
+              activeIcon: const Icon(Icons.person_search),
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.shopping_cart),

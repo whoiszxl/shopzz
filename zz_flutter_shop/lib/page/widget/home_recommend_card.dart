@@ -1,6 +1,10 @@
 
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:zz_flutter_shop/entity/response/home_recommend_response.dart';
+import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/utils/image_util.dart';
 
 class HomeRecommendCard extends StatelessWidget {
@@ -13,7 +17,9 @@ class HomeRecommendCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
-          //跳转到商详页面
+          Map<String,String> map = HashMap();
+          map['productId'] = recommendContent.productId.toString();
+          Get.toNamed(Routers.productDetail, parameters: map);
         },
 
         child: SizedBox(
@@ -82,7 +88,7 @@ class HomeRecommendCard extends StatelessWidget {
                 "售价:" + recommendContent.defaultPrice.toString(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 11, color: Colors.redAccent, fontWeight: FontWeight.w500),
+                style: const TextStyle(fontSize: 10, color: Colors.redAccent, fontWeight: FontWeight.w500),
               )
             ],
           ),

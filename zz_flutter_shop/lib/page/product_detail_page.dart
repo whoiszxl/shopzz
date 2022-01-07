@@ -9,6 +9,7 @@ import 'package:zz_flutter_shop/page/widget/product_detail/product_image_banner.
 import 'package:zz_flutter_shop/page/widget/product_detail/product_price_bar.dart';
 import 'package:zz_flutter_shop/page/widget/product_detail/sale_attr_selector.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
+import 'package:zz_flutter_shop/utils/loading_util.dart';
 
 
 class ProductDetailPage extends StatefulWidget {
@@ -62,8 +63,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> with SingleTicker
 
       return Obx(() {
         if(_productPageController.productDetailResponse.value == null
-        || _productPageController.productDetailResponse.value.productVO == null) {
-          return const Center(child: Text('加载中'));
+            || _productPageController.productDetailResponse.value.productVO == null) {
+          return normalLoading();
         }else {
           return Scaffold(
               bottomSheet: ProductFooter(() {

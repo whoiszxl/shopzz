@@ -19,8 +19,8 @@ dependencies:
   oktoast: ^3.1.5
   dio: ^3.0.10
   pull_to_refresh: ^2.0.0
-  get: ^4.3.8
-  lottie: ^1.0.1
+  get: ^4.6.1
+  lottie: ^1.2.1
   shared_preferences: ^2.0.5
   connectivity: ^0.4.9+5
   cached_network_image: ^2.4.1
@@ -45,18 +45,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - images/
+    - assets/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -68,6 +58,3 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
