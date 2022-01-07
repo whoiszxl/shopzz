@@ -1,0 +1,61 @@
+server:
+  port: 80
+spring:
+  application:
+    name: zz-gateway
+  cloud:
+    nacos:
+      server-addr: aliyun.whoiszxl.com:8848
+      config:
+        server-addr: aliyun.whoiszxl.com:8848
+        file-extension: yaml
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: zz-member-web_router
+          uri: lb://zz-member-web   # 转发到那个目的地
+          predicates:
+            - Path=/member/**
+          filters:
+            - StripPrefix=1 # 当前端访问/member/login，网关转发会将member自动的去掉，成访问 /login 路径。
+
+        - id: zz-product-web_router
+          uri: lb://zz-product-web
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+
+        - id: zz-admin-web_router
+          uri: lb://zz-admin-web
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+
+        - id: test_router
+          uri: http://www.aliyun.com
+          predicates:
+            - Path=/activity
+
+    sentinel:
+      transport:
+        dashboard: 159.75.31.203:8858
+      datasource:
+        ds1.nacos:
+          serverAddr: aliyun.whoiszxl.com:8848
+          dataId: gw-flow
+          ruleType: gw_flow
+        ds2.nacos:
+          serverAddr: aliyun.whoiszxl.com:8848
+          dataId: api-group
+          ruleType: gw_api_group
