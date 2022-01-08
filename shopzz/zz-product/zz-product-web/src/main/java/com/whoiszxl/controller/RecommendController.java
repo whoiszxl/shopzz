@@ -13,11 +13,9 @@ import com.whoiszxl.entity.vo.RecommendVO;
 import com.whoiszxl.enums.BannerTypeEnum;
 import com.whoiszxl.service.RecommendService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -60,5 +58,14 @@ public class RecommendController {
     }
 
 
+    @PostMapping("/banner/{type}")
+    @ApiOperation(value = "根据banner类型获取banner列表")
+    public ResponseResult<IndexBannerVO> banner(@PathVariable Integer type) {
+        List<HomeBannerDTO> smallBanners = recommendService.getBannerByType(BannerTypeEnum.getType(type));
+        List<HomeBannerVO> homeBannerVOS = dozerUtils.mapList(smallBanners, HomeBannerVO.class);
+        return ResponseResult.buildSuccess(
+                new IndexBannerVO(homeBannerVOS, null)
+        );
+    }
 }
 

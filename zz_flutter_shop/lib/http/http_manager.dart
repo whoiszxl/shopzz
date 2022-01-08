@@ -139,7 +139,7 @@ class HttpManager {
         if(response.data['code'] == 0){
           return BaseResponse.fromJson(response.data).data;
         }else{
-          showToast(response.data['message']);
+          print("接口发生异常：" + response.data['message']);
           return null;
         }
       }

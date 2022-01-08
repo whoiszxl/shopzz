@@ -2,6 +2,7 @@
 import 'dart:collection';
 
 import 'package:get/get.dart';
+import 'package:zz_flutter_shop/entity/response/member_info_response.dart';
 import 'package:zz_flutter_shop/http/http_manager.dart';
 import 'package:zz_flutter_shop/service/api_urls.dart';
 
@@ -15,6 +16,11 @@ class MemberApiService extends GetxService {
     params["password"] = password;
     var result = await HttpManager.getInstance().post(url: ApiUrls.memberLogin, data: params);
     return result;
+  }
+
+  Future<MemberInfoResponse> memberInfo() async {
+    var result = await HttpManager.getInstance().get(url: ApiUrls.memberInfo);
+    return MemberInfoResponse.fromJson(result);
   }
 
 }

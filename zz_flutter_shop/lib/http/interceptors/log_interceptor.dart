@@ -59,7 +59,7 @@ class LogInterceptors extends Interceptor {
     }
     if (requestHeader) {
       _printMapAsTable(options.queryParameters, header: 'Query Parameters');
-      final requestHeaders = Map();
+      final requestHeaders = {};
       if (options.headers != null) {
         requestHeaders.addAll(options.headers);
       }
@@ -76,7 +76,7 @@ class LogInterceptors extends Interceptor {
       if (data != null) {
         if (data is Map) _printRequestBody(options.data, header: 'RequestBody');
         if (data is FormData) {
-          final formDataMap = Map()
+          final formDataMap = {}
             ..addEntries(data.fields)
             ..addEntries(data.files);
           _printMapAsTable(formDataMap, header: 'Form data | ${data.boundary}');
@@ -101,8 +101,9 @@ class LogInterceptors extends Interceptor {
         }
         _printLine('╚');
         logPrint('');
-      } else
+      } else {
         _printBoxed(header: 'DioError ║ ${err.type}', text: err.message);
+      }
     }
     return err;
   }
@@ -111,7 +112,7 @@ class LogInterceptors extends Interceptor {
   Future onResponse(Response response) async {
     _printResponseHeader(response);
     if (responseHeader) {
-      final responseHeaders = Map<String, String>();
+      final responseHeaders = <String, String>{};
       response.headers
           .forEach((k, list) => responseHeaders[k] = list.toString());
       _printMapAsTable(responseHeaders, header: 'Headers');
@@ -137,14 +138,15 @@ class LogInterceptors extends Interceptor {
 
   void _printResponse(Response response) {
     if (response.data != null) {
-      if (response.data is Map)
+      if (response.data is Map) {
         _printPrettyMap(response.data);
-      else if (response.data is List) {
+      } else if (response.data is List) {
         logPrint('║${_indent()}[');
         _printList(response.data);
         logPrint('║${_indent()}[');
-      } else
+      } else {
         _printBlock(response.data.toString());
+      }
     }
   }
 
@@ -173,8 +175,9 @@ class LogInterceptors extends Interceptor {
     if (pre.length + msg.length > maxWidth) {
       logPrint(pre);
       _printBlock(msg);
-    } else
+    } else {
       logPrint('$pre$msg');
+    }
   }
 
   void _printBlock(String msg) {
@@ -200,19 +203,20 @@ class LogInterceptors extends Interceptor {
       final isLast = index == data.length - 1;
       var value = data[key];
 //      key = '\"$key\"';
-      if (value is String)
+      if (value is String) {
         value = '\"${value.toString().replaceAll(RegExp(r'(\r|\n)+'), " ")}\"';
+      }
       if (value is Map) {
-        if (compact && _canFlattenMap(value))
+        if (compact && _canFlattenMap(value)) {
           logPrint('║${_indent(tabs)} $key: $value${!isLast ? ',' : ''}');
-        else {
+        } else {
           logPrint('║${_indent(tabs)} $key: {');
           _printPrettyMap(value, tabs: tabs);
         }
       } else if (value is List) {
-        if (compact && _canFlattenList(value))
+        if (compact && _canFlattenList(value)) {
           logPrint('║${_indent(tabs)} $key: ${value.toString()}');
-        else {
+        } else {
           logPrint('║${_indent(tabs)} $key: [');
           _printList(value, tabs: tabs);
           logPrint('║${_indent(tabs)} ]${isLast ? '' : ','}');
@@ -227,8 +231,9 @@ class LogInterceptors extends Interceptor {
             logPrint(
                 '║${_indent(tabs)} ${msg.substring(i * linWidth, math.min<int>(i * linWidth + linWidth, msg.length))}');
           }
-        } else
+        } else {
           logPrint('║${_indent(tabs)} $key: $msg${!isLast ? ',' : ''}');
+        }
       }
     });
 
@@ -239,12 +244,14 @@ class LogInterceptors extends Interceptor {
     list.asMap().forEach((i, e) {
       final isLast = i == list.length - 1;
       if (e is Map) {
-        if (compact && _canFlattenMap(e))
+        if (compact && _canFlattenMap(e)) {
           logPrint('║${_indent(tabs)}  $e${!isLast ? ',' : ''}');
-        else
+        } else {
           _printPrettyMap(e, tabs: tabs + 1, isListItem: true, isLast: isLast);
-      } else
+        }
+      } else {
         logPrint('║${_indent(tabs + 2)} $e${isLast ? '' : ','}');
+      }
     });
   }
 

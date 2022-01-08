@@ -50,7 +50,6 @@ class HomeGridNavigator extends StatelessWidget {
 
       child: Column(
         children: <Widget>[
-          //Icon(Icons.account_balance),
           Image.network(
             item.pic,
             width: 30,

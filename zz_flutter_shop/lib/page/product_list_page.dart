@@ -18,8 +18,7 @@ class ProductListPage extends StatefulWidget {
   _ProductListPageState createState() => _ProductListPageState();
 }
 
-class _ProductListPageState extends State<ProductListPage>
-    with TickerProviderStateMixin {
+class _ProductListPageState extends State<ProductListPage> with TickerProviderStateMixin {
   //分页参数，默认0
   int page = 0;
 

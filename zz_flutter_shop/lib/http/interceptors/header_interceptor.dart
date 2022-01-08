@@ -15,7 +15,7 @@ class HeaderInterceptor implements Interceptor{
     await SPUtil.getString(SPKeys.token).then((text){
       token = text;
     });
-    if(null != token && token.length > 0) {
+    if(token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer ' + token??'';
     }
     return options;

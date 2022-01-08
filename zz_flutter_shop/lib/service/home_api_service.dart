@@ -18,4 +18,11 @@ class HomeApiService extends GetxService {
     var result = await HttpManager.getInstance().post(url: ApiUrls.homeRecommendProductList);
     return HomeRecommendResponse.fromJson(result);
   }
+
+
+  ///通过轮播图类型获取轮播图列表
+  Future<HomeAppIndexResponse> getBannersByType(int type) async {
+    var result = await HttpManager.getInstance().post(url: ApiUrls.bannerByType + type.toString());
+    return HomeAppIndexResponse.fromJson(result);
+  }
 }

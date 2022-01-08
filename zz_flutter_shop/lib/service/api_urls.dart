@@ -5,6 +5,7 @@ class ApiUrls {
 
   ///首页获取热门和精选商品的接口
   static const String homeRecommendProductList = "/product/recommend/list";
+  static const String bannerByType = "/product/recommend/banner/";
 
   static const String categoryTree = "/product/category/list/tree";
 
