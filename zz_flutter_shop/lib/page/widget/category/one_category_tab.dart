@@ -18,9 +18,18 @@ class OneCategoryTabState extends State<OneCategoryTab> {
 
   int activeIndex = 0;
 
+  ScrollController scrollController;
+
   @override
   void initState() {
+    scrollController = ScrollController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
   }
 
 
@@ -31,6 +40,7 @@ class OneCategoryTabState extends State<OneCategoryTab> {
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         shrinkWrap: true,
+        controller: scrollController,
         itemCount: widget.categoryList.length,
         itemBuilder: (context, index) {
           return GestureDetector(

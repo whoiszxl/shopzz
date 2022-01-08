@@ -10,7 +10,8 @@ class MemberPage extends StatefulWidget {
   }
 }
 
-class _MemberPageState extends State<MemberPage>{
+class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMixin,TickerProviderStateMixin {
+
 
   @override
   void initState() {
@@ -31,4 +32,7 @@ class _MemberPageState extends State<MemberPage>{
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

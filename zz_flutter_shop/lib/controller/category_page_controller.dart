@@ -6,6 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:zz_flutter_shop/entity/dto/category_tree_model.dart';
 import 'package:zz_flutter_shop/entity/response/home_app_index_response.dart';
 import 'package:zz_flutter_shop/service/category_api_service.dart';
+import 'package:zz_flutter_shop/utils/sp_util.dart';
 
 class CategoryPageController extends GetxController {
 

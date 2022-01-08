@@ -1,6 +1,10 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:zz_flutter_shop/entity/response/search_response.dart';
 import 'package:zz_flutter_shop/page/widget/product/little_tag.dart';
+import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/utils/image_util.dart';
 
 ///商品搜索结果列表卡片
@@ -14,7 +18,9 @@ class ProductListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () {
-          //TODO 跳转
+          Map<String,String> map = HashMap();
+          map['productId'] = productInfo.id.toString();
+          Get.toNamed(Routers.productDetail, parameters: map);
         },
 
         child: SizedBox(

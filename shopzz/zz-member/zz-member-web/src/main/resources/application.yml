@@ -19,6 +19,11 @@ spring:
     url: jdbc:mysql://aliyun.whoiszxl.com/zzshop?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: 123456
+
+    hikari:
+      connection-timeout: 10000
+      max-lifetime: 60000
+
   redis:
     host: aliyun.whoiszxl.com
     port: 16379
@@ -69,7 +74,7 @@ sa-token:
     # Redis服务器连接密码（默认为空）
     password: zxl123456!!
     # 连接超时时间（毫秒）
-    timeout: 100ms
+    timeout: 5000ms
 
 feign:
   httpclient:

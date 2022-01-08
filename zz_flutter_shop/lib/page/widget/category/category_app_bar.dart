@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:zz_flutter_shop/page/my_search_delegate.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 
 categoryAppBar(BuildContext context) {
 
@@ -10,7 +11,7 @@ categoryAppBar(BuildContext context) {
 
     //qrcode扫描按钮
     leading: IconButton(
-      icon: Icon(Icons.crop_free, color: Color(0xFF787878)),
+      icon: const Icon(Icons.crop_free, color: ColorManager.grey),
       onPressed: () {
         showToast("扫一扫");
       },
@@ -18,30 +19,28 @@ categoryAppBar(BuildContext context) {
 
     title: Container(
       height: 40,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(50)),
-          color: Color(0xFFf8f8f8)),
+          color: ColorManager.white),
       child: TextField(
         onTap: () {
           showSearch(context: context, delegate: MySearchDelegate());
         },
-        decoration: InputDecoration(
-          hintText: '开启搜索吧!',
+        decoration: const InputDecoration(
+          hintText: '搜一搜!',
           hintStyle: TextStyle(
             fontSize: 14,
           ),
-          suffixIcon: Icon(Icons.camera_alt),
-          prefixIcon: Icon(
-            Icons.search,
-            color: Color(0xFF444444),
-          ),
+          suffixIcon: Icon(Icons.camera_alt, color: ColorManager.grey),
+          prefixIcon: Icon(Icons.search, color: ColorManager.black),
           border: InputBorder.none,
         ),
       ),
     ),
     actions: <Widget>[
-      IconButton(icon: Icon(Icons.message, color: Colors.grey),
+      IconButton(icon: const Icon(Icons.message, color: Colors.grey),
         onPressed: () {
+          //todo 跳转到消息页面
           showToast("消息");
         },
       ),

@@ -48,6 +48,7 @@ class HomeHeaderState extends State<HomeHeader> {
 
         _headerButton(Icons.message_rounded, () {
           showToast("查看消息");
+          Get.toNamed(Routers.login);
         }),
 
       ],

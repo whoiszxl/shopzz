@@ -6,6 +6,7 @@ import 'package:zz_flutter_shop/i18n/messages.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/service/category_api_service.dart';
 import 'package:zz_flutter_shop/service/home_api_service.dart';
+import 'package:zz_flutter_shop/service/member_api_service.dart';
 import 'package:zz_flutter_shop/service/product_api_service.dart';
 
 ///主程序运行入口
@@ -32,6 +33,6 @@ Future<void> initServices() async {
   await Get.putAsync(() async => HomeApiService());
   await Get.putAsync(() async => CategoryApiService());
   await Get.putAsync(() async => ProductApiService());
-//  await Get.putAsync(() async => await MemberApiService());
+  await Get.putAsync(() async => MemberApiService());
   print("init services inject end...");
 }

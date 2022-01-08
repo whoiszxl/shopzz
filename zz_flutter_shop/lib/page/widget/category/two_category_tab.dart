@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zz_flutter_shop/entity/dto/category_tree_model.dart';
@@ -25,9 +23,19 @@ class TwoCategoryTab extends StatefulWidget {
 
 class TwoCategoryTabState extends State<TwoCategoryTab> {
 
+
+  ScrollController scrollController;
+
   @override
   void initState() {
+    scrollController = ScrollController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
   }
 
   @override
@@ -37,6 +45,7 @@ class TwoCategoryTabState extends State<TwoCategoryTab> {
       height: MediaQuery.of(context).size.height - 150,
       color: Colors.white70,
       child: SingleChildScrollView(
+        controller: scrollController,
         child: Column(
           children: [
             widget.banners != null ? HomeBanner(widget.banners, bannerHeight: 100, padding: const EdgeInsets.only(left: 10, right: 10, top: 10), showPagination: false,) : const SizedBox(),

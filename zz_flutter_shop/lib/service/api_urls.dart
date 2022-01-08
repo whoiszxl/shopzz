@@ -9,11 +9,13 @@ class ApiUrls {
   static const String categoryTree = "/product/category/list/tree";
 
 
-  static const String login = "/member/login";
-  static const String register = "/member/member/register";
+  static const String memberLogin = "/member/member/login";
+  static const String memberRegister = "/member/member/register";
   static const String memberInfo = "/member/member";
 
   static const String productSearch = "/product/product/search";
   static const String productDetail = "/product/product/detail/";
+
+
 
 }
