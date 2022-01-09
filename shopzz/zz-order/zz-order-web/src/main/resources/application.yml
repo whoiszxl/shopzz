@@ -1,9 +1,10 @@
+
 server:
-  port: 10003
+  port: 10004
 
 spring:
   application:
-    name: zz-product-web
+    name: zz-order-web
   profiles:
     active: dev
   cloud:
@@ -18,6 +19,11 @@ spring:
     url: jdbc:mysql://aliyun.whoiszxl.com/zzshop?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: 123456
+
+    hikari:
+      connection-timeout: 10000
+      max-lifetime: 60000
+
   redis:
     host: aliyun.whoiszxl.com
     port: 16379
@@ -31,7 +37,7 @@ spring:
 seesee:
   swagger2:
     enabled: true
-    title: member-在线接口文档
+    title: order-在线接口文档
     base-package: com.whoiszxl.controller
   log:
     enabled: true

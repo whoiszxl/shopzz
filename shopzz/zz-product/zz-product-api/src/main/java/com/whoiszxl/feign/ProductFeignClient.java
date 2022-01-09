@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author whoiszxl
  * @date 2021/7/30
  */
-@FeignClient(name = "ss-product-web", contextId = "productFeign", configuration = OAuth2FeignConfig.class)
+@FeignClient(name = "zz-product-web", contextId = "productFeign", configuration = OAuth2FeignConfig.class)
 public interface ProductFeignClient {
 
 

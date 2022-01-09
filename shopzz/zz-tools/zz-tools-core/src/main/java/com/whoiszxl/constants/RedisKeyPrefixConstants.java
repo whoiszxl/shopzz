@@ -18,4 +18,6 @@ public class RedisKeyPrefixConstants {
     public static final double MEMBER_BLOOM_REGISTER_ID_FPP = 0.03;
 
 
+    public static final String MEMBER_CART_PREFIX = "cart:";
+
 }

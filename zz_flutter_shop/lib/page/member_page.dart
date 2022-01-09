@@ -7,6 +7,7 @@ import 'package:zz_flutter_shop/entity/response/member_info_response.dart';
 import 'package:zz_flutter_shop/page/widget/home_banner.dart';
 import 'package:zz_flutter_shop/page/widget/home_grid_navigator.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_appbar.dart';
+import 'package:zz_flutter_shop/page/widget/member/member_grid_navigator.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_header.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_order.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_wallet.dart';
@@ -150,7 +151,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                 //分割线
                 const Divider(height: 2),
                 //网格栏
-                HomeGridNavigator(navigatorList: navigationList)
+                MemberGridNavigator(navigatorList: navigationList)
               ],
             ),
           ),

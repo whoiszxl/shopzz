@@ -22,14 +22,20 @@ public class MyBatisFastAutoGenerator {
     private static final String AUTHOR = "whoiszxl";
     private static final String PACKAGE_NAME = "com.whoiszxl";
     private static final String[] DB_TABLES = new String[]{
-            "rms_banner_info", "rms_recommend"
+            "oms_cart",
+            "oms_order",
+            "oms_order_item",
+            "oms_order_operate_history",
+            "oms_order_return_apply",
+            "oms_pay_info",
+            "oms_pay_info_dc"
     };
     private static final Boolean ENABLE_SWAGGER = true;
 
     public static void main(String[] args) {
         // 1.数据源配置
         DataSourceConfig.Builder dataSourceConfigBuilder = new DataSourceConfig.Builder(
-                "jdbc:mysql://aliyun.whoiszxl.com/zzshop",
+                "jdbc:mysql://aliyun.whoiszxl.com/zzshop?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false",
                 "root",
                 "123456");
 

@@ -1,6 +1,7 @@
 package com.whoiszxl.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -288,6 +289,17 @@ public class RedisUtils {
     public Map<Object, Object> hGetAll(String key) {
         return redisTemplate.opsForHash().entries(key);
     }
+
+    /**
+     * 获取所有给定字段的值
+     *
+     * @param key
+     * @return
+     */
+    public BoundHashOperations<String, Object, Object> getHashOps(String key) {
+        return redisTemplate.boundHashOps(key);
+    }
+
 
     /**
      * 获取所有给定字段的值

@@ -65,6 +65,7 @@ CREATE TABLE `pms_sku` (
     `id`                        bigint(20) NOT NULL COMMENT 'sku主键ID',
     `product_id`                bigint(20) DEFAULT NULL COMMENT '商品SPU的ID',
     `category_id`               bigint(20) DEFAULT NULL COMMENT '所属分类id',
+    `sku_name`                  bigint(100) DEFAULT NULL COMMENT 'sku名称',
     `brand_id`                  bigint(20) DEFAULT NULL COMMENT '品牌id',
     `img_url`                   varchar(255) DEFAULT NULL COMMENT 'sku缩略图片地址',
     `purchase_price`            decimal(8,2) NOT NULL COMMENT '采购价格',
