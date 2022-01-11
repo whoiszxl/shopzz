@@ -22,6 +22,7 @@ class _HomeTabSubPageState extends State<HomeTabSubPage> with AutomaticKeepAlive
   }
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(color: ColorManager.grey);
   }
 

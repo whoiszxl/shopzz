@@ -47,7 +47,7 @@ public class CartController {
     }
 
     @SaCheckLogin
-    @PostMapping("/updateQuantity")
+    @PostMapping("/update/quantity")
     @ApiOperation(value = "更新购物车SKU数量", notes = "更新购物车SKU数量", response = Boolean.class)
     public ResponseResult<CartDetailVO> updateQuantity(@RequestBody SaveCartQuery saveCartQuery) {
         Boolean updateFlag = cartService.cartUpdate(saveCartQuery.getSkuId(), saveCartQuery.getQuantity());

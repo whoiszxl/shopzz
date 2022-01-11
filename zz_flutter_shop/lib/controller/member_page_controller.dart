@@ -37,8 +37,22 @@ class MemberPageController extends GetxController {
     return false;
   }
 
+  ///登录
+  Future<bool> paswordRegister(String username, String password, String rePassword) async {
+    var registerFlag = await Get.find<MemberApiService>().passwordRegister(username, password, rePassword);
+    if(registerFlag) {
+      Get.offNamed(Routers.login);
+      return true;
+    }
+    return false;
+  }
+
 
   Future<bool> memberInfo() async {
+    var result = await Get.find<MemberApiService>().memberInfo();
+    if(result == null) {
+      return false;
+    }
     memberInfoResponse.value = await Get.find<MemberApiService>().memberInfo();
     return true;
   }

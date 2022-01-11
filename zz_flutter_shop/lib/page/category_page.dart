@@ -7,6 +7,7 @@ import 'package:zz_flutter_shop/page/widget/category/one_category_tab.dart';
 import 'package:zz_flutter_shop/page/widget/category/two_category_tab.dart';
 import 'package:zz_flutter_shop/utils/loading_util.dart';
 
+///分类页面
 class CategoryPage extends StatefulWidget {
 
   const CategoryPage({Key key}) : super(key: key);

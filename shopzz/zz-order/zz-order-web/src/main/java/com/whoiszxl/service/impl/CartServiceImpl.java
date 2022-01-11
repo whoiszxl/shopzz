@@ -45,10 +45,10 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
 
     @Override
     public Boolean cartAdd(SaveCartQuery addCartQuery) {
-        //0. TODO 对sku进行有效性校验
+        //0. 对sku进行有效性校验
         ResponseResult<SkuDTO> skuInfoResponse = productFeignClient.getSkuInfoBySkuId(addCartQuery.getSkuId());
         SkuDTO sku = skuInfoResponse.getData();
-        if(sku.getIsDeleted() == 1) {
+        if(sku == null || sku.getIsDeleted() == 1) {
             ExceptionCatcher.catchValidateEx(ResponseResult.buildError("商品无效"));
         }
 
@@ -139,7 +139,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
             //删除
             cartHashOps.delete(skuId.toString());
         }else {
-            cartItemVO.setQuantity(cartItemVO.getQuantity() + quantity);
+            cartItemVO.setQuantity(quantity);
             String jsonValue = JsonUtil.toJson(cartItemVO);
             cartHashOps.put(skuId.toString(), jsonValue);
         }

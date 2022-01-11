@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zz_flutter_shop/page/my_search_delegate.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
+
 ///搜索结果页appbar
 searchAppBar(BuildContext context, String query) {
 
@@ -13,7 +15,7 @@ searchAppBar(BuildContext context, String query) {
           },
           child: ClipRRect(
               borderRadius: BorderRadius.circular(13),
-              child: const Icon(Icons.keyboard_return, color: Colors.grey,)
+              child: const Icon(Icons.keyboard_return, color: ColorManager.grey,)
           ),
         ),
         Expanded(
@@ -31,7 +33,7 @@ searchAppBar(BuildContext context, String query) {
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: [
-                        const Icon(Icons.search, color: Colors.grey),
+                        const Icon(Icons.search, color: ColorManager.grey),
 
                         Padding(padding: const EdgeInsets.only(left: 5), child: Text(query, style: const TextStyle(fontSize: 12, color: Colors.black87)))
                       ],
@@ -43,13 +45,13 @@ searchAppBar(BuildContext context, String query) {
             )),
         const Icon(
           Icons.explore_outlined,
-          color: Colors.grey,
+          color: ColorManager.grey,
         ),
         const Padding(
           padding: EdgeInsets.only(left: 12),
           child: Icon(
             Icons.mail_outline,
-            color: Colors.grey,
+            color: ColorManager.grey,
           ),
         ),
       ],

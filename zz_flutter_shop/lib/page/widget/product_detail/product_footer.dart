@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
+import 'package:zz_flutter_shop/router/router_manager.dart';
 
 class ProductFooter extends StatelessWidget {
   Function addCartFunction;
@@ -12,7 +14,7 @@ class ProductFooter extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 60,
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: ColorManager.white,
         border: Border(
             top: BorderSide(
           color: ColorManager.main,
@@ -28,23 +30,28 @@ class ProductFooter extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[
                 Icon(Icons.support_agent_outlined,
-                    color: Colors.grey, size: 20),
-                Text("客服", style: TextStyle(color: Colors.grey, fontSize: 8)),
+                    color: ColorManager.grey, size: 20),
+                Text("客服", style: TextStyle(color: ColorManager.grey, fontSize: 8)),
               ],
             ),
           ),
           SizedBox(
             width: 30,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const <Widget>[
-                Icon(Icons.shopping_cart_outlined,
-                    color: Colors.grey, size: 20),
-                Text(
-                  "购物车",
-                  style: TextStyle(color: Colors.grey, fontSize: 8),
-                ),
-              ],
+            child: InkWell(
+              onTap: () {
+                Get.toNamed(Routers.cart);
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  Icon(Icons.shopping_cart_outlined,
+                      color: ColorManager.grey, size: 20),
+                  Text(
+                    "购物车",
+                    style: TextStyle(color: ColorManager.grey, fontSize: 8),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(
@@ -54,10 +61,10 @@ class ProductFooter extends StatelessWidget {
               children: const <Widget>[
                 Icon(
                   Icons.star_outline,
-                  color: Colors.grey,
+                  color: ColorManager.grey,
                   size: 20,
                 ),
-                Text("收藏", style: TextStyle(color: Colors.grey, fontSize: 8)),
+                Text("收藏", style: TextStyle(color: ColorManager.grey, fontSize: 8)),
               ],
             ),
           ),
@@ -72,7 +79,7 @@ class ProductFooter extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0)),
                 child: const Text(
                   "立即购买",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: ColorManager.white),
                 ),
                 onPressed: () {},
               ),
@@ -89,7 +96,7 @@ class ProductFooter extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20.0)),
                 child: const Text(
                   "加入购物车",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: ColorManager.white),
                 ),
                 onPressed: () {
                   addCartFunction();

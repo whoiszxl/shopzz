@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-///设置页面
+///发现页面
 class DiscoveryPage extends StatefulWidget {
   const DiscoveryPage({Key key}) : super(key: key);
 

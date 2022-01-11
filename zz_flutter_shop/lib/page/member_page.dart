@@ -5,16 +5,16 @@ import 'package:zz_flutter_shop/controller/member_page_controller.dart';
 import 'package:zz_flutter_shop/entity/response/home_app_index_response.dart';
 import 'package:zz_flutter_shop/entity/response/member_info_response.dart';
 import 'package:zz_flutter_shop/page/widget/home_banner.dart';
-import 'package:zz_flutter_shop/page/widget/home_grid_navigator.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_appbar.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_grid_navigator.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_header.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_order.dart';
 import 'package:zz_flutter_shop/page/widget/member/member_wallet.dart';
 import 'package:zz_flutter_shop/page/widget/product/my_navigation_bar.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
 
-///设置页面
+///会员页面
 class MemberPage extends StatefulWidget {
   const MemberPage({Key key}) : super(key: key);
 
@@ -32,7 +32,6 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
   final MemberPageController memberPageController = Get.find();
 
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
-
 
   @override
   void initState() {
@@ -99,7 +98,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
             //会员信息头部
             MemberHeader(member: memberInfoResponse.member, memberInfo: memberInfoResponse.memberInfo),
             MyNavigationBar(
-              height: 50,
+              height: 30,
               color: Colors.transparent,
               statusStyle: StatusStyle.DARK_CONTENT,
               child: memberAppBar(context),
@@ -142,8 +141,8 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
                     Padding(padding: const EdgeInsets.only(right: 8, top: 8, bottom: 4),
                         child: Row(
                           children: const [
-                            Text("查看更多", style: TextStyle(fontSize: 12, color: Colors.grey)),
-                            Icon(Icons.navigate_next, size: 12, color: Colors.grey),
+                            Text("查看更多", style: TextStyle(fontSize: 12, color: ColorManager.grey)),
+                            Icon(Icons.navigate_next, size: 12, color: ColorManager.grey),
                           ],
                         ))
                   ],
@@ -181,7 +180,7 @@ class _MemberPageState extends State<MemberPage> with AutomaticKeepAliveClientMi
 
   cardRadius() {
     return const BoxDecoration(
-        color: Colors.white,
+        color: ColorManager.white,
         borderRadius: BorderRadius.all(Radius.circular(10))
     );
   }

@@ -3,16 +3,8 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:get/get.dart';
 import 'package:zz_flutter_shop/controller/member_page_controller.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
-import 'package:zz_flutter_shop/router/router_manager.dart';
 
-const mockUsers = {
-  'dribbble@gmail.com': '12345',
-  'hunter@gmail.com': 'hunter',
-  'near.huscarl@gmail.com': 'subscribe to pewdiepie',
-  '@.com': '.',
-};
-
-///设置页面
+///登录页面
 class LoginPage extends StatefulWidget {
   const LoginPage({Key key}) : super(key: key);
 
@@ -40,7 +32,7 @@ class _LoginPageState extends State<LoginPage>{
       title: '',
       logo: 'images/logo.png',
       onLogin: _execLogin,
-      onSignup: _execLogin,
+      onSignup: _execRegister,
       userType: LoginUserType.phone,
       userValidator: usernameValidator,
       passwordValidator: passwordValidator,
@@ -86,6 +78,26 @@ class _LoginPageState extends State<LoginPage>{
       return null;
     }
   };
+
+
+  Future<String> _execRegister(LoginData data) async {
+    return Future.delayed(Duration.zero).then((_) async {
+      if(data.name == null || data.name.isEmpty) {
+        return "用户名不能为空";
+      }
+      if(data.password == null || data.password.isEmpty){
+        return "密码不能为空";
+      }
+
+      //登录逻辑
+      var registerFlag = await memberPageController.paswordRegister(data.name, data.password, data.password);
+      if(!registerFlag){
+        return "注册失败";
+      }
+      return null;
+    });
+
+  }
 
   Future<String> _execLogin(LoginData data) async {
     return Future.delayed(Duration.zero).then((_) async {

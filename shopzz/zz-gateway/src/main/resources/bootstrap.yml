@@ -42,6 +42,13 @@ spring:
           filters:
             - StripPrefix=1
 
+        - id: zz-order-web_router
+          uri: lb://zz-order-web
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+
         - id: test_router
           uri: http://www.aliyun.com
           predicates:

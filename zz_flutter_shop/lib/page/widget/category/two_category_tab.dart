@@ -43,7 +43,7 @@ class TwoCategoryTabState extends State<TwoCategoryTab> {
     return Obx(() => Container(
       width: MediaQuery.of(context).size.width - 80,
       height: MediaQuery.of(context).size.height - 150,
-      color: Colors.white70,
+      color: ColorManager.white70,
       child: SingleChildScrollView(
         controller: scrollController,
         child: Column(
@@ -71,7 +71,7 @@ class TwoCategoryTabState extends State<TwoCategoryTab> {
 
       return Container(
         margin: const EdgeInsets.all(10),
-        color: Colors.white,
+        color: ColorManager.white,
         child: Column(
           children: <Widget>[
 
@@ -97,7 +97,7 @@ class TwoCategoryTabState extends State<TwoCategoryTab> {
                     //TODO 跳转到商品列表
                   },
                   child: Container(
-                    color: Colors.white,
+                    color: ColorManager.white,
                     alignment: Alignment.center,
                     child: Column(
                       children: <Widget>[
@@ -127,7 +127,7 @@ class TwoCategoryTabState extends State<TwoCategoryTab> {
       height: 30,
       padding: const EdgeInsets.only(left: 5),
       alignment: Alignment.centerLeft,
-      color: Colors.white,
+      color: ColorManager.white,
       child: Text(name, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
     );
   }

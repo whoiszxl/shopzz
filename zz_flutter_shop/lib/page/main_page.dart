@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
     WidgetsBinding.instance?.addPostFrameCallback((_bottomBarLayout) {
       //设置状态栏的颜色和图标模式
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: ColorManager.main,
+        statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
       ));
     });

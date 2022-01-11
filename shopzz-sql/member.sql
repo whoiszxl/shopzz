@@ -3,7 +3,7 @@
 ---------------------------------------------------
 DROP TABLE IF EXISTS `ums_member`;
 CREATE TABLE `ums_member`(
-    `id`                                int(11) NOT NULL COMMENT '主键ID',
+    `id`                                bigint(11) NOT NULL COMMENT '主键ID',
     `username`                          varchar(16) NOT NULL COMMENT '会员名',
     `password`                          varchar(100) NOT NULL COMMENT '密码',
     `pay_password`                      varchar(100) DEFAULT '' COMMENT '支付密码',
@@ -27,7 +27,7 @@ CREATE TABLE `ums_member`(
 
 DROP TABLE IF EXISTS `ums_member_info`;
 CREATE TABLE `ums_member_info`(
-    `member_id`                         int(11) NOT NULL COMMENT '用户ID',
+    `member_id`                         bigint(11) NOT NULL COMMENT '用户ID',
     `gender`                            tinyint(1) DEFAULT 0 COMMENT '性别(0:未知 1:男；2:女)',
     `birthday`                          datetime DEFAULT NULL COMMENT '生日',
     `country_code`                      varchar(5) DEFAULT '' COMMENT '国家码',
@@ -36,8 +36,8 @@ CREATE TABLE `ums_member_info`(
     `city`                              varchar(50) DEFAULT '' COMMENT '城市',
     `district`                          varchar(100) DEFAULT '' COMMENT '区域',
     `grade_level`                       varchar(20) DEFAULT '' COMMENT '会员等级',
-    `login_count`                       int(11) NOT NULL DEFAULT 0 COMMENT '会员登录次数',
-    `login_error_count`                 int(11) NOT NULL DEFAULT 0 COMMENT '会员登录错误次数',
+    `login_count`                       bigint(11) NOT NULL DEFAULT 0 COMMENT '会员登录次数',
+    `login_error_count`                 bigint(11) NOT NULL DEFAULT 0 COMMENT '会员登录错误次数',
     `last_login`                        datetime DEFAULT CURRENT_TIMESTAMP COMMENT '最后登录',
     `version`                           bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                        tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',

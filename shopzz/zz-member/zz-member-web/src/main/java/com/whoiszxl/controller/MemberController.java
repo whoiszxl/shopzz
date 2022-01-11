@@ -8,14 +8,14 @@ import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.Member;
 import com.whoiszxl.entity.MemberInfo;
-import com.whoiszxl.entity.vo.LoginQuery;
-import com.whoiszxl.entity.vo.MemberDetailVO;
-import com.whoiszxl.entity.vo.MemberInfoVO;
-import com.whoiszxl.entity.vo.MemberVO;
+import com.whoiszxl.entity.vo.*;
 import com.whoiszxl.service.MemberInfoService;
 import com.whoiszxl.service.MemberService;
+import com.whoiszxl.utils.CheckPasswordUtils;
+import com.whoiszxl.utils.RegexUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +48,7 @@ public class MemberController {
     @Autowired
     private DozerUtils dozerUtils;
 
+    @SaCheckLogin
     @GetMapping
     @ApiOperation(value = "获取当前登录用户的详细信息", notes = "获取当前登录用户的详细信息", response = MemberDetailVO.class)
     public ResponseResult<MemberDetailVO> memberInfo() {
@@ -55,6 +56,7 @@ public class MemberController {
         return ResponseResult.buildSuccess(memberDetailVO);
     }
 
+    @SaCheckLogin
     @PutMapping
     @Transactional
     @ApiOperation(value = "更新当前登录用户的详细信息", notes = "更新当前登录用户的详细信息", response = Boolean.class)
@@ -69,12 +71,45 @@ public class MemberController {
 
         //2. 更新用户详细信息
         MemberInfoVO memberInfoVO = memberDetailVO.getMemberInfo();
-        MemberInfo memberInfo = dozerUtils.map(memberDetailVO, MemberInfo.class);
+        MemberInfo memberInfo = dozerUtils.map(memberInfoVO, MemberInfo.class);
         memberInfo.setMemberId(memberId);
         memberInfoService.updateByMemberId(memberInfo);
 
         return ResponseResult.buildSuccess();
     }
+
+    @Transactional
+    @PostMapping("/password/register")
+    @ApiOperation(value = "账号密码注册", notes = "账号密码注册", response = ResponseResult.class)
+    public ResponseResult<Boolean> passwordRegister(@RequestBody PasswordRegisterQuery registerQuery) {
+        //1. 校验参数
+        if(RegexUtils.checkMobile(registerQuery.getUsername())) {
+            return ResponseResult.buildError("手机号不正确");
+        }
+
+        //2. 校验密码是否一致
+        if(!StringUtils.equals(registerQuery.getPassword(), registerQuery.getRePassword())) {
+            return ResponseResult.buildError("两次输入密码不一致");
+        }
+
+        //3. 校验密码
+        if(CheckPasswordUtils.getPasswordLevel(registerQuery.getPassword()).equals(CheckPasswordUtils.LEVEL.EASY)) {
+            return ResponseResult.buildError("密码太简单了");
+        }
+
+        //4. 判断是否在数据库中已存在
+        QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("phone", registerQuery.getUsername());
+        Member member = memberService.getOne(queryWrapper);
+        if(member != null) {
+            return ResponseResult.buildError("用户已存在");
+        }
+
+        //5. 新增用户
+        boolean registerFlag = memberService.passwordRegister(registerQuery.getUsername(), registerQuery.getPassword());
+        return ResponseResult.buildByFlag(registerFlag);
+    }
+
 
     @Transactional
     @PostMapping("/login")

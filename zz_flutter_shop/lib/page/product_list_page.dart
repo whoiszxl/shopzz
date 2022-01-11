@@ -6,6 +6,7 @@ import 'package:zz_flutter_shop/page/widget/product/grid_and_list_widget.dart';
 import 'package:zz_flutter_shop/page/widget/product/my_navigation_bar.dart';
 import 'package:zz_flutter_shop/page/widget/product/search_appbar.dart';
 import 'package:get/get.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/router/application.dart';
 
 
@@ -52,14 +53,14 @@ class _ProductListPageState extends State<ProductListPage> with TickerProviderSt
           MyNavigationBar(
             height: 50,
             child: searchAppBar(context, keywords),
-            color: Colors.white,
-            statusStyle: StatusStyle.DARK_CONTENT,
+            color: ColorManager.white,
+            statusStyle: StatusStyle.LIGHT_CONTENT,
           ),
 
           //过滤栏
           Container(
             height: 48,
-            color: Colors.white,
+            color: ColorManager.white,
             child: FilterParamTab(
               onTabChangedListener: (position) {},
               clickItemPositionCallback: (position) {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 
 enum StatusStyle { LIGHT_CONTENT, DARK_CONTENT }
 
@@ -14,7 +15,7 @@ class MyNavigationBar extends StatelessWidget {
   const MyNavigationBar(
       {Key key,
         this.statusStyle = StatusStyle.DARK_CONTENT,
-        this.color = Colors.white,
+        this.color = ColorManager.white,
         this.height = 46,
         this.child})
       : super(key: key);

@@ -2,11 +2,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:zz_flutter_shop/controller/cart_page_controller.dart';
 import 'package:zz_flutter_shop/entity/dto/cholice_chip_select.dart';
 
 import 'package:zz_flutter_shop/entity/response/product_detail_response.dart';
 import 'package:zz_flutter_shop/page/widget/product_detail/product_footer.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 
 class SaleAttrSelector extends StatefulWidget {
 
@@ -34,6 +37,8 @@ class _SaleAttrSelector extends State<SaleAttrSelector> {
   List<String> _selectedButtonIdList;
   String currentSkuId;
   List<String> currentSelectedAttr;
+
+  final CartPageController _cartPageController = Get.find<CartPageController>();
 
   double _screenHeight;
   double _screenWidth;
@@ -64,7 +69,7 @@ class _SaleAttrSelector extends State<SaleAttrSelector> {
           children: [
             TextSpan(
                 text: attrKey,
-                style: const TextStyle(fontSize: 11, color: Colors.grey)
+                style: const TextStyle(fontSize: 11, color: ColorManager.grey)
             ),
             const WidgetSpan(child: SizedBox(width: 6)),
             TextSpan(
@@ -81,7 +86,7 @@ class _SaleAttrSelector extends State<SaleAttrSelector> {
             builder: (BuildContext context) {
               return Container(
                 decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: ColorManager.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
@@ -93,7 +98,7 @@ class _SaleAttrSelector extends State<SaleAttrSelector> {
                   width: _screenWidth,
                   height: _screenHeight * 0.8,
                   child: Material(
-                    color: Colors.white,
+                    color: ColorManager.white,
                     child: Stack(children: <Widget>[
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +118,7 @@ class _SaleAttrSelector extends State<SaleAttrSelector> {
                           //footer
                           ProductFooter(() {
                             if(currentSkuId != null) {
-                              showToast(currentSkuId);
+                              _cartPageController.cartAdd(int.parse(currentSkuId), 1);
                             }
                           })
                         ],
@@ -274,14 +279,14 @@ Widget skuTitleInfo(ProductVO productVO) {
             children: <Widget>[
               Text("重量: " + productVO.grossWeight.toString(),
                   style: const TextStyle(
-                      color: Colors.grey,
+                      color: ColorManager.grey,
                       fontSize: 10,
                       decoration: TextDecoration.none)),
               const SizedBox(width: 2),
               Text(
                 "编号: " + productVO.id.toString(),
                 style: const TextStyle(
-                    color: Colors.grey,
+                    color: ColorManager.grey,
                     fontSize: 10,
                     decoration: TextDecoration.none),
               )

@@ -7,6 +7,7 @@ import 'package:zz_flutter_shop/page/widget/search_tag.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
 
+///flutter自带搜索组件
 class MySearchDelegate extends SearchDelegate<String> {
 
 
@@ -105,7 +106,7 @@ class MySearchDelegate extends SearchDelegate<String> {
                   map['keywords'] = query;
                   Get.toNamed(Routers.productList, parameters: map);
                 },
-                child: SearchTag(text: Text(p), borderColor: Colors.transparent, color: Colors.grey[300]),
+                child: SearchTag(text: Text(p), borderColor: Colors.transparent, color: ColorManager.grey),
               );
             })
           ],

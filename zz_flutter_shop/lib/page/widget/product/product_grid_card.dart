@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:zz_flutter_shop/entity/response/search_response.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/utils/image_util.dart';
 import 'package:get/get.dart';
@@ -107,7 +108,7 @@ class ProductGridCard extends StatelessWidget {
                 "10000+条评论 99%好评",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 10, color: Colors.grey),
+                style: TextStyle(fontSize: 10, color: ColorManager.grey),
               ),
             ],
           ),

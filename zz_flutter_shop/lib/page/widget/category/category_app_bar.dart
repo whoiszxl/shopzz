@@ -6,7 +6,7 @@ import 'package:zz_flutter_shop/res/colors_manager.dart';
 categoryAppBar(BuildContext context) {
 
   return AppBar(
-    backgroundColor: Colors.white70, //导航栏和状态栏的的颜色
+    backgroundColor: ColorManager.white70, //导航栏和状态栏的的颜色
     elevation: 0, //阴影的高度,默认在导航栏下有4高度阴影
 
     //qrcode扫描按钮
@@ -38,7 +38,7 @@ categoryAppBar(BuildContext context) {
       ),
     ),
     actions: <Widget>[
-      IconButton(icon: const Icon(Icons.message, color: Colors.grey),
+      IconButton(icon: const Icon(Icons.message, color: ColorManager.grey),
         onPressed: () {
           //todo 跳转到消息页面
           showToast("消息");

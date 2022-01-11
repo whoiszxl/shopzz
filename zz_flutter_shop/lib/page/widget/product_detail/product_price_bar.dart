@@ -55,7 +55,7 @@ productSubTitleBar(String subTitle) {
         TextSpan(
             text: subTitle,
             style: const TextStyle(
-                fontWeight: FontWeight.w500, fontSize: 11, color: Colors.grey)),
+                fontWeight: FontWeight.w500, fontSize: 11, color: ColorManager.grey)),
       ],
     ),
   );
@@ -86,7 +86,7 @@ productPromotionBar(String logo, String title) {
               text: title,
               style: const TextStyle(
                   fontWeight: FontWeight.w500,
-                  color: Colors.grey,
+                  color: ColorManager.grey,
                   fontSize: 11)),
         ]),
       ),
@@ -94,8 +94,8 @@ productPromotionBar(String logo, String title) {
 
       Row(
         children: const [
-          Text("查看更多", style: TextStyle(fontSize: 10, color: Colors.grey)),
-          Icon(Icons.keyboard_arrow_right, color: Colors.grey)
+          Text("查看更多", style: TextStyle(fontSize: 10, color: ColorManager.grey)),
+          Icon(Icons.keyboard_arrow_right, color: ColorManager.grey)
         ],
       ),
     ],
@@ -110,7 +110,7 @@ postageInfoBar(String postageInfo) {
       children: [
         const TextSpan(
           text: "邮费",
-          style: TextStyle(fontSize: 11, color: Colors.grey)
+          style: TextStyle(fontSize: 11, color: ColorManager.grey)
         ),
         const WidgetSpan(child: SizedBox(width: 6)),
         TextSpan(
@@ -129,7 +129,7 @@ serviceGuarantees(String info) {
       children: [
         const TextSpan(
             text: "保障",
-            style: TextStyle(fontSize: 11, color: Colors.grey)
+            style: TextStyle(fontSize: 11, color: ColorManager.grey)
         ),
         const WidgetSpan(child: SizedBox(width: 6)),
         TextSpan(
@@ -149,7 +149,7 @@ addressSet(String address, String type, String message) {
         WidgetSpan(child: Column(
           children: const [
             Text("送至",
-                style: TextStyle(fontSize: 11, color: Colors.grey)
+                style: TextStyle(fontSize: 11, color: ColorManager.grey)
             ),
           ],
         )),
@@ -201,8 +201,8 @@ productComment(int commentCount, double niceCommentRate) {
 
       Row(
         children: const [
-          Text("查看更多", style: TextStyle(fontSize: 11, color: Colors.grey)),
-          Icon(Icons.keyboard_arrow_right, color: Colors.grey)
+          Text("查看更多", style: TextStyle(fontSize: 11, color: ColorManager.grey)),
+          Icon(Icons.keyboard_arrow_right, color: ColorManager.grey)
         ],
       ),
     ],

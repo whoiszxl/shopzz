@@ -19,4 +19,13 @@ public interface MemberService extends IService<Member> {
      * @return 会员信息
      */
     MemberDetailVO memberInfo();
+
+    /**
+     * 账号密码注册
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
+    boolean passwordRegister(String username, String password);
+
 }

@@ -13,7 +13,7 @@ class MemberOrder extends StatelessWidget {
       height: 80,
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.only(left: 10, right: 10),
-      decoration: const BoxDecoration(color: Colors.white, borderRadius: const BorderRadius.all(const Radius.circular(10))),
+      decoration: const BoxDecoration(color: ColorManager.white, borderRadius: const BorderRadius.all(const Radius.circular(10))),
 
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zz_flutter_shop/entity/response/search_response.dart';
 import 'package:zz_flutter_shop/page/widget/product/little_tag.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/utils/image_util.dart';
 
@@ -82,7 +83,7 @@ class ProductListCard extends StatelessWidget {
                   productInfo.subName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 10, color: Colors.grey),
+                  style: const TextStyle(fontSize: 10, color: ColorManager.grey),
                 ),
               ),
 
@@ -123,7 +124,7 @@ class ProductListCard extends StatelessWidget {
                 "10000+条评论 99%好评",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 10, color: Colors.grey),
+                style: const TextStyle(fontSize: 10, color: ColorManager.grey),
               ),
             ],
           ),

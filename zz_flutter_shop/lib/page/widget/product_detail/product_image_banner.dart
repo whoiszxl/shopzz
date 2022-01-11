@@ -40,7 +40,7 @@ class ProductImageBanner extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               margin: EdgeInsets.only(right: right, bottom: 10),
               builder: const DotSwiperPaginationBuilder(
-                  color: Colors.white60,
+                  color: ColorManager.white60,
                   size: 6,
                   activeSize: 7
               )

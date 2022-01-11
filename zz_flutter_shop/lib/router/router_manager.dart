@@ -8,11 +8,13 @@ import 'package:zz_flutter_shop/page/main_page.dart';
 import 'package:zz_flutter_shop/page/member_page.dart';
 import 'package:zz_flutter_shop/page/product_detail_page.dart';
 import 'package:zz_flutter_shop/page/product_list_page.dart';
+import 'package:zz_flutter_shop/page/qrcode_page.dart';
 import 'package:zz_flutter_shop/page/register_page.dart';
 import 'package:zz_flutter_shop/page/settings_page.dart';
 
 ///路由名称
 class Routers{
+
   static const String main = '/main';
   static const String home = '/home';
   static const String category = '/category';
@@ -28,6 +30,8 @@ class Routers{
   static const String register = '/register';
 
   static const String setting = '/setting';
+
+  static const String qrcode = '/qrcode';
 
 }
 
@@ -49,6 +53,7 @@ class RouterManager{
     GetPage(name: Routers.register, page: () => const RegisterPage()),
 
     GetPage(name: Routers.setting, page: () => const SettingsPage()),
+    GetPage(name: Routers.qrcode, page: () => const QrcodePage()),
 
   ];
 

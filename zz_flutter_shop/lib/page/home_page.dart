@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
   }
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     //获取屏幕的初始化高度和宽度
     _screenHeight = MediaQuery.of(context).size.height;
     _screenWidth = MediaQuery.of(context).size.width;
@@ -82,7 +83,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
 
 
   _getTopLayout() {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: tabHeight,
       child: Row(
@@ -141,7 +142,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
-              HomeTabCorePage(),
+              const HomeTabCorePage(),
               HomeTabSubPage(), //订阅tab
             ],
 

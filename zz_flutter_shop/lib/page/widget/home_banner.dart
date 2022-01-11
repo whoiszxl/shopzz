@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:zz_flutter_shop/entity/response/home_app_index_response.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 class HomeBanner extends StatelessWidget {
   final List<BannerEntity> bannerList;
   final double bannerHeight;
@@ -41,7 +42,7 @@ class HomeBanner extends StatelessWidget {
           alignment: Alignment.bottomRight,
           margin: EdgeInsets.only(bottom: 10, right: 2),
           builder: DotSwiperPaginationBuilder(
-            color: Colors.white60,
+            color: ColorManager.white60,
             size: 5,
             activeSize: 6,
           )

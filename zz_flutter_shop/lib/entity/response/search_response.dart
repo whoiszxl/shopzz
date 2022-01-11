@@ -56,9 +56,9 @@ class ProductInfo {
   int brandId;
   String brandName;
   double grossWeight;
-  int length;
-  int width;
-  int height;
+  double length;
+  double width;
+  double height;
   String serviceGuarantees;
   int deleteStatus;
   int publishStatus;
@@ -66,11 +66,11 @@ class ProductInfo {
   String packageList;
   int freightTemplateId;
   int version;
-  Null isDeleted;
+  int isDeleted;
   String createdBy;
   String updatedBy;
   String createdAt;
-  Null updatedAt;
+  String updatedAt;
 
   ProductInfo(
       {this.id,

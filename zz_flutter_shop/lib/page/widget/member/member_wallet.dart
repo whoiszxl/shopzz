@@ -14,7 +14,7 @@ class MemberWallet extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.only(top: 10),
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: ColorManager.white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
 
@@ -61,7 +61,7 @@ class MemberWallet extends StatelessWidget {
                     Text(tabName, style: TextStyle(fontSize: 12, color: color)),
 
                     //副标题
-                    Text(subTabName, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                    Text(subTabName, style: const TextStyle(fontSize: 10, color: ColorManager.grey)),
                   ],
                 ),
               ),

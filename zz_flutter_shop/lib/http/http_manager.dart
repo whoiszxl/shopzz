@@ -1,16 +1,16 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:zz_flutter_shop/http/http_constant.dart';
 import 'package:zz_flutter_shop/http/http_error.dart';
 import 'package:zz_flutter_shop/http/http_method.dart';
 import 'package:zz_flutter_shop/http/interceptors/header_interceptor.dart';
 import 'package:zz_flutter_shop/http/interceptors/log_interceptor.dart';
+
 import 'base_response.dart';
 
 class HttpManager {
-  Map<String, CancelToken> _cancelTokens = Map();
+  final Map<String, CancelToken> _cancelTokens = {};
 
   ///默认的超时时间
   static const int CONNECT_TIMEOUT = 30 * 1000;
@@ -140,7 +140,7 @@ class HttpManager {
           return BaseResponse.fromJson(response.data).data;
         }else{
           print("接口发生异常：" + response.data['message']);
-          return null;
+          return BaseResponse.fromJson(response.data).data;
         }
       }
 

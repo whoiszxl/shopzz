@@ -16,11 +16,15 @@ public class CartDetailVO {
     private BigDecimal totalAmount;
 
     public BigDecimal getTotalAmount() {
+        BigDecimal result = BigDecimal.ZERO;
         if(ObjectUtils.isNotEmpty(cartItemVOList)) {
-            return cartItemVOList.stream().map(CartItemVO::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+            for (CartItemVO cartItemVO : cartItemVOList) {
+                BigDecimal singleItemAmount = cartItemVO.getPrice().multiply(BigDecimal.valueOf(cartItemVO.getQuantity()));
+                result = result.add(singleItemAmount);
+            }
         }
 
-        return BigDecimal.ZERO;
+        return result;
     }
 
     public Integer getSkuCount() {

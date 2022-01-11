@@ -118,13 +118,13 @@ class LogInterceptors extends Interceptor {
       _printMapAsTable(responseHeaders, header: 'Headers');
     }
 
-    if (responseBody) {
-      logPrint('╔ Body');
-      logPrint('║');
-      _printResponse(response);
-      logPrint('║');
-      _printLine('╚');
-    }
+    // if (responseBody) {
+    //   logPrint('╔ Body');
+    //   logPrint('║');
+    //   _printResponse(response);
+    //   logPrint('║');
+    //   _printLine('╚');
+    // }
 
     return response;
   }

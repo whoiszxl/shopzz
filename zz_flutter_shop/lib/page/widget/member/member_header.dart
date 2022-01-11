@@ -119,9 +119,9 @@ class MemberHeader extends StatelessWidget {
         child: Column(
           children: <Widget>[
 
-            Text(tabValue, textAlign: TextAlign.center, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(tabValue, textAlign: TextAlign.center, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: ColorManager.white)),
 
-            Text(tabName, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, color: Colors.white))
+            Text(tabName, textAlign: TextAlign.center, style: const TextStyle(fontSize: 12, color: ColorManager.white))
           ],
         ),
       ),
@@ -135,7 +135,7 @@ class MemberHeader extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 2,
-          color: Colors.white,
+          color: ColorManager.white,
         ),
         borderRadius: const BorderRadius.all(Radius.circular(30)),
       ),
@@ -143,7 +143,7 @@ class MemberHeader extends StatelessWidget {
         child: ClipOval(
           child: cachedImage(url, width: 60, height: 60, fit: BoxFit.cover)
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: ColorManager.white,
       ),
     );
   }
@@ -151,7 +151,7 @@ class MemberHeader extends StatelessWidget {
 
   Widget username(String username) {
     return Text(username,
-      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)
+      style: const TextStyle(color: ColorManager.white, fontWeight: FontWeight.bold, fontSize: 16)
     );
   }
 
@@ -162,7 +162,7 @@ class MemberHeader extends StatelessWidget {
         margin: const EdgeInsets.only(left: 6),
         alignment: Alignment.centerLeft,
         height: 12,
-        child: Text(memberInfo.gradeLevel, style: const TextStyle(color: Colors.white, fontSize: 8))
+        child: Text(memberInfo.gradeLevel, style: const TextStyle(color: ColorManager.white, fontSize: 8))
     );
   }
 
@@ -173,7 +173,7 @@ class MemberHeader extends StatelessWidget {
       borderWidth: 0,
       margin: const EdgeInsets.only(top: 2, right: 2),
       height: 12,
-      text: Text(tagValue, style: const TextStyle(color: Colors.white, fontSize: 8)),
+      text: Text(tagValue, style: const TextStyle(color: ColorManager.white, fontSize: 8)),
     );
   }
 }

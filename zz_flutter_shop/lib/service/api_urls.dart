@@ -11,6 +11,7 @@ class ApiUrls {
 
 
   static const String memberLogin = "/member/member/login";
+  static const String memberPasswordRegister = "/member/member/password/register";
   static const String memberRegister = "/member/member/register";
   static const String memberInfo = "/member/member";
 
@@ -18,5 +19,12 @@ class ApiUrls {
   static const String productDetail = "/product/product/detail/";
 
 
+  ///购物车
+  static const String cartAdd = "/order/cart/add";
+  static const String cartCheck = "/order/cart/check";
+  static const String cartClear = "/order/cart/clear";
+  static const String cartDelete = "/order/cart/delete";
+  static const String cartDetail = "/order/cart/detail";
+  static const String cartUpdateQuantity = "/order/cart/update/quantity";
 
 }

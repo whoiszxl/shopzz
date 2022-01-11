@@ -1,5 +1,6 @@
 
 import 'package:get/get.dart';
+import 'package:zz_flutter_shop/controller/cart_page_controller.dart';
 import 'package:zz_flutter_shop/controller/category_page_controller.dart';
 import 'package:zz_flutter_shop/controller/home_page_controller.dart';
 import 'package:zz_flutter_shop/controller/language_controller.dart';
@@ -18,5 +19,6 @@ class AllControllerBinding implements Bindings {
     Get.lazyPut<CategoryPageController>(() => CategoryPageController());
     Get.lazyPut<ProductPageController>(() => ProductPageController());
     Get.lazyPut<MemberPageController>(() => MemberPageController());
+    Get.lazyPut<CartPageController>(() => CartPageController());
   }
 }

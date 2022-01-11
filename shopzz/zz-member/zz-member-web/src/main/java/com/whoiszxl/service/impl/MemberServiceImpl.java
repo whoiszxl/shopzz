@@ -1,6 +1,7 @@
 package com.whoiszxl.service.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.Member;
 import com.whoiszxl.entity.MemberInfo;
@@ -10,8 +11,9 @@ import com.whoiszxl.entity.vo.MemberVO;
 import com.whoiszxl.mapper.MemberMapper;
 import com.whoiszxl.service.MemberInfoService;
 import com.whoiszxl.service.MemberService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.whoiszxl.utils.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -31,6 +33,12 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
     @Autowired
     private DozerUtils dozerUtils;
 
+    @Autowired
+    private IdWorker idWorker;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public MemberDetailVO memberInfo() {
         //1. 获取到当前登录用户的ID
@@ -47,5 +55,21 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         memberDetailVO.setMemberInfo(memberInfoVO);
         memberDetailVO.setMember(memberVO);
         return memberDetailVO;
+    }
+
+    @Override
+    public boolean passwordRegister(String username, String password) {
+        long memberId = idWorker.nextId();
+        Member member = new Member();
+        member.setId(memberId);
+        member.setUsername(username);
+        member.setPhone(username);
+        member.setPassword(passwordEncoder.encode(password));
+        this.save(member);
+
+        MemberInfo memberInfo = new MemberInfo();
+        memberInfo.setMemberId(memberId);
+        memberInfoService.save(memberInfo);
+        return true;
     }
 }

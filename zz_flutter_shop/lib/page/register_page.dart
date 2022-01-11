@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-///设置页面
+///注册页面
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key key}) : super(key: key);
 

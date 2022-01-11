@@ -17,6 +17,6 @@ Widget cachedImage(String url, {double width, double height, BoxFit fit}) {
           String url,
           dynamic error,
           ) =>
-          Icon(Icons.error),
+          const Icon(Icons.error),
       imageUrl: url);
 }

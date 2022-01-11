@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:zz_flutter_shop/controller/language_controller.dart';
 import 'package:zz_flutter_shop/controller/main_page_controller.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
-import 'package:zz_flutter_shop/router/router_manager.dart';
 
 ///首页底部导航
 // ignore: must_be_immutable
@@ -48,7 +47,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>{
   _getLayoutBottomBar(){
     return Container(
       key: bottomBarKey,
-      color:Colors.white,
+      color:ColorManager.white,
       height: 44,
       child: Row(
         children: [

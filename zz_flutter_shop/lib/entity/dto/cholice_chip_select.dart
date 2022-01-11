@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 
 class ChoiceChipSelect extends StatefulWidget {
 
@@ -56,9 +57,9 @@ class _ChoiceChipSelectState extends State<ChoiceChipSelect> {
         child: ChoiceChip(
           padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
           pressElevation: 0,
-          selectedColor: Colors.white38,
+          selectedColor: ColorManager.white38,
           selected: isSelected,
-          backgroundColor: Colors.white38,
+          backgroundColor: ColorManager.white38,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: BorderSide(color: isSelected ? Colors.red : Colors.transparent, width: 1),

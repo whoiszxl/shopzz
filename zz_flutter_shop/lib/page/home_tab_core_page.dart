@@ -71,7 +71,7 @@ class _HomeTabCorePageState extends State<HomeTabCorePage> with AutomaticKeepAli
       List<NavigationEntity> navList = _homePageController.navigationList;
       List<BannerEntity> bannerList = _homePageController.bannerList;
 
-      if(navList.isEmpty && bannerList.isEmpty) {
+      if(_homePageController.navigationList.isEmpty || _homePageController.bannerList.isEmpty) {
         return normalLoading();
       }else {
         return Column(children: [

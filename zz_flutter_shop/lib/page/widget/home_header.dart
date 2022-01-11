@@ -1,3 +1,4 @@
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,7 @@ class HomeHeaderState extends State<HomeHeader> {
     return SliverAppBar(
       floating: true,
       pinned: true,
-      leading: const Text(''),
+      leading: const Padding(padding: EdgeInsets.only(left: 8), child:Image(image: AssetImage('images/logo.png'))),
       foregroundColor: ColorManager.black,
       backgroundColor: ColorManager.black,
       shadowColor: ColorManager.black,
@@ -43,7 +44,9 @@ class HomeHeaderState extends State<HomeHeader> {
       actions: [
 
         _headerButton(Icons.crop_free, () {
-          showToast("掃描二維碼");
+          getQrcodeState().then((value) => {
+            showToast(value)
+          });
         }),
 
         _headerButton(Icons.message_rounded, () {
@@ -53,7 +56,7 @@ class HomeHeaderState extends State<HomeHeader> {
 
       ],
       iconTheme: const IconThemeData(
-        color: Colors.white,
+        color: ColorManager.white,
         size: 30,
         opacity: 1,
       ),
@@ -70,7 +73,7 @@ class HomeHeaderState extends State<HomeHeader> {
           padding:const EdgeInsets.all(0.0),
           icon: Icon(
             icon,
-            color: Colors.white,
+            color: ColorManager.white,
             size: 20,
           ),
           onPressed: event,
@@ -85,7 +88,7 @@ class HomeHeaderState extends State<HomeHeader> {
         height: 20,
         width: MediaQuery.of(context).size.width * 0.6,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ColorManager.white,
           borderRadius: BorderRadius.circular(3),
         ),
         child: InkWell(
@@ -102,12 +105,12 @@ class HomeHeaderState extends State<HomeHeader> {
                 border: InputBorder.none,
                 prefixIcon: Icon(
                   Icons.search,
-                  color: Colors.grey,
+                  color: ColorManager.grey,
                   size: 15,
                 ),
                 suffixIcon: Icon(
                   Icons.camera_alt,
-                  color: Colors.grey,
+                  color: ColorManager.grey,
                   size: 15,
                 ),
               ),
@@ -119,5 +122,24 @@ class HomeHeaderState extends State<HomeHeader> {
       collapseMode: CollapseMode.parallax,
       background: Image.network('http://zero-mall.oss-cn-shenzhen.aliyuncs.com/banner/bg1.jpg', fit: BoxFit.cover),
     );
+  }
+
+  //扫描二维码
+  static Future<String> getQrcodeState() async {
+    try{
+      const ScanOptions options = ScanOptions(
+        strings: {
+          'cancel': '取消',
+          'flash_on': '打开闪光灯',
+          'flash_off': '关闭闪光灯',
+        }
+      );
+
+      final ScanResult result = await BarcodeScanner.scan(options: options);
+      return result.rawContent;
+    }catch(e) {
+      print(e);
+      return null;
+    }
   }
 }

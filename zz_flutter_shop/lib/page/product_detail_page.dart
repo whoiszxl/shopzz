@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:zz_flutter_shop/controller/cart_page_controller.dart';
 import 'package:zz_flutter_shop/controller/product_page_controller.dart';
 import 'package:zz_flutter_shop/page/widget/product/my_navigation_bar.dart';
 import 'package:zz_flutter_shop/page/widget/product_detail/product_footer.dart';
@@ -11,10 +11,10 @@ import 'package:zz_flutter_shop/page/widget/product_detail/sale_attr_selector.da
 import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/utils/loading_util.dart';
 
-
+///商品详情页
 class ProductDetailPage extends StatefulWidget {
 
-  ProductDetailPage();
+  const ProductDetailPage({Key key}) : super(key: key);
 
   @override
   _ProductDetailPageState createState() => _ProductDetailPageState();
@@ -32,6 +32,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with SingleTicker
 
   final ProductPageController _productPageController = Get.put<ProductPageController>(ProductPageController());
 
+  final CartPageController _cartPageController = Get.find<CartPageController>();
 
   @override
   void initState() {
@@ -68,7 +69,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with SingleTicker
         }else {
           return Scaffold(
               bottomSheet: ProductFooter(() {
-                showToast("加入购物车了");
+                _cartPageController.cartAdd(int.parse(currentSkuId), 1);
               }),
               body: SmartRefresher(
                 enablePullDown: true,
@@ -92,7 +93,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with SingleTicker
         //Appbar
         const MyNavigationBar(
           height: 0,
-          color: Colors.white,
+          color: ColorManager.white,
           statusStyle: StatusStyle.DARK_CONTENT,
         ),
 
@@ -184,7 +185,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with SingleTicker
           icon,
           color: opacity == 1
               ? ColorManager.main
-              : Colors.white,
+              : ColorManager.white,
           size: iconSize,
         ),
       ),
