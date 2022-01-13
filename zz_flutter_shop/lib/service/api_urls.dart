@@ -37,4 +37,6 @@ class ApiUrls {
   ///提交订单
   static const String orderSubmit = "/order/order/submit";
 
+  static const String orderPay = "/order/order/pay";
+
 }
