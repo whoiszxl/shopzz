@@ -2,7 +2,7 @@ package com.whoiszxl.task;
 
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.entity.Currency;
-import com.whoiszxl.entity.DcPayInfo;
+import com.whoiszxl.entity.PayInfoDc;
 import com.whoiszxl.entity.Height;
 import com.whoiszxl.enums.UpchainStatusEnum;
 import com.whoiszxl.feign.OrderFeignClient;
@@ -104,32 +104,32 @@ public class EthScanTask {
 
                 //9. 判断支付单是否存在，判断链上充值金额是否足够支付订单
                 BigDecimal amount = Convert.fromWei(transaction.getValue().toString(), Convert.Unit.ETHER);
-                DcPayInfo dcPayInfo = dcPayInfoService.getRechargeByAddressAndCurrencyNameAndUpchainStatus(transaction.getTo(), currencyName, UpchainStatusEnum.NOT_UPCHAIN.getCode());
-                if(dcPayInfo == null) {
+                PayInfoDc payInfoDc = dcPayInfoService.getRechargeByAddressAndCurrencyNameAndUpchainStatus(transaction.getTo(), currencyName, UpchainStatusEnum.NOT_UPCHAIN.getCode());
+                if(payInfoDc == null) {
                     log.info("{} 地址不在库中：{}", currencyName, transaction.getTo());
                     continue;
                 }
 
-                if(amount.compareTo(dcPayInfo.getTotalAmount()) < 0) {
-                    log.info("链上充值金额小于订单金额, 订单金额为：{}, 链上充值金额为：{}", dcPayInfo.getTotalAmount().toPlainString(), amount.toPlainString());
+                if(amount.compareTo(payInfoDc.getTotalAmount()) < 0) {
+                    log.info("链上充值金额小于订单金额, 订单金额为：{}, 链上充值金额为：{}", payInfoDc.getTotalAmount().toPlainString(), amount.toPlainString());
                     continue;
                 }
 
                 //10. 填充基础信息
-                dcPayInfo.setFromAddress(transaction.getFrom());
-                dcPayInfo.setTxHash(transaction.getHash());
-                dcPayInfo.setCurrentConfirm(transaction.getBlockNumber().subtract(BigInteger.valueOf(i)).longValue());
-                dcPayInfo.setHeight(transaction.getBlockNumber().longValue());
-                dcPayInfo.setUpchainAt(new Date(block.getTimestamp().longValue()));
+                payInfoDc.setFromAddress(transaction.getFrom());
+                payInfoDc.setTxHash(transaction.getHash());
+                payInfoDc.setCurrentConfirm(transaction.getBlockNumber().subtract(BigInteger.valueOf(i)).longValue());
+                payInfoDc.setHeight(transaction.getBlockNumber().longValue());
+                payInfoDc.setUpchainAt(new Date(block.getTimestamp().longValue()));
 
                 //11. 判断是否上链确认成功
                 if(i - block.getNumber().intValue() >= ethInfo.getConfirms()) {
-                    dcPayInfo.setUpchainStatus(UpchainStatusEnum.SUCCESS.getCode());
-                    dcPayInfo.setUpchainSuccessAt(new Date(block.getTimestamp().longValue()));
+                    payInfoDc.setUpchainStatus(UpchainStatusEnum.SUCCESS.getCode());
+                    payInfoDc.setUpchainSuccessAt(new Date(block.getTimestamp().longValue()));
                 }else {
-                    dcPayInfo.setUpchainStatus(UpchainStatusEnum.WAITING_CONFIRM.getCode());
+                    payInfoDc.setUpchainStatus(UpchainStatusEnum.WAITING_CONFIRM.getCode());
                 }
-                dcPayInfoService.updateById(dcPayInfo);
+                dcPayInfoService.updateById(payInfoDc);
             }
 
         }
@@ -158,7 +158,7 @@ public class EthScanTask {
         Long currentHeight = ethereumService.getBlockchainHeight();
 
         //2. 查询到所有待确认的支付单
-        List<DcPayInfo> waitConfirmRecharge = dcPayInfoService.getWaitConfirmPayInfo(currencyName);
+        List<PayInfoDc> waitConfirmRecharge = dcPayInfoService.getWaitConfirmPayInfo(currencyName);
         if(ObjectUtils.isEmpty(waitConfirmRecharge)) {
             log.info("不存在待确认的支付单");
             return;
@@ -166,18 +166,18 @@ public class EthScanTask {
 
         //3. 遍历库中交易进行判断是否成功
         List<Long> paySuccessOrderIds = new ArrayList<>();
-        for (DcPayInfo dcPayInfo : waitConfirmRecharge) {
-            Transaction transaction = ethereumService.getTransactionByHash(dcPayInfo.getTxHash());
+        for (PayInfoDc payInfoDc : waitConfirmRecharge) {
+            Transaction transaction = ethereumService.getTransactionByHash(payInfoDc.getTxHash());
 
             //如果链上交易确认数大于等于配置的确认数，则更新支付单为成功并更新上链成功时间，否则只更新当前确认数。
             if(currentHeight - transaction.getBlockNumber().longValue()  >= ethInfo.getConfirms()) {
-                dcPayInfo.setUpchainStatus(UpchainStatusEnum.SUCCESS.getCode());
-                dcPayInfo.setUpchainSuccessAt(new Date());
+                payInfoDc.setUpchainStatus(UpchainStatusEnum.SUCCESS.getCode());
+                payInfoDc.setUpchainSuccessAt(new Date());
             }
-            dcPayInfo.setCurrentConfirm(currentHeight - transaction.getBlockNumber().longValue());
-            dcPayInfoService.updateById(dcPayInfo);
+            payInfoDc.setCurrentConfirm(currentHeight - transaction.getBlockNumber().longValue());
+            dcPayInfoService.updateById(payInfoDc);
 
-            paySuccessOrderIds.add(dcPayInfo.getOrderId());
+            paySuccessOrderIds.add(payInfoDc.getOrderId());
         }
 
         if(ObjectUtils.isNotEmpty(paySuccessOrderIds)) {

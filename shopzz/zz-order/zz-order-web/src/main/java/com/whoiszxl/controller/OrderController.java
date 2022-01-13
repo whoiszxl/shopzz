@@ -4,6 +4,7 @@ package com.whoiszxl.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.entity.query.OrderSubmitRequest;
+import com.whoiszxl.entity.vo.OrderPayVO;
 import com.whoiszxl.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,6 +37,14 @@ public class OrderController {
     public ResponseResult<String> orderSubmit(@RequestBody OrderSubmitRequest orderSubmitRequest) {
         String orderId = orderService.orderSubmit(orderSubmitRequest);
         return ResponseResult.buildSuccess(orderId);
+    }
+
+
+    @SaCheckLogin
+    @PostMapping("/pay")
+    @ApiOperation(value = "去支付", notes = "去支付", response = Boolean.class)
+    public ResponseResult<String> pay(@RequestBody OrderPayVO orderPayVO) {
+        return orderService.pay(orderPayVO);
     }
 }
 

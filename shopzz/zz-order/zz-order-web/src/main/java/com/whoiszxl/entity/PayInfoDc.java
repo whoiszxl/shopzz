@@ -67,7 +67,7 @@ public class PayInfoDc implements Serializable {
     private LocalDateTime upchainSuccessAt;
 
     @ApiModelProperty("上链状态，1：上链并确认成功 2：等待确认中 3：未上链")
-    private Boolean upchainStatus;
+    private Integer upchainStatus;
 
     @ApiModelProperty("当前交易确认数")
     private Long currentConfirm;

@@ -2,7 +2,7 @@ package com.whoiszxl.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.whoiszxl.entity.DcPayInfo;
+import com.whoiszxl.entity.PayInfoDc;
 import com.whoiszxl.enums.UpchainStatusEnum;
 import com.whoiszxl.mapper.DcPayInfoMapper;
 import com.whoiszxl.service.DcPayInfoService;
@@ -19,39 +19,39 @@ import java.util.List;
  * @since 2021-07-30
  */
 @Service
-public class DcPayInfoServiceImpl extends ServiceImpl<DcPayInfoMapper, DcPayInfo> implements DcPayInfoService {
+public class DcPayInfoServiceImpl extends ServiceImpl<DcPayInfoMapper, PayInfoDc> implements DcPayInfoService {
 
 
     @Override
-    public DcPayInfo getByOrderIdAndMemberId(Long orderId, Long memberId) {
-        LambdaQueryWrapper<DcPayInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DcPayInfo::getOrderId, orderId);
-        queryWrapper.eq(DcPayInfo::getMemberId, memberId);
+    public PayInfoDc getByOrderIdAndMemberId(Long orderId, Long memberId) {
+        LambdaQueryWrapper<PayInfoDc> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PayInfoDc::getOrderId, orderId);
+        queryWrapper.eq(PayInfoDc::getMemberId, memberId);
         return this.getOne(queryWrapper);
     }
 
     @Override
-    public DcPayInfo getPayInfoByCurrencyNameAndOrderId(String currencyName, String orderId) {
-        LambdaQueryWrapper<DcPayInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DcPayInfo::getOrderId, orderId);
-        queryWrapper.eq(DcPayInfo::getCurrencyName, currencyName);
+    public PayInfoDc getPayInfoByCurrencyNameAndOrderId(String currencyName, String orderId) {
+        LambdaQueryWrapper<PayInfoDc> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PayInfoDc::getOrderId, orderId);
+        queryWrapper.eq(PayInfoDc::getCurrencyName, currencyName);
         return this.getOne(queryWrapper);
     }
 
     @Override
-    public List<DcPayInfo> getWaitConfirmPayInfo(String currencyName) {
-        LambdaQueryWrapper<DcPayInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DcPayInfo::getUpchainStatus, UpchainStatusEnum.WAITING_CONFIRM.getCode());
-        queryWrapper.eq(DcPayInfo::getCurrencyName, currencyName);
+    public List<PayInfoDc> getWaitConfirmPayInfo(String currencyName) {
+        LambdaQueryWrapper<PayInfoDc> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PayInfoDc::getUpchainStatus, UpchainStatusEnum.WAITING_CONFIRM.getCode());
+        queryWrapper.eq(PayInfoDc::getCurrencyName, currencyName);
         return this.list(queryWrapper);
     }
 
     @Override
-    public DcPayInfo getRechargeByAddressAndCurrencyNameAndUpchainStatus(String toAddress, String currencyName, Integer upchainStatus) {
-        LambdaQueryWrapper<DcPayInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(DcPayInfo::getToAddress, toAddress);
-        queryWrapper.eq(DcPayInfo::getCurrencyName, currencyName);
-        queryWrapper.eq(DcPayInfo::getUpchainStatus, upchainStatus);
+    public PayInfoDc getRechargeByAddressAndCurrencyNameAndUpchainStatus(String toAddress, String currencyName, Integer upchainStatus) {
+        LambdaQueryWrapper<PayInfoDc> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(PayInfoDc::getToAddress, toAddress);
+        queryWrapper.eq(PayInfoDc::getCurrencyName, currencyName);
+        queryWrapper.eq(PayInfoDc::getUpchainStatus, upchainStatus);
         return this.getOne(queryWrapper);
     }
 }

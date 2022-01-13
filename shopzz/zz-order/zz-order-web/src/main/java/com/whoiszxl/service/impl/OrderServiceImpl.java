@@ -2,16 +2,21 @@ package com.whoiszxl.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.bean.ResponseResult;
+import com.whoiszxl.constants.OrderPayTypeConstants;
 import com.whoiszxl.constants.OrderStatusConstants;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.dto.*;
 import com.whoiszxl.entity.Order;
 import com.whoiszxl.entity.OrderItem;
+import com.whoiszxl.entity.PayInfoDc;
+import com.whoiszxl.entity.PayInfoDcBuilder;
 import com.whoiszxl.entity.query.OrderSubmitRequest;
 import com.whoiszxl.entity.vo.CartDetailVO;
 import com.whoiszxl.entity.vo.CartItemVO;
 import com.whoiszxl.entity.vo.OrderCreateInfo;
+import com.whoiszxl.entity.vo.OrderPayVO;
 import com.whoiszxl.exception.ExceptionCatcher;
+import com.whoiszxl.factory.CreateDcAddressFactory;
 import com.whoiszxl.feign.MemberFeignClient;
 import com.whoiszxl.feign.ProductFeignClient;
 import com.whoiszxl.feign.PromotionFeignClient;
@@ -20,10 +25,7 @@ import com.whoiszxl.mq.MQConstants;
 import com.whoiszxl.mq.MQEnum;
 import com.whoiszxl.mq.MQSender;
 import com.whoiszxl.mq.MQSenderFactory;
-import com.whoiszxl.service.CartService;
-import com.whoiszxl.service.OrderItemService;
-import com.whoiszxl.service.OrderOperateHistoryService;
-import com.whoiszxl.service.OrderService;
+import com.whoiszxl.service.*;
 import com.whoiszxl.state.LoggerOrderStateManager;
 import com.whoiszxl.utils.BeanCopierUtils;
 import com.whoiszxl.utils.IdWorker;
@@ -80,6 +82,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private MQSenderFactory mqSenderFactory;
+
+    @Autowired
+    private PayInfoDcService payInfoDcService;
+
+    @Autowired
+    private CreateDcAddressFactory createDcAddressFactory;
 
     @Autowired
     private DozerUtils dozerUtils;
@@ -287,4 +295,53 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         return this.updateById(order);
     }
 
+    @Override
+    @Transactional
+    public ResponseResult pay(OrderPayVO orderPayVO) {
+        //1. 判断订单状态是否能支付
+        Order order = this.getById(orderPayVO.getOrderId());
+        if(!OrderStatusConstants.WAIT_FOR_PAY.equals(order.getOrderStatus())) {
+            return ResponseResult.buildError("订单无法支付");
+        }
+
+        //2. 如果是数字货币支付，判断是否存在，不存在则创建
+        if(OrderPayTypeConstants.DC_PAY.equals(orderPayVO.getPayType())) {
+            PayInfoDc payInfoDc = payInfoDcService.getByOrderIdAndMemberId(order.getId(), order.getMemberId());
+            if(payInfoDc != null) {
+                return ResponseResult.buildSuccess(payInfoDc);
+            }
+
+            payInfoDc = PayInfoDcBuilder
+                    .get()
+                    .init(createDcAddressFactory, orderPayVO.getDcName())
+                    .buildBaseData(order)
+                    .buildAddress(order)
+                    .initStatus()
+                    .create();
+
+            //汇率换算
+            BigDecimal rateAmount = rateCompute(order.getTotalAmount());
+            payInfoDc.setTotalAmount(rateAmount);
+
+            boolean saveFlag = payInfoDcService.save(payInfoDc);
+            if(saveFlag) {
+                return ResponseResult.buildSuccess(payInfoDc);
+            }
+            return ResponseResult.buildError("数字货币支付失败");
+        }
+
+        //3. TODO 如果是普通支付
+
+        return ResponseResult.buildError("TODO");
+    }
+
+
+    /**
+     * 汇率换算，TODO
+     * @param amount 需要换算的金额
+     * @return 换算后的金额
+     */
+    private BigDecimal rateCompute(BigDecimal amount) {
+        return amount;
+    }
 }
