@@ -4,10 +4,12 @@ import 'package:oktoast/oktoast.dart';
 import 'package:zz_flutter_shop/controller/all_controller_binding.dart';
 import 'package:zz_flutter_shop/i18n/messages.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
+import 'package:zz_flutter_shop/service/address_api_service.dart';
 import 'package:zz_flutter_shop/service/cart_api_service.dart';
 import 'package:zz_flutter_shop/service/category_api_service.dart';
 import 'package:zz_flutter_shop/service/home_api_service.dart';
 import 'package:zz_flutter_shop/service/member_api_service.dart';
+import 'package:zz_flutter_shop/service/order_api_service.dart';
 import 'package:zz_flutter_shop/service/product_api_service.dart';
 
 ///主程序运行入口
@@ -36,5 +38,7 @@ Future<void> initServices() async {
   await Get.putAsync(() async => ProductApiService());
   await Get.putAsync(() async => MemberApiService());
   await Get.putAsync(() async => CartApiService());
+  await Get.putAsync(() async => AddressApiService());
+  await Get.putAsync(() async => OrderApiService());
   print("init services inject end...");
 }

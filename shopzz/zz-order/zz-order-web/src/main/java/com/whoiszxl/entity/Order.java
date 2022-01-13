@@ -27,7 +27,7 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
-      private Long id;
+    private Long id;
 
     @ApiModelProperty("订单编号")
     private String orderSn;

@@ -13,7 +13,7 @@ import 'package:zz_flutter_shop/router/application.dart';
 ///商品搜索列表页
 class ProductListPage extends StatefulWidget {
 
-  ProductListPage({Key key}) : super(key: key);
+  const ProductListPage({Key key}) : super(key: key);
 
   @override
   _ProductListPageState createState() => _ProductListPageState();

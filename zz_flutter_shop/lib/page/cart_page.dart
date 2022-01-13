@@ -6,6 +6,7 @@ import 'package:zz_flutter_shop/entity/response/cart_detail_response.dart';
 import 'package:zz_flutter_shop/page/widget/cart/cart_app_bar.dart';
 import 'package:zz_flutter_shop/page/widget/cart/cart_card.dart';
 import 'package:zz_flutter_shop/page/widget/cart/cart_footer.dart';
+import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/utils/loading_util.dart';
 
 ///购物车页面
@@ -19,7 +20,7 @@ class CartPage extends StatefulWidget {
   }
 }
 
-class _CartPageState extends State<CartPage> with TickerProviderStateMixin{
+class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin{
 
   ///用户下拉刷新的控制器
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
@@ -49,16 +50,15 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin{
       //使用obx获取到业务控制器里的接口结果数据
       body: Obx(() {
         //如果结果数据为空，则显示加载动画
-        if(_cartPageController.cartDetailResponse.value == null
-            || _cartPageController.cartDetailResponse.value.cartItemVOList == null) {
-          return normalLoading();
-        }else {
+
           //否则展示智能刷新组件
           return Scaffold(
             bottomSheet: CartFooter(() {
-
+              //跳转订单确认页操作
+              Get.toNamed(Routers.orderConfirm);
             }),
-            body: SmartRefresher(
+            body: (_cartPageController.cartDetailResponse.value != null && _cartPageController.cartDetailResponse.value.cartItemVOList != null) ?
+            SmartRefresher(
                 enablePullDown: true, //开启下拉
                 enablePullUp: false, //关闭上拉
                 header: const ClassicHeader(),
@@ -66,11 +66,11 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin{
                 controller: _refreshController,
                 onRefresh: _onRefresh, //下拉时调用
                 child: _cartListView(_cartPageController.cartDetailResponse.value.cartItemVOList) //返回列表组件
-            ),
+            ) : const Center(child: Text("购物车无商品，快去加购吧")),
           );
 
 
-        }
+
       })
     );
   }
@@ -85,7 +85,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin{
   ///返回购物车商品列表，ListView
   _cartListView(List<CartItemVO> cartItemVOList) {
     return ListView.builder(
-        itemCount: cartItemVOList.length,
+        itemCount: cartItemVOList?.length,
         itemBuilder: (BuildContext context, int index) {
 
           //返回购物车item
@@ -94,13 +94,13 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin{
               //购物车item的计数器改变事件
               counterOnChanged: (int quantity, int type) {
                 //调用接口更新购物车item的数量
-                _cartPageController.cartUpdateQuantity(cartItemVOList[index].skuId, quantity);
+                _cartPageController.cartUpdateQuantity(cartItemVOList[index]?.skuId, quantity);
 
                 //根据type加减类型修改全局的总金额参数
                 if(type == -1) {
-                  _cartPageController.totalAmount.value = _cartPageController.totalAmount.value - cartItemVOList[index].price * cartItemVOList[index].quantity;
+                  _cartPageController.totalAmount.value = _cartPageController.totalAmount.value - cartItemVOList[index].price;
                 }else if(type == 1) {
-                  _cartPageController.totalAmount.value = _cartPageController.totalAmount.value + cartItemVOList[index].price * cartItemVOList[index].quantity;
+                  _cartPageController.totalAmount.value = _cartPageController.totalAmount.value + cartItemVOList[index].price;
                 }
               },
 
@@ -110,7 +110,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin{
                 _cartPageController.cartCheck(cartItemVOList[index].skuId, checked);
 
                 //根据选中状态更新全局的总金额参数
-                if(checked == 1) {
+                if(checked == 1)                                                                                                                                                                                            {
                   _cartPageController.totalAmount.value = _cartPageController.totalAmount.value + cartItemVOList[index].price * cartItemVOList[index].quantity;
                 }else if(checked == 0) {
                   _cartPageController.totalAmount.value = _cartPageController.totalAmount.value - cartItemVOList[index].price * cartItemVOList[index].quantity;
@@ -122,11 +122,15 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin{
     );
   }
 
+
+
   @override
   void dispose() {
     super.dispose();
-    _refreshController.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
 
 }

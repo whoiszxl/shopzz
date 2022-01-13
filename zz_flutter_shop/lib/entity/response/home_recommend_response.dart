@@ -20,14 +20,14 @@ class HomeRecommendResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.hotRecommendList != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (hotRecommendList != null) {
       data['hotRecommendList'] =
-          this.hotRecommendList.map((v) => v.toJson()).toList();
+          hotRecommendList.map((v) => v.toJson()).toList();
     }
-    if (this.niceRecommendList != null) {
+    if (niceRecommendList != null) {
       data['niceRecommendList'] =
-          this.niceRecommendList.map((v) => v.toJson()).toList();
+          niceRecommendList.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -65,15 +65,15 @@ class RecommendEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['productId'] = this.productId;
-    data['productName'] = this.productName;
-    data['defaultPic'] = this.defaultPic;
-    data['defaultPrice'] = this.defaultPrice;
-    data['type'] = this.type;
-    data['status'] = this.status;
-    data['sort'] = this.sort;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['productId'] = productId;
+    data['productName'] = productName;
+    data['defaultPic'] = defaultPic;
+    data['defaultPrice'] = defaultPrice;
+    data['type'] = type;
+    data['status'] = status;
+    data['sort'] = sort;
     return data;
   }
 }

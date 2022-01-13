@@ -6,7 +6,7 @@ import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
 import com.whoiszxl.dto.SkuDTO;
 import com.whoiszxl.entity.Cart;
-import com.whoiszxl.entity.query.SaveCartQuery;
+import com.whoiszxl.entity.query.SaveCartRequest;
 import com.whoiszxl.entity.vo.CartDetailVO;
 import com.whoiszxl.entity.vo.CartItemVO;
 import com.whoiszxl.enums.StatusEnum;
@@ -44,7 +44,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
     private ProductFeignClient productFeignClient;
 
     @Override
-    public Boolean cartAdd(SaveCartQuery addCartQuery) {
+    public Boolean cartAdd(SaveCartRequest addCartQuery) {
         //0. 对sku进行有效性校验
         ResponseResult<SkuDTO> skuInfoResponse = productFeignClient.getSkuInfoBySkuId(addCartQuery.getSkuId());
         SkuDTO sku = skuInfoResponse.getData();
@@ -88,10 +88,11 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
     @Override
     public CartDetailVO getCartDetail() {
         String memberId = StpUtil.getLoginIdAsString();
+        CartDetailVO cartDetailVO = new CartDetailVO();
 
         Map<Object, Object> cartItems = redisUtils.hGetAll(RedisKeyPrefixConstants.MEMBER_CART_PREFIX + memberId);
         if(ObjectUtils.isEmpty(cartItems)) {
-            return null;
+            return cartDetailVO;
         }
 
         List<CartItemVO> cartItemVOList = cartItems.values().stream().map(obj -> {
@@ -99,7 +100,6 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
             return JsonUtil.fromJson(jsonValue, CartItemVO.class);
         }).collect(Collectors.toList());
 
-        CartDetailVO cartDetailVO = new CartDetailVO();
         cartDetailVO.setCartItemVOList(cartItemVOList);
 
         return cartDetailVO;
@@ -151,5 +151,16 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
         BoundHashOperations<String, Object, Object> cartHashOps = redisUtils.getHashOps(RedisKeyPrefixConstants.MEMBER_CART_PREFIX + StpUtil.getLoginIdAsString());
         cartHashOps.delete(skuIdList.stream().map(Object::toString).toArray());
         return true;
+    }
+
+    @Override
+    public void clearCheckedCart() {
+        BoundHashOperations<String, Object, Object> cartHashOps = redisUtils.getHashOps(RedisKeyPrefixConstants.MEMBER_CART_PREFIX + StpUtil.getLoginIdAsString());
+        CartDetailVO cartDetail = getCartDetail();
+        for (CartItemVO cartItemVO : cartDetail.getCartItemVOList()) {
+            if(cartItemVO.getChecked() == 1) {
+                cartHashOps.delete(cartItemVO.getSkuId().toString());
+            }
+        }
     }
 }

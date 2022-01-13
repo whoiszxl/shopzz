@@ -6,26 +6,26 @@ class HomeAppIndexResponse {
 
   HomeAppIndexResponse.fromJson(Map<String, dynamic> json) {
     if (json['banners'] != null) {
-      banners = new List<BannerEntity>();
+      banners = <BannerEntity>[];
       json['banners'].forEach((v) {
-        banners.add(new BannerEntity.fromJson(v));
+        banners.add(BannerEntity.fromJson(v));
       });
     }
     if (json['navigations'] != null) {
-      navigations = new List<NavigationEntity>();
+      navigations = <NavigationEntity>[];
       json['navigations'].forEach((v) {
-        navigations.add(new NavigationEntity.fromJson(v));
+        navigations.add(NavigationEntity.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.banners != null) {
-      data['banners'] = this.banners.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (banners != null) {
+      data['banners'] = banners.map((v) => v.toJson()).toList();
     }
-    if (this.navigations != null) {
-      data['navigations'] = this.navigations.map((v) => v.toJson()).toList();
+    if (navigations != null) {
+      data['navigations'] = navigations.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -66,16 +66,16 @@ class BannerEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['pic'] = this.pic;
-    data['status'] = this.status;
-    data['clickCount'] = this.clickCount;
-    data['url'] = this.url;
-    data['note'] = this.note;
-    data['sort'] = this.sort;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['type'] = type;
+    data['pic'] = pic;
+    data['status'] = status;
+    data['clickCount'] = clickCount;
+    data['url'] = url;
+    data['note'] = note;
+    data['sort'] = sort;
     return data;
   }
 }
@@ -115,16 +115,16 @@ class NavigationEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['pic'] = this.pic;
-    data['status'] = this.status;
-    data['clickCount'] = this.clickCount;
-    data['url'] = this.url;
-    data['note'] = this.note;
-    data['sort'] = this.sort;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['type'] = type;
+    data['pic'] = pic;
+    data['status'] = status;
+    data['clickCount'] = clickCount;
+    data['url'] = url;
+    data['note'] = note;
+    data['sort'] = sort;
     return data;
   }
 }

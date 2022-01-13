@@ -16,7 +16,7 @@ qrcodeAppBar(BuildContext context) {
         Padding(
           padding: const EdgeInsets.only(left: 8),
           child: InkWell(
-            child: const Icon(Icons.keyboard_return,color: ColorManager.grey),
+            child: const Icon(Icons.navigate_before,color: ColorManager.grey),
             onTap: () {
               Navigator.pop(context);
             },

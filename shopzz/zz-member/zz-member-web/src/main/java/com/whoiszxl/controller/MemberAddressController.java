@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.MemberAddress;
+import com.whoiszxl.entity.response.MemberAddressListResponse;
 import com.whoiszxl.entity.vo.MemberAddressVO;
 import com.whoiszxl.service.MemberAddressService;
 import com.whoiszxl.utils.BeanCopierUtils;
@@ -37,12 +38,21 @@ public class MemberAddressController {
 
     @GetMapping
     @ApiOperation(value = "查询当前用户的收货地址列表", notes = "查询当前用户的收货地址列表", response = MemberAddressVO.class)
-    public ResponseResult<List<MemberAddressVO>> list() {
+    public ResponseResult<MemberAddressListResponse> list() {
         LambdaQueryWrapper<MemberAddress> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(MemberAddress::getMemberId, StpUtil.getLoginIdAsLong());
+        queryWrapper.orderByDesc(MemberAddress::getUpdatedAt);
+        queryWrapper.orderByDesc(MemberAddress::getIsDefault);
         List<MemberAddress> memberAddressList = memberAddressService.list(queryWrapper);
-        List<MemberAddressVO> memberAddressVOList = BeanCopierUtils.copyListProperties(memberAddressList, MemberAddressVO::new);
-        return ResponseResult.buildSuccess(memberAddressVOList);
+
+        List<MemberAddressVO> memberAddressVOList = dozerUtils.mapList(memberAddressList, MemberAddressVO.class);
+
+        MemberAddressListResponse response = new MemberAddressListResponse();
+        response.setMainAddress(memberAddressVOList.get(0));
+        memberAddressVOList.remove(0);
+        response.setAddressList(memberAddressVOList);
+
+        return ResponseResult.buildSuccess(response);
     }
 
     @PostMapping

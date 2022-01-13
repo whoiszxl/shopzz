@@ -1,11 +1,11 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:zz_flutter_shop/http/http_constant.dart';
 import 'package:zz_flutter_shop/http/http_error.dart';
 import 'package:zz_flutter_shop/http/http_method.dart';
 import 'package:zz_flutter_shop/http/interceptors/header_interceptor.dart';
 import 'package:zz_flutter_shop/http/interceptors/log_interceptor.dart';
+import 'package:zz_flutter_shop/service/api_urls.dart';
 
 import 'base_response.dart';
 
@@ -27,7 +27,7 @@ class HttpManager {
     //初始化操作
     if (null == _dio) {
       BaseOptions options = BaseOptions(
-        baseUrl: HttpConstant.baseUrl,
+        baseUrl: ApiUrls.baseUrl,
         connectTimeout: CONNECT_TIMEOUT,
         receiveTimeout: RECEIVE_TIMEOUT,
       );
@@ -101,6 +101,23 @@ class HttpManager {
     return await _requestHttp(
       url: url,
       method: HttpMethod.PUT,
+      params: params,
+      data: data,
+      options: options,
+    );
+  }
+
+  ///delete请求
+  Future delete(
+      {@required String url,
+        Map<String, dynamic> params,
+        data,
+        Options options,
+        int typeHttp
+      }) async {
+    return await _requestHttp(
+      url: url,
+      method: HttpMethod.DELETE,
       params: params,
       data: data,
       options: options,

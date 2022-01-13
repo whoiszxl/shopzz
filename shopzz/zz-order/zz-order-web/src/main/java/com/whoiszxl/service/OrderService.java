@@ -1,7 +1,8 @@
 package com.whoiszxl.service;
 
-import com.whoiszxl.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.entity.Order;
+import com.whoiszxl.entity.query.OrderSubmitRequest;
 
 /**
  * <p>
@@ -13,4 +14,19 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface OrderService extends IService<Order> {
 
+    /**
+     * 提交订单
+     * @param orderSubmitRequest 订单信息
+     * @return 订单ID
+     */
+    String orderSubmit(OrderSubmitRequest orderSubmitRequest);
+
+
+    /**
+     * 通过订单ID更新订单状态
+     * @param id 订单ID
+     * @param orderStatus 订单状态
+     * @return 是否更新成功
+     */
+    Boolean updateStatus(Long id, Integer orderStatus);
 }

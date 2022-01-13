@@ -28,13 +28,17 @@
 
 ### FlutterApp截图
 
-| ![1](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/1.png)                                                          | ![2](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/2.png)                                                          | ![3](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/3.png)                                                          | ![4](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/5.png) |  
+| ![1](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/1.png)                                                          | ![2](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/2.png)                                                          | ![3](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/3.png)                                                          | ![5](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/5.png) |  
 | :--: | :--: | :--: | :--: |  
 | 首页 | 分类 | 购物车 | 会员中心 |  
 
-| ![1](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/6.png)                                                          | ![2](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/7.png)                                                          | ![3](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/8.png)                                                          | ![4](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/9.png) |  
+| ![6](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/6.png)                                                          | ![7](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/7.png)                                                          | ![8](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/8.png)                                                          | ![9](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/9.png) |  
 |     :--:    |     :--:     |     :--:  |   :--:        |  
 | 商品Grid列表 | 商品List列表 | 商品详情  |   商品属性选择 |  
+
+| ![11](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/11.png)                                                        | ![12](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/12.png)                                                        | ![10](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/10.png)                                                        | ![14](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/14.png) |  
+|     :--:    |     :--:     |     :--:  |   :--:        |  
+| 登录页面 | 注册页面 | 设置页面  |   二维码生成页 |  
 
 #### 架构图
 

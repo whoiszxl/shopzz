@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
 
@@ -55,13 +53,13 @@ class _ChoiceChipSelectState extends State<ChoiceChipSelect> {
     return SizedBox(
         height: height,
         child: ChoiceChip(
-          padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+          padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
           pressElevation: 0,
           selectedColor: ColorManager.white38,
           selected: isSelected,
           backgroundColor: ColorManager.white38,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             side: BorderSide(color: isSelected ? Colors.red : Colors.transparent, width: 1),
           ),
           label: SizedBox(

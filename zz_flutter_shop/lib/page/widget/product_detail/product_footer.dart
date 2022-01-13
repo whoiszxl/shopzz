@@ -76,7 +76,7 @@ class ProductFooter extends StatelessWidget {
                 color: ColorManager.main,
                 highlightColor: Colors.black12,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
+                    borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "立即购买",
                   style: TextStyle(color: ColorManager.white),
@@ -93,7 +93,7 @@ class ProductFooter extends StatelessWidget {
                 color: Colors.orangeAccent,
                 highlightColor: Colors.black12,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
+                    borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "加入购物车",
                   style: TextStyle(color: ColorManager.white),

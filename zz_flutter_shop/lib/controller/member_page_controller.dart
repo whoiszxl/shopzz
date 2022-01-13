@@ -2,15 +2,11 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:oktoast/oktoast.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:zz_flutter_shop/controller/main_page_controller.dart';
-import 'package:zz_flutter_shop/entity/dto/category_tree_model.dart';
 import 'package:zz_flutter_shop/entity/response/home_app_index_response.dart';
 import 'package:zz_flutter_shop/entity/response/member_info_response.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/router/sp_keys.dart';
-import 'package:zz_flutter_shop/service/category_api_service.dart';
 import 'package:zz_flutter_shop/service/home_api_service.dart';
 import 'package:zz_flutter_shop/service/member_api_service.dart';
 import 'package:zz_flutter_shop/utils/sp_util.dart';

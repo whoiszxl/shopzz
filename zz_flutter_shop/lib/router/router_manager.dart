@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:zz_flutter_shop/page/address_page.dart';
 import 'package:zz_flutter_shop/page/cart_page.dart';
 import 'package:zz_flutter_shop/page/category_page.dart';
 import 'package:zz_flutter_shop/page/discovery_page.dart';
@@ -6,6 +7,8 @@ import 'package:zz_flutter_shop/page/home_page.dart';
 import 'package:zz_flutter_shop/page/login_page.dart';
 import 'package:zz_flutter_shop/page/main_page.dart';
 import 'package:zz_flutter_shop/page/member_page.dart';
+import 'package:zz_flutter_shop/page/order_confirm_page.dart';
+import 'package:zz_flutter_shop/page/pay_counter_page.dart';
 import 'package:zz_flutter_shop/page/product_detail_page.dart';
 import 'package:zz_flutter_shop/page/product_list_page.dart';
 import 'package:zz_flutter_shop/page/qrcode_page.dart';
@@ -33,6 +36,10 @@ class Routers{
 
   static const String qrcode = '/qrcode';
 
+  static const String orderConfirm = "/orderConfirm";
+  static const String address = "/address";
+  static const String payCounter = "/payCounter";
+
 }
 
 ///路由管理者
@@ -45,8 +52,8 @@ class RouterManager{
     GetPage(name: Routers.cart, page: () => const CartPage()),
     GetPage(name: Routers.member, page: () => const MemberPage()),
 
-    GetPage(name: Routers.productList, page: () => ProductListPage()),
-    GetPage(name: Routers.productDetail, page: () => ProductDetailPage()),
+    GetPage(name: Routers.productList, page: () => const ProductListPage()),
+    GetPage(name: Routers.productDetail, page: () => const ProductDetailPage()),
 
 
     GetPage(name: Routers.login, page: () => const LoginPage()),
@@ -54,6 +61,11 @@ class RouterManager{
 
     GetPage(name: Routers.setting, page: () => const SettingsPage()),
     GetPage(name: Routers.qrcode, page: () => const QrcodePage()),
+
+
+    GetPage(name: Routers.orderConfirm, page: () => const OrderConfirmPage()),
+    GetPage(name: Routers.address, page: () => const AddressPage()),
+    GetPage(name: Routers.payCounter, page: () => const PayCounterPage()),
 
   ];
 

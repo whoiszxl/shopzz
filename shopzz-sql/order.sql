@@ -10,7 +10,7 @@ CREATE TABLE `oms_cart` (
     `price`                         decimal(10,2) DEFAULT NULL COMMENT '价格',
     `sale_attr`                     varchar(50) DEFAULT NULL COMMENT '销售属性',
     `checked`                       tinyint(1) DEFAULT 1 COMMENT '是否选中 0未选中 1选中',
-    `status`                        tinyint(1) DEFAULT 1 COMMENT '状态：0失效 1有效',
+    `status`                        tinyint(1) DEFAULT 1 COMMENT '状态:0失效 1有效',
     `version`                       bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                    tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
     `created_by`                    varchar(50) NOT NULL COMMENT '创建者',
@@ -29,7 +29,7 @@ CREATE TABLE `oms_order` (
     `order_sn`                  varchar(20) NOT NULL COMMENT '订单编号',
     `member_id`                 bigint(20) DEFAULT NULL COMMENT '用户ID',
     `username`                  varchar(50) NOT NULL COMMENT '用户名',
-    `order_status`              tinyint(4) NOT NULL COMMENT '订单状态，1：待付款，2：已取消，3：待发货，4：待收货，5：已完成，6：售后中（退货申请待审核），7：交易关闭（退货审核不通过），8：交易中（待寄送退货商品），9：售后中（退货商品待收货），10：售后中（退货待入库），11：（1）售后中（退货已入库），12：交易关闭（完成退款）',
+    `order_status`              tinyint(4) NOT NULL COMMENT '订单状态，1:待付款，2:已取消，3:待发货，4:待收货，5:已完成，6:售后中（退货申请待审核），7:交易关闭（退货审核不通过），8:交易中（待寄送退货商品），9:售后中（退货商品待收货），10:售后中（退货待入库），11:（1）售后中（退货已入库），12:交易关闭（完成退款）',
     `receiver_name`             varchar(100) comment '收货人姓名',
     `receiver_phone`            varchar(32) comment '收货人电话',
     `receiver_post_code`        varchar(32) comment '收货人邮编',
@@ -99,7 +99,7 @@ DROP TABLE IF EXISTS `oms_order_operate_history`;
 CREATE TABLE `oms_order_operate_history` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
-    `operate_type`              tinyint(4) NOT NULL COMMENT '操作类型，1：创建订单，2：手动取消订单，3：自动取消订单，4：支付订单，5：手动确认收货，6：自动确认收货，7：商品发货，8：申请退货，9：退货审核不通过，10：退货审核通过，11：寄送退货商品，12：确认收到退货，13：退货已入库，14：完成退款',
+    `operate_type`              tinyint(4) NOT NULL COMMENT '操作类型，1:创建订单，2:手动取消订单，3:自动取消订单，4:支付订单，5:手动确认收货，6:自动确认收货，7:商品发货，8:申请退货，9:退货审核不通过，10:退货审核通过，11:寄送退货商品，12:确认收到退货，13:退货已入库，14:完成退款',
     `operate_note`              varchar(1024) NOT NULL COMMENT '操作备注',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
@@ -124,10 +124,10 @@ CREATE TABLE `oms_order_return_apply` (
     `username`                  varchar(50) NOT NULL COMMENT '用户名',
     `freight`                   decimal(8,2) not null comment '运费',
     `return_count`              int(10) NOT NULL comment '退货数量',
-    `return_reason`             tinyint(4) NOT NULL COMMENT '退货原因，1：质量不好，2：商品不满意，3：买错了，4：无理由退货',
+    `return_reason`             tinyint(4) NOT NULL COMMENT '退货原因，1:质量不好，2:商品不满意，3:买错了，4:无理由退货',
     `return_comment`            varchar(255) NOT NULL COMMENT '退货备注',
     `return_pic`                varchar(1024) NOT NULL COMMENT '退货图片备注，逗号分割',
-    `return_apply_status`       tinyint(4) NOT NULL COMMENT '退货记录状态，1：待审核，2：审核不通过，3：审核通过',
+    `return_apply_status`       tinyint(4) NOT NULL COMMENT '退货记录状态，1:待审核，2:审核不通过，3:审核通过',
     `return_logistic_code`      varchar(200) DEFAULT NULL COMMENT '退货快递单号',
     `return_receive_name`       varchar(100) comment '收货人',
     `return_receive_note`       varchar(200) comment '收货备注',
@@ -154,9 +154,9 @@ CREATE TABLE `oms_pay_info` (
     `order_sn`                  varchar(20) NOT NULL COMMENT '订单编号',
     `member_id`                 bigint(20) DEFAULT NULL COMMENT '用户ID',
     `total_amount`              decimal(8,2) NOT NULL COMMENT '订单总支付金额',
-    `trade_channel`             tinyint(3) NOT NULL COMMENT '交易渠道，1：支付宝，2：微信',
+    `trade_channel`             tinyint(3) NOT NULL COMMENT '交易渠道，1:支付宝，2:微信',
     `trade_no`                  varchar(500) DEFAULT NULL COMMENT '交易流水号，第三方支付平台生成',
-    `status`                    tinyint(3) NOT NULL COMMENT '支付状态，1：待支付，2：支付成功，3：支付失败，4：交易关闭；5：退款',
+    `status`                    tinyint(3) NOT NULL COMMENT '支付状态，1:待支付，2:支付成功，3:支付失败，4:交易关闭；5:退款',
     `complated_time`            datetime DEFAULT NULL COMMENT '完成第三方支付的时间',  
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
@@ -169,7 +169,7 @@ CREATE TABLE `oms_pay_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='第三方支付信息表';
 
 
-DROP TABLE IF EXISTS `oms_dc_pay_info_dc`;
+DROP TABLE IF EXISTS `oms_pay_info_dc`;
 CREATE TABLE `oms_pay_info_dc` (
     `id`                        bigint(20) NOT NULL COMMENT '主键',
     `order_id`                  bigint(20) NOT NULL COMMENT '订单ID',
@@ -184,7 +184,7 @@ CREATE TABLE `oms_pay_info_dc` (
     `qrcode_data`               varchar(255) DEFAULT NULL DEFAULT '' COMMENT '二维码数据',
     `upchain_at`                datetime COMMENT '上链时间',
     `upchain_success_at`        datetime COMMENT '上链成功时间',
-    `upchain_status`            tinyint(1) NOT NULL DEFAULT '2' COMMENT '上链状态，1：上链并确认成功 2：等待确认中 3：未上链',
+    `upchain_status`            tinyint(1) NOT NULL DEFAULT '2' COMMENT '上链状态，1:上链并确认成功 2:等待确认中 3:未上链',
     `current_confirm`           bigint(20) DEFAULT NULL COMMENT '当前交易确认数',
     `height`                    bigint(20) DEFAULT NULL COMMENT '当前交易所处区块的高度',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',

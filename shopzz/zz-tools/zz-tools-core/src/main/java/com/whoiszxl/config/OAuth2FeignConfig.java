@@ -29,10 +29,8 @@ public class OAuth2FeignConfig implements RequestInterceptor {
             String headerAuth = request.getHeader("Authorization");
 
             //使用RequestTemplate传递token
-            if (!StringUtils.isEmpty(header)) {
-                template.header("zxltoken", header);
-                template.header("Authorization", headerAuth);
-            }
+            template.header("zxltoken", header);
+            template.header("Authorization", headerAuth);
         }
     }
 }

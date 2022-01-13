@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:zz_flutter_shop/controller/cart_page_controller.dart';
 import 'package:zz_flutter_shop/controller/product_page_controller.dart';
@@ -70,6 +71,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> with SingleTicker
           return Scaffold(
               bottomSheet: ProductFooter(() {
                 _cartPageController.cartAdd(int.parse(currentSkuId), 1);
+                showToast("添加成功");
               }),
               body: SmartRefresher(
                 enablePullDown: true,

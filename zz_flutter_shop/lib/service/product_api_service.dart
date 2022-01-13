@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:get/get.dart';
-import 'package:zz_flutter_shop/entity/dto/category_tree_model.dart';
 import 'package:zz_flutter_shop/entity/response/product_detail_response.dart';
 import 'package:zz_flutter_shop/entity/response/search_response.dart';
 import 'package:zz_flutter_shop/http/http_manager.dart';

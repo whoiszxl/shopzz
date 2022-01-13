@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:zz_flutter_shop/controller/member_page_controller.dart';
 import 'package:zz_flutter_shop/page/member_page.dart';
 import 'package:zz_flutter_shop/page/widget/product/my_navigation_bar.dart';
-import 'package:zz_flutter_shop/page/widget/settings/settings_appbar.dart';
+import 'package:zz_flutter_shop/page/widget/settings/normal_appbar.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/utils/image_util.dart';
 
@@ -40,7 +40,7 @@ class _SettingsPageState extends State<SettingsPage>{
           //appbar
           MyNavigationBar(
             height: 50,
-            child: settingsAppBar(context),
+            child: normalAppBar(context, "设置"),
             color: ColorManager.white,
             statusStyle: StatusStyle.LIGHT_CONTENT,
           ),

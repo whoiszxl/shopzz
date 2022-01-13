@@ -32,7 +32,7 @@ class SearchResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (records != null) {
       data['records'] = records.map((v) => v.toJson()).toList();
     }
@@ -126,7 +126,7 @@ class ProductInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['subName'] = subName;

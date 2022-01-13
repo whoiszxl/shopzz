@@ -51,7 +51,7 @@ class ProductImageBanner extends StatelessWidget {
           top: 2,
           left: 3,
           child: InkWell(
-            child: const Icon(Icons.keyboard_return),
+            child: const Icon(Icons.navigate_before),
             onTap: () {
               Navigator.pop(context);
             },

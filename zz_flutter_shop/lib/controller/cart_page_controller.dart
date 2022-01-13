@@ -19,6 +19,8 @@ class CartPageController extends GetxController {
 
   final totalQuantity = 0.obs;
 
+  List<CartItemVO> currentCheckedCartItemList = <CartItemVO>[].obs;
+
   ///添加购物车
   Future<bool> cartAdd(int skuId, int quantity) async {
     return await cartApiService.cartAdd(skuId, quantity);
@@ -41,7 +43,6 @@ class CartPageController extends GetxController {
 
   ///获取当前登录用户的购物车信息
   Future<bool> cartDetail() async {
-    cartDetailResponse.value = CartDetailResponse();
     var cartDetail = await cartApiService.cartDetail();
     cartDetailResponse.value = cartDetail;
     totalAmount.value = cartDetail.totalAmount;

@@ -15,7 +15,7 @@ searchAppBar(BuildContext context, String query) {
           },
           child: ClipRRect(
               borderRadius: BorderRadius.circular(13),
-              child: const Icon(Icons.keyboard_return, color: ColorManager.grey,)
+              child: const Icon(Icons.navigate_before, color: ColorManager.grey,)
           ),
         ),
         Expanded(

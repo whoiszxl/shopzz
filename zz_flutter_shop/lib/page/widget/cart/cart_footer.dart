@@ -62,9 +62,9 @@ class CartFooter extends StatelessWidget {
                 color: ColorManager.red,
                 highlightColor: Colors.black12,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0)),
+                    borderRadius: BorderRadius.circular(10)),
                 child: Text(
-                  "去结算" + _cartPageController.totalQuantity.value.toString(),
+                  "去结算(" + _cartPageController.totalQuantity.value.toString() + ")",
                   style: const TextStyle(color: ColorManager.white),
                 ),
                 onPressed: () {

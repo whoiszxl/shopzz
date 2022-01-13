@@ -2,7 +2,7 @@ package com.whoiszxl.service;
 
 import com.whoiszxl.entity.Cart;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.whoiszxl.entity.query.SaveCartQuery;
+import com.whoiszxl.entity.query.SaveCartRequest;
 import com.whoiszxl.entity.vo.CartDetailVO;
 
 import java.util.List;
@@ -19,10 +19,10 @@ public interface CartService extends IService<Cart> {
 
     /**
      * 将商品添加到购物车中
-     * @param addCartQuery 加购参数
+     * @param saveCartRequest 加购参数
      * @return
      */
-    Boolean cartAdd(SaveCartQuery addCartQuery);
+    Boolean cartAdd(SaveCartRequest saveCartRequest);
 
     /**
      * 获取当前登录用户的购物车详情
@@ -58,4 +58,11 @@ public interface CartService extends IService<Cart> {
      * @return
      */
     Boolean deleteCartItem(List<Long> skuIdList);
+
+    /**
+     * 清空购物车中选中的商品
+     * @return
+     */
+    void clearCheckedCart();
+
 }

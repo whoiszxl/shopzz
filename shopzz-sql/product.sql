@@ -20,8 +20,8 @@ CREATE TABLE `pms_product` (
     `freight_template_id`       bigint(20) NOT NULL COMMENT '运费模板ID',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -51,8 +51,8 @@ CREATE TABLE `pms_product_detail` (
     `detail_mobile`             text COMMENT '移动端商品详情富文本内容',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`product_id`)
@@ -74,8 +74,8 @@ CREATE TABLE `pms_sku` (
     `sale_data`                 varchar(1024) NOT NULL COMMENT '商品销售属性，json格式',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -94,8 +94,8 @@ CREATE TABLE `pms_attribute` (
     `status`                    tinyint(1) DEFAULT NULL COMMENT '启用状态[0 - 禁用，1 - 启用]',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -111,8 +111,8 @@ CREATE TABLE `pms_product_attribute_value` (
     `attribute_value`           varchar(200) DEFAULT NULL COMMENT '属性值',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -143,8 +143,8 @@ CREATE TABLE `pms_attribute_group` (
     `sort`                      int(11) DEFAULT NULL COMMENT '排序',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -157,8 +157,8 @@ CREATE TABLE `pms_attribute_attrgroup_relation` (
     `attribute_group_id`        bigint(20) DEFAULT NULL COMMENT '属性分组id',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='属性&属性分组关联表';
@@ -180,8 +180,8 @@ CREATE TABLE `pms_brand` (
     `sort`                      int(3) DEFAULT '0' COMMENT '排序',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -200,8 +200,8 @@ CREATE TABLE `pms_category` (
     `icon`                      char(255) DEFAULT NULL COMMENT '图标地址',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -221,8 +221,8 @@ CREATE TABLE `pms_category_brand_relation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='品牌&分类关联表';
 
 
-drop table if exists inventory_product_stock;
-create table inventory_product_stock(
+drop table if exists `inventory_product_stock`;
+create table `inventory_product_stock`(
     `id`                                bigint not null auto_increment comment '主键',
     `product_sku_id`                    bigint not null comment '商品sku ID',
     `sale_stock_quantity`               int(10) not null comment '销售库存',

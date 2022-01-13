@@ -1,5 +1,7 @@
 class ApiUrls {
 
+  static const String baseUrl = 'http://192.168.4.153';
+
   ///首页获取banner和nav接口
   static const String homeRecommendAppIndex = "/product/recommend/app/index";
 
@@ -26,5 +28,13 @@ class ApiUrls {
   static const String cartDelete = "/order/cart/delete";
   static const String cartDetail = "/order/cart/detail";
   static const String cartUpdateQuantity = "/order/cart/update/quantity";
+
+
+  ///地址管理 CRUD
+  static const String memberAddress = "/member/member-address";
+
+
+  ///提交订单
+  static const String orderSubmit = "/order/order/submit";
 
 }

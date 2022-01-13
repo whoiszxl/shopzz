@@ -4,7 +4,7 @@ package com.whoiszxl.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.entity.query.DeleteCartQuery;
-import com.whoiszxl.entity.query.SaveCartQuery;
+import com.whoiszxl.entity.query.SaveCartRequest;
 import com.whoiszxl.entity.query.CheckCartItemQuery;
 import com.whoiszxl.entity.vo.CartDetailVO;
 import com.whoiszxl.service.CartService;
@@ -33,8 +33,8 @@ public class CartController {
     @SaCheckLogin
     @PostMapping("/add")
     @ApiOperation(value = "添加购物车", notes = "添加购物车", response = Boolean.class)
-    public ResponseResult<Boolean> addCart(@RequestBody SaveCartQuery saveCartQuery) {
-        Boolean addFlag = cartService.cartAdd(saveCartQuery);
+    public ResponseResult<Boolean> addCart(@RequestBody SaveCartRequest saveCartRequest) {
+        Boolean addFlag = cartService.cartAdd(saveCartRequest);
         return ResponseResult.buildByFlag(addFlag);
     }
 
@@ -49,7 +49,7 @@ public class CartController {
     @SaCheckLogin
     @PostMapping("/update/quantity")
     @ApiOperation(value = "更新购物车SKU数量", notes = "更新购物车SKU数量", response = Boolean.class)
-    public ResponseResult<CartDetailVO> updateQuantity(@RequestBody SaveCartQuery saveCartQuery) {
+    public ResponseResult<CartDetailVO> updateQuantity(@RequestBody SaveCartRequest saveCartQuery) {
         Boolean updateFlag = cartService.cartUpdate(saveCartQuery.getSkuId(), saveCartQuery.getQuantity());
         return ResponseResult.buildByFlag(updateFlag);
     }
