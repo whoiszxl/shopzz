@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
 
-///设置页面appbar
-settingsAppBar(BuildContext context) {
+///普通appbar
+normalAppBar(BuildContext context, String title) {
 
   return Padding(
     padding: const EdgeInsets.only(left: 10, right: 25),
@@ -15,16 +15,16 @@ settingsAppBar(BuildContext context) {
         Padding(
           padding: const EdgeInsets.only(left: 8),
           child: InkWell(
-            child: const Icon(Icons.keyboard_return,color: ColorManager.grey),
+            child: const Icon(Icons.navigate_before,color: ColorManager.grey),
             onTap: () {
               Navigator.pop(context);
             },
           ),
         ),
 
-        const Padding(
-          padding: EdgeInsets.only(left: 8),
-          child: Text("设置", style: TextStyle(fontSize: 20),)
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(title, style: const TextStyle(fontSize: 20))
         ),
 
         const Text(""),

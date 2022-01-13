@@ -3,7 +3,7 @@ package com.whoiszxl.entity.query;
 import lombok.Data;
 
 @Data
-public class SaveCartQuery {
+public class SaveCartRequest {
 
     private Long skuId;
 
