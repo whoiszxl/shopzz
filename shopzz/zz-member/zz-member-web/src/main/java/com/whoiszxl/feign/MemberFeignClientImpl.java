@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.dto.MemberAddressDTO;
+import com.whoiszxl.dto.MemberDTO;
 import com.whoiszxl.dto.MemberDetailDTO;
+import com.whoiszxl.dto.MemberInfoDTO;
 import com.whoiszxl.entity.MemberAddress;
 import com.whoiszxl.entity.vo.MemberDetailVO;
 import com.whoiszxl.service.MemberAddressService;
@@ -34,7 +36,13 @@ public class MemberFeignClientImpl implements MemberFeignClient {
     @Override
     public ResponseResult<MemberDetailDTO> getMemberInfo() {
         MemberDetailVO memberDetailVO = memberService.memberInfo();
-        MemberDetailDTO memberDetailDTO = dozerUtils.map(memberDetailVO, MemberDetailDTO.class);
+        MemberDTO memberDTO = dozerUtils.map(memberDetailVO.getMember(), MemberDTO.class);
+        MemberInfoDTO memberInfoDTO = dozerUtils.map(memberDetailVO.getMemberInfo(), MemberInfoDTO.class);
+
+        MemberDetailDTO memberDetailDTO = new MemberDetailDTO();
+        memberDetailDTO.setMember(memberDTO);
+        memberDetailDTO.setMemberInfo(memberInfoDTO);
+
         return ResponseResult.buildSuccess(memberDetailDTO);
     }
 

@@ -14,9 +14,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableFeignClients
 @SpringBootApplication
-public class EthApplication {
+public class EthApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(EthApplication.class, args);
+        SpringApplication.run(EthApp.class, args);
     }
 }

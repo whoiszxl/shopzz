@@ -1,5 +1,6 @@
 package com.whoiszxl.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.constants.OrderPayTypeConstants;
@@ -343,5 +344,23 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
      */
     private BigDecimal rateCompute(BigDecimal amount) {
         return amount;
+    }
+
+
+    @Override
+    public OrderInfoDTO getOrderInfo(Long orderId) {
+        //获取订单信息
+        Order order = this.getById(orderId);
+
+        //获取订单条目信息
+        List<OrderItem> orderItemList = orderItemService.list(new LambdaQueryWrapper<OrderItem>().eq(OrderItem::getOrderId, orderId));
+        List<OrderItemDTO> orderItemDTOList = dozerUtils.mapList(orderItemList, OrderItemDTO.class);
+
+        OrderInfoDTO orderInfoDTO = new OrderInfoDTO();
+        orderInfoDTO.setOrderId(order.getId());
+        orderInfoDTO.setMemberId(order.getMemberId());
+        orderInfoDTO.setTotalAmount(order.getTotalAmount());
+        orderInfoDTO.setOrderItemDTOList(orderItemDTOList);
+        return orderInfoDTO;
     }
 }

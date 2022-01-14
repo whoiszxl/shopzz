@@ -57,7 +57,7 @@ public class EthScanTask {
      * 定时任务使用10秒间隔（10 * 1000）。
      * https://txstreet.com/
      */
-    @Scheduled(fixedDelay = 10 * 1000)
+    @Scheduled(fixedDelay = 60 * 1000)
     public void scanOrder() {
         //1. 获取当前货币的配置信息
         Currency ethInfo = currencyService.getCurrencyByName(currencyName);

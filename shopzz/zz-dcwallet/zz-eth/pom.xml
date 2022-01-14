@@ -99,22 +99,6 @@
             <artifactId>velocity-engine-core</artifactId>
         </dependency>
 
-        <!--poi excel 依赖-->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-        </dependency>
-
-        <!-- 文件上传依赖 -->
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-        </dependency>
-
         <!-- http请求依赖 -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

@@ -83,3 +83,11 @@ ethereum:
   nodeurl: https://rinkeby.infura.io/v3/df5eacf1b6a244c38b89e4c10ef9bcb9
   keystorepath: D:/code/keystore
   keystorepassword: 123456
+
+seesee:
+  swagger2:
+    enabled: true
+    title: eth-在线接口文档
+    base-package: com.whoiszxl.controller
+  log:
+    enabled: true

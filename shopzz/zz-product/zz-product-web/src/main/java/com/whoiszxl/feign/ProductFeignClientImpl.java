@@ -2,6 +2,8 @@ package com.whoiszxl.feign;
 
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dozer.DozerUtils;
+import com.whoiszxl.dto.OrderInfoDTO;
+import com.whoiszxl.dto.OrderItemDTO;
 import com.whoiszxl.dto.SkuDTO;
 import com.whoiszxl.dto.SkuStockDTO;
 import com.whoiszxl.entity.ProductStock;
@@ -9,6 +11,7 @@ import com.whoiszxl.entity.Sku;
 import com.whoiszxl.service.ProductStockService;
 import com.whoiszxl.service.SkuService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,5 +61,23 @@ public class ProductFeignClientImpl implements ProductFeignClient{
             }
         }
         return ResponseResult.buildSuccess(Boolean.TRUE);
+    }
+
+    @Override
+    public ResponseResult paySuccessUpdateStock(OrderInfoDTO orderInfo) {
+        List<OrderItemDTO> orderItemDTOList = orderInfo.getOrderItemDTOList();
+        if(ObjectUtils.isNotEmpty(orderItemDTOList)) {
+            for (OrderItemDTO orderItemDTO : orderItemDTOList) {
+                Long skuId = orderItemDTO.getSkuId();
+                Integer quantity = orderItemDTO.getQuantity();
+
+                boolean updateFlag = productStockService.subLockStockAndAddSaledStockBySkuId(quantity, skuId);
+                if(updateFlag) {
+                    return ResponseResult.buildError();
+                }
+            }
+        }
+
+        return ResponseResult.buildSuccess();
     }
 }

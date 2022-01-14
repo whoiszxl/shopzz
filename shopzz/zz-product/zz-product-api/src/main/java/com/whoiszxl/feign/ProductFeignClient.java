@@ -2,6 +2,7 @@ package com.whoiszxl.feign;
 
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
+import com.whoiszxl.dto.OrderInfoDTO;
 import com.whoiszxl.dto.SkuDTO;
 import com.whoiszxl.dto.SkuStockDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -47,5 +48,13 @@ public interface ProductFeignClient {
      */
     @PostMapping("/checkStock")
     ResponseResult<Boolean> checkStock(@RequestBody List<Long> skuIds);
+
+
+    /**
+     * 支付成功后更新库存
+     * @param orderInfo
+     */
+    @PostMapping("/paySuccessUpdateStock")
+    ResponseResult paySuccessUpdateStock(@RequestBody OrderInfoDTO orderInfo);
 
 }

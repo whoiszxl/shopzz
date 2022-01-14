@@ -8,7 +8,9 @@ import 'package:zz_flutter_shop/page/login_page.dart';
 import 'package:zz_flutter_shop/page/main_page.dart';
 import 'package:zz_flutter_shop/page/member_page.dart';
 import 'package:zz_flutter_shop/page/order_confirm_page.dart';
+import 'package:zz_flutter_shop/page/order_list_page.dart';
 import 'package:zz_flutter_shop/page/pay_counter_page.dart';
+import 'package:zz_flutter_shop/page/pay_dc_page.dart';
 import 'package:zz_flutter_shop/page/product_detail_page.dart';
 import 'package:zz_flutter_shop/page/product_list_page.dart';
 import 'package:zz_flutter_shop/page/qrcode_page.dart';
@@ -37,8 +39,11 @@ class Routers{
   static const String qrcode = '/qrcode';
 
   static const String orderConfirm = "/orderConfirm";
+  static const String orderList = "/orderList";
   static const String address = "/address";
   static const String payCounter = "/payCounter";
+
+  static const String payDc = "/payDc";
 
 }
 
@@ -64,8 +69,11 @@ class RouterManager{
 
 
     GetPage(name: Routers.orderConfirm, page: () => const OrderConfirmPage()),
+    GetPage(name: Routers.orderList, page: () => const OrderListPage()),
     GetPage(name: Routers.address, page: () => const AddressPage()),
     GetPage(name: Routers.payCounter, page: () => const PayCounterPage()),
+
+    GetPage(name: Routers.payDc, page: () => const PayDcPage()),
 
   ];
 

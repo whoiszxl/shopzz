@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
@@ -5,6 +7,7 @@ import 'package:zz_flutter_shop/controller/cart_page_controller.dart';
 import 'package:zz_flutter_shop/page/widget/product/my_navigation_bar.dart';
 import 'package:zz_flutter_shop/page/widget/settings/normal_appbar.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
+import 'package:zz_flutter_shop/router/router_manager.dart';
 
 import 'widget/common/round_checkbox.dart';
 
@@ -24,8 +27,15 @@ class _PayCounterPageState extends State<PayCounterPage> {
 
   String currentPayType = "SHOPZZ";
 
+  String totalAmount = "";
+
   @override
   void initState() {
+    var parameters = Get.parameters;
+    String totalAmount = parameters['totalAmount'];
+    if(totalAmount != null && totalAmount.isNotEmpty) {
+      this.totalAmount = totalAmount;
+    }
     super.initState();
   }
 
@@ -60,6 +70,7 @@ class _PayCounterPageState extends State<PayCounterPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
                     child: Text(
+
                       "支付" + _cartPageController.totalAmount.toString(),
                       style: const TextStyle(color: ColorManager.white),
                     ),
@@ -129,16 +140,21 @@ class _PayCounterPageState extends State<PayCounterPage> {
                       trailing: Icon(Icons.navigate_next),
                     ),
                     _border(),
-                    const ListTile(
-                      leading: CircleAvatar(
+                    ListTile(
+                      leading: const CircleAvatar(
                         radius: 20,
                         backgroundColor: ColorManager.white,
                         backgroundImage: NetworkImage(
                             "http://zero-mall.oss-cn-shenzhen.aliyuncs.com/logo/ETH.png"),
                       ),
-                      title: Text("ETH"),
+                      title: const Text("ETH"),
                       //trailing: _checkBox("ETH", isChecked: currentPayType == "ETH"),
-                      trailing: Icon(Icons.navigate_next),
+                      trailing: const Icon(Icons.navigate_next),
+                      onTap: () {
+                        Map<String,String> map = HashMap();
+                        map['dcName'] = "ETH";
+                        Get.toNamed(Routers.payDc, parameters: map);
+                      },
                     ),
                     _border(),
                     const ListTile(

@@ -14,6 +14,7 @@ import com.whoiszxl.utils.AssertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.web3j.utils.Convert;
 
@@ -45,6 +46,7 @@ public class EthFeignClientImpl implements ETHFeignClient {
 
     @Override
     @Transactional
+    @PostMapping("/createRecharge/{orderId}/{amount}")
     public ResponseResult<RechargeResponse> giveAddress(String orderId, String amount) {
         //1. 获取货币信息
         Currency ethInfo = currencyService.getCurrencyByName(currencyName);

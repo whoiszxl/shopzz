@@ -1,5 +1,9 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
+import 'package:zz_flutter_shop/router/router_manager.dart';
 
 ///会员订单组件
 class MemberOrder extends StatelessWidget {
@@ -13,7 +17,7 @@ class MemberOrder extends StatelessWidget {
       height: 80,
       margin: const EdgeInsets.only(top: 8),
       padding: const EdgeInsets.only(left: 10, right: 10),
-      decoration: const BoxDecoration(color: ColorManager.white, borderRadius: const BorderRadius.all(const Radius.circular(10))),
+      decoration: const BoxDecoration(color: ColorManager.white, borderRadius: BorderRadius.all(Radius.circular(10))),
 
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +38,9 @@ class MemberOrder extends StatelessWidget {
 
           }),
           orderTab(Icons.collections_bookmark_outlined, "我的订单", ColorManager.orange, () {
-
+            Map<String,String> map = HashMap();
+            map['orderStatus'] = "0";
+            Get.toNamed(Routers.orderList, parameters: map);
           }),
 
         ],

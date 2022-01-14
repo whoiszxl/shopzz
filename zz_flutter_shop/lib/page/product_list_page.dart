@@ -20,8 +20,6 @@ class ProductListPage extends StatefulWidget {
 }
 
 class _ProductListPageState extends State<ProductListPage> with TickerProviderStateMixin {
-  //分页参数，默认0
-  int page = 0;
 
   //是否展示网格布局
   bool showGrid = true;

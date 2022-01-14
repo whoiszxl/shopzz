@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:get/get.dart';
+import 'package:zz_flutter_shop/entity/response/order_list_detail_response.dart';
 import 'package:zz_flutter_shop/entity/response/order_pay_dc_response.dart';
 import 'package:zz_flutter_shop/http/http_manager.dart';
 import 'package:zz_flutter_shop/service/api_urls.dart';
@@ -25,9 +26,18 @@ class OrderApiService extends GetxService {
     params["dcName"] = dcName;
     params["payType"] = 3;
     var result = await HttpManager.getInstance().post(url: ApiUrls.orderPay, data: params);
+    print(result);
     return OrderPayDcResponse.fromJson(result);
   }
 
+  Future<OrderListDetailResponse> orderList(String orderStatus, int page, int size) async {
+    Map<String, Object> params = HashMap();
+    params["page"] = page;
+    params["size"] = size;
+    params["orderStatus"] = orderStatus;
+    var result = await HttpManager.getInstance().post(url: ApiUrls.orderList, data: params);
+    return OrderListDetailResponse.fromJson(result);
+  }
 
 
 }

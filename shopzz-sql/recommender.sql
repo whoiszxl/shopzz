@@ -13,8 +13,8 @@ CREATE TABLE `rms_banner_info` (
     `sort`                      int(3) DEFAULT '0' COMMENT '排序',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
-    `created_by`                varchar(50) NOT NULL COMMENT '创建者',
-    `updated_by`                varchar(50) NOT NULL COMMENT '更新者',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
     `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 	PRIMARY KEY (`id`)

@@ -11,7 +11,6 @@ import 'package:zz_flutter_shop/page/widget/product/little_tag.dart';
 import 'package:zz_flutter_shop/page/widget/product/my_navigation_bar.dart';
 import 'package:zz_flutter_shop/page/widget/settings/normal_appbar.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
-import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/utils/image_util.dart';
 import 'package:zz_flutter_shop/utils/loading_util.dart';
 
