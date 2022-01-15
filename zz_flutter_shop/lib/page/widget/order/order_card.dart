@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:zz_flutter_shop/controller/cart_page_controller.dart';
+import 'package:zz_flutter_shop/controller/order_controller.dart';
 import 'package:zz_flutter_shop/entity/response/order_list_detail_response.dart';
 import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
@@ -15,6 +16,9 @@ class OrderCard extends StatelessWidget {
   final double width;
 
   final CartPageController _cartPageController = Get.find<CartPageController>();
+
+  final OrderController _orderController = Get.find<OrderController>();
+
 
   OrderCard(this.order, {Key key, this.width, this.height}) : super(key: key);
   @override
@@ -145,6 +149,7 @@ class OrderCard extends StatelessWidget {
                     width: 80,
                     child: order.orderStatus == 1 ? _orderButton('去支付', () {
                       _cartPageController.totalAmount.value = order.totalAmount;
+                      _orderController.orderId.value = order.id.toString();
                       Get.toNamed(Routers.payCounter);
 
                     }) :
