@@ -6,6 +6,8 @@ import 'package:zz_flutter_shop/entity/response/cart_detail_response.dart';
 import 'package:zz_flutter_shop/page/widget/cart/cart_app_bar.dart';
 import 'package:zz_flutter_shop/page/widget/cart/cart_card.dart';
 import 'package:zz_flutter_shop/page/widget/cart/cart_footer.dart';
+import 'package:zz_flutter_shop/page/widget/product/little_tag.dart';
+import 'package:zz_flutter_shop/res/colors_manager.dart';
 import 'package:zz_flutter_shop/router/router_manager.dart';
 import 'package:zz_flutter_shop/utils/loading_util.dart';
 
@@ -66,7 +68,15 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin{
                 controller: _refreshController,
                 onRefresh: _onRefresh, //下拉时调用
                 child: _cartListView(_cartPageController.cartDetailResponse.value.cartItemVOList) //返回列表组件
-            ) : const Center(child: Text("购物车无商品，快去加购吧")),
+            ) : Center(
+              child: InkWell(
+                child: const Text("购物车无商品，快去加购吧，点击刷新", style: TextStyle(color: ColorManager.black, fontSize: 14, fontWeight: FontWeight.bold)),
+                onTap: () {
+                  _cartPageController.cartDetail();
+                },
+              ),
+            ),
+
           );
 
 

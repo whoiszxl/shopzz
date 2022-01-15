@@ -106,7 +106,7 @@ public class EthScanTask {
                 BigDecimal amount = Convert.fromWei(transaction.getValue().toString(), Convert.Unit.ETHER);
                 PayInfoDc payInfoDc = dcPayInfoService.getRechargeByAddressAndCurrencyNameAndUpchainStatus(transaction.getTo(), currencyName, UpchainStatusEnum.NOT_UPCHAIN.getCode());
                 if(payInfoDc == null) {
-                    log.info("{} 地址不在库中：{}", currencyName, transaction.getTo());
+                    //log.info("{} 地址不在库中：{}", currencyName, transaction.getTo());
                     continue;
                 }
 

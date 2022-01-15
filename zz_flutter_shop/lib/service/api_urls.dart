@@ -1,6 +1,6 @@
 class ApiUrls {
 
-  static const String baseUrl = 'http://192.168.4.153';
+  static const String baseUrl = 'http://192.168.3.13';
 
   ///首页获取banner和nav接口
   static const String homeRecommendAppIndex = "/product/recommend/app/index";

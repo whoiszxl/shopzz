@@ -14,7 +14,7 @@ class CartDetailResponse {
       });
     }
     skuCount = json['skuCount'];
-    totalAmount = json['totalAmount'];
+    totalAmount = json['totalAmount'] != null ? double.parse(json['totalAmount'].toString()) : 0.0;
   }
 
   Map<String, dynamic> toJson() {

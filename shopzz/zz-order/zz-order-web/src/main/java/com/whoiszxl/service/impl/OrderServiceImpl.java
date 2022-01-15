@@ -39,6 +39,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -211,17 +212,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             ExceptionCatcher.catchValidateEx(ResponseResult.buildError("购物车不存在选中商品"));
         }
 
-        List<OrderItem> orderItemList = cartItemVOList.stream().map(item -> {
+        List<OrderItem> result = new ArrayList<>();
+        for (CartItemVO item : cartItemVOList) {
             if(item.getChecked() == 1) {
                 OrderItem orderItem = buildOrderItem(item);
                 orderItem.setOrderId(orderId);
                 orderItem.setOrderSn(orderId + "");
-                return orderItem;
+                result.add(orderItem);
             }
-            return null;
-        }).collect(Collectors.toList());
+        }
 
-        return orderItemList;
+        return result;
     }
 
 
@@ -317,12 +318,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                     .init(createDcAddressFactory, orderPayVO.getDcName())
                     .buildBaseData(order)
                     .buildAddress(order)
+                    .rateCompute(order)
                     .initStatus()
                     .create();
-
-            //汇率换算
-            BigDecimal rateAmount = rateCompute(order.getTotalAmount());
-            payInfoDc.setTotalAmount(rateAmount);
 
             boolean saveFlag = payInfoDcService.save(payInfoDc);
             if(saveFlag) {

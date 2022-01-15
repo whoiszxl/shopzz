@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -84,9 +85,9 @@ public class OrderItemDTO implements Serializable {
     @ApiModelProperty(value = "更新者")
     private String updatedBy;
 
-    @ApiModelProperty(value = "创建时间")
-    private Date createdAt;
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createdAt;
 
-    @ApiModelProperty(value = "更新时间")
-    private Date updatedAt;
+    @ApiModelProperty("更新时间")
+    private LocalDateTime updatedAt;
 }

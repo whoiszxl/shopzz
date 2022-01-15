@@ -7,6 +7,8 @@ import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.factory.CreateDcAddressFactory;
 import com.whoiszxl.feign.CreateAddressFeignClient;
 
+import java.math.BigDecimal;
+
 /**
  * 数字货币支付信息构建器
  */
@@ -94,5 +96,25 @@ public class PayInfoDcBuilder {
     }
 
 
+    /**
+     * 汇率换算
+     * @param order
+     * @return
+     */
+    public PayInfoDcBuilder rateCompute(Order order) {
+        BigDecimal finalAmount = BigDecimal.ZERO;
+        switch (dcName) {
+            case "ETH":
+                finalAmount = order.getTotalAmount().divide(new BigDecimal(10000));
+            case "BTC":
+                finalAmount = order.getTotalAmount().divide(new BigDecimal(10000));
+            case "SHOPZZ":
+                finalAmount = finalAmount;
+            default:
+                finalAmount = finalAmount;
 
+        }
+        dcPayInfo.setTotalAmount(finalAmount);
+        return this;
+    }
 }

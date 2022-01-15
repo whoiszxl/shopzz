@@ -24,7 +24,7 @@ public class OrderStatusConstants {
 	 */
 	public static final Integer WAIT_FOR_DELIVERY = 3;
 	/**
-	 * 待收货
+	 * 
 	 */
 	public static final Integer WAIT_FOR_RECEIVE = 4;
 	/**

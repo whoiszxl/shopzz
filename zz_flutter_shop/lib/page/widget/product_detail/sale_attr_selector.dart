@@ -118,6 +118,7 @@ class _SaleAttrSelector extends State<SaleAttrSelector> {
                           //footer
                           ProductFooter(() {
                             if(currentSkuId != null) {
+                              showToast("加购成功");
                               _cartPageController.cartAdd(int.parse(currentSkuId), 1);
                             }
                           })
