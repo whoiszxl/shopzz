@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="login-body">
     <div class="login-container">
       <div class="head">
