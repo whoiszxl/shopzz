@@ -18,6 +18,14 @@ spring:
     url: jdbc:mysql://aliyun.whoiszxl.com/zzshop?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: 123456
+    hikari:
+      maximum-pool-size: 60
+      connection-timeout: 60000
+      max-lifetime: 600000 # 此属性控制池中连接的最长生命周期，值 0 表示无限生命周期，默认 1800000(30 分钟)
+      idle-timeout: 600000 # 空闲连接存活最大时间，默认 600000(10 分钟)
+      validation-timeout: 3000 # 连接将被测试活动的最大时间量
+      login-timeout: 5 # 连接到数据库时等待的最长时间(秒)
+      minimum-idle: 10 # 池中维护的最小空闲连接数
   redis:
     host: aliyun.whoiszxl.com
     port: 16379

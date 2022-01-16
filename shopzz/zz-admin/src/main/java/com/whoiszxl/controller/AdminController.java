@@ -84,5 +84,37 @@ public class AdminController {
         Admin admin = adminService.getOne(queryWrapper);
         return ResponseResult.buildSuccess(admin);
     }
+
+    @SaCheckLogin
+    @SaCheckPermission(value = {"admin:getById"})
+    @GetMapping("/{id}")
+    @SSLog("通过管理员ID获取管理员用户信息")
+    @ApiOperation(value = "通过管理员ID获取管理员用户信息", notes = "通过管理员ID获取管理员用户信息", response = Admin.class)
+    public ResponseResult<Admin> getById(@PathVariable("id") Long id) {
+        LambdaQueryWrapper<Admin> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Admin::getId, id);
+        Admin admin = adminService.getOne(queryWrapper);
+        return ResponseResult.buildSuccess(admin);
+    }
+
+    @SaCheckLogin
+    @SaCheckPermission(value = {"admin:updateById"})
+    @PutMapping
+    @SSLog("通过ID更新管理员信息")
+    @ApiOperation(value = "通过ID更新管理员信息", notes = "通过ID更新管理员信息", response = Boolean.class)
+    public ResponseResult<Boolean> updateById(@RequestBody Admin admin) {
+        boolean flag = adminService.updateById(admin);
+        return ResponseResult.buildByFlag(flag);
+    }
+
+    @SaCheckLogin
+    @SaCheckPermission(value = {"admin:addAdmin"})
+    @PostMapping
+    @SSLog("添加管理员")
+    @ApiOperation(value = "添加管理员", notes = "添加管理员", response = Boolean.class)
+    public ResponseResult<Boolean> addAdmin(@RequestBody Admin admin) {
+        boolean flag = adminService.save(admin);
+        return ResponseResult.buildByFlag(flag);
+    }
 }
 

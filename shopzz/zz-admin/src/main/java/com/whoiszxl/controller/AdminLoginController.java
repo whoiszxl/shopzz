@@ -61,9 +61,7 @@ public class AdminLoginController {
     }
 
     @SaCheckLogin
-    @SaCheckRole("admin")
-    @SaCheckPermission(value = {"admin:adminLogout"})
-    @DeleteMapping("/admin/logout")
+    @DeleteMapping("/logout")
     @SSLog("管理员登出")
     @ApiOperation(value = "管理员登出", notes = "管理员登出", response = ResponseResult.class)
     public ResponseResult<String> adminLogout() {

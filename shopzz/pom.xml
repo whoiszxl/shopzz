@@ -23,6 +23,7 @@
         <module>zz-dcwallet</module>
         <module>zz-dcwallet/zz-ethereum-common</module>
         <module>zz-dcwallet/zz-dc-common</module>
+        <module>zz-server</module>
     </modules>
     <packaging>pom</packaging>
 
