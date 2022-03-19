@@ -1,0 +1,63 @@
+server:
+  port: 80
+spring:
+  application:
+    name: zz-gateway
+  cloud:
+    nacos:
+      server-addr: 212.129.223.197:8848
+      config:
+        server-addr: 212.129.223.197:8848
+        file-extension: yaml
+
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: zz-member-web_router
+          uri: lb://zz-member-web   # 转发到那个目的地
+          predicates:
+            - Path=/member/**
+          filters:
+            - StripPrefix=1 # 当前端访问/member/login，网关转发会将member自动的去掉，成访问 /login 路径。
+
+        - id: zz-product-web_router
+          uri: lb://zz-product-web
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+
+        - id: zz-admin-web_router
+          uri: lb://zz-admin-web
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+
+        - id: zz-order-web_router
+          uri: lb://zz-order-web
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+
+        - id: zz-wms-web_router
+          uri: lb://zz-wms-web
+          predicates:
+            - Path=/wms/**
+          filters:
+            - StripPrefix=1
+
+        - id: test_router
+          uri: http://www.aliyun.com
+          predicates:
+            - Path=/activity

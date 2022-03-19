@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--引入其他配置文件-->
+    <include resource="logback-base.xml" />
+
+    <!--开发环境-->
+    <springProfile name="dev">
+        <logger name="com.whoiszxl" additivity="false" level="debug">
+            <appender-ref ref="LOG_CONSOLE"/>
+        </logger>
+    </springProfile>
+    <!--生产环境-->
+    <springProfile name="pro">
+        <logger name="com.whoiszxl" additivity="false" level="info">
+            <appender-ref ref="LOG_FILE"/>
+        </logger>
+    </springProfile>
+
+    <root level="info">
+        <appender-ref ref="LOG_CONSOLE" />
+        <appender-ref ref="LOG_FILE" />
+    </root>
+</configuration>
