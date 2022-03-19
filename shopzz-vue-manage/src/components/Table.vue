@@ -40,19 +40,22 @@ export default {
       getList()
     })
 
-    const getList = () => {
+    const getList = (query) => {
       state.loading = true
-      axios.get(props.action, {
-        params: {
-          page: state.page,
-          size: state.size
-        }
-      }).then(res => {
+
+      var params = {
+        page: state.page,
+        size: state.size,
+      }
+
+      var finalParams = {...query, ...params}
+
+      axios.post(props.action, finalParams).then(res => {
         state.tableData = res.data.records
         state.total = res.data.total
-        state.currentPage = res.page
+        state.currentPage = res.data.current
         state.loading = false
-        app.ctx.goTop() // 回到顶部
+        //app.ctx.goTop() // 回到顶部
       })
     }
 

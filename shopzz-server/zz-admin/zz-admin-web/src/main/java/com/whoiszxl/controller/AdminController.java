@@ -40,10 +40,10 @@ public class AdminController {
 
     @SaCheckLogin
     @SaCheckPermission(value = {"admin:list"})
-    @GetMapping("/list")
+    @PostMapping("/list")
     @SSLog("管理员列表查询")
     @ApiOperation(value = "管理员列表查询", notes = "管理员列表查询", response = Admin.class)
-    public ResponseResult<IPage<Admin>> list(AdminQuery query) {
+    public ResponseResult<IPage<Admin>> list(@RequestBody AdminQuery query) {
         LambdaQueryWrapper<Admin> queryWrapper = new LambdaQueryWrapper<>();
         if(StringUtils.isNotBlank(query.getUsername())) {
             queryWrapper.eq(Admin::getUsername, query.getUsername());

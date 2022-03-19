@@ -1,8 +1,8 @@
 <template>
   <div class="footer">
-    <div class="left">zero mall</div>
+    <div class="left">shopzz</div>
     <div class="right">
-      <a target="_blank" href="https://github.com/whoiszxl/zero-mall">zero-mall 1.0.0 Vue 3.0</a>
+      <a target="_blank" href="https://github.com/whoiszxl/shopzz">shopzz 1.0.0 Vue 3.0</a>
     </div>
   </div>
 </template>

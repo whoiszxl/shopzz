@@ -57,6 +57,7 @@ export default {
 
     router.afterEach((to) => {
       const { id } = to.query
+      console.log(to.name);
       state.name = pathMap[to.name]
       state.hasBack = ['level2', 'level3', 'order_detail'].includes(to.name)
     })

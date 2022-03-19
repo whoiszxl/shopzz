@@ -138,7 +138,7 @@ export default {
     })
     onMounted(() => {
       if (id) {
-        axios.get(`/wms/purchase-supplier/${id}`).then(res => {
+        axios.get(`/wms/purchase/supplier/${id}`).then(res => {
           state.supplierForm = res.data;
           state.supplierForm.accountPeriod = res.data.accountPeriod;
           console.log(res.data);
@@ -155,7 +155,7 @@ export default {
             // 修改商品使用 put 方法
             httpOption = axios.put
           }
-          httpOption('/wms/purchase-supplier', state.supplierForm).then(() => {
+          httpOption('/wms/purchase/supplier', state.supplierForm).then(() => {
             ElMessage.success(id ? '修改成功' : '添加成功')
             router.push({ path: '/supplier' })
           })

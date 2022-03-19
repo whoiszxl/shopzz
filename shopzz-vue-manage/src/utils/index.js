@@ -18,7 +18,16 @@ export function localRemove (key) {
 export const pathMap = {
   index: '首页',
   login: '登录',
-  add: '添加商品',
-  sysUser: '管理员管理',
-  sysUserAdd: '添加管理员'
+  SysUser: '管理员管理',
+  SysUserAdd: '添加管理员',
+
+  Warehouse: '仓库管理',
+  WarehouseAdd: '添加仓库',
+  Supplier: '供应商管理',
+  SupplierAdd: '添加供应商',
+  PurchaseOrder: '采购单管理',
+  OutboundSellOrder: '销售出库单管理',
+  InboundReturnOrder: '退货入库单管理',
+  WarehouseShelf: '货架管理',
+  WarehouseSku: '仓库SKU管理'
 }

@@ -13,7 +13,7 @@
 
     </template>
     <Table
-      action='/wms/purchase-order'
+      action='/wms/purchase/order/list'
       ref="table"
     >
       <template #column>
@@ -22,9 +22,9 @@
         <el-table-column width="50" prop="id" label="ID"> </el-table-column>
         <el-table-column prop="supplierId" label="供应商ID"> </el-table-column>
         <el-table-column prop="expectArrivalTime" label="预计到货时间"> </el-table-column>
-        <el-table-column prop="contactor" label="联系人"> </el-table-column>
-        <el-table-column prop="contactPhoneNumber" label="联系电话"> </el-table-column>
-        <el-table-column prop="contactEmail" label="联系邮箱"> </el-table-column>
+        <el-table-column prop="purchaseContactor" label="联系人"> </el-table-column>
+        <el-table-column prop="purchaseContactPhoneNumber" label="联系电话"> </el-table-column>
+        <el-table-column prop="purchaseContactEmail" label="联系邮箱"> </el-table-column>
         <el-table-column prop="comment" label="说明备注"> </el-table-column>
         <el-table-column prop="purchaser" label="采购员"> </el-table-column>
         <el-table-column prop="purchaseOrderStatus" label="采购单状态"> </el-table-column>
@@ -67,16 +67,16 @@ export default {
     }
 
     const handleAdd = () => {
-        router.push({ path: '/supplier/add'});
+        router.push({ path: '/purchase/order/add'});
     }
 
     const handleEdit = (id) => {
-        router.push({ path: '/supplier/add', query: { id } })
+        router.push({ path: '/purchase/order/add', query: { id } })
     }
 
     const handleDelete = (id) => {
 
-      axios.delete(`/wms/purchase-supplier/` + id, {
+      axios.delete(`/wms/purchase/order` + id, {
         }).then(() => {
             ElMessage.success('删除成功')
             table.value.getList()

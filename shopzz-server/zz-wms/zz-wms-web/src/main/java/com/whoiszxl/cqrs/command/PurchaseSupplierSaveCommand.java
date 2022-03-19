@@ -40,7 +40,7 @@ public class PurchaseSupplierSaveCommand implements Serializable {
     private String contactPhoneNumber;
 
     @ApiModelProperty("账期, 1:周结算, 2:月结算, 3:季度结算")
-    private Boolean accountPeriod;
+    private Integer accountPeriod;
 
     @ApiModelProperty("银行名称")
     private String bankName;

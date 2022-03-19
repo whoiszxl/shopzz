@@ -46,7 +46,7 @@ public class PurchaseSupplier implements Serializable {
     private String contactPhoneNumber;
 
     @ApiModelProperty("账期, 1:周结算, 2:月结算, 3:季度结算")
-    private Boolean accountPeriod;
+    private Integer accountPeriod;
 
     @ApiModelProperty("银行名称")
     private String bankName;
@@ -87,7 +87,7 @@ public class PurchaseSupplier implements Serializable {
 
     @ApiModelProperty("逻辑删除 1: 已删除,  0: 未删除")
     @TableLogic
-    private Boolean isDeleted;
+    private Integer isDeleted;
 
     @ApiModelProperty("创建者")
     private String createdBy;

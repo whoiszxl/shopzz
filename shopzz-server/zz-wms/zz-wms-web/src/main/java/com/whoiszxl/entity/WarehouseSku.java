@@ -27,8 +27,11 @@ public class WarehouseSku implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
+
+    @ApiModelProperty("货架ID")
+    private Long shelfId;
 
     @ApiModelProperty("商品SKU ID")
     private Long skuId;
@@ -60,7 +63,7 @@ public class WarehouseSku implements Serializable {
 
     @ApiModelProperty("逻辑删除 1: 已删除,  0: 未删除")
     @TableLogic
-    private Boolean isDeleted;
+    private Integer isDeleted;
 
     @ApiModelProperty("创建者")
     private String createdBy;

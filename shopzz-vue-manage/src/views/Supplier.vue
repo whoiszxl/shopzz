@@ -13,7 +13,7 @@
 
     </template>
     <Table
-      action='/wms/purchase-supplier'
+      action='/wms/purchase/supplier/list'
       ref="table"
     >
       <template #column>
@@ -68,7 +68,7 @@ export default {
     })
 
     const search = () => {
-        table.value.getList();
+        table.value.getList({"supplierName": state.supplierName, "accountPeriod": state.accountPeriod});
     }
 
     const handleAdd = () => {
@@ -81,7 +81,7 @@ export default {
 
     const handleDelete = (id) => {
 
-      axios.delete(`/wms/purchase-supplier/` + id, {
+      axios.delete(`/wms/purchase/supplier/` + id, {
         }).then(() => {
             ElMessage.success('删除成功')
             table.value.getList()

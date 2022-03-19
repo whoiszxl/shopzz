@@ -20,7 +20,6 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/"><i class="el-icon-odometer" />首页</el-menu-item>
-              <el-menu-item index="/add"><i class="el-icon-plus" />添加商品</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
@@ -40,23 +39,23 @@
               <span>WMS管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/sysUser"><i class="el-icon-star-on" />仓储管理</el-menu-item>
+              <el-menu-item index="/warehouse"><i class="el-icon-star-on" />仓储管理</el-menu-item>
             </el-menu-item-group>
 
             <el-menu-item-group>
-              <el-menu-item index="/sysUser"><i class="el-icon-star-on" />供应商管理</el-menu-item>
+              <el-menu-item index="/supplier"><i class="el-icon-star-on" />供应商管理</el-menu-item>
             </el-menu-item-group>
 
             <el-menu-item-group>
-              <el-menu-item index="/sysUser"><i class="el-icon-star-on" />采购单管理</el-menu-item>
+              <el-menu-item index="/purchaseOrder"><i class="el-icon-star-on" />采购单管理</el-menu-item>
             </el-menu-item-group>
 
             <el-menu-item-group>
-              <el-menu-item index="/sysUser"><i class="el-icon-star-on" />销售出库管理</el-menu-item>
+              <el-menu-item index="/outboundSellOrder"><i class="el-icon-star-on" />销售出库管理</el-menu-item>
             </el-menu-item-group>
 
             <el-menu-item-group>
-              <el-menu-item index="/sysUser"><i class="el-icon-star-on" />退货入库管理</el-menu-item>
+              <el-menu-item index="/inboundReturnOrder"><i class="el-icon-star-on" />退货入库管理</el-menu-item>
             </el-menu-item-group>
             
           </el-submenu>
@@ -93,9 +92,9 @@ export default {
     const noMenu = ['/login']
     const router = useRouter()
     const state = reactive({
-      showMenu: true,
+      showMenu: false,
       defaultOpen: ['1', '2', '3'],
-      currentPath: '/',
+      currentPath: '/#/',
     })
 
     router.beforeEach((to, from, next) => {

@@ -120,6 +120,7 @@ create table wms_warehouse_shelf
 drop table if exists wms_warehouse_sku;
 create table wms_warehouse_sku (
     `id`                            bigint not null auto_increment comment '主键',
+    `shelf_id`                      bigint not null comment '货架ID',
     `sku_id`                        bigint not null comment '商品SKU ID',
     `sku_code`                      varchar(128) not null comment '商品sku编号',
     `sku_name`                      varchar(256) not null comment '商品SKU名称',

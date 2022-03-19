@@ -36,7 +36,7 @@ public class Warehouse implements Serializable {
     private String warehouseName;
 
     @ApiModelProperty("仓库类型: 1-自营仓")
-    private Boolean warehouseType;
+    private Integer warehouseType;
 
     @ApiModelProperty("仓库地址")
     private String warehouseAddress;
@@ -53,7 +53,7 @@ public class Warehouse implements Serializable {
 
     @ApiModelProperty("逻辑删除 1: 已删除,  0: 未删除")
     @TableLogic
-    private Boolean isDeleted;
+    private Integer isDeleted;
 
     @ApiModelProperty("创建者")
     private String createdBy;

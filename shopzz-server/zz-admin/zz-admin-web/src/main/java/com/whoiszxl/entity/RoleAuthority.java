@@ -35,7 +35,7 @@ public class RoleAuthority implements Serializable {
     private Integer roleId;
 
     @ApiModelProperty(value = "权限类型 1:菜单 2:权限")
-    private Boolean authorityType;
+    private Integer authorityType;
 
     @ApiModelProperty(value = "权限或菜单ID")
     private Integer authorityId;

@@ -66,7 +66,7 @@ public class InboundReturnOrderItem implements Serializable {
 
     @ApiModelProperty("逻辑删除 1: 已删除,  0: 未删除")
     @TableLogic
-    private Boolean isDeleted;
+    private Integer isDeleted;
 
     @ApiModelProperty("创建者")
     private String createdBy;

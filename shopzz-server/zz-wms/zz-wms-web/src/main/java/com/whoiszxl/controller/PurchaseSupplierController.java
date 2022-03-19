@@ -37,9 +37,9 @@ public class PurchaseSupplierController {
     private DozerUtils dozerUtils;
 
     @SaCheckLogin
-    @GetMapping
+    @PostMapping("/list")
     @ApiOperation(value = "分页获取供应商列表", notes = "分页获取供应商列表", response = PurchaseSupplierResponse.class)
-    public ResponseResult<IPage<PurchaseSupplierResponse>> list(SupplierQuery query) {
+    public ResponseResult<IPage<PurchaseSupplierResponse>> list(@RequestBody SupplierQuery query) {
         LambdaQueryWrapper<PurchaseSupplier> wrapper = new LambdaQueryWrapper<>();
         if(query.getSupplierName() != null) {
             wrapper.like(PurchaseSupplier::getSupplierName, "%" + query.getSupplierName() + "%");
