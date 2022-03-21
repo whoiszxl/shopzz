@@ -12,6 +12,7 @@
         <module>zz-wms</module>
         <module>zz-admin</module>
         <module>zz-gateway</module>
+        <module>zz-product</module>
     </modules>
     <packaging>pom</packaging>
 
