@@ -33,7 +33,7 @@
         <el-table-column prop="grossWeight" label="毛重"></el-table-column>
         <el-table-column prop="shelfId" label="货架ID"></el-table-column>
 
-        <el-table-column label="操作">
+        <el-table-column width="200" label="操作">
           <template #default="scope">
             <el-button @click="handleToShelf(scope.row.id)" type="primary" size="small">查看SKU详情</el-button>
             <el-button @click="handleEdit(scope.row.id)" type="primary" size="small">编辑</el-button>

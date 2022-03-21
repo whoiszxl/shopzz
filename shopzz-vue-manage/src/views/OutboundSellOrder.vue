@@ -41,6 +41,7 @@
         <el-table-column width="180" label="操作">
           <template #default="scope">
             <span style="margin-left:2px;">
+            <el-button @click="handleToDetail(scope.row.id)" type="primary" size="small" icon="el-icon-delete">查询详情</el-button>
             <el-button @click="handleDelete(scope.row.id)" type="primary" size="small" icon="el-icon-delete">删除</el-button>
             </span>
           </template>
@@ -86,9 +87,14 @@ export default {
 
     }
 
+    const handleToDetail = (id) => {
+      router.push({ path: '/outboundSellOrder/detail', query: { id } })
+    }
+
     return {
       search,
       handleDelete,
+      handleToDetail,
       table,
       state
     }
