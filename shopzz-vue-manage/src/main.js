@@ -25,7 +25,8 @@ import {
   ElRadio,
   ElSelect,
   ElOption,
-  ElMessageBox
+  ElMessageBox,
+  ElSwitch
 } from 'element-plus'
 import App from './App.vue'
 import router from '@/router'
@@ -93,4 +94,5 @@ app.use(ElButton)
   .use(ElSelect)
   .use(ElOption)
   .use(ElMessageBox)
+  .use(ElSwitch)
 app.mount('#app') // 挂载到 #app

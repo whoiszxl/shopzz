@@ -76,7 +76,6 @@ public class AttributeAdminController {
         return ResponseResult.buildByFlag(removeFlag);
     }
 
-
     @SaCheckLogin
     @PostMapping("/value/list")
     @ApiOperation(value = "通过属性key ID分页获取属性value列表", notes = "通过属性key ID分页获取属性value列表", response = AttributeValue.class)

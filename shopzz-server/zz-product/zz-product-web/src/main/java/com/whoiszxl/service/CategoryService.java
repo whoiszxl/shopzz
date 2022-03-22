@@ -1,5 +1,7 @@
 package com.whoiszxl.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.entity.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 

@@ -1,5 +1,6 @@
 <template>
-  <el-table
+  <el-card>
+    <el-table
       :load="loading"
       :data="tableData"
       tooltip-effect="dark"
@@ -16,6 +17,7 @@
     :current-page="page"
     @current-change="changePage"
   />
+  </el-card>
 </template>
 
 <script>
@@ -24,7 +26,14 @@ import axios from '@/utils/axios'
 export default {
   name: 'Table',
   props: {
-    action: String
+    action: String,
+    id: String,
+    canshu: {
+      type: Object,
+      default () {
+        return {}
+      }
+    },
   },
   setup(props) {
     const app = getCurrentInstance()
@@ -42,13 +51,15 @@ export default {
 
     const getList = (query) => {
       state.loading = true
-
       var params = {
         page: state.page,
         size: state.size,
+        keyId: props.id
       }
 
-      var finalParams = {...query, ...params}
+
+      console.log("参数：" + JSON.stringify(props.canshu));
+      var finalParams = {...query, ...params, ...props.canshu}
 
       axios.post(props.action, finalParams).then(res => {
         state.tableData = res.data.records

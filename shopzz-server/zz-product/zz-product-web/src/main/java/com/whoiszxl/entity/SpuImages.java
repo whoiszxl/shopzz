@@ -39,7 +39,7 @@ public class SpuImages implements Serializable {
     private Integer sort;
 
     @ApiModelProperty("是否默认图")
-    private Boolean isDefault;
+    private Integer isDefault;
 
 
 }

@@ -58,13 +58,13 @@ public class Spu implements Serializable {
     private String brandName;
 
     @ApiModelProperty("删除状态:0->未删除; 1->已删除")
-    private Boolean deleteStatus;
+    private Integer deleteStatus;
 
     @ApiModelProperty("上架状态:0->下架; 1->上架")
-    private Boolean publishStatus;
+    private Integer publishStatus;
 
     @ApiModelProperty("审核状态:0->未审核; 1->审核通过")
-    private Boolean verifyStatus;
+    private Integer verifyStatus;
 
     @ApiModelProperty("包装清单")
     private String packageList;

@@ -15,6 +15,11 @@ import InboundReturnOrder from '@/views/InboundReturnOrder.vue'
 import OutboundSellOrder from '@/views/OutboundSellOrder.vue'
 import WarehouseSku from '@/views/WarehouseSku.vue'
 
+import AttributeList from '@/views/product/AttributeList.vue'
+import AttributeDetail from '@/views/product/AttributeDetail.vue'
+
+import CategoryList from '@/views/product/CategoryList.vue'
+
 const router = createRouter({
   history: createWebHashHistory(), // hash 模式
   routes: [
@@ -63,6 +68,17 @@ const router = createRouter({
     {path: '/outboundSellOrder', name: 'OutboundSellOrder', component: OutboundSellOrder},
 
     {path: '/warehouseSku', name: 'WarehouseSku', component: WarehouseSku},
+
+
+
+
+    {path: '/attributeList', name: 'AttributeList', component: AttributeList},
+    {path: '/attributeDetail', name: 'AttributeDetail', component: AttributeDetail},
+
+    {path: '/categoryList', name: 'CategoryList', component: CategoryList, children: [
+      {path: '/categoryList2', name: 'CategoryList2', component: CategoryList},
+      {path: '/categoryList3', name: 'CategoryList3', component: CategoryList}
+    ]},
 
   ]
 })

@@ -22,6 +22,6 @@ public class AttributeKeySaveCommand {
     private Integer standard;
 
     @ApiModelProperty("属性类型[0-销售属性,1-基本属性]")
-    private Boolean type;
+    private Integer type;
 
 }

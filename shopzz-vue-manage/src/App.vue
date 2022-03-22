@@ -36,6 +36,20 @@
 
           <el-submenu index="3">
             <template #title>
+              <span>商品管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/attributeList"><i class="el-icon-star-on" />属性管理</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <el-menu-item index="/categoryList"><i class="el-icon-star-on" />分类管理</el-menu-item>
+            </el-menu-item-group>
+            
+          </el-submenu>
+
+
+          <el-submenu index="4">
+            <template #title>
               <span>WMS管理</span>
             </template>
             <el-menu-item-group>

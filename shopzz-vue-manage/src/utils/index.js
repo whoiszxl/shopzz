@@ -29,5 +29,9 @@ export const pathMap = {
   OutboundSellOrder: '销售出库单管理',
   InboundReturnOrder: '退货入库单管理',
   WarehouseShelf: '货架管理',
-  WarehouseSku: '仓库SKU管理'
+  WarehouseSku: '仓库SKU管理',
+
+  AttributeList: '属性管理',
+  AttributeDetail: '属性详情',
+  CategoryList: '分类管理',
 }
