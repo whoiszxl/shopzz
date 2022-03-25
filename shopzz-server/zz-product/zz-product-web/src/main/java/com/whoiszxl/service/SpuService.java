@@ -1,5 +1,7 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.cqrs.command.SpuSaveCommand;
+import com.whoiszxl.cqrs.command.SpuUpdateCommand;
 import com.whoiszxl.entity.Spu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +15,21 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SpuService extends IService<Spu> {
 
+    /**
+     * 保存SPU
+     * @param spuSaveCommand
+     */
+    void save(SpuSaveCommand spuSaveCommand);
+
+    /**
+     * 更新SPU
+     * @param spuUpdateCommand
+     */
+    void update(SpuUpdateCommand spuUpdateCommand);
+
+    /**
+     * 删除SPU
+     * @param id
+     */
+    void remove(Long id);
 }

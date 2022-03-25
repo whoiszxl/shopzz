@@ -13,6 +13,7 @@
         <module>zz-admin</module>
         <module>zz-gateway</module>
         <module>zz-product</module>
+        <module>zz-file</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 /**
  * 仓库货架服务实现
  *
- * @author zhouxiaolong
+ * @author whoiszxl
  * @date 2022/3/18
  */
 @Slf4j

@@ -103,6 +103,10 @@ public class DateUtils {
     }
 
 
+    public static String formatAsYear(LocalDateTime date) {
+        return format(date, DEFAULT_YEAR_FORMAT);
+    }
+
     public static String formatAsYearMonth(LocalDateTime date) {
         return format(date, DEFAULT_MONTH_FORMAT);
     }

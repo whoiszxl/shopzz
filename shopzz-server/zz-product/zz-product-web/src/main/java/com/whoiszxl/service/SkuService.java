@@ -1,5 +1,6 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.cqrs.command.SkuSaveCommand;
 import com.whoiszxl.entity.Sku;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-03-21
  */
 public interface SkuService extends IService<Sku> {
+
+    /**
+     * 创建SKU
+     * @param skuSaveCommand
+     */
+    void save(SkuSaveCommand skuSaveCommand);
 
 }

@@ -6,7 +6,7 @@ import com.whoiszxl.entity.Warehouse;
 /**
  * TODO
  *
- * @author zhouxiaolong
+ * @author whoiszxl
  * @date 2022/3/18
  */
 public interface WarehouseService extends IService<Warehouse> {

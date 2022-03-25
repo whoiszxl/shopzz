@@ -6,7 +6,7 @@ import com.whoiszxl.entity.OutboundSellOrder;
 /**
  * TODO
  *
- * @author zhouxiaolong
+ * @author whoiszxl
  * @date 2022/3/18
  */
 public interface OutboundSellOrderService extends IService<OutboundSellOrder> {

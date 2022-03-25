@@ -57,6 +57,13 @@ spring:
           filters:
             - StripPrefix=1
 
+        - id: zz-file-web_router
+          uri: lb://zz-file-web
+          predicates:
+            - Path=/file/**
+          filters:
+            - StripPrefix=1
+
         - id: test_router
           uri: http://www.aliyun.com
           predicates:

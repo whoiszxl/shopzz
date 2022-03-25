@@ -8,7 +8,7 @@ import com.whoiszxl.entity.PurchaseOrder;
 /**
  * TODO
  *
- * @author zhouxiaolong
+ * @author whoiszxl
  * @date 2022/3/18
  */
 public interface PurchaseOrderService extends IService<PurchaseOrder> {
