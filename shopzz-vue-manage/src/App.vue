@@ -44,6 +44,9 @@
             <el-menu-item-group>
               <el-menu-item index="/categoryList"><i class="el-icon-star-on" />分类管理</el-menu-item>
             </el-menu-item-group>
+            <el-menu-item-group>
+              <el-menu-item index="/spuList"><i class="el-icon-star-on" />SPU管理</el-menu-item>
+            </el-menu-item-group>
             
           </el-submenu>
 
@@ -73,6 +76,17 @@
             </el-menu-item-group>
             
           </el-submenu>
+
+          <el-submenu index="5">
+            <template #title>
+              <span>系统管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/fileList"><i class="el-icon-star-on" />文件管理</el-menu-item>
+            </el-menu-item-group>
+            
+          </el-submenu>
+
 
         </el-menu>
       </el-aside>

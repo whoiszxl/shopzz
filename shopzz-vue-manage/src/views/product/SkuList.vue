@@ -2,69 +2,32 @@
   <el-card class="purchase-container">
     <template #header>
         
-        <el-button @click="state.dialogVisible=!state.dialogVisible" style="margin-left:3px;" type="danger" size="mini" icon="el-icon-search">新增属性键</el-button>
-    
-        
-        <el-dialog
-            v-model="state.dialogVisible"
-            title="新增属性键"
-            width="40%"
-        >
-            <template #footer>
-                    <el-card class="add-container">
-            <el-form :model="adminForm" :rules="rules" ref="adminRef" label-width="100px" class="adminForm">
-                <el-form-item label="属性键">
-                <el-input style="width: 300px" v-model="adminForm.name" placeholder="请输入属性键"></el-input>
-                </el-form-item>
-
-                <el-form-item label="单位">
-                <el-input style="width: 300px" v-model="adminForm.unit" placeholder="请输入单位"></el-input>
-                </el-form-item>
-
-                <el-form-item label="类型">
-                <el-input style="width: 300px" v-model="adminForm.type" placeholder="请输入类型"></el-input>
-                </el-form-item>
-
-                <el-form-item label="是否标准">
-                <el-input style="width: 300px" v-model="adminForm.standard" placeholder="请输入是否标准"></el-input>
-                </el-form-item>
-                
-
-                <el-form-item>
-                <el-button type="primary" @click="submitAdd()">{{ id ? '立即修改' : '立即创建' }}</el-button>
-                </el-form-item>
-
-      </el-form>
-    </el-card>
-            </template>
-        </el-dialog>
+        <el-button @click="handleAdd" style="margin-left:3px;" type="danger" size="mini" icon="el-icon-search">新增SKU</el-button>
     </template>
 
 
     <Table
-      action='/product/attribute/key/list'
+      action='/product/sku/list'
       ref="table"
+      :canshu="params"
     >
       <template #column>
         <el-table-column type="selection" width="50"></el-table-column>
 
         <el-table-column width="50" prop="id" label="ID"> </el-table-column>
 
-        <el-table-column prop="name" label="属性键"></el-table-column>
-        <el-table-column prop="unit" label="单位"> </el-table-column>
-        <el-table-column prop="type" label="类型">
-            <template #default="scope">
-                <span style="color: red;" v-if="scope.row.type == 0">销售属性</span>
-                <span style="color: green;" v-else>基本属性</span>
-            </template>
+        <el-table-column prop="spuId" label="SPUID"></el-table-column>
+        <el-table-column prop="skuName" label="sku名称"> </el-table-column>
+
+        <el-table-column label="SKU缩略图" width="150px">
+        <template #default="scope">
+          <img style="width: 80px; height: 80px;" :key="scope.row.skuImg" :src="$filters.prefix(scope.row.skuImg)" alt="SKU缩略图">
+        </template>
         </el-table-column>
 
-        <el-table-column prop="standard" label="是否标准">
-            <template #default="scope">
-                <span style="color: red;" v-if="scope.row.standard == 0">非标准</span>
-                <span style="color: green;" v-else>标准</span>
-            </template>
-        </el-table-column>
+        <el-table-column prop="salePrice" label="销售价格"> </el-table-column>
+        <el-table-column prop="promotionPrice" label="促销价格"> </el-table-column>
+        <el-table-column prop="skuCode" label="SKU编码"> </el-table-column>
         
         <el-table-column prop="createdAt" label="创建时间"> </el-table-column>
         <el-table-column width="180" label="操作">
@@ -85,16 +48,17 @@ import { ref, reactive, toRefs } from 'vue'
 import Table from '@/components/Table.vue'
 import { ElMessage } from 'element-plus'
 import axios from '@/utils/axios'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 export default {
-  name: 'AttributeList',
+  name: 'SkuList',
   components: {
     Table
   },
   setup() {
     const table = ref(null)
-    const router = useRouter()
+    const router = useRouter();
+    const route = useRoute();
     const dialogVisible = ref(false)
     const adminRef = ref(null)
 
@@ -112,7 +76,12 @@ export default {
       },
     })
 
-const submitAdd = () => {
+    const { id = 0 } = route.query;
+    const params = {
+      spuId: id
+    };
+
+    const submitAdd = () => {
             adminRef.value.validate((vaild) => {
                 if (vaild) {
                 // 默认新增用 post 方法
@@ -143,8 +112,17 @@ const submitAdd = () => {
         table.value.getList();
     }
 
+    
+    const handleAdd = () => {
+        router.push({ path: '/spu/add'});
+    }
+
     const handleEdit = (id, name, unit, standard, type) => {
         router.push({ path: '/attributeDetail', query: { id, name, unit, standard, type } })
+    }
+
+    const handleToSku = (id) => {
+        router.push({ path: '/skuList', query: { id } })
     }
 
     const handleDelete = (id) => {
@@ -162,10 +140,13 @@ const submitAdd = () => {
       adminRef,
       search,
       handleEdit,
+      handleAdd,
       handleDelete,
       submitAdd,
       table,
-      state
+      handleToSku,
+      state,
+      params
     }
   }
 }

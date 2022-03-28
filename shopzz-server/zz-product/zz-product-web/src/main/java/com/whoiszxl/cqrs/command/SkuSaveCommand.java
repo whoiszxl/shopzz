@@ -1,16 +1,15 @@
 package com.whoiszxl.cqrs.command;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -29,7 +28,7 @@ public class SkuSaveCommand implements Serializable {
     private Long spuId;
 
     @ApiModelProperty("sku名称")
-    private Long skuName;
+    private String skuName;
 
     @ApiModelProperty("sku缩略图片地址")
     private String skuImg;
@@ -46,4 +45,24 @@ public class SkuSaveCommand implements Serializable {
     @ApiModelProperty("SKU编码")
     private String skuCode;
 
+    @NotNull
+    @ApiModelProperty("SKU编码")
+    private List<SkuAttribute> skuAttributeList;
+
+    @Data
+    @ApiModel(value = "Sku属性对象", description = "Sku属性对象")
+    public class SkuAttribute {
+
+        @ApiModelProperty("属性键ID")
+        private Long keyId;
+
+        @ApiModelProperty("属性键名称")
+        private String keyName;
+
+        @ApiModelProperty("属性值ID")
+        private Long valueId;
+
+        @ApiModelProperty("属性值名称")
+        private String valueName;
+    }
 }

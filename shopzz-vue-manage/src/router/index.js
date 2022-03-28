@@ -16,9 +16,14 @@ import OutboundSellOrder from '@/views/OutboundSellOrder.vue'
 import WarehouseSku from '@/views/WarehouseSku.vue'
 
 import AttributeList from '@/views/product/AttributeList.vue'
+import SpuList from '@/views/product/SpuList.vue'
+import SkuList from '@/views/product/SkuList.vue'
+import SpuAdd from '@/views/product/SpuAdd.vue'
 import AttributeDetail from '@/views/product/AttributeDetail.vue'
 
 import CategoryList from '@/views/product/CategoryList.vue'
+
+import FileList from '@/views/system/FileList.vue'
 
 const router = createRouter({
   history: createWebHashHistory(), // hash 模式
@@ -79,6 +84,14 @@ const router = createRouter({
       {path: '/categoryList2', name: 'CategoryList2', component: CategoryList},
       {path: '/categoryList3', name: 'CategoryList3', component: CategoryList}
     ]},
+
+    {path: '/spuList', name: 'SpuList', component: SpuList},
+    {path: '/spu/add', name: 'SpuAdd', component: SpuAdd},
+    {path: '/skuList', name: 'SkuList', component: SkuList},
+
+
+    {path: '/fileList', name: 'FileList', component: FileList},
+
 
   ]
 })

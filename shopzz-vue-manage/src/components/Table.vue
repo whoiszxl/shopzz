@@ -64,7 +64,7 @@ export default {
       axios.post(props.action, finalParams).then(res => {
         state.tableData = res.data.records
         state.total = res.data.total
-        state.currentPage = res.data.current
+        state.page = res.data.current
         state.loading = false
         //app.ctx.goTop() // 回到顶部
       })

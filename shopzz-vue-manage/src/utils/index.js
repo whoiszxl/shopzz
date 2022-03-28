@@ -33,5 +33,18 @@ export const pathMap = {
 
   AttributeList: '属性管理',
   AttributeDetail: '属性详情',
+  SpuList: 'SPU管理',
+  SkuList: 'SKU管理',
+  SpuAdd: 'SPU新增',
   CategoryList: '分类管理',
+  CategoryList2: '二级分类管理',
+  CategoryList3: '三级分类管理',
+
+
+  FileList: '文件管理',
 }
+
+// 单张图片上传
+export const uploadImgServer = '/api/file/file/upload'
+// 多张图片上传
+export const uploadImgsServer = '/api/file/file/upload'

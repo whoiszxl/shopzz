@@ -47,7 +47,7 @@
         <redisson-spring-boot-starter.version>3.13.6</redisson-spring-boot-starter.version>
         <jetcache-starter-redis.version>2.6.0</jetcache-starter-redis.version>
         <googleauth.version>1.1.5</googleauth.version>
-        <aliyun-sdk-oss.version>3.1.0</aliyun-sdk-oss.version>
+        <aliyun-sdk-oss.version>3.14.0</aliyun-sdk-oss.version>
         <aliyun-java-sdk-core.version>4.3.3</aliyun-java-sdk-core.version>
         <aliyun-java-sdk-dm.version>3.3.1</aliyun-java-sdk-dm.version>
         <net.sf.supercsv.version>2.4.0</net.sf.supercsv.version>
@@ -363,11 +363,6 @@
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/libs-milestone</url>
-        </repository>
-        <repository>
-            <id>oss</id>
-            <name>oss</name>
-            <url>https://oss.sonatype.org/content/groups/public</url>
         </repository>
     </repositories>
 

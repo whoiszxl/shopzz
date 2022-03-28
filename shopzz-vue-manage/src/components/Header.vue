@@ -1,8 +1,8 @@
 <template>
   <div class="header">
     <div class="left">
-      <i v-if="hasBack" class="el-icon-back" @click="back"></i>
-      <span style="font-size: 20px">{{ name }}</span>
+      <i class="el-icon-back" @click="back"></i>
+      <span style="font-size: 18px; padding-left:20px;">{{ name }}</span>
     </div>
     <div class="right">
       
@@ -28,9 +28,8 @@ export default {
   setup() {
     const router = useRouter()
     const state = reactive({
-      name: 'dashboard',
+      name: 'shopzz',
       userInfo: null, // 用户信息变量
-      hasBack: false, // 是否展示返回icon
     })
     // 初始化执行方法
      onMounted(() => {
@@ -58,7 +57,6 @@ export default {
     router.afterEach((to) => {
       const { id } = to.query
       state.name = pathMap[to.name]
-      state.hasBack = ['level2', 'level3', 'order_detail'].includes(to.name)
     })
 
     const back = () => {

@@ -170,7 +170,7 @@ DROP TABLE IF EXISTS `pms_category`;
 CREATE TABLE `pms_category` (
     `id`                        bigint(11) NOT NULL AUTO_INCREMENT COMMENT '分类id',
     `name`                      varchar(10) DEFAULT NULL COMMENT '分类名称',
-    `parent_id`                 bigint(11) DEFAULT NULL COMMENT '父类目的主键',
+    `parent_id`                 bigint(11) DEFAULT 0 COMMENT '父类目的主键',
     `level`                     tinyint(1) DEFAULT NULL COMMENT '分类级别:1->1级; 2->2级 3->3级',
     `status`                    tinyint(1) DEFAULT NULL COMMENT '是否显示[0-不显示,1显示]',
     `sort`                      int(11) DEFAULT NULL COMMENT '排序',

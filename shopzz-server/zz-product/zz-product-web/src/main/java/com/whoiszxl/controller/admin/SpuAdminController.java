@@ -51,6 +51,14 @@ public class SpuAdminController {
     }
 
     @SaCheckLogin
+    @GetMapping("/{id}")
+    @ApiOperation(value = "通过主键ID获取SPU", notes = "通过主键ID获取SPU", response = Spu.class)
+    public ResponseResult<Spu> getSupplierById(@PathVariable Long id) {
+        Spu spu = spuService.getById(id);
+        return ResponseResult.buildSuccess(spu);
+    }
+
+    @SaCheckLogin
     @PostMapping
     @ApiOperation(value = "新增SPU", notes = "新增SPU", response = ResponseResult.class)
     public ResponseResult<Boolean> save(@RequestBody @Validated SpuSaveCommand spuSaveCommand) {
