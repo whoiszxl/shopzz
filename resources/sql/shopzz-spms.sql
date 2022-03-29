@@ -18,6 +18,33 @@ CREATE TABLE `spms_banner` (
 	PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '轮播表';
 
+DROP TABLE IF EXISTS `spms_product_column`;
+CREATE TABLE `spms_product_column` (
+    `id`                        bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+    `name`                      varchar(128) NOT NULL COMMENT '专栏名称',
+    `descs`                     varchar(128) NOT NULL COMMENT '专栏描述',
+    `enter_img`                 varchar(255) DEFAULT '' COMMENT '入口图片地址',
+    `banner_img`                varchar(255) DEFAULT '' COMMENT '内部banner图片地址',
+    `status`                    int(1) DEFAULT '1' COMMENT '上下线状态:0->下线;1->上线',
+    `click_count`               int(11) DEFAULT '0' COMMENT '点击数',
+    `sort`                      int(3) DEFAULT '0' COMMENT '排序',
+    `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除， 0: 未删除',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
+    `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '商品专栏表';
+
+DROP TABLE IF EXISTS `spms_product_column_spu`;
+CREATE TABLE `spms_product_column_spu` (
+    `id`                        bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+    `column_id`                 bigint(10) NOT NULL COMMENT '专栏主键ID',
+    `spu_id`                    bigint(10) NOT NULL COMMENT 'SPU主键ID',
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '商品专栏跟SPU关联表';
+
 DROP TABLE IF EXISTS `spms_activity`;
 CREATE TABLE `spms_activity` (
     `id`                        bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',

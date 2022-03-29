@@ -11,6 +11,8 @@
 
     <artifactId>zz-wms-web</artifactId>
 
+
+
     <dependencies>
 
         <!-- alibaba nacos发现服务依赖 -->
@@ -117,5 +119,6 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
 
 </project>

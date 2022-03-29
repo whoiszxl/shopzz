@@ -32,7 +32,11 @@
         <el-table-column width="180" label="操作">
           <template #default="scope">
             <span style="margin-left:2px;">
-            <el-button @click="handleDelete(scope.row.id)" type="primary" size="small" icon="el-icon-delete">删除</el-button>
+            <el-popconfirm title="确认删除?" confirm-button-text="确认" cancel-button-text="取消" @confirm="handleDelete(scope.row.id)">
+                <template #reference>
+                    <el-button type="primary" size="small" icon="el-icon-delete">删除</el-button>
+                </template>
+            </el-popconfirm>
             </span>
           </template>
         </el-table-column>

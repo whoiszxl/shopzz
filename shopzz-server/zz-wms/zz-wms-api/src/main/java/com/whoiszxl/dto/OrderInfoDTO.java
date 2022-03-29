@@ -1,6 +1,7 @@
 package com.whoiszxl.dto;
 
 import lombok.Data;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.util.List;
  * @date 2021/8/11
  */
 @Data
+@Getter
 public class OrderInfoDTO implements Serializable {
 
     private Long memberId;

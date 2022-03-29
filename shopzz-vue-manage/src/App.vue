@@ -79,6 +79,17 @@
 
           <el-submenu index="5">
             <template #title>
+              <span>营销管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/bannerList"><i class="el-icon-star-on" />轮播图管理</el-menu-item>
+              <el-menu-item index="/columnList"><i class="el-icon-star-on" />专栏管理</el-menu-item>
+            </el-menu-item-group>
+            
+          </el-submenu>
+
+          <el-submenu index="6">
+            <template #title>
               <span>系统管理</span>
             </template>
             <el-menu-item-group>

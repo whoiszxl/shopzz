@@ -64,6 +64,13 @@ spring:
           filters:
             - StripPrefix=1
 
+        - id: zz-promotion-web_router
+          uri: lb://zz-promotion-web
+          predicates:
+            - Path=/promotion/**
+          filters:
+            - StripPrefix=1
+
         - id: test_router
           uri: http://www.aliyun.com
           predicates:

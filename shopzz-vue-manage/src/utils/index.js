@@ -42,6 +42,12 @@ export const pathMap = {
 
 
   FileList: '文件管理',
+
+  BannerList: '轮播图管理',
+  BannerAdd: '轮播图添加',
+  ColumnList: '专栏管理',
+  ColumnAdd: '专栏添加'
+  
 }
 
 // 单张图片上传

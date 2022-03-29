@@ -59,54 +59,16 @@ export default {
     const table = ref(null)
     const router = useRouter();
     const route = useRoute();
-    const dialogVisible = ref(false)
     const adminRef = ref(null)
 
 
     const state = reactive({
-      supplierName: '',
-      accountPeriod: '',
-      dialogVisible: dialogVisible,
-
-      adminForm: {
-        name: '',
-        unit: '',
-        type: '',
-        standard: ''
-      },
     })
 
     const { id = 0 } = route.query;
     const params = {
       spuId: id
     };
-
-    const submitAdd = () => {
-            adminRef.value.validate((vaild) => {
-                if (vaild) {
-                // 默认新增用 post 方法
-                let httpOption = axios.post
-                let params = {
-                    name: state.adminForm.name,
-                    unit: state.adminForm.unit,
-                    type: state.adminForm.type,
-                    standard: state.adminForm.standard
-                }
-                console.log('params', params)
-
-                httpOption('/product/attribute/key', params).then(() => {
-                    ElMessage.success('创建成功')
-                    state.dialogVisible = false;
-                    table.value.getList();
-
-                    state.adminForm.name = "";
-                    state.adminForm.unit = "";
-                    state.adminForm.type = "";
-                    state.adminForm.standard = "";
-                })
-                }
-            })
-        }
 
     const search = () => {
         table.value.getList();
@@ -142,7 +104,6 @@ export default {
       handleEdit,
       handleAdd,
       handleDelete,
-      submitAdd,
       table,
       handleToSku,
       state,

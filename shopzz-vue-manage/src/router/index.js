@@ -25,6 +25,14 @@ import CategoryList from '@/views/product/CategoryList.vue'
 
 import FileList from '@/views/system/FileList.vue'
 
+
+import BannerList from '@/views/promotion/BannerList.vue'
+import BannerAdd from '@/views/promotion/BannerAdd.vue'
+
+import ColumnList from '@/views/promotion/ColumnList.vue'
+import ColumnAdd from '@/views/promotion/ColumnAdd.vue'
+
+
 const router = createRouter({
   history: createWebHashHistory(), // hash 模式
   routes: [
@@ -91,6 +99,12 @@ const router = createRouter({
 
 
     {path: '/fileList', name: 'FileList', component: FileList},
+
+    {path: '/bannerList', name: 'BannerList', component: BannerList},
+    {path: '/banner/add', name: 'BannerAdd', component: BannerAdd},
+
+    {path: '/columnList', name: 'ColumnList', component: ColumnList},
+    {path: '/column/add', name: 'ColumnAdd', component: ColumnAdd},
 
 
   ]
