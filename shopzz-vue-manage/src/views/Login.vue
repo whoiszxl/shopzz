@@ -4,8 +4,8 @@
       <div class="head">
         <img class="logo" src="//camo.githubusercontent.com/6a0f76c7f114b2c8300ca379673520e5a898a0241ab216074dd7368354038abe/68747470733a2f2f692e696d6775722e636f6d2f6b644b686778362e676966" />
         <div class="name">
-          <div class="title">zero mall</div>
-          <div class="tips">zero-admin管理系统</div>
+          <div class="title">shopzz</div>
+          <div class="tips">shopzz管理系统</div>
         </div>
       </div>
       <el-form label-position="top" :rules="rules" :model="ruleForm" ref="loginForm" class="login-form">

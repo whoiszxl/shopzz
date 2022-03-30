@@ -17,19 +17,27 @@
         <el-table-column type="selection" width="50"></el-table-column>
 
         <el-table-column width="50" prop="id" label="ID"> </el-table-column>
-        <el-table-column prop="bizType" label="业务类型"> </el-table-column>
-        <el-table-column prop="dataType" label="数据类型"> </el-table-column>
+        <el-table-column width="80" prop="bizType" label="业务类型"> </el-table-column>
+        <el-table-column width="80" prop="dataType" label="数据类型"> </el-table-column>
         <el-table-column prop="relativePath" label="文件路径"> </el-table-column>
         <el-table-column prop="finalFileName" label="文件名"> </el-table-column>
         <el-table-column prop="originalFileName" label="原始文件名"> </el-table-column>
         <el-table-column prop="size" label="文件大小"> </el-table-column>
         <el-table-column prop="url" label="访问地址"> </el-table-column>
         
-        <el-table-column width="180" label="操作">
+        <el-table-column width="240" label="操作">
 
           <template #default="scope">
             <span style="margin-left:2px;">
-            <el-button @click="handleEdit(scope.row.id)" type="primary" size="small" icon="el-icon-star-on">查看文件</el-button>
+
+            <el-popover placement="left" trigger="click">
+              <template #reference>
+                <el-button type="primary" size="small" icon="el-icon-star-on">查看文件</el-button>
+              </template>
+    
+                <img style="height: 180px;" :key="scope.row.url" :src="$filters.prefix(scope.row.url)" alt="轮播图">
+            </el-popover>
+
             <el-button @click="handleDelete(scope.row.id)" type="primary" size="small" icon="el-icon-delete">删除</el-button>
             </span>
           </template>

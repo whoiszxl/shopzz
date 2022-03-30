@@ -5,7 +5,7 @@
         <div class="head">
           <div>
             <img src="//user-images.githubusercontent.com/5679180/79618120-0daffb80-80be-11ea-819e-d2b0fa904d07.gif" alt="logo">
-            <span>zero admin</span>
+            <span>shopzz admin</span>
           </div>
         </div>
         <div class="line" />
@@ -16,7 +16,7 @@
         >
           <el-submenu index="1">
             <template #title>
-              <span>Dashboard</span>
+              <span>仪表盘</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="/"><i class="el-icon-odometer" />首页</el-menu-item>
@@ -40,55 +40,51 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/attributeList"><i class="el-icon-star-on" />属性管理</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group>
               <el-menu-item index="/categoryList"><i class="el-icon-star-on" />分类管理</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group>
               <el-menu-item index="/spuList"><i class="el-icon-star-on" />SPU管理</el-menu-item>
             </el-menu-item-group>
             
           </el-submenu>
 
-
           <el-submenu index="4">
-            <template #title>
-              <span>WMS管理</span>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item index="/warehouse"><i class="el-icon-star-on" />仓储管理</el-menu-item>
-            </el-menu-item-group>
-
-            <el-menu-item-group>
-              <el-menu-item index="/supplier"><i class="el-icon-star-on" />供应商管理</el-menu-item>
-            </el-menu-item-group>
-
-            <el-menu-item-group>
-              <el-menu-item index="/purchaseOrder"><i class="el-icon-star-on" />采购单管理</el-menu-item>
-            </el-menu-item-group>
-
-            <el-menu-item-group>
-              <el-menu-item index="/outboundSellOrder"><i class="el-icon-star-on" />销售出库管理</el-menu-item>
-            </el-menu-item-group>
-
-            <el-menu-item-group>
-              <el-menu-item index="/inboundReturnOrder"><i class="el-icon-star-on" />退货入库管理</el-menu-item>
-            </el-menu-item-group>
-            
-          </el-submenu>
-
-          <el-submenu index="5">
             <template #title>
               <span>营销管理</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="/bannerList"><i class="el-icon-star-on" />轮播图管理</el-menu-item>
               <el-menu-item index="/columnList"><i class="el-icon-star-on" />专栏管理</el-menu-item>
+              <el-menu-item index="/activityList"><i class="el-icon-star-on" />活动管理</el-menu-item>
+              <el-menu-item index="/couponList"><i class="el-icon-star-on" />优惠券管理</el-menu-item>
             </el-menu-item-group>
             
           </el-submenu>
 
+          <el-submenu index="5">
+            <template #title>
+              <span>订单管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/bannerList"><i class="el-icon-star-on" />订单管理</el-menu-item>
+            </el-menu-item-group>
+            
+          </el-submenu>
+
+
           <el-submenu index="6">
+            <template #title>
+              <span>WMS管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/warehouse"><i class="el-icon-star-on" />仓储管理</el-menu-item>
+              <el-menu-item index="/supplier"><i class="el-icon-star-on" />供应商管理</el-menu-item>
+              <el-menu-item index="/purchaseOrder"><i class="el-icon-star-on" />采购单管理</el-menu-item>
+              <el-menu-item index="/outboundSellOrder"><i class="el-icon-star-on" />销售出库管理</el-menu-item>
+              <el-menu-item index="/inboundReturnOrder"><i class="el-icon-star-on" />退货入库管理</el-menu-item>
+            </el-menu-item-group>
+            
+          </el-submenu>
+
+          <el-submenu index="7">
             <template #title>
               <span>系统管理</span>
             </template>

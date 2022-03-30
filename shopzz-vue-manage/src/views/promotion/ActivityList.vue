@@ -2,12 +2,12 @@
   <el-card class="purchase-container">
     <template #header>
         
-        <el-button @click="handleAdd" style="margin-left:3px;" type="danger" size="mini" icon="el-icon-search">新增专栏</el-button>
+        <el-button @click="handleAdd" style="margin-left:3px;" type="danger" size="mini" icon="el-icon-search">新增活动</el-button>
     </template>
 
 
     <Table
-      action='/promotion/column/list'
+      action='/promotion/activity/list'
       ref="table"
     >
       <template #column>
@@ -15,54 +15,28 @@
 
         <el-table-column width="50" prop="id" label="ID"> </el-table-column>
 
-        <el-table-column prop="name" label="专栏名称"> </el-table-column>
+        <el-table-column prop="name" label="活动名称"> </el-table-column>
+        <el-table-column prop="descs" label="活动描述"> </el-table-column>
+        <el-table-column width="170" prop="startTime" label="有效期起始时间"> </el-table-column>
+        <el-table-column width="170" prop="endTime" label="有效期结束时间"> </el-table-column>
 
-        <el-table-column prop="descs" label="专栏描述"> </el-table-column>
-
-        <el-table-column label="入口图片">
-        <template #default="scope">
-          <img style="height: 60px;" :key="scope.row.pic" :src="$filters.prefix(scope.row.enterImg)" alt="轮播图">
-        </template>
+        <el-table-column label="BANNER图">
+          <template #default="scope">
+            <img style="height: 60px;" :key="scope.row.img" :src="$filters.prefix(scope.row.img)" alt="BANNER图">
+          </template>
         </el-table-column>
-
-        <el-table-column label="内部Banner">
-        <template #default="scope">
-          <img style="height: 60px;" :key="scope.row.pic" :src="$filters.prefix(scope.row.bannerImg)" alt="轮播图">
-        </template>
-        </el-table-column>
-
-        <el-table-column prop="status" label="状态">
+        
+        <el-table-column prop="status" label="活动类型">
             <template #default="scope">
-            <span style="color: red;" v-if="scope.row.status == 0">下线</span>
-            <span style="color: green;" v-else-if="scope.row.status == 1">上线</span>
+            <span style="color: green;" v-if="scope.row.status == 1">启用</span>
+            <span style="color: green;" v-else-if="scope.row.status == 2">停用</span>
             </template>
         </el-table-column>
         
-
-
-        
         <el-table-column prop="createdAt" label="创建时间"> </el-table-column>
-        <el-table-column width="300" label="操作">
+        <el-table-column width="180" label="操作">
           <template #default="scope">
-
-            <el-dialog
-    v-model="dialogVisible"
-    title="Tips"
-    width="30%"
-    :before-close="handleClose"
-  >
-    <span>This is a message</span>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false"
-          >Confirm</el-button
-        >
-      </span>
-    </template>
-  </el-dialog>
             <span style="margin-left:2px;">
-            <el-button @click="handleToSpu(scope.row.id, scope.row.name)" type="primary" size="small" icon="el-icon-star-on">SPU列表</el-button>
             <el-button @click="handleEdit(scope.row.id)" type="primary" size="small" icon="el-icon-star-on">编辑</el-button>
 
             <el-popconfirm title="确认删除?" confirm-button-text="确认" cancel-button-text="取消" @confirm="handleDelete(scope.row.id)">
@@ -86,7 +60,7 @@ import axios from '@/utils/axios'
 import { useRouter, useRoute } from 'vue-router'
 
 export default {
-  name: 'ColumnList',
+  name: 'SkuList',
   components: {
     Table
   },
@@ -101,9 +75,6 @@ export default {
     })
 
     const { id = 0 } = route.query;
-    const params = {
-      spuId: id
-    };
 
     const search = () => {
         table.value.getList();
@@ -111,20 +82,20 @@ export default {
 
     
     const handleAdd = () => {
-        router.push({ path: '/column/add'});
+        router.push({ path: '/activity/add'});
     }
 
     const handleEdit = (id) => {
-        router.push({ path: '/column/add', query: { id } })
+        router.push({ path: '/activity/add', query: { id } })
     }
 
-    const handleToSpu = (id, name) => {
-        router.push({ path: '/column/spu/list', query: { id, name } })
+    const handleToSku = (id) => {
+        router.push({ path: '/skuList', query: { id } })
     }
 
     const handleDelete = (id) => {
 
-      axios.delete(`/promotion/column/` + id, {
+      axios.delete(`/promotion/activity/` + id, {
         }).then(() => {
             ElMessage.success('删除成功')
             table.value.getList()
@@ -140,9 +111,8 @@ export default {
       handleAdd,
       handleDelete,
       table,
-      state,
-      params,
-      handleToSpu
+      handleToSku,
+      state
     }
   }
 }

@@ -31,7 +31,13 @@ import BannerAdd from '@/views/promotion/BannerAdd.vue'
 
 import ColumnList from '@/views/promotion/ColumnList.vue'
 import ColumnAdd from '@/views/promotion/ColumnAdd.vue'
+import ColumnSpuList from '@/views/promotion/ColumnSpuList.vue'
 
+import CouponList from '@/views/promotion/CouponList.vue'
+import CouponAdd from '@/views/promotion/CouponAdd.vue'
+
+import ActivityList from '@/views/promotion/ActivityList.vue'
+import ActivityAdd from '@/views/promotion/ActivityAdd.vue'
 
 const router = createRouter({
   history: createWebHashHistory(), // hash 模式
@@ -106,6 +112,14 @@ const router = createRouter({
     {path: '/columnList', name: 'ColumnList', component: ColumnList},
     {path: '/column/add', name: 'ColumnAdd', component: ColumnAdd},
 
+    {path: '/column/spu/list', name: 'ColumnSpuList', component: ColumnSpuList},
+
+    {path: '/couponList', name: 'CouponList', component: CouponList},
+    {path: '/coupon/add', name: 'CouponAdd', component: CouponAdd},
+
+    
+    {path: '/activityList', name: 'ActivityList', component: ActivityList},
+    {path: '/activity/add', name: 'ActivityAdd', component: ActivityAdd}
 
   ]
 })

@@ -26,7 +26,8 @@ import {
   ElSelect,
   ElOption,
   ElMessageBox,
-  ElSwitch
+  ElSwitch,
+  ElDatePicker
 } from 'element-plus'
 import App from './App.vue'
 import router from '@/router'
@@ -95,4 +96,5 @@ app.use(ElButton)
   .use(ElOption)
   .use(ElMessageBox)
   .use(ElSwitch)
+  .use(ElDatePicker)
 app.mount('#app') // 挂载到 #app

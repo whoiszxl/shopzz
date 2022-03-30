@@ -46,7 +46,12 @@ export const pathMap = {
   BannerList: '轮播图管理',
   BannerAdd: '轮播图添加',
   ColumnList: '专栏管理',
-  ColumnAdd: '专栏添加'
+  ColumnAdd: '专栏添加',
+  ColumnSpuList: '专栏SPU添加',
+
+  CouponList: '优惠券管理',
+  CouponAdd: '优惠券添加',
+
   
 }
 
