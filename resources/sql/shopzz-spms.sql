@@ -18,6 +18,7 @@ CREATE TABLE `spms_banner` (
 	PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '轮播表';
 
+
 DROP TABLE IF EXISTS `spms_product_column`;
 CREATE TABLE `spms_product_column` (
     `id`                        bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
@@ -92,6 +93,7 @@ CREATE TABLE `spms_coupon` (
     `discount_rate`             decimal(10,2) NOT NULL COMMENT '折扣比率',
     `type`                      tinyint(3) DEFAULT 1 COMMENT '优惠券类型 1: 满减券, 2: 满减折扣券 3: 无门槛立减券',
     `full_limited`              tinyint(3) DEFAULT 1 COMMENT '是否有全场限制 1: 全场通用, 2: 分类限制',
+    `status`                    tinyint(3) DEFAULT 1 COMMENT '优惠券状态 1: 有效, 2: 失效(超出有效期), 3: 系统停用',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
     `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',

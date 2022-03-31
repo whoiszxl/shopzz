@@ -1,7 +1,11 @@
 package com.whoiszxl.mapper;
 
+import com.whoiszxl.cqrs.response.MyCouponApiResponse;
 import com.whoiszxl.entity.Coupon;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CouponMapper extends BaseMapper<Coupon> {
 
+    /**
+     * 通过会员ID和状态获取优惠券列表
+     * @param memberId
+     * @param status
+     * @return
+     */
+    List<MyCouponApiResponse> myCouponList(@Param("memberId") Long memberId, @Param("status") Integer status);
 }

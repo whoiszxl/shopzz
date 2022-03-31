@@ -30,7 +30,7 @@ public class Coupon implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("自增主键ID")
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty("优惠券名称")
@@ -59,6 +59,9 @@ public class Coupon implements Serializable {
 
     @ApiModelProperty("是否有全场限制 1: 全场通用, 2: 分类限制")
     private Integer fullLimited;
+
+    @ApiModelProperty("优惠券状态 1: 有效, 2: 失效(超出有效期), 3: 系统停用")
+    private Integer status;
 
     @ApiModelProperty("乐观锁")
     @Version

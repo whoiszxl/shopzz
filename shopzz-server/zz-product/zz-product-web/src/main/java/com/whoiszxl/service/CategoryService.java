@@ -3,7 +3,11 @@ package com.whoiszxl.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.whoiszxl.cqrs.command.CategorySaveCommand;
 import com.whoiszxl.cqrs.command.CategoryUpdateCommand;
+import com.whoiszxl.cqrs.response.CategoryApiResponse;
+import com.whoiszxl.cqrs.response.CategoryListTreeApiResponse;
 import com.whoiszxl.entity.Category;
+
+import java.util.List;
 
 /**
  * <p>
@@ -35,5 +39,11 @@ public interface CategoryService extends IService<Category> {
      * @return
      */
     boolean update(CategoryUpdateCommand categoryUpdateCommand);
+
+    /**
+     * 获取分类树
+     * @return
+     */
+    CategoryListTreeApiResponse listWithTree();
 
 }

@@ -20,4 +20,11 @@ public class RedisKeyPrefixConstants {
 
     public static final String MEMBER_CART_PREFIX = "cart:";
 
+
+    public static final String APP_BANNER = "app:banner";
+    public static final String COLUMN_DETAIL = "column:detail:";
+    public static final String ACTIVITY_DETAIL = "activity:detail:";
+    public static final String ACTIVITY_COUPONLIST = "activity:couponList:";
+    public static final String ACTIVITY_NOTLIMIT_COUPONLIST = "activity:notlimitCouponList";
+    public static final String CATEGORY_TREE = "category:tree";
 }

@@ -58,7 +58,7 @@ public class CouponAdminController {
     @SaCheckLogin
     @GetMapping("/{id}")
     @ApiOperation(value = "通过主键ID获取优惠券", notes = "通过主键ID获取优惠券", response = CouponResponse.class)
-    public ResponseResult<CouponResponse> getSupplierById(@PathVariable Long id) {
+    public ResponseResult<CouponResponse> getCouponById(@PathVariable Long id) {
         Coupon banner = couponService.getById(id);
         return banner == null ? ResponseResult.buildSuccess() : ResponseResult.buildSuccess(dozerUtils.map(banner, CouponResponse.class));
     }

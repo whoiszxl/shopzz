@@ -1,5 +1,6 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.cqrs.response.ColumnDetailApiResponse;
 import com.whoiszxl.entity.ProductColumn;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ProductColumnService extends IService<ProductColumn> {
 
+    /**
+     * 获取专栏详情
+     * @param id
+     * @return
+     */
+    ColumnDetailApiResponse detail(Long id);
 }

@@ -586,5 +586,21 @@ public class RedisUtils {
     }
 
 
+    /**
+     * 获取对象
+     * @param key
+     * @return
+     */
+    public Object getObj(String key) {
+        return redisTemplate.opsForValue().get(key);
+    }
 
+    /**
+     * 设置对象
+     * @param key
+     * @param value
+     */
+    public void setObj(String key, Object value) {
+        redisTemplate.opsForValue().set(key, value);
+    }
 }

@@ -1,5 +1,6 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.cqrs.response.ActivityApiResponse;
 import com.whoiszxl.entity.Activity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ActivityService extends IService<Activity> {
 
+    /**
+     * 通过活动ID查询活动详情
+     * @param id
+     * @return
+     */
+    ActivityApiResponse detail(Long id);
 }
