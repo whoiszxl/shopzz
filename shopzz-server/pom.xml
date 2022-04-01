@@ -17,6 +17,7 @@
         <module>zz-promotion</module>
         <module>zz-promotion/zz-promotion-api</module>
         <module>zz-promotion/zz-promotion-web</module>
+        <module>zz-member</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -42,6 +43,7 @@
         <com-alibaba-cloud.version>2.2.6.RELEASE</com-alibaba-cloud.version>
         <swagger.version>3.0.0</swagger.version>
         <dozer.version>6.5.0</dozer.version>
+        <rocketmq.version>2.1.1</rocketmq.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <guava.version>[24.1.1,)</guava.version>
         <j2cache.version>2.8.0-release</j2cache.version>
@@ -290,6 +292,13 @@
                 <groupId>com.github.dozermapper</groupId>
                 <artifactId>dozer-spring-boot-starter</artifactId>
                 <version>${dozer.version}</version>
+            </dependency>
+
+            <!-- rocketmq 消息队列 -->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
             </dependency>
 
             <!-- swagger 相关依赖 -->

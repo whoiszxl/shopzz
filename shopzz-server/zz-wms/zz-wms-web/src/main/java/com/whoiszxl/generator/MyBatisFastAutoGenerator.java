@@ -22,15 +22,11 @@ public class MyBatisFastAutoGenerator {
     private static final String AUTHOR = "whoiszxl";
     private static final String PACKAGE_NAME = "com.whoiszxl";
     private static final String[] DB_TABLES = new String[]{
-            "spms_activity",
-            "spms_activity_category",
-            "spms_activity_coupon",
-            "spms_banner",
-            "spms_coupon",
-            "spms_coupon_category",
-            "spms_member_coupon",
-            "spms_product_column",
-            "spms_product_column_spu"
+            "ums_member",
+            "ums_member_address",
+            "ums_member_info",
+            "ums_member_point",
+            "ums_member_point_log"
     };
     private static final Boolean ENABLE_SWAGGER = true;
 

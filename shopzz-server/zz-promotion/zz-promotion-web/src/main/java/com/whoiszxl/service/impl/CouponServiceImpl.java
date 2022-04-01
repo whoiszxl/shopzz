@@ -12,9 +12,12 @@ import com.whoiszxl.cqrs.response.MyCouponApiResponse;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.Coupon;
 import com.whoiszxl.entity.CouponCategory;
+import com.whoiszxl.entity.MemberCoupon;
 import com.whoiszxl.mapper.CouponCategoryMapper;
 import com.whoiszxl.mapper.CouponMapper;
 import com.whoiszxl.service.CouponService;
+import com.whoiszxl.service.MemberCouponService;
+import com.whoiszxl.utils.AssertUtils;
 import com.whoiszxl.utils.AuthUtils;
 import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.RedisUtils;
@@ -22,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +52,9 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
 
     @Autowired
     private CouponMapper couponMapper;
+
+    @Autowired
+    private MemberCouponService memberCouponService;
 
     @Override
     public List<CouponApiResponse> getCouponByCategoryId(Long categoryId) {
@@ -96,7 +103,34 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
 
     @Override
     public void receive(Long couponId) {
-        //TODO 指定优惠券ID领取优惠券
+        //1. 校验优惠券是否存在，是否有效
+        Coupon coupon = super.getOne(Wrappers.<Coupon>lambdaQuery()
+                .eq(Coupon::getId, couponId)
+                .eq(Coupon::getStatus, CouponStatusEnum.AVAIL.getCode()));
+        AssertUtils.isTrue(coupon != null, "优惠券不存在");
+
+        //2. 判断是否在有效期内
+        LocalDateTime now = LocalDateTime.now();
+        if(now.isBefore(coupon.getStartTime()) || now.isAfter(coupon.getEndTime())) {
+            //将优惠券更新为过期状态
+            coupon.setStatus(CouponStatusEnum.EXPIRED.getCode());
+            super.updateById(coupon);
+            return;
+        }
+
+        //3. 判断是否领取过
+        Long memberId = AuthUtils.getMemberId();
+        MemberCoupon memberCoupon = memberCouponService.getOne(Wrappers.<MemberCoupon>lambdaQuery()
+                .eq(MemberCoupon::getCouponId, couponId)
+                .eq(MemberCoupon::getMemberId, memberId));
+        AssertUtils.isTrue(memberCoupon == null, "不能重复领取");
+
+        //4. 领取成功
+        MemberCoupon saveParams = new MemberCoupon();
+        saveParams.setCouponId(couponId);
+        saveParams.setMemberId(memberId);
+        saveParams.setGetTime(now);
+        memberCouponService.save(saveParams);
     }
 
 

@@ -121,7 +121,7 @@ CREATE TABLE `spms_member_coupon` (
     `coupon_id`                 bigint(11) NOT NULL COMMENT '优惠券ID',
     `status`                    tinyint(3) NOT NULL DEFAULT 1 COMMENT '优惠券状态: 1-未使用 2-已使用 3-已过期',
     `get_time`                  datetime NOT NULL COMMENT '优惠券的领取时间',
-    `use_time`                  datetime NOT NULL COMMENT '优惠券的使用时间',
+    `use_time`                  datetime NULL COMMENT '优惠券的使用时间',
     `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
     `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
