@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shopzz_flutter_app/page/home/guess/guess_page.dart';
 import 'package:shopzz_flutter_app/page/home/recommend/recommend_page.dart';
-import 'package:shopzz_flutter_app/page/home/widgets/tab_bar.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/search_bar.dart';
+import 'package:shopzz_flutter_app/page/home/widgets/tab_bar.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
 
 ///首页页面
@@ -32,9 +32,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   void initState() {
     //初始化数据
 
-    tabViewKey['推荐'] = [RecommendPage(), ""];
-    tabViewKey['猜你喜欢'] = [GuessPage(), ""];
-    tabViewKey['手机'] = [GuessPage(), ""];
+    tabViewKey['推荐'] = [const RecommendPage(), ""];
+    tabViewKey['猜你喜欢'] = [const GuessPage(), ""];
+    tabViewKey['手机'] = [const GuessPage(), ""];
 
     tabViewKey.forEach((key, value) {
       tabs.add(key);

@@ -9,11 +9,11 @@ class HomeTabBar extends StatefulWidget {
   final List<String> tabs;
   final VoidCallback onTapCallback;
 
-  HomeTabBar({
+  const HomeTabBar({Key key,
     this.tabController,
     this.tabs,
     this.onTapCallback,
-  });
+  }) : super(key: key);
 
   @override
   _HomeTabBarState createState() => _HomeTabBarState();
