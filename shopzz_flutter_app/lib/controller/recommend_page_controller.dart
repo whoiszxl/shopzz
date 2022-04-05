@@ -62,10 +62,11 @@ class RecommendPageController extends GetxController {
 
 
   ///获取推荐首页第一个专栏
-  void getFirstColumnDetail(RefreshController refreshController) async {
+  Future<bool> getFirstColumnDetail(RefreshController refreshController) async {
     var result = await Get.find<HomeApiService>().getColumnDetailById("1");
     columnDetailResponse.value = result;
     refreshController.refreshCompleted();
+    return true;
   }
 
 

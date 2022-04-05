@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -9,6 +12,7 @@ import 'package:shopzz_flutter_app/entity/response/column_detail_response.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/banner_bar.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/home_grid_navigator.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
+import 'package:shopzz_flutter_app/utils/image_util.dart';
 import 'package:shopzz_flutter_app/utils/loading_util.dart';
 
 
@@ -54,8 +58,17 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
       controller: _refreshController,
       enablePullUp: true,
       enablePullDown: true,
-      onRefresh: () { _recommendPageController.refreshBannerResponse(_refreshController); },
-      onLoading: () {  },
+      onRefresh: () {
+        _recommendPageController.refreshBannerResponse(_refreshController);
+        _recommendPageController.getFirstColumnDetail(_refreshController);
+      },
+      onLoading: () {
+        showToast("加载中");
+        //1秒后执行
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          _refreshController.loadComplete();
+        });
+      },
       child: _build(context),
     );
   }
@@ -68,31 +81,80 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
       if(navList.isEmpty || navList.isEmpty || _recommendPageController.columnDetailResponse.value.id == null) {
         return normalLoading();
       }else {
-        return Column(
-          children: <Widget>[
+        return SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
 
-            //轮播图组件
-            BannerBar(bannerList: bannerList),
+              //轮播图组件
+              BannerBar(bannerList: bannerList),
 
-            //nav组件
-            SizedBox(
-              height: 168,
-              child: HomeGridNavigator(navigatorList: navList, gridHeight: 150, gridWidth: _screenWidth),
-            ),
+              //nav组件
+              SizedBox(
+                height: 168,
+                child: HomeGridNavigator(navigatorList: navList, gridHeight: 150, gridWidth: _screenWidth),
+              ),
 
-            //专栏广告栏组件
-            _columnBar(_recommendPageController.columnDetailResponse.value, () {
-              showToast("点击了");
-            }),
+              //专栏广告栏组件
+              _columnBar(_recommendPageController.columnDetailResponse.value, () {
+                showToast("点击了");
+              }),
 
-            //专栏一
-            Padding(padding: const EdgeInsets.only(right: 5, left: 5), child: _columnOne(_recommendPageController.columnDetailResponse.value)),
+              //专栏一
+              Padding(padding: const EdgeInsets.only(right: 5, left: 5), child: _columnOne(_recommendPageController.columnDetailResponse.value)),
 
-          ],
+
+              //推荐商品列表，暂用专栏SPU代替
+              _recommendSpuList(_recommendPageController.columnDetailResponse.value),
+
+            ],
+          ),
         );
       }
 
     });
+  }
+
+  ///推荐SPU列表
+  _recommendSpuList(ColumnDetailResponse columnDetail) {
+    return StaggeredGridView.countBuilder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics (),
+      padding: const EdgeInsets.only(top: 10, left: 4, right: 4),
+      crossAxisCount: 2,
+      itemCount: columnDetail.spuList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return InkWell(
+          onTap: () {
+            showToast("点击了" + columnDetail.spuList[index].name);
+          },
+
+          child: _homeRecommendCard(columnDetail.spuList[index]),
+        );
+      },
+
+      staggeredTileBuilder: (int index) {
+        return const StaggeredTile.fit(1);
+      },
+    );
+  }
+
+
+  ///首页推荐商品列表卡片组件
+  _homeRecommendCard(ColumnSpuEntity spu) {
+    final size = MediaQuery.of(context).size;
+    return SizedBox(
+      height: 244,
+      child: Card(
+        margin: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [_itemImage(size, spu), _infoText(spu)],
+          ),
+        ),
+      ),
+    );
   }
 
   //专栏ID为1的SPU列表
@@ -207,6 +269,61 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
     );
   }
 
+  _itemImage(Size size, ColumnSpuEntity spu) {
+    return Stack(
+      children: [
+        cachedImage(spu.defaultPic, width: size.width / 2 - 10, height: 180),
+        Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 3, top: 5),
+              decoration: const BoxDecoration(
+                //渐变效果
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [Colors.black38, Colors.transparent])),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('')
+                ],
+              ),
+            ))
+      ],
+    );
+  }
+
+
+  _infoText(ColumnSpuEntity spu) {
+    return Expanded(
+        child: Container(
+          padding: const EdgeInsets.only(top: 4, left: 8, right: 8, bottom: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              //商品名称
+              Text(
+                spu.name,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 10, color: Colors.black87),
+              ),
+
+              //商品价格
+              Text(
+                "售价:" + spu.defaultPrice.toString(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 10, color: Colors.redAccent, fontWeight: FontWeight.w500),
+              )
+            ],
+          ),
+        ));
+  }
   @override
   bool get wantKeepAlive => true;
 }
