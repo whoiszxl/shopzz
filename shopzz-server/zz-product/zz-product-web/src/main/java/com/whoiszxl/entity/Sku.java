@@ -30,7 +30,7 @@ public class Sku implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("sku主键ID")
-      private Long id;
+    private Long id;
 
     @ApiModelProperty("商品SPU的ID")
     private Long spuId;

@@ -26,7 +26,7 @@ public class SpuKey implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("SPU与属性key关联表主键id")
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty("SPU ID")

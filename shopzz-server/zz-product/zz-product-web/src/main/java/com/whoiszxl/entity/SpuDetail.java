@@ -24,7 +24,7 @@ public class SpuDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("商品ID")
-      private Long spuId;
+    private Long spuId;
 
     @ApiModelProperty("PC商品详情富文本内容")
     private String detailHtml;

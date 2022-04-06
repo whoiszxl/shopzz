@@ -2,6 +2,7 @@ package com.whoiszxl.service;
 
 import com.whoiszxl.cqrs.command.SpuSaveCommand;
 import com.whoiszxl.cqrs.command.SpuUpdateCommand;
+import com.whoiszxl.cqrs.response.SpuDetailResponse;
 import com.whoiszxl.entity.Spu;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -32,4 +33,11 @@ public interface SpuService extends IService<Spu> {
      * @param id
      */
     void remove(Long id);
+
+    /**
+     * C端通过spuId获取SPU详情
+     * @param spuId
+     * @return
+     */
+    SpuDetailResponse detail(Long spuId);
 }

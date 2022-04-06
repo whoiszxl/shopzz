@@ -1,7 +1,7 @@
 package com.whoiszxl.service;
 
-import com.whoiszxl.entity.SkuStock;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.entity.SkuStock;
 
 /**
  * <p>
