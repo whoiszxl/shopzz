@@ -71,7 +71,7 @@ public class ProductColumnServiceImpl extends ServiceImpl<ProductColumnMapper, P
                         ExceptionCatcher.catchValidateEx(ResponseResult.buildError("专栏下无商品"));
                     }
 
-                    List<Long> spuIds = productColumnSpuList.stream().map(s -> s.getSpuId()).collect(Collectors.toList());
+                    List<Long> spuIds = productColumnSpuList.stream().map(ProductColumnSpu::getSpuId).collect(Collectors.toList());
                     String feignParams = ParamUtils.array2Str(spuIds);
                     ResponseResult<List<SpuFeignDTO>> feignResponse = productFeignClient.getSpuListBySpuIdList(feignParams);
                     if(!feignResponse.isOk()) {

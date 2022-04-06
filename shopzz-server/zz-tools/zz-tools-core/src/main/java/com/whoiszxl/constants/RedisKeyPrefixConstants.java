@@ -27,4 +27,8 @@ public class RedisKeyPrefixConstants {
     public static final String ACTIVITY_COUPONLIST = "activity:couponList:";
     public static final String ACTIVITY_NOTLIMIT_COUPONLIST = "activity:notlimitCouponList";
     public static final String CATEGORY_TREE = "category:tree";
+
+    public static final String HOME_RECOMMEND_A = "home:recommend:a";
+    public static final String HOME_RECOMMEND_B = "home:recommend:b";
+
 }

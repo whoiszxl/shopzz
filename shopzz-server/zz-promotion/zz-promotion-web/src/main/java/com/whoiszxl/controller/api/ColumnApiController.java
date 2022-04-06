@@ -2,16 +2,11 @@ package com.whoiszxl.controller.api;
 
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.cqrs.query.ProductColumnApiQuery;
 import com.whoiszxl.cqrs.response.ColumnDetailApiResponse;
-import com.whoiszxl.cqrs.response.ProductColumnApiResponse;
 import com.whoiszxl.cqrs.response.ProductColumnResponse;
 import com.whoiszxl.dozer.DozerUtils;
-import com.whoiszxl.entity.ProductColumn;
 import com.whoiszxl.service.ProductColumnService;
 import com.whoiszxl.service.ProductColumnSpuService;
 import io.swagger.annotations.Api;
@@ -22,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/column")

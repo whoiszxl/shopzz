@@ -130,3 +130,12 @@ CREATE TABLE `spms_member_coupon` (
     `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COMMENT='用户领取优惠券表';
+
+
+
+DROP TABLE IF EXISTS `spms_recommend_product`;
+CREATE TABLE `spms_recommend_product` (
+    `id`                        bigint(10) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+    `spu_id`                    bigint(10) NOT NULL COMMENT 'SPU主键ID',
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '首页通用推荐商品表';

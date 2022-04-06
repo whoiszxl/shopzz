@@ -7,7 +7,12 @@ class ApiUrls {
   ///首页获取banner数据
   static const String homeBanner = "/promotion/api/banner/app/index";
 
+  ///首页获取推荐商品列表
+  static const String homeRecommendList = "/promotion/api/recommend/product/list";
+
   ///首页获取banner数据
   static const String columnDetailById = "/promotion/api/column/detail";
+
+
 
 }

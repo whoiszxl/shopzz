@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shopzz_flutter_app/controller/recommend_page_controller.dart';
 import 'package:shopzz_flutter_app/entity/response/banner_response.dart';
 import 'package:shopzz_flutter_app/entity/response/column_detail_response.dart';
+import 'package:shopzz_flutter_app/entity/response/home_recommend_response.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/banner_bar.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/home_grid_navigator.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
@@ -39,6 +39,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
   void initState() {
     _recommendPageController.refreshBannerResponse(_refreshController);
     _recommendPageController.getFirstColumnDetail(_refreshController);
+    _recommendPageController.getHomeRecommendList(_refreshController);
     super.initState();
   }
 
@@ -61,13 +62,10 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
       onRefresh: () {
         _recommendPageController.refreshBannerResponse(_refreshController);
         _recommendPageController.getFirstColumnDetail(_refreshController);
+        _recommendPageController.refreshHomeRecommendList(_refreshController);
       },
       onLoading: () {
-        showToast("加载中");
-        //1秒后执行
-        Future.delayed(const Duration(milliseconds: 1000), () {
-          _refreshController.loadComplete();
-        });
+        _recommendPageController.getHomeRecommendList(_refreshController);
       },
       child: _build(context),
     );
@@ -104,7 +102,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
 
 
               //推荐商品列表，暂用专栏SPU代替
-              _recommendSpuList(_recommendPageController.columnDetailResponse.value),
+              _recommendSpuList(_recommendPageController.recommendList),
 
             ],
           ),
@@ -115,20 +113,20 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
   }
 
   ///推荐SPU列表
-  _recommendSpuList(ColumnDetailResponse columnDetail) {
+  _recommendSpuList(List<HomeRecommendEntity> recommendEntityList) {
     return StaggeredGridView.countBuilder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics (),
       padding: const EdgeInsets.only(top: 10, left: 4, right: 4),
       crossAxisCount: 2,
-      itemCount: columnDetail.spuList.length,
+      itemCount: recommendEntityList.length,
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
-            showToast("点击了" + columnDetail.spuList[index].name);
+            showToast("点击了" + recommendEntityList[index].name);
           },
 
-          child: _homeRecommendCard(columnDetail.spuList[index]),
+          child: _homeRecommendCard(recommendEntityList[index]),
         );
       },
 
@@ -140,7 +138,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
 
 
   ///首页推荐商品列表卡片组件
-  _homeRecommendCard(ColumnSpuEntity spu) {
+  _homeRecommendCard(HomeRecommendEntity recommendEntity) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
       height: 244,
@@ -150,7 +148,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
           borderRadius: BorderRadius.circular(5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [_itemImage(size, spu), _infoText(spu)],
+            children: [_itemImage(size, recommendEntity.defaultPic), _infoText(recommendEntity.name, recommendEntity.defaultPrice.toStringAsFixed(2).toString())],
           ),
         ),
       ),
@@ -269,10 +267,10 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
     );
   }
 
-  _itemImage(Size size, ColumnSpuEntity spu) {
+  _itemImage(Size size, String url) {
     return Stack(
       children: [
-        cachedImage(spu.defaultPic, width: size.width / 2 - 10, height: 180),
+        cachedImage(url, width: size.width / 2 - 10, height: 180),
         Positioned(
             left: 0,
             right: 0,
@@ -297,7 +295,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
   }
 
 
-  _infoText(ColumnSpuEntity spu) {
+  _infoText(String name, String price) {
     return Expanded(
         child: Container(
           padding: const EdgeInsets.only(top: 4, left: 8, right: 8, bottom: 10),
@@ -307,7 +305,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
             children: [
               //商品名称
               Text(
-                spu.name,
+                name,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 10, color: Colors.black87),
@@ -315,7 +313,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
 
               //商品价格
               Text(
-                "售价:" + spu.defaultPrice.toString(),
+                "售价:" + price,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 10, color: Colors.redAccent, fontWeight: FontWeight.w500),

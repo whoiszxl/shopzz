@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:get/get.dart';
 import 'package:shopzz_flutter_app/entity/response/banner_response.dart';
 import 'package:shopzz_flutter_app/entity/response/column_detail_response.dart';
+import 'package:shopzz_flutter_app/entity/response/home_recommend_response.dart';
 import 'package:shopzz_flutter_app/http/api_urls.dart';
 import 'package:shopzz_flutter_app/http/http_manager.dart';
 
@@ -21,5 +22,15 @@ class HomeApiService extends GetxService {
     params["id"] = columnId;
     var result = await HttpManager.getInstance().post(url: ApiUrls.columnDetailById, data: params);
     return ColumnDetailResponse.fromJson(result);
+  }
+
+  ///分页获取首页推荐商品列表
+  Future<HomeRecommendResponse> getHomeRecommendList(int page, int size) async {
+    Map<String, Object> params = HashMap();
+    params["page"] = page;
+    params["size"] = size;
+
+    var result = await HttpManager.getInstance().post(url: ApiUrls.homeRecommendList, data: params);
+    return HomeRecommendResponse.fromJson(result);
   }
 }

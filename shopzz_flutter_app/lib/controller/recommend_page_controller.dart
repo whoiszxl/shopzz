@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shopzz_flutter_app/entity/response/banner_response.dart';
 import 'package:shopzz_flutter_app/entity/response/column_detail_response.dart';
+import 'package:shopzz_flutter_app/entity/response/home_recommend_response.dart';
 import 'package:shopzz_flutter_app/service/home_api_service.dart';
 
 ///推荐页面的getx控制器
@@ -67,6 +68,32 @@ class RecommendPageController extends GetxController {
     columnDetailResponse.value = result;
     refreshController.refreshCompleted();
     return true;
+  }
+
+
+  int recommendListPage = 1;
+  final int recommendListSize = 4;
+  List<HomeRecommendEntity> recommendList = <HomeRecommendEntity>[].obs;
+
+  Future<bool> getHomeRecommendList(RefreshController refreshController) async {
+    var result = await Get.find<HomeApiService>().getHomeRecommendList(recommendListPage, recommendListSize);
+
+    if(result == null || result.homeRecommendList.isEmpty) {
+      refreshController.loadNoData();
+      return false;
+    }
+
+    recommendList.addAll(result.homeRecommendList);
+    recommendListPage++;
+    refreshController.refreshCompleted();
+    refreshController.loadComplete();
+    return true;
+  }
+
+  void refreshHomeRecommendList(RefreshController refreshController) async {
+    recommendListPage = 1;
+    recommendList.clear();
+    await getHomeRecommendList(refreshController);
   }
 
 
