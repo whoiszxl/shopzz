@@ -30,6 +30,7 @@ dependencies:
   video_player: ^2.1.1
   marquee: ^2.1.0
   like_button: ^2.0.2
+  skeletons: ^0.0.3
 
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:shopzz_flutter_app/controller/category_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/language_controller.dart';
 import 'package:shopzz_flutter_app/controller/main_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/recommend_page_controller.dart';
@@ -11,5 +12,6 @@ class AllControllerBinding implements Bindings {
     Get.lazyPut<MainPageController>(() => MainPageController());
     Get.lazyPut<LanguageController>(() => LanguageController());
     Get.lazyPut<RecommendPageController>(() => RecommendPageController());
+    Get.lazyPut<CategoryPageController>(() => CategoryPageController());
   }
 }

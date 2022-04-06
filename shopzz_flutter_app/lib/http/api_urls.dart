@@ -13,6 +13,9 @@ class ApiUrls {
   ///首页获取banner数据
   static const String columnDetailById = "/promotion/api/column/detail";
 
+  ///获取分类树
+  static const String categoryTree = "/product/api/category/list/tree";
+
 
 
 }

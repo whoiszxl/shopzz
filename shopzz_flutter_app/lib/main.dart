@@ -4,6 +4,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:shopzz_flutter_app/controller/all_controller_binding.dart';
 import 'package:shopzz_flutter_app/i18n/messages.dart';
 import 'package:shopzz_flutter_app/router/router_manager.dart';
+import 'package:shopzz_flutter_app/service/category_api_service.dart';
 import 'package:shopzz_flutter_app/service/home_api_service.dart';
 
 ///主程序运行入口
@@ -28,4 +29,5 @@ void main() async {
 ///和Java中的服务注入差不多
 Future<void> initServices() async {
   await Get.putAsync(() async => HomeApiService());
+  await Get.putAsync(() async => CategoryApiService());
 }
