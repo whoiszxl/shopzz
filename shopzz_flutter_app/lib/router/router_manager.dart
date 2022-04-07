@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shopzz_flutter_app/page/cart/cart_page.dart';
 import 'package:shopzz_flutter_app/page/category/category_page.dart';
+import 'package:shopzz_flutter_app/page/detail/detail_page.dart';
 import 'package:shopzz_flutter_app/page/discovery/discovery_page.dart';
 import 'package:shopzz_flutter_app/page/home/home_page.dart';
 import 'package:shopzz_flutter_app/page/main_page.dart';
@@ -17,6 +18,8 @@ class Routers{
   static const String cart = '/cart';
   static const String member = '/member';
 
+  static const String detail = '/detail';
+
 }
 
 ///路由管理者
@@ -28,6 +31,8 @@ class RouterManager{
     GetPage(name: Routers.discovery, page: () => const DiscoveryPage()),
     GetPage(name: Routers.cart, page: () => const CartPage()),
     GetPage(name: Routers.member, page: () => const MemberPage()),
+
+    GetPage(name: Routers.detail, page: () => const DetailPage()),
   ];
 
 }

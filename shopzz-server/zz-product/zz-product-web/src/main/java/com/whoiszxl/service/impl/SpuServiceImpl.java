@@ -5,11 +5,9 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.cqrs.command.SpuSaveCommand;
 import com.whoiszxl.cqrs.command.SpuUpdateCommand;
+import com.whoiszxl.cqrs.dto.SpuAttrDTO;
 import com.whoiszxl.cqrs.response.SpuDetailResponse;
-import com.whoiszxl.cqrs.vo.SkuStockVO;
-import com.whoiszxl.cqrs.vo.SkuVO;
-import com.whoiszxl.cqrs.vo.SpuImagesVO;
-import com.whoiszxl.cqrs.vo.SpuVO;
+import com.whoiszxl.cqrs.vo.*;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.*;
 import com.whoiszxl.mapper.SpuDetailMapper;
@@ -19,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
@@ -55,6 +55,10 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
 
     @Autowired
     private ThreadPoolExecutor executor;
+
+    @Autowired
+    private SpuDetailService spuDetailService;
+
 
     @Override
     @Transactional
@@ -166,9 +170,28 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
             response.setImages(spuImagesVOList);
         }, executor);
 
+        //获取SPU的detail信息
+        CompletableFuture<Void> detailFuture = CompletableFuture.runAsync(() -> {
+            SpuDetail spuDetail = spuDetailMapper.selectOne(Wrappers.<SpuDetail>lambdaQuery().eq(SpuDetail::getSpuId, spuId));
+            SpuDetailVO spuDetailVO = dozerUtils.map(spuDetail, SpuDetailVO.class);
+            response.setSpuDetailVO(spuDetailVO);
+        }, executor);
+
+        //获取SPU的销售属性组
+        CompletableFuture<Void> spuAttrGroupFuture = CompletableFuture.runAsync(() -> {
+            List<SpuAttrDTO> spuAttrDTOList = spuKeyService.listAttributes(spuId);
+
+            Map<Long, List<SpuAttrDTO>> attrGroupList = spuAttrDTOList.stream().collect(Collectors.groupingBy(SpuAttrDTO::getKeyId, Collectors.toList()));
+
+            List<SpuAttributeGroupVO> groupVOList = new ArrayList<>();
+            for (List<SpuAttrDTO> value : attrGroupList.values()) {
+                groupVOList.add(new SpuAttributeGroupVO(value.get(0).getKeyId(), value.get(0).getKey(), value));
+            }
+            response.setSpuAttributeGroupVOList(groupVOList);
+        }, executor);
 
         try {
-            CompletableFuture.allOf(spuVOFuture, skuVoFuture, imagesFuture).get();
+            CompletableFuture.allOf(spuVOFuture, skuVoFuture, imagesFuture, detailFuture, spuAttrGroupFuture).get();
         } catch (Exception e) {
             log.error("获取SPU详情线程池运行失败, SPU ID: " + spuId, e);
         }

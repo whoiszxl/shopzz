@@ -8,6 +8,7 @@ import 'package:shopzz_flutter_app/res/colors_manager.dart';
 import 'package:shopzz_flutter_app/utils/image_util.dart';
 
 ///二级分类与三级分类展示栏目
+// ignore: must_be_immutable
 class TwoCategoryTab extends StatefulWidget {
 
   final Null Function(int) onChildClick;

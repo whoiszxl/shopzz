@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shopzz_flutter_app/controller/category_page_controller.dart';
-import 'package:shopzz_flutter_app/page/category/widgets/category_app_bar.dart';
 import 'package:shopzz_flutter_app/page/category/widgets/one_category_tab.dart';
 import 'package:shopzz_flutter_app/page/category/widgets/two_category_tab.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/search_bar.dart';
-import 'package:shopzz_flutter_app/page/home/widgets/tab_bar.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
 import 'package:shopzz_flutter_app/utils/loading_util.dart';
 

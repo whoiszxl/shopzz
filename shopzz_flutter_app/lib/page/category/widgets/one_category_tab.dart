@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shopzz_flutter_app/entity/response/category_response.dart';
 
+// ignore: must_be_immutable
 class OneCategoryTab extends StatefulWidget {
 
   final Null Function(int) onChildClick;
@@ -43,7 +44,7 @@ class OneCategoryTabState extends State<OneCategoryTab> {
         controller: scrollController,
         itemCount: widget.categoryList.length,
         itemBuilder: (context, index) {
-          return GestureDetector(
+          return InkWell(
             onTap: () {
               setState(() {
                 activeIndex = index;

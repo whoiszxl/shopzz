@@ -1,9 +1,6 @@
 package com.whoiszxl.cqrs.response;
 
-import com.whoiszxl.cqrs.vo.SkuStockVO;
-import com.whoiszxl.cqrs.vo.SkuVO;
-import com.whoiszxl.cqrs.vo.SpuImagesVO;
-import com.whoiszxl.cqrs.vo.SpuVO;
+import com.whoiszxl.cqrs.vo.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -31,5 +28,11 @@ public class SpuDetailResponse {
 
     @ApiModelProperty("商品SPU图片")
     private List<SpuImagesVO> images;
+
+    @ApiModelProperty("商品SPU详情描述信息")
+    private SpuDetailVO spuDetailVO;
+
+    @ApiModelProperty("SPU属性组返回VO实体")
+    private List<SpuAttributeGroupVO> spuAttributeGroupVOList;
 
 }

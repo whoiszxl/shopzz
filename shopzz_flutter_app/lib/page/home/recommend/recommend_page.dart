@@ -1,4 +1,6 @@
 
+import 'dart:collection';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -12,6 +14,7 @@ import 'package:shopzz_flutter_app/entity/response/home_recommend_response.dart'
 import 'package:shopzz_flutter_app/page/home/widgets/banner_bar.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/home_grid_navigator.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
+import 'package:shopzz_flutter_app/router/router_manager.dart';
 import 'package:shopzz_flutter_app/utils/image_util.dart';
 import 'package:shopzz_flutter_app/utils/loading_util.dart';
 
@@ -31,6 +34,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
 
   final PageController _pageController = PageController(keepPage: true);
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
+  final ScrollController _scrollController = ScrollController();
   final RecommendPageController _recommendPageController = Get.find<RecommendPageController>();
 
   double _screenWidth;
@@ -48,6 +52,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
     super.dispose();
     _pageController.dispose();
     _refreshController.dispose();
+    _scrollController.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -56,6 +61,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
     _screenWidth = MediaQuery.of(context).size.width;
 
     return SmartRefresher(
+      scrollController: _scrollController,
       controller: _refreshController,
       enablePullUp: true,
       enablePullDown: true,
@@ -123,7 +129,9 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
-            showToast("点击了" + recommendEntityList[index].name);
+            Map<String,String> map = HashMap();
+            map['spuId'] = recommendEntityList[index].id.toString();
+            Get.toNamed(Routers.detail, parameters: map);
           },
 
           child: _homeRecommendCard(recommendEntityList[index]),
@@ -141,7 +149,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
   _homeRecommendCard(HomeRecommendEntity recommendEntity) {
     final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 244,
+      height: 250,
       child: Card(
         margin: const EdgeInsets.only(left: 4, right: 4, bottom: 4),
         child: ClipRRect(
@@ -178,7 +186,9 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
               children: columnDetail.spuList.map((ColumnSpuEntity spu) {
                 return InkWell(
                   onTap: () {
-                    showToast("点击了" + spu.name);
+                    Map<String,String> map = HashMap();
+                    map['spuId'] = spu.id.toString();
+                    Get.toNamed(Routers.detail, parameters: map);
                   },
                   child: _columnCard(spu),
                 );
@@ -198,7 +208,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
     return Card(
       child: SizedBox(
         width: 110,
-        height: 160,
+        height: 165,
         child: Column(
           children: <Widget>[
 

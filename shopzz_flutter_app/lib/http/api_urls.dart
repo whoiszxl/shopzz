@@ -17,5 +17,8 @@ class ApiUrls {
   static const String categoryTree = "/product/api/category/list/tree";
 
 
+  static const String spuDetail = "/product/api/spu/detail/";
+
+
 
 }

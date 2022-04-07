@@ -2,7 +2,6 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shopzz_flutter_app/entity/response/banner_response.dart';
 import 'package:shopzz_flutter_app/entity/response/category_response.dart';

@@ -28,6 +28,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   List<String> images = [];
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     //初始化数据
@@ -58,6 +60,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void dispose() {
     _tabController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
   @override

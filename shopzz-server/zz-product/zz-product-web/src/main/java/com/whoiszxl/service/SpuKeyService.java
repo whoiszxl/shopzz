@@ -1,7 +1,10 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.cqrs.dto.SpuAttrDTO;
 import com.whoiszxl.entity.SpuKey;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface SpuKeyService extends IService<SpuKey> {
 
+
+    List<SpuAttrDTO> listAttributes(Long spuId);
 }
