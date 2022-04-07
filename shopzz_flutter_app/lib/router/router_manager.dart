@@ -20,6 +20,11 @@ class Routers{
 
   static const String detail = '/detail';
 
+
+  static const String login = '/detail';
+  static const String qrcode = '/qrcode';
+  static const String setting = '/setting';
+
 }
 
 ///路由管理者

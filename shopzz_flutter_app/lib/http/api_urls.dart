@@ -19,6 +19,8 @@ class ApiUrls {
 
   static const String spuDetail = "/product/api/spu/detail/";
 
-
+  static const String memberLogin = "/member/api/member/login";
+  static const String memberPasswordRegister = "/member/api/member/phone/register";
+  static const String memberInfo = "/member/api/member/detail";
 
 }
