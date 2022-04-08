@@ -27,7 +27,7 @@ class HomeRecommendEntity {
   int id;
   String name;
   String subName;
-  int defaultPrice;
+  num defaultPrice;
   String defaultPic;
 
   HomeRecommendEntity(

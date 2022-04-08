@@ -58,7 +58,7 @@ class ColumnSpuEntity {
   int id;
   String name;
   String subName;
-  int defaultPrice;
+  num defaultPrice;
   String defaultPic;
 
   ColumnSpuEntity(

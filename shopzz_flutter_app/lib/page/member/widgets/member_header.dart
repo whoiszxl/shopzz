@@ -18,7 +18,7 @@ class MemberHeader extends StatelessWidget {
       width: double.infinity,
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('images/member_bg.jpg'),
+              image: AssetImage('assets/images/member_bg.jpg'),
               fit: BoxFit.fitWidth
           )
       ),
@@ -171,8 +171,8 @@ class MemberHeader extends StatelessWidget {
       borderColor: Colors.black12,
       borderWidth: 0,
       margin: const EdgeInsets.only(top: 2, right: 2),
-      height: 12,
-      text: Text(tagValue, style: const TextStyle(color: ColorManager.white, fontSize: 8)),
+      height: 14,
+      text: Text(tagValue, style: const TextStyle(color: ColorManager.white, fontSize: 10)),
     );
   }
 }

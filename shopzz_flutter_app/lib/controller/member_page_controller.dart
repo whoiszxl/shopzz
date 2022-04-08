@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shopzz_flutter_app/controller/main_page_controller.dart';
 import 'package:shopzz_flutter_app/entity/response/banner_response.dart';
@@ -34,7 +35,7 @@ class MemberPageController extends GetxController {
   Future<bool> paswordRegister(String username, String password, String rePassword) async {
     var registerFlag = await Get.find<MemberApiService>().passwordRegister(username, password, rePassword);
     if(registerFlag) {
-      Get.offNamed(Routers.login);
+      Get.offNamed(Routers.passwordLogin);
       return true;
     }
     return false;
@@ -46,7 +47,7 @@ class MemberPageController extends GetxController {
     if(result == null) {
       return false;
     }
-    memberInfoResponse.value = await Get.find<MemberApiService>().memberInfo();
+    memberInfoResponse.value = result;
     return true;
   }
 

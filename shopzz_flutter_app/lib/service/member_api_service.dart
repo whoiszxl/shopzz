@@ -1,6 +1,8 @@
 import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shopzz_flutter_app/entity/dto/error_dto.dart';
 import 'package:shopzz_flutter_app/entity/response/member_info_response.dart';
 import 'package:shopzz_flutter_app/http/api_urls.dart';
 import 'package:shopzz_flutter_app/http/http_manager.dart';
@@ -16,6 +18,9 @@ class MemberApiService extends GetxService {
     params["username"] = username;
     params["password"] = password;
     var result = await HttpManager.getInstance().post(url: ApiUrls.memberLogin, data: params);
+    if(result is ErrorDTO) {
+      return null;
+    }
     return result;
   }
 
@@ -33,16 +38,19 @@ class MemberApiService extends GetxService {
   }
 
   Future<MemberInfoResponse> memberInfo() async {
-    String token = '';
+    String token = 'Bearer ';
     await SPUtil.getString(SPKeys.token).then((text){
-      token = text;
+      token += text;
     });
+
+    debugPrint("当前的token: " + token);
 
     if(token.isBlank) {
       return null;
     }
 
     var result = await HttpManager.getInstance().get(url: ApiUrls.memberInfo);
+    debugPrint("result:" + result.toString());
     return MemberInfoResponse.fromJson(result);
   }
 

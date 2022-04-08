@@ -18,5 +18,7 @@ class ColorManager{
   static const Color fontGrey = Color(0xff666666);
 
   static const Color line = Colors.black12;
+  static const Color transparent = Colors.transparent;
+  static const Color fieldBg = Color.fromRGBO(245, 247, 247, 1);
 
 }

@@ -40,7 +40,7 @@ class MemberOrder extends StatelessWidget {
           orderTab(Icons.collections_bookmark_outlined, "我的订单", ColorManager.orange, () {
             Map<String,String> map = HashMap();
             map['orderStatus'] = "0";
-            Get.toNamed(Routers.login, parameters: map);
+            Get.toNamed(Routers.passwordLogin, parameters: map);
           }),
 
         ],

@@ -74,7 +74,7 @@ class SpuEntity {
   int id;
   String name;
   String subName;
-  int defaultPrice;
+  num defaultPrice;
   String defaultPic;
   int categoryId;
   int parentCategoryId;
@@ -134,8 +134,8 @@ class SkuEntity {
   int parentCategoryId;
   String skuName;
   String skuImg;
-  int salePrice;
-  int promotionPrice;
+  num salePrice;
+  num promotionPrice;
   String saleAttr;
   String skuCode;
 

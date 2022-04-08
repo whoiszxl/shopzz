@@ -35,7 +35,6 @@ class _MemberPageState extends State<MemberPage>  with AutomaticKeepAliveClientM
     super.initState();
     memberPageController.memberInfo();
     memberPageController.getNav();
-    _refreshController.refreshCompleted();
   }
 
   @override
@@ -48,12 +47,13 @@ class _MemberPageState extends State<MemberPage>  with AutomaticKeepAliveClientM
   Widget build(BuildContext context) {
     super.build(context);
     return Obx(() {
-      if(memberPageController.memberInfoResponse.value == null || memberPageController.memberInfoResponse.value.nickname == null) {
+      debugPrint(memberPageController.memberInfoResponse.value.toJson().toString());
+      if(memberPageController.memberInfoResponse.value == null || memberPageController.memberInfoResponse.value.memberId == null) {
         return Center(
           child: TextButton(
             child: const Text("点击登录"),
             onPressed: () {
-              Get.toNamed(Routers.login);
+              Get.toNamed(Routers.passwordLogin);
             },
           ),
         );
@@ -165,7 +165,7 @@ class _MemberPageState extends State<MemberPage>  with AutomaticKeepAliveClientM
   memberAppBar(BuildContext context) {
 
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 25),
+      padding: const EdgeInsets.only(left: 10, right: 25, top: 40),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
