@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
+import 'package:shopzz_flutter_app/utils/qrcode_util.dart';
 
 /// 首页搜索栏
 class SearchBar extends StatelessWidget {
@@ -26,7 +27,7 @@ class SearchBar extends StatelessWidget {
 
           //二维码扫描图标
           _icon(Icons.crop_free, () {
-            showToast("点击了");
+            QrcodeUtil.getQrcodeState().then((value) => showToast(value));
           }),
 
           //搜索框

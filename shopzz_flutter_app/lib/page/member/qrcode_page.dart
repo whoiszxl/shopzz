@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shopzz_flutter_app/controller/member_page_controller.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
+import 'package:shopzz_flutter_app/utils/qrcode_util.dart';
 import 'package:shopzz_flutter_app/widgets/base_scaffold.dart';
 import 'package:shopzz_flutter_app/widgets/my_app_bar.dart';
 
@@ -75,19 +77,24 @@ class _QrcodePageState extends State<QrcodePage>{
 
                       Padding(
 
-                        padding: EdgeInsets.only(top: 80),
+                        padding: const EdgeInsets.only(top: 80),
                         child: Row(
                         children: <Widget>[
 
-                          _qrcodeButton("分享", Icons.link_outlined),
+                          _qrcodeButton("分享", Icons.link_outlined, () {
+                          }),
 
                           const SizedBox(width: 70),
 
-                          _qrcodeButton("保存", Icons.download_outlined),
+                          _qrcodeButton("保存", Icons.download_outlined, () {
+
+                          }),
 
                           const SizedBox(width: 70),
 
-                          _qrcodeButton("扫扫", Icons.crop_free),
+                          _qrcodeButton("扫扫", Icons.crop_free, () {
+                            QrcodeUtil.getQrcodeState().then((value) => showToast(value));
+                          }),
                         ],
 
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -104,12 +111,15 @@ class _QrcodePageState extends State<QrcodePage>{
 
   }
 
-  _qrcodeButton(String text,IconData icon) {
-    return Column(
-      children: <Widget>[
-        Icon(icon, size: 38, color: ColorManager.grey),
-        Text(text, style: const TextStyle(fontSize: 14, color: ColorManager.grey, fontWeight: FontWeight.bold)),
-      ],
+  _qrcodeButton(String text,IconData icon, onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: <Widget>[
+          Icon(icon, size: 38, color: ColorManager.grey),
+          Text(text, style: const TextStyle(fontSize: 14, color: ColorManager.grey, fontWeight: FontWeight.bold)),
+        ],
+      ),
     );
   }
 }
