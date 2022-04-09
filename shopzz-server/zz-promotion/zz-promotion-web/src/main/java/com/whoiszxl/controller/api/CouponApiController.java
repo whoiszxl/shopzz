@@ -2,22 +2,13 @@ package com.whoiszxl.controller.api;
 
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.cqrs.command.CouponSaveCommand;
-import com.whoiszxl.cqrs.command.CouponUpdateCommand;
-import com.whoiszxl.cqrs.query.CouponQuery;
 import com.whoiszxl.cqrs.response.CouponApiResponse;
-import com.whoiszxl.cqrs.response.CouponResponse;
 import com.whoiszxl.cqrs.response.MyCouponApiResponse;
-import com.whoiszxl.dozer.DozerUtils;
-import com.whoiszxl.entity.Coupon;
+import com.whoiszxl.cqrs.vo.CouponApiVO;
 import com.whoiszxl.service.CouponService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,24 +30,21 @@ public class CouponApiController {
     @Autowired
     private CouponService couponService;
 
-    @Autowired
-    private DozerUtils dozerUtils;
-
     @SaCheckLogin
     @GetMapping("/by/category/{categoryId}")
-    @ApiOperation(value = "通过分类ID获取优惠券列表", notes = "通过分类ID获取优惠券列表", response = CouponApiResponse.class)
-    public ResponseResult<List<CouponApiResponse>> getCouponByCategoryId(@PathVariable Long categoryId) {
-        List<CouponApiResponse> couponApiResponseList = couponService.getCouponByCategoryId(categoryId);
-        return ResponseResult.buildSuccess(couponApiResponseList);
+    @ApiOperation(value = "通过分类ID获取优惠券列表", notes = "通过分类ID获取优惠券列表", response = CouponApiVO.class)
+    public ResponseResult<CouponApiResponse> getCouponByCategoryId(@PathVariable Long categoryId) {
+        List<CouponApiVO> couponApiVOList = couponService.getCouponByCategoryId(categoryId);
+        return ResponseResult.buildSuccess(new CouponApiResponse(couponApiVOList));
     }
 
 
     @SaCheckLogin
     @GetMapping("/all/unlimited")
-    @ApiOperation(value = "获取所有全场通用的优惠券", notes = "获取所有全场通用的优惠券", response = CouponApiResponse.class)
-    public ResponseResult<List<CouponApiResponse>> getCouponAllUnlimited() {
-        List<CouponApiResponse> couponApiResponseList = couponService.getCouponAllUnlimited();
-        return ResponseResult.buildSuccess(couponApiResponseList);
+    @ApiOperation(value = "获取所有全场通用的优惠券", notes = "获取所有全场通用的优惠券", response = CouponApiVO.class)
+    public ResponseResult<CouponApiResponse> getCouponAllUnlimited() {
+        List<CouponApiVO> couponApiVOList = couponService.getCouponAllUnlimited();
+        return ResponseResult.buildSuccess(new CouponApiResponse(couponApiVOList));
     }
 
     @SaCheckLogin

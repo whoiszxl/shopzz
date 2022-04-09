@@ -18,6 +18,8 @@
         <module>zz-promotion/zz-promotion-api</module>
         <module>zz-promotion/zz-promotion-web</module>
         <module>zz-member</module>
+        <module>zz-order</module>
+        <module>zz-wallet</module>
     </modules>
     <packaging>pom</packaging>
 

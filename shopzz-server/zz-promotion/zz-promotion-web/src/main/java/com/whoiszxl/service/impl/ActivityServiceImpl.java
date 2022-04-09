@@ -3,7 +3,7 @@ package com.whoiszxl.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
 import com.whoiszxl.cqrs.response.ActivityApiResponse;
-import com.whoiszxl.cqrs.response.CouponApiResponse;
+import com.whoiszxl.cqrs.vo.CouponApiVO;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.Activity;
 import com.whoiszxl.entity.ActivityCoupon;
@@ -65,8 +65,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                     List<Long> couponIdList = activityCouponList.stream().map(e -> e.getCouponId()).collect(Collectors.toList());
                     List<Coupon> couponList = couponService.listByIds(couponIdList);
 
-                    List<CouponApiResponse> couponApiResponseList = dozerUtils.mapList(couponList, CouponApiResponse.class);
-                    response.setCouponList(couponApiResponseList);
+                    List<CouponApiVO> couponApiVOList = dozerUtils.mapList(couponList, CouponApiVO.class);
+                    response.setCouponList(couponApiVOList);
 
                     activityJson = JsonUtil.toJson(response);
 

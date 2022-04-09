@@ -1,9 +1,9 @@
 package com.whoiszxl.service;
 
-import com.whoiszxl.cqrs.response.CouponApiResponse;
-import com.whoiszxl.cqrs.response.MyCouponApiResponse;
-import com.whoiszxl.entity.Coupon;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.cqrs.response.MyCouponApiResponse;
+import com.whoiszxl.cqrs.vo.CouponApiVO;
+import com.whoiszxl.entity.Coupon;
 
 import java.util.List;
 
@@ -22,13 +22,13 @@ public interface CouponService extends IService<Coupon> {
      * @param categoryId 分类ID
      * @return 优惠券列表
      */
-    List<CouponApiResponse> getCouponByCategoryId(Long categoryId);
+    List<CouponApiVO> getCouponByCategoryId(Long categoryId);
 
     /**
      * 获取全场通用的优惠券列表
      * @return
      */
-    List<CouponApiResponse> getCouponAllUnlimited();
+    List<CouponApiVO> getCouponAllUnlimited();
 
 
     /**

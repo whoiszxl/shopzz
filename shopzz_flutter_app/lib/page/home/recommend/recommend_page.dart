@@ -100,7 +100,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
 
               //专栏广告栏组件
               _columnBar(_recommendPageController.columnDetailResponse.value, () {
-                showToast("点击了");
+                Get.toNamed(Routers.coupon);
               }),
 
               //专栏一
@@ -267,7 +267,7 @@ class _RecommendPageState extends State<RecommendPage> with TickerProviderStateM
                 borderRadius: const BorderRadius.all(Radius.circular(6)),
                 image: DecorationImage(
                   image: imageProvider,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

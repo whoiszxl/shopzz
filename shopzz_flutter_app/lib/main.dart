@@ -5,6 +5,7 @@ import 'package:shopzz_flutter_app/controller/all_controller_binding.dart';
 import 'package:shopzz_flutter_app/i18n/messages.dart';
 import 'package:shopzz_flutter_app/router/router_manager.dart';
 import 'package:shopzz_flutter_app/service/category_api_service.dart';
+import 'package:shopzz_flutter_app/service/coupon_api_service.dart';
 import 'package:shopzz_flutter_app/service/home_api_service.dart';
 import 'package:shopzz_flutter_app/service/member_api_service.dart';
 import 'package:shopzz_flutter_app/service/product_api_service.dart';
@@ -34,4 +35,5 @@ Future<void> initServices() async {
   await Get.putAsync(() async => CategoryApiService());
   await Get.putAsync(() async => ProductApiService());
   await Get.putAsync(() async => MemberApiService());
+  await Get.putAsync(() async => CouponApiService());
 }

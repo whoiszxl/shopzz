@@ -1,5 +1,6 @@
 package com.whoiszxl.cqrs.response;
 
+import com.whoiszxl.cqrs.vo.CouponApiVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -36,5 +37,5 @@ public class ActivityApiResponse {
     private String img;
 
     @ApiModelProperty("优惠券列表")
-    private List<CouponApiResponse> couponList;
+    private List<CouponApiVO> couponList;
 }

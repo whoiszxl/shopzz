@@ -3,12 +3,12 @@ package com.whoiszxl.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.google.gson.reflect.TypeToken;
+import com.google.common.reflect.TypeToken;
 import com.whoiszxl.constants.CouponFullLimitedEnum;
 import com.whoiszxl.constants.CouponStatusEnum;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
-import com.whoiszxl.cqrs.response.CouponApiResponse;
 import com.whoiszxl.cqrs.response.MyCouponApiResponse;
+import com.whoiszxl.cqrs.vo.CouponApiVO;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.Coupon;
 import com.whoiszxl.entity.CouponCategory;
@@ -57,7 +57,7 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
     private MemberCouponService memberCouponService;
 
     @Override
-    public List<CouponApiResponse> getCouponByCategoryId(Long categoryId) {
+    public List<CouponApiVO> getCouponByCategoryId(Long categoryId) {
         List<CouponCategory> couponCategorieList = couponCategoryMapper.selectList(
                 Wrappers.<CouponCategory>lambdaQuery().eq(CouponCategory::getCategoryId, categoryId));
         if(couponCategorieList.isEmpty()) {
@@ -66,13 +66,13 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
 
         List<Long> couponIdList = couponCategorieList.stream().map(CouponCategory::getCouponId).collect(Collectors.toList());
         List<Coupon> couponList = super.listByIds(couponIdList);
-        List<CouponApiResponse> couponApiResponseList = dozerUtils.mapList(couponList, CouponApiResponse.class);
-        return couponApiResponseList;
+        List<CouponApiVO> couponApiVOList = dozerUtils.mapList(couponList, CouponApiVO.class);
+        return couponApiVOList;
     }
 
 
     @Override
-    public List<CouponApiResponse> getCouponAllUnlimited() {
+    public List<CouponApiVO> getCouponAllUnlimited() {
         String redisKey = RedisKeyPrefixConstants.ACTIVITY_NOTLIMIT_COUPONLIST;
         String allUnlimitedCouponListJson = redisUtils.get(redisKey);
         if(StringUtils.isBlank(allUnlimitedCouponListJson)) {
@@ -89,15 +89,15 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
                         return Collections.emptyList();
                     }
 
-                    List<CouponApiResponse> couponApiResponseList = dozerUtils.mapList(couponList, CouponApiResponse.class);
-                    allUnlimitedCouponListJson = JsonUtil.toJson(couponApiResponseList);
+                    List<CouponApiVO> couponApiVOList = dozerUtils.mapList(couponList, CouponApiVO.class);
+                    allUnlimitedCouponListJson = JsonUtil.toJson(couponApiVOList);
 
                     redisUtils.set(redisKey, allUnlimitedCouponListJson);
                 }
             }
         }
 
-        Type collectionType = new TypeToken<List<CouponApiResponse>>(){}.getType();
+        Type collectionType = new TypeToken<List<CouponApiVO>>(){}.getType();
         return JsonUtil.fromJsonToList(allUnlimitedCouponListJson, collectionType);
     }
 
@@ -137,7 +137,6 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
     @Override
     public List<MyCouponApiResponse> myCouponList(Integer status) {
         Long memberId = AuthUtils.getMemberId();
-        List<MyCouponApiResponse> couponList = couponMapper.myCouponList(memberId, status);
-        return couponList;
+        return couponMapper.myCouponList(memberId, status);
     }
 }

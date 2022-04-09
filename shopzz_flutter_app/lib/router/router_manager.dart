@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shopzz_flutter_app/page/cart/cart_page.dart';
 import 'package:shopzz_flutter_app/page/category/category_page.dart';
+import 'package:shopzz_flutter_app/page/coupon/coupon_page.dart';
 import 'package:shopzz_flutter_app/page/detail/detail_page.dart';
 import 'package:shopzz_flutter_app/page/discovery/discovery_page.dart';
 import 'package:shopzz_flutter_app/page/home/home_page.dart';
@@ -32,6 +33,9 @@ class Routers{
   static const String qrcode = '/qrcode';
   static const String setting = '/setting';
 
+  static const String coupon = '/coupon';
+
+
 }
 
 ///路由管理者
@@ -52,6 +56,7 @@ class RouterManager{
 
     GetPage(name: Routers.qrcode, page: () => const QrcodePage()),
 
+    GetPage(name: Routers.coupon, page: () => const CouponPage()),
 
   ];
 
