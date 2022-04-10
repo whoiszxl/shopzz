@@ -76,7 +76,7 @@ class _MemberPageState extends State<MemberPage>  with AutomaticKeepAliveClientM
           ),
           controller: _refreshController,
           child: _son(memberPageController.memberInfoResponse.value, memberPageController.navigationList),
-        );;
+        );
       }
     });
   }
@@ -188,7 +188,7 @@ class _MemberPageState extends State<MemberPage>  with AutomaticKeepAliveClientM
             child: InkWell(
               child: const Icon(Icons.settings_outlined,color: ColorManager.grey),
               onTap: () {
-                Get.toNamed(Routers.setting);
+                Get.toNamed(Routers.settings);
               },
             ),
           ),

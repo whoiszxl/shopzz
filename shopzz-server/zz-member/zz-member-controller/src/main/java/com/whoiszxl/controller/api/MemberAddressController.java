@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021-07-29
  */
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/api/address")
 @Api(tags = "用户地址相关接口")
 public class MemberAddressController {
 

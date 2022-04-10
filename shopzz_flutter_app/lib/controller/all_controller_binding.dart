@@ -4,6 +4,7 @@ import 'package:shopzz_flutter_app/controller/category_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/coupon_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/language_controller.dart';
 import 'package:shopzz_flutter_app/controller/main_page_controller.dart';
+import 'package:shopzz_flutter_app/controller/member_address_controller.dart';
 import 'package:shopzz_flutter_app/controller/member_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/product_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/recommend_page_controller.dart';
@@ -21,5 +22,6 @@ class AllControllerBinding implements Bindings {
     Get.lazyPut<MemberPageController>(() => MemberPageController());
     Get.lazyPut<CouponPageController>(() => CouponPageController());
     Get.lazyPut<CartPageController>(() => CartPageController());
+    Get.lazyPut<MemberAddressController>(() => MemberAddressController());
   }
 }

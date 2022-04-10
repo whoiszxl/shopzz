@@ -9,8 +9,10 @@ import 'package:shopzz_flutter_app/page/login/password_login_page.dart';
 import 'package:shopzz_flutter_app/page/login/register_page.dart';
 import 'package:shopzz_flutter_app/page/login/sms_login_page.dart';
 import 'package:shopzz_flutter_app/page/main_page.dart';
+import 'package:shopzz_flutter_app/page/member/address_page.dart';
 import 'package:shopzz_flutter_app/page/member/member_page.dart';
 import 'package:shopzz_flutter_app/page/member/qrcode_page.dart';
+import 'package:shopzz_flutter_app/page/member/settings_page.dart';
 
 ///路由名称，所有路由在此处统一管理
 ///跳转时直接使用如下代码进行处理：Get.toNamed(Routers.pageName, parameters: map);
@@ -31,7 +33,8 @@ class Routers{
   static const String register = '/register';
 
   static const String qrcode = '/qrcode';
-  static const String setting = '/setting';
+  static const String settings = '/settings';
+  static const String address = '/address';
 
   static const String coupon = '/coupon';
 
@@ -57,6 +60,9 @@ class RouterManager{
     GetPage(name: Routers.qrcode, page: () => const QrcodePage()),
 
     GetPage(name: Routers.coupon, page: () => const CouponPage()),
+
+    GetPage(name: Routers.settings, page: () => const SettingsPage()),
+    GetPage(name: Routers.address, page: () => const AddressPage()),
 
   ];
 

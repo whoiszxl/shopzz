@@ -22,7 +22,7 @@ class ApiUrls {
   static const String memberLogin = "/member/api/member/login";
   static const String memberPasswordRegister = "/member/api/member/phone/register";
   static const String memberInfo = "/member/api/member/detail";
-
+  static const String memberAddress = "/member/api/address";
 
   static const String couponAllUnlimited = "/promotion/api/coupon/all/unlimited";
   static const String receiveCoupon = "/promotion/api/coupon/receive/";
@@ -35,4 +35,6 @@ class ApiUrls {
   static const String cartDelete = "/order/api/cart/delete";
   static const String cartDetail = "/order/api/cart/detail";
   static const String cartUpdateQuantity = "/order/api/cart/update/quantity";
+
+
 }

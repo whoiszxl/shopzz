@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shopzz_flutter_app/controller/cart_page_controller.dart';
 import 'package:shopzz_flutter_app/entity/response/cart_detail_response.dart';
 import 'package:shopzz_flutter_app/page/cart/widgets/cart_card.dart';
 import 'package:shopzz_flutter_app/page/cart/widgets/cart_footer.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
-import 'package:shopzz_flutter_app/router/router_manager.dart';
 import 'package:shopzz_flutter_app/widgets/base_scaffold.dart';
 import 'package:shopzz_flutter_app/widgets/my_app_bar.dart';
-import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 ///发现页面
 class CartPage extends StatefulWidget {
