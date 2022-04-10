@@ -1,7 +1,16 @@
 package com.whoiszxl.controller.api;
 
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import com.whoiszxl.bean.ResponseResult;
+import com.whoiszxl.cqrs.command.OrderPayCommand;
+import com.whoiszxl.cqrs.command.OrderSubmitCommand;
+import com.whoiszxl.service.OrderService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +27,22 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "C端:订单相关接口")
 public class OrderApiController {
 
+    @Autowired
+    private OrderService orderService;
 
+    @SaCheckLogin
+    @PostMapping("/submit")
+    @ApiOperation(value = "提交订单", notes = "提交订单", response = String.class)
+    public ResponseResult<String> orderSubmit(@RequestBody OrderSubmitCommand orderSubmitCommand) {
+        String orderId = orderService.orderSubmit(orderSubmitCommand);
+        return ResponseResult.buildSuccess(orderId);
+    }
 
+    @SaCheckLogin
+    @PostMapping("/pay")
+    @ApiOperation(value = "去支付", notes = "去支付", response = Boolean.class)
+    public ResponseResult<String> pay(@RequestBody OrderPayCommand orderPayCommand) {
+        return ResponseResult.buildSuccess(orderService.pay(orderPayCommand));
+    }
 }
 
