@@ -33,10 +33,10 @@ public class MemberAddressPO implements Serializable {
     private Long memberId;
 
     @ApiModelProperty("收货人")
-    private String reciverName;
+    private String receiverName;
 
     @ApiModelProperty("收货人电话号码")
-    private String reciverPhone;
+    private String receiverPhone;
 
     @ApiModelProperty("省")
     private String province;

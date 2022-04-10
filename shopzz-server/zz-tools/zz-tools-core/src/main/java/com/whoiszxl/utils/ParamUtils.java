@@ -19,7 +19,7 @@ public class ParamUtils {
      * @param ids 字符串拼接参数
      * @return
      */
-    public static List str2Array(String ids) {
+    public static List<Long> str2Array(String ids) {
         return Arrays.stream(ids.split(","))
                 .map(idStr -> Long.parseLong(idStr.trim()))
                 .collect(Collectors.toList());

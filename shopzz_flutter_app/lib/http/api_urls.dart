@@ -28,5 +28,11 @@ class ApiUrls {
   static const String receiveCoupon = "/promotion/api/coupon/receive/";
 
 
-
+  ///购物车
+  static const String cartAdd = "/order/api/cart/add";
+  static const String cartCheck = "/order/api/cart/check";
+  static const String cartClean = "/order/api/cart/clean";
+  static const String cartDelete = "/order/api/cart/delete";
+  static const String cartDetail = "/order/api/cart/detail";
+  static const String cartUpdateQuantity = "/order/api/cart/update/quantity";
 }

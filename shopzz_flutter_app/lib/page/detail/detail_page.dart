@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shopzz_flutter_app/controller/cart_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/product_page_controller.dart';
 import 'package:shopzz_flutter_app/page/detail/widgets/attr_label.dart';
 import 'package:shopzz_flutter_app/page/detail/widgets/attr_modal.dart';
@@ -29,7 +30,8 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
 
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
-  final ProductPageController _productPageController = Get.put<ProductPageController>(ProductPageController());
+  final ProductPageController _productPageController = Get.put(ProductPageController());
+  final CartPageController _cartPageController = Get.put(CartPageController());
 
 
   @override
@@ -73,6 +75,8 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
                           specificationList: _productPageController.spuDetailResponse.value.spuAttributeGroupVOList);
 
                     });
+              }else {
+                _cartPageController.cartAdd(_productPageController.skuCode.value, 1);
               }
             },
             () {

@@ -49,8 +49,8 @@ DROP TABLE IF EXISTS `ums_member_address`;
 CREATE TABLE `ums_member_address` (
     `id`                                bigint(11) NOT NULL COMMENT '主键ID',
     `member_id`                         bigint(11) NOT NULL COMMENT '用户ID',
-    `reciver_name`                      varchar(64) NOT NULL COMMENT '收货人',
-    `reciver_phone`                     varchar(64) NOT NULL COMMENT '收货人电话号码',
+    `receiver_name`                     varchar(64) NOT NULL COMMENT '收货人',
+    `receiver_phone`                    varchar(64) NOT NULL COMMENT '收货人电话号码',
     `province`                          varchar(64) NOT NULL COMMENT '省',
     `city`                              varchar(64) NOT NULL COMMENT '市',
     `district`                          varchar(64) NOT NULL COMMENT '区',

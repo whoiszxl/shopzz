@@ -12,6 +12,7 @@ import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.feign.ProductFeignClient;
 import com.whoiszxl.mapper.RecommendProductMapper;
 import com.whoiszxl.service.RecommendProductService;
+import com.whoiszxl.utils.AssertUtils;
 import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.ParamUtils;
 import com.whoiszxl.utils.RedisUtils;
@@ -53,8 +54,8 @@ public class RecommendProductServiceImpl extends ServiceImpl<RecommendProductMap
         List<String> responseList = null;
         Integer page = query.getPage();
         Integer size = query.getSize();
-        Integer start = (page - 1) * size;
-        Integer end = start + size - 1;
+        int start = (page - 1) * size;
+        int end = start + size - 1;
 
         try{
             responseList = redisUtils.lRange(RedisKeyPrefixConstants.HOME_RECOMMEND_A, start, end);
@@ -67,6 +68,7 @@ public class RecommendProductServiceImpl extends ServiceImpl<RecommendProductMap
             log.error("获取首页推荐商品列表失败", e);
         }
 
+        AssertUtils.isNotNull(responseList, "推荐商品列表为空");
         List<HomeRecommendVO> resultList = responseList.stream().map(e -> JsonUtil.fromJson(e, HomeRecommendVO.class)).collect(Collectors.toList());
 
         return resultList;
@@ -86,14 +88,14 @@ public class RecommendProductServiceImpl extends ServiceImpl<RecommendProductMap
         List<SpuFeignDTO> spuFeignDTOList = feignResponse.getData();
         List<HomeRecommendVO> homeRecommendList = dozerUtils.mapList(spuFeignDTOList, HomeRecommendVO.class);
 
-        List<String> jsonList = homeRecommendList.stream().map(e -> JsonUtil.toJson(e)).collect(Collectors.toList());
+        List<String> jsonList = homeRecommendList.stream().map(JsonUtil::toJson).collect(Collectors.toList());
 
         redisUtils.delete(RedisKeyPrefixConstants.HOME_RECOMMEND_B);
         redisUtils.lLeftPushAll(RedisKeyPrefixConstants.HOME_RECOMMEND_B, jsonList);
-        redisUtils.expire(RedisKeyPrefixConstants.HOME_RECOMMEND_B, 1, TimeUnit.DAYS);
+        redisUtils.expire(RedisKeyPrefixConstants.HOME_RECOMMEND_B, 10, TimeUnit.DAYS);
 
         redisUtils.delete(RedisKeyPrefixConstants.HOME_RECOMMEND_A);
         redisUtils.lLeftPushAll(RedisKeyPrefixConstants.HOME_RECOMMEND_A, jsonList);
-        redisUtils.expire(RedisKeyPrefixConstants.HOME_RECOMMEND_A, 1, TimeUnit.DAYS);
+        redisUtils.expire(RedisKeyPrefixConstants.HOME_RECOMMEND_A, 10, TimeUnit.DAYS);
     }
 }

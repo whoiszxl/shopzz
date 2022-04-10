@@ -19,6 +19,14 @@ public class AuthUtils {
     }
 
     /**
+     * 获取当前用户的登录用户ID
+     * @return
+     */
+    public static String getStrMemberId() {
+        return StpUtil.getLoginIdAsString();
+    }
+
+    /**
      * 对memberId的用户进行登录操作
      * @param memberId 用户ID
      */

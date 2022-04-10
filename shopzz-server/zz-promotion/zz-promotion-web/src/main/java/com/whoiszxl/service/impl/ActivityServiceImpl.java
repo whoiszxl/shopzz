@@ -62,7 +62,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
                     List<ActivityCoupon> activityCouponList = activityCouponService.list(Wrappers.<ActivityCoupon>lambdaQuery()
                             .eq(ActivityCoupon::getActivityId, id));
-                    List<Long> couponIdList = activityCouponList.stream().map(e -> e.getCouponId()).collect(Collectors.toList());
+                    List<Long> couponIdList = activityCouponList.stream().map(ActivityCoupon::getCouponId).collect(Collectors.toList());
                     List<Coupon> couponList = couponService.listByIds(couponIdList);
 
                     List<CouponApiVO> couponApiVOList = dozerUtils.mapList(couponList, CouponApiVO.class);
