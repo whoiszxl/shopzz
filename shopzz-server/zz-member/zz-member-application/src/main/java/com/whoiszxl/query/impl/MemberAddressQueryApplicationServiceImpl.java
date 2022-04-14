@@ -1,12 +1,11 @@
 package com.whoiszxl.query.impl;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.whoiszxl.aggregate.model.MemberAddress;
 import com.whoiszxl.aggregate.repository.MemberAddressRepository;
 import com.whoiszxl.db.mapper.MemberAddressMapper;
 import com.whoiszxl.db.model.MemberAddressPO;
 import com.whoiszxl.dozer.DozerUtils;
+import com.whoiszxl.dto.MemberAddressDTO;
 import com.whoiszxl.query.MemberAddressQueryApplicationService;
 import com.whoiszxl.query.model.response.MemberAddressListResponse;
 import com.whoiszxl.query.model.response.MemberAddressVO;
@@ -49,5 +48,14 @@ public class MemberAddressQueryApplicationServiceImpl implements MemberAddressQu
         memberAddressVOList.remove(0);
         response.setAddressList(memberAddressVOList);
         return response;
+    }
+
+    @Override
+    public MemberAddressDTO getMemberAddress(Long memberId, Long addressId) {
+        LambdaQueryWrapper<MemberAddressPO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(MemberAddressPO::getMemberId, memberId);
+        queryWrapper.eq(MemberAddressPO::getId, addressId);
+        MemberAddressPO memberAddressPO = memberAddressMapper.selectOne(queryWrapper);
+        return dozerUtils.map(memberAddressPO, MemberAddressDTO.class);
     }
 }

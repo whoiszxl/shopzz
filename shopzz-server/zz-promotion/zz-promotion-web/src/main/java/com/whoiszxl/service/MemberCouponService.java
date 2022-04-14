@@ -1,7 +1,7 @@
 package com.whoiszxl.service;
 
-import com.whoiszxl.entity.MemberCoupon;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.entity.MemberCoupon;
 
 /**
  * <p>
@@ -13,4 +13,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface MemberCouponService extends IService<MemberCoupon> {
 
+    /**
+     * 核销优惠券
+     * @param memberId 用户ID
+     * @param couponId 优惠券ID
+     * @param orderId 订单ID
+     * @return
+     */
+    int writeOffCoupon(Long memberId, Long couponId, Long orderId);
 }

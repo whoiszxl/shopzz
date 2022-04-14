@@ -116,6 +116,12 @@
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
+            <artifactId>zz-promotion-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 

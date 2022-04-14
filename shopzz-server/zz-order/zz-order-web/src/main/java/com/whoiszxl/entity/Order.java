@@ -3,13 +3,14 @@ package com.whoiszxl.entity;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -28,7 +29,7 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
-      private Long id;
+    private Long id;
 
     @ApiModelProperty("订单编号")
     private String orderNo;
@@ -42,26 +43,8 @@ public class Order implements Serializable {
     @ApiModelProperty("订单状态，1：待付款，2：已取消，3：待发货，4：待收货，5：已完成，6：售后中（退货申请待审核），7：交易关闭（退货审核不通过），8：交易中（待寄送退货商品），9：售后中（退货商品待收货），10：售后中（退货待入库），11：（1）售后中（退货已入库），12：交易关闭（完成退款）")
     private Integer orderStatus;
 
-    @ApiModelProperty("收货人姓名")
-    private String receiverName;
-
-    @ApiModelProperty("收货人电话")
-    private String receiverPhone;
-
-    @ApiModelProperty("收货人邮编")
-    private String receiverPostCode;
-
-    @ApiModelProperty("省份/直辖市")
-    private String receiverProvince;
-
-    @ApiModelProperty("城市")
-    private String receiverCity;
-
-    @ApiModelProperty("区")
-    private String receiverRegion;
-
-    @ApiModelProperty("详细地址")
-    private String receiverDetailAddress;
+    @ApiModelProperty("地址信息快照")
+    private String snapshotAddress;
 
     @ApiModelProperty("支付方式: [1:支付宝 2:微信 3:数字货币]")
     private Integer payType;

@@ -1,7 +1,8 @@
 package com.whoiszxl.mapper;
 
-import com.whoiszxl.entity.MemberCoupon;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.whoiszxl.entity.MemberCoupon;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -13,4 +14,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface MemberCouponMapper extends BaseMapper<MemberCoupon> {
 
+    @Update("update spms_member_coupon " +
+            "set order_id = #{orderId}, " +
+            "status = 2 " +
+            "where member_id = #{memberId} " +
+            "and coupon_id = #{couponId} " +
+            "and status = 1 " +
+            "and order_id is null")
+    int writeOffCoupon(Long memberId, Long couponId, Long orderId);
 }

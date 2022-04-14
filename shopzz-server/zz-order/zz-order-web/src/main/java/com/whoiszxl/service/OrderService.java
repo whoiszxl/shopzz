@@ -20,7 +20,7 @@ public interface OrderService extends IService<Order> {
      * @param orderSubmitCommand 订单提交命令
      * @return 订单ID
      */
-    String orderSubmit(OrderSubmitCommand orderSubmitCommand);
+    Long orderSubmit(OrderSubmitCommand orderSubmitCommand);
 
     /**
      * 去支付订单
@@ -28,4 +28,13 @@ public interface OrderService extends IService<Order> {
      * @return
      */
     String pay(OrderPayCommand orderPayCommand);
+
+
+    /**
+     * 通过订单ID更新订单状态
+     * @param id 订单ID
+     * @param orderStatus 订单状态
+     * @return 是否更新成功
+     */
+    Boolean updateStatus(Long id, Integer orderStatus);
 }

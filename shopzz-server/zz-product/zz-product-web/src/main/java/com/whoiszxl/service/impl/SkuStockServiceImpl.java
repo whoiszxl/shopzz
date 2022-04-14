@@ -4,6 +4,7 @@ import com.whoiszxl.entity.SkuStock;
 import com.whoiszxl.mapper.SkuStockMapper;
 import com.whoiszxl.service.SkuStockService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class SkuStockServiceImpl extends ServiceImpl<SkuStockMapper, SkuStock> implements SkuStockService {
 
+    @Autowired
+    private SkuStockMapper skuStockMapper;
+
+    @Override
+    public int subSaleStockAndAddLockStockBySkuId(Long skuId, Integer quantity) {
+        return skuStockMapper.subSaleStockAndAddLockStockBySkuId(skuId, quantity);
+    }
 }

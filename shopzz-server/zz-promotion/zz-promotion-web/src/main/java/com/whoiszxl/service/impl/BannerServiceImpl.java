@@ -3,7 +3,7 @@ package com.whoiszxl.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.whoiszxl.constants.BannerTypeEnum;
+import com.whoiszxl.enums.promotion.BannerTypeEnum;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
 import com.whoiszxl.cqrs.response.HomeBannerVO;
 import com.whoiszxl.cqrs.response.IndexBannerResponse;

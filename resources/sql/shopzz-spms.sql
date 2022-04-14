@@ -119,6 +119,7 @@ CREATE TABLE `spms_member_coupon` (
     `id`                        bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
     `member_id`                 bigint(11) NOT NULL COMMENT '会员ID',
     `coupon_id`                 bigint(11) NOT NULL COMMENT '优惠券ID',
+    `order_id`                  bigint(11) NOT NULL COMMENT '订单ID',
     `status`                    tinyint(3) NOT NULL DEFAULT 1 COMMENT '优惠券状态: 1-未使用 2-已使用 3-已过期',
     `get_time`                  datetime NOT NULL COMMENT '优惠券的领取时间',
     `use_time`                  datetime NULL COMMENT '优惠券的使用时间',

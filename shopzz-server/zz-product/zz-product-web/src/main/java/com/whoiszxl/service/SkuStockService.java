@@ -13,4 +13,11 @@ import com.whoiszxl.entity.SkuStock;
  */
 public interface SkuStockService extends IService<SkuStock> {
 
+    /**
+     * 扣减库存
+     * @param skuId sku id
+     * @param quantity 扣减数量
+     * @return
+     */
+    int subSaleStockAndAddLockStockBySkuId(Long skuId, Integer quantity);
 }

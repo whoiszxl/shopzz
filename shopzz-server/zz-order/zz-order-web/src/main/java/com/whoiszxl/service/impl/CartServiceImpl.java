@@ -160,4 +160,15 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
 
         return response;
     }
+
+    @Override
+    public void clearCheckedCart() {
+        BoundHashOperations<String, Object, Object> cartHashOps = redisUtils.getHashOps(RedisKeyPrefixConstants.MEMBER_CART_PREFIX + StpUtil.getLoginIdAsString());
+        CartDetailApiResponse cartDetail = getCartDetail();
+        for (CartItemVO cartItemVO : cartDetail.getCartItemVOList()) {
+            if(cartItemVO.getChecked() == 1) {
+                cartHashOps.delete(cartItemVO.getSkuId().toString());
+            }
+        }
+    }
 }

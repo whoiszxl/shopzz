@@ -32,9 +32,9 @@ public class OrderApiController {
 
     @SaCheckLogin
     @PostMapping("/submit")
-    @ApiOperation(value = "提交订单", notes = "提交订单", response = String.class)
-    public ResponseResult<String> orderSubmit(@RequestBody OrderSubmitCommand orderSubmitCommand) {
-        String orderId = orderService.orderSubmit(orderSubmitCommand);
+    @ApiOperation(value = "提交订单", notes = "返回订单ID", response = Long.class)
+    public ResponseResult<Long> orderSubmit(@RequestBody OrderSubmitCommand orderSubmitCommand) {
+        Long orderId = orderService.orderSubmit(orderSubmitCommand);
         return ResponseResult.buildSuccess(orderId);
     }
 

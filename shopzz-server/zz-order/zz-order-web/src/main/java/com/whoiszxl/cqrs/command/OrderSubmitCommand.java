@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * 订单提交命令
  *
@@ -28,4 +30,7 @@ public class OrderSubmitCommand {
 
     @ApiModelProperty("优惠券ID")
     private Long couponId;
+
+    @ApiModelProperty("最终计算价格")
+    private BigDecimal finalPrice;
 }

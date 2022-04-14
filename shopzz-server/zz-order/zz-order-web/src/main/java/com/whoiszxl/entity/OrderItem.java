@@ -3,13 +3,14 @@ package com.whoiszxl.entity;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -28,7 +29,7 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
-      private Long id;
+    private Long id;
 
     @ApiModelProperty("订单ID")
     private Long orderId;

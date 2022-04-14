@@ -1,7 +1,7 @@
 package com.whoiszxl.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.whoiszxl.constants.BannerTypeEnum;
+import com.whoiszxl.enums.promotion.BannerTypeEnum;
 import com.whoiszxl.cqrs.response.HomeBannerVO;
 import com.whoiszxl.cqrs.response.IndexBannerResponse;
 import com.whoiszxl.entity.Banner;

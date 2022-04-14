@@ -1,9 +1,10 @@
 package com.whoiszxl.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.entity.MemberCoupon;
 import com.whoiszxl.mapper.MemberCouponMapper;
 import com.whoiszxl.service.MemberCouponService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MemberCouponServiceImpl extends ServiceImpl<MemberCouponMapper, MemberCoupon> implements MemberCouponService {
 
+    @Autowired
+    private MemberCouponMapper memberCouponMapper;
+
+
+    @Override
+    public int writeOffCoupon(Long memberId, Long couponId, Long orderId) {
+        return memberCouponMapper.writeOffCoupon(memberId, couponId, orderId);
+    }
 }

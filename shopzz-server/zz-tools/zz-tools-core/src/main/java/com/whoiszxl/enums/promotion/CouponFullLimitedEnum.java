@@ -1,4 +1,4 @@
-package com.whoiszxl.constants;
+package com.whoiszxl.enums.promotion;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

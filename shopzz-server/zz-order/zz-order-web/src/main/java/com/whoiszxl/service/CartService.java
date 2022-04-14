@@ -56,4 +56,10 @@ public interface CartService extends IService<Cart> {
      */
     CartDetailApiResponse getCartDetail();
 
+    /**
+     * 清空购物车选中的item
+     */
+    void clearCheckedCart();
+
+
 }

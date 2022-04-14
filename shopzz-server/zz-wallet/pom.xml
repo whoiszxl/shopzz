@@ -10,6 +10,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zz-wallet</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>zz-wallet-api</module>
+        <module>zz-wallet-common</module>
+        <module>zz-wallet-ethereum-common</module>
+        <module>zz-wallet-eth</module>
+        <module>zz-wallet-erc20</module>
+        <module>zz-wallet-btc</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
