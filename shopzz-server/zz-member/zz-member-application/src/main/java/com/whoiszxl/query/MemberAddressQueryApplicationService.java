@@ -1,6 +1,7 @@
 package com.whoiszxl.query;
 
 import com.whoiszxl.dto.MemberAddressDTO;
+import com.whoiszxl.dto.MemberAddressFeignDTO;
 import com.whoiszxl.query.model.response.MemberAddressListResponse;
 
 /**
@@ -24,5 +25,5 @@ public interface MemberAddressQueryApplicationService {
      * @param addressId 地址ID
      * @return
      */
-    MemberAddressDTO getMemberAddress(Long memberId, Long addressId);
+    MemberAddressFeignDTO getMemberAddress(Long memberId, Long addressId);
 }

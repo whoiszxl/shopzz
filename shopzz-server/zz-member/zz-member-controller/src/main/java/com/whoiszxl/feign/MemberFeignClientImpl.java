@@ -1,8 +1,10 @@
 package com.whoiszxl.feign;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.command.MemberAddressApplicationService;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.dto.MemberAddressDTO;
+import com.whoiszxl.dto.MemberAddressFeignDTO;
 import com.whoiszxl.query.MemberAddressQueryApplicationService;
 import com.whoiszxl.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +32,9 @@ public class MemberFeignClientImpl implements MemberFeignClient {
 
 
     @Override
-    public MemberAddressDTO getMemberAddress(Long addressId) {
+    public ResponseResult<MemberAddressFeignDTO> getMemberAddress(Long addressId) {
         Long memberId = AuthUtils.getMemberId();
-        MemberAddressDTO memberAddressDTO = memberAddressQueryApplicationService.getMemberAddress(memberId, addressId);
-        return memberAddressDTO;
+        MemberAddressFeignDTO memberAddressFeignDTO = memberAddressQueryApplicationService.getMemberAddress(memberId, addressId);
+        return ResponseResult.buildSuccess(memberAddressFeignDTO);
     }
 }

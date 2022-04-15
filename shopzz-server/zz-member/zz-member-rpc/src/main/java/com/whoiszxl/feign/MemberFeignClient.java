@@ -1,7 +1,9 @@
 package com.whoiszxl.feign;
 
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
 import com.whoiszxl.dto.MemberAddressDTO;
+import com.whoiszxl.dto.MemberAddressFeignDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,6 @@ public interface MemberFeignClient {
      * @return
      */
     @GetMapping("/getMemberAddress")
-    MemberAddressDTO getMemberAddress(@RequestParam Long addressId);
+    ResponseResult<MemberAddressFeignDTO> getMemberAddress(@RequestParam Long addressId);
 
 }

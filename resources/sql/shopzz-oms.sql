@@ -156,8 +156,8 @@ CREATE TABLE `oms_pay_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='第三方支付信息表';
 
 
-DROP TABLE IF EXISTS `oms_dc_pay_info`;
-CREATE TABLE `oms_dc_pay_info` (
+DROP TABLE IF EXISTS `oms_pay_info_dc`;
+CREATE TABLE `oms_pay_info_dc` (
     `id`                        bigint(11) NOT NULL COMMENT '主键',
     `order_id`                  bigint(11) NOT NULL COMMENT '订单ID',
     `order_no`                  varchar(20) NOT NULL COMMENT '订单编号',

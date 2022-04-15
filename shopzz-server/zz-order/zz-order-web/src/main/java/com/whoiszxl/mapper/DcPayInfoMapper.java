@@ -1,6 +1,6 @@
 package com.whoiszxl.mapper;
 
-import com.whoiszxl.entity.DcPayInfo;
+import com.whoiszxl.entity.PayInfoDc;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author whoiszxl
  * @since 2022-04-09
  */
-public interface DcPayInfoMapper extends BaseMapper<DcPayInfo> {
+public interface DcPayInfoMapper extends BaseMapper<PayInfoDc> {
 
 }

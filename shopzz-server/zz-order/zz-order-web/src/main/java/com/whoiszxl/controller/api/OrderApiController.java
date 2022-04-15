@@ -42,7 +42,7 @@ public class OrderApiController {
     @PostMapping("/pay")
     @ApiOperation(value = "去支付", notes = "去支付", response = Boolean.class)
     public ResponseResult<String> pay(@RequestBody OrderPayCommand orderPayCommand) {
-        return ResponseResult.buildSuccess(orderService.pay(orderPayCommand));
+        return orderService.pay(orderPayCommand);
     }
 }
 

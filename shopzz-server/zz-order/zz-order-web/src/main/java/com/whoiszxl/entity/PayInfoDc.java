@@ -21,9 +21,9 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("oms_dc_pay_info")
+@TableName("oms_pay_info_dc")
 @ApiModel(value = "DcPayInfo对象", description = "数字货币支付信息表")
-public class DcPayInfo implements Serializable {
+public class PayInfoDc implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

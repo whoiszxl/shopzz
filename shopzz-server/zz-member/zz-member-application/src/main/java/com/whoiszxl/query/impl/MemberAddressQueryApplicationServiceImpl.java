@@ -5,7 +5,7 @@ import com.whoiszxl.aggregate.repository.MemberAddressRepository;
 import com.whoiszxl.db.mapper.MemberAddressMapper;
 import com.whoiszxl.db.model.MemberAddressPO;
 import com.whoiszxl.dozer.DozerUtils;
-import com.whoiszxl.dto.MemberAddressDTO;
+import com.whoiszxl.dto.MemberAddressFeignDTO;
 import com.whoiszxl.query.MemberAddressQueryApplicationService;
 import com.whoiszxl.query.model.response.MemberAddressListResponse;
 import com.whoiszxl.query.model.response.MemberAddressVO;
@@ -51,11 +51,13 @@ public class MemberAddressQueryApplicationServiceImpl implements MemberAddressQu
     }
 
     @Override
-    public MemberAddressDTO getMemberAddress(Long memberId, Long addressId) {
+    public MemberAddressFeignDTO getMemberAddress(Long memberId, Long addressId) {
         LambdaQueryWrapper<MemberAddressPO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(MemberAddressPO::getMemberId, memberId);
         queryWrapper.eq(MemberAddressPO::getId, addressId);
         MemberAddressPO memberAddressPO = memberAddressMapper.selectOne(queryWrapper);
-        return dozerUtils.map(memberAddressPO, MemberAddressDTO.class);
+
+        MemberAddressFeignDTO memberAddressFeignDTO = dozerUtils.map(memberAddressPO, MemberAddressFeignDTO.class);
+        return memberAddressFeignDTO;
     }
 }

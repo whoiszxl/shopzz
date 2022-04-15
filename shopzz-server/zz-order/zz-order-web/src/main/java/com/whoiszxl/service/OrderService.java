@@ -1,6 +1,7 @@
 package com.whoiszxl.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.cqrs.command.OrderPayCommand;
 import com.whoiszxl.cqrs.command.OrderSubmitCommand;
 import com.whoiszxl.entity.Order;
@@ -27,7 +28,7 @@ public interface OrderService extends IService<Order> {
      * @param orderPayCommand 订单支付命令
      * @return
      */
-    String pay(OrderPayCommand orderPayCommand);
+    ResponseResult pay(OrderPayCommand orderPayCommand);
 
 
     /**

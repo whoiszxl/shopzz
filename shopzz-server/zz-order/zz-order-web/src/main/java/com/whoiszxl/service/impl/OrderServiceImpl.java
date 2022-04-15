@@ -14,14 +14,18 @@ import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.dto.*;
 import com.whoiszxl.entity.Order;
 import com.whoiszxl.entity.OrderItem;
+import com.whoiszxl.entity.PayInfoDc;
+import com.whoiszxl.entity.PayInfoDcBuilder;
 import com.whoiszxl.enums.promotion.CouponFullLimitedEnum;
 import com.whoiszxl.enums.promotion.CouponTypeEnum;
 import com.whoiszxl.exception.ExceptionCatcher;
+import com.whoiszxl.factory.CreateDcAddressFactory;
 import com.whoiszxl.feign.MemberFeignClient;
 import com.whoiszxl.feign.ProductFeignClient;
 import com.whoiszxl.feign.PromotionFeignClient;
 import com.whoiszxl.mapper.OrderMapper;
 import com.whoiszxl.service.CartService;
+import com.whoiszxl.service.DcPayInfoService;
 import com.whoiszxl.service.OrderItemService;
 import com.whoiszxl.service.OrderService;
 import com.whoiszxl.state.LoggerOrderStateManager;
@@ -65,6 +69,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Autowired
     private LoggerOrderStateManager loggerOrderStateManager;
+
+    @Autowired
+    private DcPayInfoService dcPayInfoService;
+
+    @Autowired
+    private CreateDcAddressFactory createDcAddressFactory;
 
     @Autowired
     private IdWorker idWorker;
@@ -211,9 +221,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setOrderStatus(OrderStatusConstants.UNKNOWN);
 
         //收货地址配置
-        MemberAddressDTO memberAddress = memberFeignClient.getMemberAddress(orderSubmitCommand.getAddressId());
-        AssertUtils.isNotNull(memberAddress, "地址无效");
-        String addressJson = JsonUtil.toJson(memberAddress);
+        ResponseResult<MemberAddressFeignDTO> memberAddressResult = memberFeignClient.getMemberAddress(orderSubmitCommand.getAddressId());
+        if(!memberAddressResult.isOk()) {
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError("地址无效"));
+        }
+        AssertUtils.isNotNull(memberAddressResult.getData(), "地址无效");
+        String addressJson = JsonUtil.toJson(memberAddressResult.getData());
         order.setSnapshotAddress(addressJson);
         order.setPayType(OrderPayTypeConstants.NOT_SET);
         order.setOrderComment(orderSubmitCommand.getOrderComment());
@@ -275,6 +288,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         }
 
         orderCheckDTO.setFinalPrice(serverFinalPrice);
+        orderCheckDTO.setFinalDiscountPrice(serverFinalPrice);
 
         //3. 已使用优惠券逻辑
         Long couponId = orderSubmitCommand.getCouponId();
@@ -360,8 +374,38 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public String pay(OrderPayCommand orderPayCommand) {
-        return null;
+    public ResponseResult pay(OrderPayCommand orderPayCommand) {
+        //1. 判断订单状态是否能支付
+        Order order = this.getById(orderPayCommand.getOrderId());
+        if(!OrderStatusConstants.WAIT_FOR_PAY.equals(order.getOrderStatus())) {
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError("订单无法支付"));
+        }
+
+        //2. 如果是数字货币支付，判断是否存在，不存在则创建
+        if(OrderPayTypeConstants.DC_PAY.equals(orderPayCommand.getPayType())) {
+            PayInfoDc payInfoDc = dcPayInfoService.getByOrderIdAndMemberId(order.getId(), order.getMemberId());
+            if(payInfoDc != null) {
+                return ResponseResult.buildSuccess(payInfoDc);
+            }
+
+            payInfoDc = PayInfoDcBuilder
+                    .get()
+                    .init(createDcAddressFactory, orderPayCommand.getDcName())
+                    .buildBaseData(order)
+                    .buildAddress(order)
+                    .rateCompute(order)
+                    .initStatus()
+                    .create();
+
+            boolean saveFlag = dcPayInfoService.save(payInfoDc);
+            if(saveFlag) {
+                return ResponseResult.buildSuccess(payInfoDc);
+            }
+            return ResponseResult.buildError("数字货币支付失败");
+        }
+
+        //3. TODO 微信支付，支付宝支付
+        return ResponseResult.buildError("微信支付，支付宝支付 TODO");
     }
 
     @Override

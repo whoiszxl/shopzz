@@ -1,6 +1,5 @@
 package com.whoiszxl.query.model.qry;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.PageQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
