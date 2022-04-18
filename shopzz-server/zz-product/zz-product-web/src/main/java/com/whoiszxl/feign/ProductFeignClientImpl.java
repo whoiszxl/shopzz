@@ -3,10 +3,7 @@ package com.whoiszxl.feign;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.dozer.DozerUtils;
-import com.whoiszxl.dto.ReduceStockFeignDTO;
-import com.whoiszxl.dto.SkuFeignDTO;
-import com.whoiszxl.dto.SkuStockFeignDTO;
-import com.whoiszxl.dto.SpuFeignDTO;
+import com.whoiszxl.dto.*;
 import com.whoiszxl.entity.Sku;
 import com.whoiszxl.entity.SkuStock;
 import com.whoiszxl.entity.Spu;
@@ -15,6 +12,7 @@ import com.whoiszxl.service.SkuStockService;
 import com.whoiszxl.service.SpuService;
 import com.whoiszxl.utils.ParamUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
@@ -97,6 +95,24 @@ public class ProductFeignClientImpl implements ProductFeignClient{
                 return ResponseResult.buildError();
             }
         }
+        return ResponseResult.buildSuccess();
+    }
+
+    @Override
+    public ResponseResult paySuccessUpdateStock(OrderInfoDTO orderInfo) {
+        List<OrderItemDTO> orderItemDTOList = orderInfo.getOrderItemDTOList();
+        if(ObjectUtils.isNotEmpty(orderItemDTOList)) {
+            for (OrderItemDTO orderItemDTO : orderItemDTOList) {
+                Long skuId = orderItemDTO.getSkuId();
+                Integer quantity = orderItemDTO.getQuantity();
+
+                boolean updateFlag = skuStockService.subLockStockAndAddSaledStockBySkuId(quantity, skuId);
+                if(updateFlag) {
+                    return ResponseResult.buildError();
+                }
+            }
+        }
+
         return ResponseResult.buildSuccess();
     }
 }

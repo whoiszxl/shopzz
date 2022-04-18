@@ -3,6 +3,8 @@ package com.whoiszxl.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * TODO
  *
@@ -10,7 +12,7 @@ import lombok.Data;
  * @date 2022/4/15
  */
 @Data
-public class MemberAddressFeignDTO {
+public class MemberAddressFeignDTO implements Serializable {
 
     @ApiModelProperty("主键ID")
     private Long id;

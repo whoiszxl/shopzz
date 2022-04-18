@@ -25,4 +25,9 @@ public class SkuStockServiceImpl extends ServiceImpl<SkuStockMapper, SkuStock> i
     public int subSaleStockAndAddLockStockBySkuId(Long skuId, Integer quantity) {
         return skuStockMapper.subSaleStockAndAddLockStockBySkuId(skuId, quantity);
     }
+
+    @Override
+    public boolean subLockStockAndAddSaledStockBySkuId(Integer quantity, Long skuId) {
+        return skuStockMapper.subLockStockAndAddSaledStockBySkuId(skuId, quantity);
+    }
 }

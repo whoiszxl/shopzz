@@ -20,13 +20,13 @@ public class OrderStatusConstants {
 	 */
 	public static final Integer CANCELED = 2;
 	/**
-	 * 待发货
-	 */
-	public static final Integer WAIT_FOR_DELIVERY = 3;
-	/**
 	 *
 	 */
 	public static final Integer WAIT_FOR_RECEIVE = 4;
+	/**
+	 * 待发货
+	 */
+	public static final Integer WAIT_FOR_DELIVERY = 3;
 	/**
 	 * 已完成
 	 */

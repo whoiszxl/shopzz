@@ -2,10 +2,7 @@ package com.whoiszxl.feign;
 
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.config.OAuth2FeignConfig;
-import com.whoiszxl.dto.ReduceStockFeignDTO;
-import com.whoiszxl.dto.SkuFeignDTO;
-import com.whoiszxl.dto.SkuStockFeignDTO;
-import com.whoiszxl.dto.SpuFeignDTO;
+import com.whoiszxl.dto.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,10 +60,26 @@ public interface ProductFeignClient {
     @GetMapping("/getSkuInfoBySkuCode/{skuCode}")
     ResponseResult<SkuFeignDTO> getSkuInfoBySkuCode(@PathVariable String skuCode);
 
-
+    /**
+     * 通过sku id集合批量获取库存
+     * @param skuIds
+     * @return
+     */
     @GetMapping("/getStockBySkuIdList")
     ResponseResult<List<SkuStockFeignDTO>> getStockBySkuIdList(@RequestParam(name = "skuIds") String skuIds);
 
+    /**
+     * 通过SKU ID扣除销售库存，增加锁定库存
+     * @param reduceStockFeignList
+     * @return
+     */
     @PostMapping("/subSaleStockAndAddLockStockBySkuId")
     ResponseResult<Boolean> subSaleStockAndAddLockStockBySkuId(@RequestBody List<ReduceStockFeignDTO> reduceStockFeignList);
+
+    /**
+     * 支付成功后更新库存
+     * @param orderInfo
+     */
+    @PostMapping("/paySuccessUpdateStock")
+    ResponseResult paySuccessUpdateStock(@RequestBody OrderInfoDTO orderInfo);
 }

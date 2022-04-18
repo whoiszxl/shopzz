@@ -20,4 +20,12 @@ public interface SkuStockService extends IService<SkuStock> {
      * @return
      */
     int subSaleStockAndAddLockStockBySkuId(Long skuId, Integer quantity);
+
+    /**
+     * 通过SKU ID 减去锁定库存,增加已销售库存
+     * @param quantity
+     * @param skuId
+     * @return
+     */
+    boolean subLockStockAndAddSaledStockBySkuId(Integer quantity, Long skuId);
 }
