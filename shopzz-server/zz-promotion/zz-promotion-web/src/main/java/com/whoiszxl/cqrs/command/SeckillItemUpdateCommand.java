@@ -53,7 +53,7 @@ public class SeckillItemUpdateCommand implements Serializable {
     private Integer availableStockQuantity;
 
     @ApiModelProperty("秒杀库存是否预热: 0-未预热 1-已预热")
-    private Boolean warmUpStatus;
+    private Integer warmUpStatus;
 
     @ApiModelProperty("SKU价格")
     private BigDecimal skuPrice;

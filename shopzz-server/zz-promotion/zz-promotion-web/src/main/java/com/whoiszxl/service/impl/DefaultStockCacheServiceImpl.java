@@ -5,6 +5,8 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
 import com.whoiszxl.cqrs.cache.StockCache;
+import com.whoiszxl.entity.SeckillItem;
+import com.whoiszxl.service.SeckillItemService;
 import com.whoiszxl.service.StockCacheService;
 import com.whoiszxl.utils.AssertUtils;
 import com.whoiszxl.utils.RedisUtils;
@@ -36,11 +38,17 @@ public class DefaultStockCacheServiceImpl implements StockCacheService {
     @Autowired
     private RedisUtils redisUtils;
 
+    @Autowired
+    private SeckillItemService seckillItemService;
+
     /** 库存扣减LUA脚本 */
     private static final String SUB_STOCK_LUA;
 
     /** 库存增加LUA脚本 */
     private static final String ADD_STOCK_LUA;
+
+    /** 初始化库存LUA脚本 */
+    private static final String INIT_STOCK_LUA;
 
     static {
         //1. 判断第二个参数是否存在，存在则返回-9，表示还在校准中
@@ -76,6 +84,16 @@ public class DefaultStockCacheServiceImpl implements StockCacheService {
                 "    return 1;" +
                 "end;" +
                 "return -1;";
+
+        // 通过预热键进行加锁，初始化后再删除预热键
+        INIT_STOCK_LUA = "if (redis.call('exists', KEYS[2]) == 1) then" +
+                "    return -997;" +
+                "end;" +
+                "redis.call('set', KEYS[2] , 1);" +
+                "local stockNumber = tonumber(ARGV[1]);" +
+                "redis.call('set', KEYS[1] , stockNumber);" +
+                "redis.call('del', KEYS[2]);" +
+                "return 1";
     }
 
     @Override
@@ -184,5 +202,47 @@ public class DefaultStockCacheServiceImpl implements StockCacheService {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean initItemStock(Long seckillItemId) {
+        try {
+            SeckillItem seckillItem = seckillItemService.getById(seckillItemId);
+            if(seckillItem == null) {
+                log.info("秒杀商品不存在, id:{}", seckillItemId);
+                return false;
+            }
+
+            if(seckillItem.getInitStockQuantity() < 1) {
+                log.info("秒杀商品库存未配置, id:{}", seckillItemId);
+                return false;
+            }
+
+            //构建lua脚本
+            DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(SUB_STOCK_LUA, Long.class);
+            String stockCacheKey = "cache:stock:" + seckillItemId;
+            String stockCacheAlignKey = "cache:align-stock:" + seckillItemId;
+            List<String> keys = Lists.newArrayList(stockCacheKey, stockCacheAlignKey);
+
+            Long result = (Long) redisUtils.execute(redisScript, keys, seckillItem.getInitStockQuantity());
+            if(result == null) {
+                log.info("库存初始化失败，id:{}", seckillItemId);
+                return false;
+            }
+
+            if(result == -997) {
+                log.info("库存正在初始化中，本次初始化取消，id:{}", seckillItemId);
+                return true;
+            }
+
+            if (result == 1) {
+                log.info("库存初始化完成， id:{}", seckillItemId);
+                return true;
+            }
+            return false;
+        }catch (Exception e) {
+            log.error("初始化库存发生异常：{}", e);
+            return false;
+        }
     }
 }

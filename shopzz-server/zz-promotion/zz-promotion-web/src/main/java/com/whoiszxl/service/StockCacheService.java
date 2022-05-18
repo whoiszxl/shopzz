@@ -32,4 +32,11 @@ public interface StockCacheService {
      * @return
      */
     boolean addCacheStock(Long seckillItemId, Integer quantity);
+
+    /**
+     * 初始化秒杀商品库存
+     * @param seckillItemId
+     * @return
+     */
+    boolean initItemStock(Long seckillItemId);
 }
