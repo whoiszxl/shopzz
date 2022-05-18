@@ -92,3 +92,10 @@ jasypt:
 dozer:
   mapping-files:
     - classpath:dozer/biz.dozer.xml
+
+
+zzlock:
+  redisson:
+    enabled: true
+    host: redis://47.103.198.122:6379
+    password: ECmzyDLN7bRSKtab

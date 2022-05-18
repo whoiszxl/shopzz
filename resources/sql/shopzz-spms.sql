@@ -140,3 +140,70 @@ CREATE TABLE `spms_recommend_product` (
     `spu_id`                    bigint(10) NOT NULL COMMENT 'SPU主键ID',
 	PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '首页通用推荐商品表';
+
+
+
+DROP TABLE IF EXISTS `spms_seckill`;
+CREATE TABLE `spms_seckill` (
+    `id`                        bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+    `name`                      varchar(255) NOT NULL COMMENT '秒杀活动名称',
+    `descs`                     varchar(255) NOT NULL COMMENT '秒杀活动描述',
+    `start_time`                datetime NOT NULL COMMENT '秒杀活动开始时间',
+    `end_time`                  datetime NOT NULL COMMENT '秒杀活动结束时间',
+    `img`                       varchar(255) DEFAULT NULL COMMENT '秒杀活动banner图',
+    `status`                    tinyint(4) NOT NULL COMMENT '秒杀活动的状态,1:启用,2:停用',
+    `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
+    `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARSET=utf8mb4 COMMENT='秒杀表';
+
+
+DROP TABLE IF EXISTS `spms_seckill_item`;
+CREATE TABLE `spms_seckill_item` (
+    `id`                        bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+    `seckill_id`                bigint(11) NOT NULL COMMENT '关联秒杀表的主键ID',
+    `sku_id`                    bigint(11) NOT NULL COMMENT '秒杀SKU ID',
+    `sku_name`                  varchar(255) NOT NULL COMMENT '秒杀SKU名称',
+    `sku_descs`                 varchar(255) NOT NULL COMMENT '秒杀SKU描述',
+    `start_time`                datetime NOT NULL COMMENT '秒杀开始时间',
+    `end_time`                  datetime NOT NULL COMMENT '秒杀结束时间',
+    `init_stock_quantity`       int(10) NOT NULL DEFAULT '0' COMMENT '秒杀初始库存',
+	  `available_stock_quantity`  int(10) NOT NULL DEFAULT '0' COMMENT '秒杀可用库存',
+	  `warm_up_status`            tinyint(1) NOT NULL DEFAULT '0' COMMENT '秒杀库存是否预热: 0-未预热 1-已预热',
+	  `sku_price`                 decimal(10,2) NOT NULL COMMENT 'SKU价格',
+	  `seckill_price`             decimal(10,2) NOT NULL COMMENT '秒杀价格',
+    `status`                    tinyint(4) NOT NULL COMMENT '秒杀SKU是否启动: 0-未启动 1-已启动',
+    `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
+    `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARSET=utf8mb4 COMMENT='秒杀item表';
+
+
+DROP TABLE IF EXISTS `spms_seckill_order`;
+CREATE TABLE `spms_seckill_order` ( 
+    `id`                        bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
+    `member_id`                 bigint(11) NOT NULL COMMENT '会员ID',
+    `seckill_id`                bigint(11) NOT NULL COMMENT '关联秒杀表的主键ID',
+    `seckill_item_id`           bigint(11) NOT NULL COMMENT '关联秒杀item表的主键ID',
+    `sku_name`                  varchar(255) NOT NULL COMMENT '秒杀SKU名称',
+    `sku_price`                 decimal(10,2) NOT NULL COMMENT 'SKU价格',
+	  `seckill_price`             decimal(10,2) NOT NULL COMMENT '秒杀价格',
+    `buy_quantity`              int(10) NOT NULL DEFAULT '1' COMMENT '秒杀数量',
+    `final_pay_amount`          decimal(9,2) comment '最终订单应付总额',
+    `status`                    tinyint(4) NOT NULL COMMENT '秒杀订单状态: 0-未支付 1-已支付',
+    `version`                   bigint(20) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
+    `created_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '创建者',
+    `updated_by`                varchar(50) NOT NULL DEFAULT '' COMMENT '更新者',
+    `created_at`                datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARSET=utf8mb4 COMMENT='秒杀订单表';

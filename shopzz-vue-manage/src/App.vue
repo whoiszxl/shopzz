@@ -51,6 +51,7 @@
               <span>营销管理</span>
             </template>
             <el-menu-item-group>
+              <el-menu-item index="/seckillList"><i class="el-icon-star-on" />秒杀管理</el-menu-item>
               <el-menu-item index="/bannerList"><i class="el-icon-star-on" />轮播图管理</el-menu-item>
               <el-menu-item index="/columnList"><i class="el-icon-star-on" />专栏管理</el-menu-item>
               <el-menu-item index="/activityList"><i class="el-icon-star-on" />活动管理</el-menu-item>

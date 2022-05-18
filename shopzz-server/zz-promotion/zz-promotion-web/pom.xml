@@ -122,6 +122,12 @@
             <artifactId>zz-promotion-api</artifactId>
             <version>1.0.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.whoiszxl</groupId>
+            <artifactId>zz-tools-lock</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 

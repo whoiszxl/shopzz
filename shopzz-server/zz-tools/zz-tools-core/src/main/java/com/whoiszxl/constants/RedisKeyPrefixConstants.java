@@ -31,4 +31,16 @@ public class RedisKeyPrefixConstants {
     public static final String HOME_RECOMMEND_A = "home:recommend:a";
     public static final String HOME_RECOMMEND_B = "home:recommend:b";
 
+
+    public static final String SECKILL_LOCK_ORDER_SUBMIT = "seckill:member:order:submit:";
+
+    public static final String CACHE_SECKILL = "cache:seckill";
+    public static final String CACHE_SECKILL_ITEM = "cache:seckill_item:";
+    public static final String CACHE_ITEM_STOCK = "cache:item_stock:";
+
+
+    public static final String LOCK_GET_ITEM_FROM_DB = "lock:getItemFromDB:";
+    public static final String LOCK_GET_SECKILL_FROM_DB = "lock:getSeckillFromDB:";
+
+
 }

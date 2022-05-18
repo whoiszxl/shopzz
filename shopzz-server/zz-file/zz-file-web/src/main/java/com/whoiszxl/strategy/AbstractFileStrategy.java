@@ -45,7 +45,7 @@ public abstract class AbstractFileStrategy implements FileStrategy {
             fmsFile.setSize(file.getSize());
 
             LocalDateTime now = LocalDateTime.now();
-            fmsFile.setCreatedYear(DateUtils.formatAsYear(now));
+            fmsFile.setCreatedYear(DateUtils.formatAsYear3(now));
             fmsFile.setCreatedMonth(DateUtils.formatAsYearMonth(now));
             fmsFile.setCreatedDay(DateUtils.formatAsDate(now));
             fmsFile.setCreatedAt(now);

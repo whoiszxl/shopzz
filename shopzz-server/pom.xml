@@ -51,7 +51,8 @@
         <j2cache.version>2.8.0-release</j2cache.version>
         <hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
         <jjwt.version>0.7.0</jjwt.version>
-        <redisson-spring-boot-starter.version>3.13.6</redisson-spring-boot-starter.version>
+        <redisson-spring-boot-starter.version>3.17.0</redisson-spring-boot-starter.version>
+        <redisson.version>3.17.0</redisson.version>
         <jetcache-starter-redis.version>2.6.0</jetcache-starter-redis.version>
         <googleauth.version>1.1.5</googleauth.version>
         <aliyun-sdk-oss.version>3.14.0</aliyun-sdk-oss.version>
@@ -275,6 +276,18 @@
                 <groupId>eu.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>${bitwalker.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
 
             <dependency>

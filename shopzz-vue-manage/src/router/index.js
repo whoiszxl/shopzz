@@ -29,6 +29,12 @@ import FileList from '@/views/system/FileList.vue'
 import BannerList from '@/views/promotion/BannerList.vue'
 import BannerAdd from '@/views/promotion/BannerAdd.vue'
 
+import SeckillList from '@/views/promotion/SeckillList.vue'
+import SeckillAdd from '@/views/promotion/SeckillAdd.vue'
+
+import SeckillItemList from '@/views/promotion/SeckillItemList.vue'
+
+
 import ColumnList from '@/views/promotion/ColumnList.vue'
 import ColumnAdd from '@/views/promotion/ColumnAdd.vue'
 import ColumnSpuList from '@/views/promotion/ColumnSpuList.vue'
@@ -119,7 +125,12 @@ const router = createRouter({
 
     
     {path: '/activityList', name: 'ActivityList', component: ActivityList},
-    {path: '/activity/add', name: 'ActivityAdd', component: ActivityAdd}
+    {path: '/activity/add', name: 'ActivityAdd', component: ActivityAdd},
+
+    {path: '/seckillList', name: 'SeckillList', component: SeckillList},
+    {path: '/seckill/add', name: 'SeckillAdd', component: SeckillAdd},
+
+    {path: '/seckillItemList', name: 'SeckillItemList', component: SeckillItemList},
 
   ]
 })

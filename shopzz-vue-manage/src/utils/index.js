@@ -52,7 +52,11 @@ export const pathMap = {
   CouponList: '优惠券管理',
   CouponAdd: '优惠券添加',
 
-  
+  SeckillList: '秒杀活动管理',
+  SeckillAdd: '秒杀活动添加',
+
+  SeckillItemList: '秒杀活动管理',
+
 }
 
 // 单张图片上传

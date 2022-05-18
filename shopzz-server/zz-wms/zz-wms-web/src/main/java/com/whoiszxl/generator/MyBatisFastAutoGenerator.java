@@ -22,8 +22,7 @@ public class MyBatisFastAutoGenerator {
     private static final String AUTHOR = "whoiszxl";
     private static final String PACKAGE_NAME = "com.whoiszxl";
     private static final String[] DB_TABLES = new String[]{
-            "oms_cart","oms_dc_pay_info","oms_order","oms_order_invoice","oms_order_item","oms_order_operate_history",
-            "oms_order_return_apply","oms_pay_info"
+            "spms_seckill","spms_seckill_item","spms_seckill_order"
     };
     private static final Boolean ENABLE_SWAGGER = true;
 

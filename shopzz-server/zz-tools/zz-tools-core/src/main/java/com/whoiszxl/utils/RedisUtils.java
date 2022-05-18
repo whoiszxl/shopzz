@@ -1,9 +1,11 @@
 package com.whoiszxl.utils;
 
+import org.checkerframework.checker.units.qual.K;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
@@ -30,6 +32,10 @@ public class RedisUtils {
         redisTemplate.setHashKeySerializer(stringSerializer);
         redisTemplate.setHashValueSerializer(stringSerializer);
         this.redisTemplate = redisTemplate;
+    }
+
+    public RedisTemplate getRedisTemplate() {
+        return redisTemplate;
     }
 
     /**
@@ -602,5 +608,17 @@ public class RedisUtils {
      */
     public void setObj(String key, Object value) {
         redisTemplate.opsForValue().set(key, value);
+    }
+
+
+    /**
+     * 执行lua脚本
+     * @param script
+     * @param keys
+     * @param args
+     * @return
+     */
+    public Object execute(RedisScript script, List keys, Object... args) {
+        return redisTemplate.execute(script, keys, args);
     }
 }

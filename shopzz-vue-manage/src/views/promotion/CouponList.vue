@@ -11,8 +11,6 @@
       ref="table"
     >
       <template #column>
-        <el-table-column type="selection" width="50"></el-table-column>
-
         <el-table-column width="50" prop="id" label="ID"> </el-table-column>
 
         <el-table-column prop="name" label="名称"> </el-table-column>

@@ -16,6 +16,7 @@
         <module>zz-tools-dozer</module>
         <module>zz-tools-logger</module>
         <module>zz-tools-swagger</module>
+        <module>zz-tools-lock</module>
     </modules>
 
 

@@ -102,8 +102,11 @@ public class DateUtils {
         return format(date, DEFAULT_DATE_FORMAT_EN);
     }
 
-
     public static String formatAsYear(LocalDateTime date) {
+        return format(date, DEFAULT_YEAR_FORMAT);
+    }
+
+    public static String formatAsYear3(LocalDateTime date) {
         return format(date, DEFAULT_YEAR_FORMAT);
     }
 
