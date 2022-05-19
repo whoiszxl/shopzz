@@ -34,13 +34,22 @@ public class RedisKeyPrefixConstants {
 
     public static final String SECKILL_LOCK_ORDER_SUBMIT = "seckill:member:order:submit:";
 
+    public static final String REPEAT_SECKILL_PLACE_ORDER = "repeat:seckill:place_order:";
+
     public static final String CACHE_SECKILL = "cache:seckill";
     public static final String CACHE_SECKILL_ITEM = "cache:seckill_item:";
     public static final String CACHE_ITEM_STOCK = "cache:item_stock:";
 
+    public static final String TOKEN_SECKILL_PLACE_ORDER = "token:seckill:place_order:";
+
+    public static final String TASK_SECKILL_PLACE_ORDER_MQ = "task:seckill:place_order_mq:";
+    public static final String TASK_SECKILL_PLACE_ORDER_MQ_ORDER_ID = "task:seckill:place_order_mq:order_id:";
 
     public static final String LOCK_GET_ITEM_FROM_DB = "lock:getItemFromDB:";
     public static final String LOCK_GET_SECKILL_FROM_DB = "lock:getSeckillFromDB:";
+    public static final String LOCK_SECKILL_REFRESH_PLACE_ORDER_TOKEN = "lock:seckill:refreshPlaceOrderToken:";
+
+
 
 
 }

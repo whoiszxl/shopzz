@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * 秒杀商品预热任务
  *
- * @author zhouxiaolong
+ * @author whoiszxl
  * @date 2022/5/18
  */
 @Slf4j

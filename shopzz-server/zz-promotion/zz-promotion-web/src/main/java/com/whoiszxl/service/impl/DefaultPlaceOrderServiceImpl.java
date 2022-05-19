@@ -6,6 +6,7 @@ import com.whoiszxl.cqrs.cache.SeckillCache;
 import com.whoiszxl.cqrs.cache.SeckillItemCache;
 import com.whoiszxl.cqrs.cache.StockCache;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
+import com.whoiszxl.cqrs.dto.SeckillPlaceOrderDTO;
 import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.Seckill;
 import com.whoiszxl.entity.SeckillItem;
@@ -18,6 +19,7 @@ import com.whoiszxl.utils.AuthUtils;
 import com.whoiszxl.utils.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -30,6 +32,7 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Service
+@ConditionalOnProperty(name = "shopzz.placeOrderType", havingValue = "default")
 public class DefaultPlaceOrderServiceImpl implements PlaceOrderService {
 
     @Autowired
@@ -100,6 +103,11 @@ public class DefaultPlaceOrderServiceImpl implements PlaceOrderService {
         }
 
         return null;
+    }
+
+    @Override
+    public void handlePlaceOrderTask(SeckillPlaceOrderDTO seckillPlaceOrderDTO) {
+
     }
 
     private SeckillOrder buildSeckillOrder(SeckillItem seckillItem, SeckillOrderSubmitCommand seckillOrderSubmitCommand) {

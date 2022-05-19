@@ -27,7 +27,7 @@ public class SeckillOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("自增主键ID")
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id")
     private Long id;
 
     @ApiModelProperty("会员ID")

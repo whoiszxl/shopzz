@@ -99,3 +99,9 @@ zzlock:
     enabled: true
     host: redis://47.103.198.122:6379
     password: ECmzyDLN7bRSKtab
+
+rocketmq:
+  name-server: 47.103.198.122:9876
+  seckill:
+    producer:
+      group: seckill-group

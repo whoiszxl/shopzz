@@ -12,4 +12,9 @@ public class RocketMQConstant {
 
     public static final String MEMBER_LOGIN_TOPIC = "member_login_topic";
 
+
+    public static final String SECKILL_GROUP = "seckill-group";
+
+    public static final String SECKILL_PLACE_ORDER_TOPIC = "SECKILL_PLACE_ORDER_TOPIC";
+
 }
