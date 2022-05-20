@@ -39,6 +39,7 @@ public class RedisKeyPrefixConstants {
     public static final String CACHE_SECKILL = "cache:seckill";
     public static final String CACHE_SECKILL_ITEM = "cache:seckill_item:";
     public static final String CACHE_ITEM_STOCK = "cache:item_stock:";
+    public static final String CACHE_ITEM_STOCK_ALIGN = "cache:item_stock_align:";
 
     public static final String TOKEN_SECKILL_PLACE_ORDER = "token:seckill:place_order:";
 

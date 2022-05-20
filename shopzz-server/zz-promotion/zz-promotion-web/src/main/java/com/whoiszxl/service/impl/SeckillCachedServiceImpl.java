@@ -124,7 +124,7 @@ public class SeckillCachedServiceImpl implements SeckillCachedService {
                 seckillCache = new SeckillCache().with(seckill);
             }
 
-            redisUtils.setEx(RedisKeyPrefixConstants.CACHE_SECKILL + seckillId, JsonUtil.toJson(seckillCache), 3, TimeUnit.SECONDS);
+            redisUtils.setEx(RedisKeyPrefixConstants.CACHE_SECKILL + seckillId, JsonUtil.toJson(seckillCache), 3, TimeUnit.MINUTES);
             log.info("从数据库加载数据，并保存到redis中:{}", seckillCache);
             return seckillCache;
         }catch (Exception e) {

@@ -35,7 +35,7 @@ public class SeckillItemWarmUpTask {
      */
     @Scheduled(cron = "*/5 * * * * ?")
     public void warmUpSeckillItem() {
-        log.info("秒杀商品预热任务开始执行");
+        log.info("warmUpSeckillItem|秒杀商品预热任务开始执行");
 
         //获取DB中所有未预热的秒杀商品
         List<SeckillItem> seckillItemList = seckillItemService.list(Wrappers.<SeckillItem>lambdaQuery()
@@ -44,17 +44,18 @@ public class SeckillItemWarmUpTask {
         for (SeckillItem seckillItem : seckillItemList) {
             boolean initFlag = stockCacheService.initItemStock(seckillItem.getId());
             if(!initFlag) {
-                log.info("秒杀商品预热失败，seckill item id:{}", seckillItem.getId());
+                log.info("warmUpSeckillItem|秒杀商品预热失败|{}", seckillItem.getId());
                 continue;
             }
 
-            seckillItem.setWarmUpStatus(WarmUpStatusEnum.YES.getCode());
-            seckillItem.setStatus(SeckillItemStatusEnum.OPEN.getCode());
-            seckillItemService.updateById(seckillItem);
+            seckillItemService.update(Wrappers.<SeckillItem>lambdaUpdate()
+                    .set(SeckillItem::getWarmUpStatus, WarmUpStatusEnum.YES.getCode())
+                    .set(SeckillItem::getStatus, SeckillItemStatusEnum.OPEN.getCode())
+                    .eq(SeckillItem::getId, seckillItem.getId()));
 
-            log.info("秒杀商品预热成功，seckill item id:{}", seckillItem.getId());
+            log.info("warmUpSeckillItem|秒杀商品预热成功|{}", seckillItem.getId());
         }
 
-        log.info("秒杀商品预热任务执行结束");
+        log.info("warmUpSeckillItem|秒杀商品预热任务执行结束");
     }
 }

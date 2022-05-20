@@ -33,7 +33,7 @@ public class RedissonDistributedLockFactory implements DistributedLockFactory {
             @Override
             public boolean tryLock(long waitTime, long leaseTime, TimeUnit unit) throws InterruptedException {
                 boolean isLockSuccess = lock.tryLock(waitTime, leaseTime, unit);
-                log.info("key:{} 尝试加锁是否成功: {}", key, isLockSuccess);
+                //log.info("key:{} 尝试加锁是否成功: {}", key, isLockSuccess);
                 return isLockSuccess;
             }
 

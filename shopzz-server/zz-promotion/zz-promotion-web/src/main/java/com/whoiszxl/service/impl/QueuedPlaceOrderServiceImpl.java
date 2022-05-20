@@ -17,6 +17,8 @@ import com.whoiszxl.entity.Seckill;
 import com.whoiszxl.entity.SeckillItem;
 import com.whoiszxl.entity.SeckillOrder;
 import com.whoiszxl.enums.StatusEnum;
+import com.whoiszxl.enums.promotion.SeckillItemStatusEnum;
+import com.whoiszxl.enums.promotion.SeckillOrderStatusEnum;
 import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.mq.MQSenderService;
 import com.whoiszxl.service.*;
@@ -147,7 +149,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
 
         redisUtils.setEx(RedisKeyPrefixConstants.TASK_SECKILL_PLACE_ORDER_MQ + taskKey, "0", 24, TimeUnit.HOURS);
         log.info("doPlaceOrder|下单任务提交到MQ成功|{},{}", memberId, seckillOrderSubmitCommand.getSeckillItemId());
-        return null;
+        return 1L;
     }
 
     @Override
@@ -169,7 +171,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
             AssertUtils.isTrue(subDbFlag, "库存扣减失败");
 
             //订单持久化
-            SeckillOrder seckillOrder = buildSeckillOrder(seckillItem, seckillPlaceOrderDTO);
+            SeckillOrder seckillOrder = buildSeckillOrder(seckillItem, seckillPlaceOrderDTO, seckillPlaceOrderDTO.getMemberId());
             boolean saveFlag = seckillOrderService.save(seckillOrder);
             if(!saveFlag) {
                 ExceptionCatcher.catchValidateEx(ResponseResult.buildError("下单失败"));
@@ -252,8 +254,9 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
         String orderTokenKey = RedisKeyPrefixConstants.TOKEN_SECKILL_PLACE_ORDER + seckillItemId;
         Object tokenObj = redisUtils.getObj(orderTokenKey);
         if(tokenObj != null) {
-            availableOrderTokenLocalCache.put(seckillItemId, (Integer) tokenObj);
-            return (Integer) tokenObj;
+            int tokenValue = Integer.parseInt(tokenObj.toString());
+            availableOrderTokenLocalCache.put(seckillItemId, tokenValue);
+            return tokenValue;
         }
 
         return refreshLatestAvailableToken(seckillItemId);
@@ -290,10 +293,10 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
         return null;
     }
 
-    private SeckillOrder buildSeckillOrder(SeckillItem seckillItem, SeckillPlaceOrderDTO seckillPlaceOrderDTO) {
+    private SeckillOrder buildSeckillOrder(SeckillItem seckillItem, SeckillPlaceOrderDTO seckillPlaceOrderDTO, Long memberId) {
         SeckillOrder seckillOrder = new SeckillOrder();
         seckillOrder.setId(idWorker.nextId());
-        seckillOrder.setMemberId(AuthUtils.getMemberId());
+        seckillOrder.setMemberId(memberId);
         seckillOrder.setSkuName(seckillItem.getSkuName());
         seckillOrder.setSkuPrice(seckillItem.getSkuPrice());
         seckillOrder.setSeckillPrice(seckillItem.getSeckillPrice());
@@ -301,6 +304,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
         seckillOrder.setSeckillId(seckillPlaceOrderDTO.getSeckillId());
         seckillOrder.setSeckillItemId(seckillPlaceOrderDTO.getSeckillItemId());
         seckillOrder.setBuyQuantity(seckillPlaceOrderDTO.getQuantity());
+        seckillOrder.setStatus(SeckillOrderStatusEnum.NOT_PAY.getCode());
         return seckillOrder;
     }
 
@@ -316,7 +320,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
         SeckillItemCache seckillItemCache = seckillItemCachedService.getCachedSeckillItem(seckillItemId, null);
 
         //2. 校验缓存是否需要延迟加载
-        if(!seckillItemCache.isLater()) {
+        if(seckillItemCache.isLater()) {
             log.info("从缓存中获取秒杀商品信息需要延迟加载, 秒杀商品ID: {}", seckillItemId);
             return false;
         }
@@ -341,7 +345,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
             return false;
         }
 
-        return false;
+        return true;
     }
 
     private boolean checkSeckill(Long seckillId) {
@@ -349,7 +353,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
         SeckillCache seckillCache = seckillCachedService.getCachedSeckill(seckillId, null);
 
         //2. 校验缓存是否需要延迟加载
-        if(!seckillCache.isLater()) {
+        if(seckillCache.isLater()) {
             log.info("从缓存中获取秒杀活动信息需要延迟加载, 秒杀活动ID: {}", seckillId);
             return false;
         }

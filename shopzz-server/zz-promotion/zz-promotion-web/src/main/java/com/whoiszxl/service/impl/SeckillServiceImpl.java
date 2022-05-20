@@ -61,19 +61,21 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
             //2. 尝试进行加锁，等待3秒，加锁成功后5秒释放
             boolean isLockSuccess = lock.tryLock(3, 5, TimeUnit.SECONDS);
             AssertUtils.isTrue(isLockSuccess, "加锁失败");
+            //3. 对用户进行风控检查
+            boolean checkFlag = securityService.inspectRisk(memberId);
+            AssertUtils.isTrue(checkFlag, "风控检测未通过");
+
+            //4. 下单
+            Long orderId = placeOrderService.doPlaceOrder(memberId, seckillOrderSubmitCommand);
+            AssertUtils.isNotNull(orderId, "下单失败");
+
+            return orderId;
         } catch (InterruptedException e) {
             ExceptionCatcher.catchValidateEx(ResponseResult.buildError("加锁失败"));
+            return null;
+        }finally {
+            lock.unlock();
         }
-
-        //3. 对用户进行风控检查
-        boolean checkFlag = securityService.inspectRisk(memberId);
-        AssertUtils.isTrue(checkFlag, "风控检测未通过");
-
-        //4. 下单
-        Long orderId = placeOrderService.doPlaceOrder(memberId, seckillOrderSubmitCommand);
-        AssertUtils.isNotNull(orderId, "下单失败");
-
-        return orderId;
     }
 
 }

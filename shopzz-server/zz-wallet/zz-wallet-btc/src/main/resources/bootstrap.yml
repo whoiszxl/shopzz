@@ -6,9 +6,9 @@ spring:
     name: zz-wallet-btc
   cloud:
     nacos:
-      server-addr: 212.129.223.197:8848
+      server-addr: aliyun.whoiszxl.com:8848
       config:
-        server-addr: 212.129.223.197:8848
+        server-addr: aliyun.whoiszxl.com:8848
         file-extension: yaml
 
 

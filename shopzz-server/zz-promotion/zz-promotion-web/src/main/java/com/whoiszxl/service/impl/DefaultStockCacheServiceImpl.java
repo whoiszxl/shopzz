@@ -110,7 +110,7 @@ public class DefaultStockCacheServiceImpl implements StockCacheService {
             return null;
         }
 
-        Integer stockQuantity = (Integer) stockQuantityObj;
+        Integer stockQuantity = Integer.parseInt(stockQuantityObj.toString());
         stockCache = new StockCache().with(stockQuantity);
 
         return stockCache;
@@ -219,12 +219,12 @@ public class DefaultStockCacheServiceImpl implements StockCacheService {
             }
 
             //构建lua脚本
-            DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(SUB_STOCK_LUA, Long.class);
-            String stockCacheKey = "cache:stock:" + seckillItemId;
-            String stockCacheAlignKey = "cache:align-stock:" + seckillItemId;
+            DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(INIT_STOCK_LUA, Long.class);
+            String stockCacheKey = RedisKeyPrefixConstants.CACHE_ITEM_STOCK + seckillItemId;
+            String stockCacheAlignKey = RedisKeyPrefixConstants.CACHE_ITEM_STOCK_ALIGN + seckillItemId;
             List<String> keys = Lists.newArrayList(stockCacheKey, stockCacheAlignKey);
 
-            Long result = (Long) redisUtils.execute(redisScript, keys, seckillItem.getInitStockQuantity());
+            Long result = (Long) redisUtils.execute(redisScript, keys, seckillItem.getInitStockQuantity().toString());
             if(result == null) {
                 log.info("库存初始化失败，id:{}", seckillItemId);
                 return false;
