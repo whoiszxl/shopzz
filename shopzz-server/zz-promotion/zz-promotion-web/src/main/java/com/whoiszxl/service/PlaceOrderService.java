@@ -1,5 +1,6 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.cqrs.command.SeckillOrderResultCommand;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
 import com.whoiszxl.cqrs.dto.SeckillPlaceOrderDTO;
 
@@ -24,4 +25,11 @@ public interface PlaceOrderService {
      * @param seckillPlaceOrderDTO
      */
     void handlePlaceOrderTask(SeckillPlaceOrderDTO seckillPlaceOrderDTO);
+
+    /**
+     * 获取秒杀订单结果
+     * @param seckillOrderResultCommand
+     * @return
+     */
+    Long getOrderResult(SeckillOrderResultCommand seckillOrderResultCommand);
 }

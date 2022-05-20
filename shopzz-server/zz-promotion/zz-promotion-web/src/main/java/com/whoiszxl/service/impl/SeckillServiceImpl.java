@@ -5,12 +5,14 @@ import com.whoiszxl.DistributedLock;
 import com.whoiszxl.DistributedLockFactory;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
-import com.whoiszxl.cqrs.cache.SeckillItemCache;
+import com.whoiszxl.cqrs.command.SeckillOrderResultCommand;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
 import com.whoiszxl.entity.Seckill;
 import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.mapper.SeckillMapper;
-import com.whoiszxl.service.*;
+import com.whoiszxl.service.PlaceOrderService;
+import com.whoiszxl.service.SeckillService;
+import com.whoiszxl.service.SecurityService;
 import com.whoiszxl.utils.AssertUtils;
 import com.whoiszxl.utils.AuthUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> implements SeckillService {
 
     @Autowired
-    private SeckillItemService seckillItemService;
-
-    @Autowired
-    private SeckillMapper seckillMapper;
-
-    @Autowired
     private DistributedLockFactory distributedLockFactory;
-
-    @Autowired
-    private SeckillItemCachedService seckillItemCachedService;
 
     @Autowired
     private SecurityService securityService;
@@ -78,4 +71,8 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
         }
     }
 
+    @Override
+    public Long orderResult(SeckillOrderResultCommand seckillOrderResultCommand) {
+        return placeOrderService.getOrderResult(seckillOrderResultCommand);
+    }
 }

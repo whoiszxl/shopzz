@@ -3,6 +3,7 @@ package com.whoiszxl.controller.api;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.whoiszxl.bean.ResponseResult;
+import com.whoiszxl.cqrs.command.SeckillOrderResultCommand;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
 import com.whoiszxl.service.SeckillService;
 import io.swagger.annotations.Api;
@@ -34,6 +35,14 @@ public class SeckillApiController {
     @ApiOperation(value = "秒杀下单接口", notes = "秒杀下单接口", response = Long.class)
     public ResponseResult<Long> orderSubmit(@RequestBody SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
         Long orderId = seckillService.orderSubmit(seckillOrderSubmitCommand);
+        return ResponseResult.buildSuccess(orderId);
+    }
+
+    @SaCheckLogin
+    @PostMapping("/order/result")
+    @ApiOperation(value = "异步获取秒杀订单结果", notes = "异步获取秒杀订单结果", response = Long.class)
+    public ResponseResult<Long> orderResult(@RequestBody SeckillOrderResultCommand seckillOrderResultCommand) {
+        Long orderId = seckillService.orderResult(seckillOrderResultCommand);
         return ResponseResult.buildSuccess(orderId);
     }
 

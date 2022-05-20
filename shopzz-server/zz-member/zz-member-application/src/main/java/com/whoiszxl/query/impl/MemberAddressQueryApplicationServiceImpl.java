@@ -1,7 +1,6 @@
 package com.whoiszxl.query.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.whoiszxl.aggregate.repository.MemberAddressRepository;
 import com.whoiszxl.db.mapper.MemberAddressMapper;
 import com.whoiszxl.db.model.MemberAddressPO;
 import com.whoiszxl.dozer.DozerUtils;
@@ -23,9 +22,6 @@ import java.util.List;
  */
 @Service
 public class MemberAddressQueryApplicationServiceImpl implements MemberAddressQueryApplicationService {
-
-    @Autowired
-    private MemberAddressRepository memberAddressRepository;
 
     @Autowired
     private MemberAddressMapper memberAddressMapper;

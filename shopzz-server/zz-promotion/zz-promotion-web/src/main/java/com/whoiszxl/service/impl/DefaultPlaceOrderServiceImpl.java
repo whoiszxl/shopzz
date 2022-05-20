@@ -5,6 +5,7 @@ import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.cqrs.cache.SeckillCache;
 import com.whoiszxl.cqrs.cache.SeckillItemCache;
 import com.whoiszxl.cqrs.cache.StockCache;
+import com.whoiszxl.cqrs.command.SeckillOrderResultCommand;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
 import com.whoiszxl.cqrs.dto.SeckillPlaceOrderDTO;
 import com.whoiszxl.dozer.DozerUtils;
@@ -108,6 +109,11 @@ public class DefaultPlaceOrderServiceImpl implements PlaceOrderService {
     @Override
     public void handlePlaceOrderTask(SeckillPlaceOrderDTO seckillPlaceOrderDTO) {
 
+    }
+
+    @Override
+    public Long getOrderResult(SeckillOrderResultCommand seckillOrderResultCommand) {
+        return null;
     }
 
     private SeckillOrder buildSeckillOrder(SeckillItem seckillItem, SeckillOrderSubmitCommand seckillOrderSubmitCommand) {

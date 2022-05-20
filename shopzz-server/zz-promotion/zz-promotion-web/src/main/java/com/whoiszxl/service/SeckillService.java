@@ -1,6 +1,7 @@
 package com.whoiszxl.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.cqrs.command.SeckillOrderResultCommand;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
 import com.whoiszxl.entity.Seckill;
 
@@ -20,4 +21,12 @@ public interface SeckillService extends IService<Seckill> {
      * @return 订单ID
      */
     Long orderSubmit(SeckillOrderSubmitCommand seckillOrderSubmitCommand);
+
+    /**
+     * 异步秒杀订单结果获取
+     * @param seckillOrderResultCommand
+     * @return
+     */
+    Long orderResult(SeckillOrderResultCommand seckillOrderResultCommand);
+
 }

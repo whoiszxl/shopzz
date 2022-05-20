@@ -10,6 +10,7 @@ import com.whoiszxl.constants.RocketMQConstant;
 import com.whoiszxl.cqrs.cache.SeckillCache;
 import com.whoiszxl.cqrs.cache.SeckillItemCache;
 import com.whoiszxl.cqrs.cache.StockCache;
+import com.whoiszxl.cqrs.command.SeckillOrderResultCommand;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
 import com.whoiszxl.cqrs.dto.SeckillPlaceOrderDTO;
 import com.whoiszxl.dozer.DozerUtils;
@@ -121,7 +122,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
         AssertUtils.isTrue(allowFlag, "秒杀商品校验失败");
 
         //生成下单任务ID,防止重复下单，在MQ消费者里处理完成后才将taskKey删除
-        String taskKey = DigestUtils.md5DigestAsHex(new StringBuilder().append(memberId).append(seckillOrderSubmitCommand.getSeckillItemId()).toString().getBytes());
+        String taskKey = DigestUtils.md5DigestAsHex((String.valueOf(memberId) + seckillOrderSubmitCommand.getSeckillItemId()).getBytes());
         if(redisUtils.get(RedisKeyPrefixConstants.TASK_SECKILL_PLACE_ORDER_MQ + taskKey) != null) {
             ExceptionCatcher.catchValidateEx(ResponseResult.buildError("不能重复下单"));
         }
@@ -179,7 +180,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
 
             //如果taskKey的值为0，则说明还没执行完成，则设置为1
             Object taskValueObj = redisUtils.getObj(RedisKeyPrefixConstants.TASK_SECKILL_PLACE_ORDER_MQ + seckillPlaceOrderDTO.getTaskKey());
-            if(taskValueObj != null && "0".equals(taskValueObj)) {
+            if("0".equals(taskValueObj)) {
                 redisUtils.set(RedisKeyPrefixConstants.TASK_SECKILL_PLACE_ORDER_MQ + seckillPlaceOrderDTO.getTaskKey(), "1");
             }
 
@@ -381,4 +382,19 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
         return true;
     }
 
+
+    @Override
+    public Long getOrderResult(SeckillOrderResultCommand seckillOrderResultCommand) {
+        String taskKey = DigestUtils.md5DigestAsHex((String.valueOf(AuthUtils.getMemberId()) + seckillOrderResultCommand.getSeckillItemId()).getBytes());
+        if(!seckillOrderResultCommand.getTaskId().equals(taskKey)) {
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError("下单错误"));
+        }
+        Object taskValueObj = redisUtils.getObj(RedisKeyPrefixConstants.TASK_SECKILL_PLACE_ORDER_MQ + taskKey);
+        AssertUtils.isTrue(taskValueObj != null, "下单错误");
+        AssertUtils.isTrue("1".equals(taskValueObj), "下单错误");
+
+        Object orderIdObj = redisUtils.getObj(RedisKeyPrefixConstants.TASK_SECKILL_PLACE_ORDER_MQ_ORDER_ID + taskKey);
+        AssertUtils.isTrue(orderIdObj != null, "下单错误");
+        return Long.parseLong(orderIdObj.toString());
+    }
 }
