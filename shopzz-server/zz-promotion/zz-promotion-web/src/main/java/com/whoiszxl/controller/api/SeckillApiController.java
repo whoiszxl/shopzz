@@ -2,12 +2,22 @@ package com.whoiszxl.controller.api;
 
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.cqrs.command.SeckillOrderResultCommand;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
+import com.whoiszxl.cqrs.query.SeckillOrderQuery;
+import com.whoiszxl.cqrs.response.SeckillOrderResponse;
+import com.whoiszxl.dozer.DozerUtils;
+import com.whoiszxl.entity.SeckillOrder;
+import com.whoiszxl.service.SeckillOrderService;
 import com.whoiszxl.service.SeckillService;
+import com.whoiszxl.utils.AuthUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +40,12 @@ public class SeckillApiController {
     @Autowired
     private SeckillService seckillService;
 
+    @Autowired
+    private SeckillOrderService seckillOrderService;
+
+    @Autowired
+    private DozerUtils dozerUtils;
+
     @SaCheckLogin
     @PostMapping("/order/submit")
     @ApiOperation(value = "秒杀下单接口", notes = "秒杀下单接口", response = Long.class)
@@ -44,6 +60,25 @@ public class SeckillApiController {
     public ResponseResult<Long> orderResult(@RequestBody SeckillOrderResultCommand seckillOrderResultCommand) {
         Long orderId = seckillService.orderResult(seckillOrderResultCommand);
         return ResponseResult.buildSuccess(orderId);
+    }
+
+
+    @SaCheckLogin
+    @PostMapping("/order/list")
+    @ApiOperation(value = "获取秒杀订单列表", notes = "获取秒杀订单列表", response = Long.class)
+    public ResponseResult<IPage<SeckillOrderResponse>> orderList(@RequestBody SeckillOrderQuery seckillOrderQuery) {
+        Long memberId = AuthUtils.getMemberId();
+        LambdaQueryWrapper<SeckillOrder> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SeckillOrder::getMemberId, memberId);
+
+        if(StringUtils.isNotBlank(seckillOrderQuery.getSkuName())) {
+            queryWrapper.like(SeckillOrder::getSkuName, "%" + seckillOrderQuery.getSkuName() + "%");
+        }
+
+        IPage<SeckillOrder> pageResult = seckillOrderService.page(new Page<>(seckillOrderQuery.getPage(), seckillOrderQuery.getSize()), queryWrapper);
+
+        IPage<SeckillOrderResponse> result = pageResult.convert(e -> dozerUtils.map(e, SeckillOrderResponse.class));
+        return ResponseResult.buildSuccess(result);
     }
 
 }
