@@ -14,7 +14,8 @@ import lombok.Getter;
 public enum SeckillOrderStatusEnum {
 
     NOT_PAY(0, "未支付"),
-    PAID(1, "已支付")
+    PAID(1, "已支付"),
+    CANCEL(2, "已取消"),
     ;
     private Integer code;
     private String desc;

@@ -13,4 +13,10 @@ import com.whoiszxl.entity.SeckillOrder;
  */
 public interface SeckillOrderService extends IService<SeckillOrder> {
 
+    /**
+     * 秒杀订单取消
+     * @param orderId
+     * @return
+     */
+    boolean orderCancel(Long orderId);
 }

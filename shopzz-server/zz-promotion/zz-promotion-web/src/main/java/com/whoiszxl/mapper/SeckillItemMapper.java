@@ -19,4 +19,10 @@ public interface SeckillItemMapper extends BaseMapper<SeckillItem> {
             "where id = #{seckillItemId} " +
             "and available_stock_quantity >= #{quantity}")
     boolean subDbStock(Long seckillItemId, Integer quantity);
+
+    @Update("update spms_seckill_item " +
+            "set available_stock_quantity = available_stock_quantity + #{quantity} " +
+            "where id = #{seckillItemId} " +
+            "and available_stock_quantity + #{quantity} <= init_stock_quantity")
+    boolean addDbStock(Long seckillItemId, Integer quantity);
 }

@@ -7,9 +7,7 @@ import com.whoiszxl.DistributedLockFactory;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
 import com.whoiszxl.cqrs.cache.SeckillCache;
 import com.whoiszxl.entity.Seckill;
-import com.whoiszxl.entity.SeckillItem;
 import com.whoiszxl.service.SeckillCachedService;
-import com.whoiszxl.service.SeckillItemService;
 import com.whoiszxl.service.SeckillService;
 import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.RedisUtils;
@@ -37,6 +35,9 @@ public class SeckillCachedServiceImpl implements SeckillCachedService {
             .concurrencyLevel(8) //并发写缓存的线程数
             .expireAfterWrite(10, TimeUnit.SECONDS) //写缓存后10秒过期
             .build();
+
+    private final static Cache<String, SeckillCache> flashActivitiesLocalCache = CacheBuilder.newBuilder().initialCapacity(10).concurrencyLevel(5).expireAfterWrite(10, TimeUnit.SECONDS).build();
+
 
     @Autowired
     private RedisUtils redisUtils;

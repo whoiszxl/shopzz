@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * TODO
+ * WMS feign接口调用实现
  *
  * @author whoiszxl
  * @date 2022/3/18

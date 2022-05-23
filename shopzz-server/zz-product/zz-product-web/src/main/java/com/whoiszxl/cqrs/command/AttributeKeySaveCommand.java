@@ -1,15 +1,17 @@
 package com.whoiszxl.cqrs.command;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * TODO
+ * 属性key保存命令
  *
  * @author whoiszxl
  * @date 2022/3/21
  */
 @Data
+@ApiModel("属性key保存命令")
 public class AttributeKeySaveCommand {
 
     @ApiModelProperty("属性名称")

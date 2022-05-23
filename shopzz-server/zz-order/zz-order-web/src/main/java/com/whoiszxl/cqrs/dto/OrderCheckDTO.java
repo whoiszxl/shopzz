@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 /**
- * TODO
+ * 订单检查DTO
  *
  * @author whoiszxl
  * @date 2022/4/11

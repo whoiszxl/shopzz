@@ -1,7 +1,6 @@
 package com.whoiszxl.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.entity.WarehouseSkuStock;
 import com.whoiszxl.mapper.WarehouseSkuStockMapper;
@@ -10,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * TODO
+ * 仓储sku库存服务实现
  *
  * @author whoiszxl
  * @date 2022/3/18

@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2022/5/18
  */
 @Slf4j
-@Component
+//@Component
 public class SeckillItemWarmUpTask {
 
     @Autowired
@@ -31,7 +31,6 @@ public class SeckillItemWarmUpTask {
 
     /**
      * 秒杀商品预热任务，五秒一次
-     * TODO 修改为xxl-job调用
      */
     @Scheduled(cron = "*/5 * * * * ?")
     public void warmUpSeckillItem() {

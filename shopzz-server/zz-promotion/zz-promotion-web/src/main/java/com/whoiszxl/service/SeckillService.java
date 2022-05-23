@@ -29,4 +29,10 @@ public interface SeckillService extends IService<Seckill> {
      */
     Long orderResult(SeckillOrderResultCommand seckillOrderResultCommand);
 
+    /**
+     * 取消秒杀订单
+     * @param orderId
+     * @return
+     */
+    boolean orderCancel(Long orderId);
 }

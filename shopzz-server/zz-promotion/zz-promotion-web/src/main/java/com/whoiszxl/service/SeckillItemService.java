@@ -20,4 +20,12 @@ public interface SeckillItemService extends IService<SeckillItem> {
      * @return
      */
     boolean subDbStock(Long seckillItemId, Integer quantity);
+
+    /**
+     * 库存实际DB增加
+     * @param seckillItemId
+     * @param quantity
+     * @return
+     */
+    boolean addDbStock(Long seckillItemId, Integer quantity);
 }

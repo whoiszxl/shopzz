@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * TODO
+ * 订单创建信息对象DTO
  *
  * @author whoiszxl
  * @date 2022/1/12

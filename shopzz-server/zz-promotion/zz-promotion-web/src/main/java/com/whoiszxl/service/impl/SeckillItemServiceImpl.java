@@ -25,4 +25,9 @@ public class SeckillItemServiceImpl extends ServiceImpl<SeckillItemMapper, Secki
     public boolean subDbStock(Long seckillItemId, Integer quantity) {
         return seckillItemMapper.subDbStock(seckillItemId, quantity);
     }
+
+    @Override
+    public boolean addDbStock(Long seckillItemId, Integer quantity) {
+        return seckillItemMapper.addDbStock(seckillItemId, quantity);
+    }
 }

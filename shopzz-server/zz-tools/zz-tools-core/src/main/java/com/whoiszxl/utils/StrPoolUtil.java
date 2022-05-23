@@ -1,7 +1,7 @@
 package com.whoiszxl.utils;
 
 /**
- * TODO
+ * 字符串常量
  *
  * @author whoiszxl
  * @date 2022/3/24

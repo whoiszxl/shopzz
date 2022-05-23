@@ -8,13 +8,14 @@ import com.whoiszxl.constants.RedisKeyPrefixConstants;
 import com.whoiszxl.cqrs.command.SeckillOrderResultCommand;
 import com.whoiszxl.cqrs.command.SeckillOrderSubmitCommand;
 import com.whoiszxl.entity.Seckill;
+import com.whoiszxl.entity.SeckillOrder;
+import com.whoiszxl.enums.promotion.SeckillOrderStatusEnum;
 import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.mapper.SeckillMapper;
-import com.whoiszxl.service.PlaceOrderService;
-import com.whoiszxl.service.SeckillService;
-import com.whoiszxl.service.SecurityService;
+import com.whoiszxl.service.*;
 import com.whoiszxl.utils.AssertUtils;
 import com.whoiszxl.utils.AuthUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeUnit;
  * @author whoiszxl
  * @since 2022-04-19
  */
+@Slf4j
 @Service
 public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> implements SeckillService {
 
@@ -40,6 +42,15 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
 
     @Autowired
     private PlaceOrderService placeOrderService;
+
+    @Autowired
+    private SeckillOrderService seckillOrderService;
+
+    @Autowired
+    private SeckillItemService seckillItemService;
+
+    @Autowired
+    private StockCacheService stockCacheService;
 
     @Override
     @Transactional
@@ -74,5 +85,36 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
     @Override
     public Long orderResult(SeckillOrderResultCommand seckillOrderResultCommand) {
         return placeOrderService.getOrderResult(seckillOrderResultCommand);
+    }
+
+    @Override
+    @Transactional
+    public boolean orderCancel(Long orderId) {
+        Long memberId = AuthUtils.getMemberId();
+        log.info("orderCancel|取消秒杀订单|{},{}", memberId, orderId);
+        if(orderId == null) {
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError("订单号无效"));
+        }
+
+        SeckillOrder seckillOrder = seckillOrderService.getById(orderId);
+        if(seckillOrder == null || seckillOrder.getMemberId().equals(memberId)) {
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError("订单号无效"));
+        }
+
+        if(seckillOrder.getStatus().equals(SeckillOrderStatusEnum.CANCEL.getCode())) {
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError("订单已取消"));
+        }
+
+        boolean cancelFlag = seckillOrderService.orderCancel(orderId);
+        AssertUtils.isTrue(cancelFlag, "订单取消失败");
+
+        //实际库存与缓存库存恢复
+        boolean dbStockRecoverFlag = seckillItemService.addDbStock(seckillOrder.getSeckillItemId(), seckillOrder.getBuyQuantity());
+        AssertUtils.isTrue(dbStockRecoverFlag, "实际库存恢复失败");
+        boolean cacheStockRecoverFlag = stockCacheService.addCacheStock(seckillOrder.getSeckillItemId(), seckillOrder.getBuyQuantity());
+        AssertUtils.isTrue(cacheStockRecoverFlag, "缓存库存恢复失败");
+
+        log.info("orderCancel|秒杀订单取消成功|{},{}", memberId, orderId);
+        return true;
     }
 }

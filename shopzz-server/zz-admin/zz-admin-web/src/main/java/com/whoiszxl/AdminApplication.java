@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * TODO
+ * admin启动类
  *
  * @author whoiszxl
  * @date 2021/11/30

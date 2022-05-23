@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * TODO
+ * 用户地址feign DTO
  *
  * @author whoiszxl
  * @date 2022/4/15

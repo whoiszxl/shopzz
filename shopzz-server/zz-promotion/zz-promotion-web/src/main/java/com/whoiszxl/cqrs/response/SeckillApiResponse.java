@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ApiModel(value = "Seckill 返回对象", description = "秒杀表")
-public class SeckillResponse implements Serializable {
+public class SeckillApiResponse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

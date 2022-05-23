@@ -26,7 +26,7 @@ import java.util.UUID;
 import static com.whoiszxl.utils.DateUtils.DEFAULT_MONTH_FORMAT_SLASH;
 
 /**
- * TODO
+ * 阿里云OSS策略实现
  *
  * @author whoiszxl
  * @date 2022/3/24

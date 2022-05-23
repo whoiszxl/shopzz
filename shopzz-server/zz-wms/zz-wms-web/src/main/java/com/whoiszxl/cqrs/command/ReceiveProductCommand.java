@@ -6,18 +6,17 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**
- * TODO
+ * 仓储管理员收供应商的货的接口的命令
  *
  * @author whoiszxl
  * @date 2022/3/18
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="仓储管理员收供应商的货的接口的VO", description="仓储管理员收供应商的货的接口的VO")
+@ApiModel(value="仓储管理员收供应商的货的接口的命令", description="仓储管理员收供应商的货的接口的命令")
 public class ReceiveProductCommand {
     @ApiModelProperty(value = "到货时间")
     private LocalDateTime arrivalTime;
