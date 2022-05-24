@@ -36,8 +36,10 @@ public class RedisKeyPrefixConstants {
 
     public static final String REPEAT_SECKILL_PLACE_ORDER = "repeat:seckill:place_order:";
 
-    public static final String CACHE_SECKILL = "cache:seckill";
+    public static final String CACHE_SECKILL = "cache:seckill:";
+    public static final String CACHE_SECKILL_LIST = "cache:seckill_list";
     public static final String CACHE_SECKILL_ITEM = "cache:seckill_item:";
+    public static final String CACHE_SECKILL_ITEM_LIST = "cache:seckill_item_list";
     public static final String CACHE_ITEM_STOCK = "cache:item_stock:";
     public static final String CACHE_ITEM_STOCK_ALIGN = "cache:item_stock_align:";
 
@@ -48,6 +50,8 @@ public class RedisKeyPrefixConstants {
 
     public static final String LOCK_GET_ITEM_FROM_DB = "lock:getItemFromDB:";
     public static final String LOCK_GET_SECKILL_FROM_DB = "lock:getSeckillFromDB:";
+    public static final String LOCK_GET_SECKILL_LIST_FROM_DB = "lock:getSeckillListFromDB:";
+    public static final String LOCK_GET_SECKILL_ITEM_LIST_FROM_DB = "lock:getSeckillItemListFromDB:";
     public static final String LOCK_SECKILL_REFRESH_PLACE_ORDER_TOKEN = "lock:seckill:refreshPlaceOrderToken:";
 
 
