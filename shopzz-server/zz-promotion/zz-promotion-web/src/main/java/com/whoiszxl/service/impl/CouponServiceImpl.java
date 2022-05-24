@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.reflect.TypeToken;
+import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.enums.promotion.CouponFullLimitedEnum;
 import com.whoiszxl.enums.promotion.CouponStatusEnum;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
@@ -13,6 +14,7 @@ import com.whoiszxl.dozer.DozerUtils;
 import com.whoiszxl.entity.Coupon;
 import com.whoiszxl.entity.CouponCategory;
 import com.whoiszxl.entity.MemberCoupon;
+import com.whoiszxl.exception.ExceptionCatcher;
 import com.whoiszxl.mapper.CouponCategoryMapper;
 import com.whoiszxl.mapper.CouponMapper;
 import com.whoiszxl.service.CouponService;
@@ -113,9 +115,10 @@ public class CouponServiceImpl extends ServiceImpl<CouponMapper, Coupon> impleme
         LocalDateTime now = LocalDateTime.now();
         if(now.isBefore(coupon.getStartTime()) || now.isAfter(coupon.getEndTime())) {
             //将优惠券更新为过期状态
-            coupon.setStatus(CouponStatusEnum.EXPIRED.getCode());
-            super.updateById(coupon);
-            return;
+            this.update(Wrappers.<Coupon>lambdaUpdate()
+                    .set(Coupon::getStatus, CouponStatusEnum.EXPIRED.getCode())
+                    .eq(Coupon::getId, coupon.getId()));
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError("优惠券已过期"));
         }
 
         //3. 判断是否领取过

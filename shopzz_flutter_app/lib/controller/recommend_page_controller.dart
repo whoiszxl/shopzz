@@ -85,7 +85,6 @@ class RecommendPageController extends GetxController {
 
     recommendList.addAll(result.homeRecommendList);
     recommendListPage++;
-    refreshController.refreshCompleted();
     refreshController.loadComplete();
     return true;
   }

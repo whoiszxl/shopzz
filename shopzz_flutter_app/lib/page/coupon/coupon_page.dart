@@ -49,7 +49,7 @@ class _CouponPageState extends State<CouponPage>  with AutomaticKeepAliveClientM
         appBar: MyAppBar(
           title: const Text("优惠券"),
           leadingType: AppBarBackType.Back,
-          backgroundColor: ColorManager.fieldBg,
+          backgroundColor: ColorManager.main,
           elevation: 0,
         ),
 
@@ -89,7 +89,7 @@ class _CouponPageState extends State<CouponPage>  with AutomaticKeepAliveClientM
             //金额
             Container(
               width: 100.0,
-              padding: const EdgeInsets.only(left: 3),
+              padding: const EdgeInsets.only(left: 8),
               margin: const EdgeInsets.only(left: 10.0, right: 10.0),
               child: Row(
                 children: <Widget>[

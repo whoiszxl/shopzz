@@ -1,5 +1,6 @@
 package com.whoiszxl.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.bean.PageQuery;
 import com.whoiszxl.bean.ResponseResult;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -68,7 +70,10 @@ public class RecommendProductServiceImpl extends ServiceImpl<RecommendProductMap
             log.error("获取首页推荐商品列表失败", e);
         }
 
-        AssertUtils.isNotNull(responseList, "推荐商品列表为空");
+        if(responseList.isEmpty()) {
+            return CollectionUtil.newArrayList();
+        }
+
         List<HomeRecommendVO> resultList = responseList.stream().map(e -> JsonUtil.fromJson(e, HomeRecommendVO.class)).collect(Collectors.toList());
 
         return resultList;
