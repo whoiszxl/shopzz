@@ -51,6 +51,8 @@ class SeckillPageController extends GetxController {
     return result;
   }
 
+  var currentSeckillOrderId = "".obs;
+
   ///秒杀订单异步查询
   Future<String> seckillOrderResult(String seckillItemId, String taskId) async {
     var result = await Get.find<SeckillApiService>().seckillOrderResult(seckillItemId, taskId);
@@ -58,7 +60,8 @@ class SeckillPageController extends GetxController {
       showToast(result.errorMessage);
       return "0";
     }
-    showToast(result.toString());
+    currentSeckillOrderId.value = result.toString();
+    print(currentSeckillOrderId.value);
     return result.toString();
   }
 

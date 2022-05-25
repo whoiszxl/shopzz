@@ -28,6 +28,12 @@ spring:
     port: 6379
     password: ECmzyDLN7bRSKtab
     timeout: 6000ms
+    jedis:
+      pool:
+        max-active: 30
+        max-idle: 10
+        min-idle: 1
+        max-wait: -1ms
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
