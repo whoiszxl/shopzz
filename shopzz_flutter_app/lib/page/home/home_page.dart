@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shopzz_flutter_app/page/home/guess/guess_page.dart';
 import 'package:shopzz_flutter_app/page/home/recommend/recommend_page.dart';
+import 'package:shopzz_flutter_app/page/home/seckill/seckill_page.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/search_bar.dart';
 import 'package:shopzz_flutter_app/page/home/widgets/tab_bar.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     //初始化数据
 
     tabViewKey['推荐'] = [const RecommendPage(), ""];
+    tabViewKey['秒杀'] = [const SeckillPage(), ""];
     tabViewKey['猜你喜欢'] = [const GuessPage(), ""];
     tabViewKey['手机'] = [const GuessPage(), ""];
 

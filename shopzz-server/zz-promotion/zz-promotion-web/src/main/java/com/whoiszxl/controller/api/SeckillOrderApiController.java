@@ -46,9 +46,9 @@ public class SeckillOrderApiController {
     @SaCheckLogin
     @PostMapping("/submit")
     @ApiOperation(value = "秒杀下单接口", notes = "秒杀下单接口", response = Long.class)
-    public ResponseResult<Long> orderSubmit(@RequestBody SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
-        Long orderId = seckillService.orderSubmit(seckillOrderSubmitCommand);
-        return ResponseResult.buildSuccess(orderId);
+    public ResponseResult<String> orderSubmit(@RequestBody SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
+        String taskKey = seckillService.orderSubmit(seckillOrderSubmitCommand);
+        return ResponseResult.buildSuccess(taskKey);
     }
 
     @SaCheckLogin

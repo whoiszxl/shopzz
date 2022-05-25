@@ -18,7 +18,7 @@ public interface PlaceOrderService {
      * @param seckillOrderSubmitCommand
      * @return
      */
-    Long doPlaceOrder(Long memberId, SeckillOrderSubmitCommand seckillOrderSubmitCommand);
+    String doPlaceOrder(Long memberId, SeckillOrderSubmitCommand seckillOrderSubmitCommand);
 
     /**
      * 秒杀下单队列任务消费处理方法

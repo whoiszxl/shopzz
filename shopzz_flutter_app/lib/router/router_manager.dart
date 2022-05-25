@@ -5,6 +5,7 @@ import 'package:shopzz_flutter_app/page/coupon/coupon_page.dart';
 import 'package:shopzz_flutter_app/page/detail/detail_page.dart';
 import 'package:shopzz_flutter_app/page/discovery/discovery_page.dart';
 import 'package:shopzz_flutter_app/page/home/home_page.dart';
+import 'package:shopzz_flutter_app/page/home/seckill/seckill_result_page.dart';
 import 'package:shopzz_flutter_app/page/login/password_login_page.dart';
 import 'package:shopzz_flutter_app/page/login/register_page.dart';
 import 'package:shopzz_flutter_app/page/login/sms_login_page.dart';
@@ -38,6 +39,7 @@ class Routers{
 
   static const String coupon = '/coupon';
 
+  static const String seckillResult = '/seckillResult';
 
 }
 
@@ -63,6 +65,10 @@ class RouterManager{
 
     GetPage(name: Routers.settings, page: () => const SettingsPage()),
     GetPage(name: Routers.address, page: () => const AddressPage()),
+
+    GetPage(name: Routers.seckillResult, page: () => const SeckillResultPage()),
+
+
 
   ];
 

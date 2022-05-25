@@ -54,7 +54,7 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
 
     @Override
     @Transactional
-    public Long orderSubmit(SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
+    public String orderSubmit(SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
         //0. 获取当前登录用户
         Long memberId = AuthUtils.getMemberId();
         //1. 获取用户分布式锁
@@ -70,10 +70,10 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
             AssertUtils.isTrue(checkFlag, "风控检测未通过");
 
             //4. 下单
-            Long orderId = placeOrderService.doPlaceOrder(memberId, seckillOrderSubmitCommand);
-            AssertUtils.isNotNull(orderId, "下单失败");
+            String taskKey = placeOrderService.doPlaceOrder(memberId, seckillOrderSubmitCommand);
+            AssertUtils.isNotNull(taskKey, "下单失败");
 
-            return orderId;
+            return taskKey;
         } catch (InterruptedException e) {
             ExceptionCatcher.catchValidateEx(ResponseResult.buildError("加锁失败"));
             return null;

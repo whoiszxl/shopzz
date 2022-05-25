@@ -37,4 +37,10 @@ class ApiUrls {
   static const String cartUpdateQuantity = "/order/api/cart/update/quantity";
 
 
+  ///秒杀
+  static const String seckillList = "/promotion/api/seckill/list";
+  static const String seckillItemList = "/promotion/api/seckill/item/list/";
+  static const String seckillOrderSubmit = "/promotion/api/seckill/order/submit";
+  static const String seckillOrderResult = "/promotion/api/seckill/order/result";
+
 }

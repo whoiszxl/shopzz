@@ -22,7 +22,7 @@ class HomeGridNavigator extends StatelessWidget {
 
     var tempIndex = -1;
     return Container(
-      margin: const EdgeInsets.only(top: 5),
+      margin: const EdgeInsets.only(top: 2),
       height: gridHeight,
       width: gridWidth,
       padding: const EdgeInsets.all(3),
@@ -50,7 +50,7 @@ class HomeGridNavigator extends StatelessWidget {
 
       child: Column(
         children: <Widget>[
-          Image.network(item.pic, width: 40, height: 40),
+          Image.network(item.pic, width: 45, height: 45),
           Text(item.name, style: const TextStyle(color: ColorManager.fontGrey, fontSize: 13))
         ],
       ),

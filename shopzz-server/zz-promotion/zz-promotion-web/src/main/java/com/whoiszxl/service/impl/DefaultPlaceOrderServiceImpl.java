@@ -58,7 +58,7 @@ public class DefaultPlaceOrderServiceImpl implements PlaceOrderService {
     private IdWorker idWorker;
 
     @Override
-    public Long doPlaceOrder(Long memberId, SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
+    public String doPlaceOrder(Long memberId, SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
         boolean allowFlag = checkSeckill(seckillOrderSubmitCommand.getSeckillId());
         AssertUtils.isTrue(allowFlag, "秒杀活动校验失败");
 
@@ -90,7 +90,7 @@ public class DefaultPlaceOrderServiceImpl implements PlaceOrderService {
             //发送下单成功的领域事件
 
 
-            return seckillOrder.getId();
+            return seckillOrder.getId().toString();
         }catch (Exception e) {
             //如果预下单成功了，回滚缓存里的库存数量
             if(preSubCacheFlag) {

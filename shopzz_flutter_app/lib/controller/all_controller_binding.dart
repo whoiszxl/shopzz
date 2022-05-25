@@ -8,6 +8,7 @@ import 'package:shopzz_flutter_app/controller/member_address_controller.dart';
 import 'package:shopzz_flutter_app/controller/member_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/product_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/recommend_page_controller.dart';
+import 'package:shopzz_flutter_app/controller/seckill_page_controller.dart';
 
 ///所有控制器的加载器，通过Get.lazyPut进行懒注入
 class AllControllerBinding implements Bindings {
@@ -23,5 +24,6 @@ class AllControllerBinding implements Bindings {
     Get.lazyPut<CouponPageController>(() => CouponPageController());
     Get.lazyPut<CartPageController>(() => CartPageController());
     Get.lazyPut<MemberAddressController>(() => MemberAddressController());
+    Get.lazyPut<SeckillPageController>(() => SeckillPageController());
   }
 }

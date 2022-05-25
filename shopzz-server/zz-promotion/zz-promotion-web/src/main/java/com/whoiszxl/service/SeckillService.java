@@ -18,9 +18,9 @@ public interface SeckillService extends IService<Seckill> {
     /**
      * 秒杀订单下单
      * @param seckillOrderSubmitCommand 秒杀下单命令
-     * @return 订单ID
+     * @return 秒杀TASK KEY
      */
-    Long orderSubmit(SeckillOrderSubmitCommand seckillOrderSubmitCommand);
+    String orderSubmit(SeckillOrderSubmitCommand seckillOrderSubmitCommand);
 
     /**
      * 异步秒杀订单结果获取

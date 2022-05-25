@@ -114,7 +114,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
 
 
     @Override
-    public Long doPlaceOrder(Long memberId, SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
+    public String doPlaceOrder(Long memberId, SeckillOrderSubmitCommand seckillOrderSubmitCommand) {
         boolean allowFlag = checkSeckill(seckillOrderSubmitCommand.getSeckillId());
         AssertUtils.isTrue(allowFlag, "秒杀活动校验失败");
 
@@ -150,7 +150,7 @@ public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
 
         redisUtils.setEx(RedisKeyPrefixConstants.TASK_SECKILL_PLACE_ORDER_MQ + taskKey, "0", 24, TimeUnit.HOURS);
         log.info("doPlaceOrder|下单任务提交到MQ成功|{},{}", memberId, seckillOrderSubmitCommand.getSeckillItemId());
-        return 1L;
+        return taskKey;
     }
 
     @Override
