@@ -56,5 +56,7 @@ public class RedisKeyPrefixConstants {
 
 
 
+    public static final String SMS_PLATFORM_LIST = "sms:platform_list";
+    public static final String SMS_TEMPLATE = "sms:template:";
 
 }

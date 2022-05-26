@@ -20,6 +20,11 @@
         <module>zz-member</module>
         <module>zz-order</module>
         <module>zz-wallet</module>
+        <module>zz-sms</module>
+        <module>zz-sms/zz-sms-entity</module>
+        <module>zz-sms/zz-sms-api</module>
+        <module>zz-sms/zz-sms-server</module>
+        <module>zz-sms/zz-sms-web</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -29,6 +29,7 @@ public class DateUtils {
     public final static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     public final static String DEFAULT_DATE_FORMAT_EN = "yyyy年MM月dd日";
     public final static String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public final static String TIME_FORMAT_TIMING = "yyyy-MM-dd HH:mm";
     public final static String DEFAULT_TIME_FORMAT = "HH:mm:ss";
     public final static String DAY = "DAY";
     public final static String MONTH = "MONTH";
@@ -644,6 +645,10 @@ public class DateUtils {
         return dateType;
     }
 
-//----------//----------//----------//----------//----------//----------//----------//----------//----------//----------//----------
+    public static LocalDateTime timingToLocalDateTime(String sendTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_FORMAT_TIMING);
+        LocalDateTime parsedDate = LocalDateTime.parse(sendTime, formatter);
+        return parsedDate;
+    }
 
 }
