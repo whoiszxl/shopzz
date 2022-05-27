@@ -1,5 +1,6 @@
 package com.whoiszxl.service;
 
+import com.whoiszxl.cqrs.command.SmsBatchSendCommand;
 import com.whoiszxl.cqrs.command.SmsSendCommand;
 
 /**
@@ -15,4 +16,10 @@ public interface SmsSendService {
      * @param smsSendCommand
      */
     void send(SmsSendCommand smsSendCommand);
+
+    /**
+     * 批量短信发送
+     * @param smsBatchSendCommand
+     */
+    void batchSend(SmsBatchSendCommand smsBatchSendCommand);
 }

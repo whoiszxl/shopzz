@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.constants.RocketMQConstant;
+import com.whoiszxl.cqrs.command.SmsBatchSendCommand;
 import com.whoiszxl.cqrs.command.SmsSendCommand;
 import com.whoiszxl.entity.*;
 import com.whoiszxl.enums.SmsNeedAuthEnum;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -100,7 +103,8 @@ public class SmsSendServiceImpl implements SmsSendService {
         Template template = checkParams(smsSendCommand.getTemplate(), smsSendCommand.getParams());
 
         //4. 调用接口发送
-        pushSmsMessage(template, smsSendCommand, platform, configs, "");
+
+        pushSmsMessage(template, smsSendCommand, platform, configs);
     }
 
     private List<Long> checkTemplateAndSignature(String templateCode, String signatureCode) {
@@ -121,7 +125,7 @@ public class SmsSendServiceImpl implements SmsSendService {
      * @param smsSendCommand
      * @param platform
      */
-    private void pushSmsMessage(Template template, SmsSendCommand smsSendCommand, Platform platform, List<Long> configs, String businessInfo) {
+    private void pushSmsMessage(Template template, SmsSendCommand smsSendCommand, Platform platform, List<Long> configs) {
         ReceiveLog receiveLog = new ReceiveLog();
         receiveLog.setId(idWorker.nextId());
         receiveLog.setApiLogId(receiveLog.getId());
@@ -161,7 +165,7 @@ public class SmsSendServiceImpl implements SmsSendService {
             receiveLog.setMobile(smsSendCommand.getMobile());
             receiveLog.setRequest(JSON.toJSONString(smsSendCommand.getParams()));
             receiveLog.setTimeConsuming(System.currentTimeMillis() - start);
-            receiveLog.setBusinessInfo(businessInfo);
+            receiveLog.setBusinessInfo(smsSendCommand.getBatchCode());
             receiveLogService.save(receiveLog);
         }
     }
@@ -175,7 +179,7 @@ public class SmsSendServiceImpl implements SmsSendService {
     private Template checkParams(String templateCode, Map<String, String> params) {
         Template template = templateService.getCacheByTemplateCode(templateCode);
         String content = TemplateUtils.renderString(template.getContent(), params);
-        if (content.indexOf("${") > 0) {
+        if (content.contains("${")) {
             ExceptionCatcher.catchValidateEx(ResponseResult.buildError("参数不匹配"));
         }
         return template;
@@ -219,5 +223,68 @@ public class SmsSendServiceImpl implements SmsSendService {
             }
         }
         return true;
+    }
+
+
+    @Override
+    public void batchSend(SmsBatchSendCommand smsBatchSendCommand) {
+        //1. 校验平台是否注册
+        Platform platform = checkPlatform(smsBatchSendCommand.getAccessKeyId());
+
+        //2. 校验平台是否需要鉴权
+        if(platform.getNeedAuth().equals(SmsNeedAuthEnum.NEED.getCode())) {
+            boolean checkFlag = checkAuth(smsBatchSendCommand.getTimestamp(), smsBatchSendCommand.getAccessKeyId(), platform.getAccessKeySecret(), smsBatchSendCommand.getEncryption());
+            AssertUtils.isTrue(checkFlag, "鉴权失败");
+        }
+
+        //3. 遍历，进行分发
+        Iterator<String> mobileListIter = smsBatchSendCommand.getMobileList().iterator();
+        Iterator<String> signatureListIter = smsBatchSendCommand.getSignatureList().iterator();
+        Iterator<String> templateListIter = smsBatchSendCommand.getTemplateList().iterator();
+        Iterator<LinkedHashMap<String, String>> paramsListIter = smsBatchSendCommand.getParamsList().iterator();
+
+        String mobile = null;
+        String signature = null;
+        String template = null;
+        LinkedHashMap<String, String> param = null;
+
+        StringBuilder errorSb = new StringBuilder();
+        if(StringUtils.isBlank(smsBatchSendCommand.getBatchCode())) {
+            smsBatchSendCommand.setBatchCode(String.valueOf(idWorker.nextId()));
+        }
+
+        while(mobileListIter.hasNext() || signatureListIter.hasNext() || templateListIter.hasNext() || paramsListIter.hasNext()) {
+            if(mobileListIter.hasNext()) {
+                mobile = mobileListIter.next();
+            }
+
+            if (signatureListIter.hasNext()) {
+                signature = signatureListIter.next();
+            }
+            if (templateListIter.hasNext()) {
+                template = templateListIter.next();
+            }
+            if (paramsListIter.hasNext()) {
+                param = paramsListIter.next();
+            }
+
+            SmsSendCommand smsSendCommand = new SmsSendCommand();
+            smsSendCommand.setMobile(mobile);
+            smsSendCommand.setSignature(signature);
+            smsSendCommand.setTemplate(template);
+            smsSendCommand.setParams(param);
+            smsSendCommand.setSendTime(smsBatchSendCommand.getSendTime());
+            smsSendCommand.setBatchCode(smsBatchSendCommand.getBatchCode());
+            try{
+                sendSmsMessage(smsSendCommand, platform);
+            }catch (Exception e) {
+                String message = e.getMessage();
+                errorSb.append(mobile).append(":").append(message).append(";");
+            }
+        }
+
+        if(errorSb.length() > 0) {
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError(errorSb.toString()));
+        }
     }
 }

@@ -20,16 +20,16 @@ import java.util.List;
 public class SmsBatchSendCommand {
 
     @ApiModelProperty("手机号集合")
-    private List<String> mobile = new ArrayList<>();
+    private List<String> mobileList = new ArrayList<>();
 
     @ApiModelProperty("模板编码集合")
-    private List<String> template = new ArrayList<>();
+    private List<String> templateList = new ArrayList<>();
 
     @ApiModelProperty("签名编码集合")
-    private List<String> signature = new ArrayList<>();
+    private List<String> signatureList = new ArrayList<>();
 
     @ApiModelProperty("参数集合")
-    private List<LinkedHashMap<String, String>> params = new ArrayList<>();
+    private List<LinkedHashMap<String, String>> paramsList = new ArrayList<>();
 
     @ApiModelProperty("批次编码")
     private String batchCode;

@@ -40,4 +40,7 @@ public class SmsSendCommand {
 
     @ApiModelProperty("定时时间 yyyy-MM-dd HH:mm")
     private String sendTime;
+
+    @ApiModelProperty("批次编码,仅批量发送用")
+    private String batchCode;
 }

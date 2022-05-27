@@ -3,6 +3,7 @@ package com.whoiszxl.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.bean.ResponseResult;
+import com.whoiszxl.cqrs.command.SmsBatchSendCommand;
 import com.whoiszxl.cqrs.command.SmsSendCommand;
 import com.whoiszxl.service.SmsSendService;
 import io.swagger.annotations.Api;
@@ -34,7 +35,15 @@ public class SmsSendController {
     public ResponseResult<Boolean> send(@RequestBody SmsSendCommand smsSendCommand) {
         smsSendService.send(smsSendCommand);
         return ResponseResult.buildSuccess();
-
     }
+
+
+    @PostMapping("/batch/send")
+    @ApiOperation(value = "批量发送短信", notes = "发送多条短信", response = Boolean.class)
+    public ResponseResult<Boolean> batchSend(@RequestBody SmsBatchSendCommand smsBatchSendCommand) {
+        smsSendService.batchSend(smsBatchSendCommand);
+        return ResponseResult.buildSuccess();
+    }
+
 
 }
