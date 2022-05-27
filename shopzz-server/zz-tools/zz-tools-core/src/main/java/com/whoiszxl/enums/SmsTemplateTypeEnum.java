@@ -17,4 +17,12 @@ public enum SmsTemplateTypeEnum {
     ;
     private Integer code;
     private String desc;
+
+    public static boolean isVerification(Integer code) {
+        return VERIFICATION.getCode().equals(code);
+    }
+
+    public static boolean isPromotion(Integer code) {
+        return PROMOTION.getCode().equals(code);
+    }
 }

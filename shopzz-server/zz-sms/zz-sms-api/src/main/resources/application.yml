@@ -108,9 +108,8 @@ zzlock:
 
 rocketmq:
   name-server: 212.129.223.197:9876
-  seckill:
-    producer:
-      group: seckill-group
+  producer:
+    group: sms-group
 
 shopzz:
   placeOrderType: queued

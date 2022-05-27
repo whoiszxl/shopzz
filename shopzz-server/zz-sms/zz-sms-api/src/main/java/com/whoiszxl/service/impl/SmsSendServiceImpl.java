@@ -3,14 +3,15 @@ package com.whoiszxl.service.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.generator.config.TemplateType;
 import com.whoiszxl.bean.ResponseResult;
+import com.whoiszxl.constants.RocketMQConstant;
 import com.whoiszxl.cqrs.command.SmsSendCommand;
 import com.whoiszxl.entity.*;
 import com.whoiszxl.enums.SmsNeedAuthEnum;
 import com.whoiszxl.enums.SmsTemplateTypeEnum;
 import com.whoiszxl.enums.StatusEnum;
 import com.whoiszxl.exception.ExceptionCatcher;
+import com.whoiszxl.mq.MQSenderService;
 import com.whoiszxl.service.*;
 import com.whoiszxl.utils.*;
 import org.apache.commons.lang3.StringUtils;
@@ -52,6 +53,9 @@ public class SmsSendServiceImpl implements SmsSendService {
 
     @Autowired
     private ChannelService channelService;
+
+    @Autowired
+    private MQSenderService mqSenderService;
 
     @Autowired
     private IdWorker idWorker;
@@ -108,7 +112,7 @@ public class SmsSendServiceImpl implements SmsSendService {
         List<Channel> channelList = channelService.listByTemplateAndSignature(template.getId(), signature.getId());
         AssertUtils.isTrue(CollectionUtil.isNotEmpty(channelList), "没有支持此模板和签名的通道");
 
-        return channelList.stream().map(item -> item.getId()).collect(Collectors.toList());
+        return channelList.stream().map(Channel::getId).collect(Collectors.toList());
     }
 
     /**
@@ -120,6 +124,7 @@ public class SmsSendServiceImpl implements SmsSendService {
     private void pushSmsMessage(Template template, SmsSendCommand smsSendCommand, Platform platform, List<Long> configs, String businessInfo) {
         ReceiveLog receiveLog = new ReceiveLog();
         receiveLog.setId(idWorker.nextId());
+        receiveLog.setApiLogId(receiveLog.getId());
         long start = System.currentTimeMillis();
 
         try {
@@ -136,16 +141,16 @@ public class SmsSendServiceImpl implements SmsSendService {
                 timingPush.setRequest(paramsJson);
                 timingPushService.save(timingPush);
             }else{
-                //实时发送,发送到RocketMQ
-                if(template.getType() == SmsTemplateTypeEnum.VERIFICATION.getCode()){
-
-                }else if(template.getType() == SmsTemplateTypeEnum.PROMOTION.getCode()){
-
+                //实时发送,发送到RocketMQ,通过验证码或营销类型进行分topic分发
+                if(SmsTemplateTypeEnum.isVerification(template.getType())){
+                    mqSenderService.sendMessage(RocketMQConstant.SMS_VERIFICATION_TOPIC, paramsJson);
+                }else if(SmsTemplateTypeEnum.isPromotion(template.getType())){
+                    mqSenderService.sendMessage(RocketMQConstant.SMS_PROMOTION_TOPIC, paramsJson);
                 }
             }
-            receiveLog.setStatus(1);
+            receiveLog.setStatus(StatusEnum.OPEN.getCode());
         }catch (Exception e){
-            receiveLog.setStatus(0);
+            receiveLog.setStatus(StatusEnum.CLOSE.getCode());
             receiveLog.setError(e.getMessage());
         }finally {
             receiveLog.setPlatformId(platform.getId());

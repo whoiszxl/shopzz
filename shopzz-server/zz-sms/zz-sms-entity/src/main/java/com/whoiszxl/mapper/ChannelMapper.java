@@ -20,7 +20,7 @@ public interface ChannelMapper extends BaseMapper<Channel> {
     @Select("select sc.* from sms_channel as sc " +
             "left join sms_channel_template as sct on sc.id = sct.channel_id " +
             "left join sms_channel_signature as scs on sc.id = scs.channel_id " +
-            "where sc.status = 1 and sc.enabled = 1 " +
+            "where sc.status = 1 " +
             "and sct.template_id = #{templateId} " +
             "and scs.signature_id = #{signatureId} " +
             "order by sc.level asc")
