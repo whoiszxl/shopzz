@@ -1,9 +1,9 @@
 server:
-  port: 8008
+  port: 8009
 
 spring:
   application:
-    name: zz-sms-api
+    name: zz-sms-server
   profiles:
     active: dev
   cloud:

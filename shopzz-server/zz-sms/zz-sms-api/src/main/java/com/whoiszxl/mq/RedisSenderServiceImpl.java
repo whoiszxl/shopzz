@@ -3,6 +3,7 @@ package com.whoiszxl.mq;
 import com.whoiszxl.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Service
+@ConditionalOnProperty(name = "shopzz.sms.mq", havingValue = "redis")
 public class RedisSenderServiceImpl implements MQSenderService {
 
     @Autowired

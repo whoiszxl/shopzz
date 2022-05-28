@@ -165,7 +165,7 @@ public class SmsSendServiceImpl implements SmsSendService {
             receiveLog.setMobile(smsSendCommand.getMobile());
             receiveLog.setRequest(JSON.toJSONString(smsSendCommand.getParams()));
             receiveLog.setTimeConsuming(System.currentTimeMillis() - start);
-            receiveLog.setBusinessInfo(smsSendCommand.getBatchCode());
+            receiveLog.setBusinessInfo(smsSendCommand.getBatchCode() == null ? "" : smsSendCommand.getBatchCode());
             receiveLogService.save(receiveLog);
         }
     }
