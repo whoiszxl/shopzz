@@ -58,5 +58,9 @@ public class RedisKeyPrefixConstants {
 
     public static final String SMS_PLATFORM_LIST = "sms:platform_list";
     public static final String SMS_TEMPLATE = "sms:template:";
+    public static final String SMS_TOPIC_SERVER = "sms:topic_server";
+    public static final String SMS_SERVER_ID_HASH = "sms:server_id_hash";
+    public static final String SMS_LOCK_BUILD_NEW_CONNECT = "sms:lock:build_new_connect";
+    public static final String SMS_NEW_CONNECT_SERVER = "sms:new_connect_server";
 
 }

@@ -620,4 +620,12 @@ public class RedisUtils {
     public Object execute(RedisScript script, List keys, Object... args) {
         return redisTemplate.execute(script, keys, args);
     }
+
+    public void convertAndSend(String channel, String json) {
+        redisTemplate.convertAndSend(channel, json);
+    }
+
+    public void hDel(String key, String hashKey) {
+        redisTemplate.opsForHash().delete(key, hashKey);
+    }
 }

@@ -16,4 +16,6 @@ import java.util.List;
 public interface ChannelService extends IService<Channel> {
 
     List<Channel> listByTemplateAndSignature(Long templateId, Long signature);
+
+    List<Channel> listForNewConnect();
 }

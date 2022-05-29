@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,4 +44,7 @@ public class SmsSendCommand {
 
     @ApiModelProperty("批次编码,仅批量发送用")
     private String batchCode;
+
+    @ApiModelProperty("通道配置编码")
+    private List<Long> channelIdList;
 }

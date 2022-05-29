@@ -97,14 +97,14 @@ public class SmsSendServiceImpl implements SmsSendService {
         AssertUtils.isTrue(count < 1, "无法发送黑名单手机");
 
         //3.校验签名和模板
-        List<Long> configs = checkTemplateAndSignature(smsSendCommand.getTemplate(), smsSendCommand.getSignature());
+        List<Long> channelIdList = checkTemplateAndSignature(smsSendCommand.getTemplate(), smsSendCommand.getSignature());
+        smsSendCommand.setChannelIdList(channelIdList);
 
         //3. 校验参数
         Template template = checkParams(smsSendCommand.getTemplate(), smsSendCommand.getParams());
 
         //4. 调用接口发送
-
-        pushSmsMessage(template, smsSendCommand, platform, configs);
+        pushSmsMessage(template, smsSendCommand, platform, channelIdList);
     }
 
     private List<Long> checkTemplateAndSignature(String templateCode, String signatureCode) {

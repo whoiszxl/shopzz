@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import com.whoiszxl.bean.ResponseResult;
+import com.whoiszxl.exception.ExceptionCatcher;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -57,7 +60,7 @@ public class SendLog implements Serializable {
     private String error;
 
     @ApiModelProperty("耗时")
-    private Integer timeConsuming;
+    private Long timeConsuming;
 
     @ApiModelProperty("日志ID")
     private Long apiLogId;
@@ -85,5 +88,13 @@ public class SendLog implements Serializable {
     @ApiModelProperty("更新时间")
     private LocalDateTime updatedAt;
 
-
+    public void checkResponse(String response) {
+        if (response.startsWith("FAIL@#@")) {
+            String[] responseArray = response.split("@#@");
+            this.response = responseArray[2];
+            ExceptionCatcher.catchValidateEx(ResponseResult.buildError(responseArray[1]));
+        } else {
+            this.response = response;
+        }
+    }
 }
