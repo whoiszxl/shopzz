@@ -628,4 +628,8 @@ public class RedisUtils {
     public void hDel(String key, String hashKey) {
         redisTemplate.opsForHash().delete(key, hashKey);
     }
+
+    public String deserialize(byte[] body) {
+        return redisTemplate.getDefaultSerializer().deserialize(body).toString();
+    }
 }

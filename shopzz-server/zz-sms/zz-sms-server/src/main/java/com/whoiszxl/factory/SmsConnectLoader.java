@@ -69,7 +69,7 @@ public class SmsConnectLoader implements CommandLineRunner {
 
         log.info("SmsConnectLoader|当前的可用通道|{}", channelList);
 
-        List<Object> beanList = new ArrayList<Object>();
+        List<Object> beanList = new ArrayList<>();
         for (Channel channel : channelList) {
             try {
                 //构建DTO

@@ -3,8 +3,11 @@ package com.whoiszxl.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.whoiszxl.constants.RedisKeyPrefixConstants;
+import com.whoiszxl.entity.ChannelTemplate;
 import com.whoiszxl.entity.Template;
+import com.whoiszxl.enums.StatusEnum;
 import com.whoiszxl.mapper.TemplateMapper;
+import com.whoiszxl.service.ChannelTemplateService;
 import com.whoiszxl.service.TemplateService;
 import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.RedisUtils;
@@ -28,6 +31,9 @@ public class TemplateServiceImpl extends ServiceImpl<TemplateMapper, Template> i
     @Autowired
     private RedisUtils redisUtils;
 
+    @Autowired
+    private ChannelTemplateService channelTemplateService;
+
     @Override
     public Template getCacheByTemplateCode(String templateCode) {
         String templateJson = redisUtils.get(RedisKeyPrefixConstants.SMS_TEMPLATE + templateCode);
@@ -38,5 +44,20 @@ public class TemplateServiceImpl extends ServiceImpl<TemplateMapper, Template> i
         }
 
         return JsonUtil.fromJson(templateJson, Template.class);
+    }
+
+    @Override
+    public String getChannelCodeByTemplateCode(Long channelId, String templateCode) {
+        //1. 先查询到模板实体
+        Template template = this.getOne(Wrappers.<Template>lambdaQuery()
+                .eq(Template::getCode, templateCode)
+                .eq(Template::getStatus, StatusEnum.OPEN.getCode()));
+
+        //2. 拿到短信通道模板实体
+        ChannelTemplate channelTemplate = channelTemplateService.getOne(Wrappers.<ChannelTemplate>lambdaQuery()
+                .eq(ChannelTemplate::getChannelId, channelId)
+                .eq(ChannelTemplate::getTemplateId, template.getId()));
+
+        return channelTemplate != null ? channelTemplate.getChannelTemplateCode() : "";
     }
 }

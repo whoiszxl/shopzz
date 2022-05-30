@@ -19,4 +19,6 @@ public interface TemplateService extends IService<Template> {
      * @return
      */
     Template getCacheByTemplateCode(String templateCode);
+
+    String getChannelCodeByTemplateCode(Long channelId, String templateCode);
 }

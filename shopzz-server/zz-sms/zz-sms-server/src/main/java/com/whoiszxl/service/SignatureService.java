@@ -13,4 +13,10 @@ import com.whoiszxl.entity.Signature;
  */
 public interface SignatureService extends IService<Signature> {
 
+    /**
+     * 通过缓存获取签名内容
+     * @param signatureCode
+     * @return
+     */
+    Signature getByCode(String signatureCode);
 }
