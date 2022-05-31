@@ -153,10 +153,11 @@ public class SmsConnectLoader implements CommandLineRunner {
     }
 
     public void buildNewConnect() {
-        DistributedLock distributedLock = distributedLockFactory.getDistributedLock(RedisKeyPrefixConstants.SMS_LOCK_BUILD_NEW_CONNECT);
+        //DistributedLock distributedLock = distributedLockFactory.getDistributedLock(RedisKeyPrefixConstants.SMS_LOCK_BUILD_NEW_CONNECT);
 
         try{
-            boolean lockFlag = distributedLock.tryLock(5, 1, TimeUnit.HOURS);
+            //boolean lockFlag = distributedLock.tryLock(5, 1, TimeUnit.HOURS);
+            boolean lockFlag = true;
             if(lockFlag) {
                 List<Channel> channelList = channelService.listForNewConnect();
                 FUTURE_CHANNEL_LIST = channelList;
@@ -165,7 +166,7 @@ public class SmsConnectLoader implements CommandLineRunner {
         }catch (Exception e) {
             log.error("SmsConnectLoader|构建新通道连接发生异常|", e);
         }finally {
-            distributedLock.unlock();
+            //distributedLock.unlock();
         }
     }
 
@@ -181,7 +182,11 @@ public class SmsConnectLoader implements CommandLineRunner {
                 !CollectionUtils.isEmpty(FUTURE_CHANNEL_LIST)) {
             // 配置列表不为空则执行数据库操作 并清空缓存
 
-            channelService.updateBatchById(FUTURE_CHANNEL_LIST);
+            FUTURE_CHANNEL_LIST.forEach(e -> {
+                e.setVersion(null);
+                channelService.updateById(e);
+            });
+
             FUTURE_CHANNEL_LIST.clear();
 
             redisUtils.convertAndSend(RedisKeyPrefixConstants.SMS_TOPIC_SERVER,

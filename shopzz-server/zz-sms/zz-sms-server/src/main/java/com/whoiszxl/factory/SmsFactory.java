@@ -56,7 +56,7 @@ public class SmsFactory {
     public boolean send(String json) {
         Integer level = 1;
         Integer msgErrorNum = 0;
-
+        Integer i = 20;
         do {
             log.info("SmsFactory|开始发送短信|{},{}", level, json);
             SendLog sendLog = new SendLog();
@@ -123,10 +123,10 @@ public class SmsFactory {
 
                 //如果通道失败次数超过阈值，降级通道，重新排序
                 //如果失败次数超过一定比例，则启动新通道备用
-                if(resetChannel(level)) {
-                    level = 1;
-                    continue;
-                }
+//                if(resetChannel(level)) {
+//                    level = 1;
+//                    continue;
+//                }
 
                 //如果重试次数超过阈值就切换下一级通道
                 if(msgErrorNum >= 3) {
@@ -143,9 +143,11 @@ public class SmsFactory {
                     sendLog.setTimeConsuming(end - start);
                     sendLogService.save(sendLog);
                 }
+                i--;
             }
 
-        }while (true);
+        }while (i > 0);
+        return false;
     }
 
     private boolean resetChannel(Integer level) {
@@ -159,7 +161,7 @@ public class SmsFactory {
             //通道重新排序
             log.info("SmsFactory|通道失败次数过多，重新排序|");
             smsConnectLoader.changeNewConnectMessage();
-            return true;
+            return false;
         }else {
             if(smsChannelFailNum >= 4) {
                 //通道重新选举

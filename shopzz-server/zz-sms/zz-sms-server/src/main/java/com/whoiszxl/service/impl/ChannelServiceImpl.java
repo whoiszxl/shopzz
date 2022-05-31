@@ -127,7 +127,7 @@ public class ChannelServiceImpl extends ServiceImpl<ChannelMapper, Channel> impl
 
         //查询不可用通道
         List<Channel> unActiveList = this.list(Wrappers.<Channel>lambdaQuery()
-                .eq(Channel::getStatus, StatusEnum.OPEN.getCode())
+                .eq(Channel::getStatus, StatusEnum.CLOSE.getCode())
                 .ne(Channel::getId, firstChannel.getId())
                 .orderByAsc(Channel::getLevel));
 
