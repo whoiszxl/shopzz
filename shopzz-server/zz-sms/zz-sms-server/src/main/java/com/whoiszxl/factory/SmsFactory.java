@@ -107,7 +107,7 @@ public class SmsFactory {
                 sendLog.setSignature(smsSendCommand.getSignature());
                 sendLog.setTemplate(smsSendCommand.getTemplate());
                 sendLog.setRequest(JsonUtil.toJson(smsSendCommand));
-                sendLog.setApiLogId(0L);
+                sendLog.setApiLogId(smsSendCommand.getApiLogId());
                 sendLog.setStatus(1);
 
                 //发送短信
@@ -117,7 +117,7 @@ public class SmsFactory {
                 log.info("SmsFactory|短信发送成功|{}", response);
                 return true;
             }catch (Exception e) {
-                log.error("SmsFactory|短信发送异常|", e);
+                log.error("SmsFactory|短信发送异常|");
                 sendLog.setStatus(0);
                 sendLog.setError(getExceptionMessage(e));
 

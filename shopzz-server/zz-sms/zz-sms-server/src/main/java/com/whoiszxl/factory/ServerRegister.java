@@ -37,9 +37,9 @@ public class ServerRegister implements CommandLineRunner {
     }
 
     /**
-     * 三分钟上报一次服务
+     * 一分钟上报一次服务
      */
-    @Scheduled(cron = "1 0/3 * * * ?")
+    @Scheduled(cron = "1 0/1 * * * ?")
     public void serverReport() {
         String timestamp = String.valueOf(System.currentTimeMillis());
         log.info("ServerRegister|定时上报当前服务状态|{},{}",SERVER_ID, timestamp);
@@ -47,18 +47,18 @@ public class ServerRegister implements CommandLineRunner {
     }
 
     /**
-     * 十分钟检查一次，剔除超过五分钟的服务
+     * 两分钟检查一次，剔除超过3分钟的服务
      */
-    @Scheduled(cron = "30 0/10 * * * ?")
+    @Scheduled(cron = "2 0/2 * * * ?")
     public void checkServer() {
         log.info("ServerRegister|定时检查服务状态是否可用|{}", SERVER_ID);
         Map<Object, Object> map = redisUtils.hGetAll(RedisKeyPrefixConstants.SMS_SERVER_ID_HASH);
 
         long current = System.currentTimeMillis();
-        List<Object> removeKeys = new ArrayList<Object>();
+        List<Object> removeKeys = new ArrayList<>();
         map.forEach((key,value) -> {
             long parseLong = Long.parseLong(value.toString());
-            if(current - parseLong > (1000 * 60 * 5)){
+            if(current - parseLong > (1000 * 60 * 3)){
                 //超过5分钟没有上报则添加到移除列表里
                 removeKeys.add(key);
             }

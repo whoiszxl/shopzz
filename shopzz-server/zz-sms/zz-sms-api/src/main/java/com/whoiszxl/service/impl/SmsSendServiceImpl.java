@@ -129,6 +129,7 @@ public class SmsSendServiceImpl implements SmsSendService {
         ReceiveLog receiveLog = new ReceiveLog();
         receiveLog.setId(idWorker.nextId());
         receiveLog.setApiLogId(receiveLog.getId());
+        smsSendCommand.setApiLogId(receiveLog.getId());
         long start = System.currentTimeMillis();
 
         try {

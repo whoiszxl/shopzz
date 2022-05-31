@@ -3,12 +3,12 @@ package com.whoiszxl.entity;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -18,8 +18,7 @@ import lombok.Setter;
  * @author whoiszxl
  * @since 2022-05-26
  */
-@Getter
-@Setter
+@Data
 @TableName("sms_manual_task")
 @ApiModel(value = "ManualTask对象", description = "短信人工处理任务表")
 public class ManualTask implements Serializable {

@@ -1,5 +1,6 @@
 package com.whoiszxl.register;
 
+import cn.hutool.core.convert.Convert;
 import com.whoiszxl.entity.ServerTopic;
 import com.whoiszxl.factory.SmsConnectLoader;
 import com.whoiszxl.utils.RedisUtils;
@@ -7,7 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
+import org.springframework.data.redis.util.ByteUtils;
 import org.springframework.stereotype.Component;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * SMS服务接收者
@@ -28,7 +32,7 @@ public class SmsServerReceiver implements MessageListener {
 
     @Override
     public void onMessage(Message message, byte[] bytes) {
-        String json = redisUtils.deserialize(message.getBody());
+        String json = new String(message.getBody(), StandardCharsets.UTF_8);
         ServerTopic serverTopic = ServerTopic.load(json);
 
         switch (serverTopic.getOption()) {

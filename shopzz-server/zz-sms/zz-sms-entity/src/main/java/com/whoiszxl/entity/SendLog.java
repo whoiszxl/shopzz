@@ -10,6 +10,7 @@ import com.whoiszxl.bean.ResponseResult;
 import com.whoiszxl.exception.ExceptionCatcher;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +22,7 @@ import lombok.Setter;
  * @author whoiszxl
  * @since 2022-05-26
  */
-@Getter
-@Setter
+@Data
 @TableName("sms_send_log")
 @ApiModel(value = "SendLog对象", description = "短信发送日志表")
 public class SendLog implements Serializable {

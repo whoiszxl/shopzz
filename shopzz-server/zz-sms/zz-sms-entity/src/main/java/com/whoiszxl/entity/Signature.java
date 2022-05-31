@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +19,7 @@ import lombok.Setter;
  * @author whoiszxl
  * @since 2022-05-26
  */
-@Getter
-@Setter
+@Data
 @TableName("sms_signature")
 @ApiModel(value = "Signature对象", description = "短信签名表")
 public class Signature implements Serializable {

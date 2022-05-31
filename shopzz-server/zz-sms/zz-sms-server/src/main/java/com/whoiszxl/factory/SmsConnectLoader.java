@@ -3,6 +3,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.whoiszxl.DistributedLock;
 import com.whoiszxl.DistributedLockFactory;
@@ -23,6 +24,7 @@ import org.apache.catalina.Server;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -38,6 +40,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Component
+@Import(cn.hutool.extra.spring.SpringUtil.class)
 public class SmsConnectLoader implements CommandLineRunner {
 
     private static final List<Object> CONNECT_LIST = new ArrayList<>();
@@ -52,6 +55,9 @@ public class SmsConnectLoader implements CommandLineRunner {
 
     @Autowired
     private DistributedLockFactory distributedLockFactory;
+
+    @Autowired
+    private SpringUtil springUtil;
 
     @Override
     public void run(String... args) {
@@ -76,7 +82,7 @@ public class SmsConnectLoader implements CommandLineRunner {
                 SmsChannelDTO smsChannelDTO = buildDTO(channel);
 
                 //反射创建,拼出全类名
-                String className = "com.whoiszxl.sms." + smsChannelDTO.getPlatform() + "SmsService";
+                String className = "com.whoiszxl.sms.impl." + smsChannelDTO.getPlatform() + "SmsService";
                 Class<?> aClass = Class.forName(className);
 
                 //获取构造方法创建bean对象
@@ -89,8 +95,8 @@ public class SmsConnectLoader implements CommandLineRunner {
                 signatureServiceField.setAccessible(true);
                 templateServiceField.setAccessible(true);
 
-                SignatureServiceImpl signatureService = SpringUtils.getBean(SignatureServiceImpl.class);
-                TemplateServiceImpl templateService = SpringUtils.getBean(TemplateServiceImpl.class);
+                SignatureServiceImpl signatureService = springUtil.getBean(SignatureServiceImpl.class);
+                TemplateServiceImpl templateService = springUtil.getBean(TemplateServiceImpl.class);
                 signatureServiceField.set(beanService, signatureService);
                 templateServiceField.set(beanService, templateService);
 

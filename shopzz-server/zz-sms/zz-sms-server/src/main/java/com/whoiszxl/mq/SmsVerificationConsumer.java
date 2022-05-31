@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Component;
+import com.whoiszxl.factory.SmsFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * 验证码短信消费者
@@ -15,8 +17,11 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@RocketMQMessageListener(topic = RocketMQConstant.SMS_PROMOTION_TOPIC, consumerGroup = RocketMQConstant.SMS_GROUP)
+@RocketMQMessageListener(topic = RocketMQConstant.SMS_VERIFICATION_TOPIC, consumerGroup = RocketMQConstant.SMS_GROUP)
 public class SmsVerificationConsumer implements RocketMQListener<String> {
+
+    @Autowired
+    private SmsFactory smsFactory;
 
     @Override
     public void onMessage(String json) {
@@ -27,7 +32,7 @@ public class SmsVerificationConsumer implements RocketMQListener<String> {
         }
 
         try{
-
+            smsFactory.send(json);
             log.info("SmsPromotionConsumer.onMessage|接收发送验证码短信任务,任务处理成功|{}", json);
         }catch (Exception e) {
             log.error("SmsPromotionConsumer.onMessage|接收发送验证码短信任务发生异常|{}", json, e);

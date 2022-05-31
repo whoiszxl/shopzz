@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
  * @date 2022/5/19
  */
 @Slf4j
-@Component
-@RocketMQMessageListener(topic = RocketMQConstant.SMS_PROMOTION_TOPIC, consumerGroup = RocketMQConstant.SMS_GROUP)
+//@Component
+//@RocketMQMessageListener(topic = RocketMQConstant.SMS_PROMOTION_TOPIC, consumerGroup = RocketMQConstant.SMS_GROUP)
 public class SmsPromotionConsumer implements RocketMQListener<String> {
 
     @Autowired

@@ -42,9 +42,12 @@ public class SmsSendCommand {
     @ApiModelProperty("定时时间 yyyy-MM-dd HH:mm")
     private String sendTime;
 
+    @ApiModelProperty("通道配置编码")
+    private List<Long> channelIdList;
+
     @ApiModelProperty("批次编码,仅批量发送用")
     private String batchCode;
 
-    @ApiModelProperty("通道配置编码")
-    private List<Long> channelIdList;
+    @ApiModelProperty("api日志id")
+    private Long apiLogId;
 }
