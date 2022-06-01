@@ -1,7 +1,4 @@
 package com.whoiszxl.factory;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.util.LinkedHashMap;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -17,10 +14,8 @@ import com.whoiszxl.service.impl.SignatureServiceImpl;
 import com.whoiszxl.service.impl.TemplateServiceImpl;
 import com.whoiszxl.utils.JsonUtil;
 import com.whoiszxl.utils.RedisUtils;
-import com.whoiszxl.utils.SpringUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.Server;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,7 +23,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -71,7 +69,8 @@ public class SmsConnectLoader implements CommandLineRunner {
     public void initConnect() {
         List<Channel> channelList = channelService.list(Wrappers.<Channel>lambdaQuery()
                 .eq(Channel::getChannelType, 1)
-                .eq(Channel::getStatus, StatusEnum.OPEN.getCode()).orderByAsc(Channel::getLevel));
+                .eq(Channel::getStatus, StatusEnum.OPEN.getCode())
+                .orderByAsc(Channel::getLevel));
 
         log.info("SmsConnectLoader|当前的可用通道|{}", channelList);
 
@@ -153,11 +152,11 @@ public class SmsConnectLoader implements CommandLineRunner {
     }
 
     public void buildNewConnect() {
-        //DistributedLock distributedLock = distributedLockFactory.getDistributedLock(RedisKeyPrefixConstants.SMS_LOCK_BUILD_NEW_CONNECT);
+        DistributedLock distributedLock = distributedLockFactory.getDistributedLock(RedisKeyPrefixConstants.SMS_LOCK_BUILD_NEW_CONNECT);
 
         try{
-            //boolean lockFlag = distributedLock.tryLock(5, 1, TimeUnit.HOURS);
-            boolean lockFlag = true;
+            boolean lockFlag = distributedLock.tryLock(5, 1, TimeUnit.HOURS);
+            //boolean lockFlag = true;
             if(lockFlag) {
                 List<Channel> channelList = channelService.listForNewConnect();
                 FUTURE_CHANNEL_LIST = channelList;
@@ -166,7 +165,7 @@ public class SmsConnectLoader implements CommandLineRunner {
         }catch (Exception e) {
             log.error("SmsConnectLoader|构建新通道连接发生异常|", e);
         }finally {
-            //distributedLock.unlock();
+            distributedLock.unlock();
         }
     }
 
@@ -184,8 +183,8 @@ public class SmsConnectLoader implements CommandLineRunner {
 
             FUTURE_CHANNEL_LIST.forEach(e -> {
                 e.setVersion(null);
-                channelService.updateById(e);
             });
+            channelService.updateBatchById(FUTURE_CHANNEL_LIST);
 
             FUTURE_CHANNEL_LIST.clear();
 

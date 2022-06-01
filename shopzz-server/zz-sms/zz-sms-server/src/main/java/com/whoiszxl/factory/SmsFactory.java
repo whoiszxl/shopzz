@@ -123,10 +123,10 @@ public class SmsFactory {
 
                 //如果通道失败次数超过阈值，降级通道，重新排序
                 //如果失败次数超过一定比例，则启动新通道备用
-//                if(resetChannel(level)) {
-//                    level = 1;
-//                    continue;
-//                }
+                if(resetChannel(level)) {
+                    level = 1;
+                    continue;
+                }
 
                 //如果重试次数超过阈值就切换下一级通道
                 if(msgErrorNum >= 3) {
