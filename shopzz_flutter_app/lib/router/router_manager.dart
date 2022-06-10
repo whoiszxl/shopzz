@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shopzz_flutter_app/page/cart/cart_page.dart';
+import 'package:shopzz_flutter_app/page/cart/order_confirm_page.dart';
 import 'package:shopzz_flutter_app/page/category/category_page.dart';
 import 'package:shopzz_flutter_app/page/coupon/coupon_page.dart';
 import 'package:shopzz_flutter_app/page/detail/detail_page.dart';
@@ -10,6 +11,7 @@ import 'package:shopzz_flutter_app/page/login/password_login_page.dart';
 import 'package:shopzz_flutter_app/page/login/register_page.dart';
 import 'package:shopzz_flutter_app/page/login/sms_login_page.dart';
 import 'package:shopzz_flutter_app/page/main_page.dart';
+import 'package:shopzz_flutter_app/page/member/add_address_page.dart';
 import 'package:shopzz_flutter_app/page/member/address_page.dart';
 import 'package:shopzz_flutter_app/page/member/member_page.dart';
 import 'package:shopzz_flutter_app/page/member/qrcode_page.dart';
@@ -36,10 +38,13 @@ class Routers{
   static const String qrcode = '/qrcode';
   static const String settings = '/settings';
   static const String address = '/address';
+  static const String addAddress = '/addAddress';
 
   static const String coupon = '/coupon';
 
   static const String seckillResult = '/seckillResult';
+
+  static const String orderConfirm = '/orderConfirm';
 
 }
 
@@ -65,10 +70,12 @@ class RouterManager{
 
     GetPage(name: Routers.settings, page: () => const SettingsPage()),
     GetPage(name: Routers.address, page: () => const AddressPage()),
+    GetPage(name: Routers.addAddress, page: () => const AddAddressPage()),
 
     GetPage(name: Routers.seckillResult, page: () => const SeckillResultPage()),
 
 
+    GetPage(name: Routers.orderConfirm, page: () => const OrderConfirmPage()),
 
   ];
 

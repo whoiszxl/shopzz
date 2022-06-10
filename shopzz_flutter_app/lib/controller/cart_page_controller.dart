@@ -44,7 +44,7 @@ class CartPageController extends GetxController {
   Future<bool> cartDetail() async {
     var cartDetail = await cartApiService.cartDetail();
     cartDetailResponse.value = cartDetail;
-    totalAmount.value = cartDetail.totalAmount;
+    totalAmount.value = cartDetail.totalAmount.toDouble();
     isEdit.value = false;
     totalQuantity.value = cartDetail.skuCount;
     return true;

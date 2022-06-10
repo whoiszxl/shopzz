@@ -36,7 +36,8 @@ class _AttrModal extends State<AttrLabel> {
             const SizedBox(width: 6),
 
             _productPageController.isAllChecked.value ?
-            "全选了" : const Text('请选择规格与数量', style: TextStyle(color: ColorManager.black, fontSize: 11))
+            const Text('选择了TODO', style: TextStyle(color: ColorManager.black, fontSize: 11))
+             : const Text('请选择规格与数量', style: TextStyle(color: ColorManager.black, fontSize: 11))
           ],
         ),
       ),

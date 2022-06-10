@@ -34,8 +34,8 @@ public class MemberAddressQueryApplicationServiceImpl implements MemberAddressQu
         Long memberId = AuthUtils.getMemberId();
         LambdaQueryWrapper<MemberAddressPO> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(MemberAddressPO::getMemberId, memberId);
-        queryWrapper.orderByDesc(MemberAddressPO::getUpdatedAt);
         queryWrapper.orderByDesc(MemberAddressPO::getIsDefault);
+        queryWrapper.orderByDesc(MemberAddressPO::getUpdatedAt);
         List<MemberAddressPO> memberAddressPOList = memberAddressMapper.selectList(queryWrapper);
         List<MemberAddressVO> memberAddressVOList = dozerUtils.mapList(memberAddressPOList, MemberAddressVO.class);
 

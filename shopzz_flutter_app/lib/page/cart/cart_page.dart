@@ -6,6 +6,7 @@ import 'package:shopzz_flutter_app/entity/response/cart_detail_response.dart';
 import 'package:shopzz_flutter_app/page/cart/widgets/cart_card.dart';
 import 'package:shopzz_flutter_app/page/cart/widgets/cart_footer.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
+import 'package:shopzz_flutter_app/router/router_manager.dart';
 import 'package:shopzz_flutter_app/widgets/base_scaffold.dart';
 import 'package:shopzz_flutter_app/widgets/my_app_bar.dart';
 
@@ -24,6 +25,8 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin,
   ///用户下拉刷新的控制器
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
+  final ScrollController _scrollController = ScrollController();
+
   ///获取到注入的购物车业务控制器
   final CartPageController _cartPageController = Get.find<CartPageController>();
 
@@ -41,16 +44,17 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin,
   Widget build(BuildContext context) {
     return BaseScaffold(
         appBar: MyAppBar(
-        leadingType: AppBarBackType.None,
-        backgroundColor: ColorManager.transparent,
-        elevation: 0,
+          title: const Text("购物车"),
+          leadingType: AppBarBackType.None,
+          backgroundColor: ColorManager.main,
+          elevation: 0,
         ),
         body: Obx(() {
 
           return Scaffold(
             bottomSheet: CartFooter(() {
               //跳转订单确认页操作
-              //Get.toNamed(Routers.orderConfirm);
+              Get.toNamed(Routers.orderConfirm);
             }),
             body: (_cartPageController.cartDetailResponse.value != null && _cartPageController.cartDetailResponse.value.cartItemVOList != null) ?
             SmartRefresher(
@@ -90,7 +94,9 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin,
   _cartListView(List<CartItemEntity> cartItemList) {
     return ListView.builder(
         itemCount: cartItemList?.length,
+        controller: _scrollController,
         itemBuilder: (BuildContext context, int index) {
+          print(index);
 
           //返回购物车item
           return CartCard(item: cartItemList[index],

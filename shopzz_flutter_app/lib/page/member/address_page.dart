@@ -48,7 +48,12 @@ class _AddressPageState extends State<AddressPage>{
               fit: BoxFit.fitWidth,
             ),
             backgroundColor: Colors.transparent,
-
+            actions: const [
+                Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Icon(Icons.add),
+                )
+            ],
             elevation: 0, //阴影的高度,默认在导航栏下有4高度阴影
             title: const Center(child: Text("选择地址")),
           ),
