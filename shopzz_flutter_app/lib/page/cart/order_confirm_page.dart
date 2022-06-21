@@ -1,4 +1,3 @@
-import 'dart:collection';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import 'package:shopzz_flutter_app/controller/member_address_controller.dart';
 import 'package:shopzz_flutter_app/entity/response/address_response.dart';
 import 'package:shopzz_flutter_app/entity/response/cart_detail_response.dart';
 import 'package:shopzz_flutter_app/page/cart/widgets/order_confirm_footer.dart';
-import 'package:shopzz_flutter_app/page/detail/widgets/product_many_text_bar.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
 import 'package:shopzz_flutter_app/router/router_manager.dart';
 import 'package:shopzz_flutter_app/utils/loading_util.dart';
@@ -64,8 +62,8 @@ class _OrderConfirmPageState extends State<OrderConfirmPage>{
 
         return Scaffold(
           bottomSheet: OrderConfirmFooter(() {
-            //跳转下单页面
-            Get.toNamed(Routers.orderConfirm);
+            //跳转支付页面
+            Get.toNamed(Routers.pay);
           }),
           body: SmartRefresher(
               enablePullDown: true, //开启下拉

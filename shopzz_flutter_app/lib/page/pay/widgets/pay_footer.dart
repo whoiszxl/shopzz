@@ -4,13 +4,11 @@ import 'package:get/get.dart';
 import 'package:shopzz_flutter_app/controller/cart_page_controller.dart';
 import 'package:shopzz_flutter_app/res/colors_manager.dart';
 
-class OrderConfirmFooter extends StatelessWidget {
+class PayFooter extends StatelessWidget {
 
   Function addCartFunction;
 
-  OrderConfirmFooter(this.addCartFunction, {Key key}) : super(key: key);
-
-  final CartPageController _cartPageController = Get.find<CartPageController>();
+  PayFooter(this.addCartFunction, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +27,6 @@ class OrderConfirmFooter extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-
-          Obx(() => Expanded(flex: 6, child: Text("合计：¥" + _cartPageController.totalAmount.value.toString() + "元"))),
-
           Expanded(
             flex: 4,
             child: Container(
@@ -40,7 +35,7 @@ class OrderConfirmFooter extends StatelessWidget {
                 color: ColorManager.red,
                 highlightColor: Colors.black12,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                child: const Text("下单", style: TextStyle(color: ColorManager.white)),
+                child: const Text("确认付款", style: TextStyle(color: ColorManager.white)),
                 onPressed: () {
                   addCartFunction();
                 },

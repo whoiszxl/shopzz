@@ -9,6 +9,7 @@ import 'package:shopzz_flutter_app/service/category_api_service.dart';
 import 'package:shopzz_flutter_app/service/coupon_api_service.dart';
 import 'package:shopzz_flutter_app/service/home_api_service.dart';
 import 'package:shopzz_flutter_app/service/member_api_service.dart';
+import 'package:shopzz_flutter_app/service/order_api_service.dart';
 import 'package:shopzz_flutter_app/service/product_api_service.dart';
 import 'package:shopzz_flutter_app/service/seckill_api_service.dart';
 
@@ -40,4 +41,5 @@ Future<void> initServices() async {
   await Get.putAsync(() async => CouponApiService());
   await Get.putAsync(() async => AddressApiService());
   await Get.putAsync(() async => SeckillApiService());
+  await Get.putAsync(() async => OrderApiService());
 }

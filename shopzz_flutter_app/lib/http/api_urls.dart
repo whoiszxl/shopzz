@@ -16,14 +16,19 @@ class ApiUrls {
   ///获取分类树
   static const String categoryTree = "/product/api/category/list/tree";
 
-
+  ///获取商品SPU详情
   static const String spuDetail = "/product/api/spu/detail/";
 
+  ///提交订单
+  static const String orderSubmit = "/order/api/order/submit";
+
+  ///会员
   static const String memberLogin = "/member/api/member/login";
   static const String memberPasswordRegister = "/member/api/member/phone/register";
   static const String memberInfo = "/member/api/member/detail";
   static const String memberAddress = "/member/api/address";
 
+  ///优惠券
   static const String couponAllUnlimited = "/promotion/api/coupon/all/unlimited";
   static const String receiveCoupon = "/promotion/api/coupon/receive/";
 

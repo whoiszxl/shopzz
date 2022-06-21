@@ -56,7 +56,9 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin,
               //跳转订单确认页操作
               Get.toNamed(Routers.orderConfirm);
             }),
-            body: (_cartPageController.cartDetailResponse.value != null && _cartPageController.cartDetailResponse.value.cartItemVOList != null) ?
+            body: (_cartPageController.cartDetailResponse.value != null
+                && _cartPageController.cartDetailResponse.value.cartItemVOList != null
+                && _cartPageController.cartDetailResponse.value.cartItemVOList.isNotEmpty) ?
             SmartRefresher(
                 enablePullDown: true, //开启下拉
                 enablePullUp: false, //关闭上拉
@@ -96,8 +98,6 @@ class _CartPageState extends State<CartPage> with AutomaticKeepAliveClientMixin,
         itemCount: cartItemList?.length,
         controller: _scrollController,
         itemBuilder: (BuildContext context, int index) {
-          print(index);
-
           //返回购物车item
           return CartCard(item: cartItemList[index],
 
