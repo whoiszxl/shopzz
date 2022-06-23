@@ -28,6 +28,7 @@ class _PayPageState extends State<PayPage>{
   final CartPageController _cartPageController = Get.find<CartPageController>();
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
+  int payType = 1;
 
   @override
   void initState() {
@@ -59,38 +60,78 @@ class _PayPageState extends State<PayPage>{
       }
 
       return BaseScaffold(
-          appBar: MyAppBar(
-            title: const Text("SHOPZZ收银台"),
-            backgroundColor: ColorManager.main,
-            elevation: 0,
-          ),
+        appBar: MyAppBar(
+          title: const Text("SHOPZZ收银台"),
+          backgroundColor: ColorManager.main,
+          elevation: 0,
+        ),
 
-          body: Scaffold(
-            bottomSheet: PayFooter(() {
-              //跳转支付页面
-              Get.toNamed(Routers.pay);
-            }),
+        body: Scaffold(
+          bottomSheet: PayFooter(() {
+            //跳转支付页面
+            Get.toNamed(Routers.pay);
+          }),
 
-            body: SmartRefresher(
-              enablePullDown: true, //开启下拉
-              enablePullUp: false, //关闭上拉
-              header: const ClassicHeader(),
-              footer: const ClassicFooter(),
-              controller: _refreshController,
-              onRefresh: () {
+          body: SmartRefresher(
+            enablePullDown: true, //开启下拉
+            enablePullUp: false, //关闭上拉
+            header: const ClassicHeader(),
+            footer: const ClassicFooter(),
+            controller: _refreshController,
+            onRefresh: () {
 
-              }, //下拉时调用
+            },
 
-              child: Column(
-                children: <Widget>[
-                  Text("BTC支付"),
-                  Text("ETH支付"),
-                  Text("SHOPZZ支付"),
-                ],
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RadioListTile(
+                  value: 1,
+                  onChanged: (value) {
+                    setState(() {
+                      payType = value;
+                    });
+                  },
+                  groupValue: this.payType,
+                  title: Text("BTC支付"),
+                  subtitle: Text("Bitcoin pay"),
+                  secondary: Icon(Icons.attach_money_outlined),
+                  selected: this.payType == 1,
+                ),
+                RadioListTile(
+                  value: 2,
+                  onChanged: (value) {
+                    setState(() {
+                      payType = value;
+                    });
+                  },
+                  groupValue: this.payType,
+                  title: Text("ETH支付"),
+                  subtitle: Text("Eth pay"),
+                  secondary: Icon(Icons.attach_money_outlined),
+                  selected: this.payType == 2,
+                ),
+                RadioListTile(
+                  value: 3,
+                  onChanged: (value) {
+                    setState(() {
+                      payType = value;
+                    });
+                  },
+                  groupValue: this.payType,
+                  title: Text("SHOPZZ币支付"),
+                  subtitle: Text("shopzz pay"),
+                  secondary: Icon(Icons.attach_money_outlined),
+                  selected: this.payType == 3,
+                )
+              ],
             ),
           ),
+
+        ),
+
       );
     });
   }
+
 }
