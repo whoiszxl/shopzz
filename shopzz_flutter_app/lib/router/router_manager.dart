@@ -16,6 +16,7 @@ import 'package:shopzz_flutter_app/page/member/address_page.dart';
 import 'package:shopzz_flutter_app/page/member/member_page.dart';
 import 'package:shopzz_flutter_app/page/member/qrcode_page.dart';
 import 'package:shopzz_flutter_app/page/member/settings_page.dart';
+import 'package:shopzz_flutter_app/page/pay/dcwallet_pay_page.dart';
 import 'package:shopzz_flutter_app/page/pay/pay_page.dart';
 
 ///路由名称，所有路由在此处统一管理
@@ -47,6 +48,7 @@ class Routers{
 
   static const String orderConfirm = '/orderConfirm';
   static const String pay = '/pay';
+  static const String dcwalletPay = '/dcwalletPay';
 
 }
 
@@ -79,6 +81,7 @@ class RouterManager{
 
     GetPage(name: Routers.orderConfirm, page: () => const OrderConfirmPage()),
     GetPage(name: Routers.pay, page: () => const PayPage()),
+    GetPage(name: Routers.dcwalletPay, page: () => const DcwalletPayPage()),
 
   ];
 

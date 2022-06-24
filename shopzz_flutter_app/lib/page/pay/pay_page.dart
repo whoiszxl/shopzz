@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:roundcheckbox/roundcheckbox.dart';
 import 'package:shopzz_flutter_app/controller/cart_page_controller.dart';
 import 'package:shopzz_flutter_app/controller/member_address_controller.dart';
 import 'package:shopzz_flutter_app/controller/order_confirm_page_controller.dart';
@@ -69,7 +70,7 @@ class _PayPageState extends State<PayPage>{
         body: Scaffold(
           bottomSheet: PayFooter(() {
             //跳转支付页面
-            Get.toNamed(Routers.pay);
+            Get.toNamed(Routers.dcwalletPay);
           }),
 
           body: SmartRefresher(
@@ -79,53 +80,46 @@ class _PayPageState extends State<PayPage>{
             footer: const ClassicFooter(),
             controller: _refreshController,
             onRefresh: () {
-
+              _refreshController.refreshCompleted();
             },
 
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                RadioListTile(
-                  value: 1,
-                  onChanged: (value) {
-                    setState(() {
-                      payType = value;
-                    });
-                  },
-                  groupValue: this.payType,
-                  title: Text("BTC支付"),
-                  subtitle: Text("Bitcoin pay"),
-                  secondary: Icon(Icons.attach_money_outlined),
-                  selected: this.payType == 1,
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
+                  child: Column(
+                    children: <Widget>[
+                      RichText(
+                        text: TextSpan(text: "¥",
+                            style: const TextStyle(color: ColorManager.main, fontWeight: FontWeight.bold, fontSize: 18),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: _cartPageController.totalAmount.value.toString(),
+                                style: const TextStyle(color: ColorManager.main, fontWeight: FontWeight.bold, fontSize: 24),
+                              ),
+                            ]),
+                      ),
+                    ],
+                  ),
                 ),
-                RadioListTile(
-                  value: 2,
-                  onChanged: (value) {
-                    setState(() {
-                      payType = value;
-                    });
-                  },
-                  groupValue: this.payType,
-                  title: Text("ETH支付"),
-                  subtitle: Text("Eth pay"),
-                  secondary: Icon(Icons.attach_money_outlined),
-                  selected: this.payType == 2,
+
+                //支付方式
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
+                  child: Column(
+                    children: [
+                      payTile(Icons.attach_money_outlined, "SHOPZZ币支付", 1, isDefault: false),
+                      const SizedBox(height: 3),
+                      payTile(Icons.attach_money_outlined, "ETH支付", 2, isDefault: true),
+                      const SizedBox(height: 3),
+                      payTile(Icons.attach_money_outlined, "BTC支付", 3, isDefault: false),
+                    ],
+                  ),
                 ),
-                RadioListTile(
-                  value: 3,
-                  onChanged: (value) {
-                    setState(() {
-                      payType = value;
-                    });
-                  },
-                  groupValue: this.payType,
-                  title: Text("SHOPZZ币支付"),
-                  subtitle: Text("shopzz pay"),
-                  secondary: Icon(Icons.attach_money_outlined),
-                  selected: this.payType == 3,
-                )
+
               ],
-            ),
+            )
           ),
 
         ),
@@ -134,4 +128,61 @@ class _PayPageState extends State<PayPage>{
     });
   }
 
+  ///支付方式item
+  payTile(IconData icon, String title, int payType, {isDefault = false}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+
+        Row(
+          children: [
+            Icon(icon, size: 20, color: ColorManager.main),
+            RichText(
+              text: TextSpan(children: [
+                WidgetSpan(
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 2, right: 2, top: 0, bottom: 1),
+                    child: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                  ),
+                ),
+                const WidgetSpan(child: SizedBox(width: 3)),
+              ]),
+            ),
+          ],
+        ),
+
+        Row(
+          children: [
+            littleTag("安全支付", ColorManager.main),
+            const SizedBox(width: 3),
+            RoundCheckBox(
+              isChecked: this.payType == payType,
+              size: 20,
+              checkedWidget: const Icon(Icons.check, size: 18, color: ColorManager.white),
+              checkedColor: ColorManager.main,
+              onTap: (selected) {
+                if(selected) {
+                  setState(() {
+                    this.payType = payType;
+                  });
+                }
+              },
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+
+  Widget littleTag(String text, Color colors) {
+    return Container(
+        padding: const EdgeInsets.only(left: 2, right: 2, top: 0, bottom: 0),
+        decoration: BoxDecoration(border: Border.all(color: colors)),
+        child: Text(text, style: TextStyle(
+          color: colors,
+          fontSize: 9,
+          fontWeight: FontWeight.w600,
+        )));
+  }
 }

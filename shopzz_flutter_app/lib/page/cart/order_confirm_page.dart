@@ -34,6 +34,8 @@ class _OrderConfirmPageState extends State<OrderConfirmPage>{
 
   final RefreshController _refreshController = RefreshController(initialRefresh: false);
 
+  int payType = 1;
+
   @override
   void initState() {
     super.initState();
@@ -100,22 +102,6 @@ class _OrderConfirmPageState extends State<OrderConfirmPage>{
                         confirmTile("优惠券", "-¥6.00", () {
                           //TODO 选择优惠券页面
                         })
-                      ],
-                    ),
-                  ),
-
-                  //支付方式
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
-                    child: Column(
-                      children: [
-                        payTile(Icons.wallet_travel_outlined, "零钱支付", isDefault: false),
-                        const SizedBox(height: 3),
-                        payTile(Icons.wallet_travel_outlined, "数字货币支付", isDefault: true),
-                        const SizedBox(height: 3),
-                        payTile(Icons.wallet_travel_outlined, "支付宝支付", isDefault: false),
-                        const SizedBox(height: 3),
-                        payTile(Icons.wallet_travel_outlined, "微信支付", isDefault: false)
                       ],
                     ),
                   ),
@@ -292,45 +278,6 @@ class _OrderConfirmPageState extends State<OrderConfirmPage>{
           ),
         ],
       ),
-    );
-  }
-
-  payTile(IconData icon, String title, {isDefault = false}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-
-        Row(
-          children: [
-            Icon(icon, size: 20, color: ColorManager.main),
-            RichText(
-              text: TextSpan(children: [
-                WidgetSpan(
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 2, right: 2, top: 0, bottom: 1),
-                    child: Text(title, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
-                  ),
-                ),
-                const WidgetSpan(child: SizedBox(width: 3)),
-              ]),
-            ),
-          ],
-        ),
-
-        Row(
-          children: [
-            RoundCheckBox(
-              isChecked: isDefault,
-              size: 20,
-              checkedWidget: const Icon(Icons.check, size: 15, color: ColorManager.white),
-              checkedColor: ColorManager.main,
-              onTap: (selected) {
-
-              },
-            )
-          ],
-        ),
-      ],
     );
   }
 
