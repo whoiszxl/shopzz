@@ -28,4 +28,9 @@ public class MyBatisConfig {
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.H2));
         return interceptor;
     }
+
+    @Bean
+    public BatchSqlInjector batchSqlInjector() {
+        return new BatchSqlInjector();
+    }
 }
