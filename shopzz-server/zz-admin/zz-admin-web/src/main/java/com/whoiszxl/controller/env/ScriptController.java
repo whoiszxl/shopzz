@@ -32,7 +32,7 @@ public class ScriptController {
     private ScriptService scriptService;
 
     @SaCheckLogin
-    @GetMapping
+    @PostMapping("/list")
     @ApiOperation(value = "分页获取配置列表", notes = "分页获取配置列表", response = Script.class)
     public ResponseResult<IPage<Script>> list(ScriptQuery serverQuery) {
         LambdaQueryWrapper<Script> wrapper = new LambdaQueryWrapper<>();

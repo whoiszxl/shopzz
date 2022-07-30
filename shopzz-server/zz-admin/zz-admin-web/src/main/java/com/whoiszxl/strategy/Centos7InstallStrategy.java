@@ -77,6 +77,8 @@ public class Centos7InstallStrategy implements InstallStrategy{
         for (Server server : serverList) {
             Session session = CommandUtil.getSession(server.getServerOuterIp(), Integer.parseInt(server.getServerPort()), server.getServerUsername(), server.getServerPassword());
 
+            //windows下的文件换行\r\n，\r在linux下会产生^M的错误，需要dos转unix
+            CommandUtil.exec(session, "yum install dos2unix -y");
             //同步脚本
             List<Script> scriptList = scriptService.list(null);
             for (Script script : scriptList) {
@@ -84,6 +86,7 @@ public class Centos7InstallStrategy implements InstallStrategy{
                 CommandUtil.exec(session, "mkdir -p " + script.getScriptPath());
                 CommandUtil.exec(session, "echo '" + script.getScriptContent() + "' > " + script.getScriptPath() + script.getScriptName());
                 CommandUtil.exec(session, "chmod +x " + script.getScriptPath() + script.getScriptName());
+                CommandUtil.exec(session, "dos2unix " + script.getScriptPath() + script.getScriptName());
             }
         }
         return true;
@@ -312,7 +315,7 @@ public class Centos7InstallStrategy implements InstallStrategy{
             brokerId++;
         }
 
-        return false;
+        return true;
     }
 
     /**

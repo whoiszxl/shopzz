@@ -96,6 +96,20 @@
           </el-submenu>
 
 
+          <el-submenu index="8">
+            <template #title>
+              <span>服务器管理</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/init"><i class="el-icon-star-off" />初始化</el-menu-item>
+              <el-menu-item index="/software/install"><i class="el-icon-star-off" />组件安装</el-menu-item>
+              <el-menu-item index="/server/list"><i class="el-icon-star-off" />服务器管理</el-menu-item>
+              <el-menu-item index="/software/list"><i class="el-icon-star-off" />组件管理</el-menu-item>
+              <el-menu-item index="/server/script"><i class="el-icon-star-off" />脚本管理</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+
+
         </el-menu>
       </el-aside>
       <el-container class="content">

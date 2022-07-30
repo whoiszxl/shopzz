@@ -45,6 +45,18 @@ import CouponAdd from '@/views/promotion/CouponAdd.vue'
 import ActivityList from '@/views/promotion/ActivityList.vue'
 import ActivityAdd from '@/views/promotion/ActivityAdd.vue'
 
+
+import Software from "@/views/server/Software.vue";
+import SoftwareAdd from "@/views/server/SoftwareAdd.vue";
+import Server from "@/views/server/Server.vue";
+import ServerAdd from "@/views/server/ServerAdd.vue";
+import SoftwareConfig from "@/views/server/SoftwareConfig.vue";
+import SoftwareConfigDetail from "@/views/server/SoftwareConfigDetail.vue";
+import Script from "@/views/server/Script.vue";
+import ScriptAdd from "@/views/server/ScriptAdd.vue";
+import Init from "@/views/server/Init.vue";
+import SoftwareConfigAdd from "@/views/server/SoftwareConfigAdd.vue";
+
 const router = createRouter({
   history: createWebHashHistory(), // hash 模式
   routes: [
@@ -131,6 +143,21 @@ const router = createRouter({
     {path: '/seckill/add', name: 'SeckillAdd', component: SeckillAdd},
 
     {path: '/seckillItemList', name: 'SeckillItemList', component: SeckillItemList},
+
+
+    {path: '/init', name: 'init', component: Init},
+    {path: '/software/list', name: 'software', component: Software},
+    {path: '/software/add', name: 'softwareAdd', component: SoftwareAdd},
+    {path: '/software/config', name: 'softwareConfig', component: SoftwareConfig},
+
+    {path: '/softwareConfig/detail', name: 'softwareConfigDetail', component: SoftwareConfigDetail},
+    {path: '/softwareConfig/add', name: 'softwareConfigAdd', component: SoftwareConfigAdd},
+
+    {path: '/server/list', name: 'server', component: Server},
+    {path: '/server/add', name: 'serverAdd', component: ServerAdd},
+
+    {path: '/server/script', name: 'script', component: Script},
+    {path: '/script/add', name: 'scriptAdd', component: ScriptAdd},
 
   ]
 })

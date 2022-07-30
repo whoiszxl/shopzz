@@ -38,7 +38,7 @@ public class SoftwareConfigController {
     private SoftwareService softwareService;
 
     @SaCheckLogin
-    @GetMapping
+    @PostMapping("/list")
     @ApiOperation(value = "分页获取配置列表", notes = "分页获取配置列表", response = SoftwareConfig.class)
     public ResponseResult<IPage<SoftwareConfig>> list(SoftwareConfigQuery query) {
         LambdaQueryWrapper<SoftwareConfig> wrapper = new LambdaQueryWrapper<>();

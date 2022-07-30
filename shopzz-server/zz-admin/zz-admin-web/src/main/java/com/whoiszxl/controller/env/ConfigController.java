@@ -36,7 +36,7 @@ public class ConfigController {
     private ConfigService configService;
 
     @SaCheckLogin
-    @GetMapping
+    @PostMapping("/list")
     @ApiOperation(value = "分页获取配置列表", notes = "分页获取配置列表", response = Config.class)
     public ResponseResult<IPage<Config>> list(ConfigQuery configQuery) {
         LambdaQueryWrapper<Config> wrapper = new LambdaQueryWrapper<>();
