@@ -2,10 +2,15 @@ package com.whoiszxl.strategy;
 import java.util.Date;
 
 import com.alibaba.fastjson.JSON;
+import com.aliyuncs.ecs.model.v20140526.*;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.whoiszxl.constants.ConfigConstants;
 import com.whoiszxl.entity.Server;
 import com.whoiszxl.entity.common.EcsGenerateQuery;
 import com.whoiszxl.enums.StatusEnum;
+import com.whoiszxl.mapper.ConfigMapper;
 import com.whoiszxl.mapper.ServerMapper;
+import com.whoiszxl.service.ConfigService;
 import com.whoiszxl.utils.IdWorker;
 import com.whoiszxl.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -13,15 +18,12 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.aliyuncs.*;
-import com.aliyuncs.ecs.model.v20140526.RunInstancesRequest;
-import com.aliyuncs.ecs.model.v20140526.RunInstancesResponse;
-import com.aliyuncs.ecs.model.v20140526.DescribeInstancesRequest;
-import com.aliyuncs.ecs.model.v20140526.DescribeInstancesResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,15 +119,56 @@ public class AliyunEcsGenerateStrategy implements EcsGenerateStrategy {
      */
     private String systemDiskCategory = "cloud_efficiency";
 
+    String accessKeyId;
+    String accessSecret;
+
+    @Autowired
+    private ConfigService configService;
+
     @Autowired
     private ServerMapper serverMapper;
 
+    @PostConstruct
+    public void init() {
+        accessKeyId = configService.getByKey(ConfigConstants.ACCESS_KEY_ID);
+        accessSecret = configService.getByKey(ConfigConstants.ACCESS_SECRET);
+    }
+
+    @Override
+    public boolean stopInstance(Long id) {
+        return false;
+    }
+
+    @Override
+    public boolean startInstance(Long id) {
+        return false;
+    }
+
+    @Override
+    public boolean deleteInstance(String regionId, String instanceId) {
+        DeleteInstanceRequest request = new DeleteInstanceRequest();
+        request.setSysRegionId(regionId);
+        request.setInstanceId(instanceId);
+        IAcsClient client = initClient();
+        try {
+            DeleteInstanceResponse acsResponse = client.getAcsResponse(request);
+            if(acsResponse == null) {
+                return false;
+            }
+
+            int delete = serverMapper.delete(Wrappers.<Server>lambdaQuery().eq(Server::getInstanceId, instanceId));
+            if(delete == 0) {
+                return false;
+            }
+        } catch (ClientException e) {
+            log.error("删除实例失败", e);
+        }
+
+        return true;
+    }
 
     @Override
     public boolean generateDefault(EcsGenerateQuery generateQuery) {
-
-        String accessKeyId = generateQuery.getAccessKeyId();
-        String accessSecret = generateQuery.getAccessSecret();
 
         /**
          * 使用须知：
@@ -136,7 +179,7 @@ public class AliyunEcsGenerateStrategy implements EcsGenerateStrategy {
          *
          * 由于实例的密码为敏感信息，故不在这里显示，您可调用setPassword自行设置密码
          */
-        RunInstancesResponse response = callOpenApi(composeRunInstancesRequest(generateQuery), accessKeyId, accessSecret);
+        RunInstancesResponse response = callOpenApi(composeRunInstancesRequest(generateQuery));
         if(response == null) {
             return false;
         }
@@ -157,7 +200,7 @@ public class AliyunEcsGenerateStrategy implements EcsGenerateStrategy {
             e.printStackTrace();
         }
 
-        DescribeInstancesResponse describeInstancesResponse = callOpenApi(describeInstancesRequest, accessKeyId, accessSecret);
+        DescribeInstancesResponse describeInstancesResponse = callOpenApi(describeInstancesRequest);
         List<DescribeInstancesResponse.Instance> instances = describeInstancesResponse.getInstances();
 
         for (DescribeInstancesResponse.Instance instance : instances) {
@@ -187,7 +230,7 @@ public class AliyunEcsGenerateStrategy implements EcsGenerateStrategy {
 
         serverMapper.insertBatchSomeColumn(serverList);
 
-        callToDescribeInstances(response.getInstanceIdSets(), accessKeyId, accessSecret);
+        callToDescribeInstances(response.getInstanceIdSets());
         return true;
     }
 
@@ -226,14 +269,14 @@ public class AliyunEcsGenerateStrategy implements EcsGenerateStrategy {
      * 每3秒中检查一次实例的状态，超时时间设为3分钟。
      * @param instanceIds 需要检查的实例ID
      */
-    private void callToDescribeInstances(List<String> instanceIds, String accessKeyId, String accessSecret) {
+    private void callToDescribeInstances(List<String> instanceIds) {
         Long startTime = System.currentTimeMillis();
         for(;;) {
             sleepSomeTime(INSTANCE_STATUS_CHECK_INTERVAL_MILLISECOND);
             DescribeInstancesRequest describeInstancesRequest = new DescribeInstancesRequest();
             describeInstancesRequest.setSysRegionId(regionId);
             describeInstancesRequest.setInstanceIds(JSON.toJSONString(instanceIds));
-            DescribeInstancesResponse describeInstancesResponse = callOpenApi(describeInstancesRequest, accessKeyId, accessSecret);
+            DescribeInstancesResponse describeInstancesResponse = callOpenApi(describeInstancesRequest);
             Long timeStamp = System.currentTimeMillis();
             if(describeInstancesResponse == null) {
                 continue;
@@ -259,8 +302,8 @@ public class AliyunEcsGenerateStrategy implements EcsGenerateStrategy {
      * @param <T> AcsResponse 请求所对应返回值
      * @return 返回OpenAPI的调用结果，如果调用失败，则会返回null
      */
-    private <T extends AcsResponse> T callOpenApi(AcsRequest<T> request, String accessKeyId, String accessSecret) {
-        IAcsClient client = initClient(accessKeyId, accessSecret);
+    private <T extends AcsResponse> T callOpenApi(AcsRequest<T> request) {
+        IAcsClient client = initClient();
         try {
             T response = client.getAcsResponse(request, false, 0);
             log.info("OpenAPI调用成功:{}", request.getSysActionName());
@@ -276,7 +319,7 @@ public class AliyunEcsGenerateStrategy implements EcsGenerateStrategy {
     /**
      * 需要填充账号的AccessKey ID，以及账号的Access Key Secret
      */
-    private IAcsClient initClient(String accessKeyId, String accessSecret) {
+    private IAcsClient initClient() {
         IClientProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
         return new DefaultAcsClient(profile);
     }

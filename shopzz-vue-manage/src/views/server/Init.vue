@@ -189,24 +189,24 @@
       </el-card>
 
 
-            <!-- 免密登录配置 -->
+      <!-- hadoop安装 -->
       <el-card class="order-item">
         <template #header>
-          <div class="card-header"> <span>免密登录配置</span> </div>
+          <div class="card-header"> <span>hadoop安装</span> </div>
         </template>
 
 
         <el-row>
-          <el-popconfirm title="确定配置吗？" confirmButtonText='确定' cancelButtonText='取消' @confirm="handleSSHConfig">
+          <el-popconfirm title="确定安装吗？" confirmButtonText='确定' cancelButtonText='取消' @confirm="handleHadoopInstall">
             <template #reference>
-              <el-button size="small" type="primary" icon="el-icon-star-off" plain>一键配置</el-button>
+              <el-button size="small" type="primary" icon="el-icon-star-off" plain>一键安装</el-button>
             </template>
           </el-popconfirm>
 
 
-          <el-popconfirm title="确定重新配置吗？" confirmButtonText='确定' cancelButtonText='取消' @confirm="handleSSHConfig">
+          <el-popconfirm title="确定重新安装吗？" confirmButtonText='确定' cancelButtonText='取消' @confirm="handleHadoopInstall">
             <template #reference>
-              <el-button size="small" type="danger" icon="el-icon-star-off" plain>重新配置</el-button>
+              <el-button size="small" type="danger" icon="el-icon-star-off" plain>重新安装</el-button>
             </template>
           </el-popconfirm>
 
@@ -323,6 +323,16 @@ export default {
       })
     }    
 
+    const handleHadoopInstall = () => {
+      //TODO 暂时写死传入服务器id，要修改为动态传入
+      axios.post(`/admin/install/install`, {
+        "softwareName": "hadoop",
+        "serverIds": [1,2,3]
+      }).then(() => {
+        ElMessage.success('hadoop安装成功')
+      })
+    }    
+
     return {
       handleHostsConfig,
       handleSSHConfig,
@@ -331,7 +341,8 @@ export default {
       handleViewFile,
       handleSoftwareSync,
       handleZkInstall,
-      handleKafkaInstall
+      handleKafkaInstall,
+      handleHadoopInstall
     }
   }
 }

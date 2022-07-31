@@ -304,23 +304,26 @@ public class DataGeneratorService {
         for (int i = 0; i < times; i++) {
 
             for (int j = 0; j < quantity; j++) {
+
                 AppMain appMain = new AppMain();
                 appMain.setTs(System.currentTimeMillis());
-
                 AppCommon appCommon = buildAppCommon(memberPOList);
                 appMain.setAppCommon(appCommon);
 
-                AppPage appPage = buildAppPage(spuList);
-                appMain.setAppPage(appPage);
+                int rand = enFaker.number().numberBetween(0, 100);
+                if(rand > 90) {
+                    AppStart appStart = buildAppStart();
+                    appMain.setAppStart(appStart);
+                }else {
+                    AppPage appPage = buildAppPage(spuList);
+                    appMain.setAppPage(appPage);
 
-                AppStart appStart = buildAppStart();
-                appMain.setAppStart(appStart);
+                    List<AppDisplay> appDisplayList = buildAppDisplayList();
+                    appMain.setDisplayList(appDisplayList);
 
-                List<AppDisplay> appDisplayList = buildAppDisplayList();
-                appMain.setDisplayList(appDisplayList);
-
-                List<AppAction> appActionList = buildAppActionList();
-                appMain.setActionList(appActionList);
+                    List<AppAction> appActionList = buildAppActionList();
+                    appMain.setActionList(appActionList);
+                }
 
                 kafkaTemplate.send(KafkaTopicConstants.ODS_LOG_LOG, JsonUtil.toJson(appMain));
             }

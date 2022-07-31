@@ -13,5 +13,27 @@ public interface EcsGenerateStrategy {
      */
     boolean generateDefault(EcsGenerateQuery generateQuery);
 
+    /**
+     * 删除实例
+     * @param regionId
+     * @param instanceId
+     * @return
+     */
+    boolean deleteInstance(String regionId, String instanceId);
+
+
+    /**
+     * 停止实例
+     * @param id
+     * @return
+     */
+    boolean stopInstance(Long id);
+
+    /**
+     * 启动实例
+     * @param id
+     * @return
+     */
+    boolean startInstance(Long id);
 
 }

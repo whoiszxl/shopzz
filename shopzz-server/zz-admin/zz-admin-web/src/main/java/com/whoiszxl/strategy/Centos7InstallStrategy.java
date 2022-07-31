@@ -318,6 +318,32 @@ public class Centos7InstallStrategy implements InstallStrategy{
         return true;
     }
 
+    @Override
+    public boolean installHbase(List<Integer> serverIds) {
+        Collection<Server> servers = serverService.listByIds(serverIds);
+        Software software = softwareService.getBySoftwareName(SoftwareConstants.HBASE);
+
+        for (Server server : servers) {
+            //获取需要安装zk的服务器列表并连接
+            Session session = CommandUtil.getSession(server.getServerOuterIp(), Integer.parseInt(server.getServerPort()), server.getServerUsername(), server.getServerPassword());
+
+            CommandUtil.exec(session, "mkdir -p " + software.getInstallPath());
+            CommandUtil.exec(session, "tar -zxvf " + software.getSoftwarePath() + software.getSoftwareFilename() + " -C " + software.getInstallPath());
+            CommandUtil.exec(session, "echo '" + MyTemplateUtil.replaceGanR(software.getEnvContent()) + "' >> " + software.getEnvPath());
+
+            //覆盖配置
+            List<SoftwareConfig> softwareConfigList = softwareConfigService.getlistBySoftwareName(SoftwareConstants.HBASE);
+            for (SoftwareConfig softwareConfig : softwareConfigList) {
+                String config = MyTemplateUtil.convertTemplate(softwareConfig.getConfigTemplate(), softwareConfig.getConfigTemplateParams());
+                config = MyTemplateUtil.replaceGanR(config);
+                //将模板参数写入
+                CommandUtil.exec(session, "echo '" + config + "' > " + softwareConfig.getConfigPath() + softwareConfig.getConfigName());
+            }
+        }
+
+        return true;
+    }
+
     /**
      * <p>构建ssh免密登录执行的命令</p>
      *

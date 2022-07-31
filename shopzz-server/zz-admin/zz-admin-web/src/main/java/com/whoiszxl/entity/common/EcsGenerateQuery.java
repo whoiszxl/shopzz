@@ -24,10 +24,5 @@ public class EcsGenerateQuery {
     @ApiModelProperty("密码")
     private String password;
 
-    @ApiModelProperty("秘钥ID")
-    private String accessKeyId;
-
-    @ApiModelProperty("秘钥密码")
-    private String accessSecret;
 }
 

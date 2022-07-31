@@ -480,6 +480,8 @@ docker ps
 
 # 进入容器开启控制台生产者发送消息测试
 docker exec -it kafka-0 /bin/
+/opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic testtopic
+
 # 进入容器开启控制台消费者接口消息测试
 docker exec -it kafka-1 /bin/bash
 /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --from-beginning

@@ -22,6 +22,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.whoiszxl</groupId>
+            <artifactId>zz-dwh-base</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-java</artifactId>
             <version>${flink.version}</version>

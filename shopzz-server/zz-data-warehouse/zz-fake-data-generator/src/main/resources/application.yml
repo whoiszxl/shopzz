@@ -40,7 +40,7 @@ spring:
     time-zone: GMT+8
 
   kafka:
-    bootstrap-servers: 106.13.7.251:9092
+    bootstrap-servers: 120.24.51.152:9092,120.76.99.12:9092,120.25.230.239:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer

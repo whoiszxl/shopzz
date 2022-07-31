@@ -17,7 +17,7 @@ public class KafkaUtil {
     /**
      * 默认Kafka broker集群地址，多地址使用(,)分隔
      */
-    private static final String DEFAULT_KAFKA_BROKERS = "106.13.7.251:9092";
+    private static final String DEFAULT_KAFKA_BROKERS = "120.24.51.152:9092,120.76.99.12:9092,120.25.230.239:9092";
 
     private static String default_topic = "DWD_DEFAULT_TOPIC";
 

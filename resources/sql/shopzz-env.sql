@@ -93,3 +93,17 @@ CREATE TABLE `env_script` (
     `updated_at`                    datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='SH脚本表';
+
+
+DROP TABLE IF EXISTS `env_table_process`;
+CREATE TABLE `env_table_process` (
+    `id`                            int(10) NOT NULL AUTO_INCREMENT COMMENT '脚本文件主键ID',
+    `source_table`                  varchar(128) NOT NULL COMMENT '来源表',
+    `operate_type`                  varchar(16) NOT NULL COMMENT '操作类型:insert,update,delete',
+    `sink_type`                     varchar(16) NOT NULL COMMENT '输出类型:hbase,kafka',
+    `sink_table`                    varchar(300) NOT NULL COMMENT '输出表或topic',
+    `sink_columns`                  varchar(300) NOT NULL COMMENT '输出字段',
+    `sink_pk`                       varchar(300) NOT NULL COMMENT '主键字段',
+    `sink_extend`                   varchar(300) NOT NULL COMMENT '建表扩展',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='表动态分流处理表';

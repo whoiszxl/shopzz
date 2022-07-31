@@ -22,10 +22,7 @@ public class MyBatisFastAutoGenerator {
     private static final String AUTHOR = "whoiszxl";
     private static final String PACKAGE_NAME = "com.whoiszxl";
     private static final String[] DB_TABLES = new String[]{
-            "sms_blacklist","sms_channel","sms_channel_signature",
-            "sms_channel_template","sms_manual_task","sms_platform",
-            "sms_receive_log","sms_send_log","sms_signature",
-            "sms_template","sms_timing_push"
+            "env_table_process",
 
     };
     private static final Boolean ENABLE_SWAGGER = true;
@@ -55,7 +52,7 @@ public class MyBatisFastAutoGenerator {
         StrategyConfig.Builder strategyConfigBuilder = new StrategyConfig.Builder();
 
         //过滤表前缀
-        strategyConfigBuilder.addTablePrefix("sys_", "admin_", "oms_", "ums_", "vms_", "search_", "fms_", "rms_", "wms_", "pms_", "spms_", "sms_");
+        strategyConfigBuilder.addTablePrefix("sys_", "admin_", "oms_", "ums_", "vms_", "search_", "fms_", "rms_", "wms_", "pms_", "spms_", "sms_", "env_");
         // 设置需要映射的表名
         strategyConfigBuilder.addInclude(DB_TABLES);
         // 下划线转驼峰

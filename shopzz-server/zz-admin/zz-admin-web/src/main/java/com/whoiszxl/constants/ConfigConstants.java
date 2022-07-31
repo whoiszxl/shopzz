@@ -16,4 +16,8 @@ public interface ConfigConstants {
      * 脚本文件地址
      */
     String SCRIPT_PATH = "script_path";
+
+
+    String ACCESS_KEY_ID = "accessKeyId";
+    String ACCESS_SECRET = "accessSecret";
 }

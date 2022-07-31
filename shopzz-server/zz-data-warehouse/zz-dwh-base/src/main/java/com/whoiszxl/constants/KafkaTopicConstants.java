@@ -15,4 +15,10 @@ public interface KafkaTopicConstants {
      */
     String ODS_LOG_LOG = "ods_log_log";
 
+
+
+    String DWD_START_LOG = "dwd_start_log";
+    String DWD_PAGE_LOG = "dwd_page_log";
+    String DWD_DISPLAY_LOG = "dwd_display_log";
+
 }

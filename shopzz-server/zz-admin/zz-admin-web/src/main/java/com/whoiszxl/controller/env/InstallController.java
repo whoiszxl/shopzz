@@ -82,6 +82,10 @@ public class InstallController {
                 break;
             case SoftwareConstants.SPARK:
                 installFlag = installStrategy.installSpark(installQuery.getServerIds());
+                break;
+            case SoftwareConstants.HBASE:
+                installFlag = installStrategy.installHbase(installQuery.getServerIds());
+                break;
             default:
                 break;
         }

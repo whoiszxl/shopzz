@@ -81,4 +81,11 @@ public interface InstallStrategy {
      */
     boolean installSpark(List<Integer> serverIds);
 
+    /**
+     * hbase安装
+     * @param serverIds 服务器ID集合
+     * @return 是否安装成功
+     */
+    boolean installHbase(List<Integer> serverIds);
+
 }

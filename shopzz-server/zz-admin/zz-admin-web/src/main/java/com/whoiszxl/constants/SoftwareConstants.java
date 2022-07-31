@@ -31,4 +31,6 @@ public interface SoftwareConstants {
     String IMPALA = "impala";
 
     String SPARK = "spark";
+
+    String HBASE = "hbase";
 }
