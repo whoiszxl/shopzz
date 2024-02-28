@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.whoiszxl.logger.configuration.LogAutoConfiguration
-org.springframework.context.ApplicationContextInitializer=\
-    com.whoiszxl.logger.init.ApplicationLoggerInitializer
