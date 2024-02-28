@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.whoiszxl.taowu.starter.gpt.config.GptConfiguration

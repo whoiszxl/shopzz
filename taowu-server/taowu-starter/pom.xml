@@ -4,12 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>taowu-server</artifactId>
-        <groupId>com.whoiszxl</groupId>
+        <groupId>com.whoiszxl.taowu</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>taowu-starter</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>taowu-starter-doc</module>
+        <module>taowu-starter-gpt</module>
+        <module>taowu-starter-lock</module>
+        <module>taowu-starter-map</module>
+        <module>taowu-starter-mybatis</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
