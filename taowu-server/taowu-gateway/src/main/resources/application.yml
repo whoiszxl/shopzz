@@ -1,0 +1,56 @@
+server:
+  port: 80
+spring:
+  application:
+    name: taowu-gateway
+  cloud:
+    nacos:
+      server-addr: 106.13.7.251:8848
+      config:
+        server-addr: 106.13.7.251:8848
+        file-extension: yaml
+
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: taowu-admin_router
+          uri: lb://taowu-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+
+        - id: taowu-member_router
+          uri: lb://taowu-member
+          predicates:
+            - Path=/member/**
+          filters:
+            - StripPrefix=1
+
+        - id: taowu-file_router
+          uri: lb://taowu-file
+          predicates:
+            - Path=/file/**
+          filters:
+            - StripPrefix=1
+
+        - id: taowu-im_router
+          uri: lb://taowu-im
+          predicates:
+            - Path=/im/**
+          filters:
+            - StripPrefix=1
+
+        - id: test_router
+          uri: https://github.com/whoiszxl
+          predicates:
+            - Path=/test
