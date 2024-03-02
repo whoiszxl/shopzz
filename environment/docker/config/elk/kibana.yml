@@ -1,0 +1,5 @@
+# 允许所有IP访问
+server.host: 0.0.0.0
+# 指定 ES 地址
+elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+monitoring.ui.container.elasticsearch.enabled: false

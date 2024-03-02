@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+- job_name: "prometheus"
+  scrape_interval: 5s
+  static_configs:
+  - targets: ["localhost:9090"]
+
+- job_name: "node"
+  static_configs:
+  - targets: ["node-exporter:9100"]
+
+- job_name: 'redis-exporter'
+  scrape_interval: 5s
+  metrics_path: '/metrics'
+  static_configs:
+  - targets: ["redis-exporter:9121"]
+
+- job_name: 'mysqld-exporter'
+  scrape_interval: 5s
+  metrics_path: '/metrics'
+  static_configs:
+  - targets: ["mysqld-exporter:9104"]

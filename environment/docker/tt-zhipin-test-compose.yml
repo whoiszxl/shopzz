@@ -1,0 +1,290 @@
+# 环境构建 Docker Compose test 版本
+
+version: '3.2'
+
+# 网络配置
+networks:
+  taowu-test-network:
+    driver: bridge
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+    - ./data/mysql/data:/var/lib/mysql
+    - ./data/mysql/log:/var/log/mysql
+    - ./config/mysql/conf:/etc/mysql
+    - ./config/mysql/init:/docker-entrypoint-initdb.d/
+    command: [
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--default-time-zone=+8:00'
+    ]
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: taowu
+      MYSQL_USER: taowu
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+    - 3300:3300
+    networks:
+    - taowu-test-network
+
+  redis:
+    container_name: redis
+    image: redislabs/redismod:latest
+    ports:
+    - 6379:6379
+    networks:
+    - taowu-test-network
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+    - 8082:8081
+    networks:
+    - taowu-test-network
+
+  elasticsearch:
+    image: elasticsearch:7.13.0
+    container_name: elasticsearch
+    volumes:
+    - ./config/elk/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      discovery.type: single-node
+    networks:
+    - taowu-test-network
+
+  logstash:
+    image: logstash:7.13.0
+    container_name: logstash
+    volumes:
+    - ./config/elk/logstash.yml:/usr/share/logstash/config/logstash.yml
+    - ./config/elk/pipeline:/usr/share/logstash/pipeline
+    ports:
+    - "6666:6666"
+    - "5000:5000/tcp"
+    - "5000:5000/udp"
+    - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xms256m -Xmx512m"
+    networks:
+    - taowu-test-network
+    depends_on:
+    - elasticsearch
+
+  kibana:
+    image: kibana:7.13.0
+    container_name: kibana
+    volumes:
+      - ./config/elk/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+    - "5601:5601"
+    networks:
+    - taowu-test-network
+    depends_on:
+    - elasticsearch
+
+
+  sentinel:
+    image: bladex/sentinel-dashboard
+    container_name: sentinel
+    ports:
+    - 8858:8858
+    networks:
+    - taowu-test-network
+
+  nacos:
+    image: nacos/nacos-server:2.0.3
+    container_name: nacos-standalone-mysql
+    env_file:
+    - ./config/nacos/nacos-standlone-mysql.env
+    volumes:
+    - ./data/nacos/logs:/home/nacos/logs
+    - ./config/nacos/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+    - 8848:8848
+    - 9848:9848
+    - 9555:9555
+    depends_on:
+    - mysql
+    restart: on-failure
+    networks:
+    - taowu-test-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    user: root
+    restart: unless-stopped
+    volumes:
+    - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    - ./data/prometheus_data:/prometheus
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    - --storage.tsdb.path=/prometheus
+    - --web.console.libraries=/etc/prometheus/console_libraries
+    - --web.console.templates=/etc/prometheus/consoles
+    - --web.enable-lifecycle
+    extra_hosts:
+    - host.docker.internal:host-gateway
+    ports:
+    - 9090:9090
+    networks:
+    - taowu-test-network
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    user: root
+    hostname: grafana
+    environment:
+    - GF_INSTALL_PLUGINS=redis-app
+    - GF_INSTALL_PLUGINS=redis-datasource
+    - GF_INSTALL_PLUGINS=redis-explorer-app
+    volumes:
+    - ./data/grafana:/var/lib/grafana
+    ports:
+    - 3000:3000
+    external_links:
+    - redis:redis
+    networks:
+    - taowu-test-network
+
+
+  mysqld-exporter:
+    image: prom/mysqld-exporter
+    container_name: mysqld-exporter
+    ports:
+    - 9104:9104
+    environment:
+    - DATA_SOURCE_NAME=root:123456@tcp(mysql:3300)/
+    depends_on:
+    - mysql
+    networks:
+    - taowu-test-network
+
+  redis-exporter:
+    image: oliver006/redis_exporter
+    command: -redis.addr redis://redis:6379
+    ports:
+    - 9121:9121
+    networks:
+    - taowu-test-network
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    volumes:
+    - /proc:/host/proc:ro
+    - /sys:/host/sys:ro
+    - /:/rootfs:ro
+    command:
+    - --path.procfs=/host/proc
+    - --path.rootfs=/rootfs
+    - --path.sysfs=/host/sys
+    - --collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)
+    ports:
+    - 9100:9100
+    networks:
+    - taowu-test-network
+
+
+  skywalking-oap:
+    image: apache/skywalking-oap-server:8.9.1
+    container_name: skywalking-oap
+    restart: always
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    ports:
+      - "11800:11800"
+      - "12800:12800"
+    environment:
+      TZ: Asia/Shanghai
+      SW_STORAGE: elasticsearch
+      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
+      JAVA_OPTS: "-Xms512m -Xmx512m"
+    networks:
+    - taowu-test-network
+
+  skywalking-ui:
+    image: apache/skywalking-ui:8.9.1
+    container_name: skywalking-ui
+    restart: always
+    depends_on:
+      - skywalking-oap
+    links:
+      - skywalking-oap
+    ports:
+      - "8080:8080"
+    environment:
+      TZ: Asia/Shanghai
+      SW_OAP_ADDRESS: http://skywalking-oap:12800
+    networks:
+    - taowu-test-network
+
+  minio:
+    image: minio/minio
+    hostname: "minio"
+    ports:
+      - 9000:9000 # api 端口
+      - 9001:9001 # 控制台端口
+    environment:
+      MINIO_ACCESS_KEY: admin    #管理后台用户名
+      MINIO_SECRET_KEY: admin123 #管理后台密码，最小8个字符
+    volumes:
+      - ./data/minio/data:/data               #映射当前目录下的data目录至容器内/data目录
+      - /data/minio/config:/root/.minio/     #映射配置目录
+    command: server --console-address ':9001' /data  #指定容器中的目录 /data
+    privileged: true
+    restart: always
+    networks:
+    - taowu-test-network
+
+  gitea:
+    image: gitea/gitea:1.21.2
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=mysql
+      - GITEA__database__HOST=mysql:3300
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=taowu-gitea
+      - GITEA__database__PASSWD=taowu-gitea
+    restart: always
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3001:3000"
+      - "222:22"
+    depends_on:
+      - mysql
+    networks:
+    - taowu-test-network
+
+  clickhouse:
+    user: root
+    image: docker.io/bitnami/clickhouse:23
+    container_name: clickhouse
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '8123:8123'
+    networks:
+    - taowu-test-network
