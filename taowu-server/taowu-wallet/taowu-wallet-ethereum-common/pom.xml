@@ -18,4 +18,34 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- dc核心依赖 -->
+        <dependency>
+            <groupId>com.whoiszxl.taowu</groupId>
+            <artifactId>taowu-wallet-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- springboot 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- web3j eth依赖 -->
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>core</artifactId>
+            <version>4.5.5</version>
+        </dependency>
+
+        <!-- bitcoin核心依赖 -->
+        <dependency>
+            <groupId>org.bitcoinj</groupId>
+            <artifactId>bitcoinj-core</artifactId>
+            <version>0.15.9</version>
+        </dependency>
+
+    </dependencies>
+
 </project>

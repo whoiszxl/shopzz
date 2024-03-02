@@ -43,6 +43,13 @@ spring:
           filters:
             - StripPrefix=1
 
+        - id: taowu-video
+          uri: lb://taowu-video
+          predicates:
+            - Path=/video/**
+          filters:
+            - StripPrefix=1
+
         - id: taowu-im_router
           uri: lb://taowu-im
           predicates:

@@ -17,7 +17,17 @@ public class RedisPrefixConstants {
         String MEMBER_CAPTCHA_SMS = "member:captcha:sms";
         String MEMBER_CAPTCHA_SMS_SEPARATOR = "_";
         Integer SMS_TIMEOUT = 120;
+        String VIDEO_PREFIX = "video:";
 
+    }
+
+    public interface Video {
+        String VIDEO_PREFIX = "video:";
+    }
+
+    public interface Counter {
+        String COUNTER_MEMBER_HASH_KEY = "counter:member";
+        String COUNTER_VIDEO_HASH_KEY = "counter:video";
     }
 
     public static String format(String... keys) {

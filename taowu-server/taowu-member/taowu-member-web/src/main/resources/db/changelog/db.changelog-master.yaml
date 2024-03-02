@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/v1.0.0/zhipin-member-table.sql
+  - include:
+      file: db/changelog/v1.0.0/zhipin-member-data.sql

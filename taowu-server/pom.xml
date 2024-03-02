@@ -30,6 +30,22 @@
         <module>taowu-common</module>
         <module>taowu-file/taowu-file-api</module>
         <module>taowu-file/taowu-file-web</module>
+        <module>taowu-im/taowu-im-api</module>
+        <module>taowu-im/taowu-im-core</module>
+        <module>taowu-im/taowu-im-server</module>
+        <module>taowu-im/taowu-im-web</module>
+        <module>taowu-member/taowu-member-api</module>
+        <module>taowu-member/taowu-member-web</module>
+        <module>taowu-product/taowu-product-api</module>
+        <module>taowu-product/taowu-product-web</module>
+        <module>taowu-order/taowu-order-api</module>
+        <module>taowu-order/taowu-order-web</module>
+        <module>taowu-wallet/taowu-wallet-api</module>
+        <module>taowu-wallet/taowu-wallet-btc</module>
+        <module>taowu-wallet/taowu-wallet-common</module>
+        <module>taowu-wallet/taowu-wallet-erc20</module>
+        <module>taowu-wallet/taowu-wallet-eth</module>
+        <module>taowu-wallet/taowu-wallet-ethereum-common</module>
     </modules>
 
     <name>${project.artifactId}</name>
@@ -92,7 +108,8 @@
         <commons-dbutils.version>1.7</commons-dbutils.version>
         <dozer.version>6.5.2</dozer.version>
         <jsch.version>0.1.55</jsch.version>
-
+        <commons-io.version>2.7</commons-io.version>
+        <commons-fileupload.version>1.4</commons-fileupload.version>
 
         <!-- 缓存相关依赖 -->
         <caffeine.version>2.8.0</caffeine.version>
@@ -305,6 +322,13 @@
                 <version>${jsch.version}</version>
             </dependency>
 
+            <!--commons-io-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>commons-net</groupId>
                 <artifactId>commons-net</artifactId>
@@ -414,6 +438,13 @@
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>logging-interceptor</artifactId>
                 <version>${okhttp.version}</version>
+            </dependency>
+
+            <!--文件上传-->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
             </dependency>
 
             <dependency>

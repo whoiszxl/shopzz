@@ -653,4 +653,8 @@ public class RedisUtils {
     public Set zRangeByScore(String key, double minScore) {
         return redisTemplate.opsForZSet().rangeByScore(key, minScore, Double.POSITIVE_INFINITY);
     }
+
+    public void hIncrBy(String key, String hashKey, Long num) {
+        redisTemplate.opsForHash().increment(key, hashKey, num);
+    }
 }
