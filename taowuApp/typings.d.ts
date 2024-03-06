@@ -9,15 +9,6 @@ declare module '*.js';
 
 declare module 'react-native-refreshable-listview';
 
-type ArticleSimple = {
-  id: number;
-  title: string;
-  userName: string;
-  avatarUrl: string;
-  favoriteCount: number;
-  isFavorite: boolean;
-  image: string;
-}
 
 type VideoEntity = {
   id: string;
@@ -48,124 +39,8 @@ type VideoEntity = {
 
 type Category = {
   name: string;
+  isDefault: boolean;
 }
-
-type BossMemberEntity = {
-  id: string;
-  phone: string;
-  email: string;
-  fullName: string;
-  workDate: string;
-  wxCode: string;
-  birthday: string;
-  country: string;
-  province: string;
-  city: string;
-  district: string;
-  gender: number;
-  avatar: string;
-  ip: string;
-  loginCount: string;
-  loginErrorCount: string;
-  lastLogin: string;
-  identityStatus: number;
-  workStatus: number;
-  highestQualification: number;
-  highestQualificationType: number;
-  isToutou: number;
-};
-
-
-type JobEntity = {
-    id: string;
-    memberInfo: string;
-    memberId: string;
-    companyId: string;
-    jobName: string;
-    salaryRangeStart: number;
-    salaryRangeEnd: number;
-    salaryOptional: {
-        payDay: string;
-        subsidy: string[];
-        basicSalary: number;
-        socialSecurity: string;
-    };
-    workYearRangeStart: number;
-    workYearRangeEnd: number;
-    ageRangeStart: number;
-    ageRangeEnd: number;
-    educationAttainment: string;
-    jobTags: string;
-    jobDescription: string;
-    replyCount: number;
-    longitude: number;
-    latitude: number;
-    locationImg: string;
-    country: string;
-    province: string;
-    city: string;
-    district: string;
-    addressDetail: string;
-    createdAt: string;
-    updatedAt: string;
-
-    companyResponse: {
-        id: string;
-        applyMemberId: string;
-        companyFullName: string;
-        companyAbbrName: string;
-        companyLogo: string;
-        companyDescription: string;
-        companyScale: string;
-        financingStage: string;
-        industry: string;
-        workDateStart: string;
-        workDateEnd: string;
-        restWay: number;
-        overtime: number;
-        photo: string;
-        employeeWelfare: string;
-        mainBusiness: string;
-        longitude: number;
-        latitude: number;
-        country: string;
-        province: string;
-        city: string;
-        district: string;
-        addressDetail: string;
-    }
-}
-
-type MemberInfoEntity = {
-    id: string;
-    phone: string;
-    email: string;
-    password: string;
-    fullName: string;
-    workDate: string;
-    wxCode: string;
-    birthday: string;
-    country: string;
-    province: string;
-    city: string;
-    district: string;
-    gender: string;
-    avatar: string;
-    ip: string;
-    loginCount: string;
-    loginErrorCount: string;
-    lastLogin: string;
-    identityStatus: string;
-    workStatus: string;
-    highestQualification: string;
-    highestQualificationType: string;
-    isToutou: string;
-    status: string;
-    token: string;
-    location: string;
-    browser: string;
-}
-
 
 type TalkEntity = {
     id: number;
@@ -209,95 +84,27 @@ type PrivateChatPack = {
     body: string;
 }
 
-
-
-type ResumeData = {
-    memberInfoResponse: MemberInfoResponse;
-    workExpectDtoList: WorkExpectDto[];
-    workExperienceDtoList: WorkExperienceDto[];
-    projectExperienceDtoList: ProjectExperienceDto[];
-    eduExperienceDtoList: EduExperienceDto[];
-    qualificationList: string[];
-    advantage: string;
+type OneLevelCategory = {
+  id: string;
+  name: string;
 }
 
-type MemberInfoResponse = {
-    id: string;
-    phone: string;
-    email: string;
-    password: string;
-    fullName: string;
-    workDate: string;
-    wxCode: string;
-    birthday: string;
-    country: string;
-    province: string;
-    city: string;
-    district: string;
-    gender: number;
-    avatar: string;
-    ip: string;
-    loginCount: string;
-    loginErrorCount: string;
-    lastLogin: string;
-    identityStatus: number;
-    workStatus: number;
-    highestQualification: number;
-    highestQualificationType: number;
-    isToutou: number;
-    status: number;
-    token: string;
-    location: string;
-    browser: string;
-  }
-  
-  type WorkExpectDto = {
-    type: number;
-    city: string;
-    job: string;
-    salaryRangeStart: number;
-    salaryRangeEnd: number;
-    industryArr: string[];
-  }
-  
-  type WorkExperienceDto = {
-    companyFullName: string;
-    industry: string;
-    workDateStart: string;
-    workDateEnd: string;
-    jobName: string;
-    workDetail: string;
-  }
-  
-  type ProjectExperienceDto = {
-    projectName: string;
-    projectRole: string;
-    projectDateStart: string;
-    projectDateEnd: string;
-    projectResult: string;
-    projectLink: string;
-  }
-  
-  type EduExperienceDto = {
-    schoolName: string;
-    educationAttainment: string;
-    major: string;
-    yearStart: number;
-    yearEnd: number;
-    schoolExp: string;
-    paper: string;
-  }
-  
+type TwoLevelCategory = {
+  id: string;
+  name: string;
+  childList: ThreeLevelCategory[];
+}
 
-  type AttachmentResume = {
-    id: string;
-    memberId: string;
-    filename: string;
-    url: string;
-    status: number;
-    version: string;
-    isDeleted: number;
-    createdAt: string;
-    updatedAt: string;
-  }
-  
+type ThreeLevelCategory = {
+  id: string;
+  name: string;
+  icon: string;
+}
+
+
+type IndexSpuEntity = {
+  id: string;
+  name: string;
+  defaultPrice: string;
+  defaultPic: string;
+}

@@ -1,6 +1,7 @@
 package com.whoiszxl.taowu.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.taowu.common.entity.response.PageResponse;
 import com.whoiszxl.taowu.cqrs.command.SkuSaveCommand;
 import com.whoiszxl.taowu.cqrs.command.SpuSaveCommand;
 import com.whoiszxl.taowu.cqrs.command.SpuUpdateCommand;
@@ -57,5 +58,5 @@ public interface SpuService extends IService<Spu> {
      * @param size 每一页多少条
      * @return 首页商品列表
      */
-    List<IndexSpuResponse> indexSpuList(Integer page, int size);
+    PageResponse<IndexSpuResponse> indexSpuList(Integer page, int size);
 }

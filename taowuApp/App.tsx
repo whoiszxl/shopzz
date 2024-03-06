@@ -10,12 +10,11 @@ import LoginPage from './src/pages/login/LoginPage';
 import CheckSmsCaptchaPage from './src/pages/login/CheckSmsCaptchaPage';
 import TabPage from './src/pages/tabs/TabPage';
 
-import JobPage from './src/pages/tabs/job/HomePage';
+import HomePage from './src/pages/tabs/home/HomePage';
+import BuyPage from './src/pages/tabs/buy/BuyPage';
 import DiscoveryPage from './src/pages/tabs/discovery/DiscoveryPage';
-import BuyPage from './src/pages/tabs/message/BuyPage';
 import MinePage from './src/pages/tabs/mine/MinePage';
-import InitMemberInfoPage from './src/pages/tabs/init/InitMemberInfoPage';
-import ChatPage from './src/pages/tabs/message/ChatPage';
+import ChatPage from './src/pages/tabs/discovery/ChatPage';
 
 
 
@@ -27,14 +26,7 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaProvider>
-      
-
-      <StatusBar
-        barStyle={'dark-content'}
-        translucent={false}
-        backgroundColor={'black'}
-      />
-
+      <StatusBar translucent backgroundColor={'transparent'} barStyle={'dark-content'} />
 
       <NavigationContainer>
         <Stack.Navigator initialRouteName='SplashPage'>
@@ -42,16 +34,12 @@ function App(): JSX.Element {
           <Stack.Screen options={{headerShown: false}} name='LoginPage' component={LoginPage}/>
           <Stack.Screen options={{headerShown: false}} name='CheckSmsCaptchaPage' component={CheckSmsCaptchaPage}/>
           <Stack.Screen options={{headerShown: false}} name='TabPage' component={TabPage}/>
-          <Stack.Screen options={{headerShown: false}} name='JobPage' component={JobPage}/>
-          <Stack.Screen options={{headerShown: false}} name='InitMemberInfoPage' component={InitMemberInfoPage}/>
+          <Stack.Screen options={{headerShown: false}} name='HomePage' component={HomePage}/>
 
           <Stack.Screen options={{headerShown: false}} name='DiscoveryPage' component={DiscoveryPage}/>
           <Stack.Screen options={{headerShown: false}} name='BuyPage' component={BuyPage}/>
           <Stack.Screen options={{headerShown: false}} name='MinePage' component={MinePage}/>
           <Stack.Screen options={{headerShown: false}} name='ChatPage' component={ChatPage}/>
-
-
-
         </Stack.Navigator>
       </NavigationContainer>
 

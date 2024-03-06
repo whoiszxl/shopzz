@@ -3,9 +3,9 @@ banana:
   token-active: sa-token
   # 配置项目相关信息
   info:
-    project-name: banana-zz-order-web
+    project-name: taowu-order
     version: 1.0.0
-    description: promotion-web
+    description: taowu-order
     contact:
       name: whoiszxl
       email: whoiszxl@gmail.com

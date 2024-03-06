@@ -17,6 +17,7 @@
         <module>taowu-starter-lock</module>
         <module>taowu-starter-map</module>
         <module>taowu-starter-mybatis</module>
+        <module>taowu-starter-rocketmq</module>
     </modules>
 
     <properties>

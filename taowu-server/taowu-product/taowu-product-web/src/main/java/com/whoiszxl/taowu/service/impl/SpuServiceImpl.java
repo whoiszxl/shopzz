@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.whoiszxl.taowu.common.constants.RedisPrefixConstants;
+import com.whoiszxl.taowu.common.entity.response.PageResponse;
 import com.whoiszxl.taowu.common.exception.ExceptionCatcher;
 import com.whoiszxl.taowu.common.utils.LogFormatUtil;
 import com.whoiszxl.taowu.common.utils.RedisUtils;
@@ -301,8 +302,7 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
     }
 
     @Override
-    public List<IndexSpuResponse> indexSpuList(Integer page, int size) {
-        //1. 参数校验
+    public PageResponse<IndexSpuResponse> indexSpuList(Integer page, int size) {
         if(page < 0 || page > 10) {
             ExceptionCatcher.catchServiceEx("page参数不合法");
         }
@@ -310,8 +310,8 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
         Page<Spu> result = spuMapper.selectPage(new Page<>(page, size), Wrappers.<Spu>lambdaQuery()
                 .eq(Spu::getPublishStatus, SpuPublishStatusEnum.PUBLISHED.getCode())
                 .orderByDesc(Spu::getCreatedAt));
-        List<IndexSpuResponse> indexSpuResponseList = BeanUtil.copyToList(result.getRecords(), IndexSpuResponse.class);
-        return indexSpuResponseList;
+
+        return PageResponse.convert(result, IndexSpuResponse.class);
 
     }
 }

@@ -1,6 +1,11 @@
 export const CommonColor = {
     mainColor: '#28294c',
     mainColorTwo: 'rgb(1, 194, 195)',
+    mainColorTwoTrans: 'rgba(1, 194, 195, 0.6)',
+    mainColorTwoDeep: '#49A1AC',
+
+    whiteBg: 'white',
+    
     mainColorThree: '#6f67bd',
     mainColorFour: '#d9d9d9',
 

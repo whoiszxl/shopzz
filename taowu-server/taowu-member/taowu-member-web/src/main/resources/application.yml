@@ -7,9 +7,9 @@ taowu:
   token-active: sa-token
   # 配置项目相关信息
   info:
-    project-name: tt-taowu-member
+    project-name: taowu-member
     version: 1.0.0
-    description: tt-taowu-member - 头头直聘会员服务
+    description: taowu-member - 头头直聘会员服务
     contact:
       name: whoiszxl
       email: whoiszxl@gmail.com

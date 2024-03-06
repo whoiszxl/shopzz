@@ -3,7 +3,7 @@ taowu:
   token-active: sa-token
   # 配置项目相关信息
   info:
-    project-name: taowu-product-web
+    project-name: taowu-product
     version: 1.0.0
     description: product
     contact:

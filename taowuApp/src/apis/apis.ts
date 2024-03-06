@@ -30,7 +30,15 @@ const apis = {
 
 
 
-    toutouWorkerList: {url: '/member/api/boss/member/list', method: METHODS.POST}, //获取打工人列表
+
+    /** 购物相关接口 */
+    oneCategoryList: {url: '/product/api/category/one/level', method: METHODS.GET}, // 获取所有第一级分类的列表
+    childCategoryList: {url: '/product/api/category/child/', method: METHODS.GET, paramType: PARAM_TYPE.PATH}, // 获取第一级分类下的二三级分类列表
+
+
+    spuIndexList: {url: '/product//api/spu/index/list/', method: METHODS.GET, paramType: PARAM_TYPE.PATH}, // 获取首页最新商品SPU的列表
+
+
     
 }
 

@@ -26,7 +26,6 @@ export default class HomeStore {
     }
 
     requestVideotTest = async () => {
-        console.log("requestVideotTest start  " + this.refreshing);
         if(this.refreshing) {
             return;
         }
@@ -46,8 +45,6 @@ export default class HomeStore {
                 }else {
                     this.jobList = [...this.jobList, ...(data.data.list)];
                 }
-
-                console.log(this.jobList);
                 this.page = this.page + 1;
                 this.refreshing = false;
             }else {
@@ -104,41 +101,25 @@ export default class HomeStore {
         
     }
 
-
-
-    requestDetail2 = flow(function* (this: HomeStore, id: string, callback: (data?: JobEntity) => void) {
-        try {
-
-            const { data } = yield ApiService.request('jobDetail', id);
-            if (data) {
-                if(data.code === 0) {
-                    callback?.(data.data);
-                    this.memberInfo = data.data;
-                }
-            }
-        } catch (error) {
-            callback?.(undefined);
-        }
-    });
 }
 
 const DEFAULT_CATEGORY_LIST: Category[] = [
     // 默认添加频道
-    { name: '关注' },
-    { name: '推荐' },
-    { name: '视频', },
-    { name: '直播',  },
+    { name: '关注',  isDefault: false},
+    { name: '推荐',  isDefault: true},
+    { name: '视频',  isDefault: false},
+    { name: '直播',  isDefault: false},
 
-    { name: '车品',  },
-    { name: '潮鞋',  },
-    { name: '穿搭',  },
-    { name: '手表',  },
+    { name: '车品',  isDefault: false},
+    { name: '潮鞋',  isDefault: false},
+    { name: '穿搭',  isDefault: false},
+    { name: '手表',  isDefault: false},
 
-    { name: '潮玩',  },
-    { name: '理容',  },
-    { name: '美妆',  },
-    { name: '健身',  },
+    { name: '潮玩',  isDefault: false},
+    { name: '理容',  isDefault: false},
+    { name: '美妆',  isDefault: false},
+    { name: '健身',  isDefault: false},
 
-    { name: '文化',  },
-    { name: '数码',  }
+    { name: '文化',  isDefault: false},
+    { name: '数码',  isDefault: false}
 ];

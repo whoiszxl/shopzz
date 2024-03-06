@@ -7,8 +7,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import HomePage from "./job/HomePage";
-import BuyPage from "./message/BuyPage";
+import HomePage from "./home/HomePage";
+import BuyPage from "./buy/BuyPage";
 import DiscoveryPage from "./discovery/DiscoveryPage";
 import MinePage from "./mine/MinePage";
 
@@ -94,7 +94,7 @@ export default () => {
 
             <Tab.Navigator tabBar={(props) => <MyTabBar {...props} />}>
 
-                <Tab.Screen name="JobPage" component={HomePage} options={{
+                <Tab.Screen name="HomePage" component={HomePage} options={{
                     title: '淘物', headerShown: false, lazy: false
                 }}/>
 

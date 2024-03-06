@@ -2,7 +2,7 @@ package com.whoiszxl.taowu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.whoiszxl.core.enums.UpchainStatusEnum;
+import com.whoiszxl.taowu.common.enums.UpchainStatusEnum;
 import com.whoiszxl.taowu.entity.PayInfoDc;
 import com.whoiszxl.taowu.mapper.DcPayInfoMapper;
 import com.whoiszxl.taowu.service.DcPayInfoService;

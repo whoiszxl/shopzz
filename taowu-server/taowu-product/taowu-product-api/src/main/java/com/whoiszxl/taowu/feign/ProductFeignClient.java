@@ -14,7 +14,7 @@ import java.util.List;
  * @author whoiszxl
  * @date 2021/7/30
  */
-@FeignClient(name = "taowu-product-web", contextId = "productFeign", configuration = FeignTokenConfig.class)
+@FeignClient(name = "taowu-product", contextId = "productFeign", configuration = FeignTokenConfig.class)
 public interface ProductFeignClient {
 
 

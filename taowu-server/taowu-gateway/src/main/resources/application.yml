@@ -57,6 +57,13 @@ spring:
           filters:
             - StripPrefix=1
 
+        - id: taowu-product_router
+          uri: lb://taowu-product
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+
         - id: test_router
           uri: https://github.com/whoiszxl
           predicates:
