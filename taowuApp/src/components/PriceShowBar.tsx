@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextStyle } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { CommonColor } from "../common/CommonColor";
@@ -8,14 +8,16 @@ import { StyleProp, ViewStyle } from "react-native";
 
 export interface PriceShowBarProps {
     price: string
-    titleLayoutStyle?: StyleProp<ViewStyle>
+    titleLayoutStyle?: StyleProp<TextStyle>
+    priceSize?: number,
+    symbolSize?: number,
   }
 
-const PriceShowBar = ({ price, titleLayoutStyle }: PriceShowBarProps) => {
+const PriceShowBar = ({ price, titleLayoutStyle, priceSize, symbolSize }: PriceShowBarProps) => {
     return (
-        <View style={[styles.priceShowLayout, titleLayoutStyle]}>
-            <Text style={styles.cnyText}>¥</Text>
-            <Text style={styles.priceText}>{price}</Text>
+        <View style={[styles.priceShowLayout]}>
+            <Text style={[styles.cnyText, {fontSize: symbolSize}, titleLayoutStyle]}>¥</Text>
+            <Text style={[styles.priceText, {fontSize: priceSize}, titleLayoutStyle]}>{price}</Text>
         </View>
     );
 }

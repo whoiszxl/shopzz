@@ -60,17 +60,17 @@ export default observer(() => {
 
   useEffect(() => {
     //初始化检查本地token是否存在，不存在则跳转到登录页面
-    checkToken().then((token) => {
-      if(token) {
-        store.requestAll().then(res => {
-          if(res.code !== 0) {
-            navigation.navigate('LoginPage');
-          }
-        });
-      }else {
-        navigation.navigate('LoginPage');
-      }
-    });    
+    // checkToken().then((token) => {
+    //   if(token) {
+    //     store.requestAll().then(res => {
+    //       if(res.code !== 0) {
+    //         navigation.navigate('LoginPage');
+    //       }
+    //     });
+    //   }else {
+    //     navigation.navigate('LoginPage');
+    //   }
+    // });    
   }, []);
 
   const renderHeadButton = () => {

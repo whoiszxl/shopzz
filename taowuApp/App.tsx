@@ -16,6 +16,7 @@ import DiscoveryPage from './src/pages/tabs/discovery/DiscoveryPage';
 import MinePage from './src/pages/tabs/mine/MinePage';
 import ChatPage from './src/pages/tabs/discovery/ChatPage';
 
+import ProductDetailPage from './src/pages/product/ProductDetailPage';
 
 
 
@@ -40,6 +41,8 @@ function App(): JSX.Element {
           <Stack.Screen options={{headerShown: false}} name='BuyPage' component={BuyPage}/>
           <Stack.Screen options={{headerShown: false}} name='MinePage' component={MinePage}/>
           <Stack.Screen options={{headerShown: false}} name='ChatPage' component={ChatPage}/>
+          <Stack.Screen options={{headerShown: false}} name='ProductDetailPage' component={ProductDetailPage}/>
+
         </Stack.Navigator>
       </NavigationContainer>
 

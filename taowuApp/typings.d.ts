@@ -108,3 +108,69 @@ type IndexSpuEntity = {
   defaultPrice: string;
   defaultPic: string;
 }
+
+
+type SPUAttribute = {
+  keyId: string;
+  keyName: string;
+  selected: number;
+  spuAttrList: SpuAttr[];
+}
+
+type SpuAttr = {
+  keyId: string;
+  key: string;
+  valueId: string;
+  value: string;
+}
+
+type SKU = {
+  id: string;
+  spuId: string;
+  categoryId: string;
+  parentCategoryId: string;
+  skuName: string;
+  skuImg: string;
+  salePrice: number;
+  promotionPrice: number;
+  saleAttr: string;
+  skuCode: string;
+}
+
+type SKUStock = {
+  id: string;
+  skuId: string;
+  saleStockQuantity: number;
+  stockStatus: number;
+}
+
+type SPU = {
+  id: string;
+  name: string;
+  subName: string;
+  defaultPrice: number;
+  defaultPic: string;
+  categoryId: string;
+  parentCategoryId: string;
+  brandId: string;
+  brandName: string;
+  packageList: string;
+  defaultSkuId: string;
+}
+
+type Image = {
+  id: string;
+  spuId: string;
+  imgUrl: string;
+  sort: number;
+  isDefault: number;
+}
+
+type SPUVO = {
+  spuVO: SPU;
+  skus: SKU[];
+  skuStocks: SKUStock[];
+  images: Image[];
+  spuDetailVO: string;
+  spuAttributeGroupVOList: SPUAttribute[];
+}

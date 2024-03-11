@@ -36,8 +36,9 @@ const apis = {
     childCategoryList: {url: '/product/api/category/child/', method: METHODS.GET, paramType: PARAM_TYPE.PATH}, // 获取第一级分类下的二三级分类列表
 
 
-    spuIndexList: {url: '/product//api/spu/index/list/', method: METHODS.GET, paramType: PARAM_TYPE.PATH}, // 获取首页最新商品SPU的列表
+    spuIndexList: {url: '/product/api/spu/index/list/', method: METHODS.GET, paramType: PARAM_TYPE.PATH}, // 获取首页最新商品SPU的列表
 
+    productDetail: {url: '/product/api/spu/detail/', method: METHODS.POST, paramType: PARAM_TYPE.PATH}, // 获取商品详情
 
     
 }

@@ -13,8 +13,8 @@ export default observer(({type} : {type: string}) => {
     const store = useLocalStore(() => new BuyStore());
 
     useEffect(() => {
-      store.requestChildCategoryList('2');
-      store.requestIndexSpuList();
+      // store.requestChildCategoryList('2');
+      // store.requestIndexSpuList();
     }, []);
 
     const refreshNewData = () => {

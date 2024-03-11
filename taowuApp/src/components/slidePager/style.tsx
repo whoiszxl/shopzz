@@ -1,6 +1,6 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
-const width = Dimensions.get('screen').width;
+const { width, height } = Dimensions.get('screen');
 export const styles = StyleSheet.create({
   caroselImageStyle: {
     width: width,
@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   previewImageStyle: {
-    width: width,
+    width: width - 32,
     resizeMode: 'contain',
-    height: 400,
+    height: height - 72,
   },
 });

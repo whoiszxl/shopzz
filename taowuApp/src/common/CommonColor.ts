@@ -18,9 +18,11 @@ export const CommonColor = {
     normalGrey: '#999999',
     normalBg: '#eeeeee',
     line: '#e5e5e5',
-    transparentGreyBg: 'rgba(169, 169, 169, 0.4)',
-    wxColor: '#07c160',
+    transparentGreyBg: 'rgba(169,169,169,0.4)',
+    wxColor: 'rgba(7,200,96,1.000)',
     chatBg: '#f6f6f6',
-    zhipinBg: 'F6F6F8'
+    zhipinBg: 'F6F6F8',
+
+    dark: 'black'
 
 };

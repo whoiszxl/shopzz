@@ -1,18 +1,23 @@
 import { observer, useLocalStore } from 'mobx-react';
 import React, { useEffect } from 'react'
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import BuyStore from './BuyStore';
 import { CommonColor } from '../../../common/CommonColor';
 import LinearGradient from 'react-native-linear-gradient';
 import PriceShowBar from '../../../components/PriceShowBar';
 import FlowList from '../../../components/flowlist/FlowList.js';
 import ResizeImage from '../../../components/ResizeImage';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export default observer(() => {
 
     const store = useLocalStore(() => new BuyStore());
+
+    const navigation = useNavigation<StackNavigationProp<any>>();
+
 
     useEffect(() => {
       store.requestChildCategoryList('4');
@@ -34,17 +39,20 @@ export default observer(() => {
       );
     }
 
+
+
     const renderItem = ({item, index}: {item: IndexSpuEntity, index: number}) => {
       return (
-          <View style={styles.item}>
+
+
+          <TouchableOpacity style={styles.item} onPress={() => { navigation.push('ProductDetailPage', {id: item.id}) }}>
               <ResizeImage uri={item.defaultPic} />
               <Text numberOfLines={2} style={styles.descText}>{item.name}</Text>
               <View style={styles.priceBottomContainer}>
                 <Text style={styles.defaultPriceText}>{'¥' + item.defaultPrice}</Text>
                 <Text style={styles.buyCountText}>2.41万+人付款</Text>
               </View>
-
-          </View>
+          </TouchableOpacity>
       );
     }
 
