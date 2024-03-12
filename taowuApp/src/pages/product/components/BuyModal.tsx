@@ -37,19 +37,60 @@ export default forwardRef((props: Props, ref) => {
     const [edit, setEdit] = useState<boolean>(false);
 
     const [checkedItems, setCheckedItems] = useState(new Map());  
+
+    const [currentSku, setCurrentSku] = useState<SKU>();
+
   
     // 替换Map中指定键的元素  
     const replaceItemAtKey = (key: string, newItem: string) => {  
         // 创建一个新的Map对象，并设置新的值  
         const newItems = new Map(checkedItems);  
         newItems.set(key, newItem);  
-        setCheckedItems(newItems);  
+        setCheckedItems(newItems);
+        return newItems;
     }; 
+
+    const addOrUpdateItem = (key: string, item: string) => {  
+        setCheckedItems(prevItems => {  
+            const newItems = new Map(prevItems);  
+            newItems.set(key, item);  
+            return newItems;  
+        });  
+    }; 
+
+    function convertMapToSkuCode(spuId:string, map:Map<string, string>) {  
+        // 使用Map.prototype.entries()将Map转换为键值对迭代器  
+        const iterator = map.entries();  
+          
+        // 将迭代器转换为数组，然后处理数组，方式与上面相同  
+        const entries = Array.from(iterator);  
+        const stringifiedEntries = entries.map(([key, value]) => `${key}-${value}`).join('&');  
+        const skuCode = spuId + "#" + stringifiedEntries;
+        return skuCode;  
+    } 
 
     useEffect(() => {
         if (!spu) {
             return;
         }
+        const tempMap = new Map<string, string>();
+        spu.spuAttributeGroupVOList.map((e) => {
+            console.log(e.keyId);
+            addOrUpdateItem(e.keyId, e.spuAttrList[e.selected].valueId);
+            tempMap.set(e.keyId, e.spuAttrList[e.selected].valueId);
+        });
+
+        console.log("初始化SKU选择信息", tempMap);
+        
+        // 获取默认选择的 skuCode
+        const skuCode = convertMapToSkuCode(spu.spuVO.id, tempMap);
+        console.log("SkuCode", skuCode);
+
+        // 通过 skuCode 获取到对应的 sku 信息
+        const sku = spu.skus.find(obj => obj.skuCode === skuCode);
+        setCurrentSku(sku);
+        console.log("选中的sku信息", sku);
+        
     }, [spu]);
 
     const show = () => {
@@ -123,7 +164,7 @@ export default forwardRef((props: Props, ref) => {
             <View style={styles.container}>  
                 <View style={styles.row}>  
                     <Image  
-                    source={{uri: 'https://cdn.poizon.com/pro-img/origin-img/20240222/38393d9b1e8e41db81b5d4b81f4c4f56.jpg'}}
+                    source={{uri: currentSku?.skuImg}}
                     style={styles.image}  
                     />  
                     <View style={styles.textContainer}>  
@@ -132,7 +173,7 @@ export default forwardRef((props: Props, ref) => {
                                 source={require('../../../assets/images/ic_launcher_small.png')}
                                 style={styles.taowuIconImage}  
                             />
-                            <PriceShowBar symbolSize={22} priceSize={24} price='8977'/>
+                            <PriceShowBar symbolSize={22} priceSize={24} price={currentSku?.salePrice + ""}/>
                         </View>
                         
                         
@@ -142,7 +183,7 @@ export default forwardRef((props: Props, ref) => {
                             </View>
 
                             <View style={styles.tag}>
-                                <Text style={styles.tagText}>{'772.11元/月起 >'}</Text>
+                                <Text style={styles.tagText}>{Math.trunc((currentSku?.salePrice || 0) / 24) + '元/月起 >'}</Text>
                             </View>
 
                             <View style={styles.tag}>
@@ -151,7 +192,7 @@ export default forwardRef((props: Props, ref) => {
                         </View>
 
 
-                        <Text style={styles.text}>{'已选 ' + '白色钛金属 256GB 官方标配'}</Text>  
+                        <Text style={styles.text}>{'已选 ' + currentSku?.skuName}</Text>  
                     </View>  
                 </View>  
             </View>  
@@ -208,7 +249,8 @@ export default forwardRef((props: Props, ref) => {
                 paddingVertical: 8,
                 marginRight: 5,
                 borderWidth: 2,
-                borderColor: CommonColor.whiteBg
+                borderColor: CommonColor.whiteBg,
+                marginBottom: 3
             },
 
             attrLabelActive: {
@@ -217,7 +259,8 @@ export default forwardRef((props: Props, ref) => {
                 paddingVertical: 8,
                 marginRight: 5,
                 borderWidth: 2,
-                borderColor: CommonColor.dark
+                borderColor: CommonColor.dark,
+                marginBottom: 3
             },
             
             attrLabelText: {
@@ -230,12 +273,19 @@ export default forwardRef((props: Props, ref) => {
           <View style={{marginHorizontal: 7}}>  
             <Text style={{ fontWeight: 'bold', paddingTop: 10, fontSize: 11, paddingBottom: 7 }}>{title}</Text>  
 
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
             {
                 items.map((spuAttr) => (
-                    <TouchableOpacity activeOpacity={1} key={spuAttr.value} style={checkedItems.get(spuAttr.keyId) === spuAttr.value ? styles.attrLabelActive : styles.attrLabel} onPress={() => {
-                        replaceItemAtKey(spuAttr.keyId, spuAttr.value)
-                        console.log(checkedItems);
+                    <TouchableOpacity activeOpacity={1} key={spuAttr.value} style={checkedItems.get(spuAttr.keyId) === spuAttr.valueId ? styles.attrLabelActive : styles.attrLabel} onPress={() => {
+                        const newItems = replaceItemAtKey(spuAttr.keyId, spuAttr.valueId)
+                        console.log(newItems);
+
+                        const skuCode = convertMapToSkuCode(spu.spuVO.id, newItems);
+                        console.log("SkuCode", skuCode);
+
+                        const sku = spu.skus.find(obj => obj.skuCode === skuCode);
+                        setCurrentSku(sku);
+                        console.log("点击后选中的sku信息", sku);
                     }}>
                         <Text style={styles.attrLabelText} key={spuAttr.value}>{spuAttr.value}</Text>
                     </TouchableOpacity>
@@ -282,14 +332,13 @@ export default forwardRef((props: Props, ref) => {
             },
 
             swipeItem: {  
-                width: SCREEN_WIDTH * 0.30,
                 height: 56,
                 backgroundColor: '#2A2A34',
                 marginRight: 5,
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 flexDirection: 'row',
-                paddingHorizontal: 7,
+                paddingHorizontal: 10,
                 borderRadius: 2 
             },
 
@@ -307,25 +356,25 @@ export default forwardRef((props: Props, ref) => {
             <View style={styles.container}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <View style={[styles.swipeItem, styles.firstSwipeItem]}>  
-                        <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price='1877'/>
+                        <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price={currentSku?.salePrice + ""}/>
                         <Text style={styles.priceTextStyle}>|</Text>
                         <Text style={styles.priceTextStyle}>约2-3天到</Text>
                     </View>
 
                     <View style={[styles.swipeItem]}>  
-                        <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price='1877'/>
+                        <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price={currentSku?.salePrice + ""}/>
                         <Text style={styles.priceTextStyle}>|</Text>
                         <Text style={styles.priceTextStyle}>约2天到</Text>
                     </View>
 
                     <View style={[styles.swipeItem]}>  
-                        <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price='1877'/>
+                        <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price={currentSku?.salePrice + ""}/>
                         <Text style={styles.priceTextStyle}>|</Text>
                         <Text style={styles.priceTextStyle}>约7-8天到</Text>
                     </View>
 
                     <View style={[styles.swipeItem]}>  
-                        <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price='1877'/>
+                        <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price={currentSku?.salePrice + ""}/>
                         <Text style={styles.priceTextStyle}>|</Text>
                         <Text style={styles.priceTextStyle}>约2-3天到</Text>
                     </View>
