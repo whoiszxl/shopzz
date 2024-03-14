@@ -15,7 +15,8 @@ import {
 import Entypo from 'react-native-vector-icons/Entypo';
 import { CommonColor } from '../../../common/CommonColor';
 import PriceShowBar from '../../../components/PriceShowBar';
-
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -39,6 +40,8 @@ export default forwardRef((props: Props, ref) => {
     const [checkedItems, setCheckedItems] = useState(new Map());  
 
     const [currentSku, setCurrentSku] = useState<SKU>();
+
+    const navigation = useNavigation<StackNavigationProp<any>>();
 
   
     // 替换Map中指定键的元素  
@@ -355,11 +358,14 @@ export default forwardRef((props: Props, ref) => {
         return (
             <View style={styles.container}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                    <View style={[styles.swipeItem, styles.firstSwipeItem]}>  
+                    <TouchableOpacity onPress={() => {
+                        hide();
+                        navigation.push('OrderConfirmPage', {checkedSku: currentSku, spuName: spu.spuVO.name});
+                        }} style={[styles.swipeItem, styles.firstSwipeItem]}>  
                         <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price={currentSku?.salePrice + ""}/>
                         <Text style={styles.priceTextStyle}>|</Text>
                         <Text style={styles.priceTextStyle}>约2-3天到</Text>
-                    </View>
+                    </TouchableOpacity>
 
                     <View style={[styles.swipeItem]}>  
                         <PriceShowBar titleLayoutStyle={styles.priceTextStyle} price={currentSku?.salePrice + ""}/>

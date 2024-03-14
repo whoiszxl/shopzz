@@ -17,6 +17,7 @@ import MinePage from './src/pages/tabs/mine/MinePage';
 import ChatPage from './src/pages/tabs/discovery/ChatPage';
 
 import ProductDetailPage from './src/pages/product/ProductDetailPage';
+import OrderConfirmPage from './src/pages/order/OrderConfirmPage';
 
 
 
@@ -42,6 +43,7 @@ function App(): JSX.Element {
           <Stack.Screen options={{headerShown: false}} name='MinePage' component={MinePage}/>
           <Stack.Screen options={{headerShown: false}} name='ChatPage' component={ChatPage}/>
           <Stack.Screen options={{headerShown: false}} name='ProductDetailPage' component={ProductDetailPage}/>
+          <Stack.Screen options={{headerShown: false}} name='OrderConfirmPage' component={OrderConfirmPage}/>
 
         </Stack.Navigator>
       </NavigationContainer>

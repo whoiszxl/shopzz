@@ -174,3 +174,45 @@ type SPUVO = {
   spuDetailVO: string;
   spuAttributeGroupVOList: SPUAttribute[];
 }
+
+type MemberInfoEntity = {
+  id: string;
+  phone: string;
+  email: string;
+  password: string;
+  fullName: string;
+  workDate: string;
+  wxCode: string;
+  birthday: string;
+  country: string;
+  province: string;
+  city: string;
+  district: string;
+  gender: number;
+  avatar: string;
+  ip: string;
+  loginCount: string;
+  loginErrorCount: string;
+  lastLogin: string;
+  identityStatus: string;
+  workStatus: string;
+  highestQualification: string;
+  highestQualificationType: string;
+  isToutou: string;
+  status: number;
+  token: string;
+  location: string;
+  browser: string;
+}
+
+type AddressEntity = {
+  id: string;
+  memberId: string;
+  receiverName: string;
+  receiverPhone: string;
+  province: string;
+  city: string;
+  district: string;
+  detailAddress: string;
+  isDefault: number;
+}

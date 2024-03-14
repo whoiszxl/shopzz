@@ -61,16 +61,9 @@ export default () => {
         MemberStore.requestMemberInfo((data?:MemberInfoEntity) => {
           console.log(data);
           if(data) {
-            if(data.identityStatus === '' || data.workStatus === '' 
-              || data.highestQualification === '' || data.highestQualificationType === '' 
-              || data.fullName === '' || data.gender === '' || data.birthday === ''
-              || data.avatar === '') {
-                navigation.replace('InitMemberInfoPage', {memberInfo: data});
-              }else {
-                //将当前的用户信息保存到本地
-                StorageUtil.setItem(CommonConstant.MEMBER_INFO, JSON.stringify(data));
-                navigation.replace('TabPage');
-              }
+            //将当前的用户信息保存到本地
+            StorageUtil.setItem(CommonConstant.MEMBER_INFO, JSON.stringify(data));
+            navigation.replace('TabPage');
           }else if(data === undefined) {
             navigation.replace('LoginPage');
           }

@@ -13,7 +13,7 @@ class ApiService {
   private axiosInstance: AxiosInstance;
 
   // 接口base路径
-  private baseURL = 'http://pksekn.natappfree.cc/';
+  private baseURL = 'http://s2dc56.natappfree.cc/';
 
   constructor() {
     // 创建axios实例，指定接口base路径以及超时时间

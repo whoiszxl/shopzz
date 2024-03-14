@@ -6,6 +6,7 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 @Service
+@ConditionalOnProperty(name = "rocketmq.active", havingValue = "true")
 public class RocketMQSenderService {
 
     @Value("${rocketmq.name-server}")

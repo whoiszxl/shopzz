@@ -219,6 +219,7 @@ shopzz:
   placeOrderType: queued
 
 rocketmq:
+  active: true
   name-server: 106.13.7.251:9876
   seckill:
     producer:

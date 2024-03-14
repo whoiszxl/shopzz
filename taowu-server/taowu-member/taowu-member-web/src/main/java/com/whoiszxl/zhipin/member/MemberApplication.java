@@ -3,6 +3,7 @@ package com.whoiszxl.zhipin.member;
 import cn.dev33.satoken.annotation.SaIgnore;
 import cn.hutool.extra.spring.EnableSpringUtil;
 import com.whoiszxl.taowu.common.properties.TaowuProperties;
+import com.whoiszxl.taowu.common.utils.IdWorker;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,5 +56,10 @@ public class MemberApplication implements ApplicationRunner {
         log.info("服务地址: http://{}:{}", hostAddress, serverProperties.getPort());
         log.info("文档地址: http://{}:{}/doc.html", hostAddress, serverProperties.getPort());
         log.info("*************************************************************");
+    }
+
+    @Bean
+    public IdWorker idWorker() {
+        return new IdWorker();
     }
 }

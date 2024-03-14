@@ -40,6 +40,13 @@ const apis = {
 
     productDetail: {url: '/product/api/spu/detail/', method: METHODS.POST, paramType: PARAM_TYPE.PATH}, // 获取商品详情
 
+
+    /** 地址相关接口 */
+    addressList: {url: '/member/api/address', method: METHODS.GET}, // 查询当前用户的收货地址列表
+    addressAdd: {url: '/member/api/address', method: METHODS.POST}, // 新增收货地址
+    addressUpdate: {url: '/member/api/address', method: METHODS.PUT}, //更新收货地址
+    addressDelete: {url: '/member/api/address/', method: METHODS.DELETE, paramType: PARAM_TYPE.PATH}, // 删除收货地址
+    
     
 }
 

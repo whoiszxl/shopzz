@@ -82,21 +82,6 @@ public class Member implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime lastLogin;
 
-    @Schema(description = "身份状态(1:职场人 2:学生)")
-    private Integer identityStatus;
-
-    @Schema(description = "求职状态(1:离职-随时到岗 2:在职-月内到岗 3:在职-考虑机会 4:在职-暂不考虑)")
-    private Integer workStatus;
-
-    @Schema(description = "最高学历(1:初中及以下 2:中专/中技 3:高中 4:大专 5:本科 6-硕士 7-博士)")
-    private Integer highestQualification;
-
-    @Schema(description = "最高学历类型(1:全日制 2:非全日制)")
-    private Integer highestQualificationType;
-
-    @Schema(description = "是否是头头(0:否 1:是)")
-    private Integer isToutou;
-
     @Schema(description = "状态(0:无效 1:有效)")
     private Integer status;
 

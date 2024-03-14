@@ -62,19 +62,25 @@ export default observer(() => {
   };
 
   useEffect(() => {
-    //初始化检查本地token是否存在，不存在则跳转到登录页面
-    // checkToken().then((token) => {
-    //   if(token) {
-    //     store.requestAll().then(res => {
-    //       if(res.code !== 0) {
-    //         navigation.navigate('LoginPage');
-    //       }
-    //     });
-    //   }else {
-    //     navigation.navigate('LoginPage');
-    //   }
-    // });    
+    // 初始化检查本地token是否存在，不存在则跳转到登录页面
+    checkToken().then((token) => {
+      if(token) {
+        store.requestAll().then(res => {
+          if(res.code !== 0) {
+            navigation.navigate('LoginPage');
+          }
+        });
+      }else {
+        navigation.navigate('LoginPage');
+      }
+    });    
   }, []);
+
+  const checkLoginStatus = async () => {
+    // 初始化检查本地token是否存在，不存在则跳转到登录页面
+    const token = await checkToken();
+    return token !== null;
+  }
 
 
 
@@ -148,12 +154,24 @@ export default observer(() => {
             source={{uri: store.memberInfo.avatar ?? 'http://qiniu.whoiszxl.com/default-avatar.png' }} />}
           
 
-          <View style={styles.nameLayout}>
-              <Text style={styles.nicknameText}>{store.memberInfo.fullName ?? '未登录'}</Text>
-              <View style={styles.idLayout}>
-                  <Text style={styles.idText}>填写你的个性签名吧</Text>
+          {
+            store.memberInfo.fullName ? (
+              <View style={styles.nameLayout}>
+                <Text style={styles.nicknameText}>{store.memberInfo.fullName}</Text>
+                <View style={styles.idLayout}>
+                    <Text style={styles.idText}>填写你的个性签名吧</Text>
+                </View>
               </View>
-          </View>
+            ):(
+              <TouchableOpacity style={styles.nameLayout} onPress={() => { navigation.navigate('LoginPage'); }}>
+                <Text style={styles.nicknameText}>{store.memberInfo.fullName ?? '未登录'}</Text>
+                <View style={styles.idLayout}>
+                    <Text style={styles.idText}>点击进行登录吧</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          }
+          
         </View>
 
         <View style={styles.countLabelContainer}>

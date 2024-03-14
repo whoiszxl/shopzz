@@ -67,21 +67,6 @@ public class MemberInfoResponse {
     @Schema(description = "最后登录")
     private LocalDateTime lastLogin;
 
-    @Schema(description = "身份状态(1:职场人 2:学生)")
-    private Integer identityStatus;
-
-    @Schema(description = "求职状态(1:离校-随时到岗 2:在校-月内到岗 3:在校-考虑机会 4:在校-暂不考虑 5:离职-随时到岗 6:在职-月内到岗 7:在职-考虑机会 8:在职-暂不考虑)")
-    private Integer workStatus;
-
-    @Schema(description = "最高学历(1:初中及以下 2:中专/中技 3:高中 4:大专 5:本科 6-硕士 7-博士)")
-    private Integer highestQualification;
-
-    @Schema(description = "最高学历类型(1:全日制 2:非全日制)")
-    private Integer highestQualificationType;
-
-    @Schema(description = "是否是头头(0:否 1:是)")
-    private Integer isToutou;
-
     @Schema(description = "状态(0:无效 1:有效)")
     private Integer status;
 

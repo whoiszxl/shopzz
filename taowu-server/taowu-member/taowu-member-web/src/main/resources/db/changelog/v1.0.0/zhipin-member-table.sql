@@ -52,3 +52,59 @@ CREATE TABLE `ums_member_attention`(
     PRIMARY KEY (`id`),
     UNIQUE KEY `uni_idx_member_id` (`member_id`)
 ) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '会员关注表';
+
+
+DROP TABLE IF EXISTS `ums_member_address`;
+CREATE TABLE `ums_member_address` (
+    `id`                                bigint(11) NOT NULL COMMENT '主键ID',
+    `member_id`                         bigint(11) NOT NULL COMMENT '用户ID',
+    `receiver_name`                     varchar(64) NOT NULL COMMENT '收货人',
+    `receiver_phone`                    varchar(64) NOT NULL COMMENT '收货人电话号码',
+    `province`                          varchar(64) NOT NULL COMMENT '省',
+    `city`                              varchar(64) NOT NULL COMMENT '市',
+    `district`                          varchar(64) NOT NULL COMMENT '区',
+    `detail_address`                    varchar(128) NOT NULL COMMENT '收货地址',
+    `is_default`                        tinyint(1) NOT NULL default 0 comment '是否默认 1:默认 2:非默认',
+    `version`                           bigint(11) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                        tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
+    `created_by`                        varchar(64) NULL COMMENT '创建者',
+    `updated_by`                        varchar(64) NULL COMMENT '更新者',
+    `created_at`                        datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                        datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_member_id` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员收货地址表';
+
+
+DROP TABLE IF EXISTS `ums_member_point`;
+create table `ums_member_point` (
+    `id`                                bigint(11) not null auto_increment comment '主键',
+    `member_id`                         bigint(11) not null comment '会员账号ID',
+    `point`                             bigint(11) not null comment '会员积分',
+    `version`                           bigint(11) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                        tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
+    `created_by`                        varchar(64) NULL COMMENT '创建者',
+    `updated_by`                        varchar(64) NULL COMMENT '更新者',
+    `created_at`                        datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                        datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    primary key (id),
+    KEY `idx_member_id` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员积分表';
+
+DROP TABLE IF EXISTS `ums_member_point_log`;
+create table `ums_member_point_log`(
+    `id`                                bigint(11) not null auto_increment comment '主键',
+    `member_point_id`                   bigint(11) not null comment '会员积分ID',
+    `before_point`                      bigint(11) not null comment '变动前的会员积分',
+    `change_point`                      bigint(11) not null comment '变动的会员积分',
+    `after_point`                       bigint(11) not null comment '变动后的会员积分',
+    `update_reason`                     varchar(255) not null comment '本次积分变动的原因',
+    `version`                           bigint(11) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
+    `is_deleted`                        tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
+    `created_by`                        varchar(64) NULL COMMENT '创建者',
+    `updated_by`                        varchar(64) NULL COMMENT '更新者',
+    `created_at`                        datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`                        datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    primary key (id),
+    KEY `idx_member_point_id` (`member_point_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='会员积分变动日志表';

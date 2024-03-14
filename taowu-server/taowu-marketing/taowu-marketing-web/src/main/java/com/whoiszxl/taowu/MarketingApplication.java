@@ -33,14 +33,14 @@ import java.net.InetAddress;
 @EnableSpringUtil
 @EnableScheduling
 @RequiredArgsConstructor
-public class PromotionApplication implements ApplicationRunner {
+public class MarketingApplication implements ApplicationRunner {
 
     private final TaowuProperties properties;
 
     private final ServerProperties serverProperties;
 
     public static void main(String[] args) {
-        SpringApplication.run(PromotionApplication.class, args);
+        SpringApplication.run(MarketingApplication.class, args);
     }
 
     @Hidden
