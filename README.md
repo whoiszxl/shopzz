@@ -1,4 +1,4 @@
-## shopzz 一个使用SpringCloud Alibaba开发的微服务电商项目
+## 淘物 一个使用SpringCloud Alibaba开发的微服务 C2B2C 的社区&交易平台
 [![MyWebSite](https://img.shields.io/badge/我的站点-whoiszxl-blue.svg)](http://whoiszxl.com)
 [![docs](https://img.shields.io/badge/docs-reference-green.svg)](http://shopzz.whoiszxl.com)
 [![teach](https://img.shields.io/badge/演示-mall-orange.svg)](https://shopzz.whoiszxl.com)
@@ -6,44 +6,34 @@
 
 
 ### 项目介绍
-后端使用SpringCloud Alibaba开发，移动端使用Flutter2.x构建，管理后台使用Vue 3.0 + Element Plus 进行构建，并在支付上接入数字货币（比特币、以太坊UDST）支付，后端采用Hadoop与Flink等大数据框架构建实时计算与离线计算体系。
+后端使用 SpringCloud Alibaba 开发，移动端使用 React Native 构建，管理后台使用Vue 3.0 + Element Plus 进行构建，并在支付上接入数字货币（比特币、以太坊UDST、平台Token）支付，后端采用 Hadoop 与 Flink 等大数据框架构建实时计算与离线计算体系。
 
-### 后端项目结构
-
-
-### 服务端口配置
-
-|  服务名称             | 端口号   |
-|  ----                 | ----    |
-| zz-gateway            | 80      |
-| zz-member-web         | 10001   |
-| zz-admin-web          | 10002   |
-| zz-product-web        | 10003   |
-| zz-order-web          | 10004   |
-| zero-pay-web          | 10009   |
-| zero-bitcoin          | 10010   |
-| zero-eth              | 10011   |
-| zero-erc20            | 10012   |
+### 后端项目架构
+![arch](./docs/images/taowu-arch.png)
 
 
-### FlutterApp截图
-
-| ![1](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/1.png)                                                          | ![2](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/2.png)                                                          | ![3](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/3.png)                                                          | ![5](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/5.png) |  
-| :--: | :--: | :--: | :--: |  
-| 首页 | 分类 | 购物车 | 会员中心 |  
-
-| ![6](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/6.png)                                                          | ![7](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/7.png)                                                          | ![8](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/8.png)                                                          | ![9](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/9.png) |  
-|     :--:    |     :--:     |     :--:  |   :--:        |  
-| 商品Grid列表 | 商品List列表 | 商品详情  |   商品属性选择 |  
-
-| ![11](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/11.png)                                                        | ![12](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/12.png)                                                        | ![10](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/10.png)                                                        | ![14](http://zero-mall.oss-cn-shenzhen.aliyuncs.com/screenshot/14.png) |  
-|     :--:    |     :--:     |     :--:  |   :--:        |  
-| 登录页面 | 注册页面 | 设置页面  |   二维码生成页 |  
-
-#### 架构图
+### 项目特点
+* 技术全面：提供多种技术栈，移动端、PC 端、后端皆有支持，且每种技术都是当前较新技术。
+* 方案通用：封装的 starter，代码规范，DDD 领域驱动设计，RBAC 权限管理，各种封装的组件可以灵活运用到其他项目中。
+* 代码复用：管理后台封装 BaseController，一次继承解决基础增删改查。
+* 版本管理：通过 Liquibase 管理数据库版本，跟踪、管理和应用数据库变化。
+* 数仓支持：提供 Hadoop 技术栈支持，通过 CDH 构建，实现离线数仓与实时数仓。
+* 扩展方案：多种分库分表策略，高并发场景。
+* 持续集成：实现 DevOps，通过 DroneCI/Jenkins 实现部署的全流程自动化
+* 容器编排：通过 Rancher/DockerSwarm 实现多容器的部署、管理与监控。
+* 系统监控：通过 ELK 实现日志监控，通过 SkyWalking 实现链路追踪，通过 Prometheus + Grafana 实现系统监控。
+其他：待补充
 
 
-#### 开发进度
+### APP 截图
+
+| ![1](./docs/images/screenshots/Screenshot_1.jpg)                                                          | ![2](./docs/images/screenshots/Screenshot_2.jpg)                                                          | ![3](./docs/images/screenshots/Screenshot_3.jpg)                                                          | ![5](./docs/images/screenshots/Screenshot_4.jpg) |  
+| :--: | :--: | :--: | :--: |   
+
+
+| ![1](./docs/images/screenshots/Screenshot_5.jpg)                                                          | ![2](./docs/images/screenshots/Screenshot_6.jpg)                                                          | ![3](./docs/images/screenshots/Screenshot_7.jpg)                                                          | ![5](./docs/images/screenshots/Screenshot_8.jpg) |  
+| :--: | :--: | :--: | :--: |
+
 
 
 ### 开发环境
@@ -51,10 +41,3 @@
 
 ### 项目部署
 
-> Windows环境部署
-
-
-> Linux环境部署
-
-
-> Docker环境部署

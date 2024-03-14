@@ -207,7 +207,7 @@ export default observer(() => {
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: 'white',
-        borderRadius: 5,
+        borderRadius: 3,
         paddingHorizontal: 10,
         paddingVertical: 8,
         borderBottomColor: '#eee',
@@ -353,7 +353,7 @@ export default observer(() => {
         width: '98%',
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 5,
+        borderRadius: 3,
         paddingVertical: 8,
         justifyContent: 'space-between',
         height: 50
