@@ -6,7 +6,7 @@
 
 
 ### 项目介绍
-后端使用 SpringCloud Alibaba 开发，移动端使用 React Native 构建，管理后台使用Vue 3.0 + Element Plus 进行构建，并在支付上接入数字货币（比特币、以太坊UDST、平台Token）支付，后端采用 Hadoop 与 Flink 等大数据框架构建实时计算与离线计算体系。
+后端使用 SpringCloud Alibaba 开发，移动端使用 React Native 构建，管理后台使用 Arco Design 进行构建，并在支付上接入数字货币（比特币、以太坊UDST、平台Token）支付，后端采用 Hadoop 与 Flink 等大数据框架构建实时计算与离线计算体系。
 
 ### 后端项目架构
 ![arch](./docs/images/taowu-arch.png)

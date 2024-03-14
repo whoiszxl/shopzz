@@ -1,0 +1,55 @@
+/* 灰度模式 */
+/*html {
+  filter: grayscale(95%);
+  -webkit-filter: grayscale(95%);
+  -moz-filter: grayscale(95%);
+  -ms-filter: grayscale(95%);
+  -o-filter: grayscale(95%);
+  filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=.95);
+}*/
+
+body {
+  font-size: 16px;
+}
+
+pre, code, kbd, samp {
+  font-family: var(--vp-font-family-mono);
+}
+
+.vp-doc h2 {
+  margin: 15px 0 16px;
+  padding-top: 10px;
+  border-top: none;
+}
+
+.VPDoc .content-container img {
+  border-radius: 5px;
+}
+
+/* slim scroll bar for windows based web browsers - works on firefox */
+* {
+  scrollbar-color: var(--vp-c-divider-light) var(--vp-button-alt-bg);
+  scrollbar-width: thin;
+}
+
+/* slim scroll bar for windows based web browsers - works on chrome, edge, and safari */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* scrolling handle */
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider-light);
+}
+
+/* handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-button-alt-hover-bg);
+}
+
+/* scrolling track/backgronund color */
+::-webkit-scrollbar-track {
+  background: var(--vp-button-alt-bg);
+}
+
