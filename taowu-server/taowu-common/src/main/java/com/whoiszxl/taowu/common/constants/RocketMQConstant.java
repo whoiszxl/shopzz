@@ -13,7 +13,7 @@ public class RocketMQConstant {
     public static final String MEMBER_LOGIN_TOPIC = "member_login_topic";
 
 
-    public static final String SECKILL_GROUP = "seckill-group";
+    public static final String TAOWU_GROUP = "taowu-group";
 
     public static final String SECKILL_PLACE_ORDER_TOPIC = "SECKILL_PLACE_ORDER_TOPIC";
 
@@ -22,4 +22,9 @@ public class RocketMQConstant {
 
     public static final String SMS_VERIFICATION_TOPIC = "SMS_VERIFICATION_TOPIC";
     public static final String SMS_PROMOTION_TOPIC = "SMS_PROMOTION_TOPIC";
+
+
+    public static final String AUDIT_VIDEO_TOPIC = "audit_video_topic";
+    public static final String FEED_VIDEO_TIMELINE_TOPIC = "feed_video_timeline_topic";
+
 }

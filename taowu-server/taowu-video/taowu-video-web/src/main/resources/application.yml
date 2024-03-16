@@ -239,3 +239,12 @@ server:
     max-http-post-size: -1
     buffer-size: 512
     direct-buffers: true
+
+
+
+rocketmq:
+  active: true
+  name-server: 127.0.0.1:9876
+  seckill:
+    producer:
+      group: taowu-group

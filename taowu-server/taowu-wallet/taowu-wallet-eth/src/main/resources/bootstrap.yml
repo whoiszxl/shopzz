@@ -3,21 +3,18 @@ server:
 
 spring:
   application:
-    name: zz-wallet-eth
+    name: taowu-wallet-eth
   profiles:
     active: dev
   cloud:
     nacos:
-      server-addr: aliyun.whoiszxl.com:8848
-      config:
-        server-addr: aliyun.whoiszxl.com:8848
-        file-extension: yaml
+      server-addr: 106.13.7.251:8848
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://aliyun.whoiszxl.com/shopzz?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: shopzz
-    password: ECmzyDLN7bRSKtab
+    url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:taowu}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
+    username: ${DB_USER:root}
+    password: ${DB_PWD:123456}
 
     hikari:
       connection-timeout: 10000
@@ -59,13 +56,13 @@ sa-token:
     # Redis数据库索引（默认为0）
     database: 2
     # Redis服务器地址
-    host: aliyun.whoiszxl.com
+    host: 106.13.7.251
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: ECmzyDLN7bRSKtab
+    password: Hello123456
     # 连接超时时间（毫秒）
-    timeout: 6000ms
+    timeout: 30000ms
 
 
 feign:
@@ -86,6 +83,6 @@ ethereum:
   currencyName: ETH
 
   # 节点地址,infura需包含PROJECT_ID https://infura.io/
-  nodeurl: https://rinkeby.infura.io/v3/df5eacf1b6a244c38b89e4c10ef9bcb9
+  nodeurl: http://60.204.215.165:8545
   keystorepath: D:/code/keystore/eth
   keystorepassword: 123456

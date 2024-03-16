@@ -82,6 +82,9 @@ public class Member implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime lastLogin;
 
+    @Schema(description = "状态(0:非热门用户 1:热门用户)")
+    private Integer isHot;
+
     @Schema(description = "状态(0:无效 1:有效)")
     private Integer status;
 

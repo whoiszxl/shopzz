@@ -23,6 +23,8 @@ public class RedisPrefixConstants {
 
     public interface Video {
         String VIDEO_PREFIX = "video:";
+        String FEED_OUTBOX_PREFIX = "feed:outbox:";
+        String FEED_INBOX_PREFIX = "feed:inbox:";
     }
 
     public interface Counter {

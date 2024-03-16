@@ -31,6 +31,12 @@ public class Video implements Serializable {
     @Schema(description = "会员ID")
     private Long memberId;
 
+    @Schema(description = "用户名称")
+    private String memberUsername;
+
+    @Schema(description = "用户头像")
+    private String memberAvatar;
+
     @Schema(description = "文字内容")
     private String descs;
 

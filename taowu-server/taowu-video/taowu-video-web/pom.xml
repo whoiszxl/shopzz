@@ -111,5 +111,18 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.whoiszxl.taowu</groupId>
+            <artifactId>taowu-starter-rocketmq</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.whoiszxl.taowu</groupId>
+            <artifactId>taowu-sensitive-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+
     </dependencies>
 </project>

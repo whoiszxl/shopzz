@@ -7,6 +7,8 @@ DROP TABLE IF EXISTS `vms_video`;
 CREATE TABLE `vms_video`(
     `id`                        bigint(11) NOT NULL COMMENT '视频主键ID',
     `member_id`                 bigint(11) NOT NULL COMMENT '会员ID',
+    `member_username`           varchar(32) NOT NULL COMMENT '用户名称',
+    `member_avatar`             varchar(256) DEFAULT '' COMMENT '头像',
     `descs`                     varchar(140) NOT NULL COMMENT '文字内容',
     `cover`                     varchar(300) NOT NULL COMMENT '视频封面',
     `video_url`                 varchar(300) NOT NULL COMMENT '视频文件地址',

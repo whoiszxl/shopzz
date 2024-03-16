@@ -1,0 +1,250 @@
+taowu:
+  # 开启sa-token
+  token-active: sa-token
+  # 配置项目相关信息
+  info:
+    project-name: taowu-sensitive
+    version: 1.0.0
+    description: 淘物敏感内容服务
+    contact:
+      name: whoiszxl
+      email: whoiszxl@gmail.com
+      url: https://github.com/whoiszxl
+    license:
+      name: MIT
+    parseLocalAddr: true
+  # 日志相关配置
+  logger:
+    # 是否开启日志
+    enabled: true
+    # 是否打开内网请求的记录
+    include-inner-ip: true
+    # 不记录日志的请求方法
+    exclude-methods:
+    # 需要脱敏的字段
+    desensitize:
+      - token
+      - Authorization
+      - password
+  rsa:
+    #私钥   公钥：MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA183EzqDs126Mf7mQmnvZni95tmZIeHImKUJaogYEMXXr2AioadOvGhbZA0ID5xgI1aSoAqoqQrDRvgk0Jur07NybtPVZtSrfMIR45uMcPEaUAuI8kNhmpWYduj6+zteKmTAF96JM0OgtIWe8TYYKF6HL7Fmui7tZwbleVQn9o3BihmXbOckmlAU6UFsCBMU0Dk5LkTMBX/hLpE3Dr1JpIkmOzgO0gKyStbooy6ifDBxy5juSy7VMrc3pEoa/+mSs3ei0WqcArwt2hyySOvnAbCAa9f2TR14eIRTuBEiH+SkAPN0+t5kl1nQNcxy+E3SVwYQF8Za6VzvXDhTo7XuxuQIDAQAB
+    privateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDXzcTOoOzXbox/uZCae9meL3m2Zkh4ciYpQlqiBgQxdevYCKhp068aFtkDQgPnGAjVpKgCqipCsNG+CTQm6vTs3Ju09Vm1Kt8whHjm4xw8RpQC4jyQ2GalZh26Pr7O14qZMAX3okzQ6C0hZ7xNhgoXocvsWa6Lu1nBuV5VCf2jcGKGZds5ySaUBTpQWwIExTQOTkuRMwFf+EukTcOvUmkiSY7OA7SArJK1uijLqJ8MHHLmO5LLtUytzekShr/6ZKzd6LRapwCvC3aHLJI6+cBsIBr1/ZNHXh4hFO4ESIf5KQA83T63mSXWdA1zHL4TdJXBhAXxlrpXO9cOFOjte7G5AgMBAAECggEAcs/bvB7rwrXi8/US1M29eqZBd+Q0/Demy96sf3T5+CKHpjj8+MiRaSzsqgoOL32e/aMLa9eCgla2UAdvgqEQS5AXGxBJeNRlR9fCxvvfQsY96sbYeCtZePe6KyNEuqD78QIWuqfTfHV5xUL+cLQ2XFpNNuKDtX2ohCON52pYUgH3ZYvdCoo/FZSYLxPRvpmBv5qGgK/YUng71k3GmeruXEhX2j4YScuL5RM0lSZbtW5NEk9mOMAXDKd2GirRmRf1aL0VFDXm+WhMqwEuU20NsNHKSDYK2dn68x330K3M9YQ16fwYXKkwGGvX68EqAwXuoP78r5AmuFlwPcI/P6u8nQKBgQD1QAa58FJGtSiS5AknqIP/h/qZd5GtBoIo18FppfIIzmqu5IJER5g9mP64sMAuNXrbWUf/llfCs38TagrhtSzpZwz7cCxbVxWNAlBTvI1302PaCmiAeKnxVFOqUX97wvvz4bjhE3iqRCKQEuV9pKBwJeZsMyfozV1s9BktgC/vbwKBgQDhQ1Kbdx+QYMMiYLYzLt0MQIPyoQhAj1laMR30jiBqnMm8SneHpTWBueQUVR/luF++W13A+oIVHxTKAGC0MWWtiRA0ow/Q0l4VIv13D5jk0xhJgrYkaE23XGBEb2ivJaehV5xC2e0nv6oDELiqsewImXPXLeNycjuvbMrRhSpdVwKBgBhPIFuN1pnrmvn0YHPt4CeT8uMDVw0vd/dUa3dtW3BEBY8QV1ktP4nbgGQOIP5zjpnvX5OV81z5Lb9e43U74BfCfybtF3h2SUyQziV+qwcVjPAv1+vkCfRBx4k6SsiZqx+hYBHvPCakWkitltG9X6m+F/jhmTMaKAiEqXo5GodBAoGBAM8J/IPtYfJmLROMxgmW+g4Hwf6f6SDFYD+YQ0sB0mOKxZQs8V2YB+y6uRnC/3U5F66y9SGoXSUikw3yeO9FM4njHyTx9lhc8aIFrebfTAyMxJbT76rYvw1XdxePOi04s7CEAJglCmbtL0pv9PrWWvWwbJsKjzEiMx9SI7uc5EozAoGAQJIaSs32Tj4Qu6Txy8WJ1rhY76T2eeZWJdbnD/0+mtt6/8Jc/Ra2od3U7eGgB378il/GK4h9dO/jozXG0Z645Z0Ox15isqk3J0HeN6//Zp+qr5zrHAotEXgYdkHsuOq9RmtP7/s/BcmXp+pdEc2s/VwFhG6a/FhU/3BUxdH4WeQ=
+
+# 服务端口
+server:
+  port: 20100
+
+
+--- # Liquibase 配置
+spring.liquibase:
+  # 是否启用
+  enabled: true
+  # 配置文件路径
+  change-log: classpath:db/changelog/db.changelog-master.yaml
+
+
+--- # MyBatis 配置
+mybatis-plus:
+  # 自定义扫包配置
+  mapper-scan: com.whoiszxl.**.mapper
+  # mapper.xml文件路径
+  mapper-locations: com.whoiszxl.**.mapper.xml.*Mapper.xml
+  configuration:
+    # 自动映射规则
+    auto-mapping-behavior: PARTIAL
+    # 自动驼峰命名
+    map-underscore-to-camel-case: true
+    # 日志配置，此处关闭，使用p6spy进行分析
+    # 默认：org.apache.ibatis.logging.slf4j.Slf4jImpl
+    # 更详细（会有性能损耗）：org.apache.ibatis.logging.stdout.StdOutImpl
+    # 关闭（可单纯使用 p6spy 分析）：org.apache.ibatis.logging.nologging.NoLoggingImpl
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+  global-config:
+    banner: true
+    db-config:
+      id-type: AUTO
+      # 逻辑删除字段
+      logic-delete-field: isDeleted
+      # 逻辑删除全局值（默认 1，表示已删除）
+      logic-delete-value: 1
+      # 逻辑未删除全局值（默认 0，表示未删除）
+      logic-not-delete-value: 0
+
+--- # Sa-Token 配置
+sa-token:
+  # token名称（同时也是 cookie 名称）
+  token-name: Authorization
+  # token前缀（例如填写 Bearer 实际传参 Authorization: Bearer xxxx-xxxx-xxxx-xxxx）
+  token-prefix: Bearer
+  # token有效期（单位：秒，默认 30 天，-1 代表永不过期）
+  timeout: 86400
+  # token临时有效期（单位：秒，指定时间内无操作就视为 token 过期）
+  activity-timeout: -1
+  # 是否打开自动续签（如果此值为 true，框架会在每次直接或间接调用 getLoginId() 时进行一次过期检查与续签操作）
+  auto-renew: true
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: false
+  # 是否尝试从header里读取token
+  is-read-header: true
+  # 是否尝试从cookie里读取token
+  is-read-cookie: false
+  # 是否打印操作日志
+  is-log: false
+
+  # 配置Sa-Token单独使用的Redis连接
+  alone-redis:
+    # Redis数据库索引（默认为0）
+    database: 2
+    # Redis服务器地址
+    host: 106.13.7.251
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: Hello123456
+    # 连接超时时间（毫秒）
+    timeout: 30000ms
+
+--- # 数据源设置
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    # 动态数据源配置
+    dynamic:
+      # 启用p6spy性能分析，默认false，因有性能损耗，生产环境需关闭
+      p6spy: true
+      # 设置默认的数据源或者数据源组,默认值即为master
+      primary: master
+      # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      strict: false
+      datasource:
+        # 主库配置，在方法或者类上使用@DS("dsName")注解来切换数据源，方法上注解优先于类上注解
+        # # 多主多从                      纯粹多库（记得设置primary）                   混合配置
+        #spring:                               spring:                               spring:
+        #  datasource:                           datasource:                           datasource:
+        #    dynamic:                              dynamic:                              dynamic:
+        #      datasource:                           datasource:                           datasource:
+        #        master_1:                             mysql:                                master:
+        #        master_2:                             oracle:                               slave_1:
+        #        slave_1:                              sqlserver:                            slave_2:
+        #        slave_2:                              postgresql:                           oracle_1:
+        #        slave_3:                              h2:                                   oracle_2:
+        master:
+          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:taowu}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
+          username: ${DB_USER:root}
+          password: ${DB_PWD:123456}
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        # 从库配置
+        slave_1:
+          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:taowu}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
+          username: ${DB_USER:root}
+          password: ${DB_PWD:123456}
+          lazy: true
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: ${spring.datasource.type}
+        slave_2:
+          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:taowu}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
+          username: ${DB_USER:root}
+          password: ${DB_PWD:123456}
+          lazy: true
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          type: ${spring.datasource.type}
+      # Hikari 连接池配置（完整配置地址：https://github.com/brettwooldridge/HikariCP）
+      hikari:
+        # 最大连接数量（默认 10，根据实际环境调整）
+        # 连接达到上限，并且没有空闲连接可用时，获取连接将在超时前阻塞最多 connectionTimeout 毫秒
+        max-pool-size: 20
+        # 获取连接超时时间（默认 30000 毫秒，30 秒）
+        connection-timeout: 30000
+        # 空闲连接最大存活时间（默认 600000 毫秒，10 分钟）
+        idle-timeout: 600000
+        # 保持连接活动的频率，以防止它被数据库或网络基础设施超时。该值必须小于 maxLifetime（默认 0，禁用）
+        keepaliveTime: 30000
+        # 连接最大生存时间（默认 1800000 毫秒，30 分钟）
+        max-lifetime: 1800000
+
+
+--- # 应用名，nacos配置
+spring:
+  application:
+    name: ${taowu.info.project-name}
+
+  cloud:
+    nacos:
+      server-addr: 106.13.7.251:8848
+
+
+--- # 单机Redis配置
+spring:
+  redis:
+    host: ${REDIS_HOST:106.13.7.251}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PWD:Hello123456}
+    database: ${REDIS_DB:2}
+    timeout: 10s
+    ssl: false
+
+
+--- # 序列化配置
+spring:
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+
+--- # 邮件发送配置
+spring:
+  mail:
+    # 邮件服务器
+    host: smtp.126.com
+    # 邮件服务器端口
+    port: 465
+    # 邮箱服务器账号密码
+    username: ${EMAIL_USERNAME:127.0.0.1}
+    password: ${EMAIL_PASSWORD:127.0.0.1}
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465
+
+
+--- # 验证码配置
+taowu:
+  captcha:
+    image:
+      type: SPEC
+      length: 5
+      expirationInMinutes: 10
+      width: 128
+      height: 48
+    mail:
+      length: 6
+      expirationInMinutes: 5
+      limitInSeconds: 60
+      templatePath: mail/captcha.ftl
+
+--- ### 服务器配置
+server:
+  servlet:
+    context-path: /
+  undertow:
+    max-http-post-size: -1
+    buffer-size: 512
+    direct-buffers: true
+
+
+
+rocketmq:
+  active: true
+  name-server: 127.0.0.1:9876
+  seckill:
+    producer:
+      group: taowu-group

@@ -1,24 +1,30 @@
 package com.whoiszxl.taowu.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.whoiszxl.taowu.common.constants.RocketMQConstant;
 import com.whoiszxl.taowu.common.entity.PageQuery;
 import com.whoiszxl.taowu.common.token.TokenHelper;
+import com.whoiszxl.taowu.common.token.entity.AppLoginMember;
+import com.whoiszxl.taowu.common.utils.BeanUtil;
 import com.whoiszxl.taowu.common.utils.IdWorker;
+import com.whoiszxl.taowu.common.utils.JsonUtil;
 import com.whoiszxl.taowu.cqrs.command.LikeCommand;
 import com.whoiszxl.taowu.cqrs.command.VideoPublishCommand;
+import com.whoiszxl.taowu.cqrs.dto.VideoAuditMqDto;
 import com.whoiszxl.taowu.cqrs.query.MemberTimelineQuery;
 import com.whoiszxl.taowu.cqrs.response.VideoResponse;
 import com.whoiszxl.taowu.entity.Video;
 import com.whoiszxl.taowu.enums.LikeTypeEnum;
 import com.whoiszxl.taowu.enums.VideoCounterStatusEnum;
+import com.whoiszxl.taowu.enums.VideoStatusEnum;
 import com.whoiszxl.taowu.mapper.VideoMapper;
 import com.whoiszxl.taowu.member.dto.MemberDTO;
 import com.whoiszxl.taowu.member.feign.MemberFeignClient;
+import com.whoiszxl.taowu.rocketmq.RocketMQSenderService;
 import com.whoiszxl.taowu.service.IVideoService;
 import com.whoiszxl.taowu.strategy.LikeFactory;
 import lombok.RequiredArgsConstructor;
@@ -50,13 +56,25 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     private final TokenHelper tokenHelper;
 
+    private final RocketMQSenderService rocketMQSenderService;
+
     @Override
     public void publish(VideoPublishCommand command) {
-        Long memberId = tokenHelper.getAppMemberId();
+        AppLoginMember appLoginMember = tokenHelper.getAppLoginMember();
+
+        // 发布视频，默认为未发布状态，需要等审核通过之后才能进入发布状态
         Video video = BeanUtil.copyProperties(command, Video.class);
         video.setId(idWorker.nextId());
-        video.setMemberId(memberId);
+        video.setMemberId(appLoginMember.getId());
+        video.setMemberUsername(appLoginMember.getFullName());
+        video.setMemberAvatar(appLoginMember.getAvatar());
+        video.setStatus(VideoStatusEnum.UNPUBLISHED.getCode());
         this.save(video);
+
+        VideoAuditMqDto videoAuditMqDto = BeanUtil.copyProperties(video, VideoAuditMqDto.class);
+        videoAuditMqDto.setIsHot(appLoginMember.getIsHot());
+        // 发送审核消息，审核通过后再发送 timeline feed 流消息
+        rocketMQSenderService.sendMessage(RocketMQConstant.AUDIT_VIDEO_TOPIC, JsonUtil.toJson(videoAuditMqDto));
     }
 
     @Override

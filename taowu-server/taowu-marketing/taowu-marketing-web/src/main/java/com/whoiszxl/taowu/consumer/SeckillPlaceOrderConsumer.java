@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-@RocketMQMessageListener(topic = RocketMQConstant.SECKILL_PLACE_ORDER_TOPIC, consumerGroup = RocketMQConstant.SECKILL_GROUP)
+@RocketMQMessageListener(topic = RocketMQConstant.SECKILL_PLACE_ORDER_TOPIC, consumerGroup = RocketMQConstant.TAOWU_GROUP)
 public class SeckillPlaceOrderConsumer implements RocketMQListener<String> {
 
     private final PlaceOrderService placeOrderService;
