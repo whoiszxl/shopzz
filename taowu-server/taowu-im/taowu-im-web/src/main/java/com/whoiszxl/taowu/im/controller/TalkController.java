@@ -1,13 +1,13 @@
 package com.whoiszxl.taowu.im.controller;
 
 
+import com.whoiszxl.taowu.common.entity.ResponseResult;
+import com.whoiszxl.taowu.common.entity.response.PageResponse;
 import com.whoiszxl.taowu.im.cqrs.command.TalkAddCommand;
 import com.whoiszxl.taowu.im.cqrs.command.TalkDeleteCommand;
-import com.whoiszxl.taowu.im.cqrs.response.TalkResponse;
 import com.whoiszxl.taowu.im.cqrs.query.TalkQuery;
+import com.whoiszxl.taowu.im.cqrs.response.TalkResponse;
 import com.whoiszxl.taowu.im.service.ITalkService;
-import com.whoiszxl.zhipin.tools.common.entity.ResponseResult;
-import com.whoiszxl.zhipin.tools.common.entity.response.PageResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

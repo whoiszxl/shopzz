@@ -46,7 +46,7 @@ zhipin:
 
 # 服务端口
 server:
-  port: 20005
+  port: 10005
 
 
 --- # Liquibase 配置

@@ -1,6 +1,6 @@
 package com.whoiszxl.taowu.im.sequence;
 
-import com.whoiszxl.zhipin.tools.common.utils.RedisUtils;
+import com.whoiszxl.taowu.common.utils.RedisUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

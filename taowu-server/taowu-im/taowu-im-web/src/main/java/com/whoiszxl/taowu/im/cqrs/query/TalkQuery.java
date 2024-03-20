@@ -1,6 +1,6 @@
 package com.whoiszxl.taowu.im.cqrs.query;
 
-import com.whoiszxl.zhipin.tools.common.entity.PageQuery;
+import com.whoiszxl.taowu.common.entity.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

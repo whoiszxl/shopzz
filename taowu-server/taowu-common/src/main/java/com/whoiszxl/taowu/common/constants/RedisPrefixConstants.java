@@ -25,11 +25,15 @@ public class RedisPrefixConstants {
         String VIDEO_PREFIX = "video:";
         String FEED_OUTBOX_PREFIX = "feed:outbox:";
         String FEED_INBOX_PREFIX = "feed:inbox:";
+        String FEED_UNION_LOCK_PREFIX = "feed:unionLock:";
+
     }
 
     public interface Counter {
         String COUNTER_MEMBER_HASH_KEY = "counter:member";
         String COUNTER_VIDEO_HASH_KEY = "counter:video";
+        String COUNTER_PREFIX = "counter:";
+        String COUNTER_HOT_BITMAP = "counter:hot_bitmap";
     }
 
 

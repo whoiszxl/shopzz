@@ -6,12 +6,10 @@ import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.enums.StatusEnum;
 import com.whoiszxl.taowu.common.utils.JsonUtil;
 import com.whoiszxl.taowu.common.utils.RedisUtils;
-import com.whoiszxl.taowu.cqrs.dto.VideoAuditMqDto;
-import com.whoiszxl.taowu.dto.KeywordFeignDto;
+import com.whoiszxl.taowu.dto.VideoAuditMqDto;
 import com.whoiszxl.taowu.entity.Video;
 import com.whoiszxl.taowu.enums.VideoStatusEnum;
 import com.whoiszxl.taowu.feign.SensitiveWordFeignClient;
-import com.whoiszxl.taowu.member.feign.MemberFeignClient;
 import com.whoiszxl.taowu.member.feign.MemberRelationFeignClient;
 import com.whoiszxl.taowu.service.IVideoService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +20,6 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -62,7 +59,7 @@ public class VideoAuditConsumer implements RocketMQListener<String> {
         VideoAuditMqDto videoAuditMqDto = JsonUtil.fromJson(json, VideoAuditMqDto.class);
 
         // 文字审核
-        ResponseResult<Boolean> verifyStatus = sensitiveWordFeignClient.verifyKeyword(new KeywordFeignDto(videoAuditMqDto.getDescs()));
+        ResponseResult<Boolean> verifyStatus = sensitiveWordFeignClient.verifyKeyword(videoAuditMqDto);
         if(!verifyStatus.isOk()) {
             // TODO 如果没有审核通过，则记录日志，并将结果推送给用户
             return;

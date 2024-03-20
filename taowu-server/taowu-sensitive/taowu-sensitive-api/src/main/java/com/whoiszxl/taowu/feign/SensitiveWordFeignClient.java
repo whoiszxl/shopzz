@@ -2,7 +2,7 @@ package com.whoiszxl.taowu.feign;
 
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.feign.FeignTokenConfig;
-import com.whoiszxl.taowu.dto.KeywordFeignDto;
+import com.whoiszxl.taowu.dto.VideoAuditMqDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,5 +18,5 @@ public interface SensitiveWordFeignClient {
 
 
     @PostMapping("/verify/keyword")
-    ResponseResult<Boolean> verifyKeyword(@RequestBody KeywordFeignDto keywordFeignDto);
+    ResponseResult<Boolean> verifyKeyword(@RequestBody VideoAuditMqDto videoAuditMqDto);
 }

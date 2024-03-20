@@ -2,9 +2,9 @@ package com.whoiszxl.taowu.im.idempotent;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
+import com.whoiszxl.taowu.common.utils.RedisUtils;
 import com.whoiszxl.taowu.im.pack.GroupChatPack;
 import com.whoiszxl.taowu.im.pack.PrivateChatPack;
-import com.whoiszxl.zhipin.tools.common.utils.RedisUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

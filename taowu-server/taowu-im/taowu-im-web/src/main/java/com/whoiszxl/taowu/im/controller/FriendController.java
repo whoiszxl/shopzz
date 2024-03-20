@@ -1,6 +1,7 @@
 package com.whoiszxl.taowu.im.controller;
 
 
+import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.im.cqrs.command.FriendAddCommand;
 import com.whoiszxl.taowu.im.cqrs.command.FriendDeleteCommand;
 import com.whoiszxl.taowu.im.cqrs.command.FriendRequestApproveCommand;
@@ -9,7 +10,6 @@ import com.whoiszxl.taowu.im.cqrs.response.FriendImportMultiResultResponse;
 import com.whoiszxl.taowu.im.entity.Friend;
 import com.whoiszxl.taowu.im.entity.FriendRequest;
 import com.whoiszxl.taowu.im.service.IFriendService;
-import com.whoiszxl.zhipin.tools.common.entity.ResponseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -36,11 +36,6 @@ import java.util.List;
 public class FriendController {
 
     private final IFriendService friendService;
-
-
-    public String aa = String.format("%s", "123");
-
-    public Friend friend = new Friend();
 
     /**
      * 添加好友

@@ -2,6 +2,7 @@ package com.whoiszxl.taowu.member.feign;
 
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.feign.FeignTokenConfig;
+import com.whoiszxl.taowu.member.dto.MemberAddressFeignDTO;
 import com.whoiszxl.taowu.member.dto.MemberDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,4 +36,12 @@ public interface MemberFeignClient {
      */
     @PostMapping("/member/info")
     List<MemberDTO> findMemberInfoByIds(@RequestBody List<Long> memberIdList);
+
+    /**
+     * 通过地址ID查询当前用户的地址信息
+     * @param addressId 地址ID
+     * @return
+     */
+    @GetMapping("/getMemberAddress")
+    ResponseResult<MemberAddressFeignDTO> getMemberAddress(@RequestParam Long addressId);
 }

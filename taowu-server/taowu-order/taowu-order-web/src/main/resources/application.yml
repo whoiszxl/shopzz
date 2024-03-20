@@ -32,7 +32,7 @@ banana:
 
 # 服务端口
 server:
-  port: 20007
+  port: 10010
 
 
 --- # Liquibase 配置

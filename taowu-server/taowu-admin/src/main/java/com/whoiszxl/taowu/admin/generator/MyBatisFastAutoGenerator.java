@@ -23,22 +23,22 @@ public class MyBatisFastAutoGenerator {
      *
      */
     private static final String AUTHOR = "whoiszxl";
-    private static final String PACKAGE_NAME = "com.whoiszxl";
+    private static final String PACKAGE_NAME = "com.whoiszxl.taowu";
 
     /**
      * 指定代码生成到哪个项目下
      */
-    private static final String PROJECT_NAME = "tt-zhipin-admin";
+    private static final String PROJECT_NAME = "taowu-sensitive/taowu-sensitive-web";
 
     private static final String[] TABLE_PREFIX = new String[]{
-            "sys_","fms_","ops_"
+            "sys_","fms_","ops_", "common_"
     };
 
     private static final String[] DB_TABLES = new String[]{
-            "ops_deploy"
+            "common_sensitive_word_log"
     };
 
-    private static final String DB_URL = "jdbc:mysql://106.13.7.251:3300/tt-zhipin?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false";
+    private static final String DB_URL = "jdbc:mysql://106.13.7.251:3300/taowu?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "123456";
 

@@ -22,9 +22,17 @@ public interface MemberRelationFeignClient {
 
     /**
      * 获取用户的粉丝ID集合
-     * @param memberId
-     * @return
+     * @param memberId 用户ID
+     * @return 用户的粉丝ID集合
      */
     @GetMapping("/getMemberFollowerIdList")
     ResponseResult<List<String>> getMemberFollowerIdList(@RequestParam Long memberId);
+
+    /**
+     * 获取用户的关注ID集合
+     * @param memberId 用户ID
+     * @return 用户的关注ID集合
+     */
+    @GetMapping("/getMemberAttentionIdList")
+    ResponseResult<List<String>> getMemberAttentionIdList(@RequestParam Long memberId);
 }

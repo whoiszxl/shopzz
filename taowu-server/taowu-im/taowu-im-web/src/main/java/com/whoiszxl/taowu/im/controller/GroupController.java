@@ -1,14 +1,14 @@
 package com.whoiszxl.taowu.im.controller;
 
 
+import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.im.cqrs.command.GroupCreateCommand;
 import com.whoiszxl.taowu.im.cqrs.command.GroupMemberAddCommand;
+import com.whoiszxl.taowu.im.cqrs.query.GroupInfoQuery;
 import com.whoiszxl.taowu.im.cqrs.response.FriendImportMultiResultResponse;
 import com.whoiszxl.taowu.im.cqrs.response.GroupInfoResponse;
 import com.whoiszxl.taowu.im.cqrs.response.GroupJoinedListResponse;
-import com.whoiszxl.taowu.im.cqrs.query.GroupInfoQuery;
 import com.whoiszxl.taowu.im.service.IGroupService;
-import com.whoiszxl.zhipin.tools.common.entity.ResponseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 /**

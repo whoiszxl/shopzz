@@ -5,7 +5,7 @@
 
 DROP TABLE IF EXISTS `ums_member`;
 CREATE TABLE `ums_member`(
-    `id`                                bigint(11) NOT NULL COMMENT '主键ID',
+    `id`                                bigint(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `phone`                             varchar(16) NOT NULL COMMENT '手机',
     `email`                             varchar(64) DEFAULT '' COMMENT '邮箱(选填)',
     `password`                          varchar(128) DEFAULT '' COMMENT '登录密码',
@@ -23,6 +23,7 @@ CREATE TABLE `ums_member`(
     `login_count`                       bigint(11) NOT NULL DEFAULT 0 COMMENT '会员登录次数',
     `login_error_count`                 bigint(11) NOT NULL DEFAULT 0 COMMENT '会员登录错误次数',
     `last_login`                        datetime DEFAULT CURRENT_TIMESTAMP COMMENT '最后登录',
+    `is_hot`                            tinyint(2) DEFAULT 0 COMMENT '是否是热门用户(0:非 1:是)',
     `status`                            tinyint(2) DEFAULT 1 COMMENT '状态(0:无效 1:有效)',
     `version`                           bigint(11) unsigned NOT NULL DEFAULT '1' COMMENT '乐观锁',
     `is_deleted`                        tinyint(3) DEFAULT 0 COMMENT '逻辑删除 1: 已删除, 0: 未删除',
@@ -30,7 +31,7 @@ CREATE TABLE `ums_member`(
     `updated_at`                        datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `idx_phone` (`phone`)
-) ENGINE = InnoDB CHARSET = utf8mb4 COMMENT '会员表';
+) ENGINE = InnoDB CHARSET = utf8mb4 AUTO_INCREMENT = 1000 COMMENT '会员表';
 
 
 DROP TABLE IF EXISTS `ums_member_follower`;

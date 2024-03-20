@@ -2,8 +2,6 @@ package com.whoiszxl.taowu.controller;
 
 import com.github.houbb.sensitive.word.bs.SensitiveWordBs;
 import com.whoiszxl.taowu.common.entity.ResponseResult;
-import com.whoiszxl.taowu.dto.KeywordFeignDto;
-import com.whoiszxl.taowu.feign.SensitiveWordFeignClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

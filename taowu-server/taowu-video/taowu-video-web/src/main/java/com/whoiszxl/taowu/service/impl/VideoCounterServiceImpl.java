@@ -1,5 +1,6 @@
 package com.whoiszxl.taowu.service.impl;
 
+import com.whoiszxl.taowu.cqrs.command.CounterVideoCommand;
 import com.whoiszxl.taowu.entity.VideoCounter;
 import com.whoiszxl.taowu.mapper.VideoCounterMapper;
 import com.whoiszxl.taowu.service.IVideoCounterService;
@@ -17,4 +18,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class VideoCounterServiceImpl extends ServiceImpl<VideoCounterMapper, VideoCounter> implements IVideoCounterService {
 
+    @Override
+    public void blurryCounter(CounterVideoCommand command) {
+
+    }
 }

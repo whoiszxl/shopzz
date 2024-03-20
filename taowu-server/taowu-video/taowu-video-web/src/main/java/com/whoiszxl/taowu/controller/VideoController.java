@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.whoiszxl.taowu.common.entity.PageQuery;
 import com.whoiszxl.taowu.common.entity.ResponseResult;
+import com.whoiszxl.taowu.common.entity.ZSetPageQuery;
 import com.whoiszxl.taowu.common.entity.response.PageResponse;
+import com.whoiszxl.taowu.common.entity.response.SetPageResponse;
 import com.whoiszxl.taowu.cqrs.command.VideoPublishCommand;
 import com.whoiszxl.taowu.cqrs.query.MemberTimelineQuery;
 import com.whoiszxl.taowu.cqrs.response.VideoResponse;
@@ -50,11 +52,18 @@ public class VideoController {
         return ResponseResult.buildSuccess();
     }
 
+    @PostMapping("/pull/attention/feed")
+    @Operation(summary = "拉取关注用户的Feed", description = "用户需要定期去拉取自己关注的热门用户的outbox")
+    public ResponseResult<List<Video>> pullAttentionFeed() {
+        videoService.pullAttentionFeed();
+        return ResponseResult.buildSuccess();
+    }
+
     @PostMapping("/attention/feed/list")
     @Operation(summary = "分页查询当前用户的关注用户视频feed流列表", description = "分页查询当前用户的关注用户视频feed流列表")
-    public ResponseResult<List<VideoResponse>> attentionFeedList(@RequestBody PageQuery pageQuery) {
-        IPage<VideoResponse> videoPage = videoService.attentionFeedList(pageQuery);
-        return ResponseResult.buildSuccess(videoPage.getRecords());
+    public ResponseResult<SetPageResponse<VideoResponse>> attentionFeedList(@RequestBody ZSetPageQuery pageQuery) {
+        SetPageResponse<VideoResponse> response = videoService.attentionFeedList(pageQuery);
+        return ResponseResult.buildSuccess(response);
     }
 
     @PostMapping("/recommend/feed/list")

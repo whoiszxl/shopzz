@@ -1,11 +1,11 @@
 package com.whoiszxl.taowu.im.feign;
 
+import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.im.dto.CheckGroupChatPermissionQuery;
 import com.whoiszxl.taowu.im.dto.CheckPrivateChatPermissionQuery;
 import com.whoiszxl.taowu.im.service.IFriendService;
 import com.whoiszxl.taowu.im.service.IGroupMemberService;
 import com.whoiszxl.taowu.im.service.IGroupService;
-import com.whoiszxl.zhipin.tools.common.entity.ResponseResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 

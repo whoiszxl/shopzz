@@ -8,6 +8,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * <p>
@@ -86,41 +87,6 @@ public class VideoResponse implements Serializable {
     private LocalDateTime createdAt;
 
     @Schema(description = "up主信息")
-    private UploaderInfo uploaderInfo;
-
-    @Schema(description = "计数信息")
-    private CounterInfo counterInfo;
-
-    @Data
-    @Builder
-    @Schema(description = "博主信息")
-    public static class UploaderInfo implements Serializable {
-
-        @Schema(description = "头像")
-        private String avatar;
-
-        @Schema(description = "昵称")
-        private String nickname;
-
-    }
-
-    @Data
-    @Builder
-    @Schema(description = "计数信息")
-    public static class CounterInfo implements Serializable {
-
-        @Schema(description = "点赞数")
-        private Integer lickCount;
-
-        @Schema(description = "评论数")
-        private Integer commentCount;
-
-        @Schema(description = "分享数")
-        private Integer shareCount;
-
-        @Schema(description = "是否点赞 1:是 0:否")
-        private Integer hasLiked;
-
-    }
+    private Map<Object, Object> counterInfoMap;
 
 }

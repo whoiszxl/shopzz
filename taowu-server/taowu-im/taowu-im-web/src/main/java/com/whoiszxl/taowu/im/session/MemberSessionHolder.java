@@ -2,10 +2,10 @@ package com.whoiszxl.taowu.im.session;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.json.JSONUtil;
+import com.whoiszxl.taowu.common.utils.RedisUtils;
 import com.whoiszxl.taowu.im.constants.ConnectStatusEnum;
 import com.whoiszxl.taowu.im.constants.ImRedisKeysEnum;
 import com.whoiszxl.taowu.im.entity.MemberSession;
-import com.whoiszxl.zhipin.tools.common.utils.RedisUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

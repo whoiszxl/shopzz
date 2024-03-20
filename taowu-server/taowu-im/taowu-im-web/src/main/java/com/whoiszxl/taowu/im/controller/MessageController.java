@@ -1,10 +1,10 @@
 package com.whoiszxl.taowu.im.controller;
 
 
-import com.whoiszxl.taowu.im.protocol.ChatMessage;
+import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.im.cqrs.query.OfflineListQuery;
+import com.whoiszxl.taowu.im.protocol.ChatMessage;
 import com.whoiszxl.taowu.im.service.IMessageService;
-import com.whoiszxl.zhipin.tools.common.entity.ResponseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

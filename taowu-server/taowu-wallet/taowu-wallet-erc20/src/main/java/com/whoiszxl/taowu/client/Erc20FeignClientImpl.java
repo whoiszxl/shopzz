@@ -1,15 +1,6 @@
 package com.whoiszxl.taowu.client;
 
-import com.whoiszxl.bean.ResponseResult;
-import com.whoiszxl.common.EthereumAddress;
-import com.whoiszxl.entity.Currency;
-import com.whoiszxl.entity.CurrencyAccount;
-import com.whoiszxl.entity.response.RechargeResponse;
 import com.whoiszxl.feign.Erc20FeignClient;
-import com.whoiszxl.service.CurrencyAccountService;
-import com.whoiszxl.service.CurrencyService;
-import com.whoiszxl.service.DcPayInfoService;
-import com.whoiszxl.service.EthereumService;
 import com.whoiszxl.taowu.common.EthereumAddress;
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.utils.AssertUtils;
@@ -20,7 +11,6 @@ import com.whoiszxl.taowu.service.CurrencyAccountService;
 import com.whoiszxl.taowu.service.CurrencyService;
 import com.whoiszxl.taowu.service.DcPayInfoService;
 import com.whoiszxl.taowu.service.EthereumService;
-import com.whoiszxl.utils.AssertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.transaction.annotation.Transactional;

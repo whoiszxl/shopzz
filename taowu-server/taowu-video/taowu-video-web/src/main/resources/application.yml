@@ -32,7 +32,7 @@ taowu:
 
 # 服务端口
 server:
-  port: 20007
+  port: 10016
 
 
 --- # Liquibase 配置
@@ -248,3 +248,14 @@ rocketmq:
   seckill:
     producer:
       group: taowu-group
+
+
+--- ### 分布式锁
+taowu:
+  redisson:
+    enabled: true
+    host: ${REDIS_HOST:redis://106.13.7.251:6379}
+    password: ${REDIS_PWD:Hello123456}
+    database: ${REDIS_DB:2}
+    timeout: 3000
+    ssl: false

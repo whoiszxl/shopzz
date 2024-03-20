@@ -3,6 +3,9 @@ package com.whoiszxl.taowu.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.whoiszxl.taowu.common.entity.PageQuery;
+import com.whoiszxl.taowu.common.entity.ZSetPageQuery;
+import com.whoiszxl.taowu.common.entity.response.PageResponse;
+import com.whoiszxl.taowu.common.entity.response.SetPageResponse;
 import com.whoiszxl.taowu.cqrs.command.VideoPublishCommand;
 import com.whoiszxl.taowu.cqrs.query.MemberTimelineQuery;
 import com.whoiszxl.taowu.cqrs.response.VideoResponse;
@@ -41,7 +44,7 @@ public interface IVideoService extends IService<Video> {
      * @param pageQuery
      * @return
      */
-    IPage<VideoResponse> attentionFeedList(PageQuery pageQuery);
+    SetPageResponse<VideoResponse> attentionFeedList(ZSetPageQuery pageQuery);
 
     /**
      * 分页查询当前用户的推荐视频feed流列表
@@ -70,4 +73,10 @@ public interface IVideoService extends IService<Video> {
      * @return
      */
     IPage<VideoResponse> my(PageQuery pageQuery);
+
+    /**
+     * 拉取关注用户的Feed
+     */
+    void pullAttentionFeed();
+
 }

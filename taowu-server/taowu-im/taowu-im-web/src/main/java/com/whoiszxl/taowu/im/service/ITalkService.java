@@ -1,13 +1,13 @@
 package com.whoiszxl.taowu.im.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.whoiszxl.taowu.common.entity.response.PageResponse;
 import com.whoiszxl.taowu.im.cqrs.command.TalkAddCommand;
 import com.whoiszxl.taowu.im.cqrs.command.TalkDeleteCommand;
 import com.whoiszxl.taowu.im.cqrs.query.TalkQuery;
 import com.whoiszxl.taowu.im.cqrs.response.TalkResponse;
 import com.whoiszxl.taowu.im.entity.Talk;
 import com.whoiszxl.taowu.im.pack.PrivateChatReadPack;
-import com.whoiszxl.zhipin.tools.common.entity.response.PageResponse;
 
 /**
  * <p>

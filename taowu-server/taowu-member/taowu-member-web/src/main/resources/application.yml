@@ -1,6 +1,6 @@
 # 服务端口
 server:
-  port: 20002
+  port: 10000
 
 taowu:
   # 开启sa-token

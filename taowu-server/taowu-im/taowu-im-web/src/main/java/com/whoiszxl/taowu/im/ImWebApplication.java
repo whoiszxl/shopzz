@@ -2,7 +2,7 @@ package com.whoiszxl.taowu.im;
 
 import cn.dev33.satoken.annotation.SaIgnore;
 import cn.hutool.extra.spring.EnableSpringUtil;
-import com.whoiszxl.zhipin.tools.common.properties.ZhipinProperties;
+import com.whoiszxl.taowu.common.properties.TaowuProperties;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +38,7 @@ import java.net.InetAddress;
 })
 public class ImWebApplication implements ApplicationRunner {
 
-    private final ZhipinProperties properties;
+    private final TaowuProperties properties;
 
     private final ServerProperties serverProperties;
 

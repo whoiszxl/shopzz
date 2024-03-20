@@ -47,6 +47,7 @@
         <module>taowu-wallet/taowu-wallet-eth</module>
         <module>taowu-wallet/taowu-wallet-ethereum-common</module>
         <module>taowu-sensitive</module>
+        <module>taowu-counter</module>
     </modules>
 
     <name>${project.artifactId}</name>

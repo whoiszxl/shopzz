@@ -93,6 +93,10 @@ public class RedisUtils {
         return redisTemplate.opsForValue().getBit(key, offset);
     }
 
+    public Boolean setBit(String key, long offset, Boolean value) {
+        return redisTemplate.opsForValue().setBit(key, offset, value);
+    }
+
 
 
     /**
@@ -522,6 +526,10 @@ public class RedisUtils {
         return redisTemplate.opsForZSet().zCard(key);
     }
 
+
+    public Long mergeZSets(String key, String aSet, String bSet) {
+        return redisTemplate.opsForZSet().unionAndStore(key, aSet, bSet);
+    }
     /**
      * 判断集合是否包含value
      *
@@ -653,6 +661,11 @@ public class RedisUtils {
     public Set zRangeByScore(String key, double minScore) {
         return redisTemplate.opsForZSet().rangeByScore(key, minScore, Double.POSITIVE_INFINITY);
     }
+
+    public Set<ZSetOperations.TypedTuple<String>> zReverseRangeByScoreWithScores(String key, double min, double max, long offset, long count) {
+        return redisTemplate.opsForZSet().reverseRangeByScoreWithScores(key, min, max, offset, count);
+    }
+
 
     public void hIncrBy(String key, String hashKey, Long num) {
         redisTemplate.opsForHash().increment(key, hashKey, num);

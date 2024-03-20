@@ -32,7 +32,7 @@ taowu:
 
 # 服务端口
 server:
-  port: 20006
+  port: 10009
 
 
 --- # Liquibase 配置

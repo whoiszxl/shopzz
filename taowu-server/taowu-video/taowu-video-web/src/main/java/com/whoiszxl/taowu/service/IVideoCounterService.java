@@ -1,5 +1,6 @@
 package com.whoiszxl.taowu.service;
 
+import com.whoiszxl.taowu.cqrs.command.CounterVideoCommand;
 import com.whoiszxl.taowu.entity.VideoCounter;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +13,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-06-13
  */
 public interface IVideoCounterService extends IService<VideoCounter> {
+
+
+    void blurryCounter(CounterVideoCommand command);
 
 }

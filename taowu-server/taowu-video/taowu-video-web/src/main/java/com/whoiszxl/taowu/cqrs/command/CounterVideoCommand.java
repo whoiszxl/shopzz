@@ -11,7 +11,7 @@ import lombok.Data;
 @Schema(description = "视频计数命令")
 public class CounterVideoCommand {
 
-    @Schema(description = "计数类型: 0-获赞数 1-评论数 2-分享数 3-浏览数")
+    @Schema(description = "计数类型: 1:观看量 2:转发量 3:评论量 4:点赞量")
     private Integer type;
 
     @Schema(description = "运算类型: -1-减一 1-加一")
