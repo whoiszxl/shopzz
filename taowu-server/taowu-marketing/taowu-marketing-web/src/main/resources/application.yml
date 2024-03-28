@@ -215,12 +215,11 @@ taowu:
     timeout: 3000
     ssl: false
 
-shopzz:
   placeOrderType: queued
 
 rocketmq:
   active: true
-  name-server: 106.13.7.251:9876
+  name-server: 127.0.0.1:9876
   seckill:
     producer:
       group: seckill-group

@@ -1,4 +1,4 @@
-package com.whoiszxl.feign;
+package com.whoiszxl.taowu.feign;
 
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.feign.FeignTokenConfig;
@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * 以太币feign接口
+ * shopzz erc20代币feign接口
  */
-@FeignClient(name = "taowu-wallet-eth", contextId = "ethFeign", configuration = FeignTokenConfig.class)
-public interface ETHFeignClient extends CreateAddressFeignClient {
-
-
+@FeignClient(name = "taowu-wallet-erc20", contextId = "erc20Feign", configuration = FeignTokenConfig.class)
+public interface Erc20FeignClient extends CreateAddressFeignClient {
 
     @Override
     @PostMapping("/createRecharge/{orderId}/{amount}")

@@ -1,6 +1,6 @@
 package com.whoiszxl.taowu.client;
 
-import com.whoiszxl.feign.Erc20FeignClient;
+import com.whoiszxl.taowu.feign.Erc20FeignClient;
 import com.whoiszxl.taowu.common.EthereumAddress;
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.utils.AssertUtils;
@@ -20,7 +20,7 @@ import org.web3j.utils.Convert;
 import java.math.BigDecimal;
 
 /**
- * shopzz代币 feign接口实现
+ * taowu 代币 feign接口实现
  *
  * @author whoiszxl
  * @date 2021/8/3

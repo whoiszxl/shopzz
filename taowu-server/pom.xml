@@ -48,12 +48,14 @@
         <module>taowu-wallet/taowu-wallet-ethereum-common</module>
         <module>taowu-sensitive</module>
         <module>taowu-counter</module>
+        <module>taowu-comment/taowu-comment-api</module>
+        <module>taowu-comment/taowu-comment-web</module>
     </modules>
 
     <name>${project.artifactId}</name>
     <description>淘物 - 基于Spring Cloud Alibaba实现的前后端分离的微服务 C2B2C 的交易平台</description>
 
-    <url>https://github.com/whoiszxl/shopzz</url>
+    <url>https://github.com/whoiszxl/taowu</url>
     <developers>
         <developer>
             <name>whoiszxl</name>

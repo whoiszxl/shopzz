@@ -73,4 +73,7 @@ public class VideoAuditMqDto {
 
     @Schema(description = "状态(0:非热门用户 1:热门用户)")
     private Integer isHot;
+
+    @Schema(description = "评论")
+    private String commentContent;
 }

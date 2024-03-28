@@ -1,9 +1,9 @@
 package com.whoiszxl.taowu.factory;
 
-import com.whoiszxl.feign.BTCFeignClient;
-import com.whoiszxl.feign.CreateAddressFeignClient;
-import com.whoiszxl.feign.ETHFeignClient;
-import com.whoiszxl.feign.Erc20FeignClient;
+import com.whoiszxl.taowu.feign.BTCFeignClient;
+import com.whoiszxl.taowu.feign.CreateAddressFeignClient;
+import com.whoiszxl.taowu.feign.ETHFeignClient;
+import com.whoiszxl.taowu.feign.Erc20FeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +35,7 @@ public class CreateDcAddressFactory {
                 return btcFeignClient;
             case "ETH":
                 return ethFeignClient;
-            case "SHOPZZ":
+            case "TAOWU":
                 return erc20FeignClient;
             default:
                 return btcFeignClient;

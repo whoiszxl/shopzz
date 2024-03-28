@@ -1,6 +1,6 @@
 package com.whoiszxl.taowu.entity;
 
-import com.whoiszxl.feign.CreateAddressFeignClient;
+import com.whoiszxl.taowu.feign.CreateAddressFeignClient;
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.enums.UpchainStatusEnum;
 import com.whoiszxl.taowu.common.exception.ExceptionCatcher;
@@ -48,6 +48,7 @@ public class PayInfoDcBuilder {
      * @return
      */
     public PayInfoDcBuilder buildBaseData(Order order) {
+        this.dcPayInfo.setId(order.getId());
         this.dcPayInfo.setOrderId(order.getId());
         this.dcPayInfo.setOrderNo(order.getOrderNo());
         this.dcPayInfo.setMemberId(order.getMemberId());
@@ -102,7 +103,7 @@ public class PayInfoDcBuilder {
      * @return
      */
     public PayInfoDcBuilder rateCompute(Order order) {
-        BigDecimal finalAmount = BigDecimal.ZERO;
+        BigDecimal finalAmount;
         switch (dcName) {
             case "ETH":
                 finalAmount = order.getFinalPayAmount().divide(new BigDecimal(10000));
@@ -110,7 +111,7 @@ public class PayInfoDcBuilder {
             case "BTC":
                 finalAmount = order.getFinalPayAmount().divide(new BigDecimal(10000));
                 break;
-            case "SHOPZZ":
+            case "TAOWU":
                 finalAmount = order.getFinalPayAmount();
                 break;
             default:

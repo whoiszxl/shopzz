@@ -1,6 +1,6 @@
 package com.whoiszxl.taowu.client;
 
-import com.whoiszxl.feign.BTCFeignClient;
+import com.whoiszxl.taowu.feign.BTCFeignClient;
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.utils.AssertUtils;
 import com.whoiszxl.taowu.entity.Currency;

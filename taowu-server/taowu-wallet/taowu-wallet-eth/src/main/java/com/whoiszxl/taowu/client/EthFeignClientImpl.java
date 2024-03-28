@@ -1,6 +1,6 @@
 package com.whoiszxl.taowu.client;
 
-import com.whoiszxl.feign.ETHFeignClient;
+import com.whoiszxl.taowu.feign.ETHFeignClient;
 import com.whoiszxl.taowu.common.EthereumAddress;
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.utils.AssertUtils;

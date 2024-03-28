@@ -380,7 +380,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
     @Override
-    public ResponseResult pay(OrderPayCommand orderPayCommand) {
+    public ResponseResult<PayInfoDc> pay(OrderPayCommand orderPayCommand) {
         //1. 判断订单状态是否能支付
         Order order = this.getById(orderPayCommand.getOrderId());
         if(!OrderStatusConstants.WAIT_FOR_PAY.equals(order.getOrderStatus())) {
@@ -395,19 +395,16 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             }
 
             payInfoDc = PayInfoDcBuilder
-                    .get()
-                    .init(createDcAddressFactory, orderPayCommand.getDcName())
-                    .buildBaseData(order)
-                    .buildAddress(order)
-                    .rateCompute(order)
-                    .initStatus()
-                    .create();
+                    .get() // 获取数字货币支付的信息构造器
+                    .init(createDcAddressFactory, orderPayCommand.getDcName()) // 初始化基本的参数
+                    .buildBaseData(order) // 构建订单的基本数据
+                    .buildAddress(order) // 生成数字货币的支付地址
+                    .rateCompute(order) // 数字货币和法币的汇率换算
+                    .initStatus() // 初始化数字货币订单的支付状态为未上链
+                    .create(); // 返回数字货币支付信息对象
 
             boolean saveFlag = dcPayInfoService.save(payInfoDc);
-            if(saveFlag) {
-                return ResponseResult.buildSuccess(payInfoDc);
-            }
-            return ResponseResult.buildError("数字货币支付失败");
+            return saveFlag ? ResponseResult.buildSuccess(payInfoDc) : ResponseResult.buildError("数字货币支付失败");
         }
 
         //3. TODO 微信支付，支付宝支付

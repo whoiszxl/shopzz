@@ -3,6 +3,7 @@ package com.whoiszxl.taowu;
 import cn.dev33.satoken.annotation.SaIgnore;
 import cn.hutool.extra.spring.EnableSpringUtil;
 import com.whoiszxl.taowu.common.properties.TaowuProperties;
+import com.whoiszxl.taowu.common.utils.IdWorker;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,10 +29,11 @@ import java.net.InetAddress;
 @RestController
 @SpringBootApplication
 @EnableFeignClients
-@MapperScan("com.whoiszxl.mapper")
+@MapperScan("com.whoiszxl.taowu.mapper")
 @RequiredArgsConstructor
 @EnableSpringUtil
 @EnableScheduling
+@ComponentScan(basePackages = {"com.whoiszxl.**"})
 public class OrderApplication implements ApplicationRunner {
 
     private final TaowuProperties properties;
@@ -55,5 +59,11 @@ public class OrderApplication implements ApplicationRunner {
         log.info("服务地址: http://{}:{}", hostAddress, serverProperties.getPort());
         log.info("文档地址: http://{}:{}/doc.html", hostAddress, serverProperties.getPort());
         log.info("*************************************************************");
+    }
+
+
+    @Bean
+    public IdWorker idWorker() {
+        return new IdWorker();
     }
 }

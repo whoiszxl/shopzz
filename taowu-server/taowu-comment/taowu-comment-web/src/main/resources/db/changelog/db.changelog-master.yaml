@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/v1.0.0/taowu-comment-table.sql
+  - include:
+      file: db/changelog/v1.0.0/taowu-comment-data.sql

@@ -8,6 +8,7 @@ import com.whoiszxl.taowu.cqrs.query.OrderListQuery;
 import com.whoiszxl.taowu.cqrs.response.OrderResponse;
 import com.whoiszxl.taowu.dto.OrderInfoDTO;
 import com.whoiszxl.taowu.entity.Order;
+import com.whoiszxl.taowu.entity.PayInfoDc;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public interface OrderService extends IService<Order> {
      * @param orderPayCommand 订单支付命令
      * @return
      */
-    ResponseResult pay(OrderPayCommand orderPayCommand);
+    ResponseResult<PayInfoDc> pay(OrderPayCommand orderPayCommand);
 
 
     /**

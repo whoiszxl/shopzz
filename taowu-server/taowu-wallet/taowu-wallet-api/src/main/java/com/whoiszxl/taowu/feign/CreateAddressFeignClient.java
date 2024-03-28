@@ -1,4 +1,4 @@
-package com.whoiszxl.feign;
+package com.whoiszxl.taowu.feign;
 
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.entity.response.RechargeResponse;

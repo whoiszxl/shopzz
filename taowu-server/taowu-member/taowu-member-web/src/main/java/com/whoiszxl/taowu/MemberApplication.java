@@ -32,7 +32,6 @@ import java.net.InetAddress;
 @EnableSpringUtil
 @EnableScheduling
 @EnableFeignClients
-@ComponentScan(basePackages = {"com.whoiszxl.**"})
 public class MemberApplication implements ApplicationRunner {
 
     private final TaowuProperties properties;

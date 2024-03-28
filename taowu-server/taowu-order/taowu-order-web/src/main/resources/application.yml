@@ -1,4 +1,4 @@
-banana:
+taowu:
   # 开启sa-token
   token-active: sa-token
   # 配置项目相关信息
@@ -131,20 +131,20 @@ spring:
         #        slave_2:                              postgresql:                           oracle_1:
         #        slave_3:                              h2:                                   oracle_2:
         master:
-          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:shopzz-order}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
+          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:taowu}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
           username: ${DB_USER:root}
           password: ${DB_PWD:123456}
           driver-class-name: com.mysql.cj.jdbc.Driver
         # 从库配置
         slave_1:
-          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:shopzz-order}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
+          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:taowu}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
           username: ${DB_USER:root}
           password: ${DB_PWD:123456}
           lazy: true
           driver-class-name: com.mysql.cj.jdbc.Driver
           type: ${spring.datasource.type}
         slave_2:
-          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:shopzz-order}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
+          url: jdbc:mysql://${DB_HOST:106.13.7.251}:${DB_PORT:3300}/${DB_NAME:taowu}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&autoReconnect=true&maxReconnects=10&failOverReadOnly=false
           username: ${DB_USER:root}
           password: ${DB_PWD:123456}
           lazy: true
@@ -168,7 +168,7 @@ spring:
 --- # 应用名，nacos配置
 spring:
   application:
-    name: ${banana.info.project-name}
+    name: ${taowu.info.project-name}
 
   cloud:
     nacos:
@@ -206,7 +206,7 @@ server:
     direct-buffers: true
 
 --- ### 分布式锁
-banana:
+taowu:
   redisson:
     enabled: true
     host: ${REDIS_HOST:redis://106.13.7.251:6379}
@@ -214,12 +214,10 @@ banana:
     database: ${REDIS_DB:2}
     timeout: 3000
     ssl: false
-
-shopzz:
   placeOrderType: queued
 
 rocketmq:
-  name-server: 212.129.223.197:9876
+  name-server: 127.0.0.1:9876
   seckill:
     producer:
-      group: seckill-group
+      group: taowu-group

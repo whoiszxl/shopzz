@@ -6,6 +6,7 @@ import com.whoiszxl.taowu.cqrs.command.OrderPayCommand;
 import com.whoiszxl.taowu.cqrs.command.OrderSubmitCommand;
 import com.whoiszxl.taowu.cqrs.query.OrderListQuery;
 import com.whoiszxl.taowu.cqrs.response.OrderResponse;
+import com.whoiszxl.taowu.entity.PayInfoDc;
 import com.whoiszxl.taowu.service.OrderService;
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,7 +43,7 @@ public class OrderApiController {
     @SaCheckLogin
     @PostMapping("/pay")
     @Operation(summary = "去支付", description = "去支付")
-    public ResponseResult<String> pay(@RequestBody OrderPayCommand orderPayCommand) {
+    public ResponseResult<PayInfoDc> pay(@RequestBody OrderPayCommand orderPayCommand) {
         return orderService.pay(orderPayCommand);
     }
 

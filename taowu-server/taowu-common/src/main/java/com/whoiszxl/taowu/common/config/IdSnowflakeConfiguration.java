@@ -2,6 +2,7 @@ package com.whoiszxl.taowu.common.config;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
+import com.whoiszxl.taowu.common.utils.IdWorker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

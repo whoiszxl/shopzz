@@ -47,7 +47,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "shopzz.placeOrderType", havingValue = "queued")
+@ConditionalOnProperty(name = "taowu.placeOrderType", havingValue = "queued")
 public class QueuedPlaceOrderServiceImpl implements PlaceOrderService {
 
     private final SeckillItemService seckillItemService;

@@ -1,4 +1,4 @@
-package com.whoiszxl.feign;
+package com.whoiszxl.taowu.feign;
 
 import com.whoiszxl.taowu.common.entity.ResponseResult;
 import com.whoiszxl.taowu.common.feign.FeignTokenConfig;
@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * 比特币feign接口
+ * 以太币feign接口
  */
-@FeignClient(name = "taowu-wallet-btc", contextId = "btcFeign", configuration = FeignTokenConfig.class)
-public interface BTCFeignClient extends CreateAddressFeignClient {
+@FeignClient(name = "taowu-wallet-eth", contextId = "ethFeign", configuration = FeignTokenConfig.class)
+public interface ETHFeignClient extends CreateAddressFeignClient {
+
+
 
     @Override
     @PostMapping("/createRecharge/{orderId}/{amount}")

@@ -1,6 +1,6 @@
 # 服务端口
 server:
-  port: 10000
+  port: 9999
 
 taowu:
   # 开启sa-token
@@ -9,7 +9,7 @@ taowu:
   info:
     project-name: taowu-member
     version: 1.0.0
-    description: taowu-member - 头头直聘会员服务
+    description: taowu-member - 淘物会员服务
     contact:
       name: whoiszxl
       email: whoiszxl@gmail.com
